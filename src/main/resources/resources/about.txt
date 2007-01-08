@@ -10,3 +10,9 @@ http://www.apache.org/
 This product includes icons provided by
 FAMFAMFAM.
 http://www.famfamfam.com/
+
+Stigmata version ${implementation.version}, Copyright (C) 2006-2007 Haruaki TAMADA
+Stigmata comes with ABSOLUTELY NO WARRANTY; for details
+select menu item named License.  This is free software, 
+and you are welcome to redistribute it under certain 
+conditions; select menu item named License for details.

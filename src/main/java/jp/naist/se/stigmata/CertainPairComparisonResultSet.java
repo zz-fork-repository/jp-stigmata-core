@@ -19,8 +19,18 @@ import java.util.Map;
  */
 public class CertainPairComparisonResultSet implements ComparisonResultSet{
     private BirthmarkContext context;
-    private List<ComparisonPair> pairs = new ArrayList<ComparisonPair>();
+    private List<ComparisonPair> pairList = new ArrayList<ComparisonPair>();
 
+    /**
+     * This constructor is the comparison pair list is specified.
+     */
+    public CertainPairComparisonResultSet(ComparisonPair[] pairs, BirthmarkContext context){
+        this.context = context;
+        for(int i = 0; i < pairs.length; i++){
+            pairList.add(pairs[i]);
+        }
+    }
+    
     /**
      * This constructor is the comparison pair was guessed with class name.
      */
@@ -30,7 +40,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
             BirthmarkSet target2 = findTarget(targetX[i].getClassName(), targetY);
 
             if(target2 != null){
-                pairs.add(new ComparisonPair(targetX[i], target2, context));
+                pairList.add(new ComparisonPair(targetX[i], target2, context));
             }
         }
     }
@@ -54,7 +64,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
                 }
             }
             if(target1 != null && target2 != null){
-                pairs.add(new ComparisonPair(target1, target2, context));
+                pairList.add(new ComparisonPair(target1, target2, context));
             }
         }
     }
@@ -70,14 +80,14 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
      * return comparison count.
      */
     public int getComparisonCount(){
-        return pairs.size();
+        return pairList.size();
     }
 
     /**
      * return the iterator of each pair.
      */
     public Iterator<ComparisonPair> iterator(){
-        return pairs.iterator();
+        return pairList.iterator();
     }
 
     /**

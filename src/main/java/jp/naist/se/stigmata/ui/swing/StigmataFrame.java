@@ -130,12 +130,12 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return findFile(true, exts, desc);
     }
 
-    public File getOutputFile(String[] exts, String desc){
+    public File getSaveFile(String[] exts, String desc){
         return findFile(false, exts, desc);
     }
 
     public void saveAction(BirthmarkDataWritable writable){
-        File file = getOutputFile(Messages.getStringArray("store.extensions"), Messages
+        File file = getSaveFile(Messages.getStringArray("store.extensions"), Messages
                 .getString("store.description"));
         if(file != null){
             String name = file.getName();

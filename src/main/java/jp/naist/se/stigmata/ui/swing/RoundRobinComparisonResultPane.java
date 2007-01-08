@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -14,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +22,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import jp.naist.se.stigmata.Birthmark;
@@ -70,7 +70,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         this.birthmarksY = birthmarksY;
 
         initialize();
-        compare();
+        compare(model);
     }
 
     public void writeData(PrintWriter out, ResultFormatSpi service){
@@ -78,9 +78,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
                 new RoundRobinComparisonResultSet(birthmarksX, birthmarksY, context));
     }
 
-    private void compare(){
-        BirthmarkContext context = stigmataFrame.getStigmata().createContext();
-
+    private void compare(DefaultTableModel model){
         int comparison = birthmarksX.length * birthmarksY.length;
 
         classCount.setText(Integer.toString(birthmarksX.length + birthmarksY.length));
@@ -141,7 +139,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        model = new CompareTableModel();
+        model = new RoundRobinComparisonResultSetTableModel();
         table = new JTable(model);
         table.setDefaultRenderer(Double.class, new CompareTableCellRenderer());
         table.addMouseListener(new MouseAdapter(){
@@ -215,6 +213,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     private void initialize(){
         JButton save = Utility.createButton("savecomparison"); //$NON-NLS-1$
         JButton graph = Utility.createButton("showgraph"); //$NON-NLS-1$
+        JButton obfuscate = Utility.createButton("obfuscate"); //$NON-NLS-1$
         JButton compare = Utility.createButton("compare"); //$NON-NLS-1$
         final JComboBox combo = new JComboBox();
         JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -229,6 +228,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         add(southPanel, BorderLayout.SOUTH);
         southPanel.add(save);
         southPanel.add(graph);
+        southPanel.add(obfuscate);
         southPanel.add(compare);
         southPanel.add(combo);
 
@@ -241,6 +241,11 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         graph.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 graphButtonActionPerformed(e);
+            }
+        });
+        obfuscate.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                obfuscateClassNames();
             }
         });
 
@@ -272,9 +277,36 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         }
     }
 
-    private static class CompareTableModel extends DefaultTableModel{
+    private void obfuscateClassNames(){
+        ClassNameObfuscator obfuscator = new ClassNameObfuscator();
+
+        for(int i = 0; i < birthmarksX.length; i++){
+            birthmarksX[i] = obfuscator.obfuscateClassName(birthmarksX[i]);
+        }
+        for(int i = 0; i < birthmarksY.length; i++){
+            birthmarksY[i] = obfuscator.obfuscateClassName(birthmarksY[i]);
+        }
+
+        try{
+            File file = stigmataFrame.getSaveFile(Messages.getStringArray("obfuscationmapping.extension"),
+                    Messages.getString("obfuscationmapping.description"));
+            obfuscator.outputNameMappings(file);
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), Messages
+                    .getString("error.dialog.title"), JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        DefaultTableModel model = new RoundRobinComparisonResultSetTableModel();
+        compare(model);
+        table.setModel(model);
+        this.model = model;
+    }
+
+    private static class RoundRobinComparisonResultSetTableModel extends DefaultTableModel{
         private static final long serialVersionUID = 765435324523543242L;
 
+        @Override
         public boolean isCellEditable(int row, int col){
             return false;
         }
@@ -286,34 +318,6 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
             else{
                 return Double.class;
             }
-        }
-    };
-
-    private static class CompareTableCellRenderer extends DefaultTableCellRenderer{
-        private static final long serialVersionUID = 234557758658567345L;
-
-        public Component getTableCellRendererComponent(JTable table, Object obj,
-                boolean isSelected, boolean hasForcus, int row, int cols){
-            Object value = table.getValueAt(row, cols);
-            Component c = super.getTableCellRendererComponent(table, obj, isSelected, hasForcus,
-                    row, cols);
-            if(value instanceof Double && !isSelected){
-                double d = ((Double)value).doubleValue();
-                if(Math.abs(d - 1) < 1E-8){
-                    c.setBackground(Color.red);
-                }
-                else{
-                    c.setBackground(Color.white);
-                }
-                if(d < 0.1d){
-                    c.setForeground(Color.GRAY);
-                }
-                else{
-                    c.setForeground(Color.black);
-                }
-            }
-
-            return c;
         }
     }
 }

@@ -15,9 +15,9 @@ import java.util.List;
 
 import javax.imageio.spi.ServiceRegistry;
 
-import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.reader.ClassFileArchive;
 import jp.naist.se.stigmata.reader.ClassFileEntry;
+import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.reader.DefaultClassFileArchive;
 import jp.naist.se.stigmata.reader.JarClassFileArchive;
 import jp.naist.se.stigmata.reader.WarClassFileArchive;

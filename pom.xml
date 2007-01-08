@@ -15,6 +15,11 @@
       <name>The cafebabe Maven2 Repository</name>
       <url>http://cafebabe.jp/repository/maven2</url>
     </repository>
+    <repository>
+      <id>stigmata.sourceforge.jp</id>
+      <name>Stigmata Maven2 Repository in sourceforge.jp</name>
+      <url>http://stigmata.sourceforge.jp/maven2</url>
+    </repository>
   </repositories>
 
   <developers>
@@ -61,6 +66,23 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
+  <distributionManagement>
+    <repository>
+      <id>shell.sourceforge.jp</id>
+      <url>scp://tama3@shell.sourceforge.jp/home/groups/s/st/stigmata/htdocs/maven2</url>
+    </repository>
+    <site>
+      <id>shell.sourceforge.jp</id>
+      <url>scp://tama3@shell.sourceforge.jp/home/groups/s/st/stigmata/htdocs</url>
+    </site>
+  </distributionManagement>
+
+  <scm>
+    <connection>scm:svn:http://svn.sourceforge.jp/svnroot/stigmata/trunk</connection>
+    <developerConnection>scm:svn:svn+ssh://tama3@svn.sourceforge.jp/svnroot/stigmata/trunk/</developerConnection>
+    <url>http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata</url>
+  </scm>
 
   <build>
     <plugins>
