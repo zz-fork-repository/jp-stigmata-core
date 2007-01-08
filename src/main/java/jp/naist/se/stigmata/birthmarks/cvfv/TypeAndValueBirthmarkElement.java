@@ -1,0 +1,98 @@
+package jp.naist.se.stigmata.birthmarks.cvfv;
+
+/*
+ * $Id: TypeAndValueBirthmarkElement.java 76 2006-09-08 17:59:27Z harua-t $
+ */
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+import jp.naist.se.stigmata.BirthmarkElement;
+
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ */
+public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Serializable{
+    private static final long serialVersionUID = 237098465735321L;
+
+    private String fieldName;
+    private String signature;
+    private Serializable serialValue;
+    private transient Object value;
+
+    /**
+     * @param value
+     */
+    public TypeAndValueBirthmarkElement(String fieldName, String signature, Object value){
+        super(fieldName + "=" + value);
+        this.fieldName = fieldName;
+        this.signature = signature;
+        setValue(value);
+    }
+
+    public String getFieldName(){
+        return fieldName;
+    }
+
+    public String getSignature(){
+        return signature;
+    }
+
+    public void setValue(Object value){
+        this.value = value;
+        if(signature.length() == 1 && value == null){
+            switch(signature.charAt(0)){
+            case 'Z': value = Boolean.FALSE;  break;
+            case 'D': value = new Double(0d); break;
+            case 'F': value = new Float(0f);  break;
+            case 'C':
+            case 'S':
+            case 'B':
+            case 'I':
+            default:  value = new Integer(0); break;
+            }
+        }
+
+        if(value != null && value instanceof Serializable){
+            serialValue = (Serializable)value;
+        }
+    }
+
+    public Object getValue(){
+        return value;
+    }
+
+    public String toString(){
+        return signature + " = " + value;
+    }
+
+    public int hashCode(){
+        return fieldName.hashCode() + signature.hashCode();
+    }
+
+    public boolean equals(Object o){
+        if(o instanceof TypeAndValueBirthmarkElement){
+            TypeAndValueBirthmarkElement tvbe = (TypeAndValueBirthmarkElement)o;
+
+            if(getSignature().equals(tvbe.getSignature())){
+                if(getValue() == null && tvbe.getValue() == null){
+                    return true;
+                }
+                else if(getValue() != null && tvbe.getValue() != null){
+                    return getValue().equals(tvbe.getValue());
+                }
+            }
+        }
+        return false;
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+        in.defaultReadObject();
+        if(serialValue != null){
+            value = serialValue;
+        }
+    }
+}

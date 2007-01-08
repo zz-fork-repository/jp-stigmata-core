@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="euc-jp"?>
+
+<!-- 
+$Id: birthmark.xml 154 2006-12-06 09:36:15Z harua-t $
+-->
+
+<birthmark>
+  <!-- 
+    システムクラスの設定．
+    パッケージの接頭辞，クラス名の接尾辞，クラスの完全修飾名で
+    設定することができる．
+   -->
+  <wellknown-classes>
+    <exclude>
+      <!--
+        この中に含まれるものは他でいくら wellknown と設定されていても無視する．
+        指定方法は fully-names と同じ．
+      -->
+      <suffix>Exception</suffix>
+      <suffix>Error</suffix>
+<!--
+      <match>java.lang.Throwable</match>
+      <match>java.lang.ThreadDeath</match>
+-->
+    </exclude>
+
+    <package>
+      <!-- JDK 1.5 に含まれているパッケージ -->
+      <prefix>java</prefix>
+      <prefix>javax</prefix>
+      <prefix>org.omg</prefix>
+      <prefix>org.xml</prefix>
+      <prefix>org.w3c</prefix>
+      <prefix>org.ietf</prefix>
+
+      <!-- その他，よく使われていそうなパッケージ -->
+      <prefix>org.gnu</prefix>
+      <prefix>com.apple</prefix>
+      <prefix>pnuts</prefix>
+      <prefix>org.eclipse</prefix>
+      <prefix>com.sun</prefix>
+      <prefix>sun</prefix>
+      <prefix>junit</prefix>
+      <prefix>org.apache</prefix>
+    </package>
+
+    <class-name>
+      <suffix>Test</suffix>
+<!--
+      <match>well.known.class.name</match>
+-->
+    </class-name>
+<!--
+    <fully-name>
+      <suffix>Test</suffix>
+      <prefix>fully.class.name.preffix</prefix>
+      <match>fully.class.name.match</match>
+    </fully-name>
+-->
+  </wellknown-classes>
+
+  <!-- Properties for birthmark context -->
+  <properties>
+    <property>
+      <name>birthmark.file.directory</name>
+      <value>.</value>
+    </property>
+<!--
+    <property>
+      <property-name>name</property-name>
+      <property-value>value</property-value>
+    </property>
+-->
+  </properties>
+</birthmark>

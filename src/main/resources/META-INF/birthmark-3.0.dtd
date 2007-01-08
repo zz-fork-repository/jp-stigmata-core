@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-jp"?>
+
+<!--
+ $Id: birthmark-3.0.dtd 122 2006-10-06 03:38:54Z harua-t $
+-->
+
+<!ELEMENT suffix        (#PCDATA)>
+<!ELEMENT prefix        (#PCDATA)>
+<!ELEMENT match         (#PCDATA)>
+
+<!ELEMENT name          (#PCDATA)>
+<!ELEMENT value         (#PCDATA)>
+
+<!ELEMENT exclude ((suffix,prefix,match)*)>
+
+<!ELEMENT package ((suffix,prefix,match)*)>
+
+<!ELEMENT class-name ((suffix,prefix,match)*)>
+
+<!ELEMENT fully-name ((suffix,prefix,match)*)>
+
+<!ELEMENT wellknown-classes ((exclude,package,class-name,fully-name)*)>
+
+<!ELEMENT property (name,value)>
+
+<!ELEMENT properties (property*)>
+
+<!ELEMENT birthmark (wellknown-classes,properties) >
+

@@ -1,0 +1,1956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<net.java.amateras.uml.model.RootModel>
+  <children>
+    <net.java.amateras.uml.model.ClassModel>
+      <name>jp.naist.se.stigmata.AbstractBirthmark</name>
+      <isAbstract>false</isAbstract>
+      <constraint>
+        <x>33</x>
+        <y>18</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2"/>
+          <name>elements</name>
+          <type>List&lt;QBirthmarkElement;&gt;</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1"/>
+          <name>addElement</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>element</name>
+              <type>BirthmarkElement</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getElementCount</name>
+          <type>int</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getElements</name>
+          <type>[QBirthmarkElement;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>iterator</name>
+          <type>Iterator&lt;QBirthmarkElement;&gt;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getType</name>
+          <type>String</type>
+          <params/>
+          <isAbstract>true</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>isSameType</name>
+          <type>boolean</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>b</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.ClassModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.ClassModel>
+    <net.java.amateras.uml.model.ClassModel>
+      <name>jp.naist.se.stigmata.AbstractBirthmarkExtractor</name>
+      <isAbstract>false</isAbstract>
+      <constraint>
+        <x>186</x>
+        <y>164</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>spi</name>
+          <type>BirthmarkSpi</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>AbstractBirthmarkExtractor</name>
+          <type>void</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>AbstractBirthmarkExtractor</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>spi</name>
+              <type>BirthmarkSpi</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getProvider</name>
+          <type>BirthmarkSpi</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>in</name>
+              <type>InputStream</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>bytecode</name>
+              <type>[B</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>in</name>
+              <type>InputStream</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>true</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>bytecode</name>
+              <type>[B</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.ClassModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.ClassModel>
+    <net.java.amateras.uml.model.InterfaceModel>
+      <name>jp.naist.se.stigmata.Birthmark</name>
+      <constraint>
+        <x>28</x>
+        <y>423</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getElements</name>
+          <type>[QBirthmarkElement;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>iterator</name>
+          <type>Iterator&lt;QBirthmarkElement;&gt;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getElementCount</name>
+          <type>int</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>addElement</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>element</name>
+              <type>BirthmarkElement</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getType</name>
+          <type>String</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>isSameType</name>
+          <type>boolean</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>b</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.InterfaceModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.InterfaceModel>
+    <net.java.amateras.uml.model.InterfaceModel>
+      <name>jp.naist.se.stigmata.BirthmarkComparator</name>
+      <constraint>
+        <x>-29</x>
+        <y>225</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>D</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>b1</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>b2</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getCompareCount</name>
+          <type>int</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>b1</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>b2</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getType</name>
+          <type>String</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.InterfaceModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.InterfaceModel>
+    <net.java.amateras.uml.model.ClassModel>
+      <name>jp.naist.se.stigmata.BirthmarkContext</name>
+      <isAbstract>false</isAbstract>
+      <constraint>
+        <x>94</x>
+        <y>350</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>DEFAULT_CONTEXT</name>
+          <type>BirthmarkContext</type>
+          <isStatic>true</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>parent</name>
+          <type>BirthmarkContext</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>bytecodeContext</name>
+          <type>BytecodeContext</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>manager</name>
+          <type>WellknownClassManager</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>services</name>
+          <type>Map&lt;QString;QBirthmarkSpi;&gt;</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>properties</name>
+          <type>Map&lt;QString;QString;&gt;</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>BirthmarkContext</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>flag</name>
+              <type>boolean</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>BirthmarkContext</name>
+          <type>void</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>BirthmarkContext</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>parent</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getDefaultContext</name>
+          <type>BirthmarkContext</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>true</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>removeProperty</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>key</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>putProperty</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>key</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>value</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getProperty</name>
+          <type>String</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>key</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getBytecodeContext</name>
+          <type>BytecodeContext</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>addService</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>service</name>
+              <type>BirthmarkSpi</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>removeService</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>type</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getService</name>
+          <type>BirthmarkSpi</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>type</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getServices</name>
+          <type>[QBirthmarkSpi;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>findServices</name>
+          <type>[QBirthmarkSpi;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getWellknownClassManager</name>
+          <type>WellknownClassManager</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>getServiceList</name>
+          <type>List&lt;QBirthmarkSpi;&gt;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.ClassModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.ClassModel>
+    <net.java.amateras.uml.model.ClassModel>
+      <name>jp.naist.se.stigmata.BirthmarkElement</name>
+      <isAbstract>false</isAbstract>
+      <constraint>
+        <x>352</x>
+        <y>351</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>serialVersionUID</name>
+          <type>J</type>
+          <isStatic>true</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>NULL</name>
+          <type>BirthmarkElement</type>
+          <isStatic>true</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>value</name>
+          <type>String</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>BirthmarkElement</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>value</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getValue</name>
+          <type>Object</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>toString</name>
+          <type>String</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>hashCode</name>
+          <type>int</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>equals</name>
+          <type>boolean</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>o</name>
+              <type>Object</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.ClassModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.ClassModel>
+    <net.java.amateras.uml.model.InterfaceModel>
+      <name>jp.naist.se.stigmata.BirthmarkExtractor</name>
+      <constraint>
+        <x>24</x>
+        <y>600</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>in</name>
+              <type>InputStream</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>bytecode</name>
+              <type>[B</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>in</name>
+              <type>InputStream</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>bytecode</name>
+              <type>[B</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.InterfaceModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.InterfaceModel>
+    <net.java.amateras.uml.model.ClassModel>
+      <name>jp.naist.se.stigmata.BirthmarkHolder</name>
+      <isAbstract>false</isAbstract>
+      <constraint>
+        <x>578</x>
+        <y>43</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>className</name>
+          <type>String</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>location</name>
+          <type>URL</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>birthmarks</name>
+          <type>Map&lt;QString;QBirthmark;&gt;</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>BirthmarkHolder</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>className</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>location</name>
+              <type>URL</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getSumOfElementCount</name>
+          <type>int</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getBirthmarksCount</name>
+          <type>int</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getClassName</name>
+          <type>String</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getLocation</name>
+          <type>URL</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>addBirthmark</name>
+          <type>void</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>birthmark</name>
+              <type>Birthmark</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getBirthmark</name>
+          <type>Birthmark</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>type</name>
+              <type>String</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getBirthmarks</name>
+          <type>[QBirthmark;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>birthmarkTypes</name>
+          <type>Iterator&lt;QString;&gt;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getBirthmarkTypes</name>
+          <type>[QString;</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.ClassModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.ClassModel>
+    <net.java.amateras.uml.model.ClassModel>
+      <name>jp.naist.se.stigmata.Stigmata</name>
+      <isAbstract>false</isAbstract>
+      <constraint>
+        <x>325</x>
+        <y>426</y>
+        <width>-1</width>
+        <height>-1</height>
+      </constraint>
+      <sourceConnections/>
+      <targetConnections/>
+      <children>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>instance</name>
+          <type>Stigmata</type>
+          <isStatic>true</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.AttributeModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>defaultContext</name>
+          <type>BirthmarkContext</type>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.AttributeModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.AttributeModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>Stigmata</name>
+          <type>void</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>getInstance</name>
+          <type>Stigmata</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>true</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-4"/>
+          <name>getDefaultContext</name>
+          <type>BirthmarkContext</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>createContext</name>
+          <type>BirthmarkContext</type>
+          <params/>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>[QBirthmarkHolder;</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>birthmarks</name>
+              <type>[QString;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>files</name>
+              <type>[QString;</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>extract</name>
+          <type>[QBirthmarkHolder;</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>birthmarks</name>
+              <type>[QString;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>files</name>
+              <type>[QString;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>CompareResult</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>holders</name>
+              <type>[QBirthmarkHolder;</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>CompareResult</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>holders</name>
+              <type>[QBirthmarkHolder;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>CompareResult</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>holders1</name>
+              <type>[QBirthmarkHolder;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>holders2</name>
+              <type>[QBirthmarkHolder;</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>CompareResult</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>holders1</name>
+              <type>[QBirthmarkHolder;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>holders2</name>
+              <type>[QBirthmarkHolder;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>D</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>h1</name>
+              <type>BirthmarkHolder</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>h2</name>
+              <type>BirthmarkHolder</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-1" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.OperationModel/visibility"/>
+          <name>compare</name>
+          <type>D</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>h1</name>
+              <type>BirthmarkHolder</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>h2</name>
+              <type>BirthmarkHolder</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>extractBirthmark</name>
+          <type>BirthmarkHolder</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>birthmarks</name>
+              <type>[QString;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>in</name>
+              <type>InputStream</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>holder</name>
+              <type>BirthmarkHolder</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>extractBirthmark</name>
+          <type>BirthmarkHolder</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>birthmarks</name>
+              <type>[QString;</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>bytecode</name>
+              <type>[B</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>holder</name>
+              <type>BirthmarkHolder</type>
+            </net.java.amateras.uml.model.Argument>
+            <net.java.amateras.uml.model.Argument>
+              <name>context</name>
+              <type>BirthmarkContext</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+        <net.java.amateras.uml.model.OperationModel>
+          <visibility class="net.java.amateras.uml.model.Visibility-2" reference="../../../../net.java.amateras.uml.model.ClassModel/children/net.java.amateras.uml.model.AttributeModel/visibility"/>
+          <name>inputStreamToByteArray</name>
+          <type>[B</type>
+          <params>
+            <net.java.amateras.uml.model.Argument>
+              <name>in</name>
+              <type>InputStream</type>
+            </net.java.amateras.uml.model.Argument>
+          </params>
+          <isAbstract>false</isAbstract>
+          <isStatic>false</isStatic>
+          <listeners serialization="custom">
+            <java.beans.PropertyChangeSupport>
+              <default>
+                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                <source class="net.java.amateras.uml.model.OperationModel" reference="../../../.."/>
+              </default>
+              <null/>
+            </java.beans.PropertyChangeSupport>
+          </listeners>
+        </net.java.amateras.uml.model.OperationModel>
+      </children>
+      <listeners serialization="custom">
+        <java.beans.PropertyChangeSupport>
+          <default>
+            <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+            <source class="net.java.amateras.uml.model.ClassModel" reference="../../../.."/>
+          </default>
+          <null/>
+        </java.beans.PropertyChangeSupport>
+      </listeners>
+    </net.java.amateras.uml.model.ClassModel>
+  </children>
+  <listeners serialization="custom">
+    <java.beans.PropertyChangeSupport>
+      <default>
+        <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+        <source class="net.java.amateras.uml.model.RootModel" reference="../../../.."/>
+      </default>
+      <null/>
+    </java.beans.PropertyChangeSupport>
+  </listeners>
+</net.java.amateras.uml.model.RootModel>

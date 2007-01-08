@@ -1,0 +1,202 @@
+################################################
+# StigmataFrame
+################################################
+stigmata.frame.title=Stigmata: Java バースマークツールキット
+
+control.tab.label=コントロール
+control.tab.tooltip=バースマーク抽出・比較設定
+
+extract.tab.label=抽出結果 {0}
+extract.tab.tooltip={1}から抽出したバースマーク({0}).
+
+compare.tab.label=比較結果 {0}
+compare.tab.tooltip=<{1}>と<{2}>を比較({0}).
+
+comparedetail.tab.label=比較詳細 {0}
+comparedetail.tab.tooltip={1}と{2}から{0}バースマークを抽出・比較した結果
+
+graph.tab.label=類似性グラフ {0}
+graph.tab.tooltip=類似度分布図
+
+store.extensions=xml, csv
+store.description=結果をxml, csvで保存します
+
+fileMenu.menu.label=ファイル
+
+newframe.menuitem.label=新たなフレーム
+newframe.menuitem.tooltip=新しいフレームを作成します
+
+closetab.menuitem.label=タブを閉じる
+closetab.menuteim.tooltip=現在のタブを閉じます
+
+closeframe.menuitem.label=閉じる
+closeframe.menuitem.tooltip=現在のフレームを閉じます
+
+exit.menuitem.label=終了
+exit.menuitem.tooltip=アプリケーションを終了します
+
+helpmenu.menu.label=ヘルプ
+
+about.menuitem.label=このアプリケーションについて...
+about.menuitem.tooltip=このアプリケーションについての情報を表示します
+about.dialog.title=このアプリケーションについて
+
+license.menuitem.label=ライセンス...
+license.menuitem.tooltip=このアプリケーションのライセンスを表示します
+license.dialog.title=ライセンス
+
+helpmenu.menuitem.label=ヘルプ...
+helpmenu.menuitem.tooltip=ヘルプを表示
+
+lookandfeel.menu.label=ルック&フィール
+
+cannotclosecontroltab.dialog.title=エラー
+cannotclosecontroltab.dialog.message=コントロールタブを閉じることはできません
+
+notdirectory.dialog.title=エラー
+notdirectory.dialog.message={0}はディレクトリではありません．
+
+################################################
+# TargetSelectionPane
+################################################
+addpackage.button.label=追加...
+addpackage.button.tooltip=リストにパッケージを追加します
+
+removepackage.button.label=削除
+removepackage.button.tooltip=指定されたパッケージをリストから削除します
+
+unsupportedfiletype.dialog.title=エラー
+unsupportedfiletype.dialog.message=以下のファイルはサポートされていない形式のファイルです．
+
+################################################
+# WellknownClassesSettingsPane
+################################################
+addwellknown.button.label=追加...
+addwellknown.button.tooltip=既知のクラス判定ルールを追加します
+addwellknown.dialog.title=新規: 既知のクラス判定ルール
+
+removewellknown.button.label=削除...
+removewellknown.button.tooltip=指定された既知のクラス判定ルールを削除します
+
+checkwellknown.button.label=チェック
+checkwellknown.button.tooltip=入力されたクラスが既知のクラスであるかどうかを判定します
+
+# wellknown class checker
+wellknownclasschecker.border=既知のクラス判定器
+wellknownclasschecker.default.tooltip=
+wellknownclasschecker.wellknown.tooltip=入力されたクラスは既知のクラスです．
+wellknownclasschecker.notwellknown.tooltip=入力されたクラスは既知のクラスではありません．
+
+#rule table
+prefix.label=接頭辞
+suffix.label=接尾辞
+exactmatch.label=完全一致
+fully.label=クラスの完全修飾名
+package.label=パッケージ名 (除クラス名)
+classname.label=クラス名 (除パッケージ名)
+exclude.label=除外対象 (クラスの完全修飾名)
+
+rules.border=既知のクラス判定ルール
+
+matchtype.table.column=判定ルール
+checkpart.table.column=判定対象
+pattern.table.column=パターン
+
+################################################
+# ControlPane
+################################################
+reset.button.label=リセット
+reset.button.tooltip=全ての設定をリセットします．
+
+extract.button.label=抽出
+extract.button.tooltip=上記のjarファイルに含まれるクラスから指定されたバースマークを抽出します．
+
+compare.button.label=比較
+compare.button.tooltip=上記のjarファイルに含まれるクラスから指定されたバースマークを抽出し，比較します．
+
+findclass.button.label=検索
+findclass.button.tooltip=上記のクラスパスから入力されたクラスを検索します．
+
+targets.tab.label=分析対象
+targets.tab.tooltip=バースマーク抽出・比較の対象選択
+
+wellknown.tab.label=既知のクラス
+wellknown.tab.tooltip=既知のクラス設定
+
+classpath.tab.label=クラスパス
+classpath.tab.tooltip=クラスパス設定
+
+targets.extensions=jar, zip, war
+targets.description=jarファイル, zipファイル, warファイル
+targetx.border=X 軸
+targety.border=Y 軸
+
+birthmarkspane.border=抽出するバースマーク
+
+userclasspath.border=クラスパス
+userclasspath.extensions=jar, zip
+userclasspath.description=jarファイル, zipファイル，ディレクトリ
+
+bootclasspath.border=ブートクラスパス
+
+classpathchecker.border=クラス検索器
+classpathchecker.default.tooltip=
+classpathchecker.found.tooltip=見つかりました
+classpathchecker.notfound.tooltip=見つかりませんでした
+
+################################################
+#CompareTablePane
+################################################
+savecomparison.button.label=保存
+savecomparison.button.tooltip=Save comparation result to a file.
+
+showgraph.button.label=グラフ
+showgraph.button.tooltip=バースマークの類似性の分布図
+
+################################################
+#BirthmarksViewPane
+################################################
+savebirthmark.button.label=保存
+savebirthmark.button.tooltip=抽出されたバースマークを保存します．
+
+birthmarktree.root.label=バースマーク
+
+
+################################################
+# graphpane
+################################################
+similarity.label=類似度
+
+similarity.border=類似度
+elementcount.border=バースマークの要素数
+comparisoncount.border=比較回数
+matchcount.border=要素の一致回数
+numberofclasses.border=クラス数
+distinctionratio.border=識別率
+average.border=平均
+minimum.border=最小
+maximum.border=最大
+
+comparepair.tab.label=ペアの比較結果 {0}
+comparepair.tab.tooltip={1}と{2}から{0}バースマークを抽出・比較した結果
+comparepair.target1.label=クラス名 1
+comparepair.target2.label=クラス名 2
+comparepair.similarity.label=類似度
+
+#compareguess.button.label=関係を推測して比較
+#compareguess.button.tooltip=クラスファイルを指定したバースマークで比較します．どのクラスを比較するかはクラス名から自動的に推測されます．
+
+#comparemapping.button.label=関係を指定して比較...
+#comparemapping.button.tooltip=クラスファイルを指定したバースマークで比較します．どのクラスを比較するかはファイルで指定する必要があります．
+
+comparemapping.extension=csv
+comparemapping.description=クラス間の関係を示したcsvファイルを指定
+
+roundrobin.label=総当りで比較
+guessedpair.label=ペアを推測して比較
+specifiedpair.label=ペアを指定して比較
+
+result.border=比較結果類似度
+eachbirthmarksimilarity.border=各バースマーク間の類似度
+comparisonresultset.tab.label=ペアの比較結果 {0}
+comparisonresultset.tab.tooltip=クラスファイルのペアで比較した結果
