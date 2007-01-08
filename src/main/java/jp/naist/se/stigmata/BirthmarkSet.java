@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkSet{
+public class BirthmarkSet implements Iterable<Birthmark>{
     /**
      * class name.
      */
@@ -100,6 +100,10 @@ public class BirthmarkSet{
             index++;
         }
         return b;
+    }
+
+    public Iterator<Birthmark> iterator(){
+        return birthmarks.values().iterator();
     }
 
     /**
