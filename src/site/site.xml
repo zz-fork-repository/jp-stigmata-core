@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="Stigmata">
+  <bannerLeft>
+    <name>NAIST SE Lab.</name>
+    <src>images/selogo.png</src>
+    <href>http://se.naist.jp/</href>
+    <alt>se.naist.jp</alt>
+  </bannerLeft>
+  <bannerRight>
+    <name>Stigmata</name>
+    <src>images/stigmata.png</src>
+  </bannerRight>
+  <body>
+    <menu name="AddTracer">
+      <item name="Introduction"        href="index.html"/>
+      <item name="License"             href="license.html"/>
+    </menu>
+
+    <menu name="Links">
+      <item name="SE Lab., NAIST" href="http://se.naist.jp/" />
+      <item name="jbirth"         href="http://se.naist.jp/jbirth/" />
+      <item name="DonQuixote"     href="http://donquixote.cafebabe.jp/" />
+    </menu>
+
+    ${reports}
+
+    <a href="http://sourceforge.jp/"><img src="http://sourceforge.jp/sflogo.php?group_id=2661" width="96" height="31" border="0" alt="SourceForge.jp"></a>
+  </body>
+</project>
