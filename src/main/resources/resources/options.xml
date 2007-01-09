@@ -28,7 +28,7 @@
         <definition name="mode">
             <short-option>m</short-option>
             <long-option>mode</long-option>
-            <description>Set running mode. Available values are `list,' `extract,' `compare,' and `gui.'  Default is `compare.'</description>
+            <description>Set running mode. Available values are `gui,' `list,' `extract,' `compare,' and `gui.'  Default is `gui.'</description>
             <argument>REQUIRED</argument>
             <argument-name>MODE</argument-name>
         </definition>

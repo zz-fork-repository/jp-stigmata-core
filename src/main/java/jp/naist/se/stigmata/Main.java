@@ -37,7 +37,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Front end class.
- * 
+ *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
@@ -62,13 +62,15 @@ public class Main{
             String mode = commandLine.getOptionValue("mode");
             String format = commandLine.getOptionValue("format");
 
-            if(!("gui".equals(mode) || "list".equals(mode)) && (arguments == null || arguments.length == 0)){
+            if(format == null) format = "xml";
+            if(mode == null) mode = "gui";
+
+            if(!("gui".equals(mode) || "list".equals(mode))
+               && (arguments == null || arguments.length == 0)){
                 printHelp(options);
                 return;
             }
 
-            if(format == null) format = "xml";
-            if(mode == null) mode = "gui";
             if(mode.equals("list")){
                 listBirthmarks(stigmata, format);
             }
