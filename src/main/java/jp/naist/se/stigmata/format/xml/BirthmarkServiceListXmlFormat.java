@@ -26,11 +26,11 @@ public class BirthmarkServiceListXmlFormat extends AbstractBirthmarkServiceListF
             out.print("      <name>");
             out.print(spi.getType());
             out.println("</name>");
-            
+
             out.print("      <description>");
             out.print(spi.getDescription());
             out.println("</description>");
-            
+
             out.print("      <class-name>");
             out.print(spi.getClass().getName());
             out.println("</class-name>");
@@ -38,5 +38,7 @@ public class BirthmarkServiceListXmlFormat extends AbstractBirthmarkServiceListF
         }
         out.println("  </services>");
         out.println("</stigmata>");
+
+        out.flush();
     }
 }
