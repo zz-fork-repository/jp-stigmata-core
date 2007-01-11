@@ -190,13 +190,17 @@ comparepair.similarity.label=類似度
 #comparemapping.button.tooltip=クラスファイルを指定したバースマークで比較します．どのクラスを比較するかはファイルで指定する必要があります．
 
 comparemapping.extension=csv
-comparemapping.description=クラス間の関係を示したcsvファイルを指定
+comparemapping.description=クラス間の関係を示したファイルを指定 (csv)
 
 roundrobin.label=総当りで比較
 guessedpair.label=ペアを推測して比較
-specifiedpair.label=ペアを指定して比較
+specifiedpair.label=ペアを指定して比較...
 
 result.border=比較結果類似度
 eachbirthmarksimilarity.border=各バースマーク間の類似度
 comparisonresultset.tab.label=ペアの比較結果 {0}
 comparisonresultset.tab.tooltip=クラスファイルのペアで比較した結果
+
+obfuscate.button.label=難読化...
+obfuscate.button.tooltip=クラス名を意味のない名前に変え，難読化します．また，難読化前後のマッピングをCVS形式で保存します．
+obfuscationmapping.description=難読化前後の名前のマッピングを保存 (csv)
