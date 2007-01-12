@@ -20,8 +20,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -190,7 +192,7 @@ public class TargetSelectionPane extends JPanel{
 
     private void initComponents(){
         JScrollPane scroll = new JScrollPane();
-        JPanel south = new JPanel();
+        JComponent south = Box.createHorizontalBox();
         list = new JList();
         addButton = Utility.createButton("addpackage");
         removeButton = Utility.createButton("removepackage");
@@ -200,8 +202,11 @@ public class TargetSelectionPane extends JPanel{
 
         scroll.setViewportView(list);
         add(scroll, java.awt.BorderLayout.CENTER);
+        south.add(Box.createHorizontalGlue());
         south.add(addButton);
+        south.add(Box.createHorizontalGlue());
         south.add(removeButton);
+        south.add(Box.createHorizontalGlue());
 
         list.addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent evt){

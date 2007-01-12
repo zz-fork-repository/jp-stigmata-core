@@ -6,7 +6,6 @@ package jp.naist.se.stigmata.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +17,10 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.BoxLayout;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -163,8 +163,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         scroll.setViewportView(table);
         scroll.setWheelScrollingEnabled(true);
         panel.add(scroll, BorderLayout.CENTER);
-        JPanel south = new JPanel();
-        south.setLayout(new BoxLayout(south, BoxLayout.Y_AXIS));
+        JComponent south = Box.createVerticalBox();
         JPanel box1 = new JPanel(new GridLayout(1, 3));
         box1.add(classCount = new JLabel());
         box1.add(comparisonCount = new JLabel());
@@ -216,7 +215,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         JButton obfuscate = Utility.createButton("obfuscate"); //$NON-NLS-1$
         JButton compare = Utility.createButton("compare"); //$NON-NLS-1$
         final JComboBox combo = new JComboBox();
-        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JComponent southPanel = Box.createHorizontalBox();
 
         String[] comparisonMethods = Messages.getStringArray("comparison.methods.inroundrobinresult");
         for(int i = 0; i < comparisonMethods.length; i++){
@@ -226,11 +225,17 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         setLayout(new BorderLayout());
         add(getMainPane(), BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(save);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(graph);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(obfuscate);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(compare);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(combo);
+        southPanel.add(Box.createHorizontalGlue());
 
         save.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

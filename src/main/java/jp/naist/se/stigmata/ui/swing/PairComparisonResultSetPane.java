@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -123,7 +122,7 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
     }
 
     private void initComponent(){
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JComponent buttonPanel = Box.createHorizontalBox();
         JPanel similarityPane = new JPanel(new GridLayout(1, 3));
         JComponent southPanel = Box.createVerticalBox();
         JButton saveButton = Utility.createButton("savecomparison");
@@ -148,8 +147,11 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
         similarityPane.add(minimumLabel);
         southPanel.add(similarityPane);
         southPanel.add(buttonPanel);
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(saveButton);
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(obfuscateButton);
+        buttonPanel.add(Box.createHorizontalGlue());
 
         table.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){

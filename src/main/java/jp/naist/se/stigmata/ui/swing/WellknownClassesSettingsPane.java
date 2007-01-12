@@ -197,7 +197,7 @@ public class WellknownClassesSettingsPane extends JPanel{
 
         scroll.setViewportView(getSectionTable());
         center.add(scroll, BorderLayout.CENTER);
-        center.add(getSouthPanel(), BorderLayout.SOUTH);
+        center.add(createSouthPane(), BorderLayout.SOUTH);
         center.setBorder(new TitledBorder(Messages.getString("rules.border")));
 
         add(center, BorderLayout.CENTER);
@@ -255,14 +255,17 @@ public class WellknownClassesSettingsPane extends JPanel{
         return south;
     }
 
-    private JPanel getSouthPanel(){
-        JPanel southPanel = new JPanel();
+    private JComponent createSouthPane(){
+        JComponent southPanel = Box.createHorizontalBox();
         JButton addButton = Utility.createButton("addwellknown");
         final JButton removeButton = Utility.createButton("removewellknown");
         removeButton.setEnabled(false);
 
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(addButton);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(removeButton);
+        southPanel.add(Box.createHorizontalGlue());
 
         addButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

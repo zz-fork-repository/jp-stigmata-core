@@ -5,12 +5,13 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 
+import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -33,7 +34,8 @@ public class BirthmarkExtractionResultPane extends JPanel implements BirthmarkDa
         this.frame = stigmataFrame;
         this.holders = holders;
 
-        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JComponent southPanel = Box.createHorizontalBox(); 
+        // JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton saveButton = Utility.createButton("savebirthmark");
         JScrollPane scroll = new JScrollPane();
 
@@ -42,7 +44,9 @@ public class BirthmarkExtractionResultPane extends JPanel implements BirthmarkDa
         setLayout(new BorderLayout());
         add(scroll, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
+        southPanel.add(Box.createHorizontalGlue());
         southPanel.add(saveButton);
+        southPanel.add(Box.createHorizontalGlue());
 
         saveButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
