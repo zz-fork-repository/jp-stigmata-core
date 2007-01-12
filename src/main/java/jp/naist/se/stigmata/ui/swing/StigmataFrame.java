@@ -143,7 +143,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
             ResultFormatSpi result = FormatManager.getInstance().getService(ext);
             if(result == null){
-                result = FormatManager.getInstance().getDefaultFormatService();
+                result = FormatManager.getDefaultFormatService();
             }
 
             PrintWriter out = null;

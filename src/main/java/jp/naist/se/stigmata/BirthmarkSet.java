@@ -10,11 +10,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * This class manages a set of birthmarks which extracted from a Java class
- * file.
- * 
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * This class manages a set of birthmarks which extracted from a Java class file.
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class BirthmarkSet implements Iterable<Birthmark>{
     /**
@@ -29,6 +27,8 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * map for birthmarks.
+     * @uml.property  name="birthmarks"
+     * @uml.associationEnd  qualifier="key:java.lang.Object jp.naist.se.stigmata.Birthmark"
      */
     private Map<String, Birthmark> birthmarks = new HashMap<String, Birthmark>();
 
@@ -63,6 +63,7 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * return the class name.
+     * @uml.property  name="className"
      */
     public String getClassName(){
         return className;
@@ -70,6 +71,7 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * return the location.
+     * @uml.property  name="location"
      */
     public URL getLocation(){
         return location;
@@ -90,7 +92,8 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     }
 
     /**
-     * return the all birthmarks this instance managed. 
+     * return the all birthmarks this instance managed.
+     * @uml.property  name="birthmarks"
      */
     public Birthmark[] getBirthmarks(){
         Birthmark[] b = new Birthmark[getBirthmarksCount()];

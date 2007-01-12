@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.naist.se</groupId>
   <artifactId>stigmata</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0-beta</version>
   <name>stigmata</name>
   <description>Java birthmark toolkit</description>
   <url>http://se.naist.jp/jbirth/</url>
@@ -26,15 +26,15 @@
     <developer>
       <id>tama</id>
       <name>Haruaki TAMADA</name>
-      <email>harua-t@is.naist.jp</email>
-      <organization>NAIST SE Lab.</organization>
+      <email>harua-t[ at ]is.naist.jp</email>
+      <organization>NAIST, Software Engineering Lab.</organization>
       <organizationUrl>http://se.naist.jp/</organizationUrl>
       <timezone>-9</timezone>
     </developer>
   </developers>
 
   <organization>
-    <name>NAIST Software Engineering Lab.</name>
+    <name>NAIST, Software Engineering Lab.</name>
     <url>http://se.naist.jp/</url>
   </organization>
 

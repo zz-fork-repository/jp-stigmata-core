@@ -14,19 +14,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import jp.cafebabe.commons.xmlcli.CommandLinePlus;
 import jp.cafebabe.commons.xmlcli.OptionsBuilder;
 import jp.cafebabe.commons.xmlcli.builder.OptionsBuilderFactory;
+import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
 import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
 import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
-import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
-
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
@@ -37,9 +35,8 @@ import org.xml.sax.SAXException;
 
 /**
  * Front end class.
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class Main{
     private FormatManager manager = FormatManager.getInstance();

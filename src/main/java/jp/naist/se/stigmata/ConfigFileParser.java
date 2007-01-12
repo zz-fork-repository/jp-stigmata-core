@@ -6,23 +6,19 @@ package jp.naist.se.stigmata;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 import jp.naist.se.stigmata.utils.WellknownClassSection;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * configuration file parser.
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class ConfigFileParser extends DefaultHandler{
     private BirthmarkContext context;

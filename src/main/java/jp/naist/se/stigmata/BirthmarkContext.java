@@ -11,15 +11,13 @@ import java.util.List;
 import java.util.Map;
 import javax.imageio.spi.ServiceRegistry;
 import jp.naist.se.stigmata.reader.ClasspathContext;
-
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
 /**
  * This class represents the context for extracting/comparing birthmarks.
- * 
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class BirthmarkContext{
     /**
@@ -45,11 +43,15 @@ public class BirthmarkContext{
 
     /**
      * collection of services.
+     * @uml.property  name="services"
+     * @uml.associationEnd  qualifier="key:java.lang.Object jp.naist.se.stigmata.spi.BirthmarkSpi"
      */
     private Map<String, BirthmarkSpi> services = new HashMap<String, BirthmarkSpi>();
 
     /**
      * properties manager.
+     * @uml.property  name="properties"
+     * @uml.associationEnd  qualifier="key:java.lang.Object java.lang.String"
      */
     private Map<String, String> properties = new HashMap<String, String>();
 
@@ -112,6 +114,7 @@ public class BirthmarkContext{
 
     /**
      * returns the classpath context.
+     * @uml.property  name="bytecodeContext"
      */
     public ClasspathContext getBytecodeContext(){
         return bytecodeContext;
@@ -146,6 +149,7 @@ public class BirthmarkContext{
 
     /**
      * return all birthmark services searching traverse to root context.
+     * @uml.property  name="services"
      */
     public synchronized BirthmarkSpi[] getServices(){
         List<BirthmarkSpi> list = getServiceList();

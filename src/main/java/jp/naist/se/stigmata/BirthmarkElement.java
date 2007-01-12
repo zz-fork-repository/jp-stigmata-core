@@ -9,9 +9,8 @@ import jp.naist.se.stigmata.birthmarks.NullBirthmarkElement;
 
 /**
  * element of birthmark.
- * 
- * @author Haruaki TAMADA
- * @version $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ * @author  Haruaki TAMADA
+ * @version  $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
  */
 public class BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 943675475343245243L;
@@ -32,6 +31,7 @@ public class BirthmarkElement implements Serializable{
 
     /**
      * return the value of this element.
+     * @uml.property  name="value"
      */
     public Object getValue(){
         return value;

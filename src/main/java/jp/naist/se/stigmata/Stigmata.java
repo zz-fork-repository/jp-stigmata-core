@@ -12,9 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.imageio.spi.ServiceRegistry;
-
 import jp.naist.se.stigmata.reader.ClassFileArchive;
 import jp.naist.se.stigmata.reader.ClassFileEntry;
 import jp.naist.se.stigmata.reader.ClasspathContext;
@@ -24,10 +22,8 @@ import jp.naist.se.stigmata.reader.WarClassFileArchive;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
- * 
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class Stigmata{
     private static final Stigmata instance = new Stigmata();
@@ -41,10 +37,18 @@ public class Stigmata{
         }
     }
 
+    /**
+     * @return  instance
+     * @uml.property  name="instance"
+     */
     public static Stigmata getInstance(){
         return instance;
     }
 
+    /**
+     * @return  defaultContext
+     * @uml.property  name="defaultContext"
+     */
     BirthmarkContext getDefaultContext(){
         return this.defaultContext;
     }

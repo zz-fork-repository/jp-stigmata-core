@@ -7,14 +7,12 @@ package jp.naist.se.stigmata;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
  * Abstract class for extracting birthmark.
- * 
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**

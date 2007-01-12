@@ -10,9 +10,8 @@ import java.util.List;
 
 /**
  * This class represents comparison pair.
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class ComparisonPair implements Iterable<ComparisonPairElement>{
     private BirthmarkSet target1;
@@ -34,7 +33,8 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
 
     /**
      * return a target.
-     * @see #getTarget2()
+     * @see  #getTarget2()
+     * @uml.property  name="target1"
      */
     public BirthmarkSet getTarget1(){
         return target1;
@@ -42,7 +42,8 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
 
     /**
      * return other target
-     * @see #getTarget1()
+     * @see  #getTarget1()
+     * @uml.property  name="target2"
      */
     public BirthmarkSet getTarget2(){
         return target2;

@@ -28,9 +28,8 @@ import java.util.List;
 
 /**
  * Abstract class for concrete [@link Birthmark <code>Birthmark</code>}
- * 
- * @author Haruaki TAMADA
- * @version $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ * @author  Haruaki TAMADA
+ * @version  $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
  */
 public abstract class AbstractBirthmark implements Birthmark, Serializable{
     /**
@@ -51,6 +50,10 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
         return numberOfElement;
     }
 
+    /**
+     * @return  elements
+     * @uml.property  name="elements"
+     */
     public BirthmarkElement[] getElements(){
         return elements.toArray(new BirthmarkElement[elements.size()]);
     }

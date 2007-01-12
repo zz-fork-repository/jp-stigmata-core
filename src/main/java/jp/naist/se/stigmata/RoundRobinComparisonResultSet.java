@@ -7,14 +7,20 @@ package jp.naist.se.stigmata;
 import java.util.Iterator;
 
 /**
- * Concrete class for ComparisonResultSet.
- * This instance compare class files by round robin.
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * Concrete class for ComparisonResultSet. This instance compare class files by round robin.
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class RoundRobinComparisonResultSet implements ComparisonResultSet{
+    /**
+     * @uml.property  name="holders1"
+     * @uml.associationEnd  multiplicity="(0 -1)"
+     */
     private BirthmarkSet[] holders1;
+    /**
+     * @uml.property  name="holders2"
+     * @uml.associationEnd  multiplicity="(0 -1)"
+     */
     private BirthmarkSet[] holders2;
     private BirthmarkContext context;
 
@@ -46,6 +52,10 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
         this.compareCount = holders1.length * holders2.length;
     }
 
+    /**
+     * @return  context
+     * @uml.property  name="context"
+     */
     public BirthmarkContext getContext(){
         return context;
     }

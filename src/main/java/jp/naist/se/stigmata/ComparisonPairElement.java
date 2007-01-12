@@ -6,9 +6,8 @@ package jp.naist.se.stigmata;
 
 /**
  * This class represents comparing two birthmarks.
- * 
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class ComparisonPairElement{
     private Birthmark birthmark1;
@@ -42,6 +41,10 @@ public class ComparisonPairElement{
         return birthmark1.getType();
     }
 
+    /**
+     * @return  similarity
+     * @uml.property  name="similarity"
+     */
     public double getSimilarity(){
         return similarity;
     }

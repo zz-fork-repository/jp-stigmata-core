@@ -10,12 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Concrete class for ComparisonResultSet.
- * This instance compare class files by certain pair.
- * The pair is guessed by system with class name, or specified by user.
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * Concrete class for ComparisonResultSet. This instance compare class files by certain pair. The pair is guessed by system with class name, or specified by user.
+ * @author  Haruaki TAMADA
+ * @version  $Revision$ $Date$
  */
 public class CertainPairComparisonResultSet implements ComparisonResultSet{
     private BirthmarkContext context;
@@ -71,6 +68,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
 
     /**
      * return the context.
+     * @uml.property  name="context"
      */
     public BirthmarkContext getContext(){
         return context;
