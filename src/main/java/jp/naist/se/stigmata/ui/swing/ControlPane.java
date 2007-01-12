@@ -5,11 +5,8 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,13 +15,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.Stigmata;
@@ -43,8 +36,7 @@ public class ControlPane extends JPanel{
     private BirthmarkSelectionPane birthmarks;
     private TargetSelectionPane targetX;
     private TargetSelectionPane targetY;
-    private TargetSelectionPane classpath;
-    private TargetSelectionPane bootClasspath;
+    private ClasspathSettingsPane classpath;
     private WellknownClassesSettingsPane wellknownClassses;
     private JTabbedPane controlTab;
     private JButton compareButton;
@@ -58,7 +50,7 @@ public class ControlPane extends JPanel{
         initComponents();
         Utility.addNewTab("targets", controlTab, createControlPane());
         Utility.addNewTab("wellknown", controlTab, createWellknownClassPane());
-        Utility.addNewTab("classpath", controlTab, createClasspathPane());
+        Utility.addNewTab("classpath", controlTab, classpath = new ClasspathSettingsPane(stigmata));
 
         reset();
     }
@@ -67,12 +59,8 @@ public class ControlPane extends JPanel{
         birthmarks.reset();
         targetX.removeAllElements();
         targetY.removeAllElements();
-        classpath.removeAllElements();
-        bootClasspath.removeAllElements();
 
-        addClasspath(bootClasspath, System.getProperty("java.class.path"));
-        addClasspath(bootClasspath, System.getProperty("sun.boot.class.path"));
-
+        classpath.reset();
         wellknownClassses.reset();
     }
 
@@ -136,100 +124,6 @@ public class ControlPane extends JPanel{
                         && (targets != null && targets.length > 0));
     }
 
-    private void addClasspath(TargetSelectionPane target, String classpath){
-        if(classpath != null){
-            target.addValues(classpath.split(System.getProperty("path.separator")));
-        }
-    }
-
-    private JComponent createClasspathPane(){
-        JComponent panel = new JPanel(new GridLayout(1, 2));
-        JPanel center = new JPanel(new BorderLayout());
-        classpath = new TargetSelectionPane(stigmata);
-        bootClasspath = new TargetSelectionPane(stigmata);
-        JComponent south = Box.createHorizontalBox();
-        final JButton findButton = Utility.createButton("findclass");
-        final JTextField text = new JTextField();
-        final JLabel label = new JLabel();
-
-        classpath.setBorder(new TitledBorder(Messages.getString("userclasspath.border")));
-        classpath.addTargetExtensions(Messages.getStringArray("userclasspath.extensions"));
-        classpath.setDescription(Messages.getString("userclasspath.description"));
-        classpath.setDirectorySelectable(true);
-
-        bootClasspath.setBorder(new TitledBorder(Messages.getString("bootclasspath.border")));
-        bootClasspath.setEnabled(false);
-
-        findButton.setEnabled(false);
-
-        south.setBorder(new TitledBorder(Messages.getString("classpathchecker.border")));
-
-        label.setIcon(Utility.getIcon("classpathchecker.default.icon"));
-        label.setToolTipText(Messages.getString("classpathchecker.default.tooltip"));
-
-        center.add(panel, BorderLayout.CENTER);
-        center.add(south, BorderLayout.SOUTH);
-
-        panel.add(classpath);
-        panel.add(bootClasspath);
-
-        south.add(Box.createHorizontalGlue());
-        south.add(text);
-        south.add(Box.createHorizontalGlue());
-        south.add(findButton);
-        south.add(Box.createHorizontalGlue());
-        south.add(label);
-        south.add(Box.createHorizontalGlue());
-
-        text.getDocument().addDocumentListener(new DocumentListener(){
-            public void changedUpdate(DocumentEvent arg0){
-                String t = text.getText();
-                findButton.setEnabled(t.trim().length() > 0);
-            }
-
-            public void insertUpdate(DocumentEvent arg0){
-                String t = text.getText();
-                findButton.setEnabled(t.trim().length() > 0);
-            }
-
-            public void removeUpdate(DocumentEvent arg0){
-                String t = text.getText();
-                findButton.setEnabled(t.trim().length() > 0);
-            }
-        });
-        ActionListener action = new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                boolean flag = findClass(text.getText().trim());
-                if(flag){
-                    label.setIcon(Utility.getIcon("classpathchecker.found.icon"));
-                    label.setToolTipText(Messages.getString("classpathchecker.found.tooltip"));
-                }
-                else{
-                    label.setIcon(Utility.getIcon("classpathchecker.notfound.icon"));
-                    label.setToolTipText(Messages.getString("classpathchecker.notfound.tooltip"));
-                }
-            }
-        };
-        findButton.addActionListener(action);
-        text.addActionListener(action);
-
-        return center;
-    }
-
-    private boolean findClass(String className){
-        try{
-            ClasspathContext b = stigmata.getStigmata().createContext().getBytecodeContext();
-            ClasspathContext bytecode = new ClasspathContext(b);
-            String[] path = classpath.getValues();
-            for(String cp: path){
-                bytecode.addClasspath(new File(cp).toURI().toURL());
-            }
-            return bytecode.findClass(className) != null;
-        }catch(Exception e){
-        }
-        return false;
-    }
-
     private void extractButtonActionPerformed(ActionEvent e){
         BirthmarkContext context = initAction();
         String[] fileX = targetX.getValues();
@@ -276,16 +170,7 @@ public class ControlPane extends JPanel{
         ClasspathContext bytecode = context.getBytecodeContext();
         WellknownClassManager manager = context.getWellknownClassManager();
 
-        String[] cplist = classpath.getValues();
-        if(cplist != null && cplist.length >= 0){
-            for(int i = 0; i < cplist.length; i++){
-                try{
-                    bytecode.addClasspath(new File(cplist[i]).toURI().toURL());
-                }catch(IOException ee){
-                }
-            }
-        }
-
+        classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
 
         return context;

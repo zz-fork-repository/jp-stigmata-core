@@ -37,6 +37,10 @@ public class ClasspathContext implements Iterable<URL>{
         loader = null;
     }
 
+    public void clear(){
+        classpath.clear();
+    }
+
     public Iterator<URL> iterator(){
         return classpath.iterator();
     }
