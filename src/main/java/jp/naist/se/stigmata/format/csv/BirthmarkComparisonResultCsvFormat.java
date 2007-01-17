@@ -34,7 +34,7 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
     public void printResult(PrintWriter out, ComparisonPair pair){
         list.printBirthmarkHolder(out, pair.getTarget1());
         list.printBirthmarkHolder(out, pair.getTarget2());
-        
+
         for(ComparisonPairElement element: pair){
             out.print("compare,");
             out.print(element.getType());
