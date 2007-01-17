@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.uc;
 
 /*
- * $Id: SMCBirthmarkExtractor.java 122 2006-10-06 03:38:54Z harua-t $
+ * $Id$
  */
 
 import java.util.Arrays;

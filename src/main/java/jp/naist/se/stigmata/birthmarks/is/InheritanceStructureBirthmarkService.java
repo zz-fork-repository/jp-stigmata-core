@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.is;
 
 /*
- * $Id: SMCBirthmarkExtractor.java 122 2006-10-06 03:38:54Z harua-t $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;

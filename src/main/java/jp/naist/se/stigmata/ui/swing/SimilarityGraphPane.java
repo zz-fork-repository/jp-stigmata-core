@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.ui.swing;
 
 /*
- * $Id: SimilarityGraphPane.java,v 1.2 2005/01/30 08:41:45 harua-t Exp $
+ * $Id$
  */
 
 import java.awt.Color;

@@ -1,14 +1,14 @@
 package jp.naist.se.stigmata;
 
 /*
- * $Id: BirthmarkComparator.java 76 2006-09-08 17:59:27Z harua-t $
+ * $Id$
  */
 
 /**
  * Interface for comparing given two birthmarks and calculate similarity.
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public interface BirthmarkComparator {
     /**

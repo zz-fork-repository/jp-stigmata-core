@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.ui.swing;
 
 /*
- * $Id: ExtensionFilter.java 76 2006-09-08 17:59:27Z harua-t $
+ * $Id$
  */
 
 import java.io.File;
@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileFilter;
  * File filter by file extension.
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public class ExtensionFilter extends FileFilter{
     private List<String> extensions = new ArrayList<String>();

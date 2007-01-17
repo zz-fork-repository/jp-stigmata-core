@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.ui.swing;
 
 /*
- * $Id: BirthmarkTree.java 79 2006-09-10 01:28:51Z harua-t $
+ * $Id$
  */
 
 import javax.swing.JTree;
@@ -14,7 +14,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
  * 
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 79 $ $Date: 2006-09-10 10:28:51 +0900 (Sun, 10 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public class BirthmarkTree extends JTree{
     private static final long serialVersionUID = 68345692177534765L;

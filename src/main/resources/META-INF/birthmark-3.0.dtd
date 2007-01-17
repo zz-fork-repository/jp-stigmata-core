@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="euc-jp"?>
 
 <!--
- $Id: birthmark-3.0.dtd 122 2006-10-06 03:38:54Z harua-t $
+ $Id$
 -->
 
 <!ELEMENT suffix        (#PCDATA)>

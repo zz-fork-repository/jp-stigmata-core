@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.cvfv;
 
 /*
- * $Id: TypeAndValueBirthmarkElement.java 76 2006-09-08 17:59:27Z harua-t $
+ * $Id$
  */
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import jp.naist.se.stigmata.BirthmarkElement;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 237098465735321L;

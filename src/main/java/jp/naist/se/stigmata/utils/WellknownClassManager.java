@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.utils;
 
 /* 
- * $Id: WellknownClassManager.java 79 2006-09-10 01:28:51Z harua-t $
+ * $Id$
  */
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import org.objectweb.asm.Opcodes;
  * Managing wellknown class checking rule.
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 79 $ $Date: 2006-09-10 10:28:51 +0900 (Sun, 10 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public class WellknownClassManager{
     public static final int FULLY_PREFIX_TYPE       = WellknownClassSection.FULLY_TYPE | WellknownClassSection.PREFIX_TYPE;

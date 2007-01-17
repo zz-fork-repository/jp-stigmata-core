@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata;
 
 /*
- * $Id: Birthmark.java 105 2006-09-19 10:06:47Z harua-t $
+ * $Id$
  */
 
 import java.util.Iterator;
@@ -10,7 +10,7 @@ import java.util.Iterator;
  * This interface represents the birthmark.
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 105 $ $Date: 2006-09-19 19:06:47 +0900 (Tue, 19 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public interface Birthmark extends Iterable<BirthmarkElement>{
     /**

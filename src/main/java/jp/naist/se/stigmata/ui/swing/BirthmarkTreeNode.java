@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.ui.swing;
 
 /*
- * $Id: BirthmarkTreeNode.java 79 2006-09-10 01:28:51Z harua-t $
+ * $Id$
  */
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -12,7 +12,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 79 $ $Date: 2006-09-10 10:28:51 +0900 (Sun, 10 Sep 2006) $
+ * @version $Revision$ $Date$
  */
 public class BirthmarkTreeNode extends DefaultMutableTreeNode{
     private static final long serialVersionUID = -12323457653245L;

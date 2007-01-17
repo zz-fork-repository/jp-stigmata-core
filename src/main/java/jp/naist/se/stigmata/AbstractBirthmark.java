@@ -18,7 +18,7 @@
 package jp.naist.se.stigmata;
 
 /*
- * $Id: AbstractBirthmark.java 76 2006-09-08 17:59:27Z harua-t $
+ * $Id$
  */
 
 import java.io.Serializable;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Abstract class for concrete [@link Birthmark <code>Birthmark</code>}
  * @author  Haruaki TAMADA
- * @version  $Revision: 76 $ $Date: 2006-09-09 02:59:27 +0900 (Sat, 09 Sep 2006) $
+ * @version  $Revision$ $Date$
  */
 public abstract class AbstractBirthmark implements Birthmark, Serializable{
     /**

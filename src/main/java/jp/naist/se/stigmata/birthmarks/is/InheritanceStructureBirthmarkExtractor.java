@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.is;
 
 /*
- * $Id: SMCBirthmarkExtractor.java 122 2006-10-06 03:38:54Z harua-t $
+ * $Id$
  */
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 122 $ $Date: 2006-10-06 12:38:54 +0900 (Fri, 06 Oct 2006) $
+ * @version $Revision$ $Date$
  */
 public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExtractor{
     public InheritanceStructureBirthmarkExtractor(BirthmarkSpi spi){
