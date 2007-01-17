@@ -55,7 +55,7 @@ import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 
 /**
- * 
+ *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
@@ -192,7 +192,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void compareGuessedPair(String[] birthmarks, String[] targetX, String[] targetY,
-            BirthmarkContext context){
+                                   BirthmarkContext context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
@@ -211,9 +211,9 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void compareSpecifiedPair(String[] birthmarks, String[] targetX, String[] targetY,
-            BirthmarkContext context){
-        File file = getOpenFile(Messages.getStringArray("comparemapping.extensions"), Messages
-                .getString("comparemapping.description"));
+                                     BirthmarkContext context){
+        File file = getOpenFile(Messages.getStringArray("comparemapping.extension"),
+                                Messages.getString("comparemapping.description"));
 
         if(file != null){
             Map<String, String> mapping = constructMapping(file);
