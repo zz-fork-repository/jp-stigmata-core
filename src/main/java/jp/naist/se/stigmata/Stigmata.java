@@ -22,6 +22,8 @@ import jp.naist.se.stigmata.reader.WarClassFileArchive;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
+ * Birthmarking engine.
+ *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
@@ -53,6 +55,9 @@ public class Stigmata{
         return this.defaultContext;
     }
 
+    /**
+     * create a new {@link BirthmarkContext <code>BirthmarkContext</code>}.
+     */
     public BirthmarkContext createContext(){
         return new BirthmarkContext(getDefaultContext());
     }

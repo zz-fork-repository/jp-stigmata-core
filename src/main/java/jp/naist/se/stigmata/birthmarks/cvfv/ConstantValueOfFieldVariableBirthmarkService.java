@@ -6,6 +6,7 @@ package jp.naist.se.stigmata.birthmarks.cvfv;
 
 import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkExtractor;
+import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
 import jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -16,7 +17,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class ConstantValueOfFieldVariableBirthmarkService implements BirthmarkSpi{
+public class ConstantValueOfFieldVariableBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new ConstantValueOfFieldVariableBirthmarkExtractor(this);
 
@@ -24,7 +25,7 @@ public class ConstantValueOfFieldVariableBirthmarkService implements BirthmarkSp
         return "cvfv";
     }
 
-    public String getDescription(){
+    public String getDefaultDescription(){
         return "Field type and its initial value.";
     }
 

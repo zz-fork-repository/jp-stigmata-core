@@ -28,7 +28,7 @@ public class BirthmarkServiceListXmlFormat extends AbstractBirthmarkServiceListF
             out.println("</name>");
 
             out.print("      <description>");
-            out.print(spi.getDescription());
+            out.print(spi.getDefaultDescription());
             out.println("</description>");
 
             out.print("      <class-name>");

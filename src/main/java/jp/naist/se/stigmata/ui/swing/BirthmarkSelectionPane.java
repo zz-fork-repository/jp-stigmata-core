@@ -99,9 +99,11 @@ public class BirthmarkSelectionPane extends javax.swing.JPanel {
         private BirthmarkSpi service;
         private BirthmarkSelectionPane birthmarks;
 
-        /** Creates a new instance of BirthmarkSelectAction */
+        /**
+         * Creates a new instance of BirthmarkSelectAction
+         */
         public BirthmarkSelectAction(BirthmarkSpi service, BirthmarkSelectionPane birthmarks){
-            super(service.getType());
+            super(service.getDisplayType());
             this.service = service;
             this.birthmarks = birthmarks;
         }

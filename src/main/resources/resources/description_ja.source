@@ -1,0 +1,8 @@
+birthmark.cvfv.display.type=変数初期値
+birthmark.cvfv.description=フィールドの型と初期値のペア
+birthmark.smc.display.type=メソッド実行系列
+birthmark.smc.description=クラスが呼び出している既知のクラスのメソッドの系列（定義順）
+birthmark.uc.display.type=依存クラス
+birthmark.uc.description=クラスが依存する他の既知のクラスの集合
+birthmark.is.display.type=継承関係
+birthmark.is.description=継承関係をルートまで辿って得られるクラスの系列

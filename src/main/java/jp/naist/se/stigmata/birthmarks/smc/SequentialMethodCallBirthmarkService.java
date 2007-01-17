@@ -6,6 +6,7 @@ package jp.naist.se.stigmata.birthmarks.smc;
 
 import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkExtractor;
+import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
 import jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -16,7 +17,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class SequentialMethodCallBirthmarkService implements BirthmarkSpi{
+public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new SequentialMethodCallBirthmarkExtractor(this);
 
@@ -24,7 +25,7 @@ public class SequentialMethodCallBirthmarkService implements BirthmarkSpi{
         return "smc";
     }
 
-    public String getDescription(){
+    public String getDefaultDescription(){
         return "Sequence of method call which order is appeared in method definition.";
     }
 
