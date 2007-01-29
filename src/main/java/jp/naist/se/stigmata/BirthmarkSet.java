@@ -21,21 +21,17 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     private String className;
 
     /**
-     * location of class file is loaded from. 
+     * location of class file is loaded from.
      */
     private URL location;
 
     /**
      * map for birthmarks.
-     * @uml.property  name="birthmarks"
-     * @uml.associationEnd  qualifier="key:java.lang.Object jp.naist.se.stigmata.Birthmark"
      */
     private Map<String, Birthmark> birthmarks = new HashMap<String, Birthmark>();
 
     /**
      * constructor.
-     * @param className class name of managed birthmark are extracted from.  
-     * @param location location of class file is loaded from.
      */
     public BirthmarkSet(String className, URL location){
         this.className = className;

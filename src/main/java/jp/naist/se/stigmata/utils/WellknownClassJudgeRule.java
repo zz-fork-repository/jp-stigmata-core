@@ -10,7 +10,7 @@ package jp.naist.se.stigmata.utils;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class WellknownClassSection{
+public class WellknownClassJudgeRule{
     public static final int PREFIX_TYPE = 1;
 
     public static final int SUFFIX_TYPE = 2;
@@ -29,7 +29,7 @@ public class WellknownClassSection{
 
     private String name;
 
-    public WellknownClassSection(String name, int type){
+    public WellknownClassJudgeRule(String name, int type){
         this.name = name;
         this.type = type;
     }

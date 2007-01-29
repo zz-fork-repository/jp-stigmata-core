@@ -13,8 +13,14 @@ import java.util.Iterator;
  * @version $Revision$ $Date$
  */
 public interface ComparisonResultSet extends Iterable<ComparisonPair>{
+    /**
+     * returns the birthmark context.
+     */
     public BirthmarkContext getContext();
 
+    /**
+     * returns a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.
+     */
     public Iterator<ComparisonPair> iterator();
 
     public int getComparisonCount();

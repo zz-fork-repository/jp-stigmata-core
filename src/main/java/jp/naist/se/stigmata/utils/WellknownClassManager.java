@@ -17,31 +17,31 @@ import org.objectweb.asm.Opcodes;
  * @version $Revision$ $Date$
  */
 public class WellknownClassManager{
-    public static final int FULLY_PREFIX_TYPE       = WellknownClassSection.FULLY_TYPE | WellknownClassSection.PREFIX_TYPE;
-    public static final int FULLY_SUFFIX_TYPE       = WellknownClassSection.FULLY_TYPE | WellknownClassSection.SUFFIX_TYPE;
-    public static final int FULLY_MATCH_TYPE        = WellknownClassSection.FULLY_TYPE | WellknownClassSection.MATCH_TYPE;
-    public static final int PACKAGE_PREFIX_TYPE     = WellknownClassSection.PACKAGE_TYPE | WellknownClassSection.PREFIX_TYPE;
-    public static final int PACKAGE_SUFFIX_TYPE     = WellknownClassSection.PACKAGE_TYPE | WellknownClassSection.SUFFIX_TYPE;
-    public static final int PACKAGE_MATCH_TYPE      = WellknownClassSection.PACKAGE_TYPE | WellknownClassSection.MATCH_TYPE;
-    public static final int CLASS_NAME_PREFIX_TYPE  = WellknownClassSection.CLASS_NAME_TYPE | WellknownClassSection.PREFIX_TYPE;
-    public static final int CLASS_NAME_SUFFIX_TYPE  = WellknownClassSection.CLASS_NAME_TYPE | WellknownClassSection.SUFFIX_TYPE;
-    public static final int CLASS_NAME_MATCH_TYPE   = WellknownClassSection.CLASS_NAME_TYPE | WellknownClassSection.MATCH_TYPE;
+    public static final int FULLY_PREFIX_TYPE       = WellknownClassJudgeRule.FULLY_TYPE | WellknownClassJudgeRule.PREFIX_TYPE;
+    public static final int FULLY_SUFFIX_TYPE       = WellknownClassJudgeRule.FULLY_TYPE | WellknownClassJudgeRule.SUFFIX_TYPE;
+    public static final int FULLY_MATCH_TYPE        = WellknownClassJudgeRule.FULLY_TYPE | WellknownClassJudgeRule.MATCH_TYPE;
+    public static final int PACKAGE_PREFIX_TYPE     = WellknownClassJudgeRule.PACKAGE_TYPE | WellknownClassJudgeRule.PREFIX_TYPE;
+    public static final int PACKAGE_SUFFIX_TYPE     = WellknownClassJudgeRule.PACKAGE_TYPE | WellknownClassJudgeRule.SUFFIX_TYPE;
+    public static final int PACKAGE_MATCH_TYPE      = WellknownClassJudgeRule.PACKAGE_TYPE | WellknownClassJudgeRule.MATCH_TYPE;
+    public static final int CLASS_NAME_PREFIX_TYPE  = WellknownClassJudgeRule.CLASS_NAME_TYPE | WellknownClassJudgeRule.PREFIX_TYPE;
+    public static final int CLASS_NAME_SUFFIX_TYPE  = WellknownClassJudgeRule.CLASS_NAME_TYPE | WellknownClassJudgeRule.SUFFIX_TYPE;
+    public static final int CLASS_NAME_MATCH_TYPE   = WellknownClassJudgeRule.CLASS_NAME_TYPE | WellknownClassJudgeRule.MATCH_TYPE;
 
-    private List<WellknownClassSection> systemClassesList = new ArrayList<WellknownClassSection>();
-    private List<WellknownClassSection> excludes = new ArrayList<WellknownClassSection>();
+    private List<WellknownClassJudgeRule> systemClassesList = new ArrayList<WellknownClassJudgeRule>();
+    private List<WellknownClassJudgeRule> excludes = new ArrayList<WellknownClassJudgeRule>();
 
     public WellknownClassManager(){
     }
 
     public WellknownClassManager(WellknownClassManager manager){
-        systemClassesList = new ArrayList<WellknownClassSection>(manager.systemClassesList);
-        excludes = new ArrayList<WellknownClassSection>(manager.excludes);
+        systemClassesList = new ArrayList<WellknownClassJudgeRule>(manager.systemClassesList);
+        excludes = new ArrayList<WellknownClassJudgeRule>(manager.excludes);
     }
 
     public void remove(String value, int type){
         int index = -1;
         for(int i = 0; i < systemClassesList.size(); i++){ 
-            WellknownClassSection section = (WellknownClassSection)systemClassesList.get(i);
+            WellknownClassJudgeRule section = (WellknownClassJudgeRule)systemClassesList.get(i);
             if(section.getName().equals(value) && section.getType() == type){
                 index = i;
                 break;
@@ -53,14 +53,14 @@ public class WellknownClassManager{
     public void clear(){
         systemClassesList.clear();
     }
-    public WellknownClassSection[] getSections(){
-        List<WellknownClassSection> sections = new ArrayList<WellknownClassSection>();
+    public WellknownClassJudgeRule[] getSections(){
+        List<WellknownClassJudgeRule> sections = new ArrayList<WellknownClassJudgeRule>();
         sections.addAll(excludes);
         sections.addAll(systemClassesList);
-        return sections.toArray(new WellknownClassSection[sections.size()]);
+        return sections.toArray(new WellknownClassJudgeRule[sections.size()]);
     }
 
-    public void add(WellknownClassSection section){
+    public void add(WellknownClassJudgeRule section){
         if(section.isExcludeType()){
             excludes.add(section);
         }
@@ -83,7 +83,7 @@ public class WellknownClassManager{
         }
 
         for(Iterator i = systemClassesList.iterator(); i.hasNext(); ){
-            WellknownClassSection section = (WellknownClassSection)i.next();
+            WellknownClassJudgeRule section = (WellknownClassJudgeRule)i.next();
             String target = fully;
             if(section.isClassNameType()){
                 target = cn;
@@ -92,17 +92,17 @@ public class WellknownClassManager{
                 target = pn;
             }
             switch(section.getMatchType()){
-            case WellknownClassSection.PREFIX_TYPE:
+            case WellknownClassJudgeRule.PREFIX_TYPE:
                 if(target.startsWith(section.getName())){
                     return true;
                 }
                 break;
-            case WellknownClassSection.SUFFIX_TYPE:
+            case WellknownClassJudgeRule.SUFFIX_TYPE:
                 if(target.endsWith(section.getName())){
                     return true;
                 }
                 break;
-            case WellknownClassSection.MATCH_TYPE:
+            case WellknownClassJudgeRule.MATCH_TYPE:
                 if(target.equals(section.getName())){
                     return true;
                 }
@@ -114,19 +114,19 @@ public class WellknownClassManager{
 
     private boolean isExcludes(String fully){
         for(Iterator i = excludes.iterator(); i.hasNext(); ){
-            WellknownClassSection s = (WellknownClassSection)i.next();
+            WellknownClassJudgeRule s = (WellknownClassJudgeRule)i.next();
             switch(s.getMatchType()){
-            case WellknownClassSection.PREFIX_TYPE:
+            case WellknownClassJudgeRule.PREFIX_TYPE:
                 if(fully.startsWith(s.getName())){
                     return true;
                 }
                 break;
-            case WellknownClassSection.SUFFIX_TYPE:
+            case WellknownClassJudgeRule.SUFFIX_TYPE:
                 if(fully.endsWith(s.getName())){
                     return true;
                 }
                 break;
-            case WellknownClassSection.MATCH_TYPE:
+            case WellknownClassJudgeRule.MATCH_TYPE:
                 if(fully.equals(s.getName())){
                     return true;
                 }

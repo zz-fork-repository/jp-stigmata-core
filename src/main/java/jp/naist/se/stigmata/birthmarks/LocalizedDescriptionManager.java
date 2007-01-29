@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import jp.naist.se.stigmata.spi.BirthmarkSpi;
-
 /**
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

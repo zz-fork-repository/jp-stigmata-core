@@ -8,19 +8,12 @@ import java.util.Iterator;
 
 /**
  * Concrete class for ComparisonResultSet. This instance compare class files by round robin.
+ *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
 public class RoundRobinComparisonResultSet implements ComparisonResultSet{
-    /**
-     * @uml.property  name="holders1"
-     * @uml.associationEnd  multiplicity="(0 -1)"
-     */
     private BirthmarkSet[] holders1;
-    /**
-     * @uml.property  name="holders2"
-     * @uml.associationEnd  multiplicity="(0 -1)"
-     */
     private BirthmarkSet[] holders2;
     private BirthmarkContext context;
 
@@ -28,12 +21,24 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
     private boolean tablePair = true;
     private boolean samePair = false;
 
+    /**
+     * constructor.  if user gives { a, b, c, } as holders1, then
+     * the instance (created by this constructor) compares { a<->b, a<->c,
+     * b<->c, }.
+     */
     public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkContext context){
         this(holders1, context, false);
     }
 
+    /**
+     * constructor.  if user gives { a, b, c, } as holders1, then the
+     * instance (created by this constructor when samePair is true)
+     * compares { a<->a, a<->b, a<->c, b<->b, b<->c, c<->c, }.
+     * Otherwise, the instance compares { a<->b, a<->c, b<->c, } when
+     * samePair is false.
+     */
     public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkContext context,
-            boolean samePair){
+                                         boolean samePair){
         this.holders1 = holders1;
         this.holders2 = holders1;
         this.context = context;
@@ -42,8 +47,13 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
         setCompareSamePair(samePair);
     }
 
+    /**
+     * constructor.  if user gives { a, b, c, } as holders1 and { x,
+     * y, z, } as holders2, then the instance compares { a<->x, a<->y,
+     * a<->z, b<->x, b<->y, b<->z, c<->x, c<->y, c<->z, }.
+     */
     public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkSet[] holders2,
-            BirthmarkContext context){
+                                         BirthmarkContext context){
         this.holders1 = holders1;
         this.holders2 = holders2;
         this.context = context;
@@ -54,12 +64,14 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
 
     /**
      * @return  context
-     * @uml.property  name="context"
      */
     public BirthmarkContext getContext(){
         return context;
     }
 
+    /**
+     * update same pair comparing flag unless two birthmark array is setted.
+     */
     public void setCompareSamePair(boolean flag){
         samePair = flag;
         if(samePair){
@@ -74,16 +86,22 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
         return samePair;
     }
 
+    /**
+     * returns the compare count of birthmark sets.
+     */
     public int getComparisonCount(){
         return compareCount;
     }
 
+    /**
+     * return a iterator of whole comparison.
+     */
     public Iterator<ComparisonPair> iterator(){
         return new ComparisonIterator();
     }
 
     /**
-     * 
+     * iterator class.
      */
     private class ComparisonIterator implements Iterator<ComparisonPair>{
         private int i = 0;

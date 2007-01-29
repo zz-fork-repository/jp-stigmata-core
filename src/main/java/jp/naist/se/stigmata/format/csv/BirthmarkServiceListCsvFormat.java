@@ -25,7 +25,7 @@ public class BirthmarkServiceListCsvFormat extends AbstractBirthmarkServiceListF
             out.print(",");
             out.print(spi.getClass().getName());
             out.print(",");
-            out.print(spi.gettDescription());
+            out.print(spi.getDescription());
             out.println();
         }
         out.flush();

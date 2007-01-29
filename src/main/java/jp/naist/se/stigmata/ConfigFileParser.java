@@ -9,8 +9,9 @@ import java.io.InputStream;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import jp.naist.se.stigmata.utils.WellknownClassManager;
-import jp.naist.se.stigmata.utils.WellknownClassSection;
+import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -69,25 +70,25 @@ public class ConfigFileParser extends DefaultHandler{
             propertyPart = true;
         }
         else if(qName.equals("exclude")){
-            wellknownType = WellknownClassSection.EXCLUDE_TYPE;
+            wellknownType = WellknownClassJudgeRule.EXCLUDE_TYPE;
         }
         else if(qName.equals("package")){
-            wellknownType = WellknownClassSection.PACKAGE_TYPE;
+            wellknownType = WellknownClassJudgeRule.PACKAGE_TYPE;
         }
         else if(qName.equals("class-name")){
-            wellknownType = WellknownClassSection.CLASS_NAME_TYPE;
+            wellknownType = WellknownClassJudgeRule.CLASS_NAME_TYPE;
         }
         else if(qName.equals("fully-name")){
-            wellknownType = WellknownClassSection.FULLY_TYPE;
+            wellknownType = WellknownClassJudgeRule.FULLY_TYPE;
         }
         else if(qName.equals("suffix")){
-            patternType = WellknownClassSection.SUFFIX_TYPE;
+            patternType = WellknownClassJudgeRule.SUFFIX_TYPE;
         }
         else if(qName.equals("prefix")){
-            patternType = WellknownClassSection.PREFIX_TYPE;
+            patternType = WellknownClassJudgeRule.PREFIX_TYPE;
         }
         else if(qName.equals("match")){
-            patternType = WellknownClassSection.MATCH_TYPE;
+            patternType = WellknownClassJudgeRule.MATCH_TYPE;
         }
     }
 
@@ -103,7 +104,7 @@ public class ConfigFileParser extends DefaultHandler{
             }
             else if(wellknownPart
                     && (qname.equals("suffix") || qname.equals("prefix") || qname.equals("match"))){
-                manager.add(new WellknownClassSection(new String(data, offset, length),
+                manager.add(new WellknownClassJudgeRule(new String(data, offset, length),
                         wellknownType | patternType));
             }
         }

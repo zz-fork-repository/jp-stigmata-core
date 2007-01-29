@@ -62,7 +62,7 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
 
     /**
      * Return the number of birthmarks contained a target.
-     * Note that other target must have same birthmarks.  
+     * Note that other target must have same birthmarks.
      */
     public int getBirthmarksCount(){
         return target1.getBirthmarksCount();

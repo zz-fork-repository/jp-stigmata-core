@@ -33,7 +33,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import jp.naist.se.stigmata.utils.WellknownClassManager;
-import jp.naist.se.stigmata.utils.WellknownClassSection;
+import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
 
 /**
  * @author Haruaki TAMADA
@@ -72,7 +72,7 @@ public class WellknownClassesSettingsPane extends JPanel{
             int partType = getPartType(model.getValueAt(i, 0));
             int match = getMatchType(model.getValueAt(i, 1));
             String value = (String)model.getValueAt(i, 2);
-            WellknownClassSection sect = new WellknownClassSection(value, partType | match);
+            WellknownClassJudgeRule sect = new WellknownClassJudgeRule(value, partType | match);
             manager.add(sect);
         }
     }
@@ -102,19 +102,19 @@ public class WellknownClassesSettingsPane extends JPanel{
         }
         else{
             if(object.equals(Messages.getString("fully.label"))){
-                return WellknownClassSection.FULLY_TYPE;
+                return WellknownClassJudgeRule.FULLY_TYPE;
             }
             else if(object.equals(Messages.getString("package.label"))){
-                return WellknownClassSection.PACKAGE_TYPE;
+                return WellknownClassJudgeRule.PACKAGE_TYPE;
             }
             else if(object.equals(Messages.getString("classname.label"))){
-                return WellknownClassSection.CLASS_NAME_TYPE;
+                return WellknownClassJudgeRule.CLASS_NAME_TYPE;
             }
             else if(object.equals(Messages.getString("exclude.label"))){
-                return WellknownClassSection.EXCLUDE_TYPE;
+                return WellknownClassJudgeRule.EXCLUDE_TYPE;
             }
         }
-        return WellknownClassSection.FULLY_TYPE;
+        return WellknownClassJudgeRule.FULLY_TYPE;
     }
 
     private int getMatchType(Object object){
@@ -123,16 +123,16 @@ public class WellknownClassesSettingsPane extends JPanel{
         }
         else{
             if(object.equals(Messages.getString("prefix.label"))){
-                return WellknownClassSection.PREFIX_TYPE;
+                return WellknownClassJudgeRule.PREFIX_TYPE;
             }
             else if(object.equals(Messages.getString("suffix.label"))){            
-                return WellknownClassSection.SUFFIX_TYPE;
+                return WellknownClassJudgeRule.SUFFIX_TYPE;
             }
             else if(object.equals(Messages.getString("exactmatch.label"))){
-                return WellknownClassSection.MATCH_TYPE;
+                return WellknownClassJudgeRule.MATCH_TYPE;
             }
         }
-        return WellknownClassSection.PREFIX_TYPE;
+        return WellknownClassJudgeRule.PREFIX_TYPE;
     }
 
     public void addSection(){
@@ -159,8 +159,8 @@ public class WellknownClassesSettingsPane extends JPanel{
     }
 
     private void initializeData(){
-        WellknownClassSection[] sections = manager.getSections();
-        for(WellknownClassSection section : sections){
+        WellknownClassJudgeRule[] sections = manager.getSections();
+        for(WellknownClassJudgeRule section : sections){
             model.addRow(new Object[] { new Integer(section.getMatchPartType()),
                     new Integer(section.getMatchType()), section.getName() });
         }
@@ -320,16 +320,16 @@ public class WellknownClassesSettingsPane extends JPanel{
                 public void setValue(Object value){
                     if(value instanceof Integer){
                         int type = ((Integer)value).intValue();
-                        if(type == WellknownClassSection.FULLY_TYPE){
+                        if(type == WellknownClassJudgeRule.FULLY_TYPE){
                             setText(checkPartItems[0]);
                         }
-                        else if(type == WellknownClassSection.PACKAGE_TYPE){
+                        else if(type == WellknownClassJudgeRule.PACKAGE_TYPE){
                             setText(checkPartItems[1]);
                         }
-                        else if(type == WellknownClassSection.CLASS_NAME_TYPE){
+                        else if(type == WellknownClassJudgeRule.CLASS_NAME_TYPE){
                             setText(checkPartItems[2]);
                         }
-                        else if(type == WellknownClassSection.EXCLUDE_TYPE){
+                        else if(type == WellknownClassJudgeRule.EXCLUDE_TYPE){
                             setText(checkPartItems[3]);
                         }
                         else{
@@ -355,13 +355,13 @@ public class WellknownClassesSettingsPane extends JPanel{
                 public void setValue(Object value){
                     if(value instanceof Integer){
                         int type = ((Integer)value).intValue();
-                        if(type == WellknownClassSection.PREFIX_TYPE){
+                        if(type == WellknownClassJudgeRule.PREFIX_TYPE){
                             setText(matchTypeStrings[0]);
                         }
-                        else if(type == WellknownClassSection.SUFFIX_TYPE){
+                        else if(type == WellknownClassJudgeRule.SUFFIX_TYPE){
                             setText(matchTypeStrings[1]);
                         }
-                        else if(type == WellknownClassSection.MATCH_TYPE){
+                        else if(type == WellknownClassJudgeRule.MATCH_TYPE){
                             setText(matchTypeStrings[2]);
                         }
                         else{
