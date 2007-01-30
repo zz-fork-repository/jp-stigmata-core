@@ -149,8 +149,10 @@ public class PairComparisonPane extends JPanel implements BirthmarkDataWritable{
         public Component getListCellRendererComponent(JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus){
             ComparisonPairElement elem = (ComparisonPairElement)value;
-            left.setText(elem.getType());
-            right.setText(Double.toString(elem.getSimilarity()));
+            if(elem != null){
+                left.setText(elem.getType());
+                right.setText(Double.toString(elem.getSimilarity()));
+            }
 
             setBackground(isSelected ? SystemColor.textHighlight: Color.white);
             left.setBackground(isSelected ? SystemColor.textHighlight: Color.white);

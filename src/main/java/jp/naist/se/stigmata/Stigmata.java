@@ -39,18 +39,10 @@ public class Stigmata{
         }
     }
 
-    /**
-     * @return  instance
-     * @uml.property  name="instance"
-     */
     public static Stigmata getInstance(){
         return instance;
     }
 
-    /**
-     * @return  defaultContext
-     * @uml.property  name="defaultContext"
-     */
     BirthmarkContext getDefaultContext(){
         return this.defaultContext;
     }
@@ -59,7 +51,7 @@ public class Stigmata{
      * create a new {@link BirthmarkContext <code>BirthmarkContext</code>}.
      */
     public BirthmarkContext createContext(){
-        return new BirthmarkContext(getDefaultContext());
+        return new BirthmarkContext();
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws IOException{
@@ -67,7 +59,7 @@ public class Stigmata{
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files,
-            BirthmarkContext context) throws IOException{
+                                  BirthmarkContext context) throws IOException{
         List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
         ClasspathContext bytecode = context.getBytecodeContext();
 
@@ -157,7 +149,8 @@ public class Stigmata{
     }
 
     private BirthmarkSet extractBirthmark(String[] birthmarks, byte[] bytecode,
-            BirthmarkSet holder, BirthmarkContext context) throws IOException{
+                                          BirthmarkSet holder,
+                                          BirthmarkContext context) throws IOException{
         for(String birthmark: birthmarks){
             BirthmarkSpi spi = context.getService(birthmark);
             if(spi != null){

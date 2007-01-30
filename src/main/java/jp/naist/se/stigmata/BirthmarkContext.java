@@ -43,15 +43,11 @@ public class BirthmarkContext{
 
     /**
      * collection of services.
-     * @uml.property  name="services"
-     * @uml.associationEnd  qualifier="key:java.lang.Object jp.naist.se.stigmata.spi.BirthmarkSpi"
      */
     private Map<String, BirthmarkSpi> services = new HashMap<String, BirthmarkSpi>();
 
     /**
      * properties manager.
-     * @uml.property  name="properties"
-     * @uml.associationEnd  qualifier="key:java.lang.Object java.lang.String"
      */
     private Map<String, String> properties = new HashMap<String, String>();
 
@@ -95,7 +91,7 @@ public class BirthmarkContext{
     }
 
     /**
-     * add given property. 
+     * add given property.
      */
     public void addProperty(String key, String value){
         properties.put(key, value);
@@ -114,7 +110,6 @@ public class BirthmarkContext{
 
     /**
      * returns the classpath context.
-     * @uml.property  name="bytecodeContext"
      */
     public ClasspathContext getBytecodeContext(){
         return bytecodeContext;
@@ -137,7 +132,7 @@ public class BirthmarkContext{
     }
 
     /**
-     * return birthmark service registered with given birthmark type. 
+     * return birthmark service registered with given birthmark type.
      */
     public BirthmarkSpi getService(String type){
         BirthmarkSpi service = services.get(type);
@@ -162,8 +157,7 @@ public class BirthmarkContext{
     public synchronized BirthmarkSpi[] findServices(){
         List<BirthmarkSpi> list = getServiceList();
 
-        for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i
-                .hasNext();){
+        for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext();){
             BirthmarkSpi spi = i.next();
             if(getService(spi.getType()) == null){
                 list.add(spi);

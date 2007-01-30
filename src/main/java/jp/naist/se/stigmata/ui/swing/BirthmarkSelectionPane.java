@@ -50,7 +50,10 @@ public class BirthmarkSelectionPane extends javax.swing.JPanel {
         selectedServices = new ArrayList<String>();
         for(JCheckBox check: checks){
             check.setSelected(true);
-            selectedServices.add(check.getText());
+        }
+
+        for(BirthmarkSpi service: serviceList){
+            selectedServices.add(service.getType());
         }
         fireEvent();
     }
@@ -69,7 +72,9 @@ public class BirthmarkSelectionPane extends javax.swing.JPanel {
     }
 
     public String[] getSelectedServices(){
-        return selectedServices.toArray(new String[selectedServices.size()]);
+        String[] services = selectedServices.toArray(new String[selectedServices.size()]);
+        return services;
+
     }
 
     private void fireEvent(){

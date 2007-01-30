@@ -114,14 +114,13 @@ public class ControlPane extends JPanel{
         String[] valueY = targetY.getValues();
         String[] targets = birthmarks.getSelectedServices();
 
-        extractButton
-                .setEnabled(((valueX != null && valueX.length > 0) || (valueY != null && valueY.length > 0))
-                        && (targets != null && targets.length > 0));
+        extractButton.setEnabled(((valueX != null && valueX.length > 0)
+                                  || (valueY != null && valueY.length > 0))
+                                 && (targets != null && targets.length > 0));
 
-        compareButton
-                .setEnabled((valueX != null && valueX.length > 0)
-                        && (valueY != null && valueY.length > 0)
-                        && (targets != null && targets.length > 0));
+        compareButton.setEnabled((valueX != null && valueX.length > 0)
+                                 && (valueY != null && valueY.length > 0)
+                                 && (targets != null && targets.length > 0));
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
@@ -130,23 +129,25 @@ public class ControlPane extends JPanel{
         String[] fileY = targetY.getValues();
         Set<String> targets = new HashSet<String>();
         if(fileX != null && fileX.length > 0){
-            for(String file: fileX)
+            for(String file: fileX){
                 targets.add(file);
+            }
         }
         if(fileY != null && fileY.length > 0){
-            for(String file: fileY)
+            for(String file: fileY){
                 targets.add(file);
+            }
         }
 
-        stigmata.extract(birthmarks.getSelectedServices(), targets.toArray(new String[targets
-                .size()]), context);
+        stigmata.extract(birthmarks.getSelectedServices(),
+                         targets.toArray(new String[targets.size()]), context);
     }
 
     private void compareRoundRobin(){
         BirthmarkContext context = initAction();
 
-        stigmata.compareRoundRobin(birthmarks.getSelectedServices(), targetX.getValues(), targetY
-                .getValues(), context);
+        stigmata.compareRoundRobin(birthmarks.getSelectedServices(),
+                                   targetX.getValues(), targetY.getValues(), context);
     }
 
     private void compareSpecifiedPair(){

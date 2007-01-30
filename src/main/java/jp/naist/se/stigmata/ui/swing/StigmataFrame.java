@@ -109,10 +109,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     public void setCurrentDirectory(File directory){
         if(!directory.isDirectory()){
             String message = MessageFormat.format(
-                    Messages.getString("notdirectory.dialog.message"), new Object[] { directory
-                            .getName(), });
-            JOptionPane.showMessageDialog(this, message, Messages
-                    .getString("notdirectory.dialog.title"), JOptionPane.ERROR_MESSAGE);
+                Messages.getString("notdirectory.dialog.message"),
+                new Object[] { directory.getName(), }
+            );
+            JOptionPane.showMessageDialog(this, message, Messages.getString("notdirectory.dialog.title"),
+                                          JOptionPane.ERROR_MESSAGE);
             return;
         }
         this.currentDirectory = directory;
@@ -135,8 +136,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void saveAction(BirthmarkDataWritable writable){
-        File file = getSaveFile(Messages.getStringArray("store.extensions"), Messages
-                .getString("store.description"));
+        File file = getSaveFile(Messages.getStringArray("store.extensions"),
+                                Messages.getString("store.description"));
         if(file != null){
             String name = file.getName();
             String ext = name.substring(name.lastIndexOf('.') + 1, name.length());
@@ -160,34 +161,42 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void compareDetails(BirthmarkSet target1, BirthmarkSet target2, BirthmarkContext context){
-        PairComparisonPane detail = new PairComparisonPane(this, new ComparisonPair(target1,
-                target2, context));
+        PairComparisonPane detail = new PairComparisonPane(this, new ComparisonPair(target1, target2, context));
         compareDetail++;
 
-        Utility.addNewTab("comparedetail", tabPane, detail, new Object[] { new Integer(
-                compareDetail), }, new Object[] {
-                Utility.array2String(target1.getBirthmarkTypes()), target1.getClassName(),
-                target2.getClassName(), });
+        Utility.addNewTab("comparedetail", tabPane, detail,
+            new Object[] { new Integer(compareDetail), },
+            new Object[] {
+                Utility.array2String(target1.getBirthmarkTypes()),
+                target1.getClassName(),
+                target2.getClassName(),
+            }
+        );
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
-    public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY,
-            BirthmarkContext context){
+    public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY, BirthmarkContext context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
             compareCount++;
 
-            RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this,
-                    context, x, y);
+            RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, context, x, y);
             Utility.addNewTab("compare", tabPane, compare,
-                    new Object[] { new Integer(compareCount), }, new Object[] {
-                            Utility.array2String(birthmarks), Utility.array2String(targetX),
-                            Utility.array2String(targetY), });
+                new Object[] { new Integer(compareCount), },
+                new Object[] {
+                    Utility.array2String(birthmarks),
+                    Utility.array2String(targetX),
+                    Utility.array2String(targetY),
+                }
+            );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         }catch(IOException e){
-            JOptionPane.showInternalMessageDialog(this, e.getMessage(), Messages
-                    .getString("error.dialog.title"), JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showInternalMessageDialog(
+                this, e.getMessage(),
+                Messages.getString("error.dialog.title"),
+                JOptionPane.WARNING_MESSAGE
+            );
         }
     }
 
@@ -199,10 +208,15 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             comparePair++;
 
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(x, y, context);
-            Utility.addNewTab("comparepair", tabPane, new PairComparisonResultSetPane(this,
-                    resultset), new Object[] { new Integer(comparePair), }, new Object[] {
-                    Utility.array2String(birthmarks), Utility.array2String(targetX),
-                    Utility.array2String(targetY), });
+            Utility.addNewTab("comparepair", tabPane,
+                new PairComparisonResultSetPane(this, resultset),
+                new Object[] { new Integer(comparePair), },
+                new Object[] {
+                    Utility.array2String(birthmarks),
+                    Utility.array2String(targetX),
+                    Utility.array2String(targetY),
+                }
+            );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         }catch(IOException e){
             JOptionPane.showInternalMessageDialog(this, e.getMessage(), Messages
@@ -222,13 +236,18 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
                 BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
                 comparePair++;
-                ComparisonResultSet resultset = new CertainPairComparisonResultSet(x, y, mapping,
-                        context);
+                ComparisonResultSet resultset = new CertainPairComparisonResultSet(x, y, mapping, context);
 
-                Utility.addNewTab("comparepair", tabPane, new PairComparisonResultSetPane(this,
-                        resultset), new Object[] { new Integer(comparePair), }, new Object[] {
-                        Utility.array2String(birthmarks), Utility.array2String(targetX),
-                        Utility.array2String(targetY), });
+                Utility.addNewTab(
+                    "comparepair", tabPane,
+                    new PairComparisonResultSetPane(this, resultset),
+                    new Object[] { new Integer(comparePair), },
+                    new Object[] {
+                        Utility.array2String(birthmarks),
+                        Utility.array2String(targetX),
+                        Utility.array2String(targetY),
+                    }
+                );
                 tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
             }catch(IOException e){
                 JOptionPane.showInternalMessageDialog(this, e.getMessage(), Messages

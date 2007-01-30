@@ -87,11 +87,11 @@ class Utility{
         String tabName = Messages.getString(key + ".tab.label");
         String tooltip = Messages.getString(key + ".tab.tooltip");
         Icon icon = getIcon(key + ".tab.icon");
-    
+
         if(tabnameValues != null){
             tabName = MessageFormat.format(tabName, tabnameValues);
         }
-        
+
         if(values != null){
             tooltip = MessageFormat.format(tooltip, values);
         }
