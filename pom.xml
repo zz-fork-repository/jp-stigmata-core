@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.naist.se</groupId>
   <artifactId>stigmata</artifactId>
-  <version>1.0-beta</version>
+  <version>1.0-beta2</version>
   <name>stigmata</name>
   <description>Java birthmark toolkit</description>
-  <url>http://se.naist.jp/jbirth/</url>
+  <url>http://stigmata.sourceforge.jp/</url>
 
   <repositories>
     <repository>
@@ -34,7 +34,7 @@
   </developers>
 
   <organization>
-    <name>NAIST, Software Engineering Lab.</name>
+    <name>Software Engineering Lab., NAIST</name>
     <url>http://se.naist.jp/</url>
   </organization>
 
@@ -61,8 +61,8 @@
 
   <licenses>
     <license>
-      <name>GNU General Public License Version 2</name>
-      <url>http://www.gnu.org/licenses/gpl.txt</url>
+      <name>Apache License Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
