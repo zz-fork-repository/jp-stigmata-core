@@ -70,7 +70,7 @@ USA.
 
  *{{{http://asm.objectweb.org/}ASM}} 2.2.3
 
- *{{{http://commons.cafebabe.jp/cli/}Jakarta Commons CLI}} 1.0
+ *{{{http://commons.cafebabe.jp/xmlcli/}Jakarta Commons CLI}} 1.0
 
  *{{{http://commons.cafebabe.jp/xmlcli/}XmlCli}} 1.0
 
@@ -78,7 +78,57 @@ USA.
 
 *Download
 
- {{{https://sourceforge.jp/projects/stigmata/files/}Download from sourceforge.jp}}
+ You can download release build from {{{http://sourceforge.jp/}sourceforge.jp}}. 
+
+ {{{https://sourceforge.jp/projects/stigmata/files/}Download}}
+
+**Binary download by maven2 
+
+ You can get a jar file of stigmata by Maven2 using below setting.
+First, add remote repository entry to repositories tag in `pom.xml.'
+Next, add dependency tag entry to dependencies tag in `pom.xml.'
+
+----
+<project>
+    :
+  <repositories>
+    <repository>
+      <id>stigmata.sourceforge.jp</id>
+      <name>Stigmata Maven2 Repository in sourceforge.jp</name>
+      <url>http://stigmata.sourceforge.jp/maven2</url>
+    </repository>
+  </repositories>
+    :
+
+    :
+  <dependencies>
+      :
+    <dependency>
+      <groupId>jp.naist.se</groupId>
+      <artifactId>stigmata</artifactId>
+      <version>1.0-beta</version>
+    </dependency>
+      :
+  </dependencies>
+    :
+</project>
+----
+
+**Source code
+
+***Subversion
+
+ The source can be checked out anonymously from Subversion.
+
+----
+$ svn checkout http://svn.sourceforge.jp/svnroot/stigmata/trunk/ stigmata
+----
+
+***Web access
+
+ You can brouse the source code from following link.
+
+ http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata
 
 Related Publications
 
