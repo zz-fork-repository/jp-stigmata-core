@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Front end class.
+ *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
@@ -42,6 +43,9 @@ public class Main{
     private FormatManager manager = FormatManager.getInstance();
     private BirthmarkContext context;
 
+    /**
+     * main process.
+     */
     public Main(String[] args) throws ParseException{
         Options options = buildOptions();
         CommandLineParser parser = new PosixParser();
@@ -84,6 +88,9 @@ public class Main{
         }
     }
 
+    /**
+     * extract birthmarks.
+     */
     private void extractBirthmarks(Stigmata stigmata, String[] birthmarks, String[] args, String format){
         try {
             BirthmarkSet[] holders = stigmata.extract(birthmarks, args, context);
@@ -96,6 +103,9 @@ public class Main{
         }
     }
 
+    /**
+     *
+     */
     private void compareBirthmarks(Stigmata stigmata, String[] birthmarks, String[] args, String format){
         try{
             BirthmarkSet[] holders = stigmata.extract(birthmarks, args, context);
