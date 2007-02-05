@@ -6,6 +6,8 @@ package jp.naist.se.stigmata;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,35 +33,67 @@ public class Stigmata{
     private static final Stigmata instance = new Stigmata();
 
     private BirthmarkContext defaultContext = BirthmarkContext.getDefaultContext();
+    private boolean configDone = false;
 
     private Stigmata(){
-        for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
-            BirthmarkSpi service = i.next();
-            defaultContext.addService(service);
-        }
     }
 
     public static Stigmata getInstance(){
         return instance;
     }
 
-    BirthmarkContext getDefaultContext(){
-        return this.defaultContext;
+    public void configuration(){
+        configuration(null);
+    }
+
+    public void configuration(String filePath){
+        InputStream target = null;
+        if(filePath == null){
+            File file = new File("birthmark.xml");
+            if(!file.exists()){
+                file = new File(System.getProperty("user.home"), ".birthmark.xml");
+                if(!file.exists()){
+                    file = null;
+                }
+            }
+            if(file != null){
+                try {
+                    target = new FileInputStream(file);
+                } catch (FileNotFoundException ex) {
+                    // never throwed this exception;
+                    throw new InternalError(ex.getMessage());
+                }
+            }
+        }
+        if(target == null){
+            target = getClass().getResourceAsStream("/resources/birthmark.xml");
+        }
+        initConfiguration(target);
     }
 
     /**
      * create a new {@link BirthmarkContext <code>BirthmarkContext</code>}.
      */
     public BirthmarkContext createContext(){
+        if(!configDone){
+            configuration();
+        }
         return new BirthmarkContext();
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws IOException{
+        if(!configDone){
+            configuration();
+        }
         return extract(birthmarks, files, createContext());
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files,
                                   BirthmarkContext context) throws IOException{
+        if(!configDone){
+            configuration();
+        }
+
         List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
         ClasspathContext bytecode = context.getBytecodeContext();
 
@@ -90,30 +124,49 @@ public class Stigmata{
     }
 
     public ComparisonResultSet compare(BirthmarkSet[] holders) throws IOException{
+        if(!configDone){
+            configuration();
+        }
         return compare(holders, createContext());
     }
 
     public ComparisonResultSet compare(BirthmarkSet[] holders, BirthmarkContext context) throws IOException{
+        if(!configDone){
+            configuration();
+        }
         ComparisonResultSet result = new RoundRobinComparisonResultSet(holders, context, true);
 
         return result;
     }
 
     public ComparisonResultSet compare(BirthmarkSet[] holders1, BirthmarkSet[] holders2) throws IOException{
+        if(!configDone){
+            configuration();
+        }
         return compare(holders1, holders2, createContext());
     }
 
     public ComparisonResultSet compare(BirthmarkSet[] holders1, BirthmarkSet[] holders2, BirthmarkContext context) throws IOException{
+        if(!configDone){
+            configuration();
+        }
         ComparisonResultSet result = new RoundRobinComparisonResultSet(holders1, holders2, context);
 
         return result;
     }
 
     public double compare(BirthmarkSet h1, BirthmarkSet h2){
+        if(!configDone){
+            configuration();
+        }
         return compare(h1, h2, createContext());
     }
 
     public double compare(BirthmarkSet h1, BirthmarkSet h2, BirthmarkContext context){
+        if(!configDone){
+            configuration();
+        }
+
         List<Double> list = new ArrayList<Double>();
         int count = 0;
         for(Iterator<String> i = h1.birthmarkTypes(); i.hasNext(); ){
@@ -175,5 +228,19 @@ public class Stigmata{
 
         bout.close();
         return data;
+    }
+
+    private void initConfiguration(InputStream in){
+        try {
+            ConfigFileParser parser = new ConfigFileParser(defaultContext);
+            parser.parse(in);
+        } catch(IOException e){
+            return;
+        }
+        for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
+            BirthmarkSpi service = i.next();
+            defaultContext.addService(service);
+        }
+        configDone = true;
     }
 }

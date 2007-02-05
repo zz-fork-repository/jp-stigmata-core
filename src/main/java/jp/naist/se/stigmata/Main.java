@@ -6,8 +6,6 @@ package jp.naist.se.stigmata;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,9 +51,9 @@ public class Main{
         boolean exitFlag = executeOption(commandLine, options);
         if(!exitFlag){
             Stigmata stigmata = Stigmata.getInstance();
-            context = stigmata.getDefaultContext();
+            stigmata.configuration(commandLine.getOptionValue("config-file"));
+            BirthmarkContext context = stigmata.createContext();
             addClasspath(context.getBytecodeContext(), commandLine);
-            configuration(context, commandLine.getOptionValue("config-file"));
 
             String[] birthmarks = getTargetBirthmarks(commandLine);
             String[] arguments = commandLine.getArgs();
@@ -128,42 +126,6 @@ public class Main{
             formatter.printResult(new PrintWriter(System.out), spis);
         }
         catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    private void configuration(BirthmarkContext context, String path){
-        InputStream target = null;
-
-        if(path == null){
-            File file = new File("birthmark.xml");
-            if(!file.exists()){
-                file = new File(System.getProperty("user.home"), ".birthmark.xml");
-                if(!file.exists()){
-                    file = null;
-                }
-            }
-            if(file != null){
-                try {
-                    target = new FileInputStream(file);
-                } catch (FileNotFoundException ex) {
-                    // never throwed this exception;
-                    throw new InternalError(ex.getMessage());
-                }
-            }
-        }
-        if(target == null){
-            target = getClass().getResourceAsStream("/resources/birthmark.xml");
-        }
-
-        configuration(context, target);
-    }
-
-    private void configuration(BirthmarkContext context, InputStream in){
-        try {
-            ConfigFileParser parser = new ConfigFileParser(context);
-            parser.parse(in);
-        } catch(IOException e) {
             e.printStackTrace();
         }
     }
