@@ -63,7 +63,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     private BirthmarkContext context;
 
     public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkContext context,
-            BirthmarkSet[] birthmarksX, BirthmarkSet[] birthmarksY){
+                                          BirthmarkSet[] birthmarksX, BirthmarkSet[] birthmarksY){
         this.stigmataFrame = stigmata;
         this.context = context;
         this.birthmarksX = birthmarksX;
@@ -108,8 +108,9 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
             }
             model.addRow(rows);
         }
-        distinctionRatio.setText(Double.toString((double)(comparison - correct)
-                / (double)comparison));
+        distinctionRatio.setText(
+            Double.toString((double)(comparison - correct) / (double)comparison)
+        );
         avg = avg / comparison;
         average.setText(Double.toString(avg));
         minimum.setText(Double.toString(min));
@@ -276,7 +277,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         File file = stigmataFrame.getOpenFile(Messages.getStringArray("comparemapping.extension"), Messages.getString("comparemapping.description"));
         if(file != null){
             Map<String, String> mapping = stigmataFrame.constructMapping(file);
-            
+
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(birthmarksX, birthmarksY, mapping, context); 
             stigmataFrame.showComparisonResultSet(resultset);
         }

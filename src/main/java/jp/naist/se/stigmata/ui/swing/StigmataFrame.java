@@ -112,8 +112,10 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 Messages.getString("notdirectory.dialog.message"),
                 new Object[] { directory.getName(), }
             );
-            JOptionPane.showMessageDialog(this, message, Messages.getString("notdirectory.dialog.title"),
-                                          JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this, message, Messages.getString("notdirectory.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
         this.currentDirectory = directory;
@@ -161,7 +163,9 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void compareDetails(BirthmarkSet target1, BirthmarkSet target2, BirthmarkContext context){
-        PairComparisonPane detail = new PairComparisonPane(this, new ComparisonPair(target1, target2, context));
+        PairComparisonPane detail = new PairComparisonPane(
+            this, new ComparisonPair(target1, target2, context)
+        );
         compareDetail++;
 
         Utility.addNewTab("comparedetail", tabPane, detail,
@@ -175,7 +179,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
-    public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY, BirthmarkContext context){
+    public void compareRoundRobin(String[] birthmarks, String[] targetX,
+                                  String[] targetY, BirthmarkContext context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
@@ -191,7 +196,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 }
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        }catch(IOException e){
+        } catch(IOException e){
             JOptionPane.showInternalMessageDialog(
                 this, e.getMessage(),
                 Messages.getString("error.dialog.title"),
