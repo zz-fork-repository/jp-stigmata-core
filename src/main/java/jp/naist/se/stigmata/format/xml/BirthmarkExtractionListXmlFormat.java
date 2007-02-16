@@ -52,10 +52,9 @@ public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractio
                 out.print(normalizedElement(elements.next()));
                 out.println("</element>");
             }
-
-            out.println("      </extracted-birthmark>");
+            out.println("      </birthmark>");
         }
-        out.println("    </target>");
+        out.println("    </extracted-birthmark>");
     }
 
     private String normalizedElement(BirthmarkElement e){
