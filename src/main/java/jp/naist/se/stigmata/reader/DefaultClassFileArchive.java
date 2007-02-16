@@ -53,26 +53,26 @@ public class DefaultClassFileArchive implements ClassFileArchive{
         }
         return null;
     }
-    
+
     public InputStream getInputStream(ClassFileEntry entry) throws IOException{
         return new FileInputStream(file);
     }
-    
+
     public Iterator<ClassFileEntry> entries(){
         List<ClassFileEntry> list = new ArrayList<ClassFileEntry>();
         list.add(new ClassFileEntry(className, getLocation()));
-        
+
         return list.iterator();
     }
-    
+
     public boolean hasEntry(String className){
         return this.className.equals(className);
     }
-    
+
     public ClassFileEntry getEntry(String className) throws ClassNotFoundException{
         return new ClassFileEntry(className, getLocation());
     }
-    
+
     private void parseClassName(){
         FileInputStream in = null;
         try {
@@ -80,7 +80,7 @@ public class DefaultClassFileArchive implements ClassFileArchive{
             ClassReader reader = new ClassReader(in);
             ClassNameExtractVisitor visitor = new ClassNameExtractVisitor();
             reader.accept(visitor, true);
-            
+
             this.className = visitor.getClassName();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -95,14 +95,14 @@ public class DefaultClassFileArchive implements ClassFileArchive{
             }
         }
     }
-    
+
     private class ClassNameExtractVisitor extends EmptyVisitor{
         private String className;
-        
+
         public String getClassName(){
             return className;
         }
-        
+
         @Override
         public void visit(int version, int access, String name, String signature, 
                 String superClassName, String[] interfaces){

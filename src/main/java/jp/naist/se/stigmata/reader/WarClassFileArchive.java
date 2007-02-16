@@ -25,17 +25,17 @@ public class WarClassFileArchive extends JarClassFileArchive{
     public WarClassFileArchive(String jarfile) throws IOException{
         super(jarfile);
     }
-    
+
     public InputStream getInputStream(ClassFileEntry entry) throws IOException{
         if(hasEntry(entry.getClassName())){
             return entry.getLocation().openStream();
         }
         return null;
     }
-    
+
     public Iterator<ClassFileEntry> entries(){
         List<ClassFileEntry> list = new ArrayList<ClassFileEntry>();
-        
+
         for(Enumeration<JarEntry> e = jarentries(); e.hasMoreElements(); ){
             JarEntry entry = e.nextElement();
             if(entry.getName().endsWith(".class")){
@@ -45,7 +45,7 @@ public class WarClassFileArchive extends JarClassFileArchive{
                     String className = entry.getName();
                     className = className.substring("WEB-INF/classes/".length(), className.length() - ".class".length());
                     className = className.replace('/', '.');
-                    
+
                     list.add(new ClassFileEntry(className, location));
                 } catch (MalformedURLException ex) {
                 }
@@ -53,22 +53,21 @@ public class WarClassFileArchive extends JarClassFileArchive{
         }
         return list.iterator();
     }
-    
+
     public boolean hasEntry(String className){
         return hasJarEntry("WEB-INF/classes/" + className.replace('.', '/') + ".class");
     }
-    
+
     public ClassFileEntry getEntry(String className) throws ClassNotFoundException{
         if(hasEntry(className)){
             String entryName = className.replace('.', '/') + ".class";
             try{
                 URL location = new URL("jar:" + getLocation() + "!/WEB-INF/classes/" + entryName);
-                
+
                 return new ClassFileEntry(className, location);
             } catch(MalformedURLException e){
             }
         }
         return null;
     }
-    
 }

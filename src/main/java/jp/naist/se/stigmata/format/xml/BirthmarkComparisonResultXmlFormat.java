@@ -70,10 +70,10 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
     private void printTarget(PrintWriter out, BirthmarkSet holder, int index){
         out.println("      <target" + index + ">");
         out.print("        <class-name>");
-        out.print(holder.getClassName());
+        out.print(list.escapeToXmlString(holder.getClassName()));
         out.println("</class-name>");
         out.print("        <location>");
-        out.print(holder.getLocation());
+        out.print(list.escapeToXmlString(holder.getLocation()));
         out.println("</location>");
         out.println("      </target" + index + ">");
 
