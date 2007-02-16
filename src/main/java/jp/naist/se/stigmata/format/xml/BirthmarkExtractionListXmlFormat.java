@@ -49,12 +49,22 @@ public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractio
             out.println("\">");
             for(Iterator<BirthmarkElement> elements = birthmark.iterator(); elements.hasNext(); ){
                 out.print("        <element>");
-                out.print(elements.next());
+                out.print(normalizedElement(elements.next()));
                 out.println("</element>");
             }
 
             out.println("      </extracted-birthmark>");
         }
         out.println("    </target>");
+    }
+
+    private String normalizedElement(BirthmarkElement e){
+        String string = e.toString();
+        string = string.replaceAll("&",  "&amp;");
+        string = string.replaceAll("\"", "&quot;");
+        string = string.replaceAll("<",  "&lt;");
+        string = string.replaceAll(">",  "&gt;");
+
+        return string;
     }
 }
