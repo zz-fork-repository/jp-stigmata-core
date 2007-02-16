@@ -52,7 +52,9 @@ public class WellknownClassManager{
 
     public void clear(){
         systemClassesList.clear();
+        excludes.clear();
     }
+
     public WellknownClassJudgeRule[] getSections(){
         List<WellknownClassJudgeRule> sections = new ArrayList<WellknownClassJudgeRule>();
         sections.addAll(excludes);
