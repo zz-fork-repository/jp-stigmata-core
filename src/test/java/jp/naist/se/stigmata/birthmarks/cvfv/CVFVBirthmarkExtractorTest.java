@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.birthmarks.cvfv;
 
+/*
+ * $Id$
+ */
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
