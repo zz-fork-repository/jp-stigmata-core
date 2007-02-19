@@ -31,7 +31,7 @@ public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtrac
             String signature, String[] exceptions){
 
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
-        
+
         return new MethodAdapter(visitor){
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = owner.replace('/', '.');

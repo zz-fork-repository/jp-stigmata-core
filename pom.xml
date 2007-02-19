@@ -8,6 +8,7 @@
   <name>stigmata</name>
   <description>Java birthmark toolkit</description>
   <url>http://stigmata.sourceforge.jp/</url>
+  <inceptionYear>2006</inceptionYear>
 
   <repositories>
     <repository>

@@ -23,8 +23,6 @@ import org.objectweb.asm.signature.SignatureReader;
 import org.objectweb.asm.signature.SignatureWriter;
 
 /**
- * 
- * 
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
@@ -32,12 +30,13 @@ import org.objectweb.asm.signature.SignatureWriter;
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private Birthmark birthmark;
     private Set<String> set = new HashSet<String>();
-    
-    public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+
+    public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,
+                                              BirthmarkContext context){
         super(visitor, context);
         this.birthmark = birthmark;
     }
-    
+
     public void visitEnd(){
         String[] classNames = set.toArray(new String[set.size()]);
         Arrays.sort(classNames);
@@ -45,11 +44,11 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             birthmark.addElement(new BirthmarkElement(className));
         }
     }
-    
+
     public void visit(int version, int access, String name, String signature,
             String superName, String[] interfaces){
         addSignatureClass(signature);
-        
+
         if(getContext().getWellknownClassManager().isWellKnownClass(superName)){
             set.add(superName);
         }
@@ -59,20 +58,19 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             }
         }
     }
-    
+
     public FieldVisitor visitField(int access, String name, String desc,
             String signature, Object value){
         FieldVisitor visitor = super.visitField(access, name, desc, signature, value);
-        
+
         addDescriptor(desc);
         addSignatureClass(signature);
-        
+
         return visitor;
     }
-    
+
     public MethodVisitor visitMethod(int access, String name, String desc,
-            String signature, String[] exceptions){
-        
+                                     String signature, String[] exceptions){
         if(exceptions != null){
             for(String exception: exceptions){
                 if(getContext().getWellknownClassManager().isWellKnownClass(exception)){
@@ -82,9 +80,9 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         }
         addMethodDescriptor(desc);
         addSignatureClass(signature);
-        
+
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
-        
+
         return new MethodAdapter(visitor){
             public void visitTypeInsn(int opcode, String desc){
                 Type type = Type.getType("L" + desc + ";");
@@ -93,7 +91,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 }
                 super.visitTypeInsn(opcode, desc);
             }
-            
+
             public void visitTryCatchBlock(Label start, Label end, Label handle, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
@@ -101,7 +99,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 }
                 super.visitTryCatchBlock(start, end, handle, desc);
             }
-            
+
             public void visitMultiANewArrayInsn(String desc, int dims){
                 Type type = Type.getType(desc);
                 if(checkType(type)){
@@ -109,16 +107,17 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 }
                 super.visitMultiANewArrayInsn(desc, dims);
             }
-            
-            public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index){
+
+            public void visitLocalVariable(String name, String desc, String signature,
+                                           Label start, Label end, int index){
                 if(checkType(Type.getType(desc))){
                     set.add(normalize(desc));
                 }
                 addSignatureClass(signature);
-                
+
                 super.visitLocalVariable(name, desc, signature, start, end, index);
             }
-            
+
             public void visitFieldInsn(int opcode, String owner, String name, String desc){
                 if(getContext().getWellknownClassManager().isWellKnownClass(owner)){
                     set.add(normalize(owner));
@@ -136,7 +135,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             }
         };
     }
-    
+
     private void addSignatureClass(String signature){
         if(signature != null){
             SignatureReader in = new SignatureReader(signature);
@@ -150,7 +149,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             in.accept(writer);
         }
     }
-    
+
     private void addMethodDescriptor(String desc){
         Type returnType = Type.getReturnType(desc);
         Type[] args = Type.getArgumentTypes(desc);
@@ -163,35 +162,35 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             }
         }
     }
-    
+
     private void addDescriptor(String desc){
         Type type = Type.getType(desc);
         if(checkType(type)){
             set.add(normalize(desc));
         }
     }
-    
+
     private String getType(Type type){
         if(type.getSort() == Type.ARRAY){
             while(type.getSort() != Type.ARRAY){
                 type = type.getElementType();
             }
         }
-        
+
         if(type.getSort() == Type.OBJECT){
             return normalize(type.getClassName());
         }
-        
+
         return null;
     }
-    
+
     private boolean checkType(Type type){
         if(type.getSort() == Type.ARRAY){
             while(type.getSort() != Type.ARRAY){
                 type = type.getElementType();
             }
         }
-        
+
         if(type.getSort() == Type.OBJECT){
             String className = type.getClassName();
             if(getContext().getWellknownClassManager().isWellKnownClass(className)){
@@ -200,13 +199,13 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         }
         return false;
     }
-    
+
     private String normalize(String name){
         if(name.startsWith("L") && name.endsWith(";")){
             name = name.substring(1, name.length() - 1);
         }
         name = name.replace('/', '.');
-        
+
         return name;
     }
 }

@@ -84,7 +84,7 @@ public class BirthmarkContext{
     }
 
     /**
-     * remove property mapped given key. 
+     * remove property mapped given key.
      */
     public void removeProperty(String key){
         properties.remove(key);

@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * This class manages a set of birthmarks which extracted from a Java class file.
+ *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
@@ -39,7 +40,7 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     }
 
     /**
-     * return the sum of all element count of birthmarks this instance has. 
+     * return the sum of all element count of birthmarks this instance has.
      */
     public int getSumOfElementCount(){
         int count = 0;
@@ -59,7 +60,6 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * return the class name.
-     * @uml.property  name="className"
      */
     public String getClassName(){
         return className;
@@ -67,7 +67,6 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * return the location.
-     * @uml.property  name="location"
      */
     public URL getLocation(){
         return location;
@@ -81,7 +80,7 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     }
 
     /**
-     * return the given type of birthmark.   
+     * return the given type of birthmark.
      */
     public Birthmark getBirthmark(String type){
         return birthmarks.get(type);
@@ -89,7 +88,6 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * return the all birthmarks this instance managed.
-     * @uml.property  name="birthmarks"
      */
     public Birthmark[] getBirthmarks(){
         Birthmark[] b = new Birthmark[getBirthmarksCount()];
