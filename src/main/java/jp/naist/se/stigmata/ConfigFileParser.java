@@ -6,12 +6,16 @@ package jp.naist.se.stigmata;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -29,6 +33,8 @@ public class ConfigFileParser extends DefaultHandler{
     private boolean wellknownPart = false;
 
     private boolean propertyPart = false;
+
+    private boolean classpathPart = false;
 
     private int wellknownType = 0;
 
@@ -58,16 +64,24 @@ public class ConfigFileParser extends DefaultHandler{
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes)
-            throws SAXException{
+    public void startElement(String uri, String localName, String qName,
+                             Attributes attributes) throws SAXException{
         qname = qName;
 
         if(qName.equals("wellknown-classes")){
             wellknownPart = true;
+            propertyPart = false;
+            classpathPart = false;
         }
         else if(qName.equals("property")){
             wellknownPart = false;
             propertyPart = true;
+            classpathPart = false;
+        }
+        else if(qName.equals("classpath-list")){
+            wellknownPart = false;
+            propertyPart = false;
+            classpathPart = true;
         }
         else if(qName.equals("exclude")){
             wellknownType = WellknownClassJudgeRule.EXCLUDE_TYPE;
@@ -102,10 +116,17 @@ public class ConfigFileParser extends DefaultHandler{
             else if(qname.equals("value") && propertyPart){
                 context.addProperty(key, new String(data, offset, length).trim());
             }
-            else if(wellknownPart
-                    && (qname.equals("suffix") || qname.equals("prefix") || qname.equals("match"))){
+            else if(wellknownPart && (qname.equals("suffix") || qname.equals("prefix") ||
+                                      qname.equals("match"))){
                 manager.add(new WellknownClassJudgeRule(new String(data, offset, length),
                         wellknownType | patternType));
+            }
+            else if(classpathPart && qname.equals("classpath")){
+                try{
+                    context.getBytecodeContext().addClasspath(new URL(value));
+                } catch(MalformedURLException e){
+                    throw new SAXException(e);
+                }
             }
         }
     }

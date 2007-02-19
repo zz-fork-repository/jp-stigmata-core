@@ -59,6 +59,13 @@ $Id$
 -->
   </wellknown-classes>
 
+  <classpath-list>
+    <!-- URL形式のクラスパス設定 -->
+<!--
+    <classpath>url/format/of/path/to/jar/file</classpath>
+-->
+  </classpath-list>
+
   <!-- Properties for birthmark context -->
   <properties>
     <property>
