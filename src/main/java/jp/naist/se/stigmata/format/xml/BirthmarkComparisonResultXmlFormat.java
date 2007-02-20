@@ -63,29 +63,29 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.println("      </birthmark-similarities>");
         out.print("      <similarity>");
         out.print(pair.calculateSimilarity());
-        out.println("      <similarity>");
+        out.println("</similarity>");
         out.println("    </birthmark-compare-result>");
     }
 
     private void printTarget(PrintWriter out, BirthmarkSet holder, int index){
         out.println("      <target" + index + ">");
         out.print("        <class-name>");
-        out.print(holder.getClassName());
+        out.print(list.escapeToXmlString(holder.getClassName()));
         out.println("</class-name>");
         out.print("        <location>");
-        out.print(holder.getLocation());
+        out.print(list.escapeToXmlString(holder.getLocation()));
         out.println("</location>");
         out.println("      </target" + index + ">");
 
     }
 
     private void printPairElement(PrintWriter out, ComparisonPairElement element){
-        out.print("        <birthmark-similarity type=\">");
+        out.print("        <birthmark-similarity type=\"");
         out.print(element.getType());
         out.print("\" comparisonCount=\"");
         out.print(element.getComparisonCount());
         out.print("\">");
         out.print(element.getSimilarity());
-        out.println("</birthmark-similarity");
+        out.println("</birthmark-similarity>");
     }
 }

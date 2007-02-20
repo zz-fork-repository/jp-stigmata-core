@@ -4,7 +4,7 @@ package jp.naist.se.stigmata.birthmarks.cvfv;
  * $Id$
  */
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import jp.naist.se.stigmata.Birthmark;
@@ -16,6 +16,7 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 /**
  * 
@@ -26,7 +27,7 @@ import org.objectweb.asm.Opcodes;
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private Birthmark birthmark;
-    private Map<String, TypeAndValueBirthmarkElement> elements = new HashMap<String, TypeAndValueBirthmarkElement>();
+    private Map<String, TypeAndValueBirthmarkElement> elements = new LinkedHashMap<String, TypeAndValueBirthmarkElement>();
     private String className;
 
     public ConstantValueOfFieldVariableBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
@@ -75,13 +76,40 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
 
         if(name.equals("<init>") || name.equals("<clinit>")){
             visitor = new MethodAdapter(visitor){
-                private Object constant;
+                private Object constant = null;
 
                 public void visitIntInsn(int opcode, int operand){
                     if(opcode == Opcodes.BIPUSH || opcode == Opcodes.SIPUSH){
                         constant = new Integer(operand);
                     }
                     super.visitIntInsn(opcode, operand);
+                }
+
+                public void visitMethodInsn(int opcode, String owner, String name, String desc){
+                    Type type = Type.getReturnType(desc);
+                    if(!type.equals(Type.VOID_TYPE)){
+                        constant = null;
+                    }
+                    super.visitMethodInsn(opcode, owner, name, desc);
+                }
+
+                public void visitInsn(int opcode){
+                    if(opcode == Opcodes.ICONST_M1)     constant = new Integer(-1);
+                    else if(opcode == Opcodes.ICONST_0) constant = new Integer(0);
+                    else if(opcode == Opcodes.ICONST_1) constant = new Integer(1);
+                    else if(opcode == Opcodes.ICONST_2) constant = new Integer(2);
+                    else if(opcode == Opcodes.ICONST_3) constant = new Integer(3);
+                    else if(opcode == Opcodes.ICONST_4) constant = new Integer(4);
+                    else if(opcode == Opcodes.ICONST_5) constant = new Integer(5);
+                    else if(opcode == Opcodes.LCONST_0) constant = new Long(0L);
+                    else if(opcode == Opcodes.LCONST_1) constant = new Long(1L);
+                    else if(opcode == Opcodes.DCONST_0) constant = new Double(0D);
+                    else if(opcode == Opcodes.DCONST_1) constant = new Double(1D);
+                    else if(opcode == Opcodes.FCONST_0) constant = new Float(0F);
+                    else if(opcode == Opcodes.FCONST_1) constant = new Float(1F);
+                    else if(opcode == Opcodes.FCONST_2) constant = new Float(2F);
+
+                    super.visitInsn(opcode);
                 }
 
                 public void visitLdcInsn(Object object){
@@ -93,10 +121,14 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
                     if(className.equals(owner) && opcode == Opcodes.PUTFIELD){
                         TypeAndValueBirthmarkElement e = elements.get(name);
                         if(e == null){
+                            e = new TypeAndValueBirthmarkElement(name, desc, constant);
+                        }
+
+                        if(e.getValue() == null && constant != null){
                             if(!checkCast(desc, constant)){
                                 constant = null;
                             }
-                            e = new TypeAndValueBirthmarkElement(name, desc, constant);
+                            e.setValue(constant);
                         }
                     }
                     super.visitFieldInsn(opcode, owner, name, desc);
