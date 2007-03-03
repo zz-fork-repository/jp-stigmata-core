@@ -240,3 +240,17 @@ define.expert.tooltip=熟練者向けのバースマークであるか
 define.userdef.label=ユーザ定義
 define.userdef.tooltip=ユーザが定義したバースマークであるか
 newservice.definition.label=(新規バースマーク)
+
+############################################################
+# property pane
+############################################################
+property.tab.label=プロパティ
+property.tab.tooltip=プロパティを編集します．
+
+propertyname.label=プロパティ名
+propertyvalue.label=プロパティ値
+propertyadd.button.label=追加
+propertyadd.button.tooltip=新しいプロパティを追加します．
+propertyremove.button.label=削除
+propertyremove.button.tooltip=選択しているプロパティを削除します．
+propertyadd.dialog.title=新規プロパティ

@@ -42,6 +42,7 @@ public class ControlPane extends JPanel{
     private ClasspathSettingsPane classpath;
     private WellknownClassesSettingsPane wellknownClassses;
     private BirthmarkDefinitionPane definition;
+    private PropertyEditPane properties;
     private JTabbedPane controlTab;
     private JButton compareButton;
     private JButton extractButton;
@@ -57,6 +58,7 @@ public class ControlPane extends JPanel{
         Utility.addNewTab("wellknown", controlTab, createWellknownClassPane());
         Utility.addNewTab("classpath", controlTab, classpath = new ClasspathSettingsPane(stigmata));
         definition = new BirthmarkDefinitionPane(stigmata);
+        properties = new PropertyEditPane(stigmata);
 
         reset();
     }
@@ -78,9 +80,13 @@ public class ControlPane extends JPanel{
         wellknownClassses.reset();
         updateEnable();
 
-        int index = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
-        if(index >= 0){
-            controlTab.removeTabAt(index);
+        int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+        if(index1 >= 0){
+            controlTab.removeTabAt(index1);
+        }
+        int index2 = controlTab.indexOfTab(Messages.getString("property.tab.label"));
+        if(index2 >= 0){
+            controlTab.removeTabAt(index2);
         }
     }
 
@@ -98,7 +104,7 @@ public class ControlPane extends JPanel{
                 definition.exportSettings(out);
                 wellknownClassses.exportSettings(out);
                 classpath.exportSettings(out);
-                // properties.exportSettings(out);
+                properties.exportSettings(out);
                 out.println("</birthmark>");
                 out.close();
             } catch(IOException e){
@@ -113,11 +119,16 @@ public class ControlPane extends JPanel{
 
         if(geekmode){
             Utility.addNewTab("definition", controlTab, definition);
+            Utility.addNewTab("property", controlTab, properties);
         }
         else{
-            int index = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
-            if(index >= 0){
-                controlTab.removeTabAt(index);
+            int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+            if(index1 >= 0){
+                controlTab.removeTabAt(index1);
+            }
+            int index2 = controlTab.indexOfTab(Messages.getString("property.tab.label"));
+            if(index2 >= 0){
+                controlTab.removeTabAt(index2);
             }
         }
         updateEnable();
@@ -229,12 +240,14 @@ public class ControlPane extends JPanel{
     }
 
     private BirthmarkContext initAction(){
-        BirthmarkContext context = stigmata.getContext();
+        BirthmarkContext context = stigmata.getStigmata().createContext();
+        // BirthmarkContext context2 = stigmata.getContext();
         ClasspathContext bytecode = context.getBytecodeContext();
         WellknownClassManager manager = context.getWellknownClassManager();
 
         classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
+        properties.updateContext(context);
 
         return context;
     }

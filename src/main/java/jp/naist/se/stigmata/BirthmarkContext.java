@@ -111,6 +111,14 @@ public class BirthmarkContext{
         return value;
     }
 
+    public void clearProperties(){
+        properties.clear();
+    }
+
+    public Iterator<String> propertyKeys(){
+        return properties.keySet().iterator();
+    }
+
     /**
      * returns the classpath context.
      */
