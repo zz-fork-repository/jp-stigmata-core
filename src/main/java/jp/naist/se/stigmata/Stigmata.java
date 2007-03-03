@@ -48,6 +48,14 @@ public class Stigmata{
 
     public void configuration(String filePath){
         InputStream target = null;
+        if(filePath != null){
+            try{
+                target = new FileInputStream(filePath);
+            } catch(FileNotFoundException e){
+                filePath = null;
+            }
+        }
+
         if(filePath == null){
             File file = new File("birthmark.xml");
             if(!file.exists()){

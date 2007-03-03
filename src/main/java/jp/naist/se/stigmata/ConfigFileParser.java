@@ -30,19 +30,12 @@ public class ConfigFileParser extends DefaultHandler{
     private enum Part{ WELLKNOWN_CLASSES, PROPERTIES, CLASSPATH, SERVICES, }
 
     private BirthmarkContext context;
-
     private WellknownClassManager manager;
-
     private BirthmarkService service;
-
     private Part part;
-
     private int wellknownType = 0;
-
     private int patternType = 0;
-
     private String qname;
-
     private String key;
 
     public ConfigFileParser(BirthmarkContext context){
