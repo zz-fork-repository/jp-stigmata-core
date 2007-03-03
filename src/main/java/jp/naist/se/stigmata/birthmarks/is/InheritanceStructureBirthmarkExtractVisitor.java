@@ -28,14 +28,14 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
     }
 
     public void visit(int version, int access, String name, String signature,
-            String superName, String[] interfaces){
+                      String superName, String[] interfaces){
         try {
             Class c = getContext().getBytecodeContext().findClass(name.replace('/', '.'));
             if(c != null && !c.isInterface()){
                 addISBirthmark(c);
             }
         } catch (ClassNotFoundException ex){
-            ex.printStackTrace();
+            addFailur(ex);
         }
     }
 

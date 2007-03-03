@@ -99,8 +99,12 @@ public class ClasspathContext implements Iterable<URL>{
     }
 
     public Class<?> findClass(String className) throws ClassNotFoundException{
-        ClassLoader loader = createClassLoader();
+        try{
+            ClassLoader loader = createClassLoader();
 
-        return loader.loadClass(className);
+            return loader.loadClass(className);
+        } catch(NoClassDefFoundError e){
+            throw new ClassNotFoundException(e.getMessage(), e);
+        }
     }
 }

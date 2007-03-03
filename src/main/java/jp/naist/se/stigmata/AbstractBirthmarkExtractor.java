@@ -5,8 +5,8 @@ package jp.naist.se.stigmata;
  */
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -45,26 +45,26 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * extract birthmark given stream.
      */
-    public Birthmark extract(InputStream in) throws IOException{
+    public Birthmark extract(InputStream in) throws BirthmarkExtractionException{
         return extract(in, BirthmarkContext.getDefaultContext());
     }
 
     /**
      * extract birthmark given byte array.
      */
-    public Birthmark extract(byte[] bytecode) throws IOException{
+    public Birthmark extract(byte[] bytecode) throws BirthmarkExtractionException{
         return extract(bytecode, BirthmarkContext.getDefaultContext());
     }
 
     /**
      * extract birthmark given stream with given context.
      */
-    public abstract Birthmark extract(InputStream in, BirthmarkContext context) throws IOException;
+    public abstract Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException;
 
     /**
      * extract birthmark given byte array with given context.
      */
-    public Birthmark extract(byte[] bytecode, BirthmarkContext context) throws IOException{
+    public Birthmark extract(byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionException{
         return extract(new ByteArrayInputStream(bytecode), context);
     }
 }

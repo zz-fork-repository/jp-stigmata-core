@@ -4,7 +4,6 @@ package jp.naist.se.stigmata;
  * $Id$
  */
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -17,20 +16,20 @@ public interface BirthmarkExtractor{
     /**
      * extract birthmark given stream.
      */
-    public Birthmark extract(InputStream in) throws IOException;
+    public Birthmark extract(InputStream in) throws BirthmarkExtractionException;
 
     /**
      * extract birthmark given byte array.
      */
-    public Birthmark extract(byte[] bytecode) throws IOException;
+    public Birthmark extract(byte[] bytecode) throws BirthmarkExtractionException;
 
     /**
      * extract birthmark given stream with given context.
      */
-    public Birthmark extract(InputStream in, BirthmarkContext context) throws IOException;
+    public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException;
 
     /**
      * extract birthmark given byte array with given context.
      */
-    public Birthmark extract(byte[] bytecode, BirthmarkContext context) throws IOException;
+    public Birthmark extract(byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionException;
 }

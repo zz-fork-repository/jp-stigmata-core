@@ -6,15 +6,17 @@ package jp.naist.se.stigmata;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.imageio.spi.ServiceRegistry;
+
 import jp.naist.se.stigmata.reader.ClassFileArchive;
 import jp.naist.se.stigmata.reader.ClassFileEntry;
 import jp.naist.se.stigmata.reader.ClasspathContext;
@@ -89,7 +91,7 @@ public class Stigmata{
         return new BirthmarkContext();
     }
 
-    public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws IOException{
+    public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws BirthmarkExtractionException{
         if(!configDone){
             configuration();
         }
@@ -97,11 +99,18 @@ public class Stigmata{
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files,
-                                  BirthmarkContext context) throws IOException{
+                                  BirthmarkContext context) throws BirthmarkExtractionException{
         if(!configDone){
             configuration();
         }
+        try{
+            return extractImpl(birthmarks, files, context);
+        } catch(IOException e){
+               throw new BirthmarkExtractionException(e);
+        }
+    }
 
+    private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
         List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
         ClasspathContext bytecode = context.getBytecodeContext();
 
@@ -203,7 +212,7 @@ public class Stigmata{
     }
 
     private BirthmarkSet extractBirthmark(String[] birthmarks, InputStream in,
-            BirthmarkSet holder, BirthmarkContext context) throws IOException{
+            BirthmarkSet holder, BirthmarkContext context) throws BirthmarkExtractionException, IOException{
         byte[] data = inputStreamToByteArray(in);
 
         return extractBirthmark(birthmarks, data, holder, context);
@@ -211,7 +220,7 @@ public class Stigmata{
 
     private BirthmarkSet extractBirthmark(String[] birthmarks, byte[] bytecode,
                                           BirthmarkSet holder,
-                                          BirthmarkContext context) throws IOException{
+                                          BirthmarkContext context) throws BirthmarkExtractionException, IOException{
         for(String birthmark: birthmarks){
             BirthmarkSpi spi = context.getService(birthmark);
             if(spi != null){

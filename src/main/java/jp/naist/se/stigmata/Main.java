@@ -96,7 +96,7 @@ public class Main{
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkExtractionResultFormat formatter = spi.getExtractionResultFormat();
             formatter.printResult(new PrintWriter(System.out), holders);
-        } catch (IOException ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -112,7 +112,7 @@ public class Main{
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkComparisonResultFormat formatter = spi.getComparisonResultFormat();
             formatter.printResult(new PrintWriter(System.out), resultset);
-        } catch(IOException e){
+        } catch(Exception e){
             e.printStackTrace();
         }
     }

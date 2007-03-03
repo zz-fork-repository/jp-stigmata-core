@@ -54,6 +54,9 @@ import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.BirthmarkExtractionException;
+import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
+
 
 /**
  *
@@ -105,10 +108,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 Messages.getString("notdirectory.dialog.message"),
                 new Object[] { directory.getName(), }
             );
-            JOptionPane.showMessageDialog(
-                this, message, Messages.getString("notdirectory.dialog.title"),
-                JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this, message, Messages.getString("notdirectory.dialog.title"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         this.currentDirectory = directory;
@@ -189,12 +189,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 }
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        } catch(IOException e){
-            JOptionPane.showInternalMessageDialog(
-                this, e.getMessage(),
-                Messages.getString("error.dialog.title"),
-                JOptionPane.WARNING_MESSAGE
-            );
+        } catch(Exception e){
+            showExceptionMessage(e);
         }
     }
 
@@ -216,9 +212,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 }
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        }catch(IOException e){
-            JOptionPane.showInternalMessageDialog(this, e.getMessage(), Messages
-                    .getString("error.dialog.title"), JOptionPane.WARNING_MESSAGE);
+        }catch(Exception e){
+            showExceptionMessage(e);
         }
     }
 
@@ -247,17 +242,17 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                     }
                 );
                 tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-            }catch(IOException e){
-                JOptionPane.showInternalMessageDialog(this, e.getMessage(), Messages
-                        .getString("error.dialog.title"), JOptionPane.WARNING_MESSAGE);
+            }catch(Exception e){
+                showExceptionMessage(e);
             }
         }
     }
 
     public void showComparisonResultSet(ComparisonResultSet resultset){
         comparePair++;
-        Utility.addNewTab("comparisonresultset", tabPane, new PairComparisonResultSetPane(this, resultset),
-                new Object[] { new Integer(comparePair), }, null);
+        Utility.addNewTab("comparisonresultset", tabPane,
+                          new PairComparisonResultSetPane(this, resultset),
+                          new Object[] { new Integer(comparePair), }, null);
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
@@ -283,8 +278,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                     new Object[] { new Integer(extractCount), }, new Object[] {
                             Utility.array2String(birthmarks), Utility.array2String(targets), });
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        }catch(IOException e){
-            JOptionPane.showInternalMessageDialog(this, e.getMessage());
+        }catch(Exception e){
+            showExceptionMessage(e);
         }
     }
 
@@ -304,9 +299,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 }
             }
 
-        }catch(IOException e){
-            JOptionPane.showInternalMessageDialog(this, e.getMessage(), Messages
-                    .getString("error.dialog.title"), JOptionPane.WARNING_MESSAGE);
+        }catch(Exception e){
+            showExceptionMessage(e);
         }finally{
             if(in != null){
                 try{
@@ -492,8 +486,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
         String aboutMessage = loadString("/resources/about.txt");
         aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
-        aboutMessage = aboutMessage.replace("${implementation.vendor}", p.getImplementationVendor());
-        aboutMessage = aboutMessage.replace("${implementation.title}", p.getImplementationTitle());
+        aboutMessage = aboutMessage.replace("${implementation.vendor}",  p.getImplementationVendor());
+        aboutMessage = aboutMessage.replace("${implementation.title}",   p.getImplementationTitle());
 
         JTextArea text = new JTextArea(aboutMessage);
         text.setEditable(false);
@@ -502,8 +496,10 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         scroll.setViewportView(text);
         panel.add(scroll, BorderLayout.CENTER);
 
-        JOptionPane.showMessageDialog(this, panel, Messages.getString("about.dialog.title"),
-                                      JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(
+            this, panel, Messages.getString("about.dialog.title"),
+            JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void licenseMenuActionPerformed(){
@@ -518,8 +514,52 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         scroll.setViewportView(area);
         scroll.setPreferredSize(new Dimension(500, 300));
 
-        JOptionPane.showMessageDialog(this, scroll, Messages.getString("license.dialog.title"),
-                JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(
+            this, scroll, Messages.getString("license.dialog.title"),
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    private void showExceptionMessage(Exception e){
+       if(e instanceof BirthmarkElementClassNotFoundException){
+           showClassNotFoundMessage((BirthmarkElementClassNotFoundException)e);
+           return;
+       }
+       JTextArea area = new JTextArea(20, 60);
+        StringWriter writer = new StringWriter();
+        PrintWriter out = new PrintWriter(writer);
+        e.printStackTrace(out);
+        if(e instanceof BirthmarkExtractionException){
+               out.println("Causes:");
+               for(Throwable t: ((BirthmarkExtractionException)e).getCauses()){
+                       t.printStackTrace(out);
+               }
+        }
+        out.close();
+        area.setText(writer.toString());
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(new JLabel(Messages.getString("error.message.contactus")), BorderLayout.NORTH);
+        panel.add(new JScrollPane(area), BorderLayout.CENTER);
+
+        JOptionPane.showMessageDialog(
+            this, panel, Messages.getString("error.dialog.title"),
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    private void showClassNotFoundMessage(BirthmarkElementClassNotFoundException e){
+       StringBuffer sb = new StringBuffer();
+       sb.append("<html><body><p>");
+       sb.append(Messages.getString("error.message.classpath"));
+       sb.append("</p><ul>");
+       for(String name: e.getClassNames()){
+               sb.append("<li>").append(name).append("</li>");
+       }
+       sb.append("</ul></body></html>");
+        JOptionPane.showMessageDialog(
+                this, new String(sb), Messages.getString("error.dialog.title"),
+                JOptionPane.WARNING_MESSAGE
+            );
     }
 
     private String loadString(String loadFrom){
