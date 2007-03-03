@@ -45,17 +45,11 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
     private static final long serialVersionUID = 3298346465652354302L;
 
     private StigmataFrame frame;
-
     private BirthmarkContext context;
-
     private DefaultTableModel model = new PairComparisonResultSetTableModel();
-
     private JTable table = new JTable(model);
-
     private JLabel averageLabel, maximumLabel, minimumLabel;
-
     private List<ComparisonPair> list = new ArrayList<ComparisonPair>();
-
     private double average, maximum, minimum;
 
     public PairComparisonResultSetPane(StigmataFrame frame, ComparisonResultSet resultset){

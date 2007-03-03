@@ -9,6 +9,8 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.Box;
 import javax.swing.DefaultCellEditor;
@@ -32,8 +34,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import jp.naist.se.stigmata.utils.WellknownClassManager;
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
+import jp.naist.se.stigmata.utils.WellknownClassManager;
 
 /**
  * @author Haruaki TAMADA
@@ -43,19 +45,12 @@ public class WellknownClassesSettingsPane extends JPanel{
     private static final long serialVersionUID = 329734546345634532L;
 
     private JTable sectionTable = null;
-
     private DefaultTableModel model;
-
     private WellknownClassManager manager;
-
     private JComboBox checkPartType;
-
     private JComboBox matchType;
-
     private String matchTypeColumnIdentifier;
-
     private String checkPartColumnIdentifier;
-
     private String patternColumnIdentifier;
 
     public WellknownClassesSettingsPane(WellknownClassManager manager){
@@ -64,6 +59,31 @@ public class WellknownClassesSettingsPane extends JPanel{
 
         initialize();
         initializeData();
+    }
+
+    public void exportSettings(PrintWriter out) throws IOException{
+        out.println("  <wellknown-classes>");
+        for(int i = 0; i < model.getRowCount(); i++){
+            int partType = getPartType(model.getValueAt(i, 0));
+            int match = getMatchType(model.getValueAt(i, 1));
+            String value = (String)model.getValueAt(i, 2);
+            String tag;
+            String matchtag;
+            if(partType == WellknownClassJudgeRule.CLASS_NAME_TYPE)   tag = "class-name";
+            else if(partType == WellknownClassJudgeRule.EXCLUDE_TYPE) tag = "exclude";
+            else if(partType == WellknownClassJudgeRule.FULLY_TYPE)   tag = "fully-name";
+            else if(partType == WellknownClassJudgeRule.PACKAGE_TYPE) tag = "package";
+            else throw new InternalError("unknown part type: " + partType);
+
+            if(match == WellknownClassJudgeRule.MATCH_TYPE)       matchtag = "match";
+            else if(match == WellknownClassJudgeRule.PREFIX_TYPE) matchtag = "prefix";
+            else if(match == WellknownClassJudgeRule.SUFFIX_TYPE) matchtag = "suffix";
+            else throw new InternalError("unknown match type: " + match);
+
+            out.printf("    <%s><%s>%s</%s></%s>", tag, matchtag, value, matchtag, tag);
+            out.println();
+        }
+        out.println("  </wellknown-classes>");
     }
 
     public synchronized void setWellknownClasses(WellknownClassManager manager){

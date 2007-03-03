@@ -26,6 +26,10 @@ fileMenu.menu.label=ファイル
 newframe.menuitem.label=新たなフレーム
 newframe.menuitem.tooltip=新しいフレームを作成します
 
+exportsetting.menuitem.label=設定を保存...
+exportsetting.menuitem.tooltip=設定をXMLファイルに保存します．
+export.description=設定を出力するxmlファイル
+
 closetab.menuitem.label=タブを閉じる
 closetab.menuteim.tooltip=現在のタブを閉じます
 

@@ -76,50 +76,42 @@ $Id$
     パッケージの接頭辞，クラス名の接尾辞，クラスの完全修飾名で
     設定することができる．
    -->
+  <!--
+    この中に含まれるものは他でいくら wellknown と設定されていても無視する．
+    指定方法は fully-names と同じ．
+  -->
   <wellknown-classes>
-    <exclude>
-      <!--
-        この中に含まれるものは他でいくら wellknown と設定されていても無視する．
-        指定方法は fully-names と同じ．
-      -->
-      <suffix>Exception</suffix>
-      <suffix>Error</suffix>
-      <match>java.lang.Throwable</match>
-      <match>java.lang.ThreadDeath</match>
-    </exclude>
+    <exclude><suffix>Exception</suffix></exclude>
+    <exclude><suffix>Error</suffix></exclude>
+    <exclude><match>java.lang.Throwable</match></exclude>
+    <exclude><match>java.lang.ThreadDeath</match></exclude>
 
-    <package>
-      <!-- JDK 1.5 に含まれているパッケージ -->
-      <prefix>java</prefix>
-      <prefix>javax</prefix>
-      <prefix>org.omg</prefix>
-      <prefix>org.xml</prefix>
-      <prefix>org.w3c</prefix>
-      <prefix>org.ietf</prefix>
+    <!-- JDK 1.5 に含まれているパッケージ -->
+    <package><prefix>java</prefix></package>
+    <package><prefix>javax</prefix></package>
+    <package><prefix>org.omg</prefix></package>
+    <package><prefix>org.xml</prefix></package>
+    <package><prefix>org.w3c</prefix></package>
+    <package><prefix>org.ietf</prefix></package>
 
-      <!-- その他，よく使われていそうなパッケージ -->
-      <prefix>org.gnu</prefix>
-      <prefix>com.apple</prefix>
-      <prefix>pnuts</prefix>
-      <prefix>org.eclipse</prefix>
-      <prefix>com.sun</prefix>
-      <prefix>sun</prefix>
-      <prefix>junit</prefix>
-      <prefix>org.apache</prefix>
-    </package>
+    <!-- その他，よく使われていそうなパッケージ -->
+    <package><prefix>org.gnu</prefix></package>
+    <package><prefix>com.apple</prefix></package>
+    <package><prefix>pnuts</prefix></package>
+    <package><prefix>org.eclipse</prefix></package>
+    <package><prefix>com.sun</prefix></package>
+    <package><prefix>sun</prefix></package>
+    <package><prefix>junit</prefix></package>
+    <package><prefix>org.apache</prefix></package>
 
-    <class-name>
-      <suffix>Test</suffix>
+    <class-name><suffix>Test</suffix></class-name>
 <!--
-      <match>well.known.class.name</match>
+    <class-name><match>well.known.class.name</match></class-name>
 -->
-    </class-name>
 <!--
-    <fully-name>
-      <suffix>Test</suffix>
-      <prefix>fully.class.name.preffix</prefix>
-      <match>fully.class.name.match</match>
-    </fully-name>
+    <fully-name><suffix>Test</suffix></fully-name>
+    <fully-name><prefix>fully.class.name.preffix</prefix></fully-name>
+    <fully-name><match>fully.class.name.match</match></fully-name>
 -->
   </wellknown-classes>
 

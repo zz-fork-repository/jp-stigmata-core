@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -72,6 +74,34 @@ public class BirthmarkDefinitionPane extends JPanel{
             context.removeService(service.getType());
             model.removeElement(service.getDisplayType());
         }
+    }
+
+    public void exportSettings(PrintWriter out) throws IOException{
+        out.println("  <services>");
+        for(String key: services.keySet()){
+            BirthmarkSpi service = services.get(key);
+            // not expert birthmarks are defined as class.
+            if(service.isExpert()){
+                out.println("    <service>");
+                out.print("      <type>");
+                out.print(service.getType());
+                out.println("</type>");
+                out.print("      <display-name>");
+                out.print(service.getDisplayType());
+                out.println("</display-name>");
+                out.print("      <description>");
+                out.print(service.getDescription());
+                out.println("</description>");
+                out.print("      <extractor>");
+                out.print(service.getExtractorClassName());
+                out.println("</extractor>");
+                out.print("      <comparator>");
+                out.print(service.getComparatorClassName());
+                out.println("</comparator>");
+                out.println("    </service>");
+            }
+        }
+        out.println("  </services>");
     }
 
     private void initData(){

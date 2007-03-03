@@ -7,7 +7,7 @@
 <!ELEMENT classpath     (#PCDATA)>
 
 <!ELEMENT type          (#PCDATA)>
-<!ELEMENT display-type  (#PCDATA)>
+<!ELEMENT display-name  (#PCDATA)>
 <!ELEMENT description   (#PCDATA)>
 <!ELEMENT extractor     (#PCDATA)>
 <!ELEMENT comparator    (#PCDATA)>
@@ -33,7 +33,7 @@
 
 <!ELEMENT properties (property*)>
 
-<!ELEMENT service (type,display-type,description,extractor,comparator)>
+<!ELEMENT service (type,display-name,description,extractor,comparator)>
 
 <!ELEMENT services (service*)>
 

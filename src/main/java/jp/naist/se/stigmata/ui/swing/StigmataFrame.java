@@ -381,6 +381,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private JMenu createFileMenu(){
         JMenu fileMenu = Utility.createJMenu("fileMenu");
         JMenuItem newFrameMenu = Utility.createJMenuItem("newframe");
+        JMenuItem exportMenu = Utility.createJMenuItem("exportsetting");
         JMenuItem closeTabMenu = Utility.createJMenuItem("closetab");
         JMenuItem closeMenu = Utility.createJMenuItem("closeframe");
         JMenuItem exitMenu = Utility.createJMenuItem("exit");
@@ -388,32 +389,39 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
         fileMenu.add(newFrameMenu);
         fileMenu.add(new JSeparator());
+        fileMenu.add(exportMenu);
+        fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);
         fileMenu.add(closeMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(exitMenu);
 
-        newFrameMenu.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
+        newFrameMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
                 newFrameMenuActionPerformed(evt);
             }
         });
+        exportMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                control.exportSettings();
+            }
+        });
 
-        closeTabMenu.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
+        closeTabMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
                 closeTabMenuActionPerformed();
             }
         });
 
-        closeMenu.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
+        closeMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
                 closeMenuActionPerformed(evt);
             }
         });
 
-        exitMenu.addActionListener(new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
-                exitMenuActionPerformed(evt);
+        exitMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                System.exit(0);
             }
         });
         return fileMenu;
@@ -540,7 +548,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return null;
     }
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt){
+    private void formWindowClosed(WindowEvent evt){
         frameList.remove(this);
         if(frameList.size() == 0){
             System.exit(1);
@@ -561,7 +569,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         }
     }
 
-    private void closeMenuActionPerformed(java.awt.event.ActionEvent evt){
+    private void closeMenuActionPerformed(ActionEvent evt){
         setVisible(false);
         dispose();
 
@@ -571,11 +579,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         }
     }
 
-    private void exitMenuActionPerformed(java.awt.event.ActionEvent evt){
-        System.exit(1);
-    }
-
-    private void newFrameMenuActionPerformed(java.awt.event.ActionEvent evt){
+    private void newFrameMenuActionPerformed(ActionEvent evt){
         StigmataFrame frame = new StigmataFrame(stigmata, context);
         frame.setVisible(true);
     }

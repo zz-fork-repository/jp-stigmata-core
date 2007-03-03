@@ -7,6 +7,10 @@ package jp.naist.se.stigmata.ui.swing;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -77,6 +81,28 @@ public class ControlPane extends JPanel{
         int index = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
         if(index >= 0){
             controlTab.removeTabAt(index);
+        }
+    }
+
+    public void exportSettings(){
+        File file = stigmata.getSaveFile(Messages.getStringArray("export.extensions"),
+            Messages.getString("export.description"));
+        if(file != null){
+            if(!file.getName().endsWith(".xml")){
+                file = new File(file.getParent(), file.getName() + ".xml");
+            }
+            try{
+                PrintWriter out = new PrintWriter(new FileWriter(file));
+                out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+                out.println("<birthmark>");
+                definition.exportSettings(out);
+                wellknownClassses.exportSettings(out);
+                classpath.exportSettings(out);
+                // properties.exportSettings(out);
+                out.println("</birthmark>");
+                out.close();
+            } catch(IOException e){
+            }
         }
     }
 
