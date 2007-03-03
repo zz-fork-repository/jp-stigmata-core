@@ -114,6 +114,10 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
                     pair.getTarget2().getClassName(), new Double(similarity) });
         }
         average = average / list.size();
+        
+        averageLabel.setText(Double.toString(average));
+        maximumLabel.setText(Double.toString(maximum));
+        minimumLabel.setText(Double.toString(minimum));
     }
 
     private void initComponent(){
@@ -123,9 +127,9 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
         JButton saveButton = Utility.createButton("savecomparison");
         JButton obfuscateButton = Utility.createButton("obfuscate");
         JScrollPane scroll = new JScrollPane();
-        averageLabel = new JLabel(Double.toString(average));
-        maximumLabel = new JLabel(Double.toString(maximum));
-        minimumLabel = new JLabel(Double.toString(minimum));
+        averageLabel = new JLabel(Double.toString(average), JLabel.RIGHT);
+        maximumLabel = new JLabel(Double.toString(maximum), JLabel.RIGHT);
+        minimumLabel = new JLabel(Double.toString(minimum), JLabel.RIGHT);
 
         scroll.setViewportView(table);
         table.setDefaultRenderer(Double.class, new CompareTableCellRenderer());
