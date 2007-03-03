@@ -110,7 +110,7 @@ public class SmcBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("smc");
         Assert.assertEquals(birthmark.getType(), "smc");
-        Assert.assertEquals(birthmark.getElementCount(), 29);
+        Assert.assertEquals(birthmark.getElementCount(), 31);
 
         BirthmarkElement[] elements = birthmark.getElements();
         for(int i = 0; i < elements.length; i++){
@@ -133,20 +133,22 @@ public class SmcBirthmarkExtractorTest{
         Assert.assertEquals(elements[11].toString(), "java.lang.String#equals");
         Assert.assertEquals(elements[12].toString(), "java.lang.String#equals");
         Assert.assertEquals(elements[13].toString(), "java.lang.String#equals");
-        Assert.assertEquals(elements[14].toString(), "java.lang.String#<init>");
-        Assert.assertEquals(elements[15].toString(), "java.lang.String#trim");
-        Assert.assertEquals(elements[16].toString(), "java.lang.String#length");
-        Assert.assertEquals(elements[17].toString(), "java.lang.String#equals");
-        Assert.assertEquals(elements[18].toString(), "java.lang.String#<init>");
-        Assert.assertEquals(elements[19].toString(), "java.lang.String#trim");
+        Assert.assertEquals(elements[14].toString(), "java.lang.String#equals");
+        Assert.assertEquals(elements[15].toString(), "java.lang.String#<init>");
+        Assert.assertEquals(elements[16].toString(), "java.lang.String#trim");
+        Assert.assertEquals(elements[17].toString(), "java.lang.String#length");
+        Assert.assertEquals(elements[18].toString(), "java.lang.String#equals");
+        Assert.assertEquals(elements[19].toString(), "java.lang.String#equals");
         Assert.assertEquals(elements[20].toString(), "java.lang.String#equals");
-        Assert.assertEquals(elements[21].toString(), "java.lang.String#<init>");
-        Assert.assertEquals(elements[22].toString(), "java.lang.String#trim");
+        Assert.assertEquals(elements[21].toString(), "java.lang.String#equals");
+        Assert.assertEquals(elements[22].toString(), "java.lang.String#equals");
         Assert.assertEquals(elements[23].toString(), "java.lang.String#equals");
-        Assert.assertEquals(elements[24].toString(), "java.lang.String#equals");
+        Assert.assertEquals(elements[24].toString(), "java.net.URL#<init>");
         Assert.assertEquals(elements[25].toString(), "java.lang.String#equals");
-        Assert.assertEquals(elements[26].toString(), "java.lang.String#<init>");
+        Assert.assertEquals(elements[26].toString(), "java.lang.String#equals");
         Assert.assertEquals(elements[27].toString(), "java.lang.String#equals");
-        Assert.assertEquals(elements[28].toString(), "java.net.URL#<init>");
+        Assert.assertEquals(elements[28].toString(), "java.lang.String#equals");
+        Assert.assertEquals(elements[29].toString(), "java.lang.String#equals");
+        Assert.assertEquals(elements[30].toString(), "java.lang.String#equals");
     }
 }

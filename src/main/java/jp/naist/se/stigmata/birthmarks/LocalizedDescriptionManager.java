@@ -15,6 +15,9 @@ import java.util.ResourceBundle;
  * @version $Revision$ $Date$
  */
 public class LocalizedDescriptionManager{
+    public static enum Type{
+        comparator, extractor, birthmark,
+    };
     private Map<Locale, ResourceBundle> resources = new HashMap<Locale, ResourceBundle>();
 
     /**
@@ -34,8 +37,12 @@ public class LocalizedDescriptionManager{
     }
 
     public String getDescription(Locale locale, String birthmarkType){
+        return getDescription(locale, birthmarkType, Type.birthmark);
+    }
+
+    public String getDescription(Locale locale, String birthmarkType, Type type){
         try{
-            return getBundle(locale).getString("birthmark." + birthmarkType + ".description");
+            return getBundle(locale).getString(type.name() + "." + birthmarkType + ".description");
         } catch(MissingResourceException e){
             return null;
         }

@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -63,25 +64,17 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private static final long serialVersionUID = 92345543665342134L;
 
     private static List<JFrame> frameList = new ArrayList<JFrame>();
-
     private JTabbedPane tabPane;
-
     private JMenuItem closeTabMenu;
-
+    private JCheckBoxMenuItem geekmodeMenu;
     private Stigmata stigmata;
-
     private BirthmarkContext context;
-
+    private ControlPane control;
     private File currentDirectory;
-
     private int extractCount = 0;
-
     private int compareCount = 0;
-
     private int compareDetail = 0;
-
     private int graphCount = 0;
-
     private int comparePair = 0;
 
     public StigmataFrame(){
@@ -325,6 +318,10 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return mapping;
     }
 
+    public void updateService(){
+        control.updateService();
+    }
+
     private File findFile(boolean open, String[] exts, String desc){
         JFileChooser chooser = new JFileChooser(getCurrentDirectory());
         chooser.setFileFilter(new ExtensionFilter(exts, desc));
@@ -346,7 +343,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         setTitle(Messages.getString("stigmata.frame.title"));
         initComponents();
 
-        Utility.addNewTab("control", tabPane, new ControlPane(this), null, null);
+        Utility.addNewTab("control", tabPane, control = new ControlPane(this), null, null);
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
         currentDirectory = new File(".");
@@ -428,13 +425,15 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         JMenuItem license = Utility.createJMenuItem("license");
         JMenuItem help = Utility.createJMenuItem("helpmenu");
         JMenu laf = Utility.createJMenu("lookandfeel");
+        geekmodeMenu = Utility.createJCheckBoxMenuItem("geekmenu");
 
         menu.add(about);
         menu.add(license);
+        menu.add(help);
         menu.add(new JSeparator());
         menu.add(laf);
         menu.add(new JSeparator());
-        menu.add(help);
+        menu.add(geekmodeMenu);
 
         about.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -445,6 +444,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         license.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 licenseMenuActionPerformed();
+            }
+        });
+        geekmodeMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                geekMenuActionPerformed(((JCheckBoxMenuItem)e.getSource()).getState());
             }
         });
 
@@ -468,6 +472,14 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return menu;
     }
 
+    public void setGeekMode(boolean geekmode){
+        geekmodeMenu.setState(geekmode);
+    }
+
+    private void geekMenuActionPerformed(boolean status){
+        control.setGeekMode(status);
+    }
+
     private void aboutMenuActionPerformed(){
         Package p = getClass().getPackage();
         JPanel panel = new JPanel(new BorderLayout());
@@ -489,7 +501,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         panel.add(scroll, BorderLayout.CENTER);
 
         JOptionPane.showMessageDialog(this, panel, Messages.getString("about.dialog.title"),
-                JOptionPane.INFORMATION_MESSAGE);
+                                      JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void licenseMenuActionPerformed(){
@@ -538,9 +550,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private void closeTabMenuActionPerformed(){
         int index = tabPane.getSelectedIndex();
         if(index == 0){
-            JOptionPane.showMessageDialog(this, Messages
-                    .getString("cannotclosecontroltab.dialog.message"), Messages
-                    .getString("cannotclosecontroltab.dialog.title"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this, Messages.getString("cannotclosecontroltab.dialog.message"),
+                Messages.getString("cannotclosecontroltab.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
         }
         else{
             tabPane.removeTabAt(index);

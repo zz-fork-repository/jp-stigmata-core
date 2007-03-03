@@ -87,7 +87,7 @@ public class StigmataTest{
         Assert.assertNotNull(service.getExtractor());
         Assert.assertEquals(
             service.getComparator().getClass().getName(),
-            "jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator"
+            "jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkComparator"
         );
         Assert.assertEquals(
             service.getExtractor().getClass().getName(),

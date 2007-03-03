@@ -38,4 +38,24 @@ public abstract class AbstractBirthmarkService implements BirthmarkSpi{
         }
         return description;
     }
+
+    public String getComparatorClassName(){
+        return getComparator().getClass().getName();
+    }
+
+    public String getExtractorClassName(){
+        return getExtractor().getClass().getName();
+    }
+
+    public abstract String getType();
+
+    public abstract String getDefaultDescription();
+
+    public boolean isExpert(){
+        return true;
+    }
+
+    public boolean isUserDefined(){
+        return true;
+    }
 }

@@ -32,6 +32,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonResultSet;
+import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 
 /**
@@ -70,10 +71,10 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
     }
 
     public void writeData(PrintWriter out, ResultFormatSpi service) throws IOException{
-        service.getComparisonResultFormat().printResult(
-                out,
-                new CertainPairComparisonResultSet(list.toArray(new ComparisonPair[list.size()]),
-                        context));
+        BirthmarkComparisonResultFormat format = service.getComparisonResultFormat();
+        format.printResult(out, new CertainPairComparisonResultSet(
+            list.toArray(new ComparisonPair[list.size()]), context
+        ));
     }
 
     private void obfuscateClassNames(){

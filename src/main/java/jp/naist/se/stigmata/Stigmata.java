@@ -235,7 +235,7 @@ public class Stigmata{
             ConfigFileParser parser = new ConfigFileParser(defaultContext);
             parser.parse(in);
         } catch(IOException e){
-            return;
+            throw new ApplicationInitializationError(e);
         }
         for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
             BirthmarkSpi service = i.next();

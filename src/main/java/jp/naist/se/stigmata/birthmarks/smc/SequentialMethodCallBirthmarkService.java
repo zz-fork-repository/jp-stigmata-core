@@ -7,7 +7,7 @@ package jp.naist.se.stigmata.birthmarks.smc;
 import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
-import jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator;
+import jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -35,5 +35,13 @@ public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkServi
 
     public BirthmarkComparator getComparator(){
         return comparator;
+    }
+
+    public boolean isExpert(){
+        return false;
+    }
+
+    public boolean isUserDefined(){
+        return false;
     }
 }

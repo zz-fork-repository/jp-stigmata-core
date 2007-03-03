@@ -20,7 +20,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 
 import jp.naist.se.stigmata.BirthmarkContext;
-import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
@@ -38,11 +37,13 @@ public class ControlPane extends JPanel{
     private TargetSelectionPane targetY;
     private ClasspathSettingsPane classpath;
     private WellknownClassesSettingsPane wellknownClassses;
+    private BirthmarkDefinitionPane definition;
     private JTabbedPane controlTab;
     private JButton compareButton;
     private JButton extractButton;
     private JButton resetButton;
     private JComboBox comparisonMethods;
+    private boolean geekmode = false;
 
     public ControlPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -51,17 +52,53 @@ public class ControlPane extends JPanel{
         Utility.addNewTab("targets", controlTab, createControlPane());
         Utility.addNewTab("wellknown", controlTab, createWellknownClassPane());
         Utility.addNewTab("classpath", controlTab, classpath = new ClasspathSettingsPane(stigmata));
+        definition = new BirthmarkDefinitionPane(stigmata);
 
         reset();
     }
 
+    public void updateService(){
+        birthmarks.updateService();
+        updateEnable();
+    }
+
     public void reset(){
+        this.geekmode = false;
+        definition.reset();
         birthmarks.reset();
+        stigmata.setGeekMode(false);
         targetX.removeAllElements();
         targetY.removeAllElements();
 
         classpath.reset();
         wellknownClassses.reset();
+        updateEnable();
+
+        int index = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+        if(index >= 0){
+            controlTab.removeTabAt(index);
+        }
+    }
+
+    public void setGeekMode(boolean geekmode){
+        this.geekmode = geekmode;
+        birthmarks.setGeekMode(geekmode);
+        stigmata.setGeekMode(geekmode);
+
+        if(geekmode){
+            Utility.addNewTab("definition", controlTab, definition);
+        }
+        else{
+            int index = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+            if(index >= 0){
+                controlTab.removeTabAt(index);
+            }
+        }
+        updateEnable();
+    }
+
+    public boolean isGeekMode(){
+        return geekmode;
     }
 
     private JComponent createWellknownClassPane(){
@@ -99,7 +136,7 @@ public class ControlPane extends JPanel{
 
         DataChangeListener dcl = new DataChangeListener(){
             public void valueChanged(Object source){
-                checkButtonEnabled();
+                updateEnable();
             }
         };
         targetX.addDataChangeListener(dcl);
@@ -109,7 +146,7 @@ public class ControlPane extends JPanel{
         return center;
     }
 
-    private void checkButtonEnabled(){
+    private void updateEnable(){
         String[] valueX = targetX.getValues();
         String[] valueY = targetY.getValues();
         String[] targets = birthmarks.getSelectedServices();
@@ -166,8 +203,7 @@ public class ControlPane extends JPanel{
     }
 
     private BirthmarkContext initAction(){
-        Stigmata s = stigmata.getStigmata();
-        BirthmarkContext context = s.createContext();
+        BirthmarkContext context = stigmata.getContext();
         ClasspathContext bytecode = context.getBytecodeContext();
         WellknownClassManager manager = context.getWellknownClassManager();
 
@@ -225,6 +261,9 @@ public class ControlPane extends JPanel{
                 }
                 else if(item.equals(Messages.getString("specifiedpair.label"))){
                     compareSpecifiedPair();
+                }
+                else if(item.equals(Messages.getString("roundrobin.filtering.label"))){
+                    // compareRoundRobinWithFiltering();
                 }
             }
         });

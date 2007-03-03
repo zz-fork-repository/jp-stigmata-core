@@ -70,7 +70,7 @@ public class CVFVBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("cvfv");
         Assert.assertEquals(birthmark.getType(), "cvfv");
-        Assert.assertEquals(birthmark.getElementCount(), 9);
+        Assert.assertEquals(birthmark.getElementCount(), 8);
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals(elements[0].getClass().getName(),
@@ -89,8 +89,6 @@ public class CVFVBirthmarkExtractorTest{
                             "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
         Assert.assertEquals(elements[7].getClass().getName(),
                             "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
-        Assert.assertEquals(elements[8].getClass().getName(),
-                            "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
 
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[0]).getSignature(),
                             "Ljp/naist/se/stigmata/BirthmarkContext;");
@@ -98,21 +96,21 @@ public class CVFVBirthmarkExtractorTest{
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[1]).getSignature(),
                             "Ljp/naist/se/stigmata/utils/WellknownClassManager;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[1]).getValue(), null);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getSignature(), "Z");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getValue(), 0);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getSignature(), "Z");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getValue(), 0);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getSignature(), "Z");
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getSignature(),
+                            "Ljp/naist/se/stigmata/birthmarks/BirthmarkService;");
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getValue(), null);
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getSignature(),
+                            "Ljp/naist/se/stigmata/ConfigFileParser$Part;");
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getValue(), null);
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getSignature(), "I");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getValue(), 0);
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[5]).getSignature(), "I");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[5]).getValue(), 0);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[6]).getSignature(), "I");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[6]).getValue(), 0);
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[6]).getSignature(),
+                            "Ljava/lang/String;");
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[6]).getValue(), null);
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[7]).getSignature(),
                             "Ljava/lang/String;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[7]).getValue(), null);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[8]).getSignature(),
-                            "Ljava/lang/String;");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[8]).getValue(), null);
     }
 }

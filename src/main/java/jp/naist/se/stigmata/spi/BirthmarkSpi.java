@@ -46,14 +46,22 @@ public interface BirthmarkSpi{
      */
     public String getDescription();
 
+    public String getExtractorClassName();
+
     /**
      * returns a extractor for the birthmark of this service.
      */
     public BirthmarkExtractor getExtractor();
 
+    public String getComparatorClassName();
+
     /**
      * returns a comparator for the birthmark of this service.
      */
     public BirthmarkComparator getComparator();
+
+    public boolean isExpert();
+
+    public boolean isUserDefined();
 }
 

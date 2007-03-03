@@ -1,0 +1,5 @@
+jp.naist.se.stigmata.birthmarks.extractors.ConstantValueOfFieldVariableBirthmarkExtractorService
+jp.naist.se.stigmata.birthmarks.extractors.InheritanceStructureBirthmarkExtractorService
+jp.naist.se.stigmata.birthmarks.extractors.SequentialMethodCallBirthmarkExtractorService
+jp.naist.se.stigmata.birthmarks.extractors.UsedClassesBirthmarkExtractorService
+

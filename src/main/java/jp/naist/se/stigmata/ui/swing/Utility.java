@@ -10,10 +10,12 @@ import java.text.MessageFormat;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
-
+import javax.swing.border.TitledBorder;
 
 /**
  * 
@@ -28,6 +30,24 @@ class Utility{
     private Utility(){
     }
 
+    public static void decorateJComponent(JComponent component, String label){
+        if(Messages.hasString(label + ".tooltip")){
+            component.setToolTipText(Messages.getString(label + ".tooltip"));
+        }
+        if(Messages.hasString(label + ".border")){
+            component.setBorder(new TitledBorder(Messages.getString(label + ".border")));
+        }
+        try{
+            if(component.getClass().getMethod("setIcon") != null){
+                Icon icon = getIcon(label + ".icon");
+                if(icon != null){
+                    component.getClass().getMethod("setIcon").invoke(component, icon);
+                }
+            }
+        } catch(Exception e){
+        }
+    }
+
     public static JButton createButton(String label){
         JButton button = new JButton(Messages.getString(label + ".button.label"));
         button.setActionCommand(label);
@@ -35,9 +55,28 @@ class Utility{
             button.setToolTipText(Messages.getString(label + ".button.tooltip"));
         }
         Icon icon = getIcon(label + ".button.icon");
-        button.setIcon(icon);
+        if(icon != null){
+            button.setIcon(icon);
+        }
 
         return button;
+    }
+
+    public static JCheckBoxMenuItem createJCheckBoxMenuItem(String label){
+        return createJCheckBoxMenuItem(label, false);
+    }
+
+    public static JCheckBoxMenuItem createJCheckBoxMenuItem(String label, boolean status){
+        JCheckBoxMenuItem item = new JCheckBoxMenuItem(Messages.getString(label + ".menuitem.label"), status);
+        item.setActionCommand(label);
+        if(Messages.hasString(label + ".menuitem.tooltip")){
+            item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
+        }
+        Icon icon = getIcon(label + ".menuitem.icon");
+        if(icon != null){
+            item.setIcon(icon);
+        }
+        return item;
     }
 
     public static JMenuItem createJMenuItem(String label){
@@ -46,7 +85,10 @@ class Utility{
         if(Messages.hasString(label + ".menuitem.tooltip")){
             item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
         }
-        item.setIcon(getIcon(label + ".menuitem.icon"));
+        Icon icon = getIcon(label + ".menuitem.icon");
+        if(icon != null){
+            item.setIcon(icon);
+        }
         return item;
     }
 
@@ -56,7 +98,10 @@ class Utility{
         if(Messages.hasString(label + ".menu.tooltip")){
             menu.setToolTipText(Messages.getString(label + ".menu.tooltip"));
         }
-        menu.setIcon(getIcon(label + ".menu.icon"));
+        Icon icon = getIcon(label + ".menu.icon");
+        if(icon != null){
+            menu.setIcon(icon);
+        }
         return menu;
     }
 

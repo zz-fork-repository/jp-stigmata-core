@@ -9,7 +9,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
+
 import javax.imageio.spi.ServiceRegistry;
+
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
@@ -148,7 +151,10 @@ public class BirthmarkContext{
      */
     public synchronized BirthmarkSpi[] getServices(){
         List<BirthmarkSpi> list = getServiceList();
-        return list.toArray(new BirthmarkSpi[list.size()]);
+        BirthmarkSpi[] services = list.toArray(new BirthmarkSpi[list.size()]);
+        Arrays.sort(services, new BirthmarkSpiComparator());
+
+        return services;
     }
 
     /**
@@ -163,7 +169,10 @@ public class BirthmarkContext{
                 list.add(spi);
             }
         }
-        return list.toArray(new BirthmarkSpi[list.size()]);
+        BirthmarkSpi[] services = list.toArray(new BirthmarkSpi[list.size()]);
+        Arrays.sort(services, new BirthmarkSpiComparator());
+
+        return services;
     }
 
     /**

@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.birthmarks;
+package jp.naist.se.stigmata.birthmarks.comparators;
 
 /*
  * $Id$

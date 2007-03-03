@@ -48,6 +48,9 @@ license.dialog.title=ライセンス
 helpmenu.menuitem.label=ヘルプ...
 helpmenu.menuitem.tooltip=ヘルプを表示
 
+geekmenu.menuitem.label=熟練者モード
+geekmenu.menuitem.tooltip=熟練者モードに移行 (より多くのバースマークが選択可能になり，新規バースマークの定義も行えます)
+
 lookandfeel.menu.label=ルック&フィール
 
 cannotclosecontroltab.dialog.title=エラー
@@ -195,6 +198,7 @@ comparemapping.description=クラス間の関係を示したファイルを指定 (csv)
 roundrobin.label=総当りで比較
 guessedpair.label=ペアを推測して比較
 specifiedpair.label=ペアを指定して比較...
+roundrobin.filering.label=総当り結果をフィルタリング...
 
 result.border=比較結果類似度
 eachbirthmarksimilarity.border=各バースマーク間の類似度
@@ -204,3 +208,31 @@ comparisonresultset.tab.tooltip=クラスファイルのペアで比較した結果
 obfuscate.button.label=難読化...
 obfuscate.button.tooltip=クラス名を意味のない名前に変え，難読化します．また，難読化前後のマッピングをCVS形式で保存します．
 obfuscationmapping.description=難読化前後の名前のマッピングを保存 (csv)
+
+###########################################################
+# BirthmarkDefinitionPane
+###########################################################
+servicelist.border=バースマーク一覧
+servicelist.tooltip=登録されているバースマークの一覧です．
+definition.tab.label=新規バースマーク
+definition.tab.tooltip=新たなバースマークの定義，既存バースマークの定義を確認
+removeservice.button.label=削除
+removeservice.button.tooltip=リストで選択されたバースマークをシステムから削除します．
+newservice.button.label=新規バースマーク
+newservice.button.tooltip=新たなバースマークを定義し，システムに追加します．
+
+define.type.tooltip=バースマークのID
+define.type.border=タイプ
+define.displaytype.tooltip=表示名
+define.displaytype.border=バースマークの表示名
+define.description.tooltip=バースマークの説明
+define.description.border=説明
+define.extractor.tooltip=クラスファイルからバースマークを抽出するクラス
+define.extractor.border=バースマーク抽出器
+define.comparator.tooltip=得られたバースマークを比較するクラス
+define.comparator.border=バースマーク比較器
+define.expert.label=熟練者向け
+define.expert.tooltip=熟練者向けのバースマークであるか
+define.userdef.label=ユーザ定義
+define.userdef.tooltip=ユーザが定義したバースマークであるか
+newservice.definition.label=(新規バースマーク)

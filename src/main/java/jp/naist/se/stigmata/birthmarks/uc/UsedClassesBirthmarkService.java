@@ -7,7 +7,7 @@ package jp.naist.se.stigmata.birthmarks.uc;
 import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
-import jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator;
+import jp.naist.se.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparator;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -18,7 +18,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @version $Revision$ $Date$
  */
 public class UsedClassesBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
-    private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
+    private BirthmarkComparator comparator = new LogicalAndBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new UsedClassesBirthmarkExtractor(this);
 
     public String getType(){
@@ -35,5 +35,13 @@ public class UsedClassesBirthmarkService extends AbstractBirthmarkService implem
 
     public BirthmarkComparator getComparator(){
         return comparator;
+    }
+
+    public boolean isExpert(){
+        return false;
+    }
+
+    public boolean isUserDefined(){
+        return false;
     }
 }

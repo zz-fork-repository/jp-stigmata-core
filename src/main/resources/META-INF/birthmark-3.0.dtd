@@ -4,6 +4,14 @@
  $Id$
 -->
 
+<!ELEMENT classpath     (#PCDATA)>
+
+<!ELEMENT type          (#PCDATA)>
+<!ELEMENT display-type  (#PCDATA)>
+<!ELEMENT description   (#PCDATA)>
+<!ELEMENT extractor     (#PCDATA)>
+<!ELEMENT comparator    (#PCDATA)>
+
 <!ELEMENT suffix        (#PCDATA)>
 <!ELEMENT prefix        (#PCDATA)>
 <!ELEMENT match         (#PCDATA)>
@@ -25,5 +33,11 @@
 
 <!ELEMENT properties (property*)>
 
-<!ELEMENT birthmark (wellknown-classes,properties) >
+<!ELEMENT service (type,display-type,description,extractor,comparator)>
+
+<!ELEMENT services (service*)>
+
+<!ELEMENT classpath-list (classpath*)>
+
+<!ELEMENT birthmark (services,wellknown-classes,classpath-list,properties) >
 

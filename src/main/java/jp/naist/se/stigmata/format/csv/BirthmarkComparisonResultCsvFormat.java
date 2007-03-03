@@ -14,6 +14,7 @@ import java.util.Map;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairElement;
 import jp.naist.se.stigmata.ComparisonResultSet;
+import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.format.AbstractBirthmarkComparisonResultFormat;
 
 /**
@@ -46,6 +47,25 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
 
     @Override
     public void printResult(PrintWriter out, ComparisonResultSet resultset){
+        if(resultset instanceof CertainPairComparisonResultSet){
+            printResultImpl(out, (CertainPairComparisonResultSet)resultset);
+        }
+        else{
+            printResultImpl(out, resultset);
+        }
+    }
+
+    private void printResultImpl(PrintWriter out, CertainPairComparisonResultSet resultset){
+        for(ComparisonPair pair: resultset){
+            out.print(pair.getTarget1().getClassName());
+            out.print(",");
+            out.print(pair.getTarget1().getClassName());
+            out.print(",");
+            out.println(pair.calculateSimilarity());
+        }
+    }
+
+    private void printResultImpl(PrintWriter out, ComparisonResultSet resultset){
         Map<String, Map<String, Double>> map = new LinkedHashMap<String, Map<String, Double>>();
         List<String> names = new ArrayList<String>();
 
@@ -63,7 +83,7 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
 
         for(String name: names){
             out.print(",");
-            out.print(name);        
+            out.print(name);
         }
         out.println();
         for(String key: map.keySet()){

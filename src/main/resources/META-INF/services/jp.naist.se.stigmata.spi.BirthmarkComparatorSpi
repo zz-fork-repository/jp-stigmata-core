@@ -1,0 +1,5 @@
+jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparatorService
+jp.naist.se.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparatorService
+jp.naist.se.stigmata.birthmarks.comparators.DPMatchingBirthmarkComparatorService
+jp.naist.se.stigmata.birthmarks.comparators.EditDistanceBirthmarkComparatorService
+jp.naist.se.stigmata.birthmarks.comparators.ExtendedEditDistanceBirthmarkComparatorService

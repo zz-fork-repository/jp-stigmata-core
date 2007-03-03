@@ -37,7 +37,6 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
 
     public void visitEnd(){
         for(String key: elements.keySet()){
-            TypeAndValueBirthmarkElement element = elements.get(key);
             birthmark.addElement(elements.get(key));
         }
         super.visitEnd();

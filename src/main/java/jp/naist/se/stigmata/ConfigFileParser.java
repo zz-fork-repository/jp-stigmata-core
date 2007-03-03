@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import jp.naist.se.stigmata.birthmarks.BirthmarkService;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
 
@@ -26,15 +27,15 @@ import org.xml.sax.helpers.DefaultHandler;
  * @version  $Revision$ $Date$
  */
 public class ConfigFileParser extends DefaultHandler{
+    private enum Part{ WELLKNOWN_CLASSES, PROPERTIES, CLASSPATH, SERVICES, }
+
     private BirthmarkContext context;
 
     private WellknownClassManager manager;
 
-    private boolean wellknownPart = false;
+    private BirthmarkService service;
 
-    private boolean propertyPart = false;
-
-    private boolean classpathPart = false;
+    private Part part;
 
     private int wellknownType = 0;
 
@@ -69,19 +70,18 @@ public class ConfigFileParser extends DefaultHandler{
         qname = qName;
 
         if(qName.equals("wellknown-classes")){
-            wellknownPart = true;
-            propertyPart = false;
-            classpathPart = false;
+            part = Part.WELLKNOWN_CLASSES;
         }
         else if(qName.equals("property")){
-            wellknownPart = false;
-            propertyPart = true;
-            classpathPart = false;
+            part = Part.PROPERTIES;
         }
         else if(qName.equals("classpath-list")){
-            wellknownPart = false;
-            propertyPart = false;
-            classpathPart = true;
+            part = Part.CLASSPATH;
+        }
+        else if(qName.equals("service")){
+            part = Part.SERVICES;
+            service = new BirthmarkService();
+            service.setUserDefined(false);
         }
         else if(qName.equals("exclude")){
             wellknownType = WellknownClassJudgeRule.EXCLUDE_TYPE;
@@ -110,24 +110,38 @@ public class ConfigFileParser extends DefaultHandler{
     public void characters(char[] data, int offset, int length) throws SAXException{
         String value = new String(data, offset, length).trim();
         if(value.length() > 0){
-            if(qname.equals("name") && propertyPart){
-                key = new String(data, offset, length).trim();
+            if(qname.equals("name") && part == Part.PROPERTIES){
+                key = value;
             }
-            else if(qname.equals("value") && propertyPart){
-                context.addProperty(key, new String(data, offset, length).trim());
+            else if(qname.equals("value") && part == Part.PROPERTIES){
+                context.addProperty(key, value);
             }
-            else if(wellknownPart && (qname.equals("suffix") || qname.equals("prefix") ||
-                                      qname.equals("match"))){
-                manager.add(new WellknownClassJudgeRule(new String(data, offset, length),
-                        wellknownType | patternType));
+            else if(part == Part.WELLKNOWN_CLASSES &&
+                    (qname.equals("suffix") || qname.equals("prefix") || qname.equals("match"))){
+                manager.add(new WellknownClassJudgeRule(value, wellknownType | patternType));
             }
-            else if(classpathPart && qname.equals("classpath")){
+            else if(part == Part.CLASSPATH && qname.equals("classpath")){
                 try{
                     context.getBytecodeContext().addClasspath(new URL(value));
                 } catch(MalformedURLException e){
                     throw new SAXException(e);
                 }
             }
+            else if(part == Part.SERVICES){
+                if(qname.equals("type"))              service.setType(value);
+                else if(qname.equals("display-name")) service.setDisplayType(value);
+                else if(qname.equals("description"))  service.setDescription(value);
+                else if(qname.equals("extractor"))    service.setExtractorClassName(value);
+                else if(qname.equals("comparator"))   service.setComparatorClassName(value);
+            }
+        }
+    }
+
+    @Override
+    public void endElement(String uri, String localname, String qname){
+        if(part == Part.SERVICES && qname.equals("service")){
+            context.addService(service);
+            service = null;
         }
     }
 }
