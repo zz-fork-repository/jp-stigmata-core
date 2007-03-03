@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -125,11 +124,14 @@ public class BirthmarkDefinitionPane extends JPanel{
         panel.add(information = new InformationPane(stigmata, this), BorderLayout.CENTER);
         panel.add(scroll, BorderLayout.WEST);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        Box buttonPanel = Box.createHorizontalBox();
         newService = Utility.createButton("newservice");
         removeService = Utility.createButton("removeservice");
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(newService);
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(removeService);
+        buttonPanel.add(Box.createHorizontalGlue());
 
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);

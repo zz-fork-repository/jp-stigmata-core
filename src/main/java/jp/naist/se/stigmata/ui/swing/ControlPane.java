@@ -253,7 +253,6 @@ public class ControlPane extends JPanel{
     }
 
     private void initComponents(){
-        JPanel south = new JPanel();
         controlTab = new JTabbedPane();
         resetButton = Utility.createButton("reset");
         extractButton = Utility.createButton("extract");
@@ -265,12 +264,18 @@ public class ControlPane extends JPanel{
             comparisonMethods.addItem(items[i]);
         }
 
-        setLayout(new BorderLayout());
+        Box south = Box.createHorizontalBox();
+        south.add(Box.createHorizontalGlue());
         south.add(resetButton);
+        south.add(Box.createHorizontalGlue());
         south.add(extractButton);
+        south.add(Box.createHorizontalGlue());
         south.add(compareButton);
+        south.add(Box.createHorizontalGlue());
         south.add(comparisonMethods);
+        south.add(Box.createHorizontalGlue());
 
+        setLayout(new BorderLayout());
         add(south, BorderLayout.SOUTH);
         add(controlTab, BorderLayout.CENTER);
 
