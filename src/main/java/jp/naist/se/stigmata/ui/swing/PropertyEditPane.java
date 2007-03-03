@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing;
 
+/*
+ * $Id$
+ */
+
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,6 +29,11 @@ import javax.swing.table.DefaultTableModel;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class PropertyEditPane extends JPanel{
     private static final long serialVersionUID = 12397342543653L;
 

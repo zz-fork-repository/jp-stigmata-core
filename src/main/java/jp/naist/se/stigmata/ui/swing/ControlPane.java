@@ -59,13 +59,9 @@ public class ControlPane extends JPanel{
         Utility.addNewTab("classpath", controlTab, classpath = new ClasspathSettingsPane(stigmata));
         definition = new BirthmarkDefinitionPane(stigmata);
         properties = new PropertyEditPane(stigmata);
+        definition.addServiceHolder(birthmarks);
 
         reset();
-    }
-
-    public void updateService(){
-        birthmarks.updateService();
-        updateEnable();
     }
 
     public void reset(){
@@ -247,6 +243,7 @@ public class ControlPane extends JPanel{
 
         classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
+        definition.updateContext(context);
         properties.updateContext(context);
 
         return context;

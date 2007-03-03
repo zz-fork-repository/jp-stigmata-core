@@ -47,19 +47,12 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     private static final long serialVersionUID = 2134574576543623L;
 
     private BirthmarkSet[] birthmarksX;
-
     private BirthmarkSet[] birthmarksY;
-
     private JTable table;
-
     private DefaultTableModel model;
-
     private JLabel classCount, comparisonCount, distinctionRatio;
-
     private JLabel average, minimum, maximum;
-
     private StigmataFrame stigmataFrame;
-
     private BirthmarkContext context;
 
     public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkContext context,
@@ -87,7 +80,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         double avg = 0d;
         double max = 0d;
         double min = 100d;
-        model.addColumn(""); //$NON-NLS-1$
+        model.addColumn("");
         for(BirthmarkSet x: birthmarksX){
             model.addColumn(x.getClassName());
         }

@@ -35,6 +35,10 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     public BirthmarkService(){
     }
 
+    public void setBirthmarkContext(BirthmarkContext context){
+        this.context = context;
+    }
+
     public void setExtractorClassName(String extractor){
         try{
             Class<?> c;

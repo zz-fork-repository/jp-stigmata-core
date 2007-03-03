@@ -25,7 +25,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkSelectionPane extends JPanel{
+public class BirthmarkSelectionPane extends JPanel implements BirthmarkServiceHolder{
     private static final long serialVersionUID = 3209854654743223453L;
 
     private StigmataFrame stigmata;
@@ -90,31 +90,53 @@ public class BirthmarkSelectionPane extends JPanel{
         return services;
     }
 
-    public void updateService(){
-        Map<BirthmarkSpi, JCheckBox> newChecks = new HashMap<BirthmarkSpi, JCheckBox>();
-        BirthmarkSpi[] services = stigmata.getContext().getServices();
-        for(BirthmarkSpi service: services){
-            if(checks.get(service) == null){ // added service is found
-                JCheckBox check = new JCheckBox(new BirthmarkSelectAction(service, this));
-                check.setToolTipText(service.getDescription());
-                check.setSelected(true);
-                newChecks.put(service, check);
-                selectedServices.add(service.getType());
-                serviceList.add(service);
-            }
-            else{ // unchanged services
-                newChecks.put(service, checks.get(service));
-                checks.remove(service);
-            }
+    public void addService(BirthmarkSpi service){
+        if(checks.get(service) == null){
+            JCheckBox check = new JCheckBox(new BirthmarkSelectAction(service, this));
+            check.setToolTipText(service.getDescription());
+            check.setSelected(true);
+            checks.put(service, check);
+            selectedServices.add(service.getType());
+            serviceList.add(service);
         }
-        for(BirthmarkSpi remainService: checks.keySet()){
-            JCheckBox check = checks.get(remainService);
-            selectedServices.remove(remainService.getType());
-            serviceList.remove(remainService);
-            remove(check);
-        }
-        this.checks = newChecks;
         updateLayouts();
+        fireEvent();
+    }
+
+    public BirthmarkSpi getService(String type){
+        for(BirthmarkSpi service: serviceList){
+            if(service.getType().equals(type)){
+                return service;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasService(String type){
+        for(BirthmarkSpi service: serviceList){
+            if(service.getType().equals(type)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeService(String type){
+        BirthmarkSpi target = null;
+        for(BirthmarkSpi service: serviceList){
+            if(service.getType().equals(type)){
+                target = service;
+                break;
+            }
+        }
+        if(target != null){
+            JCheckBox check = checks.get(target);
+            remove(check);
+            selectedServices.remove(target.getType());
+            serviceList.remove(target);
+            checks.remove(target);
+        }
+        fireEvent();
     }
 
     private void fireEvent(){

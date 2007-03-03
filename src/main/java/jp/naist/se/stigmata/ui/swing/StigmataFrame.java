@@ -318,10 +318,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return mapping;
     }
 
-    public void updateService(){
-        control.updateService();
-    }
-
     private File findFile(boolean open, String[] exts, String desc){
         JFileChooser chooser = new JFileChooser(getCurrentDirectory());
         chooser.setFileFilter(new ExtensionFilter(exts, desc));
@@ -495,10 +491,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         panel.add(logo, BorderLayout.NORTH);
 
         String aboutMessage = loadString("/resources/about.txt");
-        aboutMessage = aboutMessage.replace("${implementation.version}", p
-                .getImplementationVersion());
-        aboutMessage = aboutMessage
-                .replace("${implementation.vendor}", p.getImplementationVendor());
+        aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
+        aboutMessage = aboutMessage.replace("${implementation.vendor}", p.getImplementationVendor());
         aboutMessage = aboutMessage.replace("${implementation.title}", p.getImplementationTitle());
 
         JTextArea text = new JTextArea(aboutMessage);

@@ -43,7 +43,6 @@ public class PairComparisonPane extends JPanel implements BirthmarkDataWritable{
     private static final long serialVersionUID = 2342856785474356234L;
 
     private StigmataFrame frame;
-
     private ComparisonPair pair;
 
     public PairComparisonPane(StigmataFrame frame, ComparisonPair pair){

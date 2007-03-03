@@ -36,8 +36,6 @@ import javax.swing.filechooser.FileFilter;
 
 /**
  * 
- * 
- * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */

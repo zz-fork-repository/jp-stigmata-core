@@ -249,7 +249,7 @@ property.tab.tooltip=プロパティを編集します．
 
 propertyname.label=プロパティ名
 propertyvalue.label=プロパティ値
-propertyadd.button.label=追加
+propertyadd.button.label=追加...
 propertyadd.button.tooltip=新しいプロパティを追加します．
 propertyremove.button.label=削除
 propertyremove.button.tooltip=選択しているプロパティを削除します．
