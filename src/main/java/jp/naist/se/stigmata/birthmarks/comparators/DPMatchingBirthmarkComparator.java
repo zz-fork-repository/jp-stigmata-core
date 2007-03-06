@@ -59,12 +59,20 @@ public class DPMatchingBirthmarkComparator implements BirthmarkComparator{
 
         BirthmarkElement[] element1 = b1.getElements();
         BirthmarkElement[] element2 = b2.getElements();
-        int[][] cost = createCostMatrics(element1, element2);
+        if(element1.length > 0 && element2.length > 0){
+            int[][] cost = createCostMatrics(element1, element2);
 
-        int max = (element1.length + element2.length) * (getMismatchPenalty() + getShiftPenalty());
-        int distance = cost[element1.length - 1][element2.length - 1];
+            int max = (element1.length + element2.length) * (getMismatchPenalty() + getShiftPenalty());
+            int distance = cost[element1.length - 1][element2.length - 1];
 
-        return (double)(max - distance) / max;
+            return (double)(max - distance) / max;
+        }
+        else if(element1.length == 0 && element2.length == 0){
+            return 1d;
+        }
+        else{
+            return 0d;
+        }
     }
 
     public int getCompareCount(Birthmark b1, Birthmark b2){
