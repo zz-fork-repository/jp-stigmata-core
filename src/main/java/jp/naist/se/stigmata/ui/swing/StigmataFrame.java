@@ -69,7 +69,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private static List<JFrame> frameList = new ArrayList<JFrame>();
     private JTabbedPane tabPane;
     private JMenuItem closeTabMenu;
-    private JCheckBoxMenuItem geekmodeMenu;
+    private JCheckBoxMenuItem expertmodeMenu;
     private Stigmata stigmata;
     private BirthmarkContext context;
     private ControlPane control;
@@ -177,10 +177,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
-            compareCount++;
 
             RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, context, x, y);
-            Utility.addNewTab("compare", tabPane, compare,
+            compareCount++;
+            Utility.addNewTab(
+                "compare", tabPane, compare,
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
                     Utility.array2String(birthmarks),
@@ -250,9 +251,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
     public void showComparisonResultSet(ComparisonResultSet resultset){
         comparePair++;
-        Utility.addNewTab("comparisonresultset", tabPane,
-                          new PairComparisonResultSetPane(this, resultset),
-                          new Object[] { new Integer(comparePair), }, null);
+        Utility.addNewTab(
+            "comparisonresultset", tabPane,
+            new PairComparisonResultSetPane(this, resultset),
+            new Object[] { new Integer(comparePair), }, null
+        );
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
@@ -274,9 +277,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             extractCount++;
 
             BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, context, holders);
-            Utility.addNewTab("extract", tabPane, viewer,
-                    new Object[] { new Integer(extractCount), }, new Object[] {
-                            Utility.array2String(birthmarks), Utility.array2String(targets), });
+            Utility.addNewTab(
+                "extract", tabPane, viewer,
+                new Object[] { new Integer(extractCount), },
+                new Object[] { Utility.array2String(birthmarks), Utility.array2String(targets), }
+            );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         }catch(Exception e){
             showExceptionMessage(e);
@@ -423,7 +428,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         JMenuItem license = Utility.createJMenuItem("license");
         JMenuItem help = Utility.createJMenuItem("helpmenu");
         JMenu laf = Utility.createJMenu("lookandfeel");
-        geekmodeMenu = Utility.createJCheckBoxMenuItem("geekmenu");
+        expertmodeMenu = Utility.createJCheckBoxMenuItem("expertmenu");
 
         menu.add(about);
         menu.add(license);
@@ -431,7 +436,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         menu.add(new JSeparator());
         menu.add(laf);
         menu.add(new JSeparator());
-        menu.add(geekmodeMenu);
+        menu.add(expertmodeMenu);
 
         about.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -444,9 +449,9 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 licenseMenuActionPerformed();
             }
         });
-        geekmodeMenu.addActionListener(new ActionListener(){
+        expertmodeMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                geekMenuActionPerformed(((JCheckBoxMenuItem)e.getSource()).getState());
+                expertMenuActionPerformed(((JCheckBoxMenuItem)e.getSource()).getState());
             }
         });
 
@@ -470,12 +475,12 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return menu;
     }
 
-    public void setGeekMode(boolean geekmode){
-        geekmodeMenu.setState(geekmode);
+    public void setExpertMode(boolean expertmode){
+        expertmodeMenu.setState(expertmode);
     }
 
-    private void geekMenuActionPerformed(boolean status){
-        control.setGeekMode(status);
+    private void expertMenuActionPerformed(boolean status){
+        control.setExpertMode(status);
     }
 
     private void aboutMenuActionPerformed(){

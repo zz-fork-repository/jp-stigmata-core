@@ -52,8 +52,8 @@ license.dialog.title=ライセンス
 helpmenu.menuitem.label=ヘルプ...
 helpmenu.menuitem.tooltip=ヘルプを表示
 
-geekmenu.menuitem.label=熟練者モード
-geekmenu.menuitem.tooltip=熟練者モードに移行 (より多くのバースマークが選択可能になり，新規バースマークの定義も行えます)
+expertmenu.menuitem.label=上級者モード
+expertmenu.menuitem.tooltip=上級者モードに移行 (より多くのバースマークが選択可能になり，新規バースマークの定義も行えます)
 
 lookandfeel.menu.label=ルック&フィール
 

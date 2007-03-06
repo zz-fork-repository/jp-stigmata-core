@@ -33,7 +33,7 @@ public class BirthmarkSelectionPane extends JPanel implements BirthmarkServiceHo
     private List<BirthmarkSpi> serviceList;
     private Map<BirthmarkSpi, JCheckBox> checks;
     private List<DataChangeListener> listeners = new ArrayList<DataChangeListener>();
-    private boolean geekmode = false;
+    private boolean expertmode = false;
 
     public BirthmarkSelectionPane(StigmataFrame stigmata) {
         this.stigmata = stigmata;
@@ -55,19 +55,19 @@ public class BirthmarkSelectionPane extends JPanel implements BirthmarkServiceHo
         updateLayouts();
     }
 
-    public void setGeekMode(boolean geekmode){
-        this.geekmode = geekmode;
+    public void setExpertMode(boolean expertmode){
+        this.expertmode = expertmode;
         updateLayouts();
     }
 
-    public boolean isGeekMode(){
-        return geekmode;
+    public boolean isExpertMode(){
+        return expertmode;
     }
 
     public void reset(){
         selectedServices.clear();
         initServices();
-        geekmode = false;
+        expertmode = false;
         updateLayouts();
         fireEvent();
     }
@@ -148,7 +148,7 @@ public class BirthmarkSelectionPane extends JPanel implements BirthmarkServiceHo
     private Dimension calculateDimension(){
         int rows = 1;
         int cols = 0;
-        if(!isGeekMode()){
+        if(!isExpertMode()){
             for(BirthmarkSpi service: serviceList){
                 if(!service.isExpert()){
                     cols++;
@@ -179,7 +179,7 @@ public class BirthmarkSelectionPane extends JPanel implements BirthmarkServiceHo
         for(BirthmarkSpi service: serviceList){
             JCheckBox check = checks.get(service);
             check.setVisible(true);
-            if(!service.isExpert() || (isGeekMode() && service.isExpert())){
+            if(!service.isExpert() || (isExpertMode() && service.isExpert())){
                 add(check);
             }
             else{

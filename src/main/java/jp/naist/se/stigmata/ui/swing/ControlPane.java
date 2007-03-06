@@ -48,7 +48,7 @@ public class ControlPane extends JPanel{
     private JButton extractButton;
     private JButton resetButton;
     private JComboBox comparisonMethods;
-    private boolean geekmode = false;
+    private boolean expertmode = false;
 
     public ControlPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -65,10 +65,10 @@ public class ControlPane extends JPanel{
     }
 
     public void reset(){
-        this.geekmode = false;
+        this.expertmode = false;
         definition.reset();
         birthmarks.reset();
-        stigmata.setGeekMode(false);
+        stigmata.setExpertMode(false);
         targetX.removeAllElements();
         targetY.removeAllElements();
 
@@ -108,12 +108,12 @@ public class ControlPane extends JPanel{
         }
     }
 
-    public void setGeekMode(boolean geekmode){
-        this.geekmode = geekmode;
-        birthmarks.setGeekMode(geekmode);
-        stigmata.setGeekMode(geekmode);
+    public void setExpertMode(boolean expertmode){
+        this.expertmode = expertmode;
+        birthmarks.setExpertMode(expertmode);
+        stigmata.setExpertMode(expertmode);
 
-        if(geekmode){
+        if(expertmode){
             Utility.addNewTab("definition", controlTab, definition);
             Utility.addNewTab("property", controlTab, properties);
         }
@@ -130,8 +130,8 @@ public class ControlPane extends JPanel{
         updateEnable();
     }
 
-    public boolean isGeekMode(){
-        return geekmode;
+    public boolean isExpertMode(){
+        return expertmode;
     }
 
     private JComponent createWellknownClassPane(){
