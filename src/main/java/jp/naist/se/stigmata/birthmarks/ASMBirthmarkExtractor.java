@@ -26,6 +26,7 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
         super(spi);
     }
 
+    @SuppressWarnings("deprecation")
     public ASMBirthmarkExtractor(){
         super();
     }

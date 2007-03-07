@@ -30,6 +30,7 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
         super(spi);
     }
 
+    @SuppressWarnings("deprecation")
     public InheritanceStructureBirthmarkExtractor(){
         super();
     }

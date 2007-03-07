@@ -13,6 +13,9 @@ import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
+ * this comparator calculate following formula.
+ * let f(p) and f(q) be given birthmarks, then
+ * similarity of those birthmarks are defined by |f(p) and f(q)|/|f(p) or f(q)|.
  * 
  * @author Haruaki TAMADA
  * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $

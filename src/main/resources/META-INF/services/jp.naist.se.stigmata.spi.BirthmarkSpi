@@ -2,3 +2,4 @@ jp.naist.se.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkService
 jp.naist.se.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkService
 jp.naist.se.stigmata.birthmarks.is.InheritanceStructureBirthmarkService
 jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkService
+jp.naist.se.stigmata.birthmarks.kgram.KGramBasedBirthmarkService

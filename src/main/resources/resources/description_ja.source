@@ -6,3 +6,5 @@ birthmark.uc.display.type=依存クラス
 birthmark.uc.description=クラスが依存する他の既知のクラスの集合
 birthmark.is.display.type=継承関係
 birthmark.is.description=継承関係をルートまで辿って得られるクラスの系列
+birthmark.kgram.display.type=k-gram
+birthmark.kgram.description=opcodeの並びからk-gramを取り出した集合
