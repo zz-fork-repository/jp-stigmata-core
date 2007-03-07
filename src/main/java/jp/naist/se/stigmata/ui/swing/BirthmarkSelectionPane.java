@@ -161,8 +161,8 @@ public class BirthmarkSelectionPane extends JPanel implements BirthmarkServiceHo
 
         if(cols > 4){
             rows = (cols / 3);
-            cols = 3;
             if((cols % 3) != 0) rows++;
+            cols = 3;
         }
 
         return new Dimension(cols, rows);
