@@ -22,6 +22,10 @@ public class UsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
         super(spi);
     }
 
+    public UsedClassesBirthmarkExtractor(){
+        super();
+    }
+
     @Override
     public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
         return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, context);

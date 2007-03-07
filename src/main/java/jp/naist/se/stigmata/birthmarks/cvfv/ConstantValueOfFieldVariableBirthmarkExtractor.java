@@ -22,6 +22,10 @@ public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmark
         super(spi);
     }
 
+    public ConstantValueOfFieldVariableBirthmarkExtractor(){
+        super();
+    }
+
     @Override
     public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context) {
         return new ConstantValueOfFieldVariableBirthmarkExtractVisitor(writer, birthmark, context);

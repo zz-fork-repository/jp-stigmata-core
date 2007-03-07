@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.birthmarks;
 
+/*
+ * $Id$
+ */
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,12 +16,17 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
+/**
+ *
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
-    public ASMBirthmarkExtractor(BirthmarkSpi spi) {
+    public ASMBirthmarkExtractor(BirthmarkSpi spi){
         super(spi);
     }
 
-    public ASMBirthmarkExtractor() {
+    public ASMBirthmarkExtractor(){
         super();
     }
 

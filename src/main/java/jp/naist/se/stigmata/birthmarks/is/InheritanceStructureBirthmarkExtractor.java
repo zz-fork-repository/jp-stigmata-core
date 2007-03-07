@@ -30,8 +30,12 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
         super(spi);
     }
 
+    public InheritanceStructureBirthmarkExtractor(){
+        super();
+    }
+
     @Override
-        public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException{
+    public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException{
         BirthmarkElementClassNotFoundException e = new BirthmarkElementClassNotFoundException();
 
         Birthmark birthmark = new PlainBirthmark(getProvider().getType());

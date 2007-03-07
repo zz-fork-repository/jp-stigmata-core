@@ -21,6 +21,10 @@ public class SequentialMethodCallBirthmarkExtractor extends ASMBirthmarkExtracto
         super(spi);
     }
 
+    public SequentialMethodCallBirthmarkExtractor(){
+        super();
+    }
+
     @Override
     public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
         return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context);
