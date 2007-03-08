@@ -456,7 +456,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             rightLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
             this.add(leftLabel, BorderLayout.CENTER);
             this.add(rightLabel, BorderLayout.EAST);
-            this.setPreferredSize(dim);            
+            this.setPreferredSize(dim);
         }
 
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean hasFocus){

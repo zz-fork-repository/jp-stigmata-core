@@ -36,7 +36,7 @@ public class ControlPane extends JPanel{
     private static final long serialVersionUID = 983547612346543645L;
 
     private StigmataFrame stigmata;
-    private BirthmarkSelectionPane birthmarks;
+    private BirthmarkSelectablePane birthmarks;
     private TargetSelectionPane targetX;
     private TargetSelectionPane targetY;
     private ClasspathSettingsPane classpath;
@@ -143,12 +143,11 @@ public class ControlPane extends JPanel{
     private JComponent createControlPane(){
         JComponent mainPane = new Box(BoxLayout.X_AXIS);
         JPanel center = new JPanel(new BorderLayout());
-        BirthmarkSelectionPane birthmarks = new BirthmarkSelectionPane(stigmata);
+        birthmarks = new BirthmarkSelectionCheckSetPane(stigmata);
         targetX = new TargetSelectionPane(stigmata);
         targetY = new TargetSelectionPane(stigmata);
 
         birthmarks.setBorder(new TitledBorder(Messages.getString("birthmarkspane.border")));
-        this.birthmarks = birthmarks;
 
         targetX.addTargetExtensions(Messages.getStringArray("targets.extensions"));
         targetX.setDescription(Messages.getString("targets.description"));

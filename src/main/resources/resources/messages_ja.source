@@ -139,6 +139,12 @@ targetx.border=X 軸
 targety.border=Y 軸
 
 birthmarkspane.border=抽出するバースマーク
+checkall.button.label=全てチェックする
+checkall.butotn.tooltip=全てのチェックを付け，全てのバースマークの抽出・比較を行います．
+checkall.button.icon=
+uncheckall.button.label=全てチェックを外す
+uncheckall.butotn.tooltip=全てのチェックを外し，抽出・比較するバースマークを選択しません．
+uncheckall.button.icon=
 
 userclasspath.border=クラスパス
 userclasspath.extensions=jar, zip
@@ -235,8 +241,8 @@ define.extractor.tooltip=クラスファイルからバースマークを抽出するクラス
 define.extractor.border=バースマーク抽出器
 define.comparator.tooltip=得られたバースマークを比較するクラス
 define.comparator.border=バースマーク比較器
-define.expert.label=熟練者向け
-define.expert.tooltip=熟練者向けのバースマークであるか
+define.expert.label=上級者向け
+define.expert.tooltip=上級者向けのバースマークであるか
 define.userdef.label=ユーザ定義
 define.userdef.tooltip=ユーザが定義したバースマークであるか
 newservice.definition.label=(新規バースマーク)
