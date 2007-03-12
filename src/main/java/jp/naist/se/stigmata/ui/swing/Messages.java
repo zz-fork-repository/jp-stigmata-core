@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-class Messages{
+public class Messages{
     private static final String BUNDLE_NAME = "resources.messages";
     private static final Messages instance = new Messages();
     private final ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME);

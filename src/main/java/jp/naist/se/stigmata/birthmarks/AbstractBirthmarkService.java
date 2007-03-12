@@ -7,6 +7,7 @@ package jp.naist.se.stigmata.birthmarks;
 import java.util.Locale;
 
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
 
 /**
  * @author Haruaki TAMADA
@@ -57,5 +58,13 @@ public abstract class AbstractBirthmarkService implements BirthmarkSpi{
 
     public boolean isUserDefined(){
         return true;
+    }
+
+    public String getVersion(){
+        return getClass().getPackage().getImplementationVersion();
+    }
+
+    public String getVendorName(){
+        return getClass().getPackage().getImplementationVendor();
     }
 }

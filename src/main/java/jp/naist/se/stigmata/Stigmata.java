@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.imageio.spi.ServiceRegistry;
 
+import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.reader.ClassFileArchive;
 import jp.naist.se.stigmata.reader.ClassFileEntry;
 import jp.naist.se.stigmata.reader.ClasspathContext;
@@ -170,6 +171,16 @@ public class Stigmata{
         ComparisonResultSet result = new RoundRobinComparisonResultSet(holders1, holders2, context);
 
         return result;
+    }
+
+    public ComparisonResultSet filter(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters){
+        return filter(resultset, filters, createContext());
+    }
+
+    public ComparisonResultSet filter(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters, BirthmarkContext context){
+        FilteredComparisonResultSet filterResultSet = new FilteredComparisonResultSet(resultset);
+        
+        return filterResultSet;
     }
 
     public double compare(BirthmarkSet h1, BirthmarkSet h2){

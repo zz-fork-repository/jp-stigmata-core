@@ -18,7 +18,7 @@ public class DPMatchingBirthmarkComparatorService extends AbstractBirthmarkCompa
      * returns a type of the birthmark this service provides.
      */
     public String getType(){
-        return "DP Matching";
+        return "dpmatching";
     }
 
     public String getComparatorClassName(){

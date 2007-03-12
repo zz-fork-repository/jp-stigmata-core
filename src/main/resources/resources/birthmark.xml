@@ -71,6 +71,63 @@ $Id$
     </service>
   </services>
 
+  <filterset-list>
+    <filterset>
+      <name>threshold</name>
+      <!--
+        available value is `all' or `any': 
+        match all of filters or match any of filters
+      -->
+      <match>all</match>
+      <filter-list>
+        <filter>
+          <filter-type>similarity</filter-type>
+          <criterion>GREATER_THAN</criterion>
+          <attributes>
+            <attribute>
+              <name>threshold</name>
+              <value>0.8</value>
+            </attribute>
+          </attributes>
+        </filter>
+        <filter>
+          <filter-type>name</filter-type>
+          <criterion>NOT_MATCH</criterion>
+          <attributes>
+            <attribute>
+              <name>value</name>
+              <value><!-- value --></value>
+            </attribute>
+          </attributes>
+        </filter>
+      </filter-list>
+    </filterset>
+    <filterset>
+      <name>elementcounts</name>
+      <match>all</match>
+      <filter-list>
+        <filter>
+          <filter-type>elementcount</filter-type>
+          <criterion>GREATER_EQUALS</criterion>
+          <attributes>
+            <attribute>
+              <name>target</name>
+              <value>ONE_OF_TARGET</value>
+            </attribute>
+            <attribute>
+              <name>birthmarkType</name>
+              <value>uc</value>
+            </attribute>
+            <attribute>
+              <name>threshold</name>
+              <value>10</value>
+            </attribute>
+          </attributes>
+        </filter>
+      </filter-list>
+    </filterset>
+  </filterset-list>
+
   <!-- 
     システムクラスの設定．
     パッケージの接頭辞，クラス名の接尾辞，クラスの完全修飾名で

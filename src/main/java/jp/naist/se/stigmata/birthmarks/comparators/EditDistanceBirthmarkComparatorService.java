@@ -18,7 +18,7 @@ public class EditDistanceBirthmarkComparatorService extends AbstractBirthmarkCom
      * returns a type of the birthmark this service provides.
      */
     public String getType(){
-        return "Edit Distance";
+        return "editdistancee";
     }
 
     public String getComparatorClassName(){

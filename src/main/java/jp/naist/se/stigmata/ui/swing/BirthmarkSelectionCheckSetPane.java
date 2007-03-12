@@ -28,7 +28,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane implements BirthmarkServiceHolder{
+public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane implements BirthmarkServiceListener{
     private static final long serialVersionUID = 3209854654743223453L;
 
     private StigmataFrame stigmata;
@@ -147,7 +147,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane impl
     /* (non-Javadoc)
      * @see jp.naist.se.stigmata.ui.swing.BirthmarkSelectable#addService(jp.naist.se.stigmata.spi.BirthmarkSpi)
      */
-    public void addService(BirthmarkSpi service){
+    public void serviceAdded(BirthmarkSpi service){
         if(services.get(service.getType()) == null){
             BirthmarkSelection elem = new BirthmarkSelection(service);
             selectedServices.add(service.getType());
@@ -173,11 +173,11 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane impl
         return services.get(type) != null;
     }
 
-    public void removeService(String type){
-        BirthmarkSelection elem = services.get(type);
+    public void serviceRemoved(BirthmarkSpi service){
+        BirthmarkSelection elem = services.get(service);
         if(elem != null){
-            selectedServices.remove(type);
-            services.remove(type);
+            selectedServices.remove(service);
+            services.remove(service);
         }
         updateLayouts();
         fireEvent();

@@ -47,6 +47,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.7.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>jp.cafebabe.commons</groupId>
       <artifactId>xmlcli</artifactId>
       <version>1.0.1</version>
@@ -102,6 +108,7 @@
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <archive>
+            <manifestFile>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
             <manifest>
               <mainClass>jp.naist.se.stigmata.Main</mainClass>
               <addClasspath>true</addClasspath>

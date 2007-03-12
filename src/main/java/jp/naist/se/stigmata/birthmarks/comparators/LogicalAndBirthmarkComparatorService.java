@@ -18,7 +18,7 @@ public class LogicalAndBirthmarkComparatorService extends AbstractBirthmarkCompa
      * returns a type of the birthmark this service provides.
      */
     public String getType(){
-        return "AND";
+        return "and";
     }
 
     public String getComparatorClassName(){

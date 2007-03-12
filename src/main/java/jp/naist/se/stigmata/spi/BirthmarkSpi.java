@@ -15,7 +15,7 @@ import jp.naist.se.stigmata.BirthmarkExtractor;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public interface BirthmarkSpi{
+public interface BirthmarkSpi extends ServiceProvider{
     /**
      * returns a type of the birthmark this service provides.
      */
@@ -63,5 +63,6 @@ public interface BirthmarkSpi{
     public boolean isExpert();
 
     public boolean isUserDefined();
+
 }
 

@@ -8,3 +8,8 @@ birthmark.is.display.type=継承関係
 birthmark.is.description=継承関係をルートまで辿って得られるクラスの系列
 birthmark.kgram.display.type=k-gram
 birthmark.kgram.description=opcodeの並びからk-gramを取り出した集合
+
+filter.similarity.display.type=類似度でのフィルタリング
+filter.name.display.type=クラス名でのフィルタリング
+filter.totalelementcount.display.type=全バースマークの要素数でのフィルタリング
+filter.elementcount.display.type=特定のバースマークの要素数でのフィルタリング

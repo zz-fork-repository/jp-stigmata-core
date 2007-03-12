@@ -1,0 +1,4 @@
+jp.naist.se.stigmata.filter.BirthmarkElementCountComparisonPairFilterService
+jp.naist.se.stigmata.filter.SimilarityComparisonPairFilterService
+jp.naist.se.stigmata.filter.TargetNameComparisonPairFilterService
+jp.naist.se.stigmata.filter.TotalElementCountComparisonPairFilterService

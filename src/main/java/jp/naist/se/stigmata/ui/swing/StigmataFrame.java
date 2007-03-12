@@ -47,15 +47,17 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
+import jp.naist.se.stigmata.BirthmarkExtractionException;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonPair;
+import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.Stigmata;
+import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
-import jp.naist.se.stigmata.BirthmarkExtractionException;
-import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
 
 
 /**
@@ -130,6 +132,14 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return findFile(false, exts, desc);
     }
 
+    public void addBirthmarkServiceListener(BirthmarkServiceListener listener){
+        control.addBirthmarkServiceListener(listener);
+    }
+
+    public void removeBirthmarkServiceListener(BirthmarkServiceListener listener){
+        control.removeBirthmarkServiceListener(listener);
+    }
+
     public void saveAction(BirthmarkDataWritable writable){
         File file = getSaveFile(Messages.getStringArray("store.extensions"),
                                 Messages.getString("store.description"));
@@ -172,8 +182,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
-    public void compareRoundRobin(String[] birthmarks, String[] targetX,
-                                  String[] targetY, BirthmarkContext context){
+    public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY, 
+                                   BirthmarkContext context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
@@ -182,6 +192,31 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             compareCount++;
             Utility.addNewTab(
                 "compare", tabPane, compare,
+                new Object[] { new Integer(compareCount), },
+                new Object[] {
+                    Utility.array2String(birthmarks),
+                    Utility.array2String(targetX),
+                    Utility.array2String(targetY),
+                }
+            );
+            tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+        } catch(Exception e){
+            showExceptionMessage(e);
+        }
+    }
+
+    public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY, 
+                                   String[] filterNames, BirthmarkContext context){
+        try{
+            BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
+            BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
+            ComparisonPairFilterSet[] filters = context.getFilterManager().getFilterSets(filterNames);
+
+            ComparisonResultSet resultset = stigmata.compare(x, y, context);
+            FilteredComparisonResultSet fcrs = new FilteredComparisonResultSet(resultset, filters);
+            compareCount++;
+            Utility.addNewTab(
+                "compare", tabPane, new PairComparisonResultSetPane(this, fcrs),
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
                     Utility.array2String(birthmarks),
@@ -339,11 +374,12 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         initComponents();
 
         Utility.addNewTab("control", tabPane, control = new ControlPane(this), null, null);
+        control.inititalize();
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
         currentDirectory = new File(".");
 
-        pack();
+        setSize(900, 600);
         frameList.add(this);
     }
 

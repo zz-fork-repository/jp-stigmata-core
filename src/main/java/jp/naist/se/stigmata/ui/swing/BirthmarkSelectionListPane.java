@@ -7,6 +7,7 @@ package jp.naist.se.stigmata.ui.swing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +35,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision: 70 $ $Date: 2007-03-07 11:46:18 +0900 (Wed, 07 Mar 2007) $
  */
-public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implements BirthmarkServiceHolder{
+public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implements BirthmarkServiceListener{
     private static final long serialVersionUID = 3209854654743223453L;
 
     private StigmataFrame stigmata;
@@ -50,6 +51,8 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
 
         initLayouts();
         initServices();
+
+        stigmata.addBirthmarkServiceListener(this);
     }
 
     private void initLayouts(){
@@ -57,7 +60,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         list = new JList(model = new DefaultListModel());
         JScrollPane scroll = new JScrollPane(list);
         add(scroll, BorderLayout.CENTER);
-        list.setCellRenderer(new BirthmarkSelectionRendererPane());
+        list.setCellRenderer(new BirthmarkServiceListCellRenderer(new Dimension(250, 20), 60));
         list.setVisibleRowCount(5);
         JButton checkAll = Utility.createButton("checkall");
         JButton uncheckAll = Utility.createButton("uncheckall");
@@ -146,7 +149,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         return selectedServices.toArray(new String[selectedServices.size()]);
     }
 
-    public void addService(BirthmarkSpi service){
+    public void serviceAdded(BirthmarkSpi service){
         if(services.get(service.getType()) == null){
             BirthmarkSelection elem = new BirthmarkSelection(service);
             selectedServices.add(service.getType());
@@ -169,12 +172,12 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         return services.get(type) != null;
     }
 
-    public void removeService(String type){
-        BirthmarkSelection elem = services.get(type);
+    public void serviceRemoved(BirthmarkSpi service){
+        BirthmarkSelection elem = services.get(service);
         if(elem != null){
             model.removeElement(elem);
-            selectedServices.remove(type);
-            services.remove(type);
+            selectedServices.remove(service);
+            services.remove(service);
         }
         fireEvent();
     }
@@ -231,7 +234,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
             setSelected(elem.isSelected());
 
             setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            setForeground(isSelected ? Color.white: Color.black);
+            setForeground(isSelected ? SystemColor.textHighlightText: Color.black);
 
             return this;
         }

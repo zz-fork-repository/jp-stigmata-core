@@ -41,23 +41,24 @@ import jp.naist.se.stigmata.utils.WellknownClassManager;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class WellknownClassesSettingsPane extends JPanel{
+public class WellknownClassesSettingsPane extends JPanel implements SettingsExportable{
     private static final long serialVersionUID = 329734546345634532L;
 
     private JTable sectionTable = null;
     private DefaultTableModel model;
     private WellknownClassManager manager;
+    private StigmataFrame stigmata;
     private JComboBox checkPartType;
     private JComboBox matchType;
     private String matchTypeColumnIdentifier;
     private String checkPartColumnIdentifier;
     private String patternColumnIdentifier;
 
-    public WellknownClassesSettingsPane(WellknownClassManager manager){
-        super(new BorderLayout());
-        this.manager = manager;
+    public WellknownClassesSettingsPane(StigmataFrame stigmata){
+        this.stigmata = stigmata;
+        this.manager = stigmata.getContext().getWellknownClassManager();
 
-        initialize();
+        initLayouts();
         initializeData();
     }
 
@@ -206,12 +207,9 @@ public class WellknownClassesSettingsPane extends JPanel{
         }
     }
 
-    /**
-     * This method initializes this
-     * 
-     * @return void
-     */
-    private void initialize(){
+    private void initLayouts(){
+        setLayout(new BorderLayout());
+
         JPanel center = new JPanel(new BorderLayout());
         JScrollPane scroll = new JScrollPane();
 

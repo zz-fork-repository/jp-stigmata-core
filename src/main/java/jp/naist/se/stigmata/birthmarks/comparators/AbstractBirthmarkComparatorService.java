@@ -8,9 +8,10 @@ import java.lang.reflect.Constructor;
 import java.util.Locale;
 
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.spi.AbstractServiceProvider;
 import jp.naist.se.stigmata.spi.BirthmarkComparatorSpi;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
-import jp.naist.se.stigmata.birthmarks.LocalizedDescriptionManager;
+import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
 
 /**
  * Birthmark Service Provider Interface.
@@ -18,7 +19,7 @@ import jp.naist.se.stigmata.birthmarks.LocalizedDescriptionManager;
  * @author Haruaki TAMADA
  * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
  */
-abstract class AbstractBirthmarkComparatorService implements BirthmarkComparatorSpi{
+abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvider implements BirthmarkComparatorSpi{
     /**
      * returns a type of the birthmark this service provides.
      */
@@ -29,7 +30,7 @@ abstract class AbstractBirthmarkComparatorService implements BirthmarkComparator
      */
     public String getDescription(Locale locale){
         return LocalizedDescriptionManager.getInstance().getDescription(
-            locale, getType(), LocalizedDescriptionManager.Type.comparator
+            locale, getType(), LocalizedDescriptionManager.ServiceCategory.comparator
         );
     }
 

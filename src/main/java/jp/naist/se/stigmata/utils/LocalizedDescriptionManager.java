@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.birthmarks;
+package jp.naist.se.stigmata.utils;
 
 /*
  * $Id$
@@ -15,8 +15,8 @@ import java.util.ResourceBundle;
  * @version $Revision$ $Date$
  */
 public class LocalizedDescriptionManager{
-    public static enum Type{
-        comparator, extractor, birthmark,
+    public static enum ServiceCategory{
+        comparator, extractor, birthmark, formatter, filter,
     };
     private Map<Locale, ResourceBundle> resources = new HashMap<Locale, ResourceBundle>();
 
@@ -28,21 +28,25 @@ public class LocalizedDescriptionManager{
     private LocalizedDescriptionManager(){
     }
 
-    public String getDisplayType(Locale locale, String birthmarkType){
+    public String getDisplayType(Locale locale, String type){
+        return getDisplayType(locale, type, ServiceCategory.birthmark);
+    }
+
+    public String getDisplayType(Locale locale, String type, ServiceCategory category){
         try{
-            return getBundle(locale).getString("birthmark." + birthmarkType + ".display.type");
+            return getBundle(locale).getString(category.name() + "." + type + ".display.type");
         } catch(MissingResourceException e){
             return null;
         }
     }
 
     public String getDescription(Locale locale, String birthmarkType){
-        return getDescription(locale, birthmarkType, Type.birthmark);
+        return getDescription(locale, birthmarkType, ServiceCategory.birthmark);
     }
 
-    public String getDescription(Locale locale, String birthmarkType, Type type){
+    public String getDescription(Locale locale, String type, ServiceCategory category){
         try{
-            return getBundle(locale).getString(type.name() + "." + birthmarkType + ".description");
+            return getBundle(locale).getString(category.name() + "." + type + ".description");
         } catch(MissingResourceException e){
             return null;
         }

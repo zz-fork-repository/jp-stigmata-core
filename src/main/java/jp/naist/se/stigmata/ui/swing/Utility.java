@@ -24,7 +24,7 @@ import javax.swing.border.TitledBorder;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-class Utility{
+public class Utility{
     private static final String iconPath = Messages.getString("icon.directory");
 
     private Utility(){

@@ -43,6 +43,7 @@ public class ControlPane extends JPanel{
     private WellknownClassesSettingsPane wellknownClassses;
     private BirthmarkDefinitionPane definition;
     private PropertyEditPane properties;
+    private FilterManagementPane filters;
     private JTabbedPane controlTab;
     private JButton compareButton;
     private JButton extractButton;
@@ -52,16 +53,30 @@ public class ControlPane extends JPanel{
 
     public ControlPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
-
+    }
+    
+    void inititalize(){
         initComponents();
-        Utility.addNewTab("targets", controlTab, createControlPane());
-        Utility.addNewTab("wellknown", controlTab, createWellknownClassPane());
-        Utility.addNewTab("classpath", controlTab, classpath = new ClasspathSettingsPane(stigmata));
         definition = new BirthmarkDefinitionPane(stigmata);
         properties = new PropertyEditPane(stigmata);
-        definition.addServiceHolder(birthmarks);
-
+        JComponent control = createControlPane();
+        wellknownClassses = new WellknownClassesSettingsPane(stigmata);
+        classpath = new ClasspathSettingsPane(stigmata);
+        filters = new FilterManagementPane(stigmata);
+        
+        Utility.addNewTab("targets", controlTab, control);
+        Utility.addNewTab("filter",  controlTab, filters);
+        Utility.addNewTab("wellknown", controlTab, wellknownClassses);
+        Utility.addNewTab("classpath", controlTab, classpath);
         reset();
+    }
+
+    public void addBirthmarkServiceListener(BirthmarkServiceListener listener){
+        definition.addBirthmarkServiceListener(listener);
+    }
+
+    public void removeBirthmarkServiceListener(BirthmarkServiceListener listener){
+        definition.removeBirthmarkServiceListener(listener);
     }
 
     public void reset(){
@@ -74,6 +89,7 @@ public class ControlPane extends JPanel{
 
         classpath.reset();
         wellknownClassses.reset();
+        filters.reset();
         updateEnable();
 
         int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
@@ -98,6 +114,7 @@ public class ControlPane extends JPanel{
                 out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 out.println("<birthmark>");
                 definition.exportSettings(out);
+                filters.exportSettings(out);
                 wellknownClassses.exportSettings(out);
                 classpath.exportSettings(out);
                 properties.exportSettings(out);
@@ -118,14 +135,8 @@ public class ControlPane extends JPanel{
             Utility.addNewTab("property", controlTab, properties);
         }
         else{
-            int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
-            if(index1 >= 0){
-                controlTab.removeTabAt(index1);
-            }
-            int index2 = controlTab.indexOfTab(Messages.getString("property.tab.label"));
-            if(index2 >= 0){
-                controlTab.removeTabAt(index2);
-            }
+            removeTabByName(Messages.getString("definition.tab.label"));
+            removeTabByName(Messages.getString("property.tab.label"));
         }
         updateEnable();
     }
@@ -134,10 +145,11 @@ public class ControlPane extends JPanel{
         return expertmode;
     }
 
-    private JComponent createWellknownClassPane(){
-        BirthmarkContext b = stigmata.getStigmata().createContext();
-        wellknownClassses = new WellknownClassesSettingsPane(b.getWellknownClassManager());
-        return wellknownClassses;
+    private void removeTabByName(String tabname){
+        int index = controlTab.indexOfTab(tabname);
+        if(index >= 0){
+            controlTab.removeTabAt(index);
+        }
     }
 
     private JComponent createControlPane(){
@@ -212,6 +224,14 @@ public class ControlPane extends JPanel{
                          targets.toArray(new String[targets.size()]), context);
     }
 
+    private void compareRoundRobinWithFiltering(){
+        BirthmarkContext context = initAction();
+        String[] filterSetList = filters.getSelectedFilterNames();
+
+        stigmata.compareRoundRobin(birthmarks.getSelectedServices(), targetX.getValues(), 
+                                   targetY.getValues(), filterSetList, context);
+    }
+
     private void compareRoundRobin(){
         BirthmarkContext context = initAction();
 
@@ -244,6 +264,7 @@ public class ControlPane extends JPanel{
         wellknownClassses.setWellknownClasses(manager);
         definition.updateContext(context);
         properties.updateContext(context);
+        filters.updateFilterManager(context.getFilterManager());
 
         return context;
     }
@@ -303,7 +324,7 @@ public class ControlPane extends JPanel{
                     compareSpecifiedPair();
                 }
                 else if(item.equals(Messages.getString("roundrobin.filtering.label"))){
-                    // compareRoundRobinWithFiltering();
+                    compareRoundRobinWithFiltering();
                 }
             }
         });

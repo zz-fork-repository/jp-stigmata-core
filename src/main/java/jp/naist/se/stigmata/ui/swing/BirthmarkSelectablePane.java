@@ -13,7 +13,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public abstract class BirthmarkSelectablePane extends JPanel implements BirthmarkServiceHolder{
+public abstract class BirthmarkSelectablePane extends JPanel implements BirthmarkServiceListener{
 
     public abstract void setExpertMode(boolean expertmode);
 
@@ -27,7 +27,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
 
     public abstract String[] getSelectedServices();
 
-    public abstract void addService(BirthmarkSpi service);
+    public abstract void serviceAdded(BirthmarkSpi service);
 
     public abstract BirthmarkSpi getService(String type);
 

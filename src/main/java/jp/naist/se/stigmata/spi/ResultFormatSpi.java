@@ -14,7 +14,7 @@ import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public interface ResultFormatSpi{
+public interface ResultFormatSpi extends ServiceProvider{
     /**
      * return a format.
      */

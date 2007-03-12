@@ -14,7 +14,7 @@ import jp.naist.se.stigmata.BirthmarkComparator;
  * @author Haruaki TAMADA
  * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
  */
-public interface BirthmarkComparatorSpi{
+public interface BirthmarkComparatorSpi extends ServiceProvider{
     /**
      * returns a type of the birthmark this service provides.
      */

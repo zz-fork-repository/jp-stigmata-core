@@ -86,6 +86,10 @@ public class BirthmarkSet implements Iterable<Birthmark>{
         return birthmarks.get(type);
     }
 
+    public boolean hasBirthmark(String type){
+        return birthmarks.get(type) != null;
+    }
+
     /**
      * return the all birthmarks this instance managed.
      */

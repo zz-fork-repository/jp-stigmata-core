@@ -5,10 +5,8 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.SystemColor;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -20,19 +18,17 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.spi.ServiceRegistry;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
@@ -51,7 +47,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision: 24 $ $Date: 2007-01-31 00:08:43 +0900 (Wed, 31 Jan 2007) $
  */
-public class BirthmarkDefinitionPane extends JPanel{
+public class BirthmarkDefinitionPane extends JPanel implements SettingsExportable{
     private static final long serialVersionUID = 3932637653297802978L;
 
     private StigmataFrame stigmata;
@@ -61,7 +57,7 @@ public class BirthmarkDefinitionPane extends JPanel{
     private JButton newService;
     private JButton removeService;
     private List<BirthmarkSpi> addedService = new ArrayList<BirthmarkSpi>();
-    private List<BirthmarkServiceHolder> holders = new ArrayList<BirthmarkServiceHolder>();
+    private List<BirthmarkServiceListener> listeners = new ArrayList<BirthmarkServiceListener>();
 
     public BirthmarkDefinitionPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -72,12 +68,12 @@ public class BirthmarkDefinitionPane extends JPanel{
         updateView();
     }
 
-    public void addServiceHolder(BirthmarkServiceHolder holder){
-        holders.add(holder);
+    public void addBirthmarkServiceListener(BirthmarkServiceListener listener){
+        listeners.add(listener);
     }
 
-    public void removeServiceHolder(BirthmarkServiceHolder holder){
-        holders.remove(holder);
+    public void removeBirthmarkServiceListener(BirthmarkServiceListener listener){
+        listeners.remove(listener);
     }
 
     public void reset(){
@@ -100,26 +96,19 @@ public class BirthmarkDefinitionPane extends JPanel{
     public void exportSettings(PrintWriter out) throws IOException{
         out.println("  <services>");
         for(int i = 0; i < model.getSize(); i++){
-            BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(i);
-            // not expert birthmarks are defined as class.
-            if(service.isExpert()){
-                out.println("    <service>");
-                out.print("      <type>");
-                out.print(service.getType());
-                out.println("</type>");
-                out.print("      <display-name>");
-                out.print(service.getDisplayType());
-                out.println("</display-name>");
-                out.print("      <description>");
-                out.print(service.getDescription());
-                out.println("</description>");
-                out.print("      <extractor>");
-                out.print(service.getExtractorClassName());
-                out.println("</extractor>");
-                out.print("      <comparator>");
-                out.print(service.getComparatorClassName());
-                out.println("</comparator>");
-                out.println("    </service>");
+            Object element = model.getElementAt(i);
+            if(element instanceof BirthmarkSpi){
+                BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(i);
+                // not expert birthmarks are defined as class.
+                if(service.isExpert()){
+                    out.println("    <service>");
+                    out.printf("      <type>%s</type>%n", service.getType());
+                    out.printf("      <display-name>%s</display-name>%n", service.getDisplayType());
+                    out.printf("      <description>%s</description>%n", service.getDescription());
+                    out.printf("      <extractor>%s</extractor>%n", service.getExtractorClassName());
+                    out.printf("      <comparator>%s</comparator>%n", service.getComparatorClassName());
+                    out.println("    </service>");
+                }
             }
         }
         out.println("  </services>");
@@ -143,8 +132,8 @@ public class BirthmarkDefinitionPane extends JPanel{
         scroll.setBorder(new TitledBorder(Messages.getString("servicelist.border")));
         serviceList.setToolTipText(Messages.getString("servicelist.tooltip"));
 
-        panel.add(information = new InformationPane(stigmata, this), BorderLayout.CENTER);
         panel.add(scroll, BorderLayout.WEST);
+        panel.add(information = new InformationPane(stigmata, this), BorderLayout.CENTER);
 
         Box buttonPanel = Box.createHorizontalBox();
         newService = Utility.createButton("newservice");
@@ -186,8 +175,8 @@ public class BirthmarkDefinitionPane extends JPanel{
             BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(index);
             if(service != null && service.isUserDefined()){
                 model.remove(index);
-                for(BirthmarkServiceHolder holder: holders){
-                    holder.removeService(service.getType());
+                for(BirthmarkServiceListener listener: listeners){
+                    listener.serviceRemoved(service);
                 }
             }
         }
@@ -199,8 +188,8 @@ public class BirthmarkDefinitionPane extends JPanel{
         model.addElement(service);
         addedService.add(service);
 
-        for(BirthmarkServiceHolder holder: holders){
-            holder.addService(service);
+        for(BirthmarkServiceListener listener: listeners){
+            listener.serviceAdded(service);
         }
         updateView();
     }
@@ -349,50 +338,44 @@ public class BirthmarkDefinitionPane extends JPanel{
         }
 
         private void initLayouts(){
-            setLayout(new BorderLayout());
             type = new JTextField();
             displayType = new JTextField();
             extractor = new JComboBox();
             comparator = new JComboBox();
             expert = new JCheckBox(Messages.getString("define.expert.label"));
             userDefined = new JCheckBox(Messages.getString("define.userdef.label"));
-
-            Box panel = Box.createVerticalBox();
+            description = new JTextArea();
+            JScrollPane scroll = new JScrollPane(description);
+            type.setColumns(10);
+            displayType.setColumns(20);
+            description.setColumns(40);
+            description.setRows(10);
 
             Box box1 = Box.createHorizontalBox();
-            box1.add(Box.createHorizontalGlue());
             box1.add(type);
-            box1.add(Box.createHorizontalGlue());
             box1.add(displayType);
-            box1.add(Box.createHorizontalGlue());
 
             Box box2 = Box.createHorizontalBox();
             box2.add(Box.createHorizontalGlue());
-            box2.add(extractor);
+            box2.add(expert);
+            box2.add(Box.createHorizontalGlue());
+            box2.add(userDefined);
             box2.add(Box.createHorizontalGlue());
 
-            Box box3 = Box.createHorizontalBox();
-            box3.add(Box.createHorizontalGlue());
-            box3.add(comparator);
-            box3.add(Box.createHorizontalGlue());
-
-            Box box4 = Box.createHorizontalBox();
-            box4.add(Box.createHorizontalGlue());
-            box4.add(expert);
-            box4.add(Box.createHorizontalGlue());
-            box4.add(userDefined);
-            box4.add(Box.createHorizontalGlue());
-
+            JPanel panel = new JPanel(new GridLayout(3, 1));
             panel.add(box1);
-            panel.add(box2);
-            panel.add(box3);
-            panel.add(box4);
-            add(panel, BorderLayout.NORTH);
-            add(new JScrollPane(description = new JTextArea()));
+            panel.add(extractor);
+            panel.add(comparator);
+
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            add(panel);
+            add(box2);
+            add(scroll);
+            add(Box.createVerticalGlue());
 
             Utility.decorateJComponent(type, "define.type");
             Utility.decorateJComponent(displayType, "define.displaytype");
-            Utility.decorateJComponent(description, "define.description");
+            Utility.decorateJComponent(scroll, "define.description");
             Utility.decorateJComponent(extractor, "define.extractor");
             Utility.decorateJComponent(comparator, "define.comparator");
             Utility.decorateJComponent(expert, "define.expert");
@@ -437,45 +420,6 @@ public class BirthmarkDefinitionPane extends JPanel{
             };
             comparator.getEditor().addActionListener(actionListener);
             extractor.getEditor().addActionListener(actionListener);
-        }
-    }
-
-    private static class BirthmarkServiceListCellRenderer extends JPanel implements ListCellRenderer{
-        private static final long serialVersionUID = 3254763527508235L;
-
-        private final JLabel leftLabel  = new JLabel();
-        private final JLabel rightLabel = new JLabel();
-
-        public BirthmarkServiceListCellRenderer(Dimension dim, int rightw){
-            super(new BorderLayout());
-            leftLabel.setOpaque(true);
-            rightLabel.setOpaque(true);
-            this.setOpaque(true);
-            leftLabel.setBorder(BorderFactory.createEmptyBorder(0,2,0,0));
-            rightLabel.setPreferredSize(new Dimension(rightw, 0));
-            rightLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
-            this.add(leftLabel, BorderLayout.CENTER);
-            this.add(rightLabel, BorderLayout.EAST);
-            this.setPreferredSize(dim);
-        }
-
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean hasFocus){
-            if(value instanceof BirthmarkSpi){
-                BirthmarkSpi service = (BirthmarkSpi)value;
-                leftLabel.setText(service.getDisplayType());
-                rightLabel.setText("(" + service.getType() + ")");
-            }
-            else{
-                leftLabel.setText(String.valueOf(value));
-                rightLabel.setText("");
-            }
-            setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            leftLabel.setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            leftLabel.setForeground(isSelected ? Color.white: Color.black);
-            rightLabel.setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            rightLabel.setForeground(isSelected ? Color.gray.brighter(): Color.gray);
-
-            return this;
         }
     }
 }

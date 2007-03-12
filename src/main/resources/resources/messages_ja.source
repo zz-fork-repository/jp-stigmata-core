@@ -260,3 +260,49 @@ propertyadd.button.tooltip=新しいプロパティを追加します．
 propertyremove.button.label=削除
 propertyremove.button.tooltip=選択しているプロパティを削除します．
 propertyadd.dialog.title=新規プロパティ
+
+############################################################
+# Filter pane
+############################################################
+filter.tab.label=フィルタ
+filter.tab.tooltip=フィルタ
+
+newfilter.button.label=新規フィルタ
+newfilter.button.tooltip=新たなフィルタを定義します
+removefilter.button.label=削除
+removefilter.button.tooltip=選択されているフィルタを削除します．
+updatefilter.button.label=編集...
+updatefilter.button.tooltip=選択されているフィルタを編集します．
+moveup.button.label=上へ移動
+moveup.button.tooltip=選択されているフィルタの適用順序を上げます．
+movedown.button.label=下へ移動
+movedown.button.tooltip=選択されているフィルタの適用順序を下げます．
+
+allcriteria.button.label=全ての条件に一致
+allcriteria.button.tooltip=全ての条件に一致したペアのみを表示するようフィルタリングを行う
+somecriteria.button.label=いずれかの条件に一致
+somecriteria.button.tooltip=いずれかの条件に一致したペアのみを表示するようフィルタリングを行う
+
+morefilter.button.label=条件を追加
+removefilter.button.label=削除
+
+############################################################
+# Criterion
+############################################################
+criterion.LESS_THAN=less than
+criterion.LESS_EQUALS=less than equals
+criterion.GREATER_THAN=greater than
+criterion.GREATER_EQUALS=greater than equals
+criterion.EQUALS_AS=equals
+criterion.NOT_EQUALS_AS=not equals
+criterion.STARTS_WITH=starts with
+criterion.NOT_STARTS_WITH=not starts with
+criterion.ENDS_WITH=ends with
+criterion.NOT_ENDS_WITH=not ends with
+criterion.MATCH=match
+criterion.NOT_MATCH=match
+
+target.TARGET1=target 1
+target.TARGET2=target 2
+target.BOTH=both
+

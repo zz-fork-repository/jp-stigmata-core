@@ -31,7 +31,7 @@ import jp.naist.se.stigmata.reader.ClasspathContext;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class ClasspathSettingsPane extends JPanel{
+public class ClasspathSettingsPane extends JPanel implements SettingsExportable{
     private static final long serialVersionUID = 320973463423634L;
 
     private StigmataFrame stigmata;

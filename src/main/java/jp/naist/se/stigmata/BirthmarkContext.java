@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 import javax.imageio.spi.ServiceRegistry;
 
+import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
@@ -54,12 +55,15 @@ public class BirthmarkContext{
      */
     private Map<String, String> properties = new HashMap<String, String>();
 
+    private ComparisonPairFilterManager filterManager;
+
     /**
      * constructor for root context
      */
     private BirthmarkContext(boolean flag){
         manager = new WellknownClassManager();
         bytecodeContext = ClasspathContext.getDefaultContext();
+        filterManager = new ComparisonPairFilterManager();
     }
 
     /**
@@ -77,6 +81,7 @@ public class BirthmarkContext{
         this.parent = parent;
         this.manager = new WellknownClassManager(parent.getWellknownClassManager());
         this.bytecodeContext = new ClasspathContext(parent.getBytecodeContext());
+        this.filterManager = new ComparisonPairFilterManager(parent.getFilterManager());
     }
 
     /**
@@ -204,5 +209,9 @@ public class BirthmarkContext{
             list.add(services.get(key));
         }
         return list;
+    }
+
+    public ComparisonPairFilterManager getFilterManager(){
+        return filterManager;
     }
 }

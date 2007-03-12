@@ -34,7 +34,7 @@ import jp.naist.se.stigmata.BirthmarkContext;
  * @author Haruaki Tamada
  * @version $Revision$ $Date$
  */
-public class PropertyEditPane extends JPanel{
+public class PropertyEditPane extends JPanel implements SettingsExportable{
     private static final long serialVersionUID = 12397342543653L;
 
     private StigmataFrame stigmata;
