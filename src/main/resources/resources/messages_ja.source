@@ -208,7 +208,7 @@ comparemapping.description=クラス間の関係を示したファイルを指定 (csv)
 roundrobin.label=総当りで比較
 guessedpair.label=ペアを推測して比較
 specifiedpair.label=ペアを指定して比較...
-roundrobin.filering.label=総当り結果をフィルタリング...
+roundrobin.filtering.label=総当り結果をフィルタリング...
 
 result.border=比較結果類似度
 eachbirthmarksimilarity.border=各バースマーク間の類似度
@@ -266,43 +266,78 @@ propertyadd.dialog.title=新規プロパティ
 ############################################################
 filter.tab.label=フィルタ
 filter.tab.tooltip=フィルタ
+filtersetlist.pane.border=定義済みフィルタセット
+filtersetlist.pane.tooltip=定義済みのフィルタセットの集合
+filterdefinition.pane.border=フィルタセットの定義
+filterdefinition.pane.tooltip=選択されているフィルタセットの定義
+filter.pane.border=フィルタ
+filter.pane.tooltip=フィルタ内容
 
-newfilter.button.label=新規フィルタ
+newfilter.button.label=
 newfilter.button.tooltip=新たなフィルタを定義します
-removefilter.button.label=削除
+removefilter.button.label=
 removefilter.button.tooltip=選択されているフィルタを削除します．
-updatefilter.button.label=編集...
+updatefilter.button.label=
 updatefilter.button.tooltip=選択されているフィルタを編集します．
-moveup.button.label=上へ移動
+moveup.button.label=
 moveup.button.tooltip=選択されているフィルタの適用順序を上げます．
-movedown.button.label=下へ移動
+movedown.button.label=
 movedown.button.tooltip=選択されているフィルタの適用順序を下げます．
 
-allcriteria.button.label=全ての条件に一致
-allcriteria.button.tooltip=全ての条件に一致したペアのみを表示するようフィルタリングを行う
-somecriteria.button.label=いずれかの条件に一致
-somecriteria.button.tooltip=いずれかの条件に一致したペアのみを表示するようフィルタリングを行う
+matchall.button.label=全ての条件に一致
+matchall.button.tooltip=全ての条件に一致したペアのみを表示するようフィルタリングを行う
+matchany.button.label=いずれかの条件に一致
+matchany.button.tooltip=いずれかの条件に一致したペアのみを表示するようフィルタリングを行う
 
-morefilter.button.label=条件を追加
-removefilter.button.label=削除
+filterorder.border=フィルタの適用順序
+filtername.border=フィルタ名
+filtername.label=フィルタ名
+
+enablefilter.label=適用
+
+filter.similarity.label=バースマーク間の類似度
+filter.totalelementcount.label=バースマークの要素数の合計
+filter.elementcount.label=バースマーク
+filter.elementcount.label.next=の要素数
+filter.name.label=クラス名
 
 ############################################################
 # Criterion
 ############################################################
-criterion.LESS_THAN=less than
-criterion.LESS_EQUALS=less than equals
-criterion.GREATER_THAN=greater than
-criterion.GREATER_EQUALS=greater than equals
-criterion.EQUALS_AS=equals
-criterion.NOT_EQUALS_AS=not equals
-criterion.STARTS_WITH=starts with
-criterion.NOT_STARTS_WITH=not starts with
-criterion.ENDS_WITH=ends with
-criterion.NOT_ENDS_WITH=not ends with
-criterion.MATCH=match
-criterion.NOT_MATCH=match
+criterion.LESS_THAN=が次の値より小さい
+criterion.LESS_EQUALS=が次の値以下
+criterion.GREATER_THAN=が次の値より大きい
+criterion.GREATER_EQUALS=が次の値以上
+criterion.EQUALS_AS=が次と一致する
+criterion.NOT_EQUALS_AS=が次と一致しない
+criterion.STARTS_WITH=が次で始まる
+criterion.NOT_STARTS_WITH=が次で始まらない
+criterion.ENDS_WITH=が次で終わる
+criterion.NOT_ENDS_WITH=が次で終わらない
+criterion.MATCH=が一致する
+criterion.NOT_MATCH=が一致しない
 
-target.TARGET1=target 1
-target.TARGET2=target 2
-target.BOTH=both
+target.TARGET1=対象1
+target.TARGET2=対象2
+target.BOTH_TARGET=両方
+target.ONE_OF_TARGET=どちらか
 
+error.dialog.title=エラー
+error.message.classpath=Failed proccessed operation because following classes do not found.<br>Please examine your classpath settings at ``Control'' tab.
+error.message.contactus=Failed proccessed operation because following exception. Please report to developer with following error messages.
+error.empty.threshold=Threshold is empty
+error.empty.value=Value is empty
+error.invalid.format={0}: Invalid format
+error.invalid.format.double={0}: Invalid double format
+error.invalid.format.integer={0}: Invalid integer format
+error.filter.cannotcreate=Filter cannot create because following reasons:
+error.negative.value={0}: Unacceptable negative value
+error.over.range=Over acceptable range. valid range is {0}.
+
+target1.button.label=${target.TARGET1} birthmark
+target2.button.label=${target.TARGET2} birthmark
+both.button.label=${target.BOTH} birthmarks
+
+target1.name.button.label=${target.TARGET1} class name
+target2.name.button.label=${target.TARGET2} class name
+both.name.button.label=${target.BOTH} class name
