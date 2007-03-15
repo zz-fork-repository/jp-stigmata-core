@@ -54,7 +54,7 @@ public class ControlPane extends JPanel{
     public ControlPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
     }
-    
+
     void inititalize(){
         initComponents();
         definition = new BirthmarkDefinitionPane(stigmata);
@@ -63,7 +63,7 @@ public class ControlPane extends JPanel{
         wellknownClassses = new WellknownClassesSettingsPane(stigmata);
         classpath = new ClasspathSettingsPane(stigmata);
         filters = new FilterManagementPane(stigmata);
-        
+
         Utility.addNewTab("targets", controlTab, control);
         Utility.addNewTab("filter",  controlTab, filters);
         Utility.addNewTab("wellknown", controlTab, wellknownClassses);
@@ -112,13 +112,13 @@ public class ControlPane extends JPanel{
             try{
                 PrintWriter out = new PrintWriter(new FileWriter(file));
                 out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-                out.println("<birthmark>");
+                out.println("<stigmata>");
                 definition.exportSettings(out);
                 filters.exportSettings(out);
                 wellknownClassses.exportSettings(out);
                 classpath.exportSettings(out);
                 properties.exportSettings(out);
-                out.println("</birthmark>");
+                out.println("</stigmata>");
                 out.close();
             } catch(IOException e){
             }

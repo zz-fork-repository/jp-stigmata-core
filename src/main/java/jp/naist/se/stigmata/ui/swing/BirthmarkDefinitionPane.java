@@ -94,24 +94,24 @@ public class BirthmarkDefinitionPane extends JPanel implements SettingsExportabl
     }
 
     public void exportSettings(PrintWriter out) throws IOException{
-        out.println("  <services>");
+        out.println("  <birthmark-services>");
         for(int i = 0; i < model.getSize(); i++){
             Object element = model.getElementAt(i);
             if(element instanceof BirthmarkSpi){
                 BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(i);
                 // not expert birthmarks are defined as class.
                 if(service.isExpert()){
-                    out.println("    <service>");
+                    out.println("    <birthmark-service>");
                     out.printf("      <type>%s</type>%n", service.getType());
                     out.printf("      <display-name>%s</display-name>%n", service.getDisplayType());
                     out.printf("      <description>%s</description>%n", service.getDescription());
                     out.printf("      <extractor>%s</extractor>%n", service.getExtractorClassName());
                     out.printf("      <comparator>%s</comparator>%n", service.getComparatorClassName());
-                    out.println("    </service>");
+                    out.println("    </birthmark-service>");
                 }
             }
         }
-        out.println("  </services>");
+        out.println("  </birthmark-services>");
     }
 
     private void initData(){

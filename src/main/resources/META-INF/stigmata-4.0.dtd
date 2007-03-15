@@ -36,9 +36,9 @@
 
 <!ELEMENT properties (property*)>
 
-<!ELEMENT service (type,display-name,description,extractor,comparator)>
+<!ELEMENT birthmark-service (type,display-name,description,extractor,comparator)>
 
-<!ELEMENT services (service*)>
+<!ELEMENT birthmark-services (birthmark-service*)>
 
 <!ELEMENT classpath-list (classpath*)>
 
@@ -54,5 +54,5 @@
 
 <!ELEMENT filterset-list (filterset*)>
 
-<!ELEMENT birthmark ((services,wellknown-classes,classpath-list,properties,filterset-list)*) >
+<!ELEMENT stigmata ((birthmark-services,wellknown-classes,classpath-list,properties,filterset-list)*) >
 

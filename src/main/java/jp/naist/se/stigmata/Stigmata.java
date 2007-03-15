@@ -60,9 +60,9 @@ public class Stigmata{
         }
 
         if(filePath == null){
-            File file = new File("birthmark.xml");
+            File file = new File("stigmata.xml");
             if(!file.exists()){
-                file = new File(System.getProperty("user.home"), ".birthmark.xml");
+                file = new File(System.getProperty("user.home"), ".stigmata.xml");
                 if(!file.exists()){
                     file = null;
                 }
@@ -77,7 +77,7 @@ public class Stigmata{
             }
         }
         if(target == null){
-            target = getClass().getResourceAsStream("/resources/birthmark.xml");
+            target = getClass().getResourceAsStream("/resources/stigmata.xml");
         }
         initConfiguration(target);
     }

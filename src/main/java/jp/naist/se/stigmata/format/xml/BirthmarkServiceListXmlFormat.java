@@ -19,10 +19,10 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 public class BirthmarkServiceListXmlFormat extends AbstractBirthmarkServiceListFormat{
     public void printResult(PrintWriter out, BirthmarkSpi[] spilist){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<stigmata>");
-        out.println("  <services>");
+        out.println("<birthmark>");
+        out.println("  <birthmark-services>");
         for(BirthmarkSpi spi: spilist){
-            out.println("    <service>");
+            out.println("    <birthmark-service>");
             out.print("      <type>");
             out.print(spi.getType());
             out.println("</type>");
@@ -37,10 +37,10 @@ public class BirthmarkServiceListXmlFormat extends AbstractBirthmarkServiceListF
             out.print("      <class-name>");
             out.print(spi.getClass().getName());
             out.println("</class-name>");
-            out.println("    </service>");
+            out.println("    </birthmark-service>");
         }
-        out.println("  </services>");
-        out.println("</stigmata>");
+        out.println("  </birthmark-services>");
+        out.println("</birthmark>");
 
         out.flush();
     }

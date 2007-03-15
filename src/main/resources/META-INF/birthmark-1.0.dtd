@@ -1,0 +1,39 @@
+<!--
+  $Id$
+-->
+
+<!ATTLIST birthmark
+  type  NAME  #REQUIRED
+  count CDATA #REQUIRED
+>
+
+<!ATTLIST birthmark-similarity
+  type             NAME  #REQUIRED
+  comparison-count CDATA #REQUIRED
+>
+
+<!ENTITY % target "target|target1|target">
+
+<!ELEMENT type                   - - (#PCDATA)>
+<!ELEMENT display-type           - - (#PCDATA)>
+<!ELEMENT description            - - (#PCDATA)>
+<!ELEMENT class-name             - - (#PCDATA)>
+<!ELEMENT location               - - (#PCDATA)>
+<!ELEMENT element                - - (#PCDATA)>
+<!ELEMENT birthmark-similarity   - - (#PCDATA)>
+<!ELEMENT similarity             - - (#PCDATA)>
+
+<!ELEMENT birthmark-service      - - (type,display-type,description,class-name)>
+<!ELEMENT birthmark-services     - - (birthmark-service)*>
+
+<!ELEMENT birthmark              - - (element)*>
+<!ELEMENT extracted-birthmark    - - (class-name,location,birthmark)>
+<!ELEMENT extracted-birthmarks   - - (extracted-birthmark)*>
+
+<!ELEMENT (%target;)             - - (class-name,location)>
+<!ELEMENT birthmark-similarities - - (birthmark-similarity)*>
+<!ELEMENT comparison-result      - - (target1,target2,birthmark-similarities,similarity)>
+<!ELEMENT comparison-result-set  - - (comparison-result)*>
+
+<!ELEMENT birthmark              - - (birthmark-services,extracted-birthmarks,comparison-result-set)>
+

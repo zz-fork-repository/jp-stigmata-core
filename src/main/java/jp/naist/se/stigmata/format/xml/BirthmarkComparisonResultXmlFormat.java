@@ -29,7 +29,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
     @Override
     public void printResult(PrintWriter out, ComparisonPair pair){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<stigmata>");
+        out.println("<birthmark>");
         out.println("  <extracted-birthmarks>");
         list.printBirthmarkHolder(out, pair.getTarget1());
         list.printBirthmarkHolder(out, pair.getTarget2());
@@ -37,23 +37,23 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.println("  <birthmark-compare-result-set>");
         printComparisonPair(out, pair);
         out.println("  </birthmark-compare-result-set>");
-        out.println("</stigmata>");
+        out.println("</birthmark>");
     }
 
     @Override
     public void printResult(PrintWriter out, ComparisonResultSet resultset){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<stigmata>");
-        out.println("  <birthmark-compare-result-set>");
+        out.println("<birthmark>");
+        out.println("  <comparison-result-set>");
         for(ComparisonPair pair: resultset){
             printComparisonPair(out, pair);
         }
-        out.println("  </birthmark-compare-result-set>");
-        out.println("</stigmata>");
+        out.println("  </comparison-result-set>");
+        out.println("</birthmark>");
     }
 
     private void printComparisonPair(PrintWriter out, ComparisonPair pair){
-        out.println("    <birthmark-compare-result>");
+        out.println("    <comparison-result>");
         printTarget(out, pair.getTarget1(), 1);
         printTarget(out, pair.getTarget2(), 2);
         out.println("      <birthmark-similarities>");
@@ -64,7 +64,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.print("      <similarity>");
         out.print(pair.calculateSimilarity());
         out.println("</similarity>");
-        out.println("    </birthmark-compare-result>");
+        out.println("    </comparison-result>");
     }
 
     private void printTarget(PrintWriter out, BirthmarkSet holder, int index){
@@ -82,7 +82,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
     private void printPairElement(PrintWriter out, ComparisonPairElement element){
         out.print("        <birthmark-similarity type=\"");
         out.print(element.getType());
-        out.print("\" comparisonCount=\"");
+        out.print("\" comparison-count=\"");
         out.print(element.getComparisonCount());
         out.print("\">");
         out.print(element.getSimilarity());
