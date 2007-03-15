@@ -55,7 +55,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
     private void printComparisonPair(PrintWriter out, ComparisonPair pair){
         out.println("    <birthmark-compare-result>");
         printTarget(out, pair.getTarget1(), 1);
-        printTarget(out, pair.getTarget1(), 2);
+        printTarget(out, pair.getTarget2(), 2);
         out.println("      <birthmark-similarities>");
         for(ComparisonPairElement element: pair){
             printPairElement(out, element);
