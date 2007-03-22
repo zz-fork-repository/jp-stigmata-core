@@ -11,19 +11,8 @@ public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
     private boolean matchall = true;
 
     public boolean isFiltered(ComparisonPair pair){
-        boolean flag = matchall;
-        for(ComparisonPairFilter filter: filters){
-            if(!filter.isFiltered(pair)){
-                flag = !matchall;
-                break;
-            }
-        }
-        return flag;
-
-        /*
-        // above code is merged following two blocks.
         boolean flag;
-        if(matchall){ // all of criteria are matched?
+        if(isMatchAll()){ // all of criteria are matched?
             flag = true;
             for(ComparisonPairFilter filter: filters){
                 if(!filter.isFiltered(pair)){
@@ -41,7 +30,7 @@ public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
                 }
             }
         }
-        */
+        return flag;
     }
 
     public boolean isMatchAll(){

@@ -89,13 +89,21 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         case NOT_MATCH:
             flag1 = !name1.equals(name2);
             flag2 = flag1;
+            break;
         default:
             flag1 = false;
             flag2 = false;
             break;
         }
-        return (getTarget() == Target.BOTH_TARGET && (flag1 && flag2)) ||
-            (getTarget() == Target.ONE_OF_TARGET && (flag1 || flag2));
+        
+        boolean flag;
+        if(getTarget() == Target.BOTH_TARGET){
+            flag = flag1 && flag2;
+        }
+        else{
+            flag = flag1 || flag2;
+        }
+        return flag;
     }
 
     private boolean checkMatch(String name, String value){
