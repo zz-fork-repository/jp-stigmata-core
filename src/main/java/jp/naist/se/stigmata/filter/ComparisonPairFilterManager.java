@@ -44,7 +44,9 @@ public class ComparisonPairFilterManager{
         List<ComparisonPairFilterSet> list = new ArrayList<ComparisonPairFilterSet>();
         if(parent != null){
             for(ComparisonPairFilterSet fs: parent.getFilterSets()){
-                list.add(fs);
+                if(filters.get(fs.getName()) == null){
+                    list.add(fs);
+                }
             }
         }
         list.addAll(filters.values());

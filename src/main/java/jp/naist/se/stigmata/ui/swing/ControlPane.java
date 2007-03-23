@@ -19,6 +19,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
@@ -65,7 +66,7 @@ public class ControlPane extends JPanel{
         filters = new FilterManagementPane(stigmata);
 
         Utility.addNewTab("targets", controlTab, control);
-        Utility.addNewTab("filter",  controlTab, filters);
+        Utility.addNewTab("filter", controlTab, filters);
         Utility.addNewTab("wellknown", controlTab, wellknownClassses);
         Utility.addNewTab("classpath", controlTab, classpath);
         reset();
@@ -92,19 +93,22 @@ public class ControlPane extends JPanel{
         filters.reset();
         updateEnable();
 
-        int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+        int index1 = controlTab.indexOfTab(Messages
+                .getString("definition.tab.label"));
         if(index1 >= 0){
             controlTab.removeTabAt(index1);
         }
-        int index2 = controlTab.indexOfTab(Messages.getString("property.tab.label"));
+        int index2 = controlTab.indexOfTab(Messages
+                .getString("property.tab.label"));
         if(index2 >= 0){
             controlTab.removeTabAt(index2);
         }
     }
 
     public void exportSettings(){
-        File file = stigmata.getSaveFile(Messages.getStringArray("export.extensions"),
-            Messages.getString("export.description"));
+        File file = stigmata.getSaveFile(Messages
+                .getStringArray("export.extensions"), Messages
+                .getString("export.description"));
         if(file != null){
             if(!file.getName().endsWith(".xml")){
                 file = new File(file.getParent(), file.getName() + ".xml");
@@ -120,7 +124,7 @@ public class ControlPane extends JPanel{
                 properties.exportSettings(out);
                 out.println("</stigmata>");
                 out.close();
-            } catch(IOException e){
+            }catch(IOException e){
             }
         }
     }
@@ -159,15 +163,22 @@ public class ControlPane extends JPanel{
         targetX = new TargetSelectionPane(stigmata);
         targetY = new TargetSelectionPane(stigmata);
 
-        birthmarks.setBorder(new TitledBorder(Messages.getString("birthmarkspane.border")));
+        birthmarks.setBorder(new TitledBorder(Messages
+                .getString("birthmarkspane.border")));
 
-        targetX.addTargetExtensions(Messages.getStringArray("targets.extensions"));
+        targetX.addTargetExtensions(Messages
+                .getStringArray("targets.extensions"));
         targetX.setDescription(Messages.getString("targets.description"));
-        targetX.setBorder(new TitledBorder(Messages.getString("targetx.border")));
+        targetX
+                .setBorder(new TitledBorder(Messages
+                        .getString("targetx.border")));
 
-        targetY.addTargetExtensions(Messages.getStringArray("targets.extensions"));
+        targetY.addTargetExtensions(Messages
+                .getStringArray("targets.extensions"));
         targetY.setDescription(Messages.getString("targets.description"));
-        targetY.setBorder(new TitledBorder(Messages.getString("targety.border")));
+        targetY
+                .setBorder(new TitledBorder(Messages
+                        .getString("targety.border")));
 
         center.add(mainPane, BorderLayout.CENTER);
         center.add(birthmarks, BorderLayout.SOUTH);
@@ -195,13 +206,13 @@ public class ControlPane extends JPanel{
         String[] valueY = targetY.getValues();
         String[] targets = birthmarks.getSelectedServices();
 
-        extractButton.setEnabled(((valueX != null && valueX.length > 0)
-                                  || (valueY != null && valueY.length > 0))
-                                 && (targets != null && targets.length > 0));
+        extractButton
+                .setEnabled(((valueX != null && valueX.length > 0) || (valueY != null && valueY.length > 0))
+                        && (targets != null && targets.length > 0));
 
         compareButton.setEnabled((valueX != null && valueX.length > 0)
-                                 && (valueY != null && valueY.length > 0)
-                                 && (targets != null && targets.length > 0));
+                && (valueY != null && valueY.length > 0)
+                && (targets != null && targets.length > 0));
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
@@ -220,30 +231,43 @@ public class ControlPane extends JPanel{
             }
         }
 
-        stigmata.extract(birthmarks.getSelectedServices(),
-                         targets.toArray(new String[targets.size()]), context);
+        stigmata.extract(birthmarks.getSelectedServices(), targets
+                .toArray(new String[targets.size()]), context);
     }
 
     private void compareRoundRobinWithFiltering(){
         BirthmarkContext context = initAction();
-        String[] filterSetList = filters.getSelectedFilterNames();
+        FilterSelectionPane pane = new FilterSelectionPane(
+            context.getFilterManager()
+        );
+        int returnValue = JOptionPane.showConfirmDialog(
+            stigmata, pane, Messages.getString("filterselection.dialog.title"),
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if(returnValue == JOptionPane.OK_OPTION){
+            String[] filterSetList = pane.getSelectedFilters();
 
-        stigmata.compareRoundRobin(birthmarks.getSelectedServices(), targetX.getValues(), 
-                                   targetY.getValues(), filterSetList, context);
+            stigmata.compareRoundRobin(
+                birthmarks.getSelectedServices(), targetX.getValues(),
+                targetY.getValues(), filterSetList, context
+            );
+        }
     }
 
     private void compareRoundRobin(){
         BirthmarkContext context = initAction();
 
-        stigmata.compareRoundRobin(birthmarks.getSelectedServices(),
-                                   targetX.getValues(), targetY.getValues(), context);
+        stigmata.compareRoundRobin(birthmarks.getSelectedServices(), targetX
+                .getValues(), targetY.getValues(), context);
     }
 
     private void compareSpecifiedPair(){
         BirthmarkContext context = initAction();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
-        stigmata.compareSpecifiedPair(birthmarks.getSelectedServices(), fileX, fileY, context);
+        stigmata.compareSpecifiedPair(birthmarks.getSelectedServices(), fileX,
+                fileY, context);
     }
 
     private void compareGuessedPair(){
@@ -251,7 +275,8 @@ public class ControlPane extends JPanel{
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
-        stigmata.compareGuessedPair(birthmarks.getSelectedServices(), fileX, fileY, context);
+        stigmata.compareGuessedPair(birthmarks.getSelectedServices(), fileX,
+                fileY, context);
     }
 
     private BirthmarkContext initAction(){
@@ -323,7 +348,8 @@ public class ControlPane extends JPanel{
                 else if(item.equals(Messages.getString("specifiedpair.label"))){
                     compareSpecifiedPair();
                 }
-                else if(item.equals(Messages.getString("roundrobin.filtering.label"))){
+                else if(item.equals(Messages
+                        .getString("roundrobin.filtering.label"))){
                     compareRoundRobinWithFiltering();
                 }
             }

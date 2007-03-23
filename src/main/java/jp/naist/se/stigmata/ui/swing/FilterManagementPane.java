@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,30 +12,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
+import jp.naist.se.stigmata.ui.swing.filter.ComparisonPairFilterRetainable;
 import jp.naist.se.stigmata.ui.swing.filter.FilterEditingPane;
 import jp.naist.se.stigmata.ui.swing.filter.FilterSetDefinitionPane;
 
@@ -46,9 +38,8 @@ import org.apache.commons.beanutils.BeanUtils;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class FilterManagementPane extends JPanel implements SettingsExportable{
+public class FilterManagementPane extends JPanel implements SettingsExportable, ComparisonPairFilterRetainable{
     private static final long serialVersionUID = 972135792354L;
-    private static final Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
     private StigmataFrame stigmata;
     private FilterSetDefinitionPane definition;
@@ -56,7 +47,6 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
     private JList list;
     private DefaultListModel model;
     private Map<String, ComparisonPairFilterSet> filters = new HashMap<String, ComparisonPairFilterSet>();
-    private Map<String, Boolean> enableMap = new HashMap<String, Boolean>();
 
     public FilterManagementPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -118,19 +108,8 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
         }
     }
 
-    public synchronized String[] getSelectedFilterNames(){
-        List<String> list = new ArrayList<String>();
-        for(String key: enableMap.keySet()){
-            if(enableMap.get(key)){
-                list.add(key);
-            }
-        }
-        return list.toArray(new String[list.size()]);
-    }
-
     public void addFilterSet(ComparisonPairFilterSet filterset){
         filters.put(filterset.getName(), filterset);
-        enableMap.put(filterset.getName(), Boolean.TRUE);
 
         model.addElement(filterset.getName());
         list.setSelectedIndex(model.getSize() - 1);
@@ -138,7 +117,6 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
 
     public void removeFilterSet(String name){
         filters.remove(name);
-        enableMap.remove(name);
         model.removeElement(name);
 
         list.clearSelection();
@@ -152,16 +130,7 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
             }
         }
         filters.remove(oldName);
-        Boolean flag = enableMap.remove(oldName);
         filters.put(newfilter.getName(), newfilter);
-        enableMap.put(newfilter.getName(), flag);
-    }
-
-    public ComparisonPairFilterSet getEnableFilterSet(String name){
-        if(enableMap.get(name)){
-            return getFilterSet(name);
-        }
-        return null;
     }
 
     public ComparisonPairFilterSet getFilterSet(String name){
@@ -201,7 +170,6 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
     private JComponent createFilterSetPane(){
         model = new DefaultListModel();
         list = new JList(model);
-        list.setCellRenderer(new CheckedListCellRenderer());
 
         final JButton upButton = Utility.createButton("moveup");
         final JButton downButton = Utility.createButton("movedown");
@@ -218,8 +186,6 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
             public void mouseClicked(MouseEvent e){
                 int index = list.locationToIndex(e.getPoint());
                 list.setSelectedIndex(index);
-                String v = (String)model.getElementAt(index);
-                enableMap.put(v, !enableMap.get(v));
                 updateUI();
             }
         });
@@ -262,46 +228,5 @@ public class FilterManagementPane extends JPanel implements SettingsExportable{
         panel.add(south, BorderLayout.SOUTH);
         
         return panel;
-    }
-
-    private class CheckedListCellRenderer extends JPanel implements ListCellRenderer{
-        private static final long serialVersionUID = -8148037001055727351L;
-
-        private JCheckBox check;
-        private JLabel label;
-
-        public CheckedListCellRenderer(){
-            setOpaque(true);
-            setLayout(new BorderLayout());
-            add(check = new JCheckBox(), BorderLayout.WEST);
-            add(label = new JLabel(), BorderLayout.CENTER);
-        }
-
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus){
-            label.setText(String.valueOf(value));
-            check.setSelected(enableMap.get(value));
-
-            setBackground(isSelected ? list.getSelectionBackground(): list.getBackground());
-            check.setBackground(isSelected ? list.getSelectionBackground(): list.getBackground());
-            check.setForeground(isSelected ? list.getSelectionForeground(): list.getForeground());
-            label.setBackground(isSelected ? list.getSelectionBackground(): list.getBackground());
-            label.setForeground(isSelected ? list.getSelectionForeground(): list.getForeground());
-
-            Border border = null;
-            if(cellHasFocus){
-                if(isSelected){
-                    border = UIManager.getBorder("List.focusSelectedCellHighlightBorder");
-                }
-                if(border == null){
-                    border = UIManager.getBorder("List.focusCellHighlightBorder");
-                }
-            }
-            else{
-                border = noFocusBorder;
-            }
-            setBorder(border);
-
-            return this;
-        }
     }
 }

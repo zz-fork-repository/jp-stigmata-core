@@ -266,6 +266,8 @@ propertyadd.dialog.title=新規プロパティ
 ############################################################
 filter.tab.label=フィルタ
 filter.tab.tooltip=フィルタ
+filterselection.dialog.title=適用するフィルタの選択
+
 filtersetlist.pane.border=定義済みフィルタセット
 filtersetlist.pane.tooltip=定義済みのフィルタセットの集合
 filterdefinition.pane.border=フィルタセットの定義
