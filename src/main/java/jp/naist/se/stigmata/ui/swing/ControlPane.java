@@ -66,7 +66,6 @@ public class ControlPane extends JPanel{
         filters = new FilterManagementPane(stigmata);
 
         Utility.addNewTab("targets", controlTab, control);
-        Utility.addNewTab("filter", controlTab, filters);
         Utility.addNewTab("wellknown", controlTab, wellknownClassses);
         Utility.addNewTab("classpath", controlTab, classpath);
         reset();
@@ -137,10 +136,12 @@ public class ControlPane extends JPanel{
         if(expertmode){
             Utility.addNewTab("definition", controlTab, definition);
             Utility.addNewTab("property", controlTab, properties);
+            Utility.addNewTab("filter", controlTab, filters);
         }
         else{
             removeTabByName(Messages.getString("definition.tab.label"));
             removeTabByName(Messages.getString("property.tab.label"));
+            removeTabByName(Messages.getString("filter.tab.label"));
         }
         updateEnable();
     }
