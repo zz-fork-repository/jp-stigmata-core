@@ -43,6 +43,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane impl
 
         initLayouts();
         initServices();
+        stigmata.addBirthmarkServiceListener(this);
     }
 
     private void initLayouts(){
@@ -174,10 +175,10 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane impl
     }
 
     public void serviceRemoved(BirthmarkSpi service){
-        BirthmarkSelection elem = services.get(service);
+        BirthmarkSelection elem = services.get(service.getType());
         if(elem != null){
-            selectedServices.remove(service);
-            services.remove(service);
+            selectedServices.remove(service.getType());
+            services.remove(service.getType());
         }
         updateLayouts();
         fireEvent();

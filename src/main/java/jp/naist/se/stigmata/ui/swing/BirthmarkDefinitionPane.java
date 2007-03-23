@@ -208,6 +208,11 @@ public class BirthmarkDefinitionPane extends JPanel implements SettingsExportabl
         updateView();
     }
 
+    /**
+     * remove: enabled when selected index is greater than 0 and selected service is defined by user.
+     * new service: enabled when selected index is less equals than 0 or selected service is defined by user and information pane is show available service.
+     *
+     */
     private void updateView(){
         int index = serviceList.getSelectedIndex();
         ListModel model = serviceList.getModel();
@@ -217,10 +222,20 @@ public class BirthmarkDefinitionPane extends JPanel implements SettingsExportabl
         }
         newService.setEnabled(
             (index <= 0 || service.isUserDefined()) && 
-            information.isAvailableService()
+            information.isAvailableService() &&
+            isAvailableServiceName(information.getType())
         );
         removeService.setEnabled(index > 0 && service.isUserDefined());
         information.setEnabled(index <= 0 || service.isUserDefined());
+    }
+
+    private boolean isAvailableServiceName(String name){
+        for(BirthmarkSpi service: addedService){
+            if(service.getType().equals(name)){
+                return false;
+            }
+        }
+        return true;
     }
 
     private static class InformationPane extends JPanel{
@@ -240,6 +255,10 @@ public class BirthmarkDefinitionPane extends JPanel implements SettingsExportabl
             this.stigmata = stigmata;
             this.thisPane = thisPane;
             initLayouts();
+        }
+
+        public String getType(){
+            return type.getText();
         }
 
         public void setEnabled(boolean flag){

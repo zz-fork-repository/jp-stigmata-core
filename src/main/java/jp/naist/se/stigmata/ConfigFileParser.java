@@ -76,7 +76,7 @@ public class ConfigFileParser extends DefaultHandler{
         else if(qname.equals("classpath-list")){
             part = Part.CLASSPATH;
         }
-        else if(qname.equals("service")){
+        else if(qname.equals("birthmark-service")){
             part = Part.SERVICES;
             service = new BirthmarkService();
             service.setUserDefined(false);
@@ -166,7 +166,7 @@ public class ConfigFileParser extends DefaultHandler{
 
     @Override
     public void endElement(String uri, String localname, String qname){
-        if(part == Part.SERVICES && qname.equals("service")){
+        if(part == Part.SERVICES && qname.equals("birthmark-service")){
             context.addService(service);
             service = null;
         }

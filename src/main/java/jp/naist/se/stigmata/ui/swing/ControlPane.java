@@ -57,13 +57,14 @@ public class ControlPane extends JPanel{
     }
 
     void inititalize(){
-        initComponents();
         definition = new BirthmarkDefinitionPane(stigmata);
+        birthmarks = new BirthmarkSelectionCheckSetPane(stigmata);
         properties = new PropertyEditPane(stigmata);
         JComponent control = createControlPane();
         wellknownClassses = new WellknownClassesSettingsPane(stigmata);
         classpath = new ClasspathSettingsPane(stigmata);
         filters = new FilterManagementPane(stigmata);
+        initComponents();
 
         Utility.addNewTab("targets", controlTab, control);
         Utility.addNewTab("wellknown", controlTab, wellknownClassses);
@@ -160,7 +161,6 @@ public class ControlPane extends JPanel{
     private JComponent createControlPane(){
         JComponent mainPane = new Box(BoxLayout.X_AXIS);
         JPanel center = new JPanel(new BorderLayout());
-        birthmarks = new BirthmarkSelectionCheckSetPane(stigmata);
         targetX = new TargetSelectionPane(stigmata);
         targetY = new TargetSelectionPane(stigmata);
 

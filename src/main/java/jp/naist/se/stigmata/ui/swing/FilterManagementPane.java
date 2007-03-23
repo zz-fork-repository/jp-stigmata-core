@@ -155,16 +155,6 @@ public class FilterManagementPane extends JPanel implements SettingsExportable, 
         add(filtersetlist);
         add(definition);
         add(filterPane);
-
-        /*
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(definition, BorderLayout.WEST);
-        panel.add(filterPane, BorderLayout.CENTER);
-
-        setLayout(new BorderLayout());
-        add(createFilterSetPane(), BorderLayout.WEST);
-        add(panel, BorderLayout.CENTER);
-        */
     }
 
     private JComponent createFilterSetPane(){
