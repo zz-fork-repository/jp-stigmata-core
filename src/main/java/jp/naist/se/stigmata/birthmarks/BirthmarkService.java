@@ -96,7 +96,11 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     }
 
     public String getDescription(){
-        return description;
+        String desc = description;
+        if(description == null){
+            desc = "";
+        }
+        return desc;
     }
 
     /**

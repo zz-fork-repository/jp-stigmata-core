@@ -12,6 +12,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.cafebabe.commons.xmlcli.CommandLinePlus;
 import jp.cafebabe.commons.xmlcli.OptionsBuilder;
 import jp.cafebabe.commons.xmlcli.builder.OptionsBuilderFactory;
@@ -23,6 +26,7 @@ import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
@@ -48,24 +52,27 @@ public class Main{
         Options options = buildOptions();
         CommandLineParser parser = new PosixParser();
         CommandLinePlus commandLine = new CommandLinePlus(parser.parse(options, args, false));
+
+        Stigmata stigmata = Stigmata.getInstance();
+        stigmata.configuration(commandLine.getOptionValue("config-file"));
+        context = stigmata.createContext();
+
+        addClasspath(context.getBytecodeContext(), commandLine);
+
+        String[] birthmarks = getTargetBirthmarks(commandLine);
+        String[] arguments = commandLine.getArgs();
+
+        String mode = commandLine.getOptionValue("mode");
+        String format = commandLine.getOptionValue("format");
+
+        if(format == null) format = "xml";
+        if(mode == null) mode = "gui";
+
         boolean exitFlag = executeOption(commandLine, options);
+
         if(!exitFlag){
-            Stigmata stigmata = Stigmata.getInstance();
-            stigmata.configuration(commandLine.getOptionValue("config-file"));
-            BirthmarkContext context = stigmata.createContext();
-            addClasspath(context.getBytecodeContext(), commandLine);
-
-            String[] birthmarks = getTargetBirthmarks(commandLine);
-            String[] arguments = commandLine.getArgs();
-
-            String mode = commandLine.getOptionValue("mode");
-            String format = commandLine.getOptionValue("format");
-
-            if(format == null) format = "xml";
-            if(mode == null) mode = "gui";
-
             if(!("gui".equals(mode) || "list".equals(mode))
-               && (arguments == null || arguments.length == 0)){
+                && (arguments == null || arguments.length == 0)){
                 printHelp(options);
                 return;
             }
@@ -77,7 +84,11 @@ public class Main{
                 extractBirthmarks(stigmata, birthmarks, arguments, format);
             }
             else if(mode.equals("compare")){
-                compareBirthmarks(stigmata, birthmarks, arguments, format);
+                String[] filters = null;
+                if(commandLine.hasOption("filter")){
+                    filters = commandLine.getOptionValues("filter");
+                }
+                compareBirthmarks(stigmata, birthmarks, filters, arguments, format);
             }
             else if(mode.equals("gui")){
                 StigmataFrame frame = new StigmataFrame(stigmata, context);
@@ -104,10 +115,13 @@ public class Main{
     /**
      *
      */
-    private void compareBirthmarks(Stigmata stigmata, String[] birthmarks, String[] args, String format){
+    private void compareBirthmarks(Stigmata stigmata, String[] birthmarks, String[] filters, String[] args, String format){
         try{
             BirthmarkSet[] holders = stigmata.extract(birthmarks, args, context);
             ComparisonResultSet resultset = stigmata.compare(holders, context);
+            if(filters != null){
+                resultset = stigmata.filter(resultset, filters);
+            }
 
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkComparisonResultFormat formatter = spi.getComparisonResultFormat();
@@ -133,7 +147,13 @@ public class Main{
     private String[] getTargetBirthmarks(CommandLinePlus cl){
         String[] birthmarks = cl.getOptionValues("birthmark");
         if(birthmarks == null || birthmarks.length == 0){
-            birthmarks = new String[] { "cvfv", "uc", "is", "smc", };
+            List<String> birthmarkList = new ArrayList<String>();
+            for(BirthmarkSpi service: context.getServices()){
+                if(!service.isExpert()){
+                    birthmarkList.add(service.getType());
+                }
+            }
+            birthmarks = birthmarkList.toArray(new String[birthmarkList.size()]);
         }
         return birthmarks;
     }
@@ -194,6 +214,21 @@ public class Main{
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("java -jar stigmata-" + p.getImplementationVersion() + ".jar <OPTIONS> <TARGETS>",
                 "TARGETS is allowed as jar files, war files, class files, and classpath directory.", options, "");
+        System.out.println();
+        System.out.println("Available birthmarks:");
+        for(BirthmarkSpi service: context.getServices()){
+            if(!service.isExpert()){
+                System.out.printf("    %-5s (%s): %s%n", service.getType(), service.getDisplayType(), service.getDescription());
+            }
+        }
+        System.out.println();
+        System.out.println("Available filers:");
+        for(ComparisonPairFilterSet filterset: context.getFilterManager().getFilterSets()){
+            System.out.printf("    %s (%s)%n", filterset.getName(), filterset.isMatchAll()? "match all following condition": "match any following condition");
+            for(ComparisonPairFilter filter: filterset){
+                System.out.printf("        %s%n", filter);
+            }
+        }
         System.out.println();
         System.out.println("Copyright (C) by Haruaki Tamada, Ph.D.");
         System.out.println("Please notify us some bugs and requests to <birthmark-analysis@se.aist-nara.ac.jp>");

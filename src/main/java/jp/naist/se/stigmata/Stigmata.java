@@ -14,9 +14,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.imageio.spi.ServiceRegistry;
 
+import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.reader.ClassFileArchive;
 import jp.naist.se.stigmata.reader.ClassFileEntry;
@@ -113,6 +115,7 @@ public class Stigmata{
 
     private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
         List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
+        List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
         ClasspathContext bytecode = context.getBytecodeContext();
 
         for(int i = 0; i < files.length; i++){
@@ -127,7 +130,6 @@ public class Stigmata{
                 archives.add(new WarClassFileArchive(files[i]));
             }
         }
-        List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
             for(Iterator<ClassFileEntry> entries = archive.entries(); entries.hasNext(); ){
@@ -171,6 +173,30 @@ public class Stigmata{
         ComparisonResultSet result = new RoundRobinComparisonResultSet(holders1, holders2, context);
 
         return result;
+    }
+
+    public ComparisonResultSet filter(ComparisonResultSet resultset, String[] filters){
+        return filter(resultset, filters, createContext());
+    }
+
+    public ComparisonResultSet filter(ComparisonResultSet resultset, String[] filters, BirthmarkContext context){
+        if(filters != null){
+            List<ComparisonPairFilterSet> filterList = new ArrayList<ComparisonPairFilterSet>();
+            ComparisonPairFilterManager manager = context.getFilterManager();
+            for(int i = 0; i < filters.length; i++){
+                ComparisonPairFilterSet fset = manager.getFilterSet(filters[i]);
+                if(fset != null){
+                    filterList.add(fset);
+                }
+                else{
+                    Logger logger = Logger.getLogger(getClass().getName());
+                    logger.warning(filters[i] + ": filter not found");
+                }
+            }
+
+            return filter(resultset, filterList.toArray(new ComparisonPairFilterSet[filterList.size()]));
+        }
+        return resultset;
     }
 
     public ComparisonResultSet filter(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters){

@@ -1,87 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <command-line name="stigmata">
-    <definitions>
-        <definition name="classpath">
-            <short-option>c</short-option>
-            <long-option>classpath</long-option>
-            <description>Append classpath. Separated with comma.</description>
-            <argument>REQUIRED</argument>
-            <argument-name>CLASSPATH</argument-name>
-            <value-separator>,</value-separator>
-            <multiple-arg />
-        </definition>
+  <definitions>
+    <definition name="classpath">
+      <short-option>c</short-option>
+      <long-option>classpath</long-option>
+      <description>Append classpath. Separated with comma.</description>
+      <argument>REQUIRED</argument>
+      <argument-name>CLASSPATH</argument-name>
+      <value-separator>,</value-separator>
+      <multiple-arg />
+    </definition>
 
-        <definition name="birthmark">
-            <short-option>b</short-option>
-            <long-option>birthmark</long-option>
-            <description>
-                Set target birthmarks. Separated with comma. If this option is 
-                not specified, `cvfv', `is', `smc', and `uc' birthmarks are specified.
-            </description>
-            <argument>REQUIRED</argument>
-            <argument-name>BIRTHMARKS</argument-name>
-            <value-separator>,</value-separator>
-            <multiple-arg />
-        </definition>
+    <definition name="birthmark">
+      <short-option>b</short-option>
+      <long-option>birthmark</long-option>
+      <description>
+        Set target birthmarks separated with comma. If this option is
+        not specified, following available birthmarks are specified.
+      </description>
+      <argument>REQUIRED</argument>
+      <argument-name>BIRTHMARKS</argument-name>
+      <value-separator>,</value-separator>
+      <multiple-arg />
+    </definition>
 
-        <definition name="mode">
-            <short-option>m</short-option>
-            <long-option>mode</long-option>
-            <description>Set running mode. Available values are `gui,' `list,' `extract,' `compare,' and `gui.'  Default is `gui.'</description>
-            <argument>REQUIRED</argument>
-            <argument-name>MODE</argument-name>
-        </definition>
+    <definition name="mode">
+      <short-option>m</short-option>
+      <long-option>mode</long-option>
+      <description>Set running mode. Available values are `gui,' `list,' `extract,' `compare,' and `gui.'  Default is `gui.'</description>
+      <argument>REQUIRED</argument>
+      <argument-name>MODE</argument-name>
+    </definition>
 
-        <definition name="format">
-            <short-option>f</short-option>
-            <long-option>format</long-option>
-            <description>Set output report format. Available value is `csv' and `xml.' Default is `csv.'</description>
-            <argument>REQUIRED</argument>
-            <argument-name>FORMAT</argument-name>
-        </definition>
+    <definition name="format">
+      <short-option>f</short-option>
+      <long-option>format</long-option>
+      <description>Set output report format. Available value is `csv' and `xml.' Default is `csv.'</description>
+      <argument>REQUIRED</argument>
+      <argument-name>FORMAT</argument-name>
+    </definition>
 
-        <definition name="config-file">
-            <long-option>config-file</long-option>
-            <description>
-                Set configuration xml file.  If you do not specified this option and you have 
-                `.birthmarks.xml' on your home directory, or `birthmark.xml' on current directory, 
-                this tool read it.
-            </description>
-            <argument>REQUIRED</argument>
-            <argument-name>CONFIG-FILE</argument-name>
-        </definition>
+    <definition name="filter">
+      <short-option>F</short-option>
+      <long-option>filter</long-option>
+      <description>Filtering round robin result. This option is ignored when mode is not `compare.'</description>
+      <argument>REQUIRED</argument>
+      <argument-name>FILTER_NAME</argument-name>
+    </definition>
 
-        <definition name="help">
-            <short-option>h</short-option>
-            <long-option>help</long-option>
-            <description>print this message</description>
-            <argument>NONE</argument>
-        </definition>
+    <definition name="config-file">
+      <long-option>config-file</long-option>
+      <description>
+        Set configuration xml file.  If you do not specified this option and you have 
+        `.birthmarks.xml' on your home directory, or `birthmark.xml' on current directory, 
+        this tool read it.
+      </description>
+      <argument>REQUIRED</argument>
+      <argument-name>CONFIG-FILE</argument-name>
+    </definition>
 
-        <definition name="license">
-            <short-option>l</short-option>
-            <long-option>license</long-option>
-            <description>print license</description>
-            <argument>NONE</argument>
-        </definition>
+    <definition name="help">
+      <short-option>h</short-option>
+      <long-option>help</long-option>
+      <description>print this message</description>
+      <argument>NONE</argument>
+    </definition>
 
-        <definition name="version">
-            <short-option>v</short-option>
-            <long-option>version</long-option>
-            <description>print version</description>
-            <argument>NONE</argument>
-        </definition>
-    </definitions>
+    <definition name="license">
+      <short-option>l</short-option>
+      <long-option>license</long-option>
+      <description>print license</description>
+      <argument>NONE</argument>
+    </definition>
 
-    <available-options>
-        <option>classpath</option>
-        <option>birthmark</option>
-        <option>format</option>
-        <option>mode</option>
-        <option>config-file</option>
-        <option>help</option>
-        <option>license</option>
-        <option>version</option>
-    </available-options>
+    <definition name="version">
+      <short-option>v</short-option>
+      <long-option>version</long-option>
+      <description>print version</description>
+      <argument>NONE</argument>
+    </definition>
+  </definitions>
+
+  <available-options>
+    <option>classpath</option>
+    <option>birthmark</option>
+    <option>format</option>
+    <option>filter</option>
+    <option>mode</option>
+    <option>config-file</option>
+    <option>help</option>
+    <option>license</option>
+    <option>version</option>
+  </available-options>
 </command-line>
