@@ -60,6 +60,13 @@
       <argument-name>CONFIG-FILE</argument-name>
     </definition>
 
+    <definition name="export-config">
+      <long-option>export-config</long-option>
+      <description>export configuration file to specified file or standard output.</description>
+      <argument>OPTIONAL</argument>
+      <argument-name>FILE</argument-name>
+    </definition>
+
     <definition name="help">
       <short-option>h</short-option>
       <long-option>help</long-option>
@@ -92,5 +99,6 @@
     <option>help</option>
     <option>license</option>
     <option>version</option>
+    <option>export-config</option>
   </available-options>
 </command-line>
