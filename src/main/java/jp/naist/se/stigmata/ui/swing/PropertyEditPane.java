@@ -10,8 +10,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Iterator;
 
 import javax.swing.Box;
@@ -34,7 +32,7 @@ import jp.naist.se.stigmata.BirthmarkContext;
  * @author Haruaki Tamada
  * @version $Revision$ $Date$
  */
-public class PropertyEditPane extends JPanel implements SettingsExportable{
+public class PropertyEditPane extends JPanel{
     private static final long serialVersionUID = 12397342543653L;
 
     private StigmataFrame stigmata;
@@ -46,21 +44,6 @@ public class PropertyEditPane extends JPanel implements SettingsExportable{
 
         initLayouts();
         initData();
-    }
-
-    public void exportSettings(PrintWriter out) throws IOException{
-        out.println("  <properties>");
-        for(int i = 0; i < model.getRowCount(); i++){
-            out.println("    <property>");
-            out.print("      <name>");
-            out.print(model.getValueAt(i, 0));
-            out.println("</name>");
-            out.print("      <value>");
-            out.print(model.getValueAt(i, 1));
-            out.println("</value>");
-            out.println("    </property>");
-        }
-        out.println("  </properties>");
     }
 
     public void updateContext(BirthmarkContext context){

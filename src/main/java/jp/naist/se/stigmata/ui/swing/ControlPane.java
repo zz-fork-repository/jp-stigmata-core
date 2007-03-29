@@ -26,6 +26,7 @@ import javax.swing.border.TitledBorder;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.reader.ClasspathContext;
+import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
 /**
@@ -106,25 +107,29 @@ public class ControlPane extends JPanel{
     }
 
     public void exportSettings(){
-        File file = stigmata.getSaveFile(Messages
-                .getStringArray("export.extensions"), Messages
-                .getString("export.description"));
+        File file = stigmata.getSaveFile(
+            Messages.getStringArray("export.extensions"), 
+            Messages.getString("export.description")
+        );
+
         if(file != null){
+            BirthmarkContext context = generateContext();
             if(!file.getName().endsWith(".xml")){
                 file = new File(file.getParent(), file.getName() + ".xml");
             }
+
+            ConfigFileExporter bce = new ConfigFileExporter(context);
             try{
                 PrintWriter out = new PrintWriter(new FileWriter(file));
-                out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-                out.println("<stigmata>");
-                definition.exportSettings(out);
-                filters.exportSettings(out);
-                wellknownClassses.exportSettings(out);
-                classpath.exportSettings(out);
-                properties.exportSettings(out);
-                out.println("</stigmata>");
+                bce.export(out);
                 out.close();
-            }catch(IOException e){
+            } catch(IOException e){
+                JOptionPane.showMessageDialog(
+                    stigmata,
+                    Messages.getString("error.io", e.getMessage()),
+                    Messages.getString("error.dialog.title"),
+                    JOptionPane.ERROR_MESSAGE
+                );
             }
         }
     }
@@ -217,7 +222,7 @@ public class ControlPane extends JPanel{
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
-        BirthmarkContext context = initAction();
+        BirthmarkContext context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         Set<String> targets = new HashSet<String>();
@@ -237,7 +242,7 @@ public class ControlPane extends JPanel{
     }
 
     private void compareRoundRobinWithFiltering(){
-        BirthmarkContext context = initAction();
+        BirthmarkContext context = generateContext();
         FilterSelectionPane pane = new FilterSelectionPane(
             context.getFilterManager()
         );
@@ -257,14 +262,14 @@ public class ControlPane extends JPanel{
     }
 
     private void compareRoundRobin(){
-        BirthmarkContext context = initAction();
+        BirthmarkContext context = generateContext();
 
         stigmata.compareRoundRobin(birthmarks.getSelectedServices(), targetX
                 .getValues(), targetY.getValues(), context);
     }
 
     private void compareSpecifiedPair(){
-        BirthmarkContext context = initAction();
+        BirthmarkContext context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         stigmata.compareSpecifiedPair(birthmarks.getSelectedServices(), fileX,
@@ -272,7 +277,7 @@ public class ControlPane extends JPanel{
     }
 
     private void compareGuessedPair(){
-        BirthmarkContext context = initAction();
+        BirthmarkContext context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
@@ -280,7 +285,7 @@ public class ControlPane extends JPanel{
                 fileY, context);
     }
 
-    private BirthmarkContext initAction(){
+    private BirthmarkContext generateContext(){
         BirthmarkContext context = stigmata.getStigmata().createContext();
         // BirthmarkContext context2 = stigmata.getContext();
         ClasspathContext bytecode = context.getBytecodeContext();

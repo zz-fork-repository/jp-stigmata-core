@@ -10,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,13 +30,11 @@ import jp.naist.se.stigmata.ui.swing.filter.ComparisonPairFilterRetainable;
 import jp.naist.se.stigmata.ui.swing.filter.FilterEditingPane;
 import jp.naist.se.stigmata.ui.swing.filter.FilterSetDefinitionPane;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 /**
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class FilterManagementPane extends JPanel implements SettingsExportable, ComparisonPairFilterRetainable{
+public class FilterManagementPane extends JPanel implements ComparisonPairFilterRetainable{
     private static final long serialVersionUID = 972135792354L;
 
     private StigmataFrame stigmata;
@@ -52,43 +48,6 @@ public class FilterManagementPane extends JPanel implements SettingsExportable, 
         this.stigmata = stigmata;
         
         initLayouts();
-    }
-
-    public void exportSettings(PrintWriter out) throws IOException{
-        out.println("  <filterset-list>");
-        for(ComparisonPairFilterSet filterset: filters.values()){
-            out.println("    <filterset>");
-            out.printf("      <name>%s</name>%n", filterset.getName());
-            out.printf("      <match>%s</match>%n", filterset.isMatchAll()? "all": "any");
-            out.println("      <filter-list>");
-            for(ComparisonPairFilter filter: filterset){
-                out.println("        <filter>");
-                out.printf("          <filter-type>%s</filter-type>%n", filter.getService().getFilterName());
-                out.printf("          <criterion>%s</criterion>%n", filter.getCriterion());
-                try{
-                    Map props = BeanUtils.describe(filter);
-                    props.remove("service");
-                    props.remove("class");
-                    props.remove("criterion");
-                    props.remove("acceptableCriteria");
-                    out.println("          <attributes>");
-                    for(Object key: props.keySet()){
-                        out.println("            <attribute>");
-                        out.printf("              <name>%s</name>%n", String.valueOf(key));
-                        out.printf("              <value>%s</value>%n", String.valueOf(props.get(key)));
-                        out.println("            </attribute>");
-                    }
-                    out.println("          </attributes>");
-                    
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
-                out.println("        </filter>");
-            }
-            out.println("      </filter-list>");
-            out.println("    </filterset>");
-        }
-        out.println("  </filterset-list>");
     }
 
     public void reset(){

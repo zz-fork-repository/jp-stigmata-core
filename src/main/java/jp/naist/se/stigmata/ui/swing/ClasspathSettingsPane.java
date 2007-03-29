@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -31,7 +30,7 @@ import jp.naist.se.stigmata.reader.ClasspathContext;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class ClasspathSettingsPane extends JPanel implements SettingsExportable{
+public class ClasspathSettingsPane extends JPanel{
     private static final long serialVersionUID = 320973463423634L;
 
     private StigmataFrame stigmata;
@@ -42,19 +41,6 @@ public class ClasspathSettingsPane extends JPanel implements SettingsExportable{
         this.stigmata = frame;
 
         initLayouts();
-    }
-
-    public void exportSettings(PrintWriter out) throws IOException{
-        String[] cplist = classpath.getValues();
-        if(cplist != null && cplist.length > 0){
-            out.println("  <classpath-list>");
-            for(int i = 0; i < cplist.length; i++){
-                out.print("<classpath>");
-                out.print(cplist[i]);
-                out.println("</classpath>");
-            }
-            out.println("  </classpath-list>");
-        }
     }
 
     public void updateClasspathContext(ClasspathContext context){

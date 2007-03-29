@@ -28,7 +28,7 @@ import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
-import jp.naist.se.stigmata.utils.BirthmarkContextExporter;
+import jp.naist.se.stigmata.utils.ConfigFileExporter;
 
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -232,7 +232,7 @@ public class Main{
                 out = new PrintWriter(new FileWriter(file));
             }
 
-            new BirthmarkContextExporter(context).export(out);
+            new ConfigFileExporter(context).export(out);
             out.close();
         }catch(IOException e){
         }

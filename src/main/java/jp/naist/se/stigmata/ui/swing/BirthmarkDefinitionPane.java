@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +45,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision: 24 $ $Date: 2007-01-31 00:08:43 +0900 (Wed, 31 Jan 2007) $
  */
-public class BirthmarkDefinitionPane extends JPanel implements SettingsExportable{
+public class BirthmarkDefinitionPane extends JPanel{
     private static final long serialVersionUID = 3932637653297802978L;
 
     private StigmataFrame stigmata;
@@ -91,27 +89,6 @@ public class BirthmarkDefinitionPane extends JPanel implements SettingsExportabl
                 context.addService(service);
             }
         }
-    }
-
-    public void exportSettings(PrintWriter out) throws IOException{
-        out.println("  <birthmark-services>");
-        for(int i = 0; i < model.getSize(); i++){
-            Object element = model.getElementAt(i);
-            if(element instanceof BirthmarkSpi){
-                BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(i);
-                // not expert birthmarks are defined as class.
-                if(service.isExpert() && service instanceof BirthmarkService){
-                    out.println("    <birthmark-service>");
-                    out.printf("      <type>%s</type>%n", service.getType());
-                    out.printf("      <display-name>%s</display-name>%n", service.getDisplayType());
-                    out.printf("      <description>%s</description>%n", service.getDescription());
-                    out.printf("      <extractor>%s</extractor>%n", service.getExtractorClassName());
-                    out.printf("      <comparator>%s</comparator>%n", service.getComparatorClassName());
-                    out.println("    </birthmark-service>");
-                }
-            }
-        }
-        out.println("  </birthmark-services>");
     }
 
     private void initData(){
