@@ -38,7 +38,7 @@ public class UCBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("uc");
         Assert.assertEquals(birthmark.getType(), "uc");
-        Assert.assertEquals(birthmark.getElementCount(), 16);
+        Assert.assertEquals(birthmark.getElementCount(), 18);
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals(elements[ 0].getValue(), "java.io.ByteArrayInputStream");
@@ -50,20 +50,22 @@ public class UCBirthmarkExtractorTest{
         Assert.assertEquals(elements[ 6].getValue(), "java.lang.Double");
         Assert.assertEquals(elements[ 7].getValue(), "java.lang.Object");
         Assert.assertEquals(elements[ 8].getValue(), "java.lang.String");
-        Assert.assertEquals(elements[ 9].getValue(), "java.lang.System");
-        Assert.assertEquals(elements[10].getValue(), "java.net.URI");
-        Assert.assertEquals(elements[11].getValue(), "java.net.URL");
-        Assert.assertEquals(elements[12].getValue(), "java.util.ArrayList");
-        Assert.assertEquals(elements[13].getValue(), "java.util.Iterator");
-        Assert.assertEquals(elements[14].getValue(), "java.util.List");
-        Assert.assertEquals(elements[15].getValue(), "javax.imageio.spi.ServiceRegistry");
+        Assert.assertEquals(elements[ 9].getValue(), "java.lang.StringBuilder");
+        Assert.assertEquals(elements[10].getValue(), "java.lang.System");
+        Assert.assertEquals(elements[11].getValue(), "java.net.URI");
+        Assert.assertEquals(elements[12].getValue(), "java.net.URL");
+        Assert.assertEquals(elements[13].getValue(), "java.util.ArrayList");
+        Assert.assertEquals(elements[14].getValue(), "java.util.Iterator");
+        Assert.assertEquals(elements[15].getValue(), "java.util.List");
+        Assert.assertEquals(elements[16].getValue(), "java.util.logging.Logger");
+        Assert.assertEquals(elements[17].getValue(), "javax.imageio.spi.ServiceRegistry");
     }
 
     @Test
-    public void checkISBirthmark2() throws Exception{
+    public void checkUCBirthmark2() throws Exception{
         BirthmarkSet[] array = stigmata.extract(
             new String[] { "uc", },
-            new String[] { "target/classes/jp/naist/se/stigmata/ConfigFileParser.class", }
+            new String[] { "target/classes/jp/naist/se/stigmata/RoundRobinComparisonResultSet.class", }
         );
 
         Assert.assertEquals(array.length, 1);
@@ -71,17 +73,10 @@ public class UCBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("uc");
         Assert.assertEquals(birthmark.getType(), "uc");
-        Assert.assertEquals(birthmark.getElementCount(), 8);
+        Assert.assertEquals(birthmark.getElementCount(), 2);
 
         BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals(elements[0].getValue(), "java.io.InputStream");
-        Assert.assertEquals(elements[1].getValue(), "java.lang.Object");
-        Assert.assertEquals(elements[2].getValue(), "java.lang.String");
-        Assert.assertEquals(elements[3].getValue(), "java.net.URL");
-        Assert.assertEquals(elements[4].getValue(), "javax.xml.parsers.SAXParser");
-        Assert.assertEquals(elements[5].getValue(), "javax.xml.parsers.SAXParserFactory");
-        Assert.assertEquals(elements[6].getValue(), "org.xml.sax.Attributes");
-        Assert.assertEquals(elements[7].getValue(), "org.xml.sax.helpers.DefaultHandler");
-
+        Assert.assertEquals(elements[0].getValue(), "java.lang.Object");
+        Assert.assertEquals(elements[1].getValue(), "java.util.Iterator");
     }
 }

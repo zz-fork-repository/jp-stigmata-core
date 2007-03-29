@@ -62,7 +62,7 @@ public class CVFVBirthmarkExtractorTest{
     public void checkCVFVBirthmark2() throws Exception{
         BirthmarkSet[] array = stigmata.extract(
             new String[] { "cvfv", },
-            new String[] { "target/classes/jp/naist/se/stigmata/ConfigFileParser.class", }
+            new String[] { "target/classes/jp/naist/se/stigmata/RoundRobinComparisonResultSet.class", }
         );
 
         Assert.assertEquals(array.length, 1);
@@ -70,7 +70,7 @@ public class CVFVBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("cvfv");
         Assert.assertEquals(birthmark.getType(), "cvfv");
-        Assert.assertEquals(birthmark.getElementCount(), 8);
+        Assert.assertEquals(birthmark.getElementCount(), 6);
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals(elements[0].getClass().getName(),
@@ -85,32 +85,22 @@ public class CVFVBirthmarkExtractorTest{
                             "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
         Assert.assertEquals(elements[5].getClass().getName(),
                             "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
-        Assert.assertEquals(elements[6].getClass().getName(),
-                            "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
-        Assert.assertEquals(elements[7].getClass().getName(),
-                            "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
 
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[0]).getSignature(),
-                            "Ljp/naist/se/stigmata/BirthmarkContext;");
+                            "[Ljp/naist/se/stigmata/BirthmarkSet;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[0]).getValue(), null);
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[1]).getSignature(),
-                            "Ljp/naist/se/stigmata/utils/WellknownClassManager;");
+                            "[Ljp/naist/se/stigmata/BirthmarkSet;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[1]).getValue(), null);
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getSignature(),
-                            "Ljp/naist/se/stigmata/birthmarks/BirthmarkService;");
+                            "Ljp/naist/se/stigmata/BirthmarkContext;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getValue(), null);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getSignature(),
-                            "Ljp/naist/se/stigmata/ConfigFileParser$Part;");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getValue(), null);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getSignature(), "I");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getValue(), 0);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[5]).getSignature(), "I");
+
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getSignature(), "I");
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[3]).getValue(), 1);
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getSignature(), "Z");
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[4]).getValue(), 1);
+        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[5]).getSignature(), "Z");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[5]).getValue(), 0);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[6]).getSignature(),
-                            "Ljava/lang/String;");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[6]).getValue(), null);
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[7]).getSignature(),
-                            "Ljava/lang/String;");
-        Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[7]).getValue(), null);
     }
 }

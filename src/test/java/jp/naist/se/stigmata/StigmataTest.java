@@ -39,7 +39,7 @@ public class StigmataTest{
         Assert.assertNotNull(service.getExtractor());
         Assert.assertEquals(
             service.getComparator().getClass().getName(),
-            "jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator"
+            "jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator"
         );
         Assert.assertEquals(
             service.getExtractor().getClass().getName(),
@@ -55,7 +55,7 @@ public class StigmataTest{
         Assert.assertNotNull(service.getExtractor());
         Assert.assertEquals(
             service.getComparator().getClass().getName(),
-            "jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator"
+            "jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator"
         );
         Assert.assertEquals(
             service.getExtractor().getClass().getName(),
@@ -71,7 +71,7 @@ public class StigmataTest{
         Assert.assertNotNull(service.getExtractor());
         Assert.assertEquals(
             service.getComparator().getClass().getName(),
-            "jp.naist.se.stigmata.birthmarks.PlainBirthmarkComparator"
+            "jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator"
         );
         Assert.assertEquals(
             service.getExtractor().getClass().getName(),
@@ -87,7 +87,7 @@ public class StigmataTest{
         Assert.assertNotNull(service.getExtractor());
         Assert.assertEquals(
             service.getComparator().getClass().getName(),
-            "jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkComparator"
+            "jp.naist.se.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparator"
         );
         Assert.assertEquals(
             service.getExtractor().getClass().getName(),
