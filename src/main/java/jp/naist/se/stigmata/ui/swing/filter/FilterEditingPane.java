@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.filter;
 
+/*
+ * $Id$
+ */
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -28,6 +32,11 @@ import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.ui.swing.Utility;
 
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class FilterEditingPane extends JPanel{
     private static final long serialVersionUID = -2607954525579006086L;
 

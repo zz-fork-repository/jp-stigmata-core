@@ -1,7 +1,10 @@
 package jp.naist.se.stigmata.ui.swing.filter;
 
+/*
+ * $Id$
+ */
+
 import java.awt.GridLayout;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +20,11 @@ import jp.naist.se.stigmata.filter.SimilarityComparisonPairFilterService;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.Messages;
 
-
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class SimilarityComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
     public ComparisonPairFilterPane createComponent(ComparisonPairFilterSpi service){
@@ -52,13 +59,13 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
             try{
                 double v = Double.parseDouble(threshold.getText());
                 if(v < 0d){
-                    errors.add(MessageFormat.format(Messages.getString("error.negative.value"), v));
+                    errors.add(Messages.getString("error.negative.value", v));
                 }
                 else if(v > 1.0d){
-                    errors.add(MessageFormat.format(Messages.getString("error.over.range"), "0-1"));
+                    errors.add(Messages.getString("error.over.range", "0-1"));
                 }
             } catch(NumberFormatException e){
-                errors.add(MessageFormat.format(Messages.getString("error.invalid.format.double"), threshold.getText()));
+                errors.add(Messages.getString("error.invalid.format.double", threshold.getText()));
             }
 
             return errors.toArray(new String[errors.size()]);

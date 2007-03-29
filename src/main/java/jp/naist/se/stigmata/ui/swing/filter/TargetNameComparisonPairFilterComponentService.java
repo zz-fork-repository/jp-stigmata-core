@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.filter;
 
+/*
+ * $Id$
+ */
+
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +19,10 @@ import jp.naist.se.stigmata.filter.TargetNameComparisonPairFilterService;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.Messages;
 
-
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class TargetNameComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
     public ComparisonPairFilterPane createComponent(ComparisonPairFilterSpi service){

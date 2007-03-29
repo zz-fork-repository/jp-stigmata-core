@@ -100,7 +100,7 @@ public class BirthmarkDefinitionPane extends JPanel implements SettingsExportabl
             if(element instanceof BirthmarkSpi){
                 BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(i);
                 // not expert birthmarks are defined as class.
-                if(service.isExpert()){
+                if(service.isExpert() && service instanceof BirthmarkService){
                     out.println("    <birthmark-service>");
                     out.printf("      <type>%s</type>%n", service.getType());
                     out.printf("      <display-name>%s</display-name>%n", service.getDisplayType());

@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.filter;
 
+/*
+ * $Id$
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +15,11 @@ import jp.naist.se.stigmata.filter.Criterion;
 import jp.naist.se.stigmata.filter.Target;
 import jp.naist.se.stigmata.ui.swing.Messages;
 
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public abstract class ComparisonPairFilterPane extends JPanel{
     private Map<String, Criterion> criterionMap = new HashMap<String, Criterion>();
     private Map<String, Target> targetMap = new HashMap<String, Target>();

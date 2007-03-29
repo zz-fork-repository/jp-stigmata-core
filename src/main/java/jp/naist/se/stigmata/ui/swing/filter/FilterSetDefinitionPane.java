@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.filter;
 
+/*
+ * $Id$
+ */
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -25,6 +29,11 @@ import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.Utility;
 
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFilterListener{
     private static final long serialVersionUID = 7519306603672717119L;
 

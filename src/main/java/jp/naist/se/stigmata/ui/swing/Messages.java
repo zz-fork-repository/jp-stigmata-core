@@ -4,6 +4,7 @@ package jp.naist.se.stigmata.ui.swing;
  * $Id$
  */
 
+import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -23,6 +24,12 @@ public class Messages{
 
     public static String getString(String key){
         return instance.get(key);
+    }
+
+    public static String getString(String key, Object... strings){
+        String v = instance.get(key);
+
+        return MessageFormat.format(v, strings);
     }
 
     public static String[] getStringArray(String key){

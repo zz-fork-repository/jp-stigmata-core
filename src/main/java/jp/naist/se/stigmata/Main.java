@@ -6,6 +6,7 @@ package jp.naist.se.stigmata;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.cafebabe.commons.xmlcli.CommandLinePlus;
+import jp.cafebabe.commons.xmlcli.HelpFormatterPlus;
 import jp.cafebabe.commons.xmlcli.OptionsBuilder;
 import jp.cafebabe.commons.xmlcli.builder.OptionsBuilderFactory;
 import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
@@ -26,6 +28,7 @@ import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.naist.se.stigmata.utils.BirthmarkContextExporter;
 
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -37,9 +40,9 @@ import org.xml.sax.SAXException;
 
 /**
  * Front end class.
- *
- * @author  Haruaki TAMADA
- * @version  $Revision$ $Date$
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
  */
 public class Main{
     private FormatManager manager = FormatManager.getInstance();
@@ -65,14 +68,17 @@ public class Main{
         String mode = commandLine.getOptionValue("mode");
         String format = commandLine.getOptionValue("format");
 
-        if(format == null) format = "xml";
-        if(mode == null) mode = "gui";
+        if(format == null)
+            format = "xml";
+        if(mode == null)
+            mode = "gui";
 
         boolean exitFlag = executeOption(commandLine, options);
 
         if(!exitFlag){
             if(!("gui".equals(mode) || "list".equals(mode))
                 && (arguments == null || arguments.length == 0)){
+
                 printHelp(options);
                 return;
             }
@@ -100,24 +106,27 @@ public class Main{
     /**
      * extract birthmarks.
      */
-    private void extractBirthmarks(Stigmata stigmata, String[] birthmarks, String[] args, String format){
-        try {
+    private void extractBirthmarks(Stigmata stigmata, String[] birthmarks,
+            String[] args, String format){
+        try{
             BirthmarkSet[] holders = stigmata.extract(birthmarks, args, context);
 
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkExtractionResultFormat formatter = spi.getExtractionResultFormat();
             formatter.printResult(new PrintWriter(System.out), holders);
-        } catch(Exception ex) {
+        }catch(Exception ex){
             ex.printStackTrace();
         }
     }
 
     /**
-     *
+     * 
      */
-    private void compareBirthmarks(Stigmata stigmata, String[] birthmarks, String[] filters, String[] args, String format){
+    private void compareBirthmarks(Stigmata stigmata, String[] birthmarks,
+            String[] filters, String[] args, String format){
         try{
-            BirthmarkSet[] holders = stigmata.extract(birthmarks, args, context);
+            BirthmarkSet[] holders = stigmata
+                    .extract(birthmarks, args, context);
             ComparisonResultSet resultset = stigmata.compare(holders, context);
             if(filters != null){
                 resultset = stigmata.filter(resultset, filters);
@@ -126,7 +135,7 @@ public class Main{
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkComparisonResultFormat formatter = spi.getComparisonResultFormat();
             formatter.printResult(new PrintWriter(System.out), resultset);
-        } catch(Exception e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -138,8 +147,7 @@ public class Main{
             BirthmarkServiceListFormat formatter = spi.getBirthmarkServiceListFormat();
 
             formatter.printResult(new PrintWriter(System.out), spis);
-        }
-        catch(IOException e){
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
@@ -163,12 +171,12 @@ public class Main{
 
         if(classpath != null){
             for(String cp: classpath){
-                try {
+                try{
                     File f = new File(cp);
                     if(f.exists()){
                         context.addClasspath(f.toURI().toURL());
                     }
-                } catch (MalformedURLException ex) {
+                }catch(MalformedURLException ex){
                 }
             }
         }
@@ -188,43 +196,75 @@ public class Main{
             printLicense();
             exitFlag = true;
         }
+        if(commandLine.hasOption("export-config")){
+            exportConfiguration(commandLine.getOptionValue("export-config"));
+            exitFlag = true;
+        }
         return exitFlag;
     }
 
     private Options buildOptions(){
-        try {
+        try{
             OptionsBuilderFactory factory = OptionsBuilderFactory.getInstance();
             URL location = getClass().getResource("/resources/options.xml");
             OptionsBuilder builder = factory.createBuilder(location);
             Options options = builder.buildOptions();
 
             return options;
-        } catch (DOMException ex) {
+        }catch(DOMException ex){
             ex.printStackTrace();
-        } catch (SAXException ex) {
+        }catch(SAXException ex){
             ex.printStackTrace();
-        } catch (IOException ex) {
+        }catch(IOException ex){
             ex.printStackTrace();
         }
         return null;
     }
 
+    private void exportConfiguration(String file){
+        try{
+            PrintWriter out;
+            if(file == null){
+                out = new PrintWriter(System.out);
+            }
+            else{
+                if(!file.endsWith(".xml")){
+                    file = file + ".xml";
+                }
+                out = new PrintWriter(new FileWriter(file));
+            }
+
+            new BirthmarkContextExporter(context).export(out);
+            out.close();
+        }catch(IOException e){
+        }
+    }
+
     private void printHelp(Options options){
         Package p = getClass().getPackage();
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("java -jar stigmata-" + p.getImplementationVersion() + ".jar <OPTIONS> <TARGETS>",
-                "TARGETS is allowed as jar files, war files, class files, and classpath directory.", options, "");
+        HelpFormatter formatter = new HelpFormatterPlus();
+        System.out.println(options.getClass().getName());
+        formatter.printHelp(
+            String.format(
+                "java -jar stigmata-%s.jar <OPTIONS> <TARGETS>%n" + 
+                "TARGETS is allowed as jar files, war files, class files, and classpath directory.",
+                p.getImplementationVersion()
+            ),
+            options
+        );
         System.out.println();
         System.out.println("Available birthmarks:");
         for(BirthmarkSpi service: context.getServices()){
             if(!service.isExpert()){
-                System.out.printf("    %-5s (%s): %s%n", service.getType(), service.getDisplayType(), service.getDescription());
+                System.out.printf("    %-5s (%s): %s%n", service.getType(),
+                        service.getDisplayType(), service.getDescription());
             }
         }
         System.out.println();
         System.out.println("Available filers:");
-        for(ComparisonPairFilterSet filterset: context.getFilterManager().getFilterSets()){
-            System.out.printf("    %s (%s)%n", filterset.getName(), filterset.isMatchAll()? "match all following condition": "match any following condition");
+        for(ComparisonPairFilterSet filterset: context.getFilterManager()
+                .getFilterSets()){
+            System.out.printf("    %s (%s)%n", filterset.getName(), filterset.isMatchAll()? "match all": "match any");
             for(ComparisonPairFilter filter: filterset){
                 System.out.printf("        %s%n", filter);
             }
@@ -235,7 +275,7 @@ public class Main{
     }
 
     private void printLicense(){
-        try {
+        try{
             InputStream in = getClass().getResourceAsStream("/META-INF/license.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
@@ -244,7 +284,7 @@ public class Main{
                 System.out.println(line);
             }
             reader.close();
-        } catch (IOException ex) {
+        }catch(IOException ex){
             ex.printStackTrace();
         }
     }

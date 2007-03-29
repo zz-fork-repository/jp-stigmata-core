@@ -21,7 +21,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,11 +105,12 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
     public void setCurrentDirectory(File directory){
         if(!directory.isDirectory()){
-            String message = MessageFormat.format(
-                Messages.getString("notdirectory.dialog.message"),
-                new Object[] { directory.getName(), }
+            JOptionPane.showMessageDialog(
+                this, 
+                Messages.getString("notdirectory.dialog.message", directory.getName()),
+                Messages.getString("notdirectory.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
             );
-            JOptionPane.showMessageDialog(this, message, Messages.getString("notdirectory.dialog.title"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         this.currentDirectory = directory;

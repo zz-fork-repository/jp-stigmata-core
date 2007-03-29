@@ -1,8 +1,11 @@
 package jp.naist.se.stigmata.ui.swing.filter;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +17,17 @@ import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.filter.BirthmarkElementCountComparisonPairFilter;
 import jp.naist.se.stigmata.filter.BirthmarkElementCountComparisonPairFilterService;
 import jp.naist.se.stigmata.filter.Target;
-import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListCellRenderer;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.naist.se.stigmata.ui.swing.Messages;
 
-
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class BirthmarkElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService implements BirthmarkServiceListener{
     private Pane pane;
 
@@ -76,10 +83,10 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
             try{
                 int v = Integer.parseInt(threshold.getText());
                 if(v < 0){
-                    errors.add(MessageFormat.format(Messages.getString("error.negative.value"), v));
+                    errors.add(Messages.getString("error.negative.value", v));
                 }
             } catch(NumberFormatException e){
-                errors.add(MessageFormat.format(Messages.getString("error.invalid.format.integer"), threshold.getText()));
+                errors.add(Messages.getString("error.invalid.format.integer", threshold.getText()));
             }
 
             return errors.toArray(new String[errors.size()]);
