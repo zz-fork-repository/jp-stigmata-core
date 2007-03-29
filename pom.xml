@@ -134,6 +134,11 @@
         </executions>
       </plugin>
 
+<!--
+This task has a bug...
+The bug is that resource file is copied to target/classes directory, too.
+-->
+<!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>native2ascii-maven-plugin</artifactId>
@@ -143,16 +148,16 @@
               <goal>native2ascii</goal>
             </goals>
             <configuration>
-              <src>${basedir}/src/main/resources/resources</src>
-              <dest>${project.build.directory}/classes/resources</dest>
               <ext>.properties</ext>
               <includes>*.source</includes>
               <encoding>shift_jis</encoding>
+              <src>${basedir}/src/main/resources/resources/</src>
+              <dest>${project.build.directory}/classes/resources</dest>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
+-->
       <!-- for JUnit4 -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
