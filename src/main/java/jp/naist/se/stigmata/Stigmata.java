@@ -27,6 +27,7 @@ import jp.naist.se.stigmata.reader.DefaultClassFileArchive;
 import jp.naist.se.stigmata.reader.JarClassFileArchive;
 import jp.naist.se.stigmata.reader.WarClassFileArchive;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.naist.se.stigmata.utils.ConfigFileImporter;
 
 /**
  * Birthmarking engine.
@@ -286,7 +287,7 @@ public class Stigmata{
 
     private void initConfiguration(InputStream in){
         try {
-            ConfigFileParser parser = new ConfigFileParser(defaultContext);
+            ConfigFileImporter parser = new ConfigFileImporter(defaultContext);
             parser.parse(in);
         } catch(IOException e){
             throw new ApplicationInitializationError(e);
