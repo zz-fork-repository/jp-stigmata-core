@@ -5,11 +5,13 @@ package jp.naist.se.stigmata;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Arrays;
+import java.util.Set;
 
 import javax.imageio.spi.ServiceRegistry;
 
@@ -55,6 +57,9 @@ public class BirthmarkContext{
      */
     private Map<String, String> properties = new HashMap<String, String>();
 
+    /**
+     * filter manager.
+     */
     private ComparisonPairFilterManager filterManager;
 
     /**
@@ -121,7 +126,14 @@ public class BirthmarkContext{
     }
 
     public Iterator<String> propertyKeys(){
-        return properties.keySet().iterator();
+        Set<String> set = new HashSet<String>();
+        if(parent != null){
+            for(Iterator<String> i = parent.propertyKeys(); i.hasNext(); ){
+                set.add(i.next());
+            }
+        }
+        set.addAll(properties.keySet());
+        return set.iterator();
     }
 
     /**

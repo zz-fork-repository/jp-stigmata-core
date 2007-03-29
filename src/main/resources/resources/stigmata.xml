@@ -182,8 +182,8 @@ $Id$
   <!-- Properties for birthmark context -->
   <properties>
     <property>
-      <name>birthmark.file.directory</name>
-      <value>.</value>
+      <name>extractor.kgram.KValue</name>
+      <value>4</value>
     </property>
 <!--
     <property>

@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.imageio.spi.ServiceRegistry;
@@ -28,6 +29,8 @@ import jp.naist.se.stigmata.reader.JarClassFileArchive;
 import jp.naist.se.stigmata.reader.WarClassFileArchive;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.ConfigFileImporter;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
  * Birthmarking engine.
@@ -256,13 +259,24 @@ public class Stigmata{
         return extractBirthmark(birthmarks, data, holder, context);
     }
 
-    private BirthmarkSet extractBirthmark(String[] birthmarks, byte[] bytecode,
-                                          BirthmarkSet holder,
+    private BirthmarkSet extractBirthmark(String[] birthmarks, byte[] bytecode, BirthmarkSet holder,
                                           BirthmarkContext context) throws BirthmarkExtractionException, IOException{
         for(String birthmark: birthmarks){
             BirthmarkSpi spi = context.getService(birthmark);
             if(spi != null){
                 BirthmarkExtractor extractor = spi.getExtractor();
+                try{
+                    Map props = BeanUtils.describe(extractor);
+                    props.remove("class");
+                    props.remove("provider");
+                    for(Object keyObject: props.keySet()){
+                        String key = "extractor." + spi.getType() + "." + String.valueOf(keyObject);
+                        if(context.getProperty(key) != null){
+                            BeanUtils.setProperty(extractor, (String)keyObject, context.getProperty(key));
+                        }
+                    }
+                } catch(Exception e){
+                }
                 holder.addBirthmark(
                     extractor.extract(new ByteArrayInputStream(bytecode), context)
                 );

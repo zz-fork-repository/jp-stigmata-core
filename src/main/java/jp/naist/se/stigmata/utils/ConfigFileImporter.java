@@ -158,10 +158,12 @@ public class ConfigFileImporter{
 
             if(value.length() > 0){
                 if(part == Part.PROPERTIES){
-                    if(qname.equals("name"))
+                    if(qname.equals("name")){
                         key = value;
-                    else if(qname.equals("value"))
+                    }
+                    else if(qname.equals("value")){
                         context.addProperty(key, value);
+                    }
                 }
                 else if(part == Part.WELLKNOWN_CLASSES
                         && (qname.equals("suffix") || qname.equals("prefix") || qname
@@ -190,22 +192,28 @@ public class ConfigFileImporter{
                         service.setComparatorClassName(value);
                 }
                 else if(part == Part.FILTER_SET){
-                    if(qname.equals("name"))
+                    if(qname.equals("name")){
                         filter.setName(value);
+                    }
                     else if(qname.equals("match")){
-                        if(value.equals("all"))
+                        if(value.equals("all")){
                             filter.setMatchAll();
-                        else
+                        }
+                        else{
                             filter.setMatchAny();
+                        }
                     }
                 }
                 else if(part == Part.FILTER_DEFINITION){
-                    if(qname.equals("filter-type"))
+                    if(qname.equals("filter-type")){
                         filterType = value;
-                    else if(qname.equals("criterion"))
+                    }
+                    else if(qname.equals("criterion")){
                         filterCriterion = value;
-                    else if(qname.equals("name"))
+                    }
+                    else if(qname.equals("name")){
                         attributeName = value;
+                    }
                     else{
                         filterAttributes.put(attributeName, value);
                     }
@@ -220,9 +228,9 @@ public class ConfigFileImporter{
                 service = null;
             }
             else if(part == Part.FILTER_DEFINITION && qname.equals("filter")){
-                ComparisonPairFilter f = context.getFilterManager()
-                        .buildFilter(filterType, filterCriterion,
-                                filterAttributes);
+                ComparisonPairFilter f = context.getFilterManager().buildFilter(
+                    filterType, filterCriterion, filterAttributes
+                );
                 filter.addFilter(f);
                 part = Part.FILTER_SET;
             }

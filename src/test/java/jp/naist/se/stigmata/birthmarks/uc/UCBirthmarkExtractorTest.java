@@ -38,7 +38,7 @@ public class UCBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("uc");
         Assert.assertEquals(birthmark.getType(), "uc");
-        Assert.assertEquals(birthmark.getElementCount(), 18);
+        Assert.assertEquals(birthmark.getElementCount(), 21);
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals(elements[ 0].getValue(), "java.io.ByteArrayInputStream");
@@ -57,8 +57,12 @@ public class UCBirthmarkExtractorTest{
         Assert.assertEquals(elements[13].getValue(), "java.util.ArrayList");
         Assert.assertEquals(elements[14].getValue(), "java.util.Iterator");
         Assert.assertEquals(elements[15].getValue(), "java.util.List");
-        Assert.assertEquals(elements[16].getValue(), "java.util.logging.Logger");
-        Assert.assertEquals(elements[17].getValue(), "javax.imageio.spi.ServiceRegistry");
+        Assert.assertEquals(elements[16].getValue(), "java.util.Map");
+        Assert.assertEquals(elements[17].getValue(), "java.util.Set");
+        Assert.assertEquals(elements[18].getValue(), "java.util.logging.Logger");
+        Assert.assertEquals(elements[19].getValue(), "javax.imageio.spi.ServiceRegistry");
+
+        Assert.assertEquals(elements[20].getValue(), "org.apache.commons.beanutils.BeanUtils");
     }
 
     @Test
