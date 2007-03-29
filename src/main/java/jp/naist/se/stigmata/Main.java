@@ -76,8 +76,7 @@ public class Main{
         boolean exitFlag = executeOption(commandLine, options);
 
         if(!exitFlag){
-            if(!("gui".equals(mode) || "list".equals(mode))
-                && (arguments == null || arguments.length == 0)){
+            if(!("gui".equals(mode) || "list".equals(mode)) && (arguments == null || arguments.length == 0)){
 
                 printHelp(options);
                 return;
@@ -107,13 +106,13 @@ public class Main{
      * extract birthmarks.
      */
     private void extractBirthmarks(Stigmata stigmata, String[] birthmarks,
-            String[] args, String format){
+                                     String[] args, String format){
         try{
-            BirthmarkSet[] holders = stigmata.extract(birthmarks, args, context);
+            BirthmarkSet[] sets = stigmata.extract(birthmarks, args, context);
 
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkExtractionResultFormat formatter = spi.getExtractionResultFormat();
-            formatter.printResult(new PrintWriter(System.out), holders);
+            formatter.printResult(new PrintWriter(System.out), sets);
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -123,11 +122,10 @@ public class Main{
      * 
      */
     private void compareBirthmarks(Stigmata stigmata, String[] birthmarks,
-            String[] filters, String[] args, String format){
+                                     String[] filters, String[] args, String format){
         try{
-            BirthmarkSet[] holders = stigmata
-                    .extract(birthmarks, args, context);
-            ComparisonResultSet resultset = stigmata.compare(holders, context);
+            BirthmarkSet[] sets = stigmata.extract(birthmarks, args, context);
+            ComparisonResultSet resultset = stigmata.compare(sets, context);
             if(filters != null){
                 resultset = stigmata.filter(resultset, filters);
             }
@@ -271,7 +269,7 @@ public class Main{
         }
         System.out.println();
         System.out.println("Copyright (C) by Haruaki Tamada, Ph.D.");
-        System.out.println("Please notify us some bugs and requests to <birthmark-analysis@se.aist-nara.ac.jp>");
+        System.out.println("Please notify us some bugs and requests to <birthmark-analysis[ at ]se.aist-nara.ac.jp>");
     }
 
     private void printLicense(){
