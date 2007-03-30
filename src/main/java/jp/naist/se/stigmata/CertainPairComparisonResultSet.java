@@ -50,12 +50,12 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
      */
     public CertainPairComparisonResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, Map<String, String> mapping, BirthmarkContext context){
         this.context = context;
-        for(String name: mapping.keySet()){
-            BirthmarkSet target1 = findTarget(name, targetX);
-            BirthmarkSet target2 = findTarget(mapping.get(name), targetY);
+        for(Map.Entry<String, String> entry: mapping.entrySet()){
+            BirthmarkSet target1 = findTarget(entry.getKey(), targetX);
+            BirthmarkSet target2 = findTarget(entry.getValue(), targetY);
             if(target1 == null && target2 == null){
-                target1 = findTarget(name, targetY);
-                target2 = findTarget(mapping.get(name), targetX);
+                target1 = findTarget(entry.getKey(), targetY);
+                target2 = findTarget(entry.getValue(), targetX);
                 if(target1 != null && target2 != null){
                     // mapping table is swapped.
                     BirthmarkSet[] tmp = targetX;

@@ -96,13 +96,13 @@ public class ComparisonPairFilterManager{
         ComparisonPairFilter filter = createFilter(filterName);
         if(filter != null){
             filter.setCriterion(criterion);
-            for(String key: values.keySet()){
+            for(Map.Entry<String, String> entry: values.entrySet()){
                 try{
-                    Object value = values.get(key);
-                    if(key.equals("target")){
+                    Object value = entry.getValue();
+                    if(entry.getKey().equals("target")){
                         value = Target.valueOf(String.valueOf(value));
                     }
-                    BeanUtils.setProperty(filter, key, value);
+                    BeanUtils.setProperty(filter, entry.getKey(), value);
                 }catch(IllegalAccessException e){
                     e.printStackTrace();
                     filter = null;

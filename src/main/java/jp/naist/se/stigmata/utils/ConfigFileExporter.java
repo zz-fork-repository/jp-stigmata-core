@@ -111,10 +111,11 @@ public class ConfigFileExporter{
                     props.remove("criterion");
                     props.remove("acceptableCriteria");
                     out.println("          <attributes>");
-                    for(Object key: props.keySet()){
+                    for(Object object: props.entrySet()){
+                        Map.Entry entry = (Map.Entry)object;
                         out.println("            <attribute>");
-                        out.printf("              <name>%s</name>%n", String.valueOf(key));
-                        out.printf("              <value>%s</value>%n", String.valueOf(props.get(key)));
+                        out.printf("              <name>%s</name>%n", String.valueOf(entry.getKey()));
+                        out.printf("              <value>%s</value>%n", String.valueOf(entry.getValue()));
                         out.println("            </attribute>");
                     }
                     out.println("          </attributes>");
