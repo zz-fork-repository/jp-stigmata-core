@@ -14,6 +14,7 @@ import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 
 /**
+ * Filtering {@link ComparisonResultSet <code>ComparisonResultSet</code>}.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
@@ -22,10 +23,20 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
     private ComparisonResultSet resultset;
     private List<ComparisonPairFilterSet> filters = new ArrayList<ComparisonPairFilterSet>(); 
 
+    /**
+     * constructor.
+     * 
+     * @param resultset filtering target
+     */
     public FilteredComparisonResultSet(ComparisonResultSet resultset){
         this.resultset = resultset;
     }
 
+    /**
+     * constructor.
+     * @param resultset filtering target
+     * @param filters filtering rule
+     */
     public FilteredComparisonResultSet(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters){
         this.resultset = resultset;
         for(int i = 0; i < filters.length; i++){
@@ -78,17 +89,16 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         }
 
         private ComparisonPair findNext(){
-            if(iterator.hasNext()){
-                for(boolean finding = true; finding && iterator.hasNext(); ){
-                    ComparisonPair nextPair = iterator.next();
-                    // return the pair which the all filters is passed
-                    if(isAllFilterPassed(nextPair)){
-                        finding = false;
-                        next = nextPair;
-                    }
+            boolean nowFinding = true;
+            while(nowFinding && iterator.hasNext()){
+                ComparisonPair nextPair = iterator.next();
+                // return the pair which the all filters is passed
+                if(isAllFilterPassed(nextPair)){
+                    nowFinding = false; // found next value!
+                    next = nextPair;
                 }
             }
-            else{
+            if(nowFinding && !iterator.hasNext()){
                 next = null;
             }
             return next;
