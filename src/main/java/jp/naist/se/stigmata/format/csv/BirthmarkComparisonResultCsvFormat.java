@@ -87,8 +87,8 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
         }
         out.println();
         for(String key: map.keySet()){
-            Map<String, Double> element = map.get(key);
             out.print(key);
+            Map<String, Double> element = map.get(key);
             for(String name: names){
                 out.print(",");
                 Double v = element.get(name);

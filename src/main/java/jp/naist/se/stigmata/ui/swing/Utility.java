@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.Component;
+import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 
 import javax.swing.Icon;
@@ -44,7 +45,9 @@ public class Utility{
                     component.getClass().getMethod("setIcon").invoke(component, icon);
                 }
             }
-        } catch(Exception e){
+        } catch(NoSuchMethodException e){
+        } catch(IllegalAccessException e){
+        } catch(InvocationTargetException e){
         }
     }
 

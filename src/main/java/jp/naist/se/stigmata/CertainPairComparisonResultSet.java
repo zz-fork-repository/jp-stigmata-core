@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Concrete class for ComparisonResultSet. This instance compare class files by certain pair. The pair is guessed by system with class name, or specified by user.
+ * Concrete class for ComparisonResultSet. This instance compare class
+ * files by certain pair. The pair is guessed by system with class
+ * name, or specified by user.
+ *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
@@ -27,7 +30,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
             pairList.add(pairs[i]);
         }
     }
-    
+
     /**
      * This constructor is the comparison pair was guessed with class name.
      */

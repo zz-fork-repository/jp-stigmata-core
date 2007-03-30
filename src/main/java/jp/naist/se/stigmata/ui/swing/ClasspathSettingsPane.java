@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -79,7 +80,8 @@ public class ClasspathSettingsPane extends JPanel{
                 bytecode.addClasspath(new File(cp).toURI().toURL());
             }
             return bytecode.findClass(className) != null;
-        }catch(Exception e){
+        }catch(ClassNotFoundException e){
+        }catch(MalformedURLException e){
         }
         return false;
     }

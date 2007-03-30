@@ -44,7 +44,7 @@ import org.xml.sax.SAXException;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class Main{
+public final class Main{
     private FormatManager manager = FormatManager.getInstance();
     private BirthmarkContext context;
 

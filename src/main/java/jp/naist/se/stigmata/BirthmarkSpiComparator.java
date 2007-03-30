@@ -19,6 +19,10 @@ class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
     public BirthmarkSpiComparator(){
     }
 
+    public int hashCode(){
+        return System.identityHashCode(this);
+    }
+
     public int compare(BirthmarkSpi s1, BirthmarkSpi s2){
         if(s1.isExpert() && !s2.isExpert()){
             return 1;

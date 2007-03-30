@@ -44,6 +44,10 @@ public class MethodCallBirthmarkElement extends BirthmarkElement implements Seri
         return getClassName() + "#" + getMethodName();
     }
 
+    public int hashCode(){
+        return System.identityHashCode(this);
+    }
+
     public boolean equals(Object o){
         boolean flag = false;
         if(o instanceof MethodCallBirthmarkElement){

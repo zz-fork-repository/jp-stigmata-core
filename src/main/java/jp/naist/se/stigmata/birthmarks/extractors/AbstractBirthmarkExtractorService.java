@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.birthmarks.extractors;
  */
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import jp.naist.se.stigmata.BirthmarkExtractor;
@@ -52,7 +53,11 @@ abstract class AbstractBirthmarkExtractorService extends AbstractServiceProvider
             Class<? extends BirthmarkExtractor> clazz = c.asSubclass(BirthmarkExtractor.class);
             Constructor<? extends BirthmarkExtractor> constructor = clazz.getConstructor(BirthmarkSpi.class);
             return constructor.newInstance(service);
-        } catch(Exception e){
+        } catch(NoSuchMethodException e){
+        } catch(InstantiationException e){
+        } catch(InvocationTargetException e){
+        } catch(ClassNotFoundException e){
+        } catch(IllegalAccessException e){
         }
         return null;
     }

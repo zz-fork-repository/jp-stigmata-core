@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.birthmarks.comparators;
  */
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import jp.naist.se.stigmata.BirthmarkComparator;
@@ -52,7 +53,11 @@ abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvide
             Class<? extends BirthmarkComparator> clazz = c.asSubclass(BirthmarkComparator.class);
             Constructor<? extends BirthmarkComparator> constructor = clazz.getConstructor(BirthmarkSpi.class);
             return constructor.newInstance(service);
-        } catch(Exception e){
+        } catch(NoSuchMethodException e){
+        } catch(InstantiationException e){
+        } catch(InvocationTargetException e){
+        } catch(ClassNotFoundException e){
+        } catch(IllegalAccessException e){
         }
         return null;
     }

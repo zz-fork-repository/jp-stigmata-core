@@ -4,6 +4,9 @@ package jp.naist.se.stigmata.ui.swing;
  * $Id$
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -19,10 +22,9 @@ import jp.naist.se.stigmata.BirthmarkSet;
 public class BirthmarkTree extends JTree{
     private static final long serialVersionUID = 68345692177534765L;
 
-    private BirthmarkSet[] birthmarks;
-
+    private List<BirthmarkSet> birthmarks = new ArrayList<BirthmarkSet>();
+    // private BirthmarkSet[] birthmarks;
     private DefaultTreeModel model;
-
     private DefaultMutableTreeNode root;
 
     public BirthmarkTree(){
@@ -37,15 +39,16 @@ public class BirthmarkTree extends JTree{
         setBirthmarks(birthmarks);
     }
 
-    public BirthmarkSet[] getBirthmarkHolders(){
-        return birthmarks;
+    public synchronized BirthmarkSet[] getBirthmarkHolders(){
+        return birthmarks.toArray(new BirthmarkSet[birthmarks.size()]);
     }
 
-    public void setBirthmarks(BirthmarkSet[] birthmarks){
-        this.birthmarks = birthmarks;
+    public void setBirthmarks(BirthmarkSet[] sets){
+        birthmarks.clear();
 
-        for(int i = 0; i < birthmarks.length; i++){
-            root.add(new BirthmarkTreeNode(birthmarks[i]));
+        for(BirthmarkSet set: sets){
+            birthmarks.add(set);
+            root.add(new BirthmarkTreeNode(set));
         }
         expandRow(0);
     }

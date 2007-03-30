@@ -220,10 +220,10 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         }
     }
 
-    public class BirthmarkSelectionRendererPane extends JCheckBox implements ListCellRenderer{
+    public static class Renderer extends JCheckBox implements ListCellRenderer{
         private static final long serialVersionUID = -324432943654654L;
 
-        public BirthmarkSelectionRendererPane(){
+        public Renderer(){
             setOpaque(true);
         }
 

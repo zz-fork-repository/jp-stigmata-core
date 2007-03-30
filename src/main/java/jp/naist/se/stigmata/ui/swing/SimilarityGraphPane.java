@@ -84,15 +84,15 @@ public class SimilarityGraphPane extends JPanel {
         g.draw(new Line2D.Double(20, 0, 20, d.height));
 
         g.setColor(Color.GRAY);
-        // â°é≤
-        double h = (d.height - 20) / 2;
+        // x axis
+        double h = (d.height - 20) / 2d;
         g.draw(new Line2D.Double(20, h, d.width, h));
         h = h / 2;
         g.draw(new Line2D.Double(20, h, d.width, h));
         g.draw(new Line2D.Double(20, h * 3, d.width, h * 3));
 
-        // ècé≤
-        double w = (d.width - 20d) / 2;
+        // y axis
+        double w = (d.width - 20d) / 2d;
         g.draw(new Line2D.Double(w + 20, 0, w + 20, d.height - 20));
         w = w / 2;
         g.draw(new Line2D.Double(w + 20, 0, w + 20, d.height - 20));

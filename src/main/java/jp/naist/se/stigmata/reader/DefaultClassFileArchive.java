@@ -96,7 +96,7 @@ public class DefaultClassFileArchive implements ClassFileArchive{
         }
     }
 
-    private class ClassNameExtractVisitor extends EmptyVisitor{
+    private static class ClassNameExtractVisitor extends EmptyVisitor{
         private String className;
 
         public String getClassName(){

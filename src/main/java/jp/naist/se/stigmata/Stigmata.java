@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +39,7 @@ import org.apache.commons.beanutils.BeanUtils;
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
-public class Stigmata{
+public final class Stigmata{
     private static final Stigmata instance = new Stigmata();
 
     private BirthmarkContext defaultContext = BirthmarkContext.getDefaultContext();
@@ -275,7 +276,12 @@ public class Stigmata{
                             BeanUtils.setProperty(extractor, (String)keyObject, context.getProperty(key));
                         }
                     }
-                } catch(Exception e){
+                } catch(InvocationTargetException e){
+                    throw new InternalError(e.getMessage());
+                } catch(NoSuchMethodException e){
+                    throw new InternalError(e.getMessage());
+                } catch(IllegalAccessException e){
+                    throw new InternalError(e.getMessage());
                 }
                 holder.addBirthmark(
                     extractor.extract(new ByteArrayInputStream(bytecode), context)
