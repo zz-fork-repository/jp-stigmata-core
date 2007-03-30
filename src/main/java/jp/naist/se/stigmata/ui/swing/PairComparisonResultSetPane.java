@@ -111,7 +111,7 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
             average += similarity;
 
             model.addRow(new Object[] { pair.getTarget1().getClassName(),
-                    pair.getTarget2().getClassName(), new Double(similarity) });
+                         pair.getTarget2().getClassName(), new Double(similarity) });
         }
         average = average / list.size();
         

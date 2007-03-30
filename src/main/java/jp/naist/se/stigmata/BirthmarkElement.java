@@ -15,8 +15,6 @@ import jp.naist.se.stigmata.birthmarks.NullBirthmarkElement;
 public class BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 943675475343245243L;
 
-    public static final BirthmarkElement NULL = NullBirthmarkElement.getInstance();
-
     /**
      * element value.
      */

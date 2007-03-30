@@ -8,6 +8,7 @@ import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
+import jp.naist.se.stigmata.birthmarks.NullBirthmarkElement;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
 import org.objectweb.asm.ClassVisitor;
@@ -48,7 +49,7 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
                 birthmark.addElement(new BirthmarkElement(className));
             }
             else{
-                birthmark.addElement(BirthmarkElement.NULL);
+                birthmark.addElement(NullBirthmarkElement.getInstance());
             }
             c = c.getSuperclass();
         } while(!c.getName().equals("java.lang.Object"));
