@@ -118,7 +118,6 @@ public class ConfigFileExporter{
                         out.println("            </attribute>");
                     }
                     out.println("          </attributes>");
-                    
                 } catch(Exception e){
                     e.printStackTrace();
                 }
@@ -127,7 +126,7 @@ public class ConfigFileExporter{
             out.println("      </filter-list>");
             out.println("    </filterset>");
         }
-        out.println("  </filterset-list>");        
+        out.println("  </filterset-list>");
     }
 
     private void exportServices(PrintWriter out) throws IOException{
@@ -144,7 +143,5 @@ public class ConfigFileExporter{
             }
         }
         out.println("  </birthmark-services>");
-
-        
     }
 }

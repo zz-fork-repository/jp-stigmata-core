@@ -31,26 +31,18 @@ public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractio
         out.println("</birthmark>");
     }
 
-    protected void printBirthmarkHolder(PrintWriter out, BirthmarkSet holder){
+    protected void printBirthmarkHolder(PrintWriter out, BirthmarkSet set){
         out.println("    <extracted-birthmark>");
-        out.print("      <class-name>");
-        out.print(escapeToXmlString(holder.getClassName()));
-        out.println("</class-name>");
-        out.print("      <location>");
-        out.print(escapeToXmlString(holder.getLocation()));
-        out.println("</location>");
-        for(Iterator<String> i = holder.birthmarkTypes(); i.hasNext(); ){
+        out.printf("      <class-name>%s</class-name>%n", escapeToXmlString(set.getClassName()));
+        out.printf("      <location>%s</location>%n", escapeToXmlString(set.getLocation()));
+        for(Iterator<String> i = set.birthmarkTypes(); i.hasNext(); ){
             String type = i.next();
-            Birthmark birthmark = holder.getBirthmark(type);
-            out.print("      <birthmark type=\"");
-            out.print(birthmark.getType());
-            out.print("\" count=\"");
-            out.print(birthmark.getElementCount());
-            out.println("\">");
+            Birthmark birthmark = set.getBirthmark(type);
+            out.printf("      <birthmark type=\"%s\" count=\"%d\">%n",
+                       birthmark.getType(), birthmark.getElementCount());
             for(Iterator<BirthmarkElement> elements = birthmark.iterator(); elements.hasNext(); ){
-                out.print("        <element>");
-                out.print(escapeToXmlString(elements.next().toString()));
-                out.println("</element>");
+                out.printf("        <element>%s</element>%n",
+                           escapeToXmlString(String.valueOf(elements.next())));
             }
             out.println("      </birthmark>");
         }

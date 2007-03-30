@@ -67,25 +67,17 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.println("    </comparison-result>");
     }
 
-    private void printTarget(PrintWriter out, BirthmarkSet holder, int index){
-        out.println("      <target" + index + ">");
-        out.print("        <class-name>");
-        out.print(list.escapeToXmlString(holder.getClassName()));
-        out.println("</class-name>");
-        out.print("        <location>");
-        out.print(list.escapeToXmlString(holder.getLocation()));
-        out.println("</location>");
-        out.println("      </target" + index + ">");
+    private void printTarget(PrintWriter out, BirthmarkSet set, int index){
+        out.printf("      <target%d>%n", index);
+        out.printf("        <class-name>%s</class-name>%n", list.escapeToXmlString(set.getClassName()));
+        out.printf("        <location>%s</location>%n", list.escapeToXmlString(set.getLocation()));
+        out.printf("      </target%d>%n", index);
 
     }
 
-    private void printPairElement(PrintWriter out, ComparisonPairElement element){
-        out.print("        <birthmark-similarity type=\"");
-        out.print(element.getType());
-        out.print("\" comparison-count=\"");
-        out.print(element.getComparisonCount());
-        out.print("\">");
-        out.print(element.getSimilarity());
-        out.println("</birthmark-similarity>");
+    private void printPairElement(PrintWriter out, ComparisonPairElement e){
+        out.printf("        <birthmark-similarity type=\"%s\" comparison-count=\"%d\">%g</birthmark-similarity>%n",
+                   e.getType(), e.getComparisonCount(), e.getSimilarity());
+
     }
 }

@@ -37,7 +37,7 @@ public class XmlResultFormatService extends AbstractServiceProvider implements R
     public String getFormat(){
         return "xml";
     }
-    
+
     public BirthmarkComparisonResultFormat getComparisonResultFormat() {
         return compare;
     }
