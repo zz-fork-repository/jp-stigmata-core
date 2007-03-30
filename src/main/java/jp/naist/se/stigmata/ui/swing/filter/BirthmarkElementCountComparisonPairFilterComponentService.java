@@ -125,7 +125,7 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         private void initLayouts(){
             JLabel label = new JLabel(Messages.getString("filter.elementcount.label"));
             threshold = new JTextField();
-            criterionType = createCriteriaBox(BirthmarkElementCountComparisonPairFilter.CRITERIA);
+            criterionType = createCriteriaBox(BirthmarkElementCountComparisonPairFilter.getValidCriteria());
             birthmarks = new JComboBox();
             birthmarks.setRenderer(new BirthmarkServiceListCellRenderer(new Dimension(200, 20), 60));
             JLabel label2 = new JLabel(Messages.getString("filter.elementcount.label.next"));

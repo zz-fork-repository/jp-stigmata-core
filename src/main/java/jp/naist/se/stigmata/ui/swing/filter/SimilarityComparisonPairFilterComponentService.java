@@ -105,7 +105,7 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
         private void initLayouts(){
             JLabel label = new JLabel(Messages.getString("filter.similarity.label"));
             threshold = new JTextField();
-            criterionType = createCriteriaBox(SimilarityComparisonPairFilter.CRITERIA);
+            criterionType = createCriteriaBox(SimilarityComparisonPairFilter.getValidCriteria());
 
             setLayout(new GridLayout(3, 1));
             add(label);

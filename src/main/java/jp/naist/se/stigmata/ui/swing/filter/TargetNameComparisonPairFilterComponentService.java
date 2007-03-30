@@ -91,7 +91,7 @@ public class TargetNameComparisonPairFilterComponentService extends AbstractComp
         private void initLayouts(){
             JLabel label = new JLabel(Messages.getString("filter.name.label"));
             value = new JTextField();
-            criterionType = createCriteriaBox(TargetNameComparisonPairFilter.CRITERIA);
+            criterionType = createCriteriaBox(TargetNameComparisonPairFilter.getValidCriteria());
             targetType = createTargetBox();
 
             setLayout(new GridLayout(4, 1));

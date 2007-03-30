@@ -4,6 +4,9 @@ package jp.naist.se.stigmata.filter;
  * $Id$
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 
@@ -13,15 +16,20 @@ import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
  * @version $Revision$ $Date$
  */
 public class BirthmarkElementCountComparisonPairFilter extends AbstractComparisonPairFilter{
-    public static final Criterion[] CRITERIA = new Criterion[] {
-        Criterion.GREATER_EQUALS, Criterion.GREATER_THAN,
-        Criterion.LESS_EQUALS, Criterion.LESS_THAN,
-        Criterion.EQUALS_AS, Criterion.NOT_EQUALS_AS, 
-    };
-    
+    private static final List<Criterion> CRITERIA = new ArrayList<Criterion>();
+
     private int threshold = 0;
     private Target target;
     private String birthmarkType;
+
+    static{
+        CRITERIA.add(Criterion.GREATER_EQUALS);
+        CRITERIA.add(Criterion.GREATER_THAN);
+        CRITERIA.add(Criterion.LESS_EQUALS);
+        CRITERIA.add(Criterion.LESS_THAN);
+        CRITERIA.add(Criterion.EQUALS_AS);
+        CRITERIA.add(Criterion.NOT_EQUALS_AS);
+    }
 
     public BirthmarkElementCountComparisonPairFilter(ComparisonPairFilterSpi service){
         super(service);
@@ -35,8 +43,12 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
         this.birthmarkType = birthmarkType;
     }
 
+    public static Criterion[] getValidCriteria(){
+        return CRITERIA.toArray(new Criterion[CRITERIA.size()]);
+    }
+
     public Criterion[] getAcceptableCriteria(){
-        return CRITERIA;
+        return getValidCriteria();
     }
 
     private boolean isFilteredTwo(ComparisonPair pair){

@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -27,19 +29,19 @@ import jp.naist.se.stigmata.spi.ResultFormatSpi;
 public class BirthmarkExtractionResultPane extends JPanel implements BirthmarkDataWritable{
     private static final long serialVersionUID = 239084365756236543L;
 
-    private BirthmarkSet[] holders;
+    private List<BirthmarkSet> birthmarks;
     private StigmataFrame frame;
 
-    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkContext context, BirthmarkSet[] holders){
+    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkContext context, BirthmarkSet[] sets){
         this.frame = stigmataFrame;
-        this.holders = holders;
+        this.birthmarks = Arrays.asList(sets);
 
         JComponent southPanel = Box.createHorizontalBox(); 
         // JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton saveButton = Utility.createButton("savebirthmark");
         JScrollPane scroll = new JScrollPane();
 
-        scroll.setViewportView(new BirthmarkTree(holders));
+        scroll.setViewportView(new BirthmarkTree(birthmarks.toArray(new BirthmarkSet[birthmarks.size()])));
 
         setLayout(new BorderLayout());
         add(scroll, BorderLayout.CENTER);
@@ -62,6 +64,6 @@ public class BirthmarkExtractionResultPane extends JPanel implements BirthmarkDa
     public void writeData(PrintWriter out, ResultFormatSpi service){
         BirthmarkExtractionResultFormat list = service.getExtractionResultFormat();
 
-        list.printResult(new PrintWriter(out), holders);
+        list.printResult(new PrintWriter(out), birthmarks.toArray(new BirthmarkSet[birthmarks.size()]));
     }
 }

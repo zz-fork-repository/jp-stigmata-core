@@ -98,7 +98,7 @@ public class TotalElementCountComparisonPairFilterComponentService extends Abstr
         private void initLayouts(){
             JLabel label = new JLabel(Messages.getString("filter.totalelementcount.label"));
             threshold = new JTextField();
-            criterionType = createCriteriaBox(TotalElementCountComparisonPairFilter.CRITERIA);
+            criterionType = createCriteriaBox(TotalElementCountComparisonPairFilter.getValidCriteria());
             targetType = createTargetBox();
 
             setLayout(new GridLayout(4, 1));

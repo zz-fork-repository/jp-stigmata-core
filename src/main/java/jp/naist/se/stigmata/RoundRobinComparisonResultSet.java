@@ -4,7 +4,9 @@ package jp.naist.se.stigmata;
  * $Id$
  */
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Concrete class for ComparisonResultSet. This instance compare class files by round robin.
@@ -13,8 +15,8 @@ import java.util.Iterator;
  * @version  $Revision$ $Date$
  */
 public class RoundRobinComparisonResultSet implements ComparisonResultSet{
-    private BirthmarkSet[] holders1;
-    private BirthmarkSet[] holders2;
+    private List<BirthmarkSet> holders1;
+    private List<BirthmarkSet> holders2;
     private BirthmarkContext context;
 
     private int compareCount;
@@ -38,9 +40,9 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * samePair is false.
      */
     public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkContext context,
-                                         boolean samePair){
-        this.holders1 = holders1;
-        this.holders2 = holders1;
+                                          boolean samePair){
+        this.holders1 = Arrays.asList(holders1);
+        this.holders2 = Arrays.asList(holders1);
         this.context = context;
 
         tablePair = false;
@@ -52,10 +54,10 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * y, z, } as holders2, then the instance compares { a<->x, a<->y,
      * a<->z, b<->x, b<->y, b<->z, c<->x, c<->y, c<->z, }.
      */
-    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkSet[] holders2,
-                                         BirthmarkContext context){
-        this.holders1 = holders1;
-        this.holders2 = holders2;
+    public RoundRobinComparisonResultSet(final BirthmarkSet[] holders1, final BirthmarkSet[] holders2,
+                                          BirthmarkContext context){
+        this.holders1 = Arrays.asList(holders1);
+        this.holders2 = Arrays.asList(holders2);
         this.context = context;
         tablePair = true;
 
@@ -75,10 +77,10 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
     public void setCompareSamePair(boolean flag){
         samePair = flag;
         if(samePair){
-            compareCount = holders1.length * (holders1.length + 1) / 2;
+            compareCount = holders1.size() * (holders1.size() + 1) / 2;
         }
         else{
-            compareCount = holders1.length * (holders1.length - 1) / 2;
+            compareCount = holders1.size() * (holders1.size() - 1) / 2;
         }
     }
 
@@ -115,12 +117,12 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
         }
 
         public ComparisonPair next(){
-            if((tablePair && i == holders1.length) || (!tablePair && !samePair && i == j)
+            if((tablePair && i == holders1.size()) || (!tablePair && !samePair && i == j)
                     || (!tablePair && samePair && i > j)){
                 i = 0;
                 j++;
             }
-            ComparisonPair pair = new ComparisonPair(holders1[i], holders2[j], context);
+            ComparisonPair pair = new ComparisonPair(holders1.get(i), holders2.get(j), context);
             count++;
             i++;
             return pair;

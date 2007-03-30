@@ -14,7 +14,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.Box;
@@ -46,8 +48,8 @@ import jp.naist.se.stigmata.spi.ResultFormatSpi;
 public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkDataWritable{
     private static final long serialVersionUID = 2134574576543623L;
 
-    private BirthmarkSet[] birthmarksX;
-    private BirthmarkSet[] birthmarksY;
+    private List<BirthmarkSet> birthmarksX;
+    private List<BirthmarkSet> birthmarksY;
     private JTable table;
     private DefaultTableModel model;
     private JLabel classCount, comparisonCount, distinctionRatio;
@@ -59,8 +61,8 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
                                           BirthmarkSet[] birthmarksX, BirthmarkSet[] birthmarksY){
         this.stigmataFrame = stigmata;
         this.context = context;
-        this.birthmarksX = birthmarksX;
-        this.birthmarksY = birthmarksY;
+        this.birthmarksX = Arrays.asList(birthmarksX);
+        this.birthmarksY = Arrays.asList(birthmarksY);
 
         initialize();
         compare(model);
@@ -68,13 +70,17 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
 
     public void writeData(PrintWriter out, ResultFormatSpi service){
         service.getComparisonResultFormat().printResult(out,
-                new RoundRobinComparisonResultSet(birthmarksX, birthmarksY, context));
+            new RoundRobinComparisonResultSet(
+                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
+                birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]), context
+            )
+        );
     }
 
     private void compare(DefaultTableModel model){
-        int comparison = birthmarksX.length * birthmarksY.length;
+        int comparison = birthmarksX.size() * birthmarksY.size();
 
-        classCount.setText(Integer.toString(birthmarksX.length + birthmarksY.length));
+        classCount.setText(Integer.toString(birthmarksX.size() + birthmarksY.size()));
         comparisonCount.setText(Integer.toString(comparison));
         int correct = 0;
         double avg = 0d;
@@ -84,12 +90,12 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         for(BirthmarkSet x: birthmarksX){
             model.addColumn(x.getClassName());
         }
-        for(int j = 0; j < birthmarksY.length; j++){
-            Object[] rows = new Object[birthmarksX.length + 1];
-            rows[0] = birthmarksY[j].getClassName();
+        for(int j = 0; j < birthmarksY.size(); j++){
+            Object[] rows = new Object[birthmarksX.size() + 1];
+            rows[0] = birthmarksY.get(j).getClassName();
 
-            for(int i = 0; i < birthmarksX.length; i++){
-                double similarity = compare(context, birthmarksX[i], birthmarksY[j]);
+            for(int i = 0; i < birthmarksX.size(); i++){
+                double similarity = compare(context, birthmarksX.get(i), birthmarksY.get(j));
                 rows[i + 1] = new Double(similarity);
 
                 if(Math.abs(similarity - 1) < 1E-8){
@@ -143,8 +149,8 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
                     int col = table.columnAtPoint(e.getPoint());
                     if(col >= 1 && col < table.getColumnCount() && row >= 0
                             && row < table.getRowCount()){
-                        BirthmarkSet b1 = birthmarksX[col - 1];
-                        BirthmarkSet b2 = birthmarksY[row];
+                        BirthmarkSet b1 = birthmarksX.get(col - 1);
+                        BirthmarkSet b2 = birthmarksY.get(row);
 
                         stigmataFrame.compareDetails(b1, b2, context);
                     }
@@ -262,7 +268,11 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     }
 
     private void compareGuessedPair(){
-        ComparisonResultSet resultset = new CertainPairComparisonResultSet(birthmarksX, birthmarksY, context);
+        ComparisonResultSet resultset = new CertainPairComparisonResultSet(
+            birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
+            birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
+            context
+        );
         stigmataFrame.showComparisonResultSet(resultset);
     }
 
@@ -271,7 +281,11 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         if(file != null){
             Map<String, String> mapping = stigmataFrame.constructMapping(file);
 
-            ComparisonResultSet resultset = new CertainPairComparisonResultSet(birthmarksX, birthmarksY, mapping, context); 
+            ComparisonResultSet resultset = new CertainPairComparisonResultSet(
+                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
+                birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
+                mapping, context
+            ); 
             stigmataFrame.showComparisonResultSet(resultset);
         }
     }
@@ -279,11 +293,11 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     private void obfuscateClassNames(){
         ClassNameObfuscator obfuscator = new ClassNameObfuscator();
 
-        for(int i = 0; i < birthmarksX.length; i++){
-            birthmarksX[i] = obfuscator.obfuscateClassName(birthmarksX[i]);
+        for(int i = 0; i < birthmarksX.size(); i++){
+            birthmarksX.set(i, obfuscator.obfuscateClassName(birthmarksX.get(i)));
         }
-        for(int i = 0; i < birthmarksY.length; i++){
-            birthmarksY[i] = obfuscator.obfuscateClassName(birthmarksY[i]);
+        for(int i = 0; i < birthmarksY.size(); i++){
+            birthmarksY.set(i, obfuscator.obfuscateClassName(birthmarksY.get(i)));
         }
 
         try{

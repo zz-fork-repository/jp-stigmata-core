@@ -4,6 +4,9 @@ package jp.naist.se.stigmata.filter;
  * $Id$
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 
@@ -13,11 +16,17 @@ import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
  * @version $Revision$ $Date$
  */
 public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter{
-    public static final Criterion[] CRITERIA = new Criterion[] {
-        Criterion.STARTS_WITH, Criterion.NOT_STARTS_WITH, 
-        Criterion.ENDS_WITH, Criterion.NOT_ENDS_WITH,
-        Criterion.EQUALS_AS, Criterion.NOT_EQUALS_AS,
-        Criterion.MATCH, Criterion.NOT_MATCH,
+    private static final List<Criterion> CRITERIA = new ArrayList<Criterion>();
+
+    static{
+        CRITERIA.add(Criterion.STARTS_WITH);
+        CRITERIA.add(Criterion.NOT_STARTS_WITH); 
+        CRITERIA.add(Criterion.ENDS_WITH);
+        CRITERIA.add(Criterion.NOT_ENDS_WITH);
+        CRITERIA.add(Criterion.EQUALS_AS);
+        CRITERIA.add(Criterion.NOT_EQUALS_AS);
+        CRITERIA.add(Criterion.MATCH);
+        CRITERIA.add(Criterion.NOT_MATCH);
     };
     private Target target = Target.BOTH_TARGET;
     private String value;
@@ -27,7 +36,11 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
     }
 
     public Criterion[] getAcceptableCriteria(){
-        return CRITERIA;
+        return getValidCriteria();
+    }
+
+    public static Criterion[] getValidCriteria(){
+        return CRITERIA.toArray(new Criterion[CRITERIA.size()]);
     }
 
     public boolean isFiltered(ComparisonPair pair){
