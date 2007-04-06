@@ -87,10 +87,10 @@ public class CVFVBirthmarkExtractorTest{
                             "jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement");
 
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[0]).getSignature(),
-                            "[Ljp/naist/se/stigmata/BirthmarkSet;");
+                            "Ljava/util/List;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[0]).getValue(), null);
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[1]).getSignature(),
-                            "[Ljp/naist/se/stigmata/BirthmarkSet;");
+                            "Ljava/util/List;");
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[1]).getValue(), null);
         Assert.assertEquals(((TypeAndValueBirthmarkElement)elements[2]).getSignature(),
                             "Ljp/naist/se/stigmata/BirthmarkContext;");

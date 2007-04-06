@@ -138,7 +138,7 @@ public class SmcBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("smc");
         Assert.assertEquals(birthmark.getType(), "smc");
-        Assert.assertEquals(birthmark.getElementCount(), 2);
+        Assert.assertEquals(birthmark.getElementCount(), 10);
 
         BirthmarkElement[] elements = birthmark.getElements();
         for(int i = 0; i < elements.length; i++){
@@ -148,6 +148,14 @@ public class SmcBirthmarkExtractorTest{
             );
         }
         Assert.assertEquals(elements[0].toString(), "java.lang.Object#<init>");
-        Assert.assertEquals(elements[1].toString(), "java.lang.Object#<init>");
+        Assert.assertEquals(elements[1].toString(), "java.util.Arrays#asList");
+        Assert.assertEquals(elements[2].toString(), "java.util.Arrays#asList");
+        Assert.assertEquals(elements[3].toString(), "java.lang.Object#<init>");
+        Assert.assertEquals(elements[4].toString(), "java.util.Arrays#asList");
+        Assert.assertEquals(elements[5].toString(), "java.util.Arrays#asList");
+        Assert.assertEquals(elements[6].toString(), "java.util.List#size");
+        Assert.assertEquals(elements[7].toString(), "java.util.List#size");
+        Assert.assertEquals(elements[8].toString(), "java.util.List#size");
+        Assert.assertEquals(elements[9].toString(), "java.util.List#size");
     }
 }

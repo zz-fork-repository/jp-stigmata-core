@@ -77,10 +77,12 @@ public class UCBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("uc");
         Assert.assertEquals(birthmark.getType(), "uc");
-        Assert.assertEquals(birthmark.getElementCount(), 2);
+        Assert.assertEquals(birthmark.getElementCount(), 4);
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals(elements[0].getValue(), "java.lang.Object");
-        Assert.assertEquals(elements[1].getValue(), "java.util.Iterator");
+        Assert.assertEquals(elements[1].getValue(), "java.util.Arrays");
+        Assert.assertEquals(elements[2].getValue(), "java.util.Iterator");
+        Assert.assertEquals(elements[3].getValue(), "java.util.List");
     }
 }
