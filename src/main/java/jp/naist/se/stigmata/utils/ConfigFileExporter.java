@@ -52,7 +52,7 @@ public class ConfigFileExporter{
         out.println("  <properties>");
         for(Iterator<String> i = context.propertyKeys(); i.hasNext(); ){
             String key = i.next();
-            String value = i.next();
+            String value = context.getProperty(key);
             out.println("    <property>");
             out.printf("      <name>%s</name>%n", key);
             out.printf("      <value>%s</value>%n", value);
