@@ -84,10 +84,15 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
         try{
             File file = frame.getSaveFile(Messages.getStringArray("obfuscationmapping.extension"),
                     Messages.getString("obfuscationmapping.description"));
+            if(file == null){
+                return;
+            }
             obfuscator.outputNameMappings(file);
         }catch(IOException e){
-            JOptionPane.showMessageDialog(this, e.getMessage(), Messages
-                    .getString("error.dialog.title"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this, e.getMessage(), Messages.getString("error.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
 

@@ -269,7 +269,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
 
     private void compareGuessedPair(){
         ComparisonResultSet resultset = new CertainPairComparisonResultSet(
-            birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
+            birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
             birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
             context
         );
@@ -277,15 +277,18 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     }
 
     private void compareSpecifiedPair(){
-        File file = stigmataFrame.getOpenFile(Messages.getStringArray("comparemapping.extension"), Messages.getString("comparemapping.description"));
+        File file = stigmataFrame.getOpenFile(
+            Messages.getStringArray("comparemapping.extension"),
+            Messages.getString("comparemapping.description")
+        );
         if(file != null){
             Map<String, String> mapping = stigmataFrame.constructMapping(file);
 
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(
-                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
+                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
                 birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
                 mapping, context
-            ); 
+            );
             stigmataFrame.showComparisonResultSet(resultset);
         }
     }
@@ -293,17 +296,21 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     private void obfuscateClassNames(){
         ClassNameObfuscator obfuscator = new ClassNameObfuscator();
 
-        for(int i = 0; i < birthmarksX.size(); i++){
-            birthmarksX.set(i, obfuscator.obfuscateClassName(birthmarksX.get(i)));
-        }
-        for(int i = 0; i < birthmarksY.size(); i++){
-            birthmarksY.set(i, obfuscator.obfuscateClassName(birthmarksY.get(i)));
-        }
-
         try{
-            File file = stigmataFrame.getSaveFile(Messages.getStringArray("obfuscationmapping.extension"),
-                    Messages.getString("obfuscationmapping.description"));
-            obfuscator.outputNameMappings(file);
+            File file = stigmataFrame.getSaveFile(
+                Messages.getStringArray("obfuscationmapping.extension"),
+                Messages.getString("obfuscationmapping.description")
+            );
+            if(file != null){
+                for(int i = 0; i < birthmarksX.size(); i++){
+                    birthmarksX.set(i, obfuscator.obfuscateClassName(birthmarksX.get(i)));
+                }
+                for(int i = 0; i < birthmarksY.size(); i++){
+                    birthmarksY.set(i, obfuscator.obfuscateClassName(birthmarksY.get(i)));
+                }
+
+                obfuscator.outputNameMappings(file);
+            }
         }catch(IOException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), Messages
                     .getString("error.dialog.title"), JOptionPane.ERROR_MESSAGE);
