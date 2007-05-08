@@ -5,7 +5,6 @@ package jp.naist.se.stigmata;
  */
 
 import java.io.Serializable;
-import jp.naist.se.stigmata.birthmarks.NullBirthmarkElement;
 
 /**
  * element of birthmark.

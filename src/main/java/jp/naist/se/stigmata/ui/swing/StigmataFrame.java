@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -354,7 +355,11 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
     private File findFile(boolean open, String[] exts, String desc){
         JFileChooser chooser = new JFileChooser(getCurrentDirectory());
-        chooser.setFileFilter(new ExtensionFilter(exts, desc));
+        for(int i = 0; i < exts.length; i++){
+            chooser.addChoosableFileFilter(
+                new ExtensionFilter(exts[i], MessageFormat.format(desc, exts[i]))
+            );
+        }
         int returnValue = -1;
         if(open){
             returnValue = chooser.showOpenDialog(SwingUtilities.getRootPane(this));

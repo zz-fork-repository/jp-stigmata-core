@@ -18,8 +18,7 @@ comparedetail.tab.tooltip={1}と{2}から{0}バースマークを抽出・比較した結果
 graph.tab.label=類似性グラフ {0}
 graph.tab.tooltip=類似度分布図
 
-store.extensions=xml, csv
-store.description=結果をxml, csvで保存します
+store.description=結果の保存 ({0})
 
 fileMenu.menu.label=ファイル
 
@@ -28,7 +27,7 @@ newframe.menuitem.tooltip=新しいフレームを作成します
 
 exportsetting.menuitem.label=設定を保存...
 exportsetting.menuitem.tooltip=設定をXMLファイルに保存します．
-export.description=設定を出力するxmlファイル
+export.description=設定ファイル ({0})
 
 closetab.menuitem.label=タブを閉じる
 closetab.menuteim.tooltip=現在のタブを閉じます
@@ -133,8 +132,7 @@ wellknown.tab.tooltip=既知のクラス設定
 classpath.tab.label=クラスパス
 classpath.tab.tooltip=クラスパス設定
 
-targets.extensions=jar, zip, war
-targets.description=jarファイル, zipファイル, warファイル
+targets.description=対象 ({0}ファイル)
 targetx.border=X 軸
 targety.border=Y 軸
 
@@ -147,8 +145,7 @@ uncheckall.butotn.tooltip=全てのチェックを外し，抽出・比較するバースマークを選択
 uncheckall.button.icon=
 
 userclasspath.border=クラスパス
-userclasspath.extensions=jar, zip
-userclasspath.description=jarファイル, zipファイル，ディレクトリ
+userclasspath.description=ユーザクラスパス ({0}ファイル)
 
 bootclasspath.border=ブートクラスパス
 
@@ -202,8 +199,7 @@ comparepair.similarity.label=類似度
 #comparemapping.button.label=関係を指定して比較...
 #comparemapping.button.tooltip=クラスファイルを指定したバースマークで比較します．どのクラスを比較するかはファイルで指定する必要があります．
 
-comparemapping.extension=csv
-comparemapping.description=クラス間の関係を示したファイルを指定 (csv)
+comparemapping.description=対応関係ファイル ({0})
 
 roundrobin.label=総当りで比較
 guessedpair.label=ペアを推測して比較

@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class TargetSelectionPane extends JPanel{
 
     private CurrentDirectoryHolder currentDirectoryHolder;
 
-    private FileFilter filter;
+    private FileFilter[] filters;
 
     private List<String> extensions = new ArrayList<String>();
 
@@ -91,26 +92,34 @@ public class TargetSelectionPane extends JPanel{
     }
 
     public void setFileFilter(FileFilter filter){
-        this.filter = filter;
+        setFileFilters(new FileFilter[] { filter, });
     }
 
-    public FileFilter getFileFilter(){
-        if(filter == null){
-            filter = new ExtensionFilter(getExtensions(), getSelectDescription());
+    public void setFileFilters(FileFilter[] filters){
+        this.filters = filters;
+    }
+
+    public FileFilter[] getFileFilters(){
+        if(filters == null){
+            String[] exts = getExtensions();
+            filters = new FileFilter[exts.length];
+            for(int i = 0; i < exts.length; i++){
+                filters[i] = new ExtensionFilter(exts[i], MessageFormat.format(getSelectDescription(), exts[i]));
+            };
         }
-        return filter;
+        return filters;
     }
 
     public void addTargetExtension(String ext){
-        if(filter instanceof ExtensionFilter){
-            filter = null;
+        if(filters != null){
+            filters = null;
         }
         extensions.add(ext);
     }
 
     public void addTargetExtensions(String[] exts){
-        if(filter instanceof ExtensionFilter){
-            filter = null;
+        if(filters != null){
+            filters = null;
         }
         for(String ext : exts){
             extensions.add(ext);
@@ -246,11 +255,11 @@ public class TargetSelectionPane extends JPanel{
 
     private void addButtonActionPerformed(ActionEvent evt){
         JFileChooser chooser = new JFileChooser(currentDirectoryHolder.getCurrentDirectory());
-        FileFilter filter = getFileFilter();
-        if(filter == null){
-            filter = new ExtensionFilter(getExtensions(), getSelectDescription());
+        FileFilter[] filters = getFileFilters();
+
+        for(FileFilter filter: filters){
+            chooser.addChoosableFileFilter(filter);
         }
-        chooser.setFileFilter(filter);
         chooser.setMultiSelectionEnabled(isMultipleSelectable());
         if(isDirectorySelectable()){
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -286,15 +295,17 @@ public class TargetSelectionPane extends JPanel{
             try{
                 if(trans.isDataFlavorSupported(DataFlavor.javaFileListFlavor)){
                     List list = (List)trans.getTransferData(DataFlavor.javaFileListFlavor);
-                    filter = getFileFilter();
+                    filters = getFileFilters();
                     List<String> errorList = new ArrayList<String>();
                     for(int i = 0; i < list.size(); i++){
                         File file = (File)list.get(i);
-                        if(filter.accept(file)){
-                            addValue(file.getPath());
-                        }
-                        else{
-                            errorList.add(file.getName());
+                        for(FileFilter filter: filters){
+                            if(filter.accept(file)){
+                                addValue(file.getPath());
+                            }
+                            else{
+                                errorList.add(file.getName());
+                            }
                         }
                     }
                     if(errorList.size() > 0){

@@ -24,6 +24,14 @@ public class ExtensionFilter extends FileFilter{
     public ExtensionFilter(){
     }
 
+    public ExtensionFilter(String ext){
+        this(new String[] { ext }, null);
+    }
+
+    public ExtensionFilter(String ext, String description){
+        this(new String[] { ext }, description);
+    }
+
     public ExtensionFilter(String[] exts){
         this(exts, null);
     }
@@ -39,6 +47,14 @@ public class ExtensionFilter extends FileFilter{
 
     public void addExtension(String ext){
         extensions.add(ext);
+    }
+
+    public boolean hasExtension(){
+        return extensions.size() > 0;
+    }
+
+    public synchronized String[] getExtensions(){
+        return extensions.toArray(new String[extensions.size()]);
     }
 
     public boolean accept(File f){

@@ -169,22 +169,15 @@ public class ControlPane extends JPanel{
         targetX = new TargetSelectionPane(stigmata);
         targetY = new TargetSelectionPane(stigmata);
 
-        birthmarks.setBorder(new TitledBorder(Messages
-                .getString("birthmarkspane.border")));
+        birthmarks.setBorder(new TitledBorder(Messages.getString("birthmarkspane.border")));
 
-        targetX.addTargetExtensions(Messages
-                .getStringArray("targets.extensions"));
+        targetX.addTargetExtensions(Messages.getStringArray("targets.extensions"));
         targetX.setDescription(Messages.getString("targets.description"));
-        targetX
-                .setBorder(new TitledBorder(Messages
-                        .getString("targetx.border")));
+        targetX.setBorder(new TitledBorder(Messages.getString("targetx.border")));
 
-        targetY.addTargetExtensions(Messages
-                .getStringArray("targets.extensions"));
+        targetY.addTargetExtensions(Messages.getStringArray("targets.extensions"));
         targetY.setDescription(Messages.getString("targets.description"));
-        targetY
-                .setBorder(new TitledBorder(Messages
-                        .getString("targety.border")));
+        targetY.setBorder(new TitledBorder(Messages.getString("targety.border")));
 
         center.add(mainPane, BorderLayout.CENTER);
         center.add(birthmarks, BorderLayout.SOUTH);
