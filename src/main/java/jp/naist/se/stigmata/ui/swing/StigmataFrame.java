@@ -401,9 +401,31 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         }
         if(returnValue == JFileChooser.APPROVE_OPTION){
             setCurrentDirectory(chooser.getCurrentDirectory());
-            return chooser.getSelectedFile();
+            File file = chooser.getSelectedFile();
+            if(!open){
+                FileFilter filter = chooser.getFileFilter();
+                if(filter instanceof ExtensionFilter){
+                    ExtensionFilter ef = (ExtensionFilter)filter;
+                    if(!filter.accept(file)){
+                        String[] extensions = ef.getExtensions();
+                        file = setExtension(file, extensions[0]);
+                    }
+                }
+            }
+            return file;
         }
         return null;
+    }
+
+    private File setExtension(File file, String ext){
+        String name = file.getName();
+        int index = name.lastIndexOf('.');
+        String n = name;
+        if(index > 0){
+            n = n.substring(0, index);
+        }
+        name = n + '.' + ext;
+        return new File(file.getParentFile(), name);
     }
 
     private void initLayouts(){
