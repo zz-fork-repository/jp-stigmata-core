@@ -122,7 +122,7 @@ public class SimilarityGraphPane extends JPanel{
         g.drawString("50%", 0, (d.height - 20) / 2);
     }
 
-    public void saveImage(File file) throws IOException{
+    public void storeGraphImage(File file) throws IOException{
         BufferedImage image = new BufferedImage(300, 300, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         paintComponent(g);

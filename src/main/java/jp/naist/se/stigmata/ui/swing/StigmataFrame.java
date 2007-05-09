@@ -313,7 +313,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         panel.add(south, BorderLayout.SOUTH);
         save.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                saveImage(graph);
+                storeGraphImage(graph);
             }
         });
 
@@ -368,13 +368,13 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return mapping;
     }
 
-    private void saveImage(SimilarityGraphPane graph){
+    private void storeGraphImage(SimilarityGraphPane graph){
         String[] exts = graph.getSupportedFormats();
         File file = getSaveFile(
             exts, Messages.getString("savegraph.description")
         );
         try{
-            graph.saveImage(file);
+            graph.storeGraphImage(file);
         } catch(IOException e){
             JOptionPane.showMessageDialog(
                 this,
