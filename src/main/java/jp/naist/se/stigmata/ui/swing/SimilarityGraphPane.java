@@ -10,8 +10,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -19,7 +25,7 @@ import javax.swing.JPanel;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class SimilarityGraphPane extends JPanel {
+public class SimilarityGraphPane extends JPanel{
     private static final long serialVersionUID = 2314463453465L;
 
     private Map<Integer, Integer> distributions;
@@ -31,6 +37,18 @@ public class SimilarityGraphPane extends JPanel {
 
         this.distributions = distributions;
         initialize();
+    }
+
+    public String[] getSupportedFormats(){
+        String[] formats = ImageIO.getWriterFormatNames();
+        Set<String> set = new HashSet<String>();
+        for(String f: formats){
+            if(f != null){
+                set.add(f.toLowerCase());
+            }
+        }
+        
+        return set.toArray(new String[set.size()]);
     }
 
     public void paintComponent(Graphics g1){
@@ -102,5 +120,15 @@ public class SimilarityGraphPane extends JPanel {
         g.drawString("50%", (d.width - 20) / 2 + 10, d.height - 5);
         g.drawString(Messages.getString("similarity.label"), d.width - 60, d.height - 5);
         g.drawString("50%", 0, (d.height - 20) / 2);
+    }
+
+    public void saveImage(File file) throws IOException{
+        BufferedImage image = new BufferedImage(300, 300, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        paintComponent(g);
+        String format = file.getName();
+        format = format.substring(format.lastIndexOf('.') + 1);
+
+        ImageIO.write(image, format, file);
     }
 }

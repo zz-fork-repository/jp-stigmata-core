@@ -206,7 +206,7 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
                 values.put(new Integer(similarity), dist);
             }
         }
-        stigmataFrame.showGraph(values);
+        stigmataFrame.showSimilarityDistributionGraph(values);
     }
 
     private void initialize(){

@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -45,6 +47,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileFilter;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
@@ -295,12 +298,24 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
-    public void showGraph(Map<Integer, Integer> distributions){
-        SimilarityGraphPane graph = new SimilarityGraphPane(distributions);
+    public void showSimilarityDistributionGraph(Map<Integer, Integer> distributions){
+        final SimilarityGraphPane graph = new SimilarityGraphPane(distributions);
         JPanel graphPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         graphPanel.add(graph);
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(graphPanel, BorderLayout.CENTER);
+
+        JButton save = Utility.createButton("savegraph");
+        Box south = Box.createHorizontalBox();
+        south.add(Box.createHorizontalGlue());
+        south.add(save);
+        south.add(Box.createHorizontalGlue());
+        panel.add(south, BorderLayout.SOUTH);
+        save.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                saveImage(graph);
+            }
+        });
 
         graphCount++;
         Utility.addNewTab("graph", tabPane, panel, new Object[] { new Integer(graphCount), }, null);
@@ -351,6 +366,23 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             }
         }
         return mapping;
+    }
+
+    private void saveImage(SimilarityGraphPane graph){
+        String[] exts = graph.getSupportedFormats();
+        File file = getSaveFile(
+            exts, Messages.getString("savegraph.description")
+        );
+        try{
+            graph.saveImage(file);
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(
+                this,
+                Messages.getString("error.io", e.getMessage()),
+                Messages.getString("error.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     private File findFile(boolean open, String[] exts, String desc){
