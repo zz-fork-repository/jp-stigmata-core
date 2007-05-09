@@ -33,16 +33,16 @@ public class ISBirthmarkExtractorTest{
             new String[] { "target/classes/jp/naist/se/stigmata/Stigmata.class", }
         );
 
-        Assert.assertEquals(array.length, 1);
+        Assert.assertEquals(1, array.length);
         Assert.assertNotNull(array[0].getBirthmark("is"));
 
         Birthmark birthmark = array[0].getBirthmark("is");
-        Assert.assertEquals(birthmark.getType(), "is");
-        Assert.assertEquals(birthmark.getElementCount(), 2);
+        Assert.assertEquals("is", birthmark.getType());
+        Assert.assertEquals(2, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertNull(elements[0].getValue());
-        Assert.assertEquals(elements[1].getValue(), "java.lang.Object");
+        Assert.assertEquals("java.lang.Object", elements[1].getValue());
     }
 
     @Test
@@ -52,15 +52,15 @@ public class ISBirthmarkExtractorTest{
             new String[] { "target/classes/jp/naist/se/stigmata/RoundRobinComparisonResultSet.class", }
         );
 
-        Assert.assertEquals(array.length, 1);
+        Assert.assertEquals(1, array.length);
         Assert.assertNotNull(array[0].getBirthmark("is"));
 
         Birthmark birthmark = array[0].getBirthmark("is");
-        Assert.assertEquals(birthmark.getType(), "is");
-        Assert.assertEquals(birthmark.getElementCount(), 2);
+        Assert.assertEquals("is", birthmark.getType());
+        Assert.assertEquals(2, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertNull(elements[0].getValue());
-        Assert.assertEquals(elements[1].getValue(), "java.lang.Object");
+        Assert.assertEquals("java.lang.Object", elements[1].getValue());
     }
 }

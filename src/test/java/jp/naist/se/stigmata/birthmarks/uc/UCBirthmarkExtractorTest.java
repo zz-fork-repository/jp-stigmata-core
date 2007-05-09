@@ -33,36 +33,35 @@ public class UCBirthmarkExtractorTest{
             new String[] { "target/classes/jp/naist/se/stigmata/Stigmata.class", }
         );
 
-        Assert.assertEquals(array.length, 1);
+        Assert.assertEquals(1, array.length);
         Assert.assertNotNull(array[0].getBirthmark("uc"));
 
         Birthmark birthmark = array[0].getBirthmark("uc");
-        Assert.assertEquals(birthmark.getType(), "uc");
-        Assert.assertEquals(birthmark.getElementCount(), 21);
+        Assert.assertEquals("uc", birthmark.getType());
+        Assert.assertEquals(21, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals(elements[ 0].getValue(), "java.io.ByteArrayInputStream");
-        Assert.assertEquals(elements[ 1].getValue(), "java.io.ByteArrayOutputStream");
-        Assert.assertEquals(elements[ 2].getValue(), "java.io.File");
-        Assert.assertEquals(elements[ 3].getValue(), "java.io.FileInputStream");
-        Assert.assertEquals(elements[ 4].getValue(), "java.io.InputStream");
-        Assert.assertEquals(elements[ 5].getValue(), "java.lang.Class");
-        Assert.assertEquals(elements[ 6].getValue(), "java.lang.Double");
-        Assert.assertEquals(elements[ 7].getValue(), "java.lang.Object");
-        Assert.assertEquals(elements[ 8].getValue(), "java.lang.String");
-        Assert.assertEquals(elements[ 9].getValue(), "java.lang.StringBuilder");
-        Assert.assertEquals(elements[10].getValue(), "java.lang.System");
-        Assert.assertEquals(elements[11].getValue(), "java.net.URI");
-        Assert.assertEquals(elements[12].getValue(), "java.net.URL");
-        Assert.assertEquals(elements[13].getValue(), "java.util.ArrayList");
-        Assert.assertEquals(elements[14].getValue(), "java.util.Iterator");
-        Assert.assertEquals(elements[15].getValue(), "java.util.List");
-        Assert.assertEquals(elements[16].getValue(), "java.util.Map");
-        Assert.assertEquals(elements[17].getValue(), "java.util.Set");
-        Assert.assertEquals(elements[18].getValue(), "java.util.logging.Logger");
-        Assert.assertEquals(elements[19].getValue(), "javax.imageio.spi.ServiceRegistry");
-
-        Assert.assertEquals(elements[20].getValue(), "org.apache.commons.beanutils.BeanUtils");
+        Assert.assertEquals("java.io.ByteArrayInputStream",           elements[ 0].getValue());
+        Assert.assertEquals("java.io.ByteArrayOutputStream",          elements[ 1].getValue());
+        Assert.assertEquals("java.io.File",                           elements[ 2].getValue());
+        Assert.assertEquals("java.io.FileInputStream",                elements[ 3].getValue());
+        Assert.assertEquals("java.io.InputStream",                    elements[ 4].getValue());
+        Assert.assertEquals("java.lang.Class",                        elements[ 5].getValue());
+        Assert.assertEquals("java.lang.Double",                       elements[ 6].getValue());
+        Assert.assertEquals("java.lang.Object",                       elements[ 7].getValue());
+        Assert.assertEquals("java.lang.String",                       elements[ 8].getValue());
+        Assert.assertEquals("java.lang.StringBuilder",                elements[ 9].getValue());
+        Assert.assertEquals("java.lang.System",                       elements[10].getValue());
+        Assert.assertEquals("java.net.URI",                           elements[11].getValue());
+        Assert.assertEquals("java.net.URL",                           elements[12].getValue());
+        Assert.assertEquals("java.util.ArrayList",                    elements[13].getValue());
+        Assert.assertEquals("java.util.Iterator",                     elements[14].getValue());
+        Assert.assertEquals("java.util.List",                         elements[15].getValue());
+        Assert.assertEquals("java.util.Map",                          elements[16].getValue());
+        Assert.assertEquals("java.util.Set",                          elements[17].getValue());
+        Assert.assertEquals("java.util.logging.Logger",               elements[18].getValue());
+        Assert.assertEquals("javax.imageio.spi.ServiceRegistry",      elements[19].getValue());
+        Assert.assertEquals("org.apache.commons.beanutils.BeanUtils", elements[20].getValue());
     }
 
     @Test
@@ -72,17 +71,17 @@ public class UCBirthmarkExtractorTest{
             new String[] { "target/classes/jp/naist/se/stigmata/RoundRobinComparisonResultSet.class", }
         );
 
-        Assert.assertEquals(array.length, 1);
+        Assert.assertEquals(1, array.length);
         Assert.assertNotNull(array[0].getBirthmark("uc"));
 
         Birthmark birthmark = array[0].getBirthmark("uc");
-        Assert.assertEquals(birthmark.getType(), "uc");
-        Assert.assertEquals(birthmark.getElementCount(), 4);
+        Assert.assertEquals("uc", birthmark.getType());
+        Assert.assertEquals(4, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals(elements[0].getValue(), "java.lang.Object");
-        Assert.assertEquals(elements[1].getValue(), "java.util.Arrays");
-        Assert.assertEquals(elements[2].getValue(), "java.util.Iterator");
-        Assert.assertEquals(elements[3].getValue(), "java.util.List");
+        Assert.assertEquals("java.lang.Object",   elements[0].getValue());
+        Assert.assertEquals("java.util.Arrays",   elements[1].getValue());
+        Assert.assertEquals("java.util.Iterator", elements[2].getValue());
+        Assert.assertEquals("java.util.List",     elements[3].getValue());
     }
 }
