@@ -9,7 +9,7 @@ import java.util.Locale;
 import jp.naist.se.stigmata.BirthmarkComparator;
 
 /**
- * Birthmark Service Provider Interface.
+ * Service provider interface for comparing birthmarks.
  *
  * @author Haruaki TAMADA
  * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $

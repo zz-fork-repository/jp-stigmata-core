@@ -50,7 +50,7 @@ public interface Birthmark extends Iterable<BirthmarkElement>{
     /**
      * This method check types of this birthmark and given birthmark are matched.
      * 
-     * @param b check target.
+     * @param birthmark check target.
      * @return true: same type, false: not same type.
      */
     public boolean isSameType(Birthmark birthmark);

@@ -17,6 +17,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 /**
+ * Abstract birthmark extractor using ASM.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
@@ -31,10 +32,12 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
         super();
     }
 
-    public abstract BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context);
+    public abstract BirthmarkExtractVisitor
+        createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context);
 
     @Override
-    public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException{
+    public Birthmark extract(InputStream in,
+                             BirthmarkContext context) throws BirthmarkExtractionException{
         BirthmarkExtractionException bee = new BirthmarkExtractionException();
 
         try{

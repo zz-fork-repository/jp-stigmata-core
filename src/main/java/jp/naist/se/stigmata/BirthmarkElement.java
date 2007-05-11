@@ -28,7 +28,6 @@ public class BirthmarkElement implements Serializable{
 
     /**
      * return the value of this element.
-     * @uml.property  name="value"
      */
     public Object getValue(){
         return value;

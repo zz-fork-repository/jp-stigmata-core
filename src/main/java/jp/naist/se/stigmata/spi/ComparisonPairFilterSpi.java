@@ -9,6 +9,7 @@ import java.util.Locale;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 
 /**
+ * Service provider interface for filtering comparison pair.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

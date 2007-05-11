@@ -10,7 +10,7 @@ import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 
 /**
- * Birthmark Service Provider Interface.
+ * Birthmark service provider interface.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

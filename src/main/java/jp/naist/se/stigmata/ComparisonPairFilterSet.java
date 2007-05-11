@@ -1,10 +1,20 @@
 package jp.naist.se.stigmata;
 
+/*
+ * $Id$
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
+/**
+ * Set of {@link ComparisonPairFilter <Ccode>ComparisonPairFilter</code>}.
+ *
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
     private List<ComparisonPairFilter> filters = new ArrayList<ComparisonPairFilter>();
     private String name;

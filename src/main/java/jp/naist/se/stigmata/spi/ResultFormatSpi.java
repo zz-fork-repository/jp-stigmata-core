@@ -9,7 +9,8 @@ import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
 import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
 
 /**
- * comparison/extracting result output service.
+ * Service provider interface for printing comparison/extracting
+ * result to certain output stream.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

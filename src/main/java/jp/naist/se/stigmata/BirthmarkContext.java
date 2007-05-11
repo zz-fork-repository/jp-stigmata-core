@@ -172,7 +172,6 @@ public class BirthmarkContext{
 
     /**
      * return all birthmark services searching traverse to root context.
-     * @uml.property  name="services"
      */
     public synchronized BirthmarkSpi[] getServices(){
         List<BirthmarkSpi> list = getServiceList();

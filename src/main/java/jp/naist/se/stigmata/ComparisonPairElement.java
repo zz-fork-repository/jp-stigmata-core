@@ -43,7 +43,6 @@ public class ComparisonPairElement{
 
     /**
      * @return  similarity
-     * @uml.property  name="similarity"
      */
     public double getSimilarity(){
         return similarity;

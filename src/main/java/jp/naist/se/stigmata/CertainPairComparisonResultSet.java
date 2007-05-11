@@ -71,7 +71,6 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
 
     /**
      * return the context.
-     * @uml.property  name="context"
      */
     public BirthmarkContext getContext(){
         return context;

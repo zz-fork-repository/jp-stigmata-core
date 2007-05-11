@@ -7,6 +7,7 @@ package jp.naist.se.stigmata.birthmarks;
 import jp.naist.se.stigmata.BirthmarkElement;
 
 /**
+ * Null birthmark element.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$ 

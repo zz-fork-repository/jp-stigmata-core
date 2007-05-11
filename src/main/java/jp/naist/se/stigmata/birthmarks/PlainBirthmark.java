@@ -7,6 +7,7 @@ package jp.naist.se.stigmata.birthmarks;
 import jp.naist.se.stigmata.AbstractBirthmark;
 
 /**
+ * Implementation of plain birthmark.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

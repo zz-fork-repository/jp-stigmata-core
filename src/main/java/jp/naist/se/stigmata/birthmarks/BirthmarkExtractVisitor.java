@@ -13,13 +13,12 @@ import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassVisitor;
 
 /**
- * 
- * 
+ * Abstract visitor class of extracting birthmarks from class file.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkExtractVisitor extends ClassAdapter{
+public abstract class BirthmarkExtractVisitor extends ClassAdapter{
     private BirthmarkContext context;
     private List<Throwable> causes = new ArrayList<Throwable>();
 

@@ -10,6 +10,8 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
 
 /**
+ * Abstract class for {@link BirthmarkSpi <code>BirthmarkSpi</code>}
+ *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
