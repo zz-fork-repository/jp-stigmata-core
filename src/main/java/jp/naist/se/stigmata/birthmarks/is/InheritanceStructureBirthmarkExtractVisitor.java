@@ -21,11 +21,8 @@ import org.objectweb.asm.ClassVisitor;
  * @version $Revision$ $Date$
  */
 public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    private Birthmark birthmark;
-
     public InheritanceStructureBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
-        super(visitor, context);
-        this.birthmark = birthmark;
+        super(visitor, birthmark, context);
     }
 
     public void visit(int version, int access, String name, String signature,
@@ -46,13 +43,13 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
             String className = c.getName();
 
             if(wcm.isWellKnownClass(className)){
-                birthmark.addElement(new BirthmarkElement(className));
+                addElement(new BirthmarkElement(className));
             }
             else{
-                birthmark.addElement(NullBirthmarkElement.getInstance());
+                addElement(NullBirthmarkElement.getInstance());
             }
             c = c.getSuperclass();
         } while(!c.getName().equals("java.lang.Object"));
-        birthmark.addElement(new BirthmarkElement("java.lang.Object"));
+        addElement(new BirthmarkElement("java.lang.Object"));
     }
 }

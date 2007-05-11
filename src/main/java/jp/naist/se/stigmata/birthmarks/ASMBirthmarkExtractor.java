@@ -52,7 +52,7 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
                 bee.addCauses(visitor.getCauses());
             }
 
-            return birthmark;
+            return visitor.getBirthmark();
         } catch(IOException e){
             bee.addCause(e);
             throw bee;

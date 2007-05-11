@@ -28,20 +28,18 @@ import org.objectweb.asm.signature.SignatureWriter;
  * @version $Revision$ $Date$
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    private Birthmark birthmark;
     private Set<String> set = new HashSet<String>();
 
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,
                                               BirthmarkContext context){
-        super(visitor, context);
-        this.birthmark = birthmark;
+        super(visitor, birthmark, context);
     }
 
     public void visitEnd(){
         String[] classNames = set.toArray(new String[set.size()]);
         Arrays.sort(classNames);
         for(String className: classNames){
-            birthmark.addElement(new BirthmarkElement(className));
+            addElement(new BirthmarkElement(className));
         }
     }
 

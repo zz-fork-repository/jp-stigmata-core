@@ -21,6 +21,9 @@ public class PlainBirthmark extends AbstractBirthmark{
         this.type = type;
     }
 
+    public PlainBirthmark(){
+    }
+
     public void setType(String type){
         this.type = type;
     }

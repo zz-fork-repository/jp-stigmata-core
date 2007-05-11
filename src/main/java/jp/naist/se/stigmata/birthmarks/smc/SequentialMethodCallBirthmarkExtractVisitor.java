@@ -20,15 +20,12 @@ import org.objectweb.asm.MethodVisitor;
  * @version $Revision$ $Date$
  */
 public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    private Birthmark birthmark;
-
     public SequentialMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
-        super(visitor, context);
-        this.birthmark = birthmark;
+        super(visitor, birthmark, context);
     }
 
     public MethodVisitor visitMethod(int access, String name, String desc,
-            String signature, String[] exceptions){
+                                      String signature, String[] exceptions){
 
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
 
@@ -36,7 +33,7 @@ public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtrac
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = owner.replace('/', '.');
                 if(getContext().getWellknownClassManager().isWellKnownClass(className)){
-                    birthmark.addElement(new MethodCallBirthmarkElement(className, name, desc));
+                    addElement(new MethodCallBirthmarkElement(className, name, desc));
                 }
                 super.visitMethodInsn(opcode, owner, name, desc);
             }

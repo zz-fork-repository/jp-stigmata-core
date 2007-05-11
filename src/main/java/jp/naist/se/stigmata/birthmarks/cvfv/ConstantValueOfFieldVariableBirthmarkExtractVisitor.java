@@ -26,18 +26,16 @@ import org.objectweb.asm.Type;
  * @version $Revision$ $Date$
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    private Birthmark birthmark;
     private Map<String, TypeAndValueBirthmarkElement> elements = new LinkedHashMap<String, TypeAndValueBirthmarkElement>();
     private String className;
 
     public ConstantValueOfFieldVariableBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
-        super(visitor, context);
-        this.birthmark = birthmark;
+        super(visitor, birthmark, context);
     }
 
     public void visitEnd(){
         for(String key: elements.keySet()){
-            birthmark.addElement(elements.get(key));
+            addElement(elements.get(key));
         }
         super.visitEnd();
     }

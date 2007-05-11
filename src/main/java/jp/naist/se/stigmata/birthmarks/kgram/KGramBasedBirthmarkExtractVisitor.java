@@ -22,13 +22,11 @@ import org.objectweb.asm.MethodVisitor;
  * @version $Revision: 59 $ $Date: 2007-03-03 12:42:06 +0900 (Sat, 03 Mar 2007) $
  */
 public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    private Birthmark birthmark;
     private int kvalue;
     private List<Integer> opcodes = new ArrayList<Integer>();
 
     public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
-        super(visitor, context);
-        this.birthmark = birthmark;
+        super(visitor, birthmark, context);
     }
 
     public int getKValue(){
@@ -53,7 +51,7 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             }
         }
         for(KGram kgram: kgrams){
-            birthmark.addElement(new KGramBasedBirthmarkElement(kgram));
+            addElement(new KGramBasedBirthmarkElement(kgram));
         }
     }
 
