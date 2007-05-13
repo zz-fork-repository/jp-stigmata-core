@@ -10,6 +10,12 @@ import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
+ * An implementation of {@link BirthmarkComparator
+ * <code>BirthmarkComparator</code>}.  Let <i>p</i> and <i>q</i> be
+ * programs, <i>f(p)</i> and <i>f(q)</i> be extracted birthmarks from
+ * <i>p</i> and <i>q</i>.  Let <i>|f(p)|</i> be a element count of
+ * <i>f(p)</i>.  Then, expression of comparing birthmarks algorithm of
+ * this class is defined as <i>|f(p) and f(q)|/(|f(p)| + |f(q)|)</i>.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

@@ -11,7 +11,6 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
  * calculate similarities between two birthmarks by DP matching algorithm.
- * 
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

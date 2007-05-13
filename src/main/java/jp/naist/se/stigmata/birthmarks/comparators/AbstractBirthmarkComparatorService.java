@@ -15,7 +15,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
 
 /**
- * Birthmark Service Provider Interface.
+ * Abstract service provider interface for comparing birthmarks.
  *
  * @author Haruaki TAMADA
  * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
