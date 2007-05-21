@@ -163,6 +163,9 @@ savecomparison.button.tooltip=Save comparation result to a file.
 showgraph.button.label=グラフ
 showgraph.button.tooltip=バースマークの類似性の分布図
 
+changecolor.button.label=色の変更
+changecolor.title=色の変更
+
 ################################################
 #BirthmarksViewPane
 ################################################

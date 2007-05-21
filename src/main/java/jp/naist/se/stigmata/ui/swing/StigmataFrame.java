@@ -6,7 +6,6 @@ package jp.naist.se.stigmata.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,8 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -299,26 +296,10 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void showSimilarityDistributionGraph(Map<Integer, Integer> distributions){
-        final SimilarityGraphPane graph = new SimilarityGraphPane(distributions);
-        JPanel graphPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        graphPanel.add(graph);
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(graphPanel, BorderLayout.CENTER);
-
-        JButton save = Utility.createButton("savegraph");
-        Box south = Box.createHorizontalBox();
-        south.add(Box.createHorizontalGlue());
-        south.add(save);
-        south.add(Box.createHorizontalGlue());
-        panel.add(south, BorderLayout.SOUTH);
-        save.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                storeGraphImage(graph);
-            }
-        });
+        SimilarityDistributionGraphPane graph = new SimilarityDistributionGraphPane(this, distributions);
 
         graphCount++;
-        Utility.addNewTab("graph", tabPane, panel, new Object[] { new Integer(graphCount), }, null);
+        Utility.addNewTab("graph", tabPane, graph, new Object[] { new Integer(graphCount), }, null);
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
@@ -366,23 +347,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             }
         }
         return mapping;
-    }
-
-    private void storeGraphImage(SimilarityGraphPane graph){
-        String[] exts = graph.getSupportedFormats();
-        File file = getSaveFile(
-            exts, Messages.getString("savegraph.description")
-        );
-        try{
-            graph.storeGraphImage(file);
-        } catch(IOException e){
-            JOptionPane.showMessageDialog(
-                this,
-                Messages.getString("error.io", e.getMessage()),
-                Messages.getString("error.dialog.title"),
-                JOptionPane.ERROR_MESSAGE
-            );
-        }
     }
 
     private File findFile(boolean open, String[] exts, String desc){
