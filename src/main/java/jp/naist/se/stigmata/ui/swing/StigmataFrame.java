@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -58,6 +62,9 @@ import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.ui.swing.graph.MultiDimensionalScalingMethod;
+import jp.naist.se.stigmata.ui.swing.graph.MultiDimensionalScalingViewer;
+import Jama.Matrix;
 
 
 /**
@@ -79,7 +86,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private int extractCount = 0;
     private int compareCount = 0;
     private int compareDetail = 0;
-    private int graphCount = 0;
+    private int similarityGraphCount = 0;
+    private int mappingGraphCount = 0;
     private int comparePair = 0;
 
     public StigmataFrame(){
@@ -295,11 +303,56 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
+    public void showMDSGraph(BirthmarkSet[] set){
+        double[][] matrix = new double[set.length][set.length];
+
+        String[] labels = new String[set.length];
+        for(int i = 0; i < set.length; i++){
+            for(int j = 0; j <= i; j++){
+                ComparisonPair pair = new ComparisonPair(set[i], set[j], context);
+                matrix[i][j] = 1d - pair.calculateSimilarity();
+                if(i != j){
+                    matrix[j][i] = matrix[i][j];
+                }
+            }
+            labels[i] = set[i].getClassName();
+        }
+        final MultiDimensionalScalingViewer viewer = new MultiDimensionalScalingViewer(new MultiDimensionalScalingMethod(new Matrix(matrix)), labels);
+        viewer.setShowLabel(true);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        Box south = Box.createHorizontalBox();
+        JButton colorButton = new JButton(new ChangeColorAction(this, Color.BLUE, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                ChangeColorAction action = (ChangeColorAction)e.getSource();
+                viewer.setOverColor(action.getColor());
+            }
+        }));
+        final JCheckBox check = new JCheckBox(Messages.getString("showlabel.button.label"), true);
+        check.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                viewer.setShowLabel(check.isSelected());
+            }
+        });
+
+        south.add(Box.createHorizontalGlue());
+        south.add(colorButton);
+        south.add(Box.createHorizontalGlue());
+        south.add(check);
+        south.add(Box.createHorizontalGlue());
+        panel.add(viewer, BorderLayout.CENTER);
+        panel.add(south, BorderLayout.SOUTH);
+
+        mappingGraphCount++;
+        Utility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
+        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+    }
+
     public void showSimilarityDistributionGraph(Map<Integer, Integer> distributions){
         SimilarityDistributionGraphPane graph = new SimilarityDistributionGraphPane(this, distributions);
 
-        graphCount++;
-        Utility.addNewTab("graph", tabPane, graph, new Object[] { new Integer(graphCount), }, null);
+        similarityGraphCount++;
+        Utility.addNewTab("similaritygraph", tabPane, graph, new Object[] { new Integer(similarityGraphCount), }, null);
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 

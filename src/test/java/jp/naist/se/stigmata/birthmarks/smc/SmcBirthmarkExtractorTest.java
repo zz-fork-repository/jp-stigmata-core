@@ -142,7 +142,7 @@ public class SmcBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("smc");
         Assert.assertEquals("smc", birthmark.getType());
-        Assert.assertEquals(10, birthmark.getElementCount());
+        Assert.assertEquals(25, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         for(int i = 0; i < elements.length; i++){
@@ -151,15 +151,37 @@ public class SmcBirthmarkExtractorTest{
                 elements[i].getClass().getName()
             );
         }
-        Assert.assertEquals("java.lang.Object#<init>", elements[0].toString());
-        Assert.assertEquals("java.util.Arrays#asList", elements[1].toString());
-        Assert.assertEquals("java.util.Arrays#asList", elements[2].toString());
-        Assert.assertEquals("java.lang.Object#<init>", elements[3].toString());
-        Assert.assertEquals("java.util.Arrays#asList", elements[4].toString());
-        Assert.assertEquals("java.util.Arrays#asList", elements[5].toString());
-        Assert.assertEquals("java.util.List#size",     elements[6].toString());
-        Assert.assertEquals("java.util.List#size",     elements[7].toString());
-        Assert.assertEquals("java.util.List#size",     elements[8].toString());
-        Assert.assertEquals("java.util.List#size",     elements[9].toString());
+        // <init>(BirthmarkSet[], BirthmarkContext, boolean)
+        Assert.assertEquals("java.lang.Object#<init>",      elements[ 0].toString());
+        Assert.assertEquals("java.util.Arrays#asList",      elements[ 1].toString());
+        Assert.assertEquals("java.util.Arrays#asList",      elements[ 2].toString());
+        Assert.assertEquals("java.lang.Object#<init>",      elements[ 3].toString());
+
+        // <init>(BirthmarkSet[], BirthmarkSet[], BirthmarkContext, boolean)
+        Assert.assertEquals("java.util.Arrays#asList",      elements[ 4].toString());
+        Assert.assertEquals("java.util.Arrays#asList",      elements[ 5].toString());
+
+        // setCompareSamePair
+        Assert.assertEquals("java.util.List#size",          elements[ 6].toString());
+        Assert.assertEquals("java.util.List#size",          elements[ 7].toString());
+        Assert.assertEquals("java.util.List#size",          elements[ 8].toString());
+        Assert.assertEquals("java.util.List#size",          elements[ 9].toString());
+
+        // getComparisonSources
+        Assert.assertEquals("java.util.HashMap#<init>",     elements[10].toString());
+        Assert.assertEquals("java.util.List#iterator",      elements[11].toString());
+        Assert.assertEquals("java.util.Iterator#next",      elements[12].toString());
+        Assert.assertEquals("java.util.Map#put",            elements[13].toString());
+        Assert.assertEquals("java.util.Iterator#hasNext",   elements[14].toString());
+        Assert.assertEquals("java.util.List#iterator",      elements[15].toString());
+        Assert.assertEquals("java.util.Iterator#next",      elements[16].toString());
+        Assert.assertEquals("java.util.Map#put",            elements[17].toString());
+        Assert.assertEquals("java.util.Iterator#hasNext",   elements[18].toString());
+        Assert.assertEquals("java.util.Map#size",           elements[19].toString());
+        Assert.assertEquals("java.util.Map#entrySet",       elements[20].toString());
+        Assert.assertEquals("java.util.Set#iterator",       elements[21].toString());
+        Assert.assertEquals("java.util.Iterator#next",      elements[22].toString());
+        Assert.assertEquals("java.util.Map$Entry#getValue", elements[23].toString());
+        Assert.assertEquals("java.util.Iterator#hasNext",   elements[24].toString());
     }
 }

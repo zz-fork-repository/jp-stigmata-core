@@ -4,7 +4,9 @@ package jp.naist.se.stigmata;
  * $Id$
  */
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class CertainPairComparisonResultSet implements ComparisonResultSet{
     private BirthmarkContext context;
     private List<ComparisonPair> pairList = new ArrayList<ComparisonPair>();
+    private Map<URL, BirthmarkSet> sources = new HashMap<URL, BirthmarkSet>();
 
     /**
      * This constructor is the comparison pair list is specified.
@@ -28,6 +31,8 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
         this.context = context;
         for(int i = 0; i < pairs.length; i++){
             pairList.add(pairs[i]);
+            sources.put(pairs[i].getTarget1().getLocation(), pairs[i].getTarget1());
+            sources.put(pairs[i].getTarget2().getLocation(), pairs[i].getTarget2());
         }
     }
 
@@ -43,6 +48,8 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
                 pairList.add(new ComparisonPair(targetX[i], target2, context));
             }
         }
+        addSources(targetX);
+        addSources(targetY);
     }
 
     /**
@@ -67,6 +74,8 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
                 pairList.add(new ComparisonPair(target1, target2, context));
             }
         }
+        addSources(targetX);
+        addSources(targetY);
     }
 
     /**
@@ -90,6 +99,16 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
         return pairList.iterator();
     }
 
+    public BirthmarkSet[] getComparisonSources(){
+        BirthmarkSet[] entries = new BirthmarkSet[sources.size()];
+        int index = 0;
+        for(Map.Entry<URL, BirthmarkSet> entry: sources.entrySet()){
+            entries[index] = entry.getValue();
+            index++;
+        }
+        return entries;
+    }
+
     /**
      * find BirthmarkSet from given array by given class name.
      */
@@ -100,5 +119,11 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
             }
         }
         return null;
+    }
+
+    private void addSources(BirthmarkSet[] bs){
+        for(BirthmarkSet s: bs){
+            sources.put(s.getLocation(), s);
+        }
     }
 }

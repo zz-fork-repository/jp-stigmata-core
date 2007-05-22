@@ -4,9 +4,12 @@ package jp.naist.se.stigmata;
  * $Id$
  */
 
+import java.net.URL;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Concrete class for ComparisonResultSet. This instance compare class files by round robin.
@@ -35,7 +38,7 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
     /**
      * constructor.  if user gives { a, b, c, } as holders1, then the
      * instance (created by this constructor when samePair is true)
-     * compares { a<->a, a<->b, a<->c, b<->b, b<->c, c<->c, }.
+     * compares { a<->a, b<->a, b<->b, c<->a, c<->b, c<->c, }.
      * Otherwise, the instance compares { a<->b, a<->c, b<->c, } when
      * samePair is false.
      */
@@ -102,14 +105,31 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
         return new ComparisonIterator();
     }
 
+    public BirthmarkSet[] getComparisonSources(){
+        Map<URL, BirthmarkSet> map = new HashMap<URL, BirthmarkSet>();
+        for(BirthmarkSet set: holders1){
+            map.put(set.getLocation(), set);
+        }
+        for(BirthmarkSet set: holders2){
+            map.put(set.getLocation(), set);
+        }
+
+        BirthmarkSet[] entries = new BirthmarkSet[map.size()];
+        int index = 0;
+        for(Map.Entry<URL, BirthmarkSet> entry: map.entrySet()){
+            entries[index] = entry.getValue();
+            index++;
+        }
+
+        return entries;
+    }
+
     /**
      * iterator class.
      */
     private class ComparisonIterator implements Iterator<ComparisonPair>{
         private int i = 0;
-
         private int j = 0;
-
         private int count = 0;
 
         public boolean hasNext(){
@@ -117,8 +137,9 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
         }
 
         public ComparisonPair next(){
-            if((tablePair && i == holders1.size()) || (!tablePair && !samePair && i == j)
-                    || (!tablePair && samePair && i > j)){
+            if((tablePair  && i == holders1.size()) || 
+               (!tablePair && !samePair && i == j) ||
+               (!tablePair && samePair && i > j)){
                 i = 0;
                 j++;
             }

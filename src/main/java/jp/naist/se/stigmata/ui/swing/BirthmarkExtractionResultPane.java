@@ -37,7 +37,6 @@ public class BirthmarkExtractionResultPane extends JPanel implements BirthmarkDa
         this.birthmarks = Arrays.asList(sets);
 
         JComponent southPanel = Box.createHorizontalBox(); 
-        // JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton saveButton = Utility.createButton("savebirthmark");
         JScrollPane scroll = new JScrollPane();
 

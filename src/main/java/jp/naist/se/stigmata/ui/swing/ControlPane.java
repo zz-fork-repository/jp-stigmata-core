@@ -17,8 +17,8 @@ import java.util.Set;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -50,7 +50,7 @@ public class ControlPane extends JPanel{
     private JButton compareButton;
     private JButton extractButton;
     private JButton resetButton;
-    private JComboBox comparisonMethods;
+    private PopupButton comparePopup;
     private boolean expertmode = false;
 
     public ControlPane(StigmataFrame stigmata){
@@ -205,13 +205,16 @@ public class ControlPane extends JPanel{
         String[] valueY = targetY.getValues();
         String[] targets = birthmarks.getSelectedServices();
 
-        extractButton
-                .setEnabled(((valueX != null && valueX.length > 0) || (valueY != null && valueY.length > 0))
-                        && (targets != null && targets.length > 0));
+        extractButton.setEnabled(
+            ((valueX != null && valueX.length > 0) || (valueY != null && valueY.length > 0))
+            && (targets != null && targets.length > 0)
+        );
 
-        compareButton.setEnabled((valueX != null && valueX.length > 0)
-                && (valueY != null && valueY.length > 0)
-                && (targets != null && targets.length > 0));
+        comparePopup.setEnabled(
+            (valueX != null && valueX.length > 0) &&
+            (valueY != null && valueY.length > 0) &&
+            (targets != null && targets.length > 0)
+        );
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
@@ -257,8 +260,10 @@ public class ControlPane extends JPanel{
     private void compareRoundRobin(){
         BirthmarkContext context = generateContext();
 
-        stigmata.compareRoundRobin(birthmarks.getSelectedServices(), targetX
-                .getValues(), targetY.getValues(), context);
+        stigmata.compareRoundRobin(
+            birthmarks.getSelectedServices(), targetX.getValues(), 
+            targetY.getValues(), context
+        );
     }
 
     private void compareSpecifiedPair(){
@@ -297,13 +302,8 @@ public class ControlPane extends JPanel{
         controlTab = new JTabbedPane();
         resetButton = Utility.createButton("reset");
         extractButton = Utility.createButton("extract");
-        compareButton = Utility.createButton("compare");
-        comparisonMethods = new JComboBox();
-
-        String[] items = Messages.getStringArray("comparison.methods");
-        for(int i = 0; i < items.length; i++){
-            comparisonMethods.addItem(items[i]);
-        }
+        compareButton = Utility.createButton("roundrobin");
+        comparePopup = new PopupButton(compareButton);
 
         Box south = Box.createHorizontalBox();
         south.add(Box.createHorizontalGlue());
@@ -311,9 +311,7 @@ public class ControlPane extends JPanel{
         south.add(Box.createHorizontalGlue());
         south.add(extractButton);
         south.add(Box.createHorizontalGlue());
-        south.add(compareButton);
-        south.add(Box.createHorizontalGlue());
-        south.add(comparisonMethods);
+        south.add(comparePopup);
         south.add(Box.createHorizontalGlue());
 
         setLayout(new BorderLayout());
@@ -321,7 +319,7 @@ public class ControlPane extends JPanel{
         add(controlTab, BorderLayout.CENTER);
 
         extractButton.setEnabled(false);
-        compareButton.setEnabled(false);
+        comparePopup.setEnabled(false);
 
         resetButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -335,23 +333,31 @@ public class ControlPane extends JPanel{
             }
         });
 
-        compareButton.addActionListener(new ActionListener(){
+        ActionListener compareListener = new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                String item = (String)comparisonMethods.getSelectedItem();
-                if(item.equals(Messages.getString("roundrobin.label"))){
+                String command = e.getActionCommand();
+
+                if(command.equals("roundrobin")){
                     compareRoundRobin();
                 }
-                else if(item.equals(Messages.getString("guessedpair.label"))){
+                else if(command.equals("guessedpair")){
                     compareGuessedPair();
                 }
-                else if(item.equals(Messages.getString("specifiedpair.label"))){
+                else if(command.equals("specifiedpair")){
                     compareSpecifiedPair();
                 }
-                else if(item.equals(Messages
-                        .getString("roundrobin.filtering.label"))){
+                else if(command.equals("roundrobin.filtering")){
                     compareRoundRobinWithFiltering();
                 }
             }
-        });
+        };
+        compareButton.addActionListener(compareListener);
+
+        String[] items = Messages.getStringArray("comparison.methods");
+        for(int i = 1; i < items.length; i++){
+            JMenuItem item = Utility.createJMenuItem(items[i]);
+            comparePopup.addMenuItem(item);
+            item.addActionListener(compareListener);
+        }
     }
 }

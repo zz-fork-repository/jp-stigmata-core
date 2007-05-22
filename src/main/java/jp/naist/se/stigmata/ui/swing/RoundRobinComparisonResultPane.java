@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +22,9 @@ import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,6 +39,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.RoundRobinComparisonResultSet;
+import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 
 /**
@@ -192,6 +194,24 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         stigmataFrame.saveAction(this);
     }
 
+    private void mdsButtonActionPerformed(ActionEvent e){
+        Map<URL, BirthmarkSet> map = new HashMap<URL, BirthmarkSet>();
+        for(BirthmarkSet bs: birthmarksX){
+            map.put(bs.getLocation(), bs);
+        }
+        for(BirthmarkSet bs: birthmarksY){
+            map.put(bs.getLocation(), bs);
+        }
+        int index = 0;
+        BirthmarkSet[] set = new BirthmarkSet[map.size()];
+        for(Map.Entry<URL, BirthmarkSet> entry: map.entrySet()){
+            set[index] = entry.getValue();
+            index++;
+        }
+
+        stigmataFrame.showMDSGraph(set);
+    }
+
     private void graphButtonActionPerformed(ActionEvent e){
         Map<Integer, Integer> values = new HashMap<Integer, Integer>();
         for(int i = 0; i < table.getRowCount(); i++){
@@ -213,14 +233,13 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         JButton save = Utility.createButton("savecomparison"); //$NON-NLS-1$
         JButton graph = Utility.createButton("showgraph"); //$NON-NLS-1$
         JButton obfuscate = Utility.createButton("obfuscate"); //$NON-NLS-1$
-        JButton compare = Utility.createButton("compare"); //$NON-NLS-1$
-        final JComboBox combo = new JComboBox();
-        JComponent southPanel = Box.createHorizontalBox();
+        JButton compare = Utility.createButton("guessedpair"); //$NON-NLS-1$
+        JMenuItem mdsMenu = Utility.createJMenuItem("mdsmap");
 
-        String[] comparisonMethods = Messages.getStringArray("comparison.methods.inroundrobinresult");
-        for(int i = 0; i < comparisonMethods.length; i++){
-            combo.addItem(comparisonMethods[i]);
-        }
+        PopupButton comparePopup = new PopupButton(compare);
+        PopupButton graphPopup = new PopupButton(graph);
+
+        JComponent southPanel = Box.createHorizontalBox();
 
         setLayout(new BorderLayout());
         add(getMainPane(), BorderLayout.CENTER);
@@ -228,13 +247,11 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(save);
         southPanel.add(Box.createHorizontalGlue());
-        southPanel.add(graph);
+        southPanel.add(graphPopup);
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(obfuscate);
         southPanel.add(Box.createHorizontalGlue());
-        southPanel.add(compare);
-        southPanel.add(Box.createHorizontalGlue());
-        southPanel.add(combo);
+        southPanel.add(comparePopup);
         southPanel.add(Box.createHorizontalGlue());
 
         save.addActionListener(new ActionListener(){
@@ -248,23 +265,67 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
                 graphButtonActionPerformed(e);
             }
         });
+        mdsMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                mdsButtonActionPerformed(e);
+            }
+        });
+
         obfuscate.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 obfuscateClassNames();
             }
         });
 
-        compare.addActionListener(new ActionListener(){
+        ActionListener compareListener = new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                String item = (String)combo.getSelectedItem();
-                if(item.equals(Messages.getString("guessedpair.label"))){
+                String item = e.getActionCommand();
+                if(item.equals("guessedpair")){
                     compareGuessedPair();
                 }
-                else if(item.equals(Messages.getString("specifiedpair.label"))){
+                else if(item.equals("specifiedpair")){
                     compareSpecifiedPair();
                 }
+                else if(item.equals("roundrobin.filtering")){
+                    compareRoundRobinWithFiltering();
+                }
             }
-        });
+        };
+
+        compare.addActionListener(compareListener);
+        String[] comparisonMethods = Messages.getStringArray("comparison.methods.inroundrobinresult");
+        for(int i = 1; i < comparisonMethods.length; i++){
+            JMenuItem item = Utility.createJMenuItem(comparisonMethods[i]);
+            comparePopup.addMenuItem(item);
+            item.addActionListener(compareListener);
+        }
+        graphPopup.addMenuItem(mdsMenu);
+    }
+
+    private void compareRoundRobinWithFiltering(){
+        FilterSelectionPane pane = new FilterSelectionPane(
+            context.getFilterManager()
+        );
+        int returnValue = JOptionPane.showConfirmDialog(
+            stigmataFrame, pane, Messages.getString("filterselection.dialog.title"),
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if(returnValue == JOptionPane.OK_OPTION){
+            String[] filterSetList = pane.getSelectedFilters();
+
+            ComparisonResultSet resultset = new RoundRobinComparisonResultSet(
+                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
+                birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
+                context
+            );
+            
+            ComparisonResultSet filterResultSet = new FilteredComparisonResultSet(
+                resultset,
+                context.getFilterManager().getFilterSets(filterSetList)
+            );
+            stigmataFrame.showComparisonResultSet(filterResultSet);
+        }
     }
 
     private void compareGuessedPair(){

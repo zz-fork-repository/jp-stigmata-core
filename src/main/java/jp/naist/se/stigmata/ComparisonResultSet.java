@@ -24,4 +24,6 @@ public interface ComparisonResultSet extends Iterable<ComparisonPair>{
     public Iterator<ComparisonPair> iterator();
 
     public int getComparisonCount();
+
+    public BirthmarkSet[] getComparisonSources();
 }

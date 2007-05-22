@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
@@ -62,6 +63,10 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
 
     public Iterator<ComparisonPair> iterator(){
         return new FilteredIterator(resultset.iterator());
+    }
+
+    public BirthmarkSet[] getComparisonSources(){
+        return resultset.getComparisonSources();
     }
 
     private class FilteredIterator implements Iterator<ComparisonPair>{

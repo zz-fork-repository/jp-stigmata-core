@@ -24,8 +24,6 @@ import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,8 +42,6 @@ public class SimilarityDistributionGraphPane extends JPanel{
     private int maxFrequency = 0;
     private JLabel iconLabel;
     private BufferedImage image;
-    private Color color = Color.RED;
-    private JColorChooser chooser;
 
     public SimilarityDistributionGraphPane(StigmataFrame stigmata, Map<Integer, Integer> distributions){
         this.stigmata = stigmata;
@@ -54,7 +50,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
         initializeLayouts();
         initializeData();
 
-        drawGraph();
+        drawGraph(Color.RED);
     }
 
     public String[] getSupportedFormats(){
@@ -68,7 +64,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
         return set.toArray(new String[set.size()]);
     }
 
-    private void drawGraph(){
+    private void drawGraph(Color color){
         Graphics2D g = image.createGraphics();
         g.setColor(getBackground());
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
@@ -142,23 +138,23 @@ public class SimilarityDistributionGraphPane extends JPanel{
     }
 
     private void initializeLayouts(){
-        chooser = new JColorChooser();
-        chooser.setColor(Color.RED);
         image = new BufferedImage(300, 300, BufferedImage.TYPE_INT_ARGB);
 
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
         iconLabel = new JLabel();
         Box south = Box.createHorizontalBox();
         JButton storeImageButton = Utility.createButton("savegraph");
-        JButton switchColorButton = Utility.createButton("changecolor");
+        JButton switchColorButton = new JButton(new ChangeColorAction(stigmata, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                ChangeColorAction action = (ChangeColorAction)e.getSource();
+                if(action.isColorSelected()){
+                    drawGraph(action.getColor());
+                }
+            }
+        }));
         storeImageButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 storeGraphImage();
-            }
-        });
-        switchColorButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                switchColor();
             }
         });
 
@@ -172,25 +168,6 @@ public class SimilarityDistributionGraphPane extends JPanel{
 
         add(center, BorderLayout.CENTER);
         add(south, BorderLayout.SOUTH);
-    }
-
-    private void switchColor(){
-        chooser.setColor(color);
-        JDialog dialog = JColorChooser.createDialog(
-            stigmata, Messages.getString("changecolor.title"), 
-            true, chooser, 
-            new ActionListener(){ // ok
-                public void actionPerformed(ActionEvent e){
-                    color = chooser.getColor();
-                    drawGraph();
-                }
-            },
-            new ActionListener(){ // cancel
-                public void actionPerformed(ActionEvent e){
-                }
-            }
-        );
-        dialog.setVisible(true);
     }
 
     private void storeGraphImage(){
