@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.ui.swing;
+package jp.naist.se.stigmata.ui.swing.graph;
 
 /*
  * $Id$
@@ -27,6 +27,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import jp.naist.se.stigmata.ui.swing.ChangeColorAction;
+import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.naist.se.stigmata.ui.swing.Utility;
 
 /**
  * 

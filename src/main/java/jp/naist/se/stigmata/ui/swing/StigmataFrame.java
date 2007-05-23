@@ -64,6 +64,7 @@ import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.graph.MultiDimensionalScalingMethod;
 import jp.naist.se.stigmata.ui.swing.graph.MultiDimensionalScalingViewer;
+import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import Jama.Matrix;
 
 
