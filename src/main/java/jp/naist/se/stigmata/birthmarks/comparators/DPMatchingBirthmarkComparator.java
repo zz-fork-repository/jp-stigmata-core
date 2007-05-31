@@ -59,7 +59,7 @@ public class DPMatchingBirthmarkComparator implements BirthmarkComparator{
         BirthmarkElement[] element1 = b1.getElements();
         BirthmarkElement[] element2 = b2.getElements();
         if(element1.length > 0 && element2.length > 0){
-            int[][] cost = createCostMatrics(element1, element2);
+            int[][] cost = createCostMatrix(element1, element2);
 
             int max = (element1.length + element2.length) * (getMismatchPenalty() + getShiftPenalty());
             int distance = cost[element1.length - 1][element2.length - 1];
@@ -78,8 +78,8 @@ public class DPMatchingBirthmarkComparator implements BirthmarkComparator{
         return b1.getElementCount() + b2.getElementCount();
     }
 
-    private int[][] createCostMatrics(BirthmarkElement[] targetX, BirthmarkElement[] targetY){
-        int[][] mismatches = getMismatchMatrics(targetX, targetY);
+    private int[][] createCostMatrix(BirthmarkElement[] targetX, BirthmarkElement[] targetY){
+        int[][] mismatches = getMismatchMatrix(targetX, targetY);
         int[][] cost = new int[targetX.length][targetY.length];
 
         cost[0][0] = mismatches[0][0] * getMismatchPenalty();
@@ -110,7 +110,7 @@ public class DPMatchingBirthmarkComparator implements BirthmarkComparator{
         return cost;
     }
 
-    private int[][] getMismatchMatrics(BirthmarkElement[] targetX, BirthmarkElement[] targetY){
+    private int[][] getMismatchMatrix(BirthmarkElement[] targetX, BirthmarkElement[] targetY){
         int[][] mismatches = new int[targetX.length][targetY.length];
 
         for(int i = 0; i < mismatches.length; i++){
