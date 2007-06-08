@@ -94,13 +94,11 @@ public class ControlPane extends JPanel{
         filters.reset();
         updateEnable();
 
-        int index1 = controlTab.indexOfTab(Messages
-                .getString("definition.tab.label"));
+        int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
         if(index1 >= 0){
             controlTab.removeTabAt(index1);
         }
-        int index2 = controlTab.indexOfTab(Messages
-                .getString("property.tab.label"));
+        int index2 = controlTab.indexOfTab(Messages.getString("property.tab.label"));
         if(index2 >= 0){
             controlTab.removeTabAt(index2);
         }
@@ -233,8 +231,10 @@ public class ControlPane extends JPanel{
             }
         }
 
-        stigmata.extract(birthmarks.getSelectedServices(), targets
-                .toArray(new String[targets.size()]), context);
+        stigmata.extract(
+            birthmarks.getSelectedServices(), 
+            targets.toArray(new String[targets.size()]), context
+        );
     }
 
     private void compareRoundRobinWithFiltering(){

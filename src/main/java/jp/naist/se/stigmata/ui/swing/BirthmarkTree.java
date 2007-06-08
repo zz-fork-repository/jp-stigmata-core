@@ -23,13 +23,13 @@ public class BirthmarkTree extends JTree{
     private static final long serialVersionUID = 68345692177534765L;
 
     private List<BirthmarkSet> birthmarks = new ArrayList<BirthmarkSet>();
-    // private BirthmarkSet[] birthmarks;
     private DefaultTreeModel model;
     private DefaultMutableTreeNode root;
 
     public BirthmarkTree(){
-        super(new DefaultTreeModel(new DefaultMutableTreeNode(Messages
-                .getString("birthmarktree.root.label"), true)));
+        super(new DefaultTreeModel(new DefaultMutableTreeNode(
+            Messages.getString("birthmarktree.root.label"), true)
+        ));
         model = (DefaultTreeModel)getModel();
         root = (DefaultMutableTreeNode)model.getRoot();
     }

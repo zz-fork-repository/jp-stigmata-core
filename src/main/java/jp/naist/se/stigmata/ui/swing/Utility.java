@@ -5,9 +5,13 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,6 +35,19 @@ public class Utility{
     private Utility(){
     }
 
+    public static Action createAction(String key, final ActionListener listener){
+        final Icon icon = getIcon(key + ".icon");
+        final String label = Messages.getString(key + ".label");
+
+        return new AbstractAction(label, icon){
+            private static final long serialVersionUID = 1349393156253158607L;
+
+            public void actionPerformed(ActionEvent e){
+                listener.actionPerformed(e);
+            }
+        };
+    }
+
     public static void decorateJComponent(JComponent component, String label){
         if(Messages.hasString(label + ".tooltip")){
             component.setToolTipText(Messages.getString(label + ".tooltip"));
@@ -49,6 +66,15 @@ public class Utility{
         } catch(IllegalAccessException e){
         } catch(InvocationTargetException e){
         }
+    }
+
+    public static JButton createButton(String label, Action action){
+        JButton button = new JButton(action);
+        button.setActionCommand(label);
+        if(Messages.hasString(label + ".button.tooltip")){
+            button.setToolTipText(Messages.getString(label + ".button.tooltip"));
+        }
+        return button;
     }
 
     public static JButton createButton(String label){
@@ -78,6 +104,15 @@ public class Utility{
         Icon icon = getIcon(label + ".menuitem.icon");
         if(icon != null){
             item.setIcon(icon);
+        }
+        return item;
+    }
+
+    public static JMenuItem createJMenuItem(String label, Action action){
+        JMenuItem item = new JMenuItem(action);
+        item.setActionCommand(label);
+        if(Messages.hasString(label + ".menuitem.tooltip")){
+            item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
         }
         return item;
     }

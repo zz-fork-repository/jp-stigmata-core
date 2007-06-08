@@ -18,15 +18,20 @@ public class ChangeColorAction extends AbstractAction{
     private boolean colorSelected = false;
     private ActionListener listener;
 
-    public ChangeColorAction(Component component, Color color, ActionListener listener){
-        super(Messages.getString("changecolor.button.label"),
-                Utility.getIcon("changecolor.button.icon"));
+    public ChangeColorAction(String label, Component component, Color color, ActionListener listener){
+        super(Messages.getString(label + ".label"),
+                Utility.getIcon(label + ".icon"));
         this.component = component;
         this.listener = listener;
         this.color = color;
 
         chooser = new JColorChooser();
         chooser.setColor(color);
+
+    }
+
+    public ChangeColorAction(Component component, Color color, ActionListener listener){
+        this("changecolor", component, color, listener);
     }
 
     public ChangeColorAction(Component component, ActionListener listener){

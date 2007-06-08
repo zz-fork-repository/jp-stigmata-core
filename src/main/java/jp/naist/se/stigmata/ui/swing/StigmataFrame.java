@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -27,9 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -62,10 +58,8 @@ import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
-import jp.naist.se.stigmata.ui.swing.graph.MultiDimensionalScalingMethod;
-import jp.naist.se.stigmata.ui.swing.graph.MultiDimensionalScalingViewer;
 import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
-import Jama.Matrix;
+import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
 
 
 /**
@@ -134,10 +128,17 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return context;
     }
 
+    /**
+     * Find file to open it.
+     */
     public File getOpenFile(String[] exts, String desc){
         return findFile(true, exts, desc);
     }
 
+    /**
+     * Find file for storing data to it.
+     * Extension of found file is correct as selected extension.
+     */
     public File getSaveFile(String[] exts, String desc){
         return findFile(false, exts, desc);
     }
@@ -305,45 +306,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void showMDSGraph(BirthmarkSet[] set){
-        double[][] matrix = new double[set.length][set.length];
-
-        String[] labels = new String[set.length];
-        for(int i = 0; i < set.length; i++){
-            for(int j = 0; j <= i; j++){
-                ComparisonPair pair = new ComparisonPair(set[i], set[j], context);
-                matrix[i][j] = 1d - pair.calculateSimilarity();
-                if(i != j){
-                    matrix[j][i] = matrix[i][j];
-                }
-            }
-            labels[i] = set[i].getClassName();
-        }
-        final MultiDimensionalScalingViewer viewer = new MultiDimensionalScalingViewer(new MultiDimensionalScalingMethod(new Matrix(matrix)), labels);
-        viewer.setShowLabel(true);
-
-        JPanel panel = new JPanel(new BorderLayout());
-        Box south = Box.createHorizontalBox();
-        JButton colorButton = new JButton(new ChangeColorAction(this, Color.BLUE, new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                ChangeColorAction action = (ChangeColorAction)e.getSource();
-                viewer.setOverColor(action.getColor());
-            }
-        }));
-        final JCheckBox check = new JCheckBox(Messages.getString("showlabel.button.label"), true);
-        check.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                viewer.setShowLabel(check.isSelected());
-            }
-        });
-
-        south.add(Box.createHorizontalGlue());
-        south.add(colorButton);
-        south.add(Box.createHorizontalGlue());
-        south.add(check);
-        south.add(Box.createHorizontalGlue());
-        panel.add(viewer, BorderLayout.CENTER);
-        panel.add(south, BorderLayout.SOUTH);
-
+        MDSGraphPanel panel = new MDSGraphPanel(this, set, context);
         mappingGraphCount++;
         Utility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
@@ -357,18 +320,22 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
+    public void showExtractionResult(BirthmarkSet[] set, BirthmarkContext context){
+        extractCount++;
+        BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, context, set);
+        Utility.addNewTab(
+            "extract", tabPane, viewer,
+            new Object[] { new Integer(extractCount), },
+            new Object[] { Utility.array2String(set[0].getBirthmarkTypes()), }
+        );
+        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+        
+    }
+
     public void extract(String[] birthmarks, String[] targets, BirthmarkContext context){
         try{
             BirthmarkSet[] holders = stigmata.extract(birthmarks, targets, context);
-            extractCount++;
-
-            BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, context, holders);
-            Utility.addNewTab(
-                "extract", tabPane, viewer,
-                new Object[] { new Integer(extractCount), },
-                new Object[] { Utility.array2String(birthmarks), Utility.array2String(targets), }
-            );
-            tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+            showExtractionResult(holders, context);
         }catch(Exception e){
             showExceptionMessage(e);
         }
@@ -675,9 +642,9 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
        }
        sb.append("</ul></body></html>");
         JOptionPane.showMessageDialog(
-                this, new String(sb), Messages.getString("error.dialog.title"),
-                JOptionPane.WARNING_MESSAGE
-            );
+            this, new String(sb), Messages.getString("error.dialog.title"),
+            JOptionPane.WARNING_MESSAGE
+        );
     }
 
     private String loadString(String loadFrom){

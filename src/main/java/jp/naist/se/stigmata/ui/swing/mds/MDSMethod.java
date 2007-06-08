@@ -1,14 +1,16 @@
-package jp.naist.se.stigmata.ui.swing.graph;
+package jp.naist.se.stigmata.ui.swing.mds;
 
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
 
-public class MultiDimensionalScalingMethod{
+public class MDSMethod{
     private Matrix target;
     private Matrix coordinate;
+    private Matrix eigenValues;
+    private Matrix eigenVectors;
     private int[] indexes;
 
-    public MultiDimensionalScalingMethod(Matrix matrix){
+    public MDSMethod(Matrix matrix){
         this.target = matrix;
     }
 
@@ -17,6 +19,20 @@ public class MultiDimensionalScalingMethod{
         Matrix trans = centering.transpose();
 
         return centering.times(target).times(trans).times(-1);
+    }
+
+    public Matrix getEigenValues(){
+        if(eigenValues == null){
+            getCoordinateMatrix();
+        }
+        return (Matrix)eigenValues.clone();
+    }
+
+    public Matrix getEigenVectors(){
+        if(eigenVectors == null){
+            getCoordinateMatrix();
+        }
+        return (Matrix)eigenVectors.clone();
     }
 
     public double[] getCoordinate(int axis){
@@ -31,26 +47,34 @@ public class MultiDimensionalScalingMethod{
     }
 
     public Matrix getCoordinateMatrix(){
-        Matrix mat = getCenteredInnerProductMatrix();
-        EigenvalueDecomposition eigen = mat.eig();
-        Matrix eigenVectors = eigen.getV();
-        Matrix eigenValues  = eigen.getD();
+        if(coordinate == null){
+            Matrix mat = getCenteredInnerProductMatrix();
+            EigenvalueDecomposition eigen = mat.eig();
+            Matrix eigenVectors = eigen.getV();
+            Matrix eigenValues  = eigen.getD();
+            Matrix coordinate   = (Matrix)eigenVectors.clone();
 
-        for(int i = 0; i < mat.getRowDimension(); i++){
-            for(int j = 0; j < mat.getColumnDimension(); j++){
-                double v = eigenVectors.get(i, j);
-                v = v * Math.sqrt(eigenValues.get(j, j));
-                eigenVectors.set(i, j, v);
+            int col = mat.getColumnDimension();
+            int row = mat.getRowDimension();
+            for(int i = 0; i < row; i++){
+                for(int j = 0; j < col; j++){
+                    double v = coordinate.get(i, j);
+                    v = v * Math.sqrt(eigenValues.get(j, j));
+                    coordinate.set(i, j, v);
+                }
             }
+            sortValues(eigenValues);
+            this.coordinate = coordinate;
+            this.eigenVectors = eigenVectors;
+            this.eigenValues  = eigenValues;
         }
-        sortValues(eigenVectors);
-        this.coordinate = eigenVectors;
 
-        return eigenVectors;
+        return coordinate;
     }
 
     protected static Matrix getCenteringMatrix(int n){
         Matrix matrix = Matrix.identity(n, n);
+
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 matrix.set(i, j, matrix.get(i, j) - (1d / n));
@@ -69,7 +93,7 @@ public class MultiDimensionalScalingMethod{
 
         for(int i = 0; i < v.length; i++){
             for(int j = i + 1; j < v.length; j++){
-                if(v[i] < v[j]){
+                if(Math.abs(v[i]) < Math.abs(v[j])){
                     double tmpValue = v[j];
                     v[j] = v[i];
                     v[i] = tmpValue;
@@ -79,6 +103,7 @@ public class MultiDimensionalScalingMethod{
                 }
             }
         }
+
         indexes = index;
     }
 
@@ -95,7 +120,7 @@ public class MultiDimensionalScalingMethod{
             { 2182, 1737, 1021, 1891,  959, 2734, 2408,  678,    0, 2329, },
             {  543,  597, 1494, 1220, 2300,  923,  205, 2442, 2329,    0, },
         });
-        MultiDimensionalScalingMethod mds = new MultiDimensionalScalingMethod(matrix);
+        MDSMethod mds = new MDSMethod(matrix);
         System.out.println(mds.getCoordinateMatrix());
     }
 }
