@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="euc-jp"?>
 
 <!--
- $Id: birthmark-3.0.dtd 61 2007-03-03 06:54:58Z tama3 $
+ $Id$
 -->
 
 <!ELEMENT classpath               (#PCDATA)>
