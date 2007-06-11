@@ -140,8 +140,10 @@ public class WellknownClassesSettingsPane extends JPanel{
         inputPanel.add(new JLabel(patternColumnIdentifier));
         inputPanel.add(text);
 
-        int value = JOptionPane.showConfirmDialog(this, inputPanel, Messages
-                .getString("addwellknown.dialog.title"), JOptionPane.OK_CANCEL_OPTION);
+        int value = JOptionPane.showConfirmDialog(
+            stigmata, inputPanel, Messages.getString("addwellknown.dialog.title"),
+            JOptionPane.OK_CANCEL_OPTION
+        );
         if(value == JOptionPane.OK_OPTION){
             int part = getPartType(checkPartType.getSelectedItem());
             int match = getMatchType(matchType.getSelectedItem());
@@ -205,14 +207,22 @@ public class WellknownClassesSettingsPane extends JPanel{
             public void actionPerformed(ActionEvent e){
                 String t = text.getText().trim();
                 if(t.length() > 0){
+                    String message = Messages.getString("wellknownclasschecker.wellknown.tooltip");
                     if(isWellknownClass(t)){
                         label.setIcon(Utility.getIcon("wellknownclasschecker.wellknown.icon"));
-                        label.setToolTipText(Messages.getString("wellknownclasschecker.wellknown.tooltip"));
                     }
                     else{
                         label.setIcon(Utility.getIcon("wellknownclasschecker.notwellknown.icon"));
-                        label.setToolTipText(Messages.getString("wellknownclasschecker.notwellknown.tooltip"));
+                        message = Messages.getString("wellknownclasschecker.notwellknown.tooltip");
                     }
+                    label.setToolTipText(message);
+                    String dm = String.format(
+                        "<html><body><dl><dt>%s</dt><dd>%s</dd></body></html>", t, message
+                    );
+                    JOptionPane.showMessageDialog(
+                        stigmata, dm, Messages.getString("wellknownclasschecker.dialog.title"),
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
                 }
             }
         };
