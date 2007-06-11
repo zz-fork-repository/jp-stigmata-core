@@ -117,5 +117,5 @@ $ svn checkout http://svn.sourceforge.jp/svnroot/stigmata/trunk/ stigmata
 
  You can brouse the source code from following link.
 
- {{{http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata}http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata}}
+ {{http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata}}
 

@@ -1,0 +1,55 @@
+ ----
+ FAQ
+ ----
+ Haruaki Tamada
+ ----
+ 2007-06-11
+ ----
+
+{FAQ}
+
+ *{{{#What is stigmata}What is stigmata}}
+
+ *{{{#What is birthmark}What is birthmark}}
+
+ *{{{#Why did I name it stigmata}Why did I name it stigmata}}
+
+ *{{{#What kind of features does stigmata have}What kind of features does stigmata have}}
+
+*{What is stigmata}
+
+ Stigmata is a toolkit for birthmarking Java class files.  Extracting
+birthmarks from Java class files directly and comparing them.  And
+analyzing birthmarks in multi-dimensional scaling.
+
+*{What is birthmark}
+
+ A birthmark is a unique and native characteristics of a program.  The
+birthmark provides a way to detect stolen software without embedding
+any additional information before distribution.
+
+ For more defails, see {{{definition.html}Definitions}}.
+
+*{Why did I name it stigmata}
+
+ Birthmark is marks that appear on a person's body in the same places
+ as those made on Jesus Christ's body when he was nailed to a cross.
+
+ {{http://dictionary.cambridge.org/define.asp?key=78150&dict=CALD}}
+
+ We liken birthmarks to holy sign of programs.
+
+*{What kind of features does stigmata have}
+
+ Stigmata have general mode and expert mode.  In general mode, we can
+extract certain birthmarks from jar file directly, and compare
+extracted birthmarks. Additionally, analyzing extracted birthmarks
+with MDS (multi-dimensional scaling).
+
+ In expert mode, it added to general mode, we can define the new
+birthmark, and a new filter (filtering the result of comparing).
+
+ Moreover, a part of extracting/comparing birthmarks is provided as
+plugins, you can define original birthmark plugin and easily install
+it to Stigmata.
+

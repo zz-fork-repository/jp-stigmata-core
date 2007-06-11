@@ -9,9 +9,10 @@
 Overview
 
  Stigmata is rewrite almost every source code based on <<<jbirth>>>
-which available at http://se.naist.jp/jbirth.  Stigmata aims to detect
-the theft of programs, too.  This tool can extract birthmarks from
-Java class files, and compare them.  Differences from <<<jbirth>>> are
+which available at {{http://se.naist.jp/jbirth}}.  Stigmata aims to
+detect the theft of programs, too.  This tool can extract birthmarks
+from Java class files, and compare them.  Differences from
+<<<jbirth>>> are
 
  * using spi (service provider interface) architecture for birthmark implementation
 
@@ -66,7 +67,7 @@ Related Tools
 
  *{{{http://www.e-t.com/jshrink.html}JShrink}}
 
- *{{{http://www.drjava.de/obfuscator/}Marvin Obfuscator }}
+ *{{{http://www.drjava.de/obfuscator/}Marvin Obfuscator}}
 
  *{{{http://proguard.sourceforge.net/}ProGuard}}
 

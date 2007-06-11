@@ -36,6 +36,9 @@
     <menu name="Stigmata">
       <item name="Introduction"        href="index.html"/>
       <item name="Download"            href="download.html" />
+      <item name="Definition"          href="definition.html" />
+      <item name="DTD"                 href="dtd.html" />
+      <item name="FAQ"                 href="faq.html"/>
       <item name="License"             href="license.html"/>
       <item name="Project Page"        href="http://sourceforge.jp/projects/stigmata/"/>
     </menu>
