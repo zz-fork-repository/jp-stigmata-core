@@ -3,7 +3,7 @@
 <project name="Stigmata">
   <bannerLeft>
     <name>NAIST SE Lab.</name>
-    <src>images/selogo.png</src>
+    <src>images/logos/selogo.png</src>
     <href>http://se.naist.jp/</href>
     <alt>se.naist.jp</alt>
   </bannerLeft>
@@ -35,9 +35,8 @@
 
     <menu name="Stigmata">
       <item name="Introduction"        href="index.html"/>
-      <item name="Technical Note"      href="technique.html" />
+      <item name="Download"            href="download.html" />
       <item name="License"             href="license.html"/>
-      <item name="Download"            href="https://sourceforge.jp/projects/stigmata/files/" />
       <item name="Project Page"        href="http://sourceforge.jp/projects/stigmata/"/>
     </menu>
 
