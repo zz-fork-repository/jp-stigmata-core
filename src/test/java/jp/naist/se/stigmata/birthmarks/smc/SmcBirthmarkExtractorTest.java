@@ -38,7 +38,7 @@ public class SmcBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("smc");
         Assert.assertEquals("smc", birthmark.getType());
-        Assert.assertEquals(76, birthmark.getElementCount());
+        Assert.assertEquals(77, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         for(int i = 0; i < elements.length; i++){
@@ -71,12 +71,12 @@ public class SmcBirthmarkExtractorTest{
         Assert.assertEquals("java.lang.String#endsWith",            elements[index++].getValue());
         Assert.assertEquals("java.util.List#add",                   elements[index++].getValue());
         Assert.assertEquals("java.util.List#iterator",              elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
         Assert.assertEquals("java.net.URL#openStream",              elements[index++].getValue());
         Assert.assertEquals("java.util.List#add",                   elements[index++].getValue());
-        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
-        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.List#size",                  elements[index++].getValue());
         Assert.assertEquals("java.util.List#toArray",               elements[index++].getValue());
         Assert.assertEquals("java.util.ArrayList#<init>",           elements[index++].getValue());
@@ -84,31 +84,33 @@ public class SmcBirthmarkExtractorTest{
         Assert.assertEquals("java.lang.Object#getClass",            elements[index++].getValue());
         Assert.assertEquals("java.lang.Class#getName",              elements[index++].getValue());
         Assert.assertEquals("java.util.logging.Logger#getLogger",   elements[index++].getValue());
-        Assert.assertEquals("java.lang.String#valueOf",             elements[index++].getValue());
         Assert.assertEquals("java.lang.StringBuilder#<init>",       elements[index++].getValue());
+        Assert.assertEquals("java.lang.StringBuilder#append",       elements[index++].getValue());
         Assert.assertEquals("java.lang.StringBuilder#append",       elements[index++].getValue());
         Assert.assertEquals("java.lang.StringBuilder#toString",     elements[index++].getValue());
         Assert.assertEquals("java.util.logging.Logger#warning",     elements[index++].getValue());
         Assert.assertEquals("java.util.List#size",                  elements[index++].getValue());
         Assert.assertEquals("java.util.List#toArray",               elements[index++].getValue());
         Assert.assertEquals("java.util.ArrayList#<init>",           elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
         Assert.assertEquals("java.lang.Double#valueOf",             elements[index++].getValue());
         Assert.assertEquals("java.util.List#add",                   elements[index++].getValue());
-        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.List#iterator",              elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
         Assert.assertEquals("java.lang.Double#doubleValue",         elements[index++].getValue());
         Assert.assertEquals("java.lang.Double#doubleValue",         elements[index++].getValue());
-        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("org.apache.commons.beanutils.BeanUtils#describe",
                             elements[index++].getValue());
         Assert.assertEquals("java.util.Map#remove",                 elements[index++].getValue());
         Assert.assertEquals("java.util.Map#remove",                 elements[index++].getValue());
         Assert.assertEquals("java.util.Map#keySet",                 elements[index++].getValue());
         Assert.assertEquals("java.util.Set#iterator",               elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
         Assert.assertEquals("java.lang.StringBuilder#<init>",       elements[index++].getValue());
+        Assert.assertEquals("java.lang.StringBuilder#append",       elements[index++].getValue());
         Assert.assertEquals("java.lang.StringBuilder#append",       elements[index++].getValue());
         Assert.assertEquals("java.lang.StringBuilder#append",       elements[index++].getValue());
         Assert.assertEquals("java.lang.String#valueOf",             elements[index++].getValue());
@@ -116,18 +118,17 @@ public class SmcBirthmarkExtractorTest{
         Assert.assertEquals("java.lang.StringBuilder#toString",     elements[index++].getValue());
         Assert.assertEquals("org.apache.commons.beanutils.BeanUtils#setProperty",
                             elements[index++].getValue());
-        Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
         Assert.assertEquals("java.io.ByteArrayInputStream#<init>",  elements[index++].getValue());
         Assert.assertEquals("java.io.ByteArrayOutputStream#<init>", elements[index++].getValue());
-        Assert.assertEquals("java.io.ByteArrayOutputStream#write",  elements[index++].getValue());
         Assert.assertEquals("java.io.InputStream#read",             elements[index++].getValue());
+        Assert.assertEquals("java.io.ByteArrayOutputStream#write",  elements[index++].getValue());
         Assert.assertEquals("java.io.ByteArrayOutputStream#toByteArray",
                             elements[index++].getValue());
         Assert.assertEquals("java.io.ByteArrayOutputStream#close",  elements[index++].getValue());
         Assert.assertEquals("javax.imageio.spi.ServiceRegistry#lookupProviders",
                             elements[index++].getValue());
-        Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator#hasNext",           elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator#next",              elements[index++].getValue());
     }
 
     @Test

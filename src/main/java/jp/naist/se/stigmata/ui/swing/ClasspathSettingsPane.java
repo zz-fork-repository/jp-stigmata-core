@@ -16,6 +16,7 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -143,15 +144,24 @@ public class ClasspathSettingsPane extends JPanel{
         });
         ActionListener action = new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                boolean flag = findClass(text.getText().trim());
+                String t = text.getText().trim();
+                boolean flag = findClass(t);
+                String message = Messages.getString("classpathchecker.found.tooltip");
                 if(flag){
                     label.setIcon(Utility.getIcon("classpathchecker.found.icon"));
-                    label.setToolTipText(Messages.getString("classpathchecker.found.tooltip"));
                 }
                 else{
                     label.setIcon(Utility.getIcon("classpathchecker.notfound.icon"));
-                    label.setToolTipText(Messages.getString("classpathchecker.notfound.tooltip"));
+                    message = Messages.getString("classpathchecker.notfound.tooltip");
                 }
+                label.setToolTipText(message);
+                String dm = String.format(
+                    "<html><body><dl><dt>%s</dt><dd>%s</dd></body></html>", t, message
+                );
+                JOptionPane.showMessageDialog(
+                    stigmata, dm, Messages.getString("classpathchecker.dialog.title"),
+                    JOptionPane.INFORMATION_MESSAGE
+                );
             }
         };
         findButton.addActionListener(action);
