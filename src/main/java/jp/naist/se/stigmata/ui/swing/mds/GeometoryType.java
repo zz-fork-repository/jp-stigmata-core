@@ -1,5 +1,13 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public enum GeometoryType{
     RECTANGLE,
     UPPER_TRIANGLE,

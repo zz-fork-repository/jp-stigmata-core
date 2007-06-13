@@ -1,11 +1,20 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
 import jp.naist.se.stigmata.ui.swing.mds.GeometoryType;
 import jp.naist.se.stigmata.ui.swing.mds.MarkDrawer;
 
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class DrawerFactory{
     private static final DrawerFactory instance = new DrawerFactory();
 

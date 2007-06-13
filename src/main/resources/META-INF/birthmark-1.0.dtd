@@ -21,18 +21,18 @@
 <!ELEMENT birthmark-similarity   (#PCDATA)>
 <!ELEMENT similarity             (#PCDATA)>
 
-<!ELEMENT birthmark-service      (type,display-type,description,class-name)>
-<!ELEMENT birthmark-services     ((birthmark-service)*)>
+<!ELEMENT birthmark-service      (type,display-type,description?,class-name)>
+<!ELEMENT birthmark-services     (birthmark-service*)>
 
-<!ELEMENT birthmark              ((element)*)>
+<!ELEMENT birthmark              (element*)>
 <!ELEMENT extracted-birthmark    (class-name,location,birthmark)>
-<!ELEMENT extracted-birthmarks   ((extracted-birthmark)*)>
+<!ELEMENT extracted-birthmarks   (extracted-birthmark*)>
 
 <!ELEMENT target1                (class-name,location)>
 <!ELEMENT target2                (class-name,location)>
-<!ELEMENT birthmark-similarities ((birthmark-similarity)*)>
+<!ELEMENT birthmark-similarities (birthmark-similarity*)>
 <!ELEMENT comparison-result      (target1,target2,birthmark-similarities,similarity)>
-<!ELEMENT comparison-result-set  ((comparison-result)*)>
+<!ELEMENT comparison-result-set  (comparison-result*)>
 
 <!ELEMENT birthmark              ((birthmark-services|extracted-birthmarks|comparison-result-set)+)>
 

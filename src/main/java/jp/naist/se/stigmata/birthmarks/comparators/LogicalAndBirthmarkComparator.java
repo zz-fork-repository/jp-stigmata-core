@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.comparators;
 
 /*
- * $Id: PlainBirthmarkComparator.java 20 2007-01-17 02:06:01Z tama3 $
+ * $Id$
  */
 
 import java.util.Set;
@@ -18,7 +18,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * similarity of those birthmarks are defined by |f(p) and f(q)|/|f(p) or f(q)|.
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
+ * @version $Revision$ $Date$
  */
 public class LogicalAndBirthmarkComparator implements BirthmarkComparator{
     private BirthmarkSpi spi;

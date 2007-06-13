@@ -1,8 +1,16 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
 
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class MDSMethod{
     private Matrix target;
     private Matrix coordinate;

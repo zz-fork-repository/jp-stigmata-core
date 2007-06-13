@@ -1,5 +1,13 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class Coordinate{
     private double x, y, z;
     private String label;

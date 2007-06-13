@@ -1,9 +1,18 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-public class CircleDrawer extends AbstractMarkDrawer{
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+class CircleDrawer extends AbstractMarkDrawer{
 
     public CircleDrawer(){
         super();

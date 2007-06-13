@@ -1,9 +1,18 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-public class RhombusDrawer extends AbstractMarkDrawer{
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+class RhombusDrawer extends AbstractMarkDrawer{
 
     public RhombusDrawer(){
         super();

@@ -10,18 +10,15 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -38,7 +35,6 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.filechooser.FileFilter;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
@@ -50,12 +46,11 @@ import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
-import jp.naist.se.stigmata.format.FormatManager;
-import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.actions.AboutAction;
 import jp.naist.se.stigmata.ui.swing.actions.LicenseAction;
 import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
+import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
 
 
 /**
@@ -73,7 +68,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private Stigmata stigmata;
     private BirthmarkContext context;
     private ControlPane control;
-    private File currentDirectory;
+    private FileIOManager fileio;
     private int extractCount = 0;
     private int compareCount = 0;
     private int compareDetail = 0;
@@ -84,6 +79,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     public StigmataFrame(){
         stigmata = Stigmata.getInstance();
         context = stigmata.createContext();
+        fileio = new FileIOManager(this);
 
         initLayouts();
     }
@@ -95,25 +91,9 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     public StigmataFrame(Stigmata stigmata, BirthmarkContext context){
         this.stigmata = stigmata;
         this.context = context;
+        this.fileio = new FileIOManager(this);
 
         initLayouts();
-    }
-
-    public File getCurrentDirectory(){
-        return currentDirectory;
-    }
-
-    public void setCurrentDirectory(File directory){
-        if(!directory.isDirectory()){
-            JOptionPane.showMessageDialog(
-                this, 
-                Messages.getString("notdirectory.dialog.message", directory.getName()),
-                Messages.getString("notdirectory.dialog.title"),
-                JOptionPane.ERROR_MESSAGE
-            );
-            return;
-        }
-        this.currentDirectory = directory;
     }
 
     public Stigmata getStigmata(){
@@ -124,11 +104,19 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return context;
     }
 
+    public File getCurrentDirectory(){
+        return fileio.getCurrentDirectory();
+    }
+
+    public void setCurrentDirectory(File file){
+        fileio.setCurrentDirectory(file);
+    }
+
     /**
      * Find file to open it.
      */
     public File getOpenFile(String[] exts, String desc){
-        return findFile(true, exts, desc);
+        return fileio.findFile(true, exts, desc);
     }
 
     /**
@@ -136,7 +124,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
      * Extension of found file is correct as selected extension.
      */
     public File getSaveFile(String[] exts, String desc){
-        return findFile(false, exts, desc);
+        return fileio.findFile(false, exts, desc);
     }
 
     public void addBirthmarkServiceListener(BirthmarkServiceListener listener){
@@ -145,31 +133,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
     public void removeBirthmarkServiceListener(BirthmarkServiceListener listener){
         control.removeBirthmarkServiceListener(listener);
-    }
-
-    public void saveAction(BirthmarkDataWritable writable){
-        File file = getSaveFile(Messages.getStringArray("store.extensions"),
-                                Messages.getString("store.description"));
-        if(file != null){
-            String name = file.getName();
-            String ext = name.substring(name.lastIndexOf('.') + 1, name.length());
-
-            ResultFormatSpi result = FormatManager.getInstance().getService(ext);
-            if(result == null){
-                result = FormatManager.getDefaultFormatService();
-            }
-
-            PrintWriter out = null;
-            try{
-                out = new PrintWriter(new FileWriter(file));
-                writable.writeData(out, result);
-            }catch(IOException e){
-            }finally{
-                if(out != null){
-                    out.close();
-                }
-            }
-        }
     }
 
     public void compareDetails(BirthmarkSet target1, BirthmarkSet target2, BirthmarkContext context){
@@ -366,49 +329,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         return mapping;
     }
 
-    private File findFile(boolean open, String[] exts, String desc){
-        JFileChooser chooser = new JFileChooser(getCurrentDirectory());
-        for(int i = 0; i < exts.length; i++){
-            chooser.addChoosableFileFilter(
-                new ExtensionFilter(exts[i], MessageFormat.format(desc, exts[i]))
-            );
-        }
-        int returnValue = -1;
-        if(open){
-            returnValue = chooser.showOpenDialog(SwingUtilities.getRootPane(this));
-        }
-        else{
-            returnValue = chooser.showSaveDialog(SwingUtilities.getRootPane(this));
-        }
-        if(returnValue == JFileChooser.APPROVE_OPTION){
-            setCurrentDirectory(chooser.getCurrentDirectory());
-            File file = chooser.getSelectedFile();
-            if(!open){
-                FileFilter filter = chooser.getFileFilter();
-                if(filter instanceof ExtensionFilter){
-                    ExtensionFilter ef = (ExtensionFilter)filter;
-                    if(!filter.accept(file)){
-                        String[] extensions = ef.getExtensions();
-                        file = setExtension(file, extensions[0]);
-                    }
-                }
-            }
-            return file;
-        }
-        return null;
-    }
-
-    private File setExtension(File file, String ext){
-        String name = file.getName();
-        int index = name.lastIndexOf('.');
-        String n = name;
-        if(index > 0){
-            n = n.substring(0, index);
-        }
-        name = n + '.' + ext;
-        return new File(file.getParentFile(), name);
-    }
-
     private void initLayouts(){
         setTitle(Messages.getString("stigmata.frame.title"));
         initComponents();
@@ -417,15 +337,18 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         control.inititalize();
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
-        currentDirectory = new File(".");
-
         setSize(900, 600);
         frameList.add(this);
     }
 
     private void initComponents(){
-        tabPane = new JTabbedPane();
+        JMenuBar menubar = new JMenuBar();
+        menubar.add(createFileMenu());
+        menubar.add(createHelpMenu());
 
+        setJMenuBar(menubar);
+
+        tabPane = new EditableTabbedPane(this);
         add(tabPane, BorderLayout.CENTER);
 
         tabPane.addChangeListener(new ChangeListener(){
@@ -434,12 +357,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
                 closeTabMenu.setEnabled(!title.equals(Messages.getString("control.tab.label")));
             }
         });
-
-        JMenuBar menubar = new JMenuBar();
-        menubar.add(createFileMenu());
-        menubar.add(createHelpMenu());
-
-        setJMenuBar(menubar);
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }

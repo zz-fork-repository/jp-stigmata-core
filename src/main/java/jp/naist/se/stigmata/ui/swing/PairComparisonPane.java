@@ -11,8 +11,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -32,14 +30,16 @@ import javax.swing.border.TitledBorder;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairElement;
+import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 
 /**
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class PairComparisonPane extends JPanel implements BirthmarkDataWritable{
+public class PairComparisonPane extends JPanel{
     private static final long serialVersionUID = 2342856785474356234L;
 
     private StigmataFrame frame;
@@ -50,10 +50,6 @@ public class PairComparisonPane extends JPanel implements BirthmarkDataWritable{
         this.pair = pair;
 
         initialize();
-    }
-
-    public void writeData(PrintWriter out, ResultFormatSpi service) throws IOException{
-        service.getComparisonResultFormat().printResult(out, pair);
     }
 
     private void initialize(){
@@ -83,13 +79,19 @@ public class PairComparisonPane extends JPanel implements BirthmarkDataWritable{
         panel.add(similarityPanel);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton saveButton = Utility.createButton("savecomparison");
+        JButton saveButton = Utility.createButton(
+            "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
+                public void writeAsciiData(PrintWriter out, String format) throws IOException{
+                    ResultFormatSpi service = FormatManager.getInstance().getService(format);
+                    if(service == null){
+                        service = FormatManager.getDefaultFormatService();
+                    }
 
-        saveButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                frame.saveAction(PairComparisonPane.this);
-            }
-        });
+                    service.getComparisonResultFormat().printResult(out, pair);
+                }
+            })
+        );
+
         buttonPanel.add(saveButton);
         panel.add(buttonPanel);
 

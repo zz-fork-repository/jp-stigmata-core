@@ -32,7 +32,7 @@
 <!ELEMENT property                (name,value)>
 <!ELEMENT properties              (property*)>
 
-<!ELEMENT birthmark-service       (type,display-name,description,extractor,comparator)>
+<!ELEMENT birthmark-service       (type,display-name,description?,extractor,comparator)>
 <!ELEMENT birthmark-services      (birthmark-service*)>
 
 <!ELEMENT classpath-list          (classpath*)>

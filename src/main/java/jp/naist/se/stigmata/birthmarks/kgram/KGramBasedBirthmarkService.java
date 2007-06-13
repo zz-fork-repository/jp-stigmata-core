@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.kgram;
 
 /*
- * $Id: ConstantValueOfFieldVariableBirthmarkService.java 59 2007-03-03 03:42:06Z tama3 $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;
@@ -15,7 +15,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision: 59 $ $Date: 2007-03-03 12:42:06 +0900 (Sat, 03 Mar 2007) $
+ * @version $Revision$ $Date$
  */
 public class KGramBasedBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private BirthmarkComparator comparator = new LogicalAndBirthmarkComparator(this);

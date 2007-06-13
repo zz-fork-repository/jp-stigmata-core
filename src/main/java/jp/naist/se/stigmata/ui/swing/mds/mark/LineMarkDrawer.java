@@ -1,9 +1,18 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.awt.BasicStroke;
 import java.awt.Stroke;
 
-public abstract class LineMarkDrawer extends AbstractMarkDrawer{
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+abstract class LineMarkDrawer extends AbstractMarkDrawer{
     public LineMarkDrawer(){
     }
 

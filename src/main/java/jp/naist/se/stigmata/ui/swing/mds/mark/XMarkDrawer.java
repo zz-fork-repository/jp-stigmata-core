@@ -1,9 +1,18 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-public class XMarkDrawer extends LineMarkDrawer{
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+class XMarkDrawer extends LineMarkDrawer{
     public XMarkDrawer(){
     }
 

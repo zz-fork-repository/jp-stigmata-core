@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,6 +20,10 @@ import javax.swing.JLabel;
 
 import jp.naist.se.stigmata.ui.swing.mds.mark.DrawerFactory;
 
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 class PointComponent extends JLabel{
     private static final long serialVersionUID = 6945871049990818511L;
     public static final Color DEFAULT_OVER_COLOR = Color.BLUE;

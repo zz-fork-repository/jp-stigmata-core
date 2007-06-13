@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.extractors;
 
 /*
- * $Id: BirthmarkSpi.java 20 2007-01-17 02:06:01Z tama3 $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.BirthmarkExtractor;
@@ -12,7 +12,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * Birthmark Service Provider Interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
+ * @version $Revision$ $Date$
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
 

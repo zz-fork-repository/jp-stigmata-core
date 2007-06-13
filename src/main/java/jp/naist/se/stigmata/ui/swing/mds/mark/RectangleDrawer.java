@@ -1,9 +1,18 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-public class RectangleDrawer extends AbstractMarkDrawer{
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+class RectangleDrawer extends AbstractMarkDrawer{
 
     public RectangleDrawer(){
         super();

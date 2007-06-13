@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.kgram;
 
 /*
- * $Id: SequentialMethodCallBirthmarkExtractor.java 66 2007-03-03 15:11:35Z tama3 $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.Birthmark;
@@ -14,7 +14,7 @@ import org.objectweb.asm.ClassWriter;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision: 66 $ $Date: 2007-03-04 00:11:35 +0900 (Sun, 04 Mar 2007) $
+ * @version $Revision$ $Date$
  */
 public class KGramBasedBirthmarkExtractor extends ASMBirthmarkExtractor{
     private int kvalue = 4;

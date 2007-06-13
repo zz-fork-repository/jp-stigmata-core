@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.ui.swing;
 
 /*
- * $Id: BirthmarkSelectionPane.java 70 2007-03-07 02:46:18Z tama3 $
+ * $Id$
  */
 
 import java.awt.BorderLayout;
@@ -33,7 +33,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision: 70 $ $Date: 2007-03-07 11:46:18 +0900 (Wed, 07 Mar 2007) $
+ * @version $Revision$ $Date$
  */
 public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implements BirthmarkServiceListener{
     private static final long serialVersionUID = 3209854654743223453L;

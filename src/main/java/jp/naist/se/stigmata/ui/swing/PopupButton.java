@@ -35,6 +35,8 @@ public class PopupButton extends JPanel{
     private JButton arrowButton;
 
     public PopupButton(JButton initButton){
+        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
         this.button = initButton;
 
         Icon icon = createIcon();
@@ -43,19 +45,18 @@ public class PopupButton extends JPanel{
         add(button);
         add(arrowButton);
 
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         Dimension prefferedSize = button.getPreferredSize();
 
-        arrowButton.setPreferredSize(new Dimension(icon.getIconWidth() + 2, prefferedSize.height));
-        setPreferredSize(new Dimension(prefferedSize.width + icon.getIconWidth() + 2, prefferedSize.height));
+        arrowButton.setPreferredSize(new Dimension(icon.getIconWidth() + 4, prefferedSize.height));
+        setPreferredSize(new Dimension(prefferedSize.width + icon.getIconWidth() + 4, prefferedSize.height));
 
         Dimension maxSize = button.getMaximumSize();
-        arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 2, maxSize.height));
-        setMaximumSize(new Dimension(maxSize.width + icon.getIconWidth() + 2, maxSize.height));
+        arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, maxSize.height));
+        setMaximumSize(new Dimension(maxSize.width + icon.getIconWidth() + 4, maxSize.height));
 
         Dimension minSize = button.getMinimumSize();
-        arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 2, minSize.height));
-        setMinimumSize(new Dimension(minSize.width + icon.getIconWidth() + 2, minSize.height));
+        arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, minSize.height));
+        setMinimumSize(new Dimension(minSize.width + icon.getIconWidth() + 4, minSize.height));
 
         arrowButton.setSize(arrowButton.getPreferredSize());
         setSize(getPreferredSize());

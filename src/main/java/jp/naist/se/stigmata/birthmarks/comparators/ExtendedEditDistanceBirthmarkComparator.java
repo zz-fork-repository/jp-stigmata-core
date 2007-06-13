@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.comparators;
 
 /*
- * $Id: DPMatchingBirthmarkComparator.java 53 2007-02-22 02:46:40Z tama3 $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.Birthmark;
@@ -13,7 +13,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * algorithm (levenshtein distance).
  *
  * @author Haruaki TAMADA
- * @version $Revision: 53 $ $Date: 2007-02-22 11:46:40 +0900 (Thu, 22 Feb 2007) $
+ * @version $Revision$ $Date$
  */
 public class ExtendedEditDistanceBirthmarkComparator extends EditDistanceBirthmarkComparator{
     public ExtendedEditDistanceBirthmarkComparator(){

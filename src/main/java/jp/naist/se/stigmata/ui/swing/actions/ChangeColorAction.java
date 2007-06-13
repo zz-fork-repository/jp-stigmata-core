@@ -1,4 +1,8 @@
-package jp.naist.se.stigmata.ui.swing;
+package jp.naist.se.stigmata.ui.swing.actions;
+
+/*
+ * $Id$
+ */
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,25 +13,32 @@ import javax.swing.AbstractAction;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 
+import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.Utility;
+
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class ChangeColorAction extends AbstractAction{
     private static final long serialVersionUID = -7617597154707466764L;
 
-    private Color color = Color.RED;
+    private Color currentColor = Color.RED;
     private JColorChooser chooser;
     private Component component;
     private boolean colorSelected = false;
     private ActionListener listener;
 
-    public ChangeColorAction(String label, Component component, Color color, ActionListener listener){
-        super(Messages.getString(label + ".label"),
-                Utility.getIcon(label + ".icon"));
+    public ChangeColorAction(String label, Component component, 
+                              Color initialColor, ActionListener listener){
+        super(Messages.getString(label + ".label"), Utility.getIcon(label + ".icon"));
         this.component = component;
         this.listener = listener;
-        this.color = color;
+        this.currentColor = initialColor;
 
         chooser = new JColorChooser();
-        chooser.setColor(color);
-
+        chooser.setColor(initialColor);
     }
 
     public ChangeColorAction(Component component, Color color, ActionListener listener){
@@ -43,17 +54,17 @@ public class ChangeColorAction extends AbstractAction{
     }
 
     public Color getColor(){
-        return color;
+        return currentColor;
     }
 
     public void actionPerformed(ActionEvent e){
-        chooser.setColor(color);
+        chooser.setColor(currentColor);
         JDialog dialog = JColorChooser.createDialog(
             component, Messages.getString("changecolor.title"), 
             true, chooser,
             new ActionListener(){ // ok
                 public void actionPerformed(ActionEvent e){
-                    color = chooser.getColor();
+                    currentColor = chooser.getColor();
                     colorSelected = true;
                     listener.actionPerformed(new ActionEvent(ChangeColorAction.this, e.getID(), e.getActionCommand(), e.getWhen(), e.getModifiers()));
                 }

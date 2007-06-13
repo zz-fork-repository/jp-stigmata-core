@@ -5,12 +5,9 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -33,19 +30,6 @@ public class Utility{
     private static final String iconPath = Messages.getString("icon.directory");
 
     private Utility(){
-    }
-
-    public static Action createAction2(String key, final ActionListener listener){
-        final Icon icon = getIcon(key + ".icon");
-        final String label = Messages.getString(key + ".label");
-
-        return new AbstractAction(label, icon){
-            private static final long serialVersionUID = 1349393156253158607L;
-
-            public void actionPerformed(ActionEvent e){
-                listener.actionPerformed(e);
-            }
-        };
     }
 
     public static void decorateJComponent(JComponent component, String label){

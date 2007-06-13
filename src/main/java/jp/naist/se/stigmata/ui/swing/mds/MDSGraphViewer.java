@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -19,6 +23,10 @@ import javax.swing.JLayeredPane;
 import jp.naist.se.stigmata.ui.swing.mds.mark.DrawerFactory;
 import Jama.Matrix;
 
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class MDSGraphViewer extends JLayeredPane{
     private static final long serialVersionUID = -9196070059428975126L;
     private static final int POINT_LAYER = DEFAULT_LAYER;

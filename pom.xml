@@ -169,6 +169,15 @@ The bug is that resource file is copied to target/classes directory, too.
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.3</version>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <inputEncoding>utf-8</inputEncoding>
+          <outputEncoding>utf-8</outputEncoding>
+          <locales>en</locales>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

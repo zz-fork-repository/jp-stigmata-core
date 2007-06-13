@@ -1,3 +1,7 @@
+# $Id$
+# $Revision$ $Date$
+
+
 ################################################
 # StigmataFrame
 ################################################
@@ -7,7 +11,7 @@ control.tab.label=コントロール
 control.tab.tooltip=バースマーク抽出・比較設定
 
 extract.tab.label=抽出結果 {0}
-extract.tab.tooltip={1}から抽出したバースマーク({0}).
+extract.tab.tooltip=抽出したバースマーク({0}).
 
 compare.tab.label=比較結果 {0}
 compare.tab.tooltip=<{1}>と<{2}>を比較({0}).
@@ -15,8 +19,11 @@ compare.tab.tooltip=<{1}>と<{2}>を比較({0}).
 comparedetail.tab.label=比較詳細 {0}
 comparedetail.tab.tooltip={1}と{2}から{0}バースマークを抽出・比較した結果
 
-graph.tab.label=類似性グラフ {0}
-graph.tab.tooltip=類似度分布図
+similaritygraph.tab.label=類似性グラフ {0}
+similaritygraph.tab.tooltip=類似度分布図
+
+mappinggraph.tab.label=MDSグラフ {0}
+mappinggraph.tab.tooltip=バースマーク類似度によるMDSのクラス分布
 
 store.description=結果の保存 ({0})
 
@@ -90,8 +97,9 @@ checkwellknown.button.tooltip=入力されたクラスが既知のクラスであるかどうかを判定
 # wellknown class checker
 wellknownclasschecker.border=既知のクラス判定器
 wellknownclasschecker.default.tooltip=
-wellknownclasschecker.wellknown.tooltip=入力されたクラスは既知のクラスです．
-wellknownclasschecker.notwellknown.tooltip=入力されたクラスは既知のクラスではありません．
+wellknownclasschecker.wellknown.tooltip=既知のクラスです．
+wellknownclasschecker.notwellknown.tooltip=既知のクラスではありません．
+wellknownclasschecker.dialog.title=判定結果
 
 #rule table
 prefix.label=接頭辞
@@ -153,6 +161,7 @@ classpathchecker.border=クラス検索器
 classpathchecker.default.tooltip=
 classpathchecker.found.tooltip=見つかりました
 classpathchecker.notfound.tooltip=見つかりませんでした
++classpathchecker.dialog.title=検索結果
 
 ################################################
 #CompareTablePane
@@ -163,8 +172,13 @@ savecomparison.button.tooltip=Save comparation result to a file.
 showgraph.button.label=グラフ
 showgraph.button.tooltip=バースマークの類似性の分布図
 
-changecolor.button.label=色の変更
+mdsmap.menuitem.label=MDS分析
+mdsmap.menuitem.tooltip=類似度から全てのクラスを2D平面上に最適配置します．
+
+changecolor.label=色の変更
 changecolor.title=色の変更
+
+showlabel.button.label=ラベルの表示
 
 ################################################
 #BirthmarksViewPane
@@ -204,10 +218,22 @@ comparepair.similarity.label=類似度
 
 comparemapping.description=対応関係ファイル ({0})
 
-roundrobin.label=総当りで比較
+roundrobin.label=総当たりで比較
 guessedpair.label=ペアを推測して比較
 specifiedpair.label=ペアを指定して比較...
 roundrobin.filtering.label=総当り結果をフィルタリング...
+
+roundrobin.button.label=総当たりで比較
+roundrobin.button.tooltip=抽出された全てのバースマークを総当たりで比較する．
+
+guessedpair.button.label=ペアを推測して比較
+guessedpair.button.tooltip=抽出されたバースマークを抽出元の名前を元にペアを推測して比較する．
+
+specifiedpair.menuitem.label=ペアを指定して比較...
+specifiedpair.menuitem.tooltip=バースマークの抽出元の名前でペアを指定して比較する．
+
+roundrobin.filtering.menuitem.label=総当たり比較の結果をフィルタリング...
+roundrobin.filtering.menuitem.tooltip=総当たり比較の結果を特定の条件でフィルタリングする．
 
 result.border=比較結果類似度
 eachbirthmarksimilarity.border=各バースマーク間の類似度
@@ -217,6 +243,23 @@ comparisonresultset.tab.tooltip=クラスファイルのペアで比較した結果
 obfuscate.button.label=難読化...
 obfuscate.button.tooltip=クラス名を意味のない名前に変え，難読化します．また，難読化前後のマッピングをCVS形式で保存します．
 obfuscationmapping.description=難読化前後の名前のマッピングを保存 (csv)
+
+################################################
+# mds graph pane
+################################################
+
+savemds.label=MDSグラフを保存...
+savemds.tooltip=グラフイメージをファイルに保存します．
+savemds.description=MDSグラフを画像ファイルに保存 ({0})
+
+savelocation.label=座標を保存...
+savelocation.tooltip=座標をCSV形式に保存します．
+savelocation.description=座標の保存 (csv)
+
+updatecolor.label=色の更新...
+updatecolor.tooltip=プロットしている点の色を更新します．
+updateovercolor.label=強調時の色の更新...
+updateovercolor.tooltip=マウスオーバー時の色を更新します．
 
 ###########################################################
 # BirthmarkDefinitionPane
@@ -335,6 +378,7 @@ error.filter.cannotcreate=フィルタは以下の理由により作成されませんでした:
 error.negative.value={0}: 負の値を入力することはできません．
 error.over.range=範囲を越えています．{0}の範囲に収まるようにしてください．
 error.io=I/Oエラー: {0}
+error.unsupportedformat={0}: サポートしていないフォーマットが指定されました．
 
 target1.button.label=${target.TARGET1}バースマーク
 target2.button.label=${target.TARGET2}バースマーク

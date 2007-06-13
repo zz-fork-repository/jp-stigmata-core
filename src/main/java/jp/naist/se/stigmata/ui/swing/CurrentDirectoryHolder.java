@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * This interface has current directory.
  *
- * @author tamada
+ * @author Haruaki Tamada
  * @version $Revision$ $Date$
  */
 public interface CurrentDirectoryHolder {

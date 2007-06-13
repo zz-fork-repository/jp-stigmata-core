@@ -1,0 +1,101 @@
+package jp.naist.se.stigmata.ui.swing.actions;
+
+/*
+ * $Id$
+ */
+
+import java.awt.event.ActionEvent;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+
+import jp.naist.se.stigmata.ui.swing.AsciiDataWritable;
+import jp.naist.se.stigmata.ui.swing.BinaryDataWritable;
+import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
+
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+public class SaveAction extends AbstractAction{
+    private static final long serialVersionUID = 1427912047636729211L;
+
+    private AsciiDataWritable asciiWritable;
+    private BinaryDataWritable binaryWritable;
+    private StigmataFrame stigmata;
+    private String[] extensions;
+    private String description;
+
+    public SaveAction(StigmataFrame stigmata, AsciiDataWritable writable){
+        this.stigmata = stigmata;
+        this.asciiWritable = writable;
+    }
+
+    public SaveAction(StigmataFrame stigmata, BinaryDataWritable writable){
+        this.stigmata = stigmata;
+        this.binaryWritable = writable;
+    }
+
+    public void setExtensions(String[] extensions){
+        this.extensions = extensions;
+    }
+
+    public void setDescrpition(String description){
+        this.description = description;
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(extensions == null || description == null){
+            extensions = Messages.getStringArray("store.extensions");
+            description = Messages.getString("store.description");
+        }
+        File file = stigmata.getSaveFile(extensions, description);
+        if(file != null){
+            String name = file.getName();
+            String format = name.substring(name.lastIndexOf('.') + 1, name.length());
+
+            OutputStream out = null;
+            PrintWriter writer = null;
+            try{
+                if(asciiWritable != null){
+                    writer = new PrintWriter(new FileWriter(file));
+                    asciiWritable.writeAsciiData(writer, format);
+                }
+                else{
+                    out = new BufferedOutputStream(new FileOutputStream(file));
+                    binaryWritable.writeBinaryData(out, format);
+                }
+            }catch(IOException ee){
+                JOptionPane.showMessageDialog(
+                    stigmata, ee.getMessage(), Messages.getString("error.dialog.title"),
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }catch(UnsupportedFormatException ee){
+                JOptionPane.showMessageDialog(
+                    stigmata, ee.getMessage(), Messages.getString("error.dialog.title"),
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }finally{
+                if(out != null){
+                    try{
+                        out.close();
+                    } catch(IOException ee){
+                    }
+                }
+                if(writer != null){
+                    writer.close();
+                }
+            }
+        }
+    }
+}

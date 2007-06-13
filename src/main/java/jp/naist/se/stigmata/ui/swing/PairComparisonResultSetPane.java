@@ -32,8 +32,9 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 
 /**
  * 
@@ -41,7 +42,7 @@ import jp.naist.se.stigmata.spi.ResultFormatSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class PairComparisonResultSetPane extends JPanel implements BirthmarkDataWritable{
+public class PairComparisonResultSetPane extends JPanel{
     private static final long serialVersionUID = 3298346465652354302L;
 
     private StigmataFrame frame;
@@ -62,13 +63,6 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
 
         initComponent();
         initData(model, list);
-    }
-
-    public void writeData(PrintWriter out, ResultFormatSpi service) throws IOException{
-        BirthmarkComparisonResultFormat format = service.getComparisonResultFormat();
-        format.printResult(out, new CertainPairComparisonResultSet(
-            list.toArray(new ComparisonPair[list.size()]), context
-        ));
     }
 
     private void obfuscateClassNames(){
@@ -129,7 +123,21 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
         JComponent buttonPanel = Box.createHorizontalBox();
         JPanel similarityPane = new JPanel(new GridLayout(1, 3));
         JComponent southPanel = Box.createVerticalBox();
-        JButton saveButton = Utility.createButton("savecomparison");
+        JButton saveButton = Utility.createButton(
+            "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
+                public void writeAsciiData(PrintWriter out, String format) throws IOException{
+                    ResultFormatSpi service = FormatManager.getInstance().getService(format);
+                    if(service == null){
+                        service = FormatManager.getDefaultFormatService();
+                    }
+                    service.getComparisonResultFormat().printResult(
+                        out, new CertainPairComparisonResultSet(
+                            list.toArray(new ComparisonPair[list.size()]), context
+                        )
+                    );
+                }
+            })
+        );
         JButton obfuscateButton = Utility.createButton("obfuscate");
         JScrollPane scroll = new JScrollPane();
         averageLabel = new JLabel(Double.toString(average), JLabel.RIGHT);
@@ -169,11 +177,6 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
                         frame.compareDetails(pair.getTarget1(), pair.getTarget2(), context);
                     }
                 }
-            }
-        });
-        saveButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                frame.saveAction(PairComparisonResultSetPane.this);
             }
         });
 

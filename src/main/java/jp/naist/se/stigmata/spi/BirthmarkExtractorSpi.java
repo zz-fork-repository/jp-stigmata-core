@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.spi;
 
 /*
- * $Id: BirthmarkSpi.java 20 2007-01-17 02:06:01Z tama3 $
+ * $Id$
  */
 
 import java.util.Locale;
@@ -12,7 +12,7 @@ import jp.naist.se.stigmata.BirthmarkExtractor;
  * Service provider interface for extracting birhtmark from given class files.
  *
  * @author Haruaki TAMADA
- * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
+ * @version $Revision$ $Date$
  */
 public interface BirthmarkExtractorSpi extends ServiceProvider{
     /**

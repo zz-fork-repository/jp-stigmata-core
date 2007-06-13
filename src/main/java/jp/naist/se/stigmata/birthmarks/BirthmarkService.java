@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks;
 
 /*
- * $Id: BirthmarkSpi.java 20 2007-01-17 02:06:01Z tama3 $
+ * $Id$
  */
 
 import java.lang.reflect.Constructor;
@@ -16,7 +16,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * configuration files.
  *
  * @author Haruaki TAMADA
- * @version $Revision: 20 $ $Date: 2007-01-17 11:06:01 +0900 (Wed, 17 Jan 2007) $
+ * @version $Revision$ $Date$
  */
 public class BirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private Class<? extends BirthmarkExtractor> extractorClass;

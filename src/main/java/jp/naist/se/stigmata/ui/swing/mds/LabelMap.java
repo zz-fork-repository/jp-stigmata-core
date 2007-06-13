@@ -1,10 +1,17 @@
 package jp.naist.se.stigmata.ui.swing.mds;
+/*
+ * $Id$
+ */
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class LabelMap{
     private List<String> labels = new ArrayList<String>();
     private Map<String, String> groups = new HashMap<String, String>();

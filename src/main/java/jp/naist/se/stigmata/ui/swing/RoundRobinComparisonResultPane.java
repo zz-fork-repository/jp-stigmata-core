@@ -40,14 +40,16 @@ import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.RoundRobinComparisonResultSet;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
+import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 
 /**
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkDataWritable{
+public class RoundRobinComparisonResultPane extends JPanel{
     private static final long serialVersionUID = 2134574576543623L;
 
     private List<BirthmarkSet> birthmarksX;
@@ -68,15 +70,6 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
 
         initialize();
         compare(model);
-    }
-
-    public void writeData(PrintWriter out, ResultFormatSpi service){
-        service.getComparisonResultFormat().printResult(out,
-            new RoundRobinComparisonResultSet(
-                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
-                birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]), context
-            )
-        );
     }
 
     private void compare(DefaultTableModel model){
@@ -178,20 +171,16 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         box2.add(maximum = new JLabel());
         south.add(box2);
 
-        classCount.setBorder(new TitledBorder(Messages.getString("numberofclasses.border"))); //$NON-NLS-1$
-        comparisonCount.setBorder(new TitledBorder(Messages.getString("comparisoncount.border"))); //$NON-NLS-1$
-        distinctionRatio.setBorder(new TitledBorder(Messages.getString("distinctionratio.border"))); //$NON-NLS-1$
-        average.setBorder(new TitledBorder(Messages.getString("average.border"))); //$NON-NLS-1$
-        minimum.setBorder(new TitledBorder(Messages.getString("minimum.border"))); //$NON-NLS-1$
-        maximum.setBorder(new TitledBorder(Messages.getString("maximum.border"))); //$NON-NLS-1$
+        classCount.setBorder(new TitledBorder(Messages.getString("numberofclasses.border")));
+        comparisonCount.setBorder(new TitledBorder(Messages.getString("comparisoncount.border")));
+        distinctionRatio.setBorder(new TitledBorder(Messages.getString("distinctionratio.border")));
+        average.setBorder(new TitledBorder(Messages.getString("average.border")));
+        minimum.setBorder(new TitledBorder(Messages.getString("minimum.border")));
+        maximum.setBorder(new TitledBorder(Messages.getString("maximum.border")));
 
         panel.add(south, BorderLayout.SOUTH);
 
         return panel;
-    }
-
-    private void saveButtonActionPerformed(ActionEvent e){
-        stigmataFrame.saveAction(this);
     }
 
     private void mdsButtonActionPerformed(ActionEvent e){
@@ -230,10 +219,26 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
     }
 
     private void initialize(){
-        JButton save = Utility.createButton("savecomparison"); //$NON-NLS-1$
-        JButton graph = Utility.createButton("showgraph"); //$NON-NLS-1$
-        JButton obfuscate = Utility.createButton("obfuscate"); //$NON-NLS-1$
-        JButton compare = Utility.createButton("guessedpair"); //$NON-NLS-1$
+        JButton save = Utility.createButton(
+            "savecomparison", new SaveAction(stigmataFrame, new AsciiDataWritable(){
+                public void writeAsciiData(PrintWriter out, String format){
+                    ResultFormatSpi service = FormatManager.getInstance().getService(format);
+                    if(service == null){
+                        service = FormatManager.getDefaultFormatService();
+                    }
+
+                    service.getComparisonResultFormat().printResult(out,
+                        new RoundRobinComparisonResultSet(
+                            birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
+                            birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]), context
+                        )
+                    );
+                }
+            }
+        ));
+        JButton graph = Utility.createButton("showgraph");
+        JButton obfuscate = Utility.createButton("obfuscate");
+        JButton compare = Utility.createButton("guessedpair");
         JMenuItem mdsMenu = Utility.createJMenuItem("mdsmap");
 
         PopupButton comparePopup = new PopupButton(compare);
@@ -253,12 +258,6 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(comparePopup);
         southPanel.add(Box.createHorizontalGlue());
-
-        save.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                saveButtonActionPerformed(e);
-            }
-        });
 
         graph.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

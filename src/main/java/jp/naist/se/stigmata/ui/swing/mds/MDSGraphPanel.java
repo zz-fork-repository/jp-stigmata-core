@@ -1,37 +1,36 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
-import java.util.Iterator;
 
-import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
-import jp.naist.se.stigmata.ui.swing.ChangeColorAction;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.PopupButton;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.actions.ChangeColorAction;
+import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import Jama.Matrix;
 
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
 public class MDSGraphPanel extends JPanel{
     private static final long serialVersionUID = -7256554014379112897L;
     private StigmataFrame stigmata;
@@ -49,50 +48,6 @@ public class MDSGraphPanel extends JPanel{
 
         double[][] matrix = initData(set, context);
         initLayouts(matrix);
-    }
-
-    private void saveMDSImage(){
-        File file = stigmata.getSaveFile(
-            Messages.getStringArray("savemds.extensions"),
-            Messages.getString("savemds.description")
-        );
-        Dimension size = viewer.getSize();
-        BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = image.createGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, size.width, size.height);
-        viewer.update(g);
-        try{
-            String name = file.getName();
-            ImageIO.write(image, name.substring(name.lastIndexOf('.') + 1), file);
-        } catch(IOException e){
-            JOptionPane.showMessageDialog(
-                stigmata, e.getMessage(), "File store error", JOptionPane.WARNING_MESSAGE
-            );
-        }
-    }
-
-    private void saveCoordinate(){
-        File file = stigmata.getSaveFile(
-            Messages.getStringArray("savelocation.extensions"),
-            Messages.getString("savelocation.description")
-        );
-        PrintWriter out = null;
-        try{
-            out = new PrintWriter(new FileWriter(file));
-            for(Iterator<Coordinate> i = viewer.coordinates(); i.hasNext(); ){
-                Coordinate c = i.next();
-                out.printf("%s,%s,%g,%g%n", c.getLabel(), c.getGroupId(), c.getX(), c.getY());
-            }
-        } catch(IOException e){
-            JOptionPane.showMessageDialog(
-                stigmata, e.getMessage(), "File store error", JOptionPane.WARNING_MESSAGE
-            );
-        } finally{
-            if(out != null){
-                out.close();
-            }
-        }
     }
 
     private double[][] initData(BirthmarkSet[] set, BirthmarkContext context){
@@ -126,7 +81,7 @@ public class MDSGraphPanel extends JPanel{
     private void initLayouts(double[][] matrix){
         viewer = new MDSGraphViewer(new MDSMethod(new Matrix(matrix)), labels);
         viewer.setShowLabel(true);
-        
+
         Box south = Box.createHorizontalBox();
 
         viewer.addActionListener(new ActionListener(){
@@ -165,20 +120,14 @@ public class MDSGraphPanel extends JPanel{
                 }
             }
         );
-        Action saveMDSAction = new AbstractAction(){
-            private static final long serialVersionUID = 3314135350231965216L;
+        SaveAction saveMDSAction = new SaveAction(stigmata, new MDSImageExporter(viewer));
+        saveMDSAction.setExtensions(Messages.getStringArray("savemds.extensions"));
+        saveMDSAction.setDescrpition(Messages.getString("savemds.description"));
 
-            public void actionPerformed(ActionEvent e){
-                saveMDSImage();
-            }
-        };
-        Action saveCoordinate = new AbstractAction(){
-            private static final long serialVersionUID = 1956405328339468706L;
+        SaveAction saveCoordinate = new SaveAction(stigmata, new MDSPointsLocationExporter(viewer));
+        saveCoordinate.setExtensions(Messages.getStringArray("savelocation.extensions"));
+        saveCoordinate.setDescrpition(Messages.getString("savelocation.description"));
 
-            public void actionPerformed(ActionEvent e){
-                saveCoordinate();
-            }
-        };
         PopupButton colorButton = new PopupButton(Utility.createButton("updatecolor", pointColorAction));
         colorButton.addMenuItem(Utility.createJMenuItem("updateovercolor", overColorAction));
         PopupButton saveButton = new PopupButton(Utility.createButton("savemds", saveMDSAction));

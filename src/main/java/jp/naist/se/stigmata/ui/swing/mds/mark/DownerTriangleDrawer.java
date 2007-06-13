@@ -1,10 +1,18 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-public class DownerTriangleDrawer extends AbstractMarkDrawer{
-
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+class DownerTriangleDrawer extends AbstractMarkDrawer{
     public DownerTriangleDrawer(){
         super();
     }

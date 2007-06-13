@@ -1,5 +1,8 @@
 package jp.naist.se.stigmata.ui.swing.mds.mark;
 
+/*
+ * $Id$
+ */
 
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -7,7 +10,12 @@ import java.awt.Stroke;
 
 import jp.naist.se.stigmata.ui.swing.mds.MarkDrawer;
 
-public abstract class AbstractMarkDrawer implements MarkDrawer{
+/**
+ * 
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+abstract class AbstractMarkDrawer implements MarkDrawer{
     private boolean fill;
 
     public AbstractMarkDrawer(){
