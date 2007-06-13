@@ -27,45 +27,45 @@ of Stigmata.
  $Id: stigmata-4.0.dtd 124 2007-06-11 04:22:36Z tama3 $
 -->
 
-<!ELEMENT classpath               (#PCDATA)>
+<!ELEMENT classpath          (#PCDATA)>
 
-<!ELEMENT type                    (#PCDATA)>
-<!ELEMENT display-name            (#PCDATA)>
-<!ELEMENT description             (#PCDATA)>
-<!ELEMENT extractor               (#PCDATA)>
-<!ELEMENT comparator              (#PCDATA)>
+<!ELEMENT type               (#PCDATA)>
+<!ELEMENT display-name       (#PCDATA)>
+<!ELEMENT description        (#PCDATA)>
+<!ELEMENT extractor          (#PCDATA)>
+<!ELEMENT comparator         (#PCDATA)>
 
-<!ELEMENT suffix                  (#PCDATA)>
-<!ELEMENT prefix                  (#PCDATA)>
-<!ELEMENT match                   (#PCDATA)>
+<!ELEMENT suffix             (#PCDATA)>
+<!ELEMENT prefix             (#PCDATA)>
+<!ELEMENT match              (#PCDATA)>
 
-<!ELEMENT name                    (#PCDATA)>
-<!ELEMENT value                   (#PCDATA)>
+<!ELEMENT name               (#PCDATA)>
+<!ELEMENT value              (#PCDATA)>
 
-<!ELEMENT criterion               (#PCDATA)>
-<!ELEMENT filter-type             (#PCDATA)>
+<!ELEMENT criterion          (#PCDATA)>
+<!ELEMENT filter-type        (#PCDATA)>
 
-<!ELEMENT exclude                 (suffix|prefix|match)>
-<!ELEMENT package                 (suffix|prefix|match)>
-<!ELEMENT class-name              (suffix|prefix|match)>
-<!ELEMENT fully-name              (suffix|prefix|match)>
+<!ELEMENT exclude            (suffix|prefix|match)>
+<!ELEMENT package            (suffix|prefix|match)>
+<!ELEMENT class-name         (suffix|prefix|match)>
+<!ELEMENT fully-name         (suffix|prefix|match)>
 
-<!ELEMENT wellknown-classes       ((exclude|package|class-name|fully-name)*)>
+<!ELEMENT wellknown-classes  ((exclude|package|class-name|fully-name)*)>
 
-<!ELEMENT property                (name,value)>
-<!ELEMENT properties              (property*)>
+<!ELEMENT property           (name,value)>
+<!ELEMENT properties         (property*)>
 
-<!ELEMENT birthmark-service       (type,display-name,description,extractor,comparator)>
-<!ELEMENT birthmark-services      (birthmark-service*)>
+<!ELEMENT birthmark-service  (type,display-name,description?,extractor,comparator)>
+<!ELEMENT birthmark-services (birthmark-service*)>
 
-<!ELEMENT classpath-list          (classpath*)>
+<!ELEMENT classpath-list     (classpath*)>
 
-<!ELEMENT attribute               (name,value)>
-<!ELEMENT attributes              (attribute*)>
-<!ELEMENT filter                  (filter-type,criterion,attributes)>
-<!ELEMENT filter-list             (filter*)>
-<!ELEMENT filterset               (name,match,filter-list)>
-<!ELEMENT filterset-list          (filterset*)>
+<!ELEMENT attribute          (name,value)>
+<!ELEMENT attributes         (attribute*)>
+<!ELEMENT filter             (filter-type,criterion,attributes)>
+<!ELEMENT filter-list        (filter*)>
+<!ELEMENT filterset          (name,match,filter-list)>
+<!ELEMENT filterset-list     (filterset*)>
 
 <!ELEMENT stigmata (birthmark-services,wellknown-classes?,classpath-list?,properties?,filterset-list?) >
 ----
@@ -103,7 +103,7 @@ information is shown as xml file formatted in this DTD.
 <!ELEMENT birthmark-similarity   (#PCDATA)>
 <!ELEMENT similarity             (#PCDATA)>
 
-<!ELEMENT birthmark-service      (type,display-type,description,class-name)>
+<!ELEMENT birthmark-service      (type,display-type,description?,class-name)>
 <!ELEMENT birthmark-services     (birthmark-service*)>
 
 <!ELEMENT birthmark              (element*)>

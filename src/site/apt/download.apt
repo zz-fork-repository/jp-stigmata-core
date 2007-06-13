@@ -34,13 +34,18 @@ permissions and limitations under the License.
 
  *{{{http://commons.cafebabe.jp/xmlcli/}Jakarta Commons CLI}} 1.0
 
- *{{{http://commons.cafebabe.jp/xmlcli/}XmlCli}} 1.0
+ *{{{http://commons.cafebabe.jp/xmlcli/}XmlCli}} 1.2
 
  *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 later)
 
+ *{{{http://www.junit.org/}JUnit}} 4.1
+
  []
 
-**How to install requirement into Maven local repository
+**How to install requirements into your Maven local repository
+
+ You must install manually Jama, since it does not support Maven 2.
+Other libraries can be automatically downloaded by Maven 2.
 
  type below command.
 
