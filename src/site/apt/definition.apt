@@ -29,6 +29,8 @@ extracted from <p> by a certain method <f>. Then <f(p)> is called a
 
  [[2]]If <q> is copied from <p>, then <f(p)=f(q)>
 
+ []
+
  First condition means that the birthmark is not extra information and
 is required for <p> to run.  Hence, extracting a birthmark does not
 require extra code as watermarking does.  Second condition states that
@@ -39,14 +41,16 @@ not a copy of <p>.
 
  Hopefully, a birthmark will satisfy the following properties.
 
- [[Property 1: Preservation]] For <p'> obtained from <p> by any
+ [Property 1: Preservation] For <p'> obtained from <p> by any
 program transformation, <f(p) = f(p')> holds.
 
- [[Property 2: Distinction]] For <p> and <q> such that same
+ [Property 2: Distinction] For <p> and <q> such that same
 specification, if <p> and <q> are written independently, then
 <f(p)!=f(q)>.
 
-These properties strengthen Condition 2 of birthmark definition.
+ []
+
+ These properties strengthen Condition 2 of birthmark definition.
 First property specifies <preservation property> of the birthmark
 against program transformation.  Preservation property specifies that
 the same birthmark must be obtained from <p> and converted to <p'>.

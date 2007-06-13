@@ -100,23 +100,30 @@ Related Publications
    0919-9527, Graduate School of Information Science, Nara Institute
    of Science and Technology, November 2003.
 
- * ‹Ê“c tº, _è —Yˆê˜Y, ’†‘º ‹§G, –å“c ‹Ål, ¼–{ Œ’ˆê, ``Java ƒNƒ‰ƒXƒtƒ@ƒCƒ‹‚©‚çƒvƒƒOƒ‰ƒ€w–ä‚ğ’Šo‚·‚é•û–@‚Ì’ñˆÄ'', MŠw‹Z•ñ î•ñƒZƒLƒ…ƒŠƒeƒBŒ¤‹†‰ï, Vol. ISEC2003-29, pp.127--133, July 2003.
+ * ç‰ç”° æ˜¥æ˜­, ç¥å´ é›„ä¸€éƒ, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``Java ã‚¯ãƒ©ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ãƒ—ãƒ­ã‚°ãƒ©ãƒ æŒ‡ç´‹ã‚’æŠ½å‡ºã™ã‚‹æ–¹æ³•ã®ææ¡ˆ'', ä¿¡å­¦æŠ€å ± æƒ…å ±ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ç ”ç©¶ä¼š, Vol. ISEC2003-29, pp.127--133, July 2003.
 
 *Dynamic Birthmark
 
- * XR C, ŒÃ] Šx‘å, ‰“R ‹B, ¼–{ •×, ``APIŠÖ”ŒÄo—š—ğ‚É‚æ‚éƒ\ƒtƒgƒEƒFƒA“®“Iƒo[ƒXƒ}[ƒN‚Ìˆê•û®'', MŠw‹Z•ñ, vol. 106, no. 235, ISEC2006-82, pp. 77-84, September 2006.
+ * Haruaki Tamada, Keiji Okamoto, Masahide Nakamura, Akito Monden and
+   Ken-ichi Matsumoto, ``Design and Evaluation of Dynamic Software
+   Birthmarks Based on API Calls'', Information Science Technical
+   Report, NAIST-IS-TR2007011, ISSN 0919-9527, Graduate School of
+   Information Science, Nara Institute of Science and Technology, May
+   2007.
 
- * ‰ª–{ Œ\i, ‹Ê“c tº, ’†‘º ‹§G, –å“c ‹Ål, ¼–{ Œ’ˆê, ``APIŒÄ‚Ño‚µ‚ğ—p‚¢‚½“®“Iƒo[ƒXƒ}[ƒN'', “dqî•ñ’ÊMŠw‰ï˜_•¶, Vol.J89-D, No.8, pp.1751-1763, August 2006.
+ * æ£®å±± ä¿®, å¤æ±Ÿ å²³å¤§, é å±± æ¯…, æ¾æœ¬ å‹‰, ``APIé–¢æ•°å‘¼å‡ºå±¥æ­´ã«ã‚ˆã‚‹ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®ä¸€æ–¹å¼'', ä¿¡å­¦æŠ€å ±, vol. 106, no. 235, ISEC2006-82, pp. 77-84, September 2006.
+
+ * å²¡æœ¬ åœ­å¸, ç‰ç”° æ˜¥æ˜­, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``APIå‘¼ã³å‡ºã—ã‚’ç”¨ã„ãŸå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯'', é›»å­æƒ…å ±é€šä¿¡å­¦ä¼šè«–æ–‡èªŒ, Vol.J89-D, No.8, pp.1751-1763, August 2006.
 
  * David Schuler and Valentin Dallmeier, ``Detecting Software Theft
    with API Call Sequence Sets,'' Workshops Software Reengineering
    (WSR 2006), pp.56-57, May 2006.
 
- * ŒÃ“c ‘sG, ^–ì –F‹v, ``ÀsŒn—ñ‚Ì’ŠÛ•\Œ»‚ğ—˜—p‚µ‚½“®“Iƒo[ƒXƒ}[ƒN'', “dqî•ñ’ÊMŠw‰ï˜_•¶ Vol.J88-D1, No.10, pp.1595--1599, October 2005.
+ * å¤ç”° å£®å®, çœŸé‡ èŠ³ä¹…, ``å®Ÿè¡Œç³»åˆ—ã®æŠ½è±¡è¡¨ç¾ã‚’åˆ©ç”¨ã—ãŸå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯'', é›»å­æƒ…å ±é€šä¿¡å­¦ä¼šè«–æ–‡èªŒ Vol.J88-D1, No.10, pp.1595--1599, October 2005.
 
- * ‰ª–{ Œ\i, ‹Ê“c tº, ’†‘º ‹§G, –å“c ‹Ål, ¼–{ Œ’ˆê, ``ƒ\ƒtƒgƒEƒFƒAÀs‚ÌAPIŒÄ‚Ño‚µ—š—ğ‚ÉŠî‚Ã‚­“®“Iƒo[ƒXƒ}[ƒN‚ÌÀŒ±“I•]‰¿'', ‘æ46‰ñƒvƒƒOƒ‰ƒ~ƒ“ƒOEƒVƒ“ƒ|ƒWƒEƒ€•ñW, pp. 41--50, January 2005
+ * å²¡æœ¬ åœ­å¸, ç‰ç”° æ˜¥æ˜­, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å®Ÿè¡Œæ™‚ã®APIå‘¼ã³å‡ºã—å±¥æ­´ã«åŸºã¥ãå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®å®Ÿé¨“çš„è©•ä¾¡'', ç¬¬46å›ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°ãƒ»ã‚·ãƒ³ãƒã‚¸ã‚¦ãƒ å ±å‘Šé›†, pp. 41--50, January 2005
 
- * ‰ª–{ Œ\i, ‹Ê“c tº, ’†‘º ‹§G, –å“c ‹Ål, ¼–{ Œ’ˆê, ``ƒ\ƒtƒgƒEƒFƒAÀs‚ÌAPIŒÄ‚Ño‚µ—š—ğ‚ÉŠî‚Ã‚­“®“Iƒo[ƒXƒ}[ƒN‚Ì’ñˆÄ'', ƒ\ƒtƒgƒEƒFƒAHŠw‚ÌŠî‘bXI, “ú–{ƒ\ƒtƒgƒEƒFƒA‰ÈŠw‰ï FOSE2004 (FOSE2004), pp.85--88, November 2004. 
+ * å²¡æœ¬ åœ­å¸, ç‰ç”° æ˜¥æ˜­, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å®Ÿè¡Œæ™‚ã®APIå‘¼ã³å‡ºã—å±¥æ­´ã«åŸºã¥ãå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®ææ¡ˆ'', ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å·¥å­¦ã®åŸºç¤XI, æ—¥æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ç§‘å­¦ä¼š FOSE2004 (FOSE2004), pp.85--88, November 2004. 
 
  * Haruaki Tamada, Keiji Okamoto, Masahide Nakamura, Akito Monden, and
    Ken-ichi Matsumoto, ``Dynamic Software Birthmarks to Detect the
