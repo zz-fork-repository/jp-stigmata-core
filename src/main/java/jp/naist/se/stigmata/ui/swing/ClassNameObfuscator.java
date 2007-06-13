@@ -32,10 +32,10 @@ public class ClassNameObfuscator{
     }
 
     public BirthmarkSet obfuscateClassName(BirthmarkSet orig){
-        String newName = nameMapping.get(orig.getClassName());
+        String newName = nameMapping.get(orig.getName());
         if(newName == null){
             newName = String.format("C%04d", new Object[] { new Integer(nameMapping.size() + 1), });
-            nameMapping.put(orig.getClassName(), newName);
+            nameMapping.put(orig.getName(), newName);
         }
 
         BirthmarkSet newSet = new BirthmarkSet(newName, orig.getLocation());

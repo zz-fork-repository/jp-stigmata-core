@@ -19,7 +19,7 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     /**
      * class name.
      */
-    private String className;
+    private String name;
 
     /**
      * location of class file is loaded from.
@@ -34,8 +34,8 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     /**
      * constructor.
      */
-    public BirthmarkSet(String className, URL location){
-        this.className = className;
+    public BirthmarkSet(String name, URL location){
+        this.name = name;
         this.location = location;
     }
 
@@ -61,8 +61,8 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     /**
      * return the class name.
      */
-    public String getClassName(){
-        return className;
+    public String getName(){
+        return name;
     }
 
     /**

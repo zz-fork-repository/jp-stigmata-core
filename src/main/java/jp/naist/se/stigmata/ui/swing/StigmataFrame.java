@@ -5,21 +5,15 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +52,8 @@ import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.ui.swing.actions.AboutAction;
+import jp.naist.se.stigmata.ui.swing.actions.LicenseAction;
 import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
 
@@ -186,8 +182,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             new Object[] { new Integer(compareDetail), },
             new Object[] {
                 Utility.array2String(target1.getBirthmarkTypes()),
-                target1.getClassName(),
-                target2.getClassName(),
+                target1.getName(),
+                target2.getName(),
             }
         );
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
@@ -446,11 +442,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         setJMenuBar(menubar);
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new WindowAdapter(){
-            public void windowClosed(WindowEvent evt){
-                formWindowClosed(evt);
-            }
-        });
     }
 
     private JMenu createFileMenu(){
@@ -504,8 +495,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
     private JMenu createHelpMenu(){
         JMenu menu = Utility.createJMenu("helpmenu");
-        JMenuItem about = Utility.createJMenuItem("about");
-        JMenuItem license = Utility.createJMenuItem("license");
+        JMenuItem about = Utility.createJMenuItem("about", new AboutAction(this));
+        JMenuItem license = Utility.createJMenuItem("license", new LicenseAction(this));
         JMenuItem help = Utility.createJMenuItem("helpmenu");
         JMenu laf = Utility.createJMenu("lookandfeel");
         expertmodeMenu = Utility.createJCheckBoxMenuItem("expertmenu");
@@ -518,17 +509,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         menu.add(new JSeparator());
         menu.add(expertmodeMenu);
 
-        about.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                aboutMenuActionPerformed();
-            }
-        });
-
-        license.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                licenseMenuActionPerformed();
-            }
-        });
         expertmodeMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 expertMenuActionPerformed(((JCheckBoxMenuItem)e.getSource()).getState());
@@ -563,62 +543,20 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         control.setExpertMode(status);
     }
 
-    private void aboutMenuActionPerformed(){
-        Package p = getClass().getPackage();
-        JPanel panel = new JPanel(new BorderLayout());
-        JLabel logo = new JLabel(Utility.getIcon("stigmata.logo"));
-        panel.add(logo, BorderLayout.NORTH);
-
-        String aboutMessage = loadString("/resources/about.txt");
-        aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
-        aboutMessage = aboutMessage.replace("${implementation.vendor}",  p.getImplementationVendor());
-        aboutMessage = aboutMessage.replace("${implementation.title}",   p.getImplementationTitle());
-
-        JTextArea text = new JTextArea(aboutMessage);
-        text.setEditable(false);
-        text.setCaretPosition(0);
-        JScrollPane scroll = new JScrollPane();
-        scroll.setViewportView(text);
-        panel.add(scroll, BorderLayout.CENTER);
-
-        JOptionPane.showMessageDialog(
-            this, panel, Messages.getString("about.dialog.title"),
-            JOptionPane.INFORMATION_MESSAGE
-        );
-    }
-
-    private void licenseMenuActionPerformed(){
-        JTextArea area = new JTextArea();
-        area.setText(loadString("/META-INF/license.txt"));
-        Font f = area.getFont();
-        area.setFont(new Font("Monospaced", f.getStyle(), f.getSize()));
-        area.setEditable(false);
-        area.setCaretPosition(0);
-
-        JScrollPane scroll = new JScrollPane();
-        scroll.setViewportView(area);
-        scroll.setPreferredSize(new Dimension(500, 300));
-
-        JOptionPane.showMessageDialog(
-            this, scroll, Messages.getString("license.dialog.title"),
-            JOptionPane.INFORMATION_MESSAGE
-        );
-    }
-
     private void showExceptionMessage(Exception e){
-       if(e instanceof BirthmarkElementClassNotFoundException){
-           showClassNotFoundMessage((BirthmarkElementClassNotFoundException)e);
-           return;
-       }
-       JTextArea area = new JTextArea(20, 60);
+        if(e instanceof BirthmarkElementClassNotFoundException){
+            showClassNotFoundMessage((BirthmarkElementClassNotFoundException)e);
+            return;
+        }
+        JTextArea area = new JTextArea(20, 60);
         StringWriter writer = new StringWriter();
         PrintWriter out = new PrintWriter(writer);
         e.printStackTrace(out);
         if(e instanceof BirthmarkExtractionException){
-               out.println("Causes:");
-               for(Throwable t: ((BirthmarkExtractionException)e).getCauses()){
-                       t.printStackTrace(out);
-               }
+            out.println("Causes:");
+            for(Throwable t: ((BirthmarkExtractionException)e).getCauses()){
+                t.printStackTrace(out);
+            }
         }
         out.close();
         area.setText(writer.toString());
@@ -633,45 +571,18 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     private void showClassNotFoundMessage(BirthmarkElementClassNotFoundException e){
-       StringBuffer sb = new StringBuffer();
-       sb.append("<html><body><p>");
-       sb.append(Messages.getString("error.message.classpath"));
-       sb.append("</p><ul>");
-       for(String name: e.getClassNames()){
-               sb.append("<li>").append(name).append("</li>");
-       }
-       sb.append("</ul></body></html>");
+        StringBuffer sb = new StringBuffer();
+        sb.append("<html><body><p>");
+        sb.append(Messages.getString("error.message.classpath"));
+        sb.append("</p><ul>");
+        for(String name: e.getClassNames()){
+            sb.append("<li>").append(name).append("</li>");
+        }
+        sb.append("</ul></body></html>");
         JOptionPane.showMessageDialog(
             this, new String(sb), Messages.getString("error.dialog.title"),
             JOptionPane.WARNING_MESSAGE
         );
-    }
-
-    private String loadString(String loadFrom){
-        try{
-            String line;
-            URL url = getClass().getResource(loadFrom);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringWriter writer = new StringWriter();
-            PrintWriter out = new PrintWriter(writer);
-            while((line = in.readLine()) != null){
-                out.println(line);
-            }
-            out.close();
-            in.close();
-
-            return writer.toString();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void formWindowClosed(WindowEvent evt){
-        frameList.remove(this);
-        if(frameList.size() == 0){
-            System.exit(1);
-        }
     }
 
     private void closeTabMenuActionPerformed(){

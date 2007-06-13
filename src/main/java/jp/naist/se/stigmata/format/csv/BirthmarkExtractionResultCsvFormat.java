@@ -29,7 +29,7 @@ public class BirthmarkExtractionResultCsvFormat extends AbstractBirthmarkExtract
 
     protected void printBirthmarkHolder(PrintWriter out, BirthmarkSet holder){
         for(String type: holder.getBirthmarkTypes()){
-            out.print(holder.getClassName());
+            out.print(holder.getName());
             out.print(",");
             out.print(holder.getLocation());
 

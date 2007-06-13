@@ -48,13 +48,13 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         if(v == null) v = "";
         boolean flag;
         if(getTarget() == Target.TARGET_1){
-            flag = checkMatch(pair.getTarget1().getClassName(), v);
+            flag = checkMatch(pair.getTarget1().getName(), v);
         }
         else if(getTarget() == Target.TARGET_2){
-            flag = checkMatch(pair.getTarget2().getClassName(), v);
+            flag = checkMatch(pair.getTarget2().getName(), v);
         }
         else{
-            flag = checkMatch(pair.getTarget1().getClassName(), pair.getTarget2().getClassName(), v);
+            flag = checkMatch(pair.getTarget1().getName(), pair.getTarget2().getName(), v);
         }
         return flag;
     }

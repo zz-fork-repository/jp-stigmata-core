@@ -90,11 +90,11 @@ public class RoundRobinComparisonResultPane extends JPanel implements BirthmarkD
         double min = 100d;
         model.addColumn("");
         for(BirthmarkSet x: birthmarksX){
-            model.addColumn(x.getClassName());
+            model.addColumn(x.getName());
         }
         for(int j = 0; j < birthmarksY.size(); j++){
             Object[] rows = new Object[birthmarksX.size() + 1];
-            rows[0] = birthmarksY.get(j).getClassName();
+            rows[0] = birthmarksY.get(j).getName();
 
             for(int i = 0; i < birthmarksX.size(); i++){
                 double similarity = compare(context, birthmarksX.get(i), birthmarksY.get(j));

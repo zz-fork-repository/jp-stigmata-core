@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JCheckBox;
@@ -106,7 +107,7 @@ public class MDSGraphPanel extends JPanel{
                     matrix[j][i] = matrix[i][j];
                 }
             }
-            String className = set[i].getClassName();
+            String className = set[i].getName();
             labels.addLabel(className);
             String groupName = getGroupName(set[i].getLocation());
             labels.setGroup(className, groupName);
@@ -132,16 +133,17 @@ public class MDSGraphPanel extends JPanel{
             public void actionPerformed(ActionEvent e){
                 String c = e.getActionCommand();
                 for(int i = 0; i < set.length; i++){
-                    if(c.equals(set[i].getClassName())){
+                    if(c.equals(set[i].getName())){
                         stigmata.showExtractionResult(new BirthmarkSet[] { set[i], }, stigmata.getContext());
                     }
                 }
             }
         });
-        final JCheckBox check = new JCheckBox(Messages.getString("showlabel.button.label"), true);
+        JCheckBox check = new JCheckBox(Messages.getString("showlabel.button.label"), true);
         check.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                viewer.setShowLabel(check.isSelected());
+                JCheckBox c = (JCheckBox)e.getSource();
+                viewer.setShowLabel(c.isSelected());
             }
         });
 
@@ -163,16 +165,20 @@ public class MDSGraphPanel extends JPanel{
                 }
             }
         );
-        Action saveMDSAction = Utility.createAction("savemds", new ActionListener(){
+        Action saveMDSAction = new AbstractAction(){
+            private static final long serialVersionUID = 3314135350231965216L;
+
             public void actionPerformed(ActionEvent e){
                 saveMDSImage();
             }
-        });
-        Action saveCoordinate = Utility.createAction("savelocation", new ActionListener(){
+        };
+        Action saveCoordinate = new AbstractAction(){
+            private static final long serialVersionUID = 1956405328339468706L;
+
             public void actionPerformed(ActionEvent e){
                 saveCoordinate();
             }
-        });
+        };
         PopupButton colorButton = new PopupButton(Utility.createButton("updatecolor", pointColorAction));
         colorButton.addMenuItem(Utility.createJMenuItem("updateovercolor", overColorAction));
         PopupButton saveButton = new PopupButton(Utility.createButton("savemds", saveMDSAction));

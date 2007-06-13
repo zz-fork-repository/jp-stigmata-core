@@ -115,8 +115,8 @@ public class PairComparisonResultSetPane extends JPanel implements BirthmarkData
             if(similarity < minimum) minimum = similarity;
             average += similarity;
 
-            model.addRow(new Object[] { pair.getTarget1().getClassName(),
-                         pair.getTarget2().getClassName(), new Double(similarity) });
+            model.addRow(new Object[] { pair.getTarget1().getName(),
+                         pair.getTarget2().getName(), new Double(similarity) });
         }
         average = average / list.size();
         

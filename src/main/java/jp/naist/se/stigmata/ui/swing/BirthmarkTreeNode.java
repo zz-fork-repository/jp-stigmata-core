@@ -25,7 +25,7 @@ public class BirthmarkTreeNode extends DefaultMutableTreeNode{
     }
 
     public BirthmarkTreeNode(BirthmarkSet birthmark){
-        super(birthmark.getClassName() + "(" +
+        super(birthmark.getName() + "(" +
                 + birthmark.getSumOfElementCount() + ")");
         setBirthmark(birthmark);
     }

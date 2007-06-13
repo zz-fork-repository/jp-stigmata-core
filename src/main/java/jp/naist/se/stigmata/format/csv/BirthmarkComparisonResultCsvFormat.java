@@ -57,9 +57,9 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
 
     private void printResultImpl(PrintWriter out, CertainPairComparisonResultSet resultset){
         for(ComparisonPair pair: resultset){
-            out.print(pair.getTarget1().getClassName());
+            out.print(pair.getTarget1().getName());
             out.print(",");
-            out.print(pair.getTarget1().getClassName());
+            out.print(pair.getTarget1().getName());
             out.print(",");
             out.println(pair.calculateSimilarity());
         }
@@ -70,15 +70,15 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
         List<String> names = new ArrayList<String>();
 
         for(ComparisonPair pair: resultset){
-            Map<String, Double> val = map.get(pair.getTarget1().getClassName());
+            Map<String, Double> val = map.get(pair.getTarget1().getName());
             if(val == null){
                 val = new HashMap<String, Double>();
             }
-            val.put(pair.getTarget2().getClassName(), new Double(pair.calculateSimilarity()));
-            if(!names.contains(pair.getTarget2().getClassName())){
-                names.add(pair.getTarget2().getClassName());
+            val.put(pair.getTarget2().getName(), new Double(pair.calculateSimilarity()));
+            if(!names.contains(pair.getTarget2().getName())){
+                names.add(pair.getTarget2().getName());
             }
-            map.put(pair.getTarget1().getClassName(), val);
+            map.put(pair.getTarget1().getName(), val);
         }
 
         for(String name: names){

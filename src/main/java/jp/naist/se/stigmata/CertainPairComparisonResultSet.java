@@ -42,7 +42,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
     public CertainPairComparisonResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, BirthmarkContext context){
         this.context = context;
         for(int i = 0; i < targetX.length; i++){
-            BirthmarkSet target2 = findTarget(targetX[i].getClassName(), targetY);
+            BirthmarkSet target2 = findTarget(targetX[i].getName(), targetY);
 
             if(target2 != null){
                 pairList.add(new ComparisonPair(targetX[i], target2, context));
@@ -114,7 +114,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
      */
     private BirthmarkSet findTarget(String className, BirthmarkSet[] target){
         for(int i = 0; i < target.length; i++){
-            if(className.equals(target[i].getClassName())){
+            if(className.equals(target[i].getName())){
                 return target[i];
             }
         }

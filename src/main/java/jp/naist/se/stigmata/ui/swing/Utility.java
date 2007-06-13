@@ -35,7 +35,7 @@ public class Utility{
     private Utility(){
     }
 
-    public static Action createAction(String key, final ActionListener listener){
+    public static Action createAction2(String key, final ActionListener listener){
         final Icon icon = getIcon(key + ".icon");
         final String label = Messages.getString(key + ".label");
 
@@ -70,10 +70,16 @@ public class Utility{
 
     public static JButton createButton(String label, Action action){
         JButton button = new JButton(action);
+        button.setText(Messages.getString(label + ".button.label"));
         button.setActionCommand(label);
         if(Messages.hasString(label + ".button.tooltip")){
             button.setToolTipText(Messages.getString(label + ".button.tooltip"));
         }
+        Icon icon = getIcon(label + ".button.icon");
+        if(icon != null){
+            button.setIcon(icon);
+        }
+
         return button;
     }
 
@@ -110,9 +116,14 @@ public class Utility{
 
     public static JMenuItem createJMenuItem(String label, Action action){
         JMenuItem item = new JMenuItem(action);
+        item.setText(Messages.getString(label + ".menuitem.label"));
         item.setActionCommand(label);
         if(Messages.hasString(label + ".menuitem.tooltip")){
             item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
+        }
+        Icon icon = getIcon(label + ".menuitem.icon");
+        if(icon != null){
+            item.setIcon(icon);
         }
         return item;
     }
