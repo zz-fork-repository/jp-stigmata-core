@@ -286,7 +286,7 @@ public class ControlPane extends JPanel{
     private BirthmarkContext generateContext(){
         BirthmarkContext context = stigmata.getStigmata().createContext();
         // BirthmarkContext context2 = stigmata.getContext();
-        ClasspathContext bytecode = context.getBytecodeContext();
+        ClasspathContext bytecode = context.getClasspathContext();
         WellknownClassManager manager = context.getWellknownClassManager();
 
         classpath.updateClasspathContext(bytecode);

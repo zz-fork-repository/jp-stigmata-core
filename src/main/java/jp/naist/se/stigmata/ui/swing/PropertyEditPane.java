@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 
 import javax.swing.Box;
@@ -58,10 +60,49 @@ public class PropertyEditPane extends JPanel{
 
     private void initData(){
         BirthmarkContext context = stigmata.getContext();
+        context.addPropertyListener(new PropertyChangeListener(){
+            public void propertyChange(PropertyChangeEvent evt){
+                String name = evt.getPropertyName();
+                String value = (String)evt.getNewValue();
+                if(value == null){
+                    removeProperty(name);
+                }
+                else{
+                    addOrUpdateProperty(name, value);
+                }
+            }
+        });
         for(Iterator<String> i = context.propertyKeys(); i.hasNext(); ){
             String key = i.next();
             model.addRow(new Object[] { key, context.getProperty(key), });
         }
+    }
+
+    private void removeProperty(String name){
+        int index = findIndex(name);
+        if(index >= 0){
+            model.removeRow(index);
+        }
+    }
+
+    private void addOrUpdateProperty(String name, String value){
+        int index = findIndex(name);
+        if(index >= 0){
+            model.setValueAt(value, index, 1);
+        }
+        else{
+            model.addRow(new Object[] { name, value, });
+        }
+    }
+
+    private int findIndex(String name){
+        for(int i = 0; i < model.getRowCount(); i++){
+            String v = (String)model.getValueAt(i, 0);
+            if(v.equals(name)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void addNewProperty(){

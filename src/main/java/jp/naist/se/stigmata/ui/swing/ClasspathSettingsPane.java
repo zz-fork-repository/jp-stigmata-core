@@ -74,7 +74,7 @@ public class ClasspathSettingsPane extends JPanel{
 
     private boolean findClass(String className){
         try{
-            ClasspathContext b = stigmata.getStigmata().createContext().getBytecodeContext();
+            ClasspathContext b = stigmata.getStigmata().createContext().getClasspathContext();
             ClasspathContext bytecode = new ClasspathContext(b);
             String[] path = classpath.getValues();
             for(String cp: path){

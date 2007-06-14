@@ -4,6 +4,8 @@ package jp.naist.se.stigmata;
  * $Id$
  */
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -58,6 +60,11 @@ public class BirthmarkContext{
     private Map<String, String> properties = new HashMap<String, String>();
 
     /**
+     * listeners for updating properties.
+     */
+    private List<PropertyChangeListener> propertyListeners = new ArrayList<PropertyChangeListener>();
+
+    /**
      * filter manager.
      */
     private ComparisonPairFilterManager filterManager;
@@ -85,7 +92,7 @@ public class BirthmarkContext{
     public BirthmarkContext(BirthmarkContext parent){
         this.parent = parent;
         this.manager = new WellknownClassManager(parent.getWellknownClassManager());
-        this.bytecodeContext = new ClasspathContext(parent.getBytecodeContext());
+        this.bytecodeContext = new ClasspathContext(parent.getClasspathContext());
         this.filterManager = new ComparisonPairFilterManager(parent.getFilterManager());
     }
 
@@ -96,18 +103,26 @@ public class BirthmarkContext{
         return DEFAULT_CONTEXT;
     }
 
+    public BirthmarkContext getParent(){
+        return parent;
+    }
+
     /**
      * remove property mapped given key.
      */
     public void removeProperty(String key){
+        String old = properties.get(key);
         properties.remove(key);
+        firePropertyEvent(new PropertyChangeEvent(this, key, old, null));
     }
 
     /**
      * add given property.
      */
     public void addProperty(String key, String value){
+        String old = getProperty(key);
         properties.put(key, value);
+        firePropertyEvent(new PropertyChangeEvent(this, key, old, value));
     }
 
     /**
@@ -119,6 +134,30 @@ public class BirthmarkContext{
             value = parent.getProperty(key);
         }
         return value;
+    }
+
+    /**
+     * fire property change event to listeners.
+     * @param e Event object.
+     */
+    private void firePropertyEvent(PropertyChangeEvent e){
+        for(PropertyChangeListener listener: propertyListeners){
+            listener.propertyChange(e);
+        }
+    }
+
+    /**
+     * add listener for updating properties.
+     */
+    public void addPropertyListener(PropertyChangeListener listener){
+        propertyListeners.add(listener);
+    }
+
+    /**
+     * remove specified listener.
+     */
+    public void removePropertyListener(PropertyChangeListener listener){
+        propertyListeners.remove(listener);
     }
 
     public void clearProperties(){
@@ -139,7 +178,7 @@ public class BirthmarkContext{
     /**
      * returns the classpath context.
      */
-    public ClasspathContext getBytecodeContext(){
+    public ClasspathContext getClasspathContext(){
         return bytecodeContext;
     }
 

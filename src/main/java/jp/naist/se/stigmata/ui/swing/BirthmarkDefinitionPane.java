@@ -295,8 +295,8 @@ public class BirthmarkDefinitionPane extends JPanel{
             // check extractor/comparator classes are available
             try{
                 flag = flag
-                    && context.getBytecodeContext().find(extractorClass) != null
-                    && context.getBytecodeContext().find(comparatorClass) != null;
+                    && context.getClasspathContext().find(extractorClass) != null
+                    && context.getClasspathContext().find(comparatorClass) != null;
             } catch(ClassNotFoundException e){
                 flag = false;
             }

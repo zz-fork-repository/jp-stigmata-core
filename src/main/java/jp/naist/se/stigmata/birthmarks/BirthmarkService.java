@@ -47,7 +47,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
                 c = Class.forName(extractor);
             }
             else{
-                c = context.getBytecodeContext().findClass(extractor);
+                c = context.getClasspathContext().findClass(extractor);
             }
             extractorClass = c.asSubclass(BirthmarkExtractor.class);
             extractorObject = null;
@@ -63,7 +63,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
                 c = Class.forName(comparator);
             }
             else{
-                c = context.getBytecodeContext().findClass(comparator);
+                c = context.getClasspathContext().findClass(comparator);
             }
             comparatorClass = c.asSubclass(BirthmarkComparator.class);
             comparatorObject = null;

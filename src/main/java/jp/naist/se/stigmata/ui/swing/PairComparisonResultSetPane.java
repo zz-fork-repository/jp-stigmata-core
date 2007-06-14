@@ -35,6 +35,7 @@ import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
+import jp.naist.se.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
 
 /**
  * 
@@ -138,6 +139,9 @@ public class PairComparisonResultSetPane extends JPanel{
                 }
             })
         );
+        JButton updateColorButton = Utility.createButton(
+            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, context)
+        );
         JButton obfuscateButton = Utility.createButton("obfuscate");
         JScrollPane scroll = new JScrollPane();
         averageLabel = new JLabel(Double.toString(average), JLabel.RIGHT);
@@ -145,7 +149,7 @@ public class PairComparisonResultSetPane extends JPanel{
         minimumLabel = new JLabel(Double.toString(minimum), JLabel.RIGHT);
 
         scroll.setViewportView(table);
-        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer());
+        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(context));
         similarityPane.setBorder(new TitledBorder(Messages.getString("similarity.border")));
         averageLabel.setBorder(new TitledBorder(Messages.getString("average.border")));
         maximumLabel.setBorder(new TitledBorder(Messages.getString("maximum.border")));
@@ -161,6 +165,8 @@ public class PairComparisonResultSetPane extends JPanel{
         southPanel.add(buttonPanel);
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(saveButton);
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(updateColorButton);
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(obfuscateButton);
         buttonPanel.add(Box.createHorizontalGlue());

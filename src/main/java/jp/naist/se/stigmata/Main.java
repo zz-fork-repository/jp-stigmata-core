@@ -60,7 +60,7 @@ public final class Main{
         stigmata.configuration(commandLine.getOptionValue("config-file"));
         context = stigmata.createContext();
 
-        addClasspath(context.getBytecodeContext(), commandLine);
+        addClasspath(context.getClasspathContext(), commandLine);
 
         String[] birthmarks = getTargetBirthmarks(commandLine);
         String[] arguments = commandLine.getArgs();

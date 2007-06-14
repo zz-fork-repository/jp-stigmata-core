@@ -9,7 +9,6 @@ import java.io.File;
 import java.text.MessageFormat;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
@@ -31,25 +30,26 @@ public class FileIOManager{
         return currentDirectory;
     }
 
-    public void setCurrentDirectory(File directory){
+    public void setCurrentDirectory(File directory) throws IllegalArgumentException{
         if(!directory.isDirectory()){
-            JOptionPane.showMessageDialog(
-                parent, 
-                Messages.getString("notdirectory.dialog.message", directory.getName()),
-                Messages.getString("notdirectory.dialog.title"),
-                JOptionPane.ERROR_MESSAGE
-            );
-            return;
+            throw new IllegalArgumentException(directory.getName() + " is not directory");
         }
         this.currentDirectory = directory;
     }
 
+    public File findFile(boolean open){
+        return findFile(open, new String[0], "");
+    }
+
     public File findFile(boolean open, String[] exts, String desc){
         JFileChooser chooser = new JFileChooser(getCurrentDirectory());
-        for(int i = 0; i < exts.length; i++){
-            chooser.addChoosableFileFilter(
-                new ExtensionFilter(exts[i], MessageFormat.format(desc, exts[i]))
-            );
+        if(exts != null){
+            MessageFormat formatter = new MessageFormat(desc);
+            for(int i = 0; i < exts.length; i++){
+                chooser.addChoosableFileFilter(
+                    new ExtensionFilter(exts[i], formatter.format(exts[i]))
+                );
+            }
         }
         int returnValue = -1;
         if(open){

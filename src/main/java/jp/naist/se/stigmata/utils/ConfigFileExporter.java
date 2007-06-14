@@ -63,7 +63,7 @@ public class ConfigFileExporter{
 
     private void exportClasspath(PrintWriter out) throws IOException{
         out.println("  <classpath-list>");
-        for(URL location: context.getBytecodeContext()){
+        for(URL location: context.getClasspathContext()){
             out.printf("    <classpath>%s</classpath>%n", location.toString());
         }
         out.println("  </classpath-list>");

@@ -387,3 +387,39 @@ both.button.label=${target.BOTH}バースマーク
 target1.name.button.label=${target.TARGET1}クラス名
 target2.name.button.label=${target.TARGET2}クラス名
 both.name.button.label=${target.BOTH}クラス名
+
+################################################
+# update table cell color
+################################################
+
+updatecellcolor.button.label=セル色変更...
+updatecellcolor.button.tooltip=表のセル色を変更します．
+
+updatecellcolor.dialog.title=色の変更
+updatecellfore.button.label=文字色...
+updatecellfore.button.tooltip=文字色を変更します．
+updatecellback.button.label=背景色...
+updatecellback.button.tooltip=背景色を変更します．
+
+forecolor_0.label=文字色 (類似度=0)
+backcolor_0.label=背景色 (類似度=0)
+forecolor_1.label=文字色 (0 < 類似度 <= 0.2)
+backcolor_1.label=背景色 (0 < 類似度 <= 0.2)
+forecolor_2.label=文字色 (0.2 < 類似度 <= 0.4)
+backcolor_2.label=背景色 (0.2 < 類似度 <= 0.4)
+forecolor_3.label=文字色 (0.4 < 類似度 <= 0.6)
+backcolor_3.label=背景色 (0.4 < 類似度 <= 0.6)
+forecolor_4.label=文字色 (0.6 < 類似度 <= 0.8)
+backcolor_4.label=背景色 (0.6 < 類似度 <= 0.8)
+forecolor_5.label=文字色 (0.8 < 類似度 <= 1.0)
+backcolor_5.label=背景色 (0.8 < 類似度 <= 1.0)
+
+updatecell.title=色の更新 ({0})
+
+rank_0.label=類似度: 0.0
+rank_1.label=類似度: (0.0, 0.2]
+rank_2.label=類似度: (0.2, 0.4]
+rank_3.label=類似度: (0.4, 0.6]
+rank_4.label=類似度: (0.6, 0.8]
+rank_5.label=類似度: (0.8, 1.0]
+

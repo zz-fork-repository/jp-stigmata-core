@@ -173,7 +173,7 @@ public class ConfigFileImporter{
                 }
                 else if(part == Part.CLASSPATH && qname.equals("classpath")){
                     try{
-                        context.getBytecodeContext().addClasspath(
+                        context.getClasspathContext().addClasspath(
                                 new URL(value));
                     }catch(MalformedURLException e){
                         throw new SAXException(e);

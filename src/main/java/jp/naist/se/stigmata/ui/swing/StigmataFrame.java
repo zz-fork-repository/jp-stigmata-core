@@ -13,9 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -61,7 +59,6 @@ import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
 public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private static final long serialVersionUID = 92345543665342134L;
 
-    private static List<JFrame> frameList = new ArrayList<JFrame>();
     private JTabbedPane tabPane;
     private JMenuItem closeTabMenu;
     private JCheckBoxMenuItem expertmodeMenu;
@@ -69,12 +66,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     private BirthmarkContext context;
     private ControlPane control;
     private FileIOManager fileio;
-    private int extractCount = 0;
-    private int compareCount = 0;
-    private int compareDetail = 0;
-    private int similarityGraphCount = 0;
-    private int mappingGraphCount = 0;
-    private int comparePair = 0;
+    private Map<String, Integer> countmap = new HashMap<String, Integer>();
 
     public StigmataFrame(){
         stigmata = Stigmata.getInstance();
@@ -109,7 +101,18 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void setCurrentDirectory(File file){
-        fileio.setCurrentDirectory(file);
+        try{
+            fileio.setCurrentDirectory(file);
+        } catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(
+                this,
+                Messages.getString("notdirectory.dialog.message", file.getName()),
+                Messages.getString("notdirectory.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
+        } catch(Exception e){
+            showExceptionMessage(e);
+        }
     }
 
     /**
@@ -139,7 +142,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         PairComparisonPane detail = new PairComparisonPane(
             this, new ComparisonPair(target1, target2, context)
         );
-        compareDetail++;
+        int compareDetail = getNextCount("compare_detail");
 
         Utility.addNewTab("comparedetail", tabPane, detail,
             new Object[] { new Integer(compareDetail), },
@@ -159,7 +162,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
 
             RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, context, x, y);
-            compareCount++;
+            int compareCount = getNextCount("compare");
             Utility.addNewTab(
                 "compare", tabPane, compare,
                 new Object[] { new Integer(compareCount), },
@@ -184,7 +187,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
             ComparisonResultSet resultset = stigmata.compare(x, y, context);
             FilteredComparisonResultSet fcrs = new FilteredComparisonResultSet(resultset, filters);
-            compareCount++;
+            int compareCount = getNextCount("compare");
             Utility.addNewTab(
                 "compare", tabPane, new PairComparisonResultSetPane(this, fcrs),
                 new Object[] { new Integer(compareCount), },
@@ -205,7 +208,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
-            comparePair++;
+            int comparePair = getNextCount("compare_pair");
 
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(x, y, context);
             Utility.addNewTab("comparepair", tabPane,
@@ -234,7 +237,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
             try{
                 BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
                 BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
-                comparePair++;
+                int comparePair = getNextCount("compare_pair");
                 ComparisonResultSet resultset = new CertainPairComparisonResultSet(x, y, mapping, context);
 
                 Utility.addNewTab(
@@ -255,7 +258,7 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void showComparisonResultSet(ComparisonResultSet resultset){
-        comparePair++;
+        int comparePair = getNextCount("compare_pair");
         Utility.addNewTab(
             "comparisonresultset", tabPane,
             new PairComparisonResultSetPane(this, resultset),
@@ -265,22 +268,26 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
     }
 
     public void showMDSGraph(BirthmarkSet[] set){
-        MDSGraphPanel panel = new MDSGraphPanel(this, set, context);
-        mappingGraphCount++;
-        Utility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
-        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+        try{
+            MDSGraphPanel panel = new MDSGraphPanel(this, set, context);
+            int mappingGraphCount = getNextCount("mds_graph");
+            Utility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
+            tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+        } catch(Exception e){
+            showExceptionMessage(e);
+        }
     }
 
     public void showSimilarityDistributionGraph(Map<Integer, Integer> distributions){
         SimilarityDistributionGraphPane graph = new SimilarityDistributionGraphPane(this, distributions);
 
-        similarityGraphCount++;
+        int similarityGraphCount = getNextCount("similarity_graph");
         Utility.addNewTab("similaritygraph", tabPane, graph, new Object[] { new Integer(similarityGraphCount), }, null);
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
     public void showExtractionResult(BirthmarkSet[] set, BirthmarkContext context){
-        extractCount++;
+        int extractCount = getNextCount("extract");
         BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, context, set);
         Utility.addNewTab(
             "extract", tabPane, viewer,
@@ -338,7 +345,6 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
         setSize(900, 600);
-        frameList.add(this);
     }
 
     private void initComponents(){
@@ -381,7 +387,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
         newFrameMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
-                newFrameMenuActionPerformed(evt);
+                StigmataFrame frame = new StigmataFrame(stigmata, context);
+                frame.setVisible(true);
             }
         });
         exportMenu.addActionListener(new ActionListener(){
@@ -398,7 +405,8 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
 
         closeMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
-                closeMenuActionPerformed(evt);
+                setVisible(false);
+                dispose();
             }
         });
 
@@ -516,18 +524,13 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         }
     }
 
-    private void closeMenuActionPerformed(ActionEvent evt){
-        setVisible(false);
-        dispose();
-
-        frameList.remove(this);
-        if(frameList.size() == 0){
-            System.exit(1);
+    private int getNextCount(String label){
+        Integer i = countmap.get(label);
+        if(i == null){
+            i = new Integer(0);
         }
-    }
-
-    private void newFrameMenuActionPerformed(ActionEvent evt){
-        StigmataFrame frame = new StigmataFrame(stigmata, context);
-        frame.setVisible(true);
+        i = i + 1;
+        countmap.put(label, i);
+        return i;
     }
 }

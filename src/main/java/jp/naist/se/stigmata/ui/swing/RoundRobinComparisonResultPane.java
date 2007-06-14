@@ -43,6 +43,7 @@ import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
+import jp.naist.se.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
 
 /**
  * 
@@ -136,7 +137,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
         model = new RoundRobinComparisonResultSetTableModel();
         table = new JTable(model);
-        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer());
+        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(context));
         table.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 if(e.getClickCount() == 2){
@@ -165,7 +166,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         box1.add(distinctionRatio = new JLabel());
         south.add(box1);
         JPanel box2 = new JPanel(new GridLayout(1, 3));
-        box2.setBorder(new TitledBorder(Messages.getString("similarity.border"))); //$NON-NLS-1$
+        box2.setBorder(new TitledBorder(Messages.getString("similarity.border")));
         box2.add(average = new JLabel());
         box2.add(minimum = new JLabel());
         box2.add(maximum = new JLabel());
@@ -239,6 +240,9 @@ public class RoundRobinComparisonResultPane extends JPanel{
         JButton graph = Utility.createButton("showgraph");
         JButton obfuscate = Utility.createButton("obfuscate");
         JButton compare = Utility.createButton("guessedpair");
+        JButton updateColor = Utility.createButton(
+            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, context)
+        );
         JMenuItem mdsMenu = Utility.createJMenuItem("mdsmap");
 
         PopupButton comparePopup = new PopupButton(compare);
@@ -251,6 +255,8 @@ public class RoundRobinComparisonResultPane extends JPanel{
         add(southPanel, BorderLayout.SOUTH);
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(save);
+        southPanel.add(Box.createHorizontalGlue());
+        southPanel.add(updateColor);
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(graphPopup);
         southPanel.add(Box.createHorizontalGlue());

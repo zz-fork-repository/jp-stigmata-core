@@ -121,7 +121,7 @@ public final class Stigmata{
     private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
         List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
-        ClasspathContext bytecode = context.getBytecodeContext();
+        ClasspathContext bytecode = context.getClasspathContext();
 
         for(int i = 0; i < files.length; i++){
             if(files[i].endsWith(".class")){
