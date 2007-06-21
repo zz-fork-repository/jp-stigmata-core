@@ -35,6 +35,7 @@
 
     <menu name="Stigmata">
       <item name="Introduction"        href="index.html"/>
+      <item name="Tutorial"            href="tutorial.html"/>
       <item name="Download"            href="download.html" />
       <item name="Definition"          href="definition.html" />
       <item name="DTD"                 href="dtd.html" />

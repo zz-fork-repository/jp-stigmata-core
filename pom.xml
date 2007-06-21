@@ -192,6 +192,9 @@ The bug is that resource file is copied to target/classes directory, too.
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>jxr-maven-plugin</artifactId>
+        <configuration>
+          <javadocDir>site/apidocs</javadocDir>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
