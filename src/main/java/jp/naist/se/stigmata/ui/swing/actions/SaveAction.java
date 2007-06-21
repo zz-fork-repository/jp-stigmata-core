@@ -90,6 +90,7 @@ public class SaveAction extends AbstractAction{
                     try{
                         out.close();
                     } catch(IOException ee){
+                        throw new InternalError(ee.getMessage());
                     }
                 }
                 if(writer != null){

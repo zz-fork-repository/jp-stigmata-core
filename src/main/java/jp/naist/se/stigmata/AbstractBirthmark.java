@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Abstract class for concrete {@link Birthmark <code>Birthmark</code>}
+ *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */

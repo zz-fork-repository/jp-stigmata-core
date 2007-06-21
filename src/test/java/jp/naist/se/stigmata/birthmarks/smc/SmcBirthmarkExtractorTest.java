@@ -48,7 +48,6 @@ public class SmcBirthmarkExtractorTest{
         }
         /*
         Assert.assertEquals(76, birthmark.getElementCount());
-
         int index = 0;
         Assert.assertEquals("java.io.FileInputStream#<init>",       elements[index++].getValue());
         Assert.assertEquals("java.io.File#<init>",                  elements[index++].getValue());

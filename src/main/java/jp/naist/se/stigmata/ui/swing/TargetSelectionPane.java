@@ -299,13 +299,15 @@ public class TargetSelectionPane extends JPanel{
                     List<String> errorList = new ArrayList<String>();
                     for(int i = 0; i < list.size(); i++){
                         File file = (File)list.get(i);
+                        boolean neverAddedFlag = true;
                         for(FileFilter filter: filters){
                             if(filter.accept(file)){
                                 addValue(file.getPath());
+                                neverAddedFlag = false;
                             }
-                            else{
-                                errorList.add(file.getName());
-                            }
+                        }
+                        if(neverAddedFlag){
+                            errorList.add(file.getName());
                         }
                     }
                     if(errorList.size() > 0){
@@ -316,10 +318,11 @@ public class TargetSelectionPane extends JPanel{
                             builder.append("<li>").append(errorList.get(i)).append("</li>");
                         }
                         builder.append("</ul></body></html>");
-                        JOptionPane.showMessageDialog(TargetSelectionPane.this,
-                                new String(builder), Messages
-                                        .getString("unsupportedfiletype.dialog.title"),
-                                JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(
+                            TargetSelectionPane.this, new String(builder),
+                            Messages.getString("unsupportedfiletype.dialog.title"),
+                            JOptionPane.ERROR_MESSAGE
+                        );
                     }
                 }
             }

@@ -6,6 +6,7 @@ package jp.naist.se.stigmata.ui.swing;
 
 import java.awt.Component;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.MessageFormat;
 
 import javax.swing.Action;
@@ -40,15 +41,19 @@ public class Utility{
             component.setBorder(new TitledBorder(Messages.getString(label + ".border")));
         }
         try{
-            if(component.getClass().getMethod("setIcon") != null){
-                Icon icon = getIcon(label + ".icon");
-                if(icon != null){
-                    component.getClass().getMethod("setIcon").invoke(component, icon);
+            Method[] methods = component.getClass().getMethods();
+            Icon icon = getIcon(label + ".icon");
+            if(icon != null){
+                for(Method m: methods){
+                    if(m.getName().equals("setIcon")){
+                        m.invoke(component, icon);
+                    }
                 }
             }
-        } catch(NoSuchMethodException e){
         } catch(IllegalAccessException e){
+            throw new InternalError(e.getMessage());
         } catch(InvocationTargetException e){
+            throw new InternalError(e.getMessage());
         }
     }
 

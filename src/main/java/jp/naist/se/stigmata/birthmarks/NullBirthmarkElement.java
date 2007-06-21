@@ -25,6 +25,10 @@ public class NullBirthmarkElement extends BirthmarkElement{
         return ELEMENT;
     }
 
+    public int hashCode(){
+        return 0;
+    }
+
     public boolean equals(Object o){
         return o instanceof NullBirthmarkElement;
     }
