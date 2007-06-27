@@ -9,6 +9,12 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceAdapter;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
@@ -25,12 +31,10 @@ import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
@@ -43,7 +47,7 @@ import javax.swing.filechooser.FileFilter;
 public class TargetSelectionPane extends JPanel{
     private static final long serialVersionUID = 3209435745432235432L;
 
-    private CurrentDirectoryHolder currentDirectoryHolder;
+    private StigmataFrame stigmata;
 
     private FileFilter[] filters;
 
@@ -65,13 +69,17 @@ public class TargetSelectionPane extends JPanel{
 
     private JButton removeButton;
 
-    public TargetSelectionPane(CurrentDirectoryHolder cdh){
-        this.currentDirectoryHolder = cdh;
+    public TargetSelectionPane(StigmataFrame stigmata){
+        this.stigmata = stigmata;
         initComponents();
         list.setModel(model);
 
         DropTarget dropTarget = new TargetSelectionDropTarget();
         list.setDropTarget(dropTarget);
+        DragSource dragSource = DragSource.getDefaultDragSource();
+        dragSource.createDefaultDragGestureRecognizer(
+            list, DnDConstants.ACTION_MOVE, new TargetDragGestureListener(list, model)
+        );
     }
 
     public void addDataChangeListener(DataChangeListener listener){
@@ -254,25 +262,76 @@ public class TargetSelectionPane extends JPanel{
     }
 
     private void addButtonActionPerformed(ActionEvent evt){
-        JFileChooser chooser = new JFileChooser(currentDirectoryHolder.getCurrentDirectory());
-        FileFilter[] filters = getFileFilters();
-
-        for(FileFilter filter: filters){
-            chooser.addChoosableFileFilter(filter);
-        }
-        chooser.setMultiSelectionEnabled(isMultipleSelectable());
-        if(isDirectorySelectable()){
-            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        }
-        int returnCode = chooser.showOpenDialog(SwingUtilities.getRootPane(this));
-        if(returnCode == JFileChooser.APPROVE_OPTION){
-            currentDirectoryHolder.setCurrentDirectory(chooser.getCurrentDirectory());
-            File[] files = chooser.getSelectedFiles();
-            for(File file : files){
-                addValue(file.getPath());
-            }
+        File[] files = stigmata.openFiles(getFileFilters(), true, true);
+        for(File file : files){
+            addValue(file.getPath());
         }
     }
+
+    private class TargetDragGestureListener implements DragGestureListener{
+        private JList list;
+
+        public TargetDragGestureListener(JList list, DefaultListModel model){
+            this.list = list;
+        }
+
+        public void dragGestureRecognized(DragGestureEvent dge){
+            int[] indeces = list.getSelectedIndices();
+            if(indeces.length > 0){
+                String[] strings = new String[indeces.length];
+                for(int i = 0; i < strings.length; i++){
+                    strings[i] = (String)model.getElementAt(indeces[i]);
+                }
+                Transferable transferable = new TargetTransferable(strings);
+                DragSourceListener listener = new DataRemoveWhenDragSuccessfulAdapter(model, indeces);
+                
+                dge.startDrag(DragSource.DefaultMoveDrop, transferable, listener);
+            }
+        }
+    };
+
+    private class DataRemoveWhenDragSuccessfulAdapter extends DragSourceAdapter{
+        private DefaultListModel model;
+        private int[] indeces;
+
+        public DataRemoveWhenDragSuccessfulAdapter(DefaultListModel model, int[] indeces){
+            this.model = model;
+            this.indeces = indeces;
+        }
+
+        @Override
+        public void dragDropEnd(DragSourceDropEvent dsde){
+            for(int i = indeces.length - 1; i >= 0; i--){
+                model.removeElementAt(indeces[i]);
+            }
+            fireEvent();
+            super.dragDropEnd(dsde);
+        }
+    };
+
+    private class TargetTransferable implements Transferable{
+        private String[] strings;
+
+        public TargetTransferable(String[] strings){
+            this.strings = strings;
+        }
+
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException{
+            List<File> list = new ArrayList<File>();
+            for(int i = 0; i < strings.length; i++){
+                list.add(new File(strings[i]));
+            }
+            return list;
+        }
+
+        public DataFlavor[] getTransferDataFlavors(){
+            return new DataFlavor[] { DataFlavor.javaFileListFlavor, };
+        }
+
+        public boolean isDataFlavorSupported(DataFlavor flavor){
+            return flavor.equals(DataFlavor.javaFileListFlavor);
+        }
+    };
 
     private class TargetSelectionDropTarget extends DropTarget{
         private static final long serialVersionUID = 3204457621345L;
@@ -295,34 +354,9 @@ public class TargetSelectionPane extends JPanel{
             try{
                 if(trans.isDataFlavorSupported(DataFlavor.javaFileListFlavor)){
                     List list = (List)trans.getTransferData(DataFlavor.javaFileListFlavor);
-                    filters = getFileFilters();
-                    List<String> errorList = new ArrayList<String>();
-                    for(int i = 0; i < list.size(); i++){
-                        File file = (File)list.get(i);
-                        boolean neverAddedFlag = true;
-                        for(FileFilter filter: filters){
-                            if(filter.accept(file)){
-                                addValue(file.getPath());
-                                neverAddedFlag = false;
-                            }
-                        }
-                        if(neverAddedFlag){
-                            errorList.add(file.getName());
-                        }
-                    }
+                    List<String> errorList = checkAndAddDroppedFile(list);
                     if(errorList.size() > 0){
-                        StringBuilder builder = new StringBuilder("<html><body>");
-                        builder.append(Messages.getString("unsupportedfiletype.dialog.message"));
-                        builder.append("<ul>");
-                        for(int i = 0; i < errorList.size(); i++){
-                            builder.append("<li>").append(errorList.get(i)).append("</li>");
-                        }
-                        builder.append("</ul></body></html>");
-                        JOptionPane.showMessageDialog(
-                            TargetSelectionPane.this, new String(builder),
-                            Messages.getString("unsupportedfiletype.dialog.title"),
-                            JOptionPane.ERROR_MESSAGE
-                        );
+                        showError(errorList);
                     }
                 }
             }
@@ -330,6 +364,41 @@ public class TargetSelectionPane extends JPanel{
             }
             catch(IOException e){
             }
+        }
+
+        private List<String> checkAndAddDroppedFile(List list){
+            List<String> errorList = new ArrayList<String>();
+
+            FileFilter[] filters = getFileFilters();
+            for(int i = 0; i < list.size(); i++){
+                File file = (File)list.get(i);
+                boolean neverAddedFlag = true;
+                for(FileFilter filter: filters){
+                    if(filter.accept(file)){
+                        addValue(file.getPath());
+                        neverAddedFlag = false;
+                    }
+                }
+                if(neverAddedFlag){
+                    errorList.add(file.getName());
+                }
+            }
+            return errorList;
+        }
+
+        private void showError(List<String> errorList){
+            StringBuilder builder = new StringBuilder("<html><body>");
+            builder.append(Messages.getString("unsupportedfiletype.dialog.message"));
+            builder.append("<ul>");
+            for(int i = 0; i < errorList.size(); i++){
+                builder.append("<li>").append(errorList.get(i)).append("</li>");
+            }
+            builder.append("</ul></body></html>");
+            JOptionPane.showMessageDialog(
+                TargetSelectionPane.this, new String(builder),
+                Messages.getString("unsupportedfiletype.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 }

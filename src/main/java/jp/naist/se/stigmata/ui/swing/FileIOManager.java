@@ -41,6 +41,28 @@ public class FileIOManager{
         return findFile(open, new String[0], "");
     }
 
+    public File[] openFiles(FileFilter[] filters, boolean multi, boolean directory){
+        JFileChooser chooser = new JFileChooser(getCurrentDirectory());
+        if(filters != null){
+            for(int i = 0; i < filters.length; i++){
+                chooser.addChoosableFileFilter(filters[0]);
+            }
+        }
+        chooser.setMultiSelectionEnabled(multi);
+        if(directory){
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        }
+        else{
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        }
+        int returnValue = chooser.showOpenDialog(SwingUtilities.getRootPane(parent));
+        if(returnValue == JFileChooser.APPROVE_OPTION){
+            setCurrentDirectory(chooser.getCurrentDirectory());
+            return chooser.getSelectedFiles();
+        }
+        return new File[0];
+    }
+
     public File findFile(boolean open, String[] exts, String desc){
         JFileChooser chooser = new JFileChooser(getCurrentDirectory());
         if(exts != null){

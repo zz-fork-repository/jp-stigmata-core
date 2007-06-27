@@ -33,6 +33,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileFilter;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
@@ -56,7 +57,7 @@ import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
+public class StigmataFrame extends JFrame{
     private static final long serialVersionUID = 92345543665342134L;
 
     private JTabbedPane tabPane;
@@ -113,6 +114,10 @@ public class StigmataFrame extends JFrame implements CurrentDirectoryHolder{
         } catch(Exception e){
             showExceptionMessage(e);
         }
+    }
+
+    public File[] openFiles(FileFilter[] filters, boolean multipleSelectable, boolean directorySelectable){
+        return fileio.openFiles(filters, multipleSelectable, directorySelectable);
     }
 
     /**
