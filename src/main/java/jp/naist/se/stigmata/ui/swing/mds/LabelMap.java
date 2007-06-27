@@ -43,7 +43,7 @@ public class LabelMap{
     public void setGroup(String label, String groupLabel){
         groups.put(label, groupLabel);
         if(gids.get(groupLabel) == null){
-            gids.put(groupLabel, groups.size());
+            gids.put(groupLabel, gids.size());
         }
     }
 

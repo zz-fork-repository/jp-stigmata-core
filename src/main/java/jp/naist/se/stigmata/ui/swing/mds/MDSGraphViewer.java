@@ -62,8 +62,10 @@ public class MDSGraphViewer extends JLayeredPane{
     }
 
     @Override
-    public void setSize(int x, int y){
-        super.setSize(x, y);
+    public void setSize(int width, int height){
+        if(width < height) height = width;
+        else               width = height;
+        super.setSize(width, height);
         setPreferredSize(getSize());
     }
 
@@ -132,7 +134,13 @@ public class MDSGraphViewer extends JLayeredPane{
         Dimension d = getSize();
 
         g.setColor(Color.GRAY);
+
+        g.drawLine(0, 0, d.width - 1, 0);
+        g.drawLine(d.width - 1, 0, d.width - 1, d.height - 1);
         g.drawLine(d.width / 2, d.height, d.width / 2, 0);
+
+        g.drawLine(0, 0, 0, d.height - 1);
+        g.drawLine(0, d.height - 1, d.width - 1, d.height - 1);
         g.drawLine(0, d.height / 2, d.width, d.height / 2);
 
         updatePointComponents(d);

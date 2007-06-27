@@ -6,8 +6,12 @@ package jp.naist.se.stigmata.ui.swing.mds;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.net.URL;
 
 import javax.swing.Action;
@@ -140,9 +144,20 @@ public class MDSGraphPanel extends JPanel{
         south.add(Box.createHorizontalGlue());
         south.add(check);
         south.add(Box.createHorizontalGlue());
-
+        
+        JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        center.addComponentListener(new ComponentAdapter(){
+            @Override
+            public void componentResized(ComponentEvent e){
+                Dimension d = e.getComponent().getSize();
+                viewer.setSize(d.width - 10, d.height - 10);
+            }
+        });
         setLayout(new BorderLayout());
-        add(viewer, BorderLayout.CENTER);
+
+        center.add(viewer);
+
+        add(center, BorderLayout.CENTER);
         add(south, BorderLayout.SOUTH);
     }
 }
