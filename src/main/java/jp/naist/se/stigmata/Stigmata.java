@@ -12,7 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -119,10 +121,115 @@ public final class Stigmata{
     }
 
     private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
-        List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
-        List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
-        ClasspathContext bytecode = context.getClasspathContext();
+        ClassFileArchive[] archives = createArchives(files, context);
+        BirthmarkExtractor[] extractors = createExtractors(birthmarks, context);
+        ExtractionUnit unit = context.getExtractionUnit();
+        
+        if(unit == ExtractionUnit.CLASS){
+            return extractFromClass(archives, extractors, context);
+        }
+        else if(unit == ExtractionUnit.PACKAGE){
+            return extractFromPackage(archives, extractors, context);
+        }
+        else if(unit == ExtractionUnit.ARCHIVE){
+            return extractFromProduct(archives, extractors, context);
+        }
+        return null;
+    }
 
+    private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+        Map<String, BirthmarkSet> list = new HashMap<String, BirthmarkSet>();
+        
+        for(ClassFileArchive archive: archives){
+            for(ClassFileEntry entry: archive){
+                String name = entry.getClassName();
+                String packageName = parsePackageName(name);
+                BirthmarkSet bs = list.get(packageName);
+                if(bs == null){
+                    bs = new BirthmarkSet(packageName, archive.getLocation());
+                    list.put(packageName, bs);
+                }
+
+                byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
+                for(BirthmarkExtractor extractor: extractors){
+                    if(extractor.isAcceptable(ExtractionUnit.PACKAGE)){
+                        Birthmark b = bs.getBirthmark(extractor.getProvider().getType());
+                        if(b == null){
+                            b = extractor.createBirthmark();
+                            bs.addBirthmark(b);
+                        }
+                        extractor.extract(b, new ByteArrayInputStream(data), context);
+                    }
+                }
+            }
+        }
+
+        BirthmarkSet[] bslist = new BirthmarkSet[list.size()];
+        int index = 0;
+        for(BirthmarkSet bs: list.values()){
+            bslist[index] = bs;
+            index++;
+        }
+        return bslist;
+    }
+
+    private String parsePackageName(String name){
+        String n = name.replace('/', '.');
+        int index = n.lastIndexOf('.');
+        if(index > 0){
+            n = n.substring(0, index - 1);
+        }
+
+        return n;
+    }
+
+    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+        List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
+
+        for(ClassFileArchive archive: archives){
+            for(ClassFileEntry entry: archive){
+                BirthmarkSet birthmarkset = new BirthmarkSet(entry.getClassName(), entry.getLocation());
+                list.add(birthmarkset);
+                byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
+                for(BirthmarkExtractor extractor: extractors){
+                    if(extractor.isAcceptable(ExtractionUnit.CLASS)){
+                        Birthmark b = extractor.extract(new ByteArrayInputStream(data), context);
+                        birthmarkset.addBirthmark(b);
+                    }
+                }
+            }
+        }
+        return list.toArray(new BirthmarkSet[list.size()]);
+    }
+
+    private BirthmarkSet[] extractFromProduct(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+        List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
+
+        for(ClassFileArchive archive: archives){
+            BirthmarkSet birthmarkset = new BirthmarkSet(archive.getName(), archive.getLocation());
+            list.add(birthmarkset);
+
+            for(ClassFileEntry entry: archive){
+                byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
+                for(BirthmarkExtractor extractor: extractors){
+                    if(extractor.isAcceptable(ExtractionUnit.ARCHIVE)){
+                        Birthmark b = birthmarkset.getBirthmark(extractor.getProvider().getType());
+                        if(b == null){
+                            b = extractor.createBirthmark();
+                            birthmarkset.addBirthmark(b);
+                        }
+                        extractor.extract(b, new ByteArrayInputStream(data), context);
+                    }
+                }
+            }
+        }
+
+        return list.toArray(new BirthmarkSet[list.size()]);
+    }
+
+    private ClassFileArchive[] createArchives(String[] files, BirthmarkContext context) throws IOException, MalformedURLException{
+        ClasspathContext bytecode = context.getClasspathContext();
+        List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
         for(int i = 0; i < files.length; i++){
             if(files[i].endsWith(".class")){
                 archives.add(new DefaultClassFileArchive(files[i]));
@@ -135,17 +242,7 @@ public final class Stigmata{
                 archives.add(new WarClassFileArchive(files[i]));
             }
         }
-
-        for(ClassFileArchive archive: archives){
-            for(Iterator<ClassFileEntry> entries = archive.entries(); entries.hasNext(); ){
-                ClassFileEntry entry = entries.next();
-                BirthmarkSet holder = new BirthmarkSet(entry.getClassName(), entry.getLocation());
-                extractBirthmark(birthmarks, holder.getLocation().openStream(), holder, context);
-                list.add(holder);
-            }
-        }
-
-        return list.toArray(new BirthmarkSet[list.size()]);
+        return archives.toArray(new ClassFileArchive[archives.size()]);
     }
 
     public ComparisonResultSet compare(BirthmarkSet[] holders) throws IOException{
@@ -253,43 +350,39 @@ public final class Stigmata{
         return similarity / count;
     }
 
-    private BirthmarkSet extractBirthmark(String[] birthmarks, InputStream in,
-            BirthmarkSet holder, BirthmarkContext context) throws BirthmarkExtractionException, IOException{
-        byte[] data = inputStreamToByteArray(in);
-
-        return extractBirthmark(birthmarks, data, holder, context);
+    private BirthmarkExtractor[] createExtractors(String[] birthmarkTypes, BirthmarkContext context){
+        List<BirthmarkExtractor> list = new ArrayList<BirthmarkExtractor>();
+        for(String type: birthmarkTypes){
+            BirthmarkExtractor extractor = createExtractor(type, context);
+            list.add(extractor);
+        }
+        return list.toArray(new BirthmarkExtractor[list.size()]);
     }
 
-    private BirthmarkSet extractBirthmark(String[] birthmarks, byte[] bytecode, BirthmarkSet holder,
-                                          BirthmarkContext context) throws BirthmarkExtractionException, IOException{
-        for(String birthmark: birthmarks){
-            BirthmarkSpi spi = context.getService(birthmark);
-            if(spi != null){
-                BirthmarkExtractor extractor = spi.getExtractor();
-                try{
-                    Map props = BeanUtils.describe(extractor);
-                    props.remove("class");
-                    props.remove("provider");
-                    for(Object keyObject: props.keySet()){
-                        String key = "extractor." + spi.getType() + "." + String.valueOf(keyObject);
-                        if(context.getProperty(key) != null){
-                            BeanUtils.setProperty(extractor, (String)keyObject, context.getProperty(key));
-                        }
+    private BirthmarkExtractor createExtractor(String birthmarkType, BirthmarkContext context){
+        BirthmarkSpi spi = context.getService(birthmarkType);
+        if(spi != null){
+            BirthmarkExtractor extractor = spi.getExtractor();
+            try{
+                Map props = BeanUtils.describe(extractor);
+                props.remove("class");
+                props.remove("provider");
+                for(Object keyObject: props.keySet()){
+                    String key = "extractor." + spi.getType() + "." + String.valueOf(keyObject);
+                    if(context.getProperty(key) != null){
+                        BeanUtils.setProperty(extractor, (String)keyObject, context.getProperty(key));
                     }
-                } catch(InvocationTargetException e){
-                    throw new InternalError(e.getMessage());
-                } catch(NoSuchMethodException e){
-                    throw new InternalError(e.getMessage());
-                } catch(IllegalAccessException e){
-                    throw new InternalError(e.getMessage());
                 }
-                holder.addBirthmark(
-                    extractor.extract(new ByteArrayInputStream(bytecode), context)
-                );
+            } catch(InvocationTargetException e){
+                throw new InternalError(e.getMessage());
+            } catch(NoSuchMethodException e){
+                throw new InternalError(e.getMessage());
+            } catch(IllegalAccessException e){
+                throw new InternalError(e.getMessage());
             }
+            return extractor;
         }
-
-        return holder;
+        return null;
     }
 
     private byte[] inputStreamToByteArray(InputStream in) throws IOException{

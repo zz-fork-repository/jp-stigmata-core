@@ -15,14 +15,16 @@ import java.util.Iterator;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public interface ClassFileArchive{
+public interface ClassFileArchive extends Iterable<ClassFileEntry>{
     public URL getLocation();
 
     public InputStream getInputStream(ClassFileEntry entry) throws IOException;
 
-    public Iterator<ClassFileEntry> entries();
+    public Iterator<ClassFileEntry> iterator();
 
     public boolean hasEntry(String className);
 
     public ClassFileEntry getEntry(String className) throws ClassNotFoundException;
+
+    public String getName();
 }

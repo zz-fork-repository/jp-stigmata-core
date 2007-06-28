@@ -45,7 +45,7 @@ public class FileIOManager{
         JFileChooser chooser = new JFileChooser(getCurrentDirectory());
         if(filters != null){
             for(int i = 0; i < filters.length; i++){
-                chooser.addChoosableFileFilter(filters[0]);
+                chooser.addChoosableFileFilter(filters[i]);
             }
         }
         chooser.setMultiSelectionEnabled(multi);

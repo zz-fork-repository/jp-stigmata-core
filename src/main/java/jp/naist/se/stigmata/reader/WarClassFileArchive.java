@@ -33,7 +33,7 @@ public class WarClassFileArchive extends JarClassFileArchive{
         return null;
     }
 
-    public Iterator<ClassFileEntry> entries(){
+    public Iterator<ClassFileEntry> iterator(){
         List<ClassFileEntry> list = new ArrayList<ClassFileEntry>();
 
         for(Enumeration<JarEntry> e = jarentries(); e.hasMoreElements(); ){

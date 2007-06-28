@@ -11,12 +11,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -25,6 +28,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 
 import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
@@ -51,6 +55,8 @@ public class ControlPane extends JPanel{
     private JButton extractButton;
     private JButton resetButton;
     private PopupButton comparePopup;
+    private JComboBox unitBox;
+    private Map<String, String> unitLabels = new HashMap<String, String>();
     private boolean expertmode = false;
 
     public ControlPane(StigmataFrame stigmata){
@@ -285,10 +291,10 @@ public class ControlPane extends JPanel{
 
     private BirthmarkContext generateContext(){
         BirthmarkContext context = stigmata.getStigmata().createContext();
-        // BirthmarkContext context2 = stigmata.getContext();
         ClasspathContext bytecode = context.getClasspathContext();
         WellknownClassManager manager = context.getWellknownClassManager();
 
+        context.setExtractionUnit(parseExtractionUnit());
         classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
         definition.updateContext(context);
@@ -298,12 +304,30 @@ public class ControlPane extends JPanel{
         return context;
     }
 
+    private ExtractionUnit parseExtractionUnit(){
+        String label = (String)unitBox.getSelectedItem();
+        String key = unitLabels.get(label);
+        ExtractionUnit unit = ExtractionUnit.CLASS;
+
+        if(key.equals("unit.archive")){
+            unit = ExtractionUnit.ARCHIVE;
+        }
+        else if(key.equals("unit.package")){
+            unit = ExtractionUnit.PACKAGE;
+        }
+        else{
+            unit = ExtractionUnit.CLASS;
+        }
+        return unit;
+    }
+
     private void initComponents(){
         controlTab = new JTabbedPane();
         resetButton = Utility.createButton("reset");
         extractButton = Utility.createButton("extract");
         compareButton = Utility.createButton("roundrobin");
         comparePopup = new PopupButton(compareButton);
+        unitBox = new JComboBox();
 
         Box south = Box.createHorizontalBox();
         south.add(Box.createHorizontalGlue());
@@ -312,6 +336,8 @@ public class ControlPane extends JPanel{
         south.add(extractButton);
         south.add(Box.createHorizontalGlue());
         south.add(comparePopup);
+        south.add(Box.createHorizontalGlue());
+        south.add(unitBox);
         south.add(Box.createHorizontalGlue());
 
         setLayout(new BorderLayout());
@@ -353,11 +379,18 @@ public class ControlPane extends JPanel{
         };
         compareButton.addActionListener(compareListener);
 
-        String[] items = Messages.getStringArray("comparison.methods");
-        for(int i = 1; i < items.length; i++){
-            JMenuItem item = Utility.createJMenuItem(items[i]);
+        String[] comparisonMethods = Messages.getStringArray("comparison.methods");
+        for(int i = 1; i < comparisonMethods.length; i++){
+            JMenuItem item = Utility.createJMenuItem(comparisonMethods[i]);
             comparePopup.addMenuItem(item);
             item.addActionListener(compareListener);
+        }
+
+        String[] extractionUnits = Messages.getStringArray("extraction.units");
+        for(int i = 0; i < extractionUnits.length; i++){
+            String label = Messages.getString(extractionUnits[i]);
+            unitLabels.put(label, extractionUnits[i]);
+            unitBox.addItem(label);
         }
     }
 }

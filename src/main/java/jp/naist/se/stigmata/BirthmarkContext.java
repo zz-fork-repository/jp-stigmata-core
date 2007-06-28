@@ -70,6 +70,11 @@ public class BirthmarkContext{
     private ComparisonPairFilterManager filterManager;
 
     /**
+     * birthmark extraction unit.
+     */
+    private ExtractionUnit unit = ExtractionUnit.CLASS;
+
+    /**
      * constructor for root context
      */
     private BirthmarkContext(boolean flag){
@@ -263,5 +268,13 @@ public class BirthmarkContext{
 
     public ComparisonPairFilterManager getFilterManager(){
         return filterManager;
+    }
+
+    public ExtractionUnit getExtractionUnit(){
+        return unit;
+    }
+
+    public void setExtractionUnit(ExtractionUnit unit){
+        this.unit = unit;
     }
 }

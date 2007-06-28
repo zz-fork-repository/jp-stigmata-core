@@ -22,27 +22,32 @@ import java.util.jar.JarEntry;
  * @version $Revision$ $Date$
  */
 public class JarClassFileArchive implements ClassFileArchive{
+    private File file;
     private JarFile jarfile;
     private URL jarfileLocation;
     
     public JarClassFileArchive(String jarfile) throws IOException{
-        File file = new File(jarfile);
+        this.file = new File(jarfile);
         this.jarfile = new JarFile(jarfile);
         this.jarfileLocation = file.toURI().toURL();
     }
-    
+
     public URL getLocation(){
         return jarfileLocation;
     }
-    
+
+    public String getName(){
+        return file.getName();
+    }
+
     public InputStream getInputStream(ClassFileEntry entry) throws IOException{
         if(hasEntry(entry.getClassName())){
             return jarfile.getInputStream(jarfile.getEntry(entry.getClassName().replace('.', '/') + ".class"));
         }
         return null;
     }
-    
-    public Iterator<ClassFileEntry> entries(){
+
+    public Iterator<ClassFileEntry> iterator(){
         List<ClassFileEntry> list = new ArrayList<ClassFileEntry>();
         
         for(Enumeration<JarEntry> e = jarfile.entries(); e.hasMoreElements(); ){
@@ -62,11 +67,11 @@ public class JarClassFileArchive implements ClassFileArchive{
         }
         return list.iterator();
     }
-    
+
     public boolean hasEntry(String className){
         return jarfile.getEntry(className.replace('.', '/') + ".class") != null;
     }
-    
+
     public ClassFileEntry getEntry(String className) throws ClassNotFoundException{
         if(hasEntry(className)){
             String entryName = className.replace('.', '/') + ".class";

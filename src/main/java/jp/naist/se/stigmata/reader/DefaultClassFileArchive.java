@@ -45,7 +45,7 @@ public class DefaultClassFileArchive implements ClassFileArchive{
         this.file = file;
         this.className = className;
     }
-    
+
     public URL getLocation(){
         try {
             return file.toURI().toURL();
@@ -58,7 +58,7 @@ public class DefaultClassFileArchive implements ClassFileArchive{
         return new FileInputStream(file);
     }
 
-    public Iterator<ClassFileEntry> entries(){
+    public Iterator<ClassFileEntry> iterator(){
         List<ClassFileEntry> list = new ArrayList<ClassFileEntry>();
         list.add(new ClassFileEntry(className, getLocation()));
 
@@ -71,6 +71,10 @@ public class DefaultClassFileArchive implements ClassFileArchive{
 
     public ClassFileEntry getEntry(String className) throws ClassNotFoundException{
         return new ClassFileEntry(className, getLocation());
+    }
+
+    public String getName(){
+        return className;
     }
 
     private void parseClassName(){

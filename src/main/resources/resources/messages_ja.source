@@ -226,6 +226,10 @@ roundrobin.filtering.label=総当り結果をフィルタリング...
 roundrobin.button.label=総当たりで比較
 roundrobin.button.tooltip=抽出された全てのバースマークを総当たりで比較する．
 
+unit.class=クラス単位で抽出
+unit.package=パッケージ単位で抽出
+unit.archive=アーカイブ単位で抽出
+
 guessedpair.button.label=ペアを推測して比較
 guessedpair.button.tooltip=抽出されたバースマークを抽出元の名前を元にペアを推測して比較する．
 
