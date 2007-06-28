@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.fmc;
 
 /*
- * $Id: SequentialMethodCallBirthmarkExtractVisitor.java 130 2007-06-13 10:08:01Z tama3 $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.Birthmark;
@@ -17,7 +17,7 @@ import org.objectweb.asm.MethodVisitor;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision: 130 $ $Date: 2007-06-13 19:08:01 +0900 (Wed, 13 Jun 2007) $
+ * @version $Revision$ $Date$
  */
 public class FrequencyMethodCallBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public FrequencyMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
