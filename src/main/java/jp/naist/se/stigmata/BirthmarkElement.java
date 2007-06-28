@@ -37,7 +37,7 @@ public class BirthmarkElement implements Serializable{
      * to string.
      */
     public String toString(){
-        return value;
+        return String.valueOf(getValue());
     }
 
     /**

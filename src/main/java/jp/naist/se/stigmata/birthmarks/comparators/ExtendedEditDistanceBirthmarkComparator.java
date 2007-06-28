@@ -16,9 +16,6 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @version $Revision$ $Date$
  */
 public class ExtendedEditDistanceBirthmarkComparator extends EditDistanceBirthmarkComparator{
-    public ExtendedEditDistanceBirthmarkComparator(){
-    }
-
     public ExtendedEditDistanceBirthmarkComparator(BirthmarkSpi spi){
         super(spi);
     }

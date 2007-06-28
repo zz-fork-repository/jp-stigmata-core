@@ -1,7 +1,7 @@
-package jp.naist.se.stigmata.birthmarks.kgram;
+package jp.naist.se.stigmata.birthmarks.fmc;
 
 /*
- * $Id$
+ * $Id: SequentialMethodCallBirthmarkExtractor.java 130 2007-06-13 10:08:01Z tama3 $
  */
 
 import jp.naist.se.stigmata.Birthmark;
@@ -15,37 +15,30 @@ import org.objectweb.asm.ClassWriter;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision: 130 $ $Date: 2007-06-13 19:08:01 +0900 (Wed, 13 Jun 2007) $
  */
-public class KGramBasedBirthmarkExtractor extends ASMBirthmarkExtractor{
-    private int kvalue = 4;
-
-    public KGramBasedBirthmarkExtractor(BirthmarkSpi spi){
+public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor{
+    public FrequencyMethodCallBirthmarkExtractor(BirthmarkSpi spi){
         super(spi);
     }
 
-    public KGramBasedBirthmarkExtractor(){
+    public FrequencyMethodCallBirthmarkExtractor(){
         super();
-    }
-
-    public void setKValue(int kvalue){
-        this.kvalue = kvalue;
-    }
-
-    public int getKValue(){
-        return kvalue;
     }
 
     @Override
     public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
-        KGramBasedBirthmarkExtractVisitor extractor = new KGramBasedBirthmarkExtractVisitor(writer, birthmark, context);
-        extractor.setKValue(getKValue());
-        return extractor;
+        return new FrequencyMethodCallBirthmarkExtractVisitor(writer, birthmark, context);
     }
 
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 
         };
+    }
+
+    @Override
+    public Birthmark createBirthmark(){
+        return new FrequencyMethodCallBirthmark(getProvider().getType());
     }
 }

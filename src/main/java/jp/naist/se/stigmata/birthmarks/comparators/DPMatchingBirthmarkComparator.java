@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.birthmarks.comparators;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -15,24 +14,12 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class DPMatchingBirthmarkComparator implements BirthmarkComparator{
-    private BirthmarkSpi spi;
+public class DPMatchingBirthmarkComparator extends AbstractBirthmarkComparator{
     private int mismatchPenalty = 5;
     private int shiftPenalty = 1;
 
-    public DPMatchingBirthmarkComparator(){
-    }
-
     public DPMatchingBirthmarkComparator(BirthmarkSpi spi){
-        this.spi = spi;
-    }
-
-    public BirthmarkSpi getProvider(){
-        return spi;
-    }
-
-    public String getType(){
-        return spi.getType();
+        super(spi);
     }
 
     public int getMismatchPenalty(){

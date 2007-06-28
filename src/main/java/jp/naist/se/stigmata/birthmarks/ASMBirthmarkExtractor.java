@@ -36,13 +36,11 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
         createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context);
 
     @Override
-    public Birthmark extract(InputStream in,
+    public Birthmark extract(Birthmark birthmark, InputStream in,
                              BirthmarkContext context) throws BirthmarkExtractionException{
         BirthmarkExtractionException bee = new BirthmarkExtractionException();
 
         try{
-            Birthmark birthmark = new PlainBirthmark(getProvider().getType());
-
             ClassReader reader = new ClassReader(in);
             ClassWriter writer = new ClassWriter(false);
             BirthmarkExtractVisitor visitor = createExtractVisitor(writer, birthmark, context);

@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.birthmarks.comparators;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -16,22 +15,9 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class EditDistanceBirthmarkComparator implements BirthmarkComparator{
-    private BirthmarkSpi spi;
-
-    public EditDistanceBirthmarkComparator(){
-    }
-
+public class EditDistanceBirthmarkComparator extends AbstractBirthmarkComparator{
     public EditDistanceBirthmarkComparator(BirthmarkSpi spi){
-        this.spi = spi;
-    }
-
-    public BirthmarkSpi getProvider(){
-        return spi;
-    }
-
-    public String getType(){
-        return spi.getType();
+        super(spi);
     }
 
     public double compare(Birthmark b1, Birthmark b2) {
@@ -53,10 +39,6 @@ public class EditDistanceBirthmarkComparator implements BirthmarkComparator{
             return 1d;
         }
         return (double)(length - d) / length;
-    }
-
-    public int getCompareCount(Birthmark b1, Birthmark b2){
-        return b1.getElementCount() + b2.getElementCount();
     }
 
     protected int[][] createDistanceMatrics(BirthmarkElement[] element1,

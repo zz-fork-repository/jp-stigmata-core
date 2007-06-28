@@ -12,8 +12,8 @@ import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
 import jp.naist.se.stigmata.BirthmarkExtractionException;
+import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
-import jp.naist.se.stigmata.birthmarks.PlainBirthmark;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 import org.objectweb.asm.ClassReader;
@@ -36,10 +36,9 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
     }
 
     @Override
-    public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException{
+    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionException{
         BirthmarkElementClassNotFoundException e = new BirthmarkElementClassNotFoundException();
 
-        Birthmark birthmark = new PlainBirthmark(getProvider().getType());
         try{
             ClassReader reader = new ClassReader(in);
             ClassWriter writer = new ClassWriter(false);
@@ -65,4 +64,8 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
         }
         return birthmark;
      }
+
+    public ExtractionUnit[] getAcceptableUnits(){
+        return new ExtractionUnit[] { ExtractionUnit.CLASS, };
+    }
 }

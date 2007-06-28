@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.birthmarks;
  */
 
 import jp.naist.se.stigmata.AbstractBirthmark;
+import jp.naist.se.stigmata.BirthmarkElement;
 
 /**
  * Implementation of plain birthmark.
@@ -22,6 +23,14 @@ public class PlainBirthmark extends AbstractBirthmark{
     }
 
     public PlainBirthmark(){
+    }
+
+    public void addElement(int index, BirthmarkElement element){
+        elements.add(index, element);
+    }
+
+    public BirthmarkElement getElement(int index){
+        return elements.get(index);
     }
 
     public void setType(String type){

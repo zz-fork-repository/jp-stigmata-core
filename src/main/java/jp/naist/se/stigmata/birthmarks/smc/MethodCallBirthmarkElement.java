@@ -41,7 +41,7 @@ public class MethodCallBirthmarkElement extends BirthmarkElement implements Seri
     }
 
     public Object getValue(){
-        return getClassName() + "#" + getMethodName();
+        return getClassName() + "#" + getMethodName() + "!" + getSignature();
     }
 
     public int hashCode(){

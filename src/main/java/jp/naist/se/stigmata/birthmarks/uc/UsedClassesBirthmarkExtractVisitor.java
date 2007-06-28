@@ -4,10 +4,6 @@ package jp.naist.se.stigmata.birthmarks.uc;
  * $Id$
  */
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElement;
@@ -28,19 +24,9 @@ import org.objectweb.asm.signature.SignatureWriter;
  * @version $Revision$ $Date$
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    private Set<String> set = new HashSet<String>();
-
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,
                                               BirthmarkContext context){
         super(visitor, birthmark, context);
-    }
-
-    public void visitEnd(){
-        String[] classNames = set.toArray(new String[set.size()]);
-        Arrays.sort(classNames);
-        for(String className: classNames){
-            addElement(new BirthmarkElement(className));
-        }
     }
 
     public void visit(int version, int access, String name, String signature,
@@ -48,11 +34,11 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         addSignatureClass(signature);
 
         if(getContext().getWellknownClassManager().isWellKnownClass(superName)){
-            set.add(superName);
+            add(superName);
         }
         for(String i: interfaces){
             if(getContext().getWellknownClassManager().isWellKnownClass(i)){
-                set.add(i);
+                add(i);
             }
         }
     }
@@ -72,7 +58,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         if(exceptions != null){
             for(String exception: exceptions){
                 if(getContext().getWellknownClassManager().isWellKnownClass(exception)){
-                    set.add(exception);
+                    add(exception);
                 }
             }
         }
@@ -85,7 +71,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitTypeInsn(int opcode, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
-                    set.add(normalize(desc));
+                    add(normalize(desc));
                 }
                 super.visitTypeInsn(opcode, desc);
             }
@@ -93,7 +79,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitTryCatchBlock(Label start, Label end, Label handle, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
-                    set.add(getType(type));
+                    add(getType(type));
                 }
                 super.visitTryCatchBlock(start, end, handle, desc);
             }
@@ -101,7 +87,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitMultiANewArrayInsn(String desc, int dims){
                 Type type = Type.getType(desc);
                 if(checkType(type)){
-                    set.add(getType(type));
+                    add(getType(type));
                 }
                 super.visitMultiANewArrayInsn(desc, dims);
             }
@@ -109,7 +95,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitLocalVariable(String name, String desc, String signature,
                                            Label start, Label end, int index){
                 if(checkType(Type.getType(desc))){
-                    set.add(normalize(desc));
+                    add(normalize(desc));
                 }
                 addSignatureClass(signature);
 
@@ -118,7 +104,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
 
             public void visitFieldInsn(int opcode, String owner, String name, String desc){
                 if(getContext().getWellknownClassManager().isWellKnownClass(owner)){
-                    set.add(normalize(owner));
+                    add(normalize(owner));
                 }
                 addDescriptor(desc);
                 super.visitFieldInsn(opcode, owner, name, desc);
@@ -126,7 +112,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = normalize(owner);
                 if(getContext().getWellknownClassManager().isWellKnownClass(className)){
-                    set.add(className);
+                    add(className);
                 }
                 addMethodDescriptor(desc);
                 super.visitMethodInsn(opcode, owner, name, desc);
@@ -140,7 +126,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             SignatureWriter writer = new SignatureWriter(){
                 public void visitClassType(String classType){
                     if(getContext().getWellknownClassManager().isWellKnownClass(classType)){
-                        set.add(normalize(classType));
+                        add(normalize(classType));
                     }
                 }
             };
@@ -152,11 +138,11 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         Type returnType = Type.getReturnType(desc);
         Type[] args = Type.getArgumentTypes(desc);
         if(checkType(returnType)){
-            set.add(getType(returnType));
+            add(getType(returnType));
         }
         for(Type arg: args){
             if(checkType(arg)){
-                set.add(getType(arg));
+                add(getType(arg));
             }
         }
     }
@@ -164,7 +150,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private void addDescriptor(String desc){
         Type type = Type.getType(desc);
         if(checkType(type)){
-            set.add(normalize(desc));
+            add(normalize(desc));
         }
     }
 
@@ -205,5 +191,9 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         name = name.replace('/', '.');
 
         return name;
+    }
+
+    private void add(String name){
+        addElement(new BirthmarkElement(name));
     }
 }

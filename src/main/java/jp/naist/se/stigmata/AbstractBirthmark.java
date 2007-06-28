@@ -19,7 +19,7 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
     /**
      * collections for elements.
      */
-    private List<BirthmarkElement> elements = new ArrayList<BirthmarkElement>();
+    protected List<BirthmarkElement> elements = new ArrayList<BirthmarkElement>();
 
     public void addElement(BirthmarkElement element){
         elements.add(element);

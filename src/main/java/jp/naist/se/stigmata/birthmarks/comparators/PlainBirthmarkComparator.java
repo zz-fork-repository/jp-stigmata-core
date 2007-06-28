@@ -20,22 +20,9 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class PlainBirthmarkComparator implements BirthmarkComparator{
-    private BirthmarkSpi spi;
-
-    public PlainBirthmarkComparator(){
-    }
-
+public class PlainBirthmarkComparator extends AbstractBirthmarkComparator{
     public PlainBirthmarkComparator(BirthmarkSpi spi){
-        this.spi = spi;
-    }
-
-    public BirthmarkSpi getProvider(){
-        return spi;
-    }
-
-    public String getType(){
-        return spi.getType();
+        super(spi);
     }
 
     public double compare(Birthmark b1, Birthmark b2) {

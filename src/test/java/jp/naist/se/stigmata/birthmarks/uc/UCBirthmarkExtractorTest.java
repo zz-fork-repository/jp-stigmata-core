@@ -38,30 +38,33 @@ public class UCBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("uc");
         Assert.assertEquals("uc", birthmark.getType());
-        Assert.assertEquals(21, birthmark.getElementCount());
+        Assert.assertEquals(23, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals("java.io.ByteArrayInputStream",           elements[ 0].getValue());
-        Assert.assertEquals("java.io.ByteArrayOutputStream",          elements[ 1].getValue());
-        Assert.assertEquals("java.io.File",                           elements[ 2].getValue());
-        Assert.assertEquals("java.io.FileInputStream",                elements[ 3].getValue());
-        Assert.assertEquals("java.io.InputStream",                    elements[ 4].getValue());
-        Assert.assertEquals("java.lang.Class",                        elements[ 5].getValue());
-        Assert.assertEquals("java.lang.Double",                       elements[ 6].getValue());
-        Assert.assertEquals("java.lang.Object",                       elements[ 7].getValue());
-        Assert.assertEquals("java.lang.String",                       elements[ 8].getValue());
-        Assert.assertEquals("java.lang.StringBuilder",                elements[ 9].getValue());
-        Assert.assertEquals("java.lang.System",                       elements[10].getValue());
-        Assert.assertEquals("java.net.URI",                           elements[11].getValue());
-        Assert.assertEquals("java.net.URL",                           elements[12].getValue());
-        Assert.assertEquals("java.util.ArrayList",                    elements[13].getValue());
-        Assert.assertEquals("java.util.Iterator",                     elements[14].getValue());
-        Assert.assertEquals("java.util.List",                         elements[15].getValue());
-        Assert.assertEquals("java.util.Map",                          elements[16].getValue());
-        Assert.assertEquals("java.util.Set",                          elements[17].getValue());
-        Assert.assertEquals("java.util.logging.Logger",               elements[18].getValue());
-        Assert.assertEquals("javax.imageio.spi.ServiceRegistry",      elements[19].getValue());
-        Assert.assertEquals("org.apache.commons.beanutils.BeanUtils", elements[20].getValue());
+        int index = 0;
+        Assert.assertEquals("java.io.ByteArrayInputStream",                elements[index++].getValue());
+        Assert.assertEquals("java.io.ByteArrayOutputStream",               elements[index++].getValue());
+        Assert.assertEquals("java.io.File",                                elements[index++].getValue());
+        Assert.assertEquals("java.io.FileInputStream",                     elements[index++].getValue());
+        Assert.assertEquals("java.io.InputStream",                         elements[index++].getValue());
+        Assert.assertEquals("java.lang.Class",                             elements[index++].getValue());
+        Assert.assertEquals("java.lang.Double",                            elements[index++].getValue());
+        Assert.assertEquals("java.lang.Object",                            elements[index++].getValue());
+        Assert.assertEquals("java.lang.String",                            elements[index++].getValue());
+        Assert.assertEquals("java.lang.StringBuilder",                     elements[index++].getValue());
+        Assert.assertEquals("java.lang.System",                            elements[index++].getValue());
+        Assert.assertEquals("java.net.URI",                                elements[index++].getValue());
+        Assert.assertEquals("java.net.URL",                                elements[index++].getValue());
+        Assert.assertEquals("java.util.ArrayList",                         elements[index++].getValue());
+        Assert.assertEquals("java.util.Collection",                        elements[index++].getValue());
+        Assert.assertEquals("java.util.HashMap",                           elements[index++].getValue());
+        Assert.assertEquals("java.util.Iterator",                          elements[index++].getValue());
+        Assert.assertEquals("java.util.List",                              elements[index++].getValue());
+        Assert.assertEquals("java.util.Map",                               elements[index++].getValue());
+        Assert.assertEquals("java.util.Set",                               elements[index++].getValue());
+        Assert.assertEquals("java.util.logging.Logger",                    elements[index++].getValue());
+        Assert.assertEquals("javax.imageio.spi.ServiceRegistry",           elements[index++].getValue());
+        Assert.assertEquals("org.apache.commons.beanutils.BeanUtils",      elements[index++].getValue());
     }
 
     @Test
