@@ -33,10 +33,14 @@ public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtrac
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = owner.replace('/', '.');
                 if(getContext().getWellknownClassManager().isWellKnownClass(className)){
-                    addElement(new MethodCallBirthmarkElement(className, name, desc));
+                    addElement(className, name, desc);
                 }
                 super.visitMethodInsn(opcode, owner, name, desc);
             }
         };
+    }
+
+    protected void addElement(String className, String methodName, String description){
+        addElement(new MethodCallBirthmarkElement(className, methodName, description));
     }
 }

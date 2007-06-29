@@ -10,6 +10,8 @@ import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
 import jp.naist.se.stigmata.birthmarks.FrequencyBirthmark;
+import jp.naist.se.stigmata.birthmarks.FrequencyBirthmarkElement;
+import jp.naist.se.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractVisitor;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 import org.objectweb.asm.ClassWriter;
@@ -29,7 +31,12 @@ public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor
 
     @Override
     public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
-        return new FrequencyMethodCallBirthmarkExtractVisitor(writer, birthmark, context);
+        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context){
+            @Override
+            protected void addElement(String className, String methodName, String description){
+                addElement(new FrequencyBirthmarkElement(className + "#" + methodName + description));
+            }            
+        };
     }
 
     public ExtractionUnit[] getAcceptableUnits(){

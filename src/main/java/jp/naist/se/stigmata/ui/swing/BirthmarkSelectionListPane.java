@@ -5,20 +5,12 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
@@ -27,6 +19,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -35,24 +30,23 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implements BirthmarkServiceListener{
+public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
     private static final long serialVersionUID = 3209854654743223453L;
 
-    private StigmataFrame stigmata;
-    private List<DataChangeListener> listeners = new ArrayList<DataChangeListener>();
-    private Set<String> selectedServices = new HashSet<String>();
-    private Map<String, BirthmarkSelection> services;
-    private boolean expertmode = false;
     private DefaultListModel model;
     private JList list;
 
     public BirthmarkSelectionListPane(StigmataFrame stigmata){
-        this.stigmata = stigmata;
+        super(stigmata);
 
         initLayouts();
-        initServices();
+    }
 
-        stigmata.addBirthmarkServiceListener(this);
+    public void serviceRemoved(BirthmarkSpi service){
+        BirthmarkSelection elem = getSelection(service.getType());
+        model.removeElement(elem);
+        
+        super.serviceRemoved(service);
     }
 
     private void initLayouts(){
@@ -60,7 +54,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         list = new JList(model = new DefaultListModel());
         JScrollPane scroll = new JScrollPane(list);
         add(scroll, BorderLayout.CENTER);
-        list.setCellRenderer(new BirthmarkServiceListCellRenderer(new Dimension(250, 20), 60));
+        list.setCellRenderer(new Renderer());
         list.setVisibleRowCount(5);
         JButton checkAll = Utility.createButton("checkall");
         JButton uncheckAll = Utility.createButton("uncheckall");
@@ -76,12 +70,12 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         ActionListener listener = new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 boolean flag = e.getActionCommand().equals("checkall");
-                for(String key: services.keySet()){
-                    BirthmarkSelection le = services.get(key);
+                for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
+                    BirthmarkSelection le = i.next();
                     le.setSelected(flag);
-                    updateUI();
                     fireEvent();
                 }
+                updateUI();
             }
         };
         checkAll.addActionListener(listener);
@@ -98,130 +92,26 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
         });
     }
 
-    public void select(BirthmarkSpi service, boolean flag){
-        if(flag){
-            selectedServices.add(service.getType());
-        }
-        else{
-            selectedServices.remove(service.getType());
-        }
-        fireEvent();
-    }
-
-    public void refresh(){
-        initServices();
-        updateLayouts();
-    }
-
-    public void setExpertMode(boolean expertmode){
-        this.expertmode = expertmode;
-        updateLayouts();
-    }
-
-    public boolean isExpertMode(){
-        return expertmode;
-    }
-
-    public void reset(){
-        selectedServices.clear();
-        initServices();
-        expertmode = false;
-        updateLayouts();
-        fireEvent();
-    }
-
-    public void addDataChangeListener(DataChangeListener listener){
-        listeners.add(listener);
-    }
-
-    public String[] getServices(){
-        String[] serviceArray = new String[services.size()];
-        int index = 0;
-        for(String key: services.keySet()){
-            BirthmarkSpi service = services.get(key).getService();
-            serviceArray[index] = service.getType();
-            index++;
-        }
-        return serviceArray;
-    }
-
-    public String[] getSelectedServices(){
-        return selectedServices.toArray(new String[selectedServices.size()]);
-    }
-
-    public void serviceAdded(BirthmarkSpi service){
-        if(services.get(service.getType()) == null){
-            BirthmarkSelection elem = new BirthmarkSelection(service);
-            selectedServices.add(service.getType());
-            services.put(service.getType(), elem);
-        }
-        updateLayouts();
-        fireEvent();
-    }
-
-    public BirthmarkSpi getService(String type){
-        BirthmarkSelection elem = services.get(type);
-        if(elem != null){
-            return elem.getService();
-        }
-
-        return null;
-    }
-
-    public boolean hasService(String type){
-        return services.get(type) != null;
-    }
-
-    public void serviceRemoved(BirthmarkSpi service){
-        BirthmarkSelection elem = services.get(service);
-        if(elem != null){
-            model.removeElement(elem);
-            selectedServices.remove(service);
-            services.remove(service);
-        }
-        fireEvent();
-    }
-
-    private void fireEvent(){
-        for(DataChangeListener listener: listeners){
-            listener.valueChanged(this);
-        }
-    }
-
     /**
      * update layouts and update selected birthmarks list.
      */
-    private void updateLayouts(){
+    protected void updateLayouts(){
         model.removeAllElements();
 
-        for(String key: services.keySet()){
-            BirthmarkSelection elem = services.get(key);
+        for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
+            BirthmarkSelection elem = i.next();
             if(elem.isVisible(isExpertMode())){
                 model.addElement(elem);
             }
 
-            if(elem.isVisible(isExpertMode()) && elem.isSelected()){ 
-                selectedServices.add(elem.getType());
-            }
-            else{
-                selectedServices.remove(elem.getType());
-            }
+            select(elem.getType(), elem.isVisible(isExpertMode()) && elem.isSelected());
         }
         updateUI();
     }
 
-    private void initServices(){
-        BirthmarkSpi[] serviceArray = stigmata.getContext().getServices();
-
-        services = new LinkedHashMap<String, BirthmarkSelection>();
-        for(BirthmarkSpi service: serviceArray){
-            BirthmarkSelection elem = new BirthmarkSelection(service);
-            services.put(service.getType(), elem);
-        }
-    }
-
     public static class Renderer extends JCheckBox implements ListCellRenderer{
         private static final long serialVersionUID = -324432943654654L;
+        private static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
         public Renderer(){
             setOpaque(true);
@@ -233,8 +123,27 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane implemen
             setToolTipText(elem.getService().getDescription());
             setSelected(elem.isSelected());
 
-            setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            setForeground(isSelected ? SystemColor.textHighlightText: Color.black);
+            if(isSelected){
+                setBackground(list.getSelectionBackground());
+                setForeground(list.getSelectionForeground());
+            }
+            else{
+                setBackground(list.getBackground());
+                setForeground(list.getForeground());
+            }
+
+            Border border = null;
+            if(forcus) {
+                if (isSelected) {
+                    border = UIManager.getBorder("List.focusSelectedCellHighlightBorder");
+                }
+                if (border == null) {
+                    border = UIManager.getBorder("List.focusCellHighlightBorder");
+                }
+            } else {
+                border = noFocusBorder;
+            }
+            setBorder(border);
 
             return this;
         }

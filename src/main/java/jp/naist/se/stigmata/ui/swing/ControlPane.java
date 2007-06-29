@@ -65,7 +65,7 @@ public class ControlPane extends JPanel{
 
     void inititalize(){
         definition = new BirthmarkDefinitionPane(stigmata);
-        birthmarks = new BirthmarkSelectionCheckSetPane(stigmata);
+        birthmarks = new BirthmarkSelectionListPane(stigmata);
         properties = new PropertyEditPane(stigmata);
         JComponent control = createControlPane();
         wellknownClassses = new WellknownClassesSettingsPane(stigmata);
@@ -207,7 +207,7 @@ public class ControlPane extends JPanel{
     private void updateEnable(){
         String[] valueX = targetX.getValues();
         String[] valueY = targetY.getValues();
-        String[] targets = birthmarks.getSelectedServices();
+        String[] targets = birthmarks.getSelectedServiceTypes();
 
         extractButton.setEnabled(
             ((valueX != null && valueX.length > 0) || (valueY != null && valueY.length > 0))
@@ -238,7 +238,7 @@ public class ControlPane extends JPanel{
         }
 
         stigmata.extract(
-            birthmarks.getSelectedServices(), 
+            birthmarks.getSelectedServiceTypes(), 
             targets.toArray(new String[targets.size()]), context
         );
     }
@@ -257,7 +257,7 @@ public class ControlPane extends JPanel{
             String[] filterSetList = pane.getSelectedFilters();
 
             stigmata.compareRoundRobin(
-                birthmarks.getSelectedServices(), targetX.getValues(),
+                birthmarks.getSelectedServiceTypes(), targetX.getValues(),
                 targetY.getValues(), filterSetList, context
             );
         }
@@ -267,7 +267,7 @@ public class ControlPane extends JPanel{
         BirthmarkContext context = generateContext();
 
         stigmata.compareRoundRobin(
-            birthmarks.getSelectedServices(), targetX.getValues(), 
+            birthmarks.getSelectedServiceTypes(), targetX.getValues(), 
             targetY.getValues(), context
         );
     }
@@ -276,7 +276,7 @@ public class ControlPane extends JPanel{
         BirthmarkContext context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
-        stigmata.compareSpecifiedPair(birthmarks.getSelectedServices(), fileX,
+        stigmata.compareSpecifiedPair(birthmarks.getSelectedServiceTypes(), fileX,
                 fileY, context);
     }
 
@@ -285,7 +285,7 @@ public class ControlPane extends JPanel{
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
-        stigmata.compareGuessedPair(birthmarks.getSelectedServices(), fileX,
+        stigmata.compareGuessedPair(birthmarks.getSelectedServiceTypes(), fileX,
                 fileY, context);
     }
 
