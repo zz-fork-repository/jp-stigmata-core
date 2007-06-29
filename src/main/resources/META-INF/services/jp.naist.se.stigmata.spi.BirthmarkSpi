@@ -4,3 +4,4 @@ jp.naist.se.stigmata.birthmarks.is.InheritanceStructureBirthmarkService
 jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkService
 jp.naist.se.stigmata.birthmarks.kgram.KGramBasedBirthmarkService
 jp.naist.se.stigmata.birthmarks.fmc.FrequencyMethodCallBirthmarkService
+jp.naist.se.stigmata.birthmarks.fuc.FrequencyUsedClassesBirthmarkService

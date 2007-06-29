@@ -3,3 +3,5 @@ jp.naist.se.stigmata.birthmarks.extractors.InheritanceStructureBirthmarkExtracto
 jp.naist.se.stigmata.birthmarks.extractors.SequentialMethodCallBirthmarkExtractorService
 jp.naist.se.stigmata.birthmarks.extractors.UsedClassesBirthmarkExtractorService
 jp.naist.se.stigmata.birthmarks.extractors.KGramBasedBirthmarkExtractorService
+jp.naist.se.stigmata.birthmarks.extractors.FrequencyMethodCallBirthmarkExtractorService
+jp.naist.se.stigmata.birthmarks.extractors.FrequencyUsedClassesBirthmarkExtractorService

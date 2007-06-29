@@ -10,6 +10,8 @@ birthmark.kgram.display.type=k-gram
 birthmark.kgram.description=opcodeの並びからk-gramを取り出した集合
 birthmark.fmc.display.type=メソッド出現頻度
 birthmark.fmc.description=メソッド呼出しの出現頻度
+birthmark.fuc.display.type=依存クラスの頻度
+birthmark.fuc.description=依存クラスの出現頻度
 
 filter.similarity.display.type=類似度でのフィルタリング
 filter.name.display.type=クラス名でのフィルタリング

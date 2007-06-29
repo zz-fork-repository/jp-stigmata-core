@@ -45,8 +45,15 @@ public class CosineSimilarityBirthmarkComparator extends
         double norm1 = norm(pairs, true);
         double norm2 = norm(pairs, false);
         double product = innerproduct(pairs);
+        double similarity = product / (norm1 * norm2);
+        // System.out.printf("%g / (%g * %g) = %g%n", product, norm1, norm2, similarity);
 
-        return product / (norm1 * norm2);
+        // double radian = Math.acos(product / (norm1 * norm2));
+        // double angle = 90 - (180 * radian / Math.PI);
+        // double sim = angle / 90;
+        // System.out.printf("angle: %g (%g“x, %g)%n", radian, angle, sim);
+
+        return similarity;
     }
 
     private double innerproduct(Map<String, CountPair> pairs){
@@ -97,6 +104,18 @@ public class CosineSimilarityBirthmarkComparator extends
             else{
                 c2 = count;
             }
+        }
+    }
+
+    /**
+     * This method is used for debugging.
+     */
+    @SuppressWarnings("unused")
+    private void printAll(Map<String, CountPair> pairs){
+        System.out.println("----------");
+        for(Map.Entry<String, CountPair> entry: pairs.entrySet()){
+            CountPair pair = entry.getValue();
+            System.out.printf("%40s: %5d, %5d%n", entry.getKey(), pair.get(true), pair.get(false));
         }
     }
 }

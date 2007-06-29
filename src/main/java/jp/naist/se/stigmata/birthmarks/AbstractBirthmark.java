@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata;
+package jp.naist.se.stigmata.birthmarks;
 
 /*
  * $Id$
@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import jp.naist.se.stigmata.Birthmark;
+import jp.naist.se.stigmata.BirthmarkElement;
 
 /**
  * Abstract class for concrete {@link Birthmark <code>Birthmark</code>}

@@ -4,7 +4,6 @@ package jp.naist.se.stigmata.birthmarks;
  * $Id$
  */
 
-import jp.naist.se.stigmata.AbstractBirthmark;
 import jp.naist.se.stigmata.BirthmarkElement;
 
 /**

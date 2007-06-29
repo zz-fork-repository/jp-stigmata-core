@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata;
+package jp.naist.se.stigmata.birthmarks;
 
 /*
  * $Id$
@@ -7,7 +7,11 @@ package jp.naist.se.stigmata;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import jp.naist.se.stigmata.birthmarks.PlainBirthmark;
+import jp.naist.se.stigmata.Birthmark;
+import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkExtractionException;
+import jp.naist.se.stigmata.BirthmarkExtractor;
+import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**

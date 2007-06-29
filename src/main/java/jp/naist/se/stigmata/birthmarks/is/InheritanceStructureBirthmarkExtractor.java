@@ -7,12 +7,12 @@ package jp.naist.se.stigmata.birthmarks.is;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jp.naist.se.stigmata.AbstractBirthmarkExtractor;
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
 import jp.naist.se.stigmata.BirthmarkExtractionException;
 import jp.naist.se.stigmata.ExtractionUnit;
+import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 

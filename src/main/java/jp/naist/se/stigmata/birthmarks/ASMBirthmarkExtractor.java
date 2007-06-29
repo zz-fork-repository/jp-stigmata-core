@@ -7,7 +7,6 @@ package jp.naist.se.stigmata.birthmarks;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jp.naist.se.stigmata.AbstractBirthmarkExtractor;
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkExtractionException;

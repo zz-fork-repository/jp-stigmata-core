@@ -7,6 +7,7 @@ package jp.naist.se.stigmata.birthmarks.fmc;
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
+import jp.naist.se.stigmata.birthmarks.FrequencyBirthmarkElement;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodAdapter;
@@ -33,7 +34,7 @@ public class FrequencyMethodCallBirthmarkExtractVisitor extends BirthmarkExtract
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = owner.replace('/', '.');
                 if(getContext().getWellknownClassManager().isWellKnownClass(className)){
-                    addElement(new FrequencyOfMethodBirthmarkElement(className, name, desc));
+                    addElement(new FrequencyBirthmarkElement(className + "#" + name + desc));
                 }
                 super.visitMethodInsn(opcode, owner, name, desc);
             }
