@@ -1,4 +1,0 @@
-Implementation-Vendor: SE Lab., NAIST
-Implementation-Version: 1.0
-Implementation-Title: stigmata
-Sealed: true

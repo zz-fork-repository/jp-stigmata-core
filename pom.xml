@@ -114,10 +114,10 @@
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <archive>
-            <manifestFile>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
             <manifest>
               <mainClass>jp.naist.se.stigmata.Main</mainClass>
               <addClasspath>true</addClasspath>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
         </configuration>
