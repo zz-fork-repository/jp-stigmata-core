@@ -181,10 +181,12 @@ public class SimilarityDistributionGraphPane extends JPanel{
             exts, Messages.getString("savegraph.description")
         );
         try{
-            String format = file.getName();
-            format = format.substring(format.lastIndexOf('.') + 1);
+            if(file != null){
+                String format = file.getName();
+                format = format.substring(format.lastIndexOf('.') + 1);
 
-            ImageIO.write(image, format, file);
+                ImageIO.write(image, format, file);
+            }
         } catch(IOException e){
             JOptionPane.showMessageDialog(
                 this,

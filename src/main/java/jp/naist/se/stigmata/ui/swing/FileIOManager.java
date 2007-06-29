@@ -69,7 +69,7 @@ public class FileIOManager{
             MessageFormat formatter = new MessageFormat(desc);
             for(int i = 0; i < exts.length; i++){
                 chooser.addChoosableFileFilter(
-                    new ExtensionFilter(exts[i], formatter.format(exts[i]))
+                    new ExtensionFilter(exts[i], formatter.format(new Object[] { exts[i], }))
                 );
             }
         }
