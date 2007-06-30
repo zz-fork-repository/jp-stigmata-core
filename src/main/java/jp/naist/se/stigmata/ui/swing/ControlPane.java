@@ -29,6 +29,7 @@ import javax.swing.border.TitledBorder;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.ExtractionUnit;
+import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
@@ -65,7 +66,7 @@ public class ControlPane extends JPanel{
 
     void inititalize(){
         definition = new BirthmarkDefinitionPane(stigmata);
-        birthmarks = new BirthmarkSelectionListPane(stigmata);
+        birthmarks = new BirthmarkSelectionCheckSetPane(stigmata);
         properties = new PropertyEditPane(stigmata);
         JComponent control = createControlPane();
         wellknownClassses = new WellknownClassesSettingsPane(stigmata);
@@ -293,13 +294,14 @@ public class ControlPane extends JPanel{
         BirthmarkContext context = stigmata.getStigmata().createContext();
         ClasspathContext bytecode = context.getClasspathContext();
         WellknownClassManager manager = context.getWellknownClassManager();
+        ComparisonPairFilterManager filterManager = context.getFilterManager();
 
         context.setExtractionUnit(parseExtractionUnit());
         classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
+        filters.updateFilterManager(filterManager);
         definition.updateContext(context);
         properties.updateContext(context);
-        filters.updateFilterManager(context.getFilterManager());
 
         return context;
     }
