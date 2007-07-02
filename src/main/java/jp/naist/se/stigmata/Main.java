@@ -68,10 +68,12 @@ public final class Main{
         String mode = commandLine.getOptionValue("mode");
         String format = commandLine.getOptionValue("format");
 
-        if(format == null)
+        if(format == null){
             format = "xml";
-        if(mode == null)
+        }
+        if(mode == null){
             mode = "gui";
+        }
 
         boolean exitFlag = executeOption(commandLine, options);
 
@@ -269,7 +271,7 @@ public final class Main{
         }
         System.out.println();
         System.out.println("Copyright (C) by Haruaki Tamada, Ph.D.");
-        System.out.println("Please notify us some bugs and requests to <birthmark-analysis[ at ]se.aist-nara.ac.jp>");
+        System.out.println("Please notify us some bugs and requests to <stigmata-info[ at ]lists.sourceforge.jp>");
     }
 
     private void printLicense(){

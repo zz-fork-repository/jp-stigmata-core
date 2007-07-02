@@ -75,7 +75,7 @@ $Id$
     <filterset>
       <name>threshold</name>
       <!--
-        available value is `all' or `any': 
+        available value is `all' or `any':
         match all of filters or match any of filters
       -->
       <match>all</match>
@@ -128,22 +128,24 @@ $Id$
     </filterset>
   </filterset-list>
 
-  <!-- 
-    システムクラスの設定．
+  <!--
+    Settings for wellknown classes.
     パッケージの接頭辞，クラス名の接尾辞，クラスの完全修飾名で
     設定することができる．
    -->
-  <!--
-    この中に含まれるものは他でいくら wellknown と設定されていても無視する．
-    指定方法は fully-names と同じ．
-  -->
   <wellknown-classes>
+    <!--
+      Those names are excluded from wellknown classes, even if
+      following parts define the name is contain wellknown classes.
+      この中に含まれるものは他でいくら wellknown と設定されていても無視する．
+      指定方法は fully-names と同じ．
+    -->
     <exclude><suffix>Exception</suffix></exclude>
     <exclude><suffix>Error</suffix></exclude>
     <exclude><match>java.lang.Throwable</match></exclude>
     <exclude><match>java.lang.ThreadDeath</match></exclude>
 
-    <!-- JDK 1.5 に含まれているパッケージ -->
+    <!-- Package names includes JDK 1.5 -->
     <package><prefix>java</prefix></package>
     <package><prefix>javax</prefix></package>
     <package><prefix>org.omg</prefix></package>
@@ -174,9 +176,9 @@ $Id$
 
   <classpath-list>
     <!-- URL形式のクラスパス設定 -->
-<!--
+    <!--
     <classpath>url/format/of/path/to/jar/file</classpath>
--->
+    -->
   </classpath-list>
 
   <!-- Properties for birthmark context -->

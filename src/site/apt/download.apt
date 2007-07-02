@@ -36,7 +36,7 @@ permissions and limitations under the License.
 
  *{{{http://commons.cafebabe.jp/xmlcli/}XmlCli}} 1.2
 
- *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 later)
+ *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 or later)
 
  *{{{http://www.junit.org/}JUnit}} 4.1
 
