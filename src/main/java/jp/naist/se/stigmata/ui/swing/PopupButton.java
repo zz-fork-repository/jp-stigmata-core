@@ -4,9 +4,9 @@ package jp.naist.se.stigmata.ui.swing;
  * $Id$
  */
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,40 +34,25 @@ public class PopupButton extends JPanel{
     private JButton button;
     private JPopupMenu popup;
     private JButton arrowButton;
+    private Icon icon;
 
     public PopupButton(JButton initButton){
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        setLayout(new BorderLayout());
 
-        this.button = initButton;
-
-        Icon icon = createIcon();
+        button = initButton;
+        icon = createIcon();
         arrowButton = new JButton(icon);
         popup = new JPopupMenu();
-        add(button);
-        add(arrowButton);
+        add(button, BorderLayout.CENTER);
+        add(arrowButton, BorderLayout.EAST);
 
-        Dimension prefferedSize = button.getPreferredSize();
-
-        arrowButton.setPreferredSize(new Dimension(icon.getIconWidth() + 4, prefferedSize.height));
-        setPreferredSize(new Dimension(prefferedSize.width + icon.getIconWidth() + 4, prefferedSize.height));
-
-        Dimension maxSize = button.getMaximumSize();
-        arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, maxSize.height));
-        setMaximumSize(new Dimension(maxSize.width + icon.getIconWidth() + 4, maxSize.height));
-
-        Dimension minSize = button.getMinimumSize();
-        arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, minSize.height));
-        setMinimumSize(new Dimension(minSize.width + icon.getIconWidth() + 4, minSize.height));
-
-        arrowButton.setSize(arrowButton.getPreferredSize());
-        setSize(getPreferredSize());
-        
         arrowButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 Point p = button.getLocation();
                 popup.show(PopupButton.this, p.x, button.getHeight());
             }
         });
+        updateUI();
     }
 
     @Override
@@ -80,6 +66,31 @@ public class PopupButton extends JPanel{
         return button;
     }
 
+    public JMenuItem addMenuItem(JMenuItem menuItem){
+        return popup.add(menuItem);
+    }
+
+    public void updateUI(){
+        super.updateUI();
+        if(button != null){
+            Dimension prefferedSize = button.getPreferredSize();
+
+            arrowButton.setPreferredSize(new Dimension(icon.getIconWidth() + 4, prefferedSize.height));
+            setPreferredSize(new Dimension(prefferedSize.width + icon.getIconWidth() + 4, prefferedSize.height));
+
+            Dimension maxSize = button.getMaximumSize();
+            arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, maxSize.height));
+            setMaximumSize(new Dimension(maxSize.width + icon.getIconWidth() + 4, maxSize.height));
+
+            Dimension minSize = button.getMinimumSize();
+            arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, minSize.height));
+            setMinimumSize(new Dimension(minSize.width + icon.getIconWidth() + 4, minSize.height));
+
+            arrowButton.setSize(arrowButton.getPreferredSize());
+            setSize(getPreferredSize());
+        }
+    }
+
     private Icon createIcon(){
         BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
@@ -90,9 +101,5 @@ public class PopupButton extends JPanel{
         g.fill(polygon);
 
         return new ImageIcon(image);
-    }
-
-    public JMenuItem addMenuItem(JMenuItem menuItem){
-        return popup.add(menuItem);
     }
 }
