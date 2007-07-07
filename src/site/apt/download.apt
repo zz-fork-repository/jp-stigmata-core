@@ -3,7 +3,7 @@
  ----
  Haruaki Tamada
  ----
- 2007-06-11
+ 2007-07-08
  ----
 
 Download
@@ -14,7 +14,7 @@ Download
 
  Apache License 2.0
 
- Copyright (C) 2006-2007  Haruaki TAMADA
+ Copyright (C) 2006-2007  Haruaki TAMADA, Ph.D.
 
  Licensed under the Apache License, Version 2.0 (the "License"); you
 may not use this file except in compliance with the License. You may
@@ -38,16 +38,21 @@ permissions and limitations under the License.
 
  *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 or later)
 
+ *{{{http://browserlaunch2.sourceforge.net/}BrowserLauncher2}} 1.2 (stigmata-1.1.0 or later; as needed)
+
  *{{{http://www.junit.org/}JUnit}} 4.1
 
  []
 
 **How to install requirements into your Maven local repository
 
- You must install manually Jama, since it does not support Maven 2.
-Other libraries can be automatically downloaded by Maven 2.
+ If you want to compile stigmata from source codes, you must install
+manually Jama and BrowserLauncher2 into your maven2 local repository.
+Because maven2 default remote repository do not has them.  Other
+libraries can be automatically downloaded by Maven2.
 
- type below command.
+ type below command for nstalling jar product into your maven2 local
+repository.
 
 ----
 $ mvn install:install-file \
@@ -59,7 +64,7 @@ $ mvn install:install-file \
 ----
 
  For example, installing Jama-1.0.2.jar into maven local repository,
- copy and paste below command.
+copy and paste below command.
 
 ----
 $ mvn install:install-file \

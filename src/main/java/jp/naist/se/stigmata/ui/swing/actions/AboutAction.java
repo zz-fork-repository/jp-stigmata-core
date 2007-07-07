@@ -26,14 +26,19 @@ public class AboutAction extends ShowTextAction{
     }
 
     @Override
+    public boolean isHtmlDocument(){
+        return true;
+    }
+
+    @Override
     public String getTitle(){
         return Messages.getString("about.dialog.title");
     }
 
     @Override
     public String getMessage(){
-        String aboutMessage = loadStringFromFile(getClass().getResource("/resources/about.txt"));
-        
+        String aboutMessage = loadStringFromFile(getClass().getResource("/resources/about.html"));
+
         Package p = getClass().getPackage();
         aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
         aboutMessage = aboutMessage.replace("${implementation.vendor}",  p.getImplementationVendor());
@@ -43,7 +48,7 @@ public class AboutAction extends ShowTextAction{
     }
 
     @Override
-    public void updatePanel(JPanel panel){
+    protected void updatePanel(JPanel panel){
         JLabel logo = new JLabel(Utility.getIcon("stigmata.logo"));
         panel.add(logo, BorderLayout.NORTH);
     }

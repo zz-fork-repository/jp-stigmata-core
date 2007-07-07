@@ -16,10 +16,11 @@ import java.io.StringWriter;
 import java.net.URL;
 
 import javax.swing.AbstractAction;
+import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 /**
  * 
@@ -35,21 +36,31 @@ abstract class ShowTextAction extends AbstractAction{
 
     public abstract String getMessage();
 
-    public void updatePanel(JPanel panel){
+    protected void updatePanel(JPanel panel){
     }
 
     public abstract String getTitle();
 
+    public boolean isHtmlDocument(){
+        return false;
+    }
+
     public void actionPerformed(ActionEvent e){
         String message = getMessage();
+        JPanel panel = new JPanel(new BorderLayout());
+        JScrollPane scroll = new JScrollPane();
+        String mimeType = "text/plain";
+        if(isHtmlDocument()){
+            mimeType = "text/html";
+        }
+        JEditorPane text = new JEditorPane(mimeType, message);
+        text.addHyperlinkListener(new LinkFollower());
 
-        JTextArea text = new JTextArea(message);
         text.setEditable(false);
         text.setCaretPosition(0);
-        JScrollPane scroll = new JScrollPane();
+        text.setBackground(panel.getBackground());
         scroll.setViewportView(text);
 
-        JPanel panel = new JPanel(new BorderLayout());
         panel.add(scroll, BorderLayout.CENTER);
         panel.setPreferredSize(new Dimension(500, 300));
 
@@ -68,7 +79,8 @@ abstract class ShowTextAction extends AbstractAction{
             StringWriter writer = new StringWriter();
             PrintWriter out = new PrintWriter(writer);
             while((line = in.readLine()) != null){
-                out.println(line);
+                out.print(line);
+                out.println();
             }
             out.close();
             in.close();
