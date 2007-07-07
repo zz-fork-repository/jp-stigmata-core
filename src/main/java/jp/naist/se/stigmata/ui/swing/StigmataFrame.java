@@ -16,6 +16,7 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -353,6 +355,7 @@ public class StigmataFrame extends JFrame{
     }
 
     private void initComponents(){
+        setDefaultUI();
         JMenuBar menubar = new JMenuBar();
         menubar.add(createFileMenu());
         menubar.add(createHelpMenu());
@@ -428,14 +431,13 @@ public class StigmataFrame extends JFrame{
         JMenuItem about = Utility.createJMenuItem("about", new AboutAction(this));
         JMenuItem license = Utility.createJMenuItem("license", new LicenseAction(this));
         JMenuItem help = Utility.createJMenuItem("helpmenu");
-        JMenu laf = Utility.createJMenu("lookandfeel");
         expertmodeMenu = Utility.createJCheckBoxMenuItem("expertmenu");
 
         menu.add(about);
         menu.add(license);
         menu.add(help);
         menu.add(new JSeparator());
-        menu.add(laf);
+        menu.add(createLookAndFeelMenu());
         menu.add(new JSeparator());
         menu.add(expertmodeMenu);
 
@@ -444,25 +446,40 @@ public class StigmataFrame extends JFrame{
                 expertMenuActionPerformed(((JCheckBoxMenuItem)e.getSource()).getState());
             }
         });
-
-        final UIManager.LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
-        for(int i = 0; i < info.length; i++){
-            final int index = i;
-            JMenuItem item = new JMenuItem(info[i].getName());
-            laf.add(item);
-            item.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    try{
-                        UIManager.setLookAndFeel(info[index].getClassName());
-                        SwingUtilities.updateComponentTreeUI(StigmataFrame.this);
-                    }catch(Exception ee){
-                    }
-                }
-            });
-        }
         help.setEnabled(false);
 
         return menu;
+    }
+
+    private JMenu createLookAndFeelMenu(){
+        JMenu laf = Utility.createJMenu("lookandfeel");
+        ButtonGroup bg = new ButtonGroup();
+        UIManager.LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
+        LookAndFeel lookfeel = UIManager.getLookAndFeel();
+
+        ActionListener listener = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                try{
+                    String command = e.getActionCommand();
+                    UIManager.setLookAndFeel(command);
+                    SwingUtilities.updateComponentTreeUI(StigmataFrame.this);
+                } catch(Exception ee){
+                }
+            }
+        };
+        for(int i = 0; i < info.length; i++){
+            JCheckBoxMenuItem item = new JCheckBoxMenuItem(info[i].getName());
+            item.setActionCommand(info[i].getClassName());
+            item.addActionListener(listener);
+            bg.add(item);
+            laf.add(item);
+
+            if(info[i].getClassName().equals(lookfeel.getClass().getName())){
+                item.setState(true);
+            }
+        }
+
+        return laf;
     }
 
     public void setExpertMode(boolean expertmode){
@@ -537,5 +554,12 @@ public class StigmataFrame extends JFrame{
         i = i + 1;
         countmap.put(label, i);
         return i;
+    }
+
+    private void setDefaultUI(){
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e){
+        }
     }
 }
