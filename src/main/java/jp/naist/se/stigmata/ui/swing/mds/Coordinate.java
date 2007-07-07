@@ -88,13 +88,21 @@ public class Coordinate{
 
     private static String shortenLabel(String label){
         int index = label.lastIndexOf('/');
+        if(index < 0){
+            index = label.lastIndexOf('\\');
+        }
         int firstIndex = label.indexOf('.');
         int lastIndex = label.lastIndexOf('.');
         int length = label.length();
+        String returnValue = label;
 
         if(index < 0 && (firstIndex != lastIndex && lastIndex != (length - 1))){
-            index = label.lastIndexOf('.');
+            index = lastIndex;
+            returnValue = label.substring(index + 1);
+            if("jar".equals(returnValue)){
+                returnValue = label;
+            }
         }
-        return label.substring(index + 1);
+        return returnValue;
     }
 }
