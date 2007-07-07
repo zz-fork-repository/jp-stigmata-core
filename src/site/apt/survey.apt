@@ -71,7 +71,7 @@ Implemented Birthmarks
 
  [Description] Frequency of method calls.
 
- [Papers] No
+ [Papers] Not published
 
  [Related Papers] Haruaki Tamada, Keiji Okamoto, Masahide Nakamura,
    Akito Monden, and Ken-ichi Matsumoto, ``Dynamic Software Birthmarks
@@ -85,7 +85,7 @@ Implemented Birthmarks
 
  [Description] Frequency of used classes.
 
- [Papers] No
+ [Papers] Not published
 
  [Related Papers] Haruaki Tamada, Keiji Okamoto, Masahide Nakamura,
    Akito Monden, and Ken-ichi Matsumoto, ``Dynamic Software Birthmarks
@@ -93,6 +93,21 @@ Implemented Birthmarks
    Proc. International Symposium on Future Software Technology 2004
    (ISFST 2004), CD-ROM, Xi'an, China, 20-22 October 2004.
 
+Analysis method
+
+*MDS (Multi-dimensional scaling)
+
+ [Proposer?] T. Kakimoto, et al.
+
+ [Description] plotting classes into plane based on their similarities
+ between each pairs.
+
+ [Paper] Takeshi Kakimoto, Akito Monden, Yasutaka Kamei, Haruaki
+   Tamada, Masateru Tsunoda, and Ken-ichi Matsumoto, ``Using Software
+   Birthmarks to Identify Similar Classes and Major Functionalities,''
+   In Proc. the 3rd International Workshop on Mining Software
+   Repositories ({{{http://msr.uwaterloo.ca/msr2006/}MSR Mining
+   Challenge 2006}}), pp.171--172, Shanghai, China, May 2006.
 
 Related Publications
 
@@ -103,7 +118,7 @@ Related Publications
    International Conference on Intelligent Information Hiding and
    Multimedia, 2006.
 
- * Takesi Kakimoto, Akito Monden, Yasutaka Kamei, Haruaki Tamada,
+ * Takeshi Kakimoto, Akito Monden, Yasutaka Kamei, Haruaki Tamada,
    Masateru Tsunoda, and Ken-ichi Matsumoto, ``Using Software
    Birthmarks to Identify Similar Classes and Major Functionalities,''
    In Proc. the 3rd International Workshop on Mining Software
