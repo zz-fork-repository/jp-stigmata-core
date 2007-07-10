@@ -265,6 +265,9 @@ updatecolor.tooltip=プロットしている点の色を更新します．
 updateovercolor.label=強調時の色の更新...
 updateovercolor.tooltip=マウスオーバー時の色を更新します．
 
+mdsgraph.count.border=点の数
+mdsgraph.group.border=マークごとの点の数
+
 ###########################################################
 # BirthmarkDefinitionPane
 ###########################################################

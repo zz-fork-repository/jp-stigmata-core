@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.ui.swing.mds;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -7,7 +11,11 @@ import java.awt.Graphics2D;
 
 import javax.swing.Icon;
 
-
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class MarkIcon implements Icon{
     private static final int DEFAULT_ICON_WIDTH = 16;
     private static final int DEFAULT_ICON_HEIGHT = 16;
