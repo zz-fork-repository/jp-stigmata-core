@@ -16,6 +16,8 @@
 
  *{{{#What kind of features does stigmata have}What kind of features does stigmata have}}
 
+ *{{{#What is the limitation of extracting birthmarks}What is the limitation of extracting birthmarks}}
+
 *{What is stigmata}
 
  Stigmata is a toolkit for birthmarking Java class files.  Extracting
@@ -53,3 +55,24 @@ birthmark, and a new filter (filtering the result of comparing).
 plugins, you can define original birthmark plugin and easily install
 it to Stigmata.
 
+*{What is the limitation of extracting birthmarks}
+
+ Stigmata loads a target class into StigmataClassLoader when
+birthmarks were extracted from the class.  Therefore, extracting
+birthmarks from sealed classes will be failed.
+
+ For example, let <S> be a set of classes included in sealed jar file
+<SomeArchive-X.X.jar>, then, <<<SecurityException>>> will be thrown
+when extracting birthmarks from other version sealed jar file
+(SomeArchive-X.Y.jar).
+
+ This limitation is occured only when extracting IS birthmark.  IS
+birthmark is inheritance structure birthmark, and to extract it to
+find super class from loaded classes pool.  So, difference version
+cannot be applied.
+
+ References
+
+ *{{{http://java.sun.com/docs/books/tutorial/deployment/jar/}Lesson: Packaging Programs in JAR Files}}
+
+ []
