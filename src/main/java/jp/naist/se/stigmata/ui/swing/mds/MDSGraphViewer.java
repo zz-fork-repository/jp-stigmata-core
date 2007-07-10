@@ -192,7 +192,7 @@ public class MDSGraphViewer extends JLayeredPane{
             }
             Coordinate coordinate = new Coordinate(label, xy[0], xy[1], xy[2]);
             if(labels != null){
-                coordinate.setGroupId(labels.getGroupId(coordinate.getLabel()));
+                coordinate.setGroupId(labels.getGroupIdFromElementName(coordinate.getLabel()));
             }
             plots.add(coordinate);
 

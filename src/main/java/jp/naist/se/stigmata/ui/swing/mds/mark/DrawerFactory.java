@@ -7,8 +7,11 @@ package jp.naist.se.stigmata.ui.swing.mds.mark;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Icon;
+
 import jp.naist.se.stigmata.ui.swing.mds.GeometoryType;
 import jp.naist.se.stigmata.ui.swing.mds.MarkDrawer;
+import jp.naist.se.stigmata.ui.swing.mds.MarkIcon;
 
 /**
  * 
@@ -42,5 +45,9 @@ public class DrawerFactory{
 
     public MarkDrawer create(GeometoryType type){
         return drawers.get(type);
+    }
+
+    public Icon createIcon(GeometoryType type){
+        return new MarkIcon(create(type));
     }
 }

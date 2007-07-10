@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class LabelMap{
+class LabelMap{
     private List<String> labels = new ArrayList<String>();
     private Map<String, String> groups = new HashMap<String, String>();
     private Map<String, Integer> gids = new HashMap<String, Integer>();
@@ -55,9 +55,12 @@ public class LabelMap{
         return group;
     }
 
-    public int getGroupId(String label){
-        String glabel = groups.get(label);
-        Integer i = gids.get(glabel);
+    public int getGroupIdFromElementName(String label){
+        return getGroupId(groups.get(label));
+    }
+
+    public int getGroupId(String groupLabel){
+        Integer i = gids.get(groupLabel);
         if(i == null){
             i = new Integer(0);
         }
@@ -65,7 +68,28 @@ public class LabelMap{
     }
 
     public int getGroupCount(){
-        return groups.size();
+        return gids.size();
+    }
+
+    public String[] getGroupNames(){
+        String[] names = new String[gids.size()];
+        int index = 0;
+        for(String name: gids.keySet()){
+            names[index] = name;
+            index++;
+        }
+
+        return names;
+    }
+
+    public synchronized int getGroupElementCount(String group){
+        int count = 0;
+        for(Map.Entry<String, String> entry: groups.entrySet()){
+            if(group.equals(entry.getValue())){
+                count++;
+            }
+        }
+        return count;
     }
 
     public synchronized String[] getGroupElements(String group){
