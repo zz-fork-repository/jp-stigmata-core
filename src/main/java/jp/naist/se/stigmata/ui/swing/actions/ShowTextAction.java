@@ -17,7 +17,6 @@ import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

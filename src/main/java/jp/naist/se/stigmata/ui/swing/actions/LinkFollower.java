@@ -4,13 +4,11 @@ package jp.naist.se.stigmata.ui.swing.actions;
  * $Id$
  */
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
-import javax.swing.JEditorPane;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
 /**
  *
@@ -19,7 +17,6 @@ import javax.swing.event.HyperlinkEvent;
  */
 class LinkFollower implements HyperlinkListener{
     public void hyperlinkUpdate(HyperlinkEvent e){
-        JEditorPane text = (JEditorPane)e.getSource();
         if(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
             URL url = null;
             try{
