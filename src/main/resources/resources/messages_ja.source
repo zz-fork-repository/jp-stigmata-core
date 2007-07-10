@@ -371,8 +371,8 @@ target.BOTH_TARGET=両方
 target.ONE_OF_TARGET=どちらか
 
 error.dialog.title=エラー
-error.message.classpath=以下のクラスが見つからなかったため，指定された処理を完了することができませんでした．<br>「コントロール」タブのクラスパス設定を見直して再実行してください．
-error.message.contactus=以下の例外が発生したため，指定された処理を完了することができませんでした．<br>エラーメッセージを添付して開発者までレポートをお願いします．
+error.message.classpath=<html><body><p>以下のクラスが見つからなかったため，指定された処理を完了することができませんでした．<br>「コントロール」タブのクラスパス設定を見直して再実行してください．</p></body></html>
+error.message.contactus=<html><body><p>以下の例外が発生したため，指定された処理を完了することができませんでした．<br>エラーメッセージを添付して開発者までレポートをお願いします．</p></body></html>
 error.empty.threshold=閾値が入力されていません．
 error.empty.value=値が入力されていません．
 error.invalid.format={0}: フォーマット以上です．
@@ -382,7 +382,7 @@ error.filter.cannotcreate=フィルタは以下の理由により作成されませんでした:
 error.negative.value={0}: 負の値を入力することはできません．
 error.over.range=範囲を越えています．{0}の範囲に収まるようにしてください．
 error.io=I/Oエラー: {0}
-error.unsupportedformat={0}: サポートしていないフォーマットが指定されました．
+error.unsupportedformat={0}: サポートされていないフォーマットが指定されました．
 
 target1.button.label=${target.TARGET1}バースマーク
 target2.button.label=${target.TARGET2}バースマーク
