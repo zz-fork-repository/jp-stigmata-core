@@ -5,12 +5,9 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.SystemColor;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -19,12 +16,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
-import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
 
 import jp.naist.se.stigmata.BirthmarkSet;
@@ -68,9 +63,9 @@ public class PairComparisonPane extends JPanel{
         label.setBorder(BorderFactory.createTitledBorder(Messages.getString("result.border")));
         JComboBox combo = new JComboBox();
         for(ComparisonPairElement elem : pair){
-            combo.addItem(elem);
+            combo.addItem(new ClippedLRListCellRenderer.LRItem(elem.getType(), elem.getSimilarity()));
         }
-        combo.setRenderer(new ComparisonPairElementRenderer(new Dimension(100, combo.getPreferredSize().height), 50));
+        combo.setRenderer(new ClippedLRListCellRenderer(new Dimension(100, combo.getPreferredSize().height), 50));
         combo.setBorder(BorderFactory.createTitledBorder(Messages.getString("eachbirthmarksimilarity.border")));
         similarityPanel.add(label);
         similarityPanel.add(combo);
@@ -122,46 +117,5 @@ public class PairComparisonPane extends JPanel{
         south.add(elementCount, BorderLayout.CENTER);
 
         return panel;
-    }
-
-    /**
-     * copy from tempura memo available at
-     * http://terai.xrea.jp/Swing/ClippedLRComboBox.html
-     */
-    private static class ComparisonPairElementRenderer extends JPanel implements ListCellRenderer{
-        private static final long serialVersionUID = 32943674625674235L;
-        private final JLabel left = new JLabel();
-
-        private final JLabel right = new JLabel();
-
-        public ComparisonPairElementRenderer(Dimension dim, int rightWidth){
-            super(new BorderLayout());
-            setOpaque(true);
-            left.setOpaque(true);
-            right.setOpaque(true);
-            left.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 0));
-            right.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-            right.setPreferredSize(new Dimension(rightWidth, 0));
-            add(left, BorderLayout.CENTER);
-            add(right, BorderLayout.EAST);
-            setPreferredSize(dim);
-        }
-
-        public Component getListCellRendererComponent(JList list, Object value, int index,
-                boolean isSelected, boolean cellHasFocus){
-            ComparisonPairElement elem = (ComparisonPairElement)value;
-            if(elem != null){
-                left.setText(elem.getType());
-                right.setText(Double.toString(elem.getSimilarity()));
-            }
-
-            setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            left.setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            right.setBackground(isSelected ? SystemColor.textHighlight: Color.white);
-            left.setForeground(isSelected ? Color.white: Color.black);
-            right.setForeground(isSelected ? Color.gray.brighter(): Color.gray);
-
-            return this;
-        }
     }
 }
