@@ -16,6 +16,7 @@ class LabelMap{
     private List<String> labels = new ArrayList<String>();
     private Map<String, String> groups = new HashMap<String, String>();
     private Map<String, Integer> gids = new HashMap<String, Integer>();
+    private boolean groupEnabled = true;
 
     public LabelMap(){
         gids.put("", 0);
@@ -30,6 +31,14 @@ class LabelMap{
 
     public boolean isAvailableLabel(int index){
         return index >= 0 && index < labels.size();
+    }
+
+    public void setGroupEnabled(boolean flag){
+        this.groupEnabled = flag;
+    }
+
+    public boolean isGroupEnabled(){
+        return groupEnabled && getGroupCount() < GeometoryType.getMaxGroupCount();
     }
 
     public void addLabel(String label){
@@ -60,9 +69,12 @@ class LabelMap{
     }
 
     public int getGroupId(String groupLabel){
-        Integer i = gids.get(groupLabel);
-        if(i == null){
-            i = new Integer(0);
+        Integer i = new Integer(0);
+        if(isGroupEnabled()){
+            i = gids.get(groupLabel);
+            if(i == null){
+                i = new Integer(0);
+            }
         }
         return i;
     }

@@ -66,8 +66,7 @@ public class MDSGraphPanel extends JPanel{
 
         for(int i = 0; i < set.length; i++){
             for(int j = 0; j <= i; j++){
-                ComparisonPair pair = new ComparisonPair(set[i], set[j],
-                        context);
+                ComparisonPair pair = new ComparisonPair(set[i], set[j], context);
                 matrix[i][j] = 1d - pair.calculateSimilarity();
                 if(i != j){
                     matrix[j][i] = matrix[i][j];
@@ -154,11 +153,12 @@ public class MDSGraphPanel extends JPanel{
         // set the number of dots of each groups
         JComboBox numberOfGroupsLabelCombo = new JComboBox();
         GeometoryType[] types = GeometoryType.values();
+        DrawerFactory factory = DrawerFactory.getInstance();
         for(String name: labels.getGroupNames()){
             int count = labels.getGroupElementCount(name);
             if(count != 0){
                 ClippedLRListCellRenderer.LRItem item = new ClippedLRListCellRenderer.LRItem(name, count);
-                item.setIcon(DrawerFactory.getInstance().createIcon(types[labels.getGroupId(name)]));
+                item.setIcon(factory.createIcon(types[labels.getGroupId(name)]));
                 numberOfGroupsLabelCombo.addItem(item);
             }
         }

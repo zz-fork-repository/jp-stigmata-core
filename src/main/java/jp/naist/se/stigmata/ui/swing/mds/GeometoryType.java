@@ -21,5 +21,9 @@ public enum GeometoryType{
     FILLED_CIRCLE,
     FILLED_RHOMBUS,
     STAR,
-    FILLED_DOWNER_TRIANGLE,
+    FILLED_DOWNER_TRIANGLE;
+
+    public static int getMaxGroupCount(){
+        return FILLED_DOWNER_TRIANGLE.ordinal();
+    }
 }
