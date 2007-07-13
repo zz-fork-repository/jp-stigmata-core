@@ -45,8 +45,8 @@ class RhombusDrawer extends AbstractMarkDrawer{
         GeneralPath path = new GeneralPath();
         path.moveTo(ww,     0);
         path.lineTo(0,      hh);
-        path.lineTo(ww,     h - 1f);
-        path.lineTo(w - 1f, hh);
+        path.lineTo(ww,     h);
+        path.lineTo(w,      hh);
         path.lineTo(ww,     0);
 
         return path;

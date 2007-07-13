@@ -28,8 +28,8 @@ public class BirthmarkCompareTest{
     public void equalsTest() throws Exception{
         Assert.assertEquals(3, birthmarks.length);
 
-        Assert.assertEquals(1d, stigmata.compare(birthmarks[0], birthmarks[0]), 1E-6);
-        Assert.assertEquals(1d, stigmata.compare(birthmarks[1], birthmarks[1]), 1E-6);
-        Assert.assertEquals(1d, stigmata.compare(birthmarks[2], birthmarks[2]), 1E-6);
+        Assert.assertEquals(1d, stigmata.compareDetails(birthmarks[0], birthmarks[0]), 1E-6);
+        Assert.assertEquals(1d, stigmata.compareDetails(birthmarks[1], birthmarks[1]), 1E-6);
+        Assert.assertEquals(1d, stigmata.compareDetails(birthmarks[2], birthmarks[2]), 1E-6);
     }
 }

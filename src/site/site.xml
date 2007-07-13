@@ -35,14 +35,14 @@
 
     <menu name="Stigmata">
       <item name="Introduction"        href="index.html"/>
-      <item name="Tutorial"            href="tutorial.html"/>
       <item name="Download"            href="download.html" />
-      <item name="Definition"          href="definition.html" />
-      <item name="DTD"                 href="dtd.html" />
-      <item name="FAQ"                 href="faq.html"/>
-      <item name="Survey"              href="survey.html"/>
       <item name="License"             href="license.html"/>
+      <item name="Tutorial"            href="tutorial.html"/>
       <item name="Tutorial (pdf)"      href="tutorial.pdf"/>
+      <item name="FAQ"                 href="faq.html"/>
+      <item name="DTD"                 href="dtd.html" />
+      <item name="Definition"          href="definition.html" />
+      <item name="Survey"              href="survey.html"/>
       <item name="Project Page"        href="http://sourceforge.jp/projects/stigmata/"/>
     </menu>
 

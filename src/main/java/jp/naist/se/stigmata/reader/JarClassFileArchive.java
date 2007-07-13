@@ -25,7 +25,7 @@ public class JarClassFileArchive implements ClassFileArchive{
     private File file;
     private JarFile jarfile;
     private URL jarfileLocation;
-    
+
     public JarClassFileArchive(String jarfile) throws IOException{
         this.file = new File(jarfile);
         this.jarfile = new JarFile(jarfile);

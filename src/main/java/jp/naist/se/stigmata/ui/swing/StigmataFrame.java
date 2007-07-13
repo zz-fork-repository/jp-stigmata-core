@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.ButtonGroup;
@@ -46,6 +47,9 @@ import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.Stigmata;
+import jp.naist.se.stigmata.event.OperationAdapter;
+import jp.naist.se.stigmata.event.OperationEvent;
+import jp.naist.se.stigmata.event.WarningMessages;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.ui.swing.actions.AboutAction;
 import jp.naist.se.stigmata.ui.swing.actions.LicenseAction;
@@ -72,11 +76,7 @@ public class StigmataFrame extends JFrame{
     private Map<String, Integer> countmap = new HashMap<String, Integer>();
 
     public StigmataFrame(){
-        stigmata = Stigmata.getInstance();
-        context = stigmata.createContext();
-        fileio = new FileIOManager(this);
-
-        initLayouts();
+        this(Stigmata.getInstance());
     }
 
     public StigmataFrame(Stigmata stigmata){
@@ -87,6 +87,13 @@ public class StigmataFrame extends JFrame{
         this.stigmata = stigmata;
         this.context = context;
         this.fileio = new FileIOManager(this);
+
+        stigmata.addOperationListener(new OperationAdapter(){
+            @Override
+            public void operationDone(OperationEvent e){
+                showWarnings(e.getMessage());
+            }
+        });
 
         initLayouts();
     }
@@ -352,6 +359,24 @@ public class StigmataFrame extends JFrame{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
         setSize(900, 600);
+    }
+
+    private void showWarnings(WarningMessages warnings){
+        if(warnings.getWarningCount() > 0){
+            StringBuilder sb = new StringBuilder("<html><body><dl>");
+            for(Iterator<Exception> i = warnings.exceptions(); i.hasNext(); ){
+                Exception e = i.next();
+                sb.append("<dt>").append(e.getClass().getName()).append("</dt>");
+                sb.append("<dd>").append(e.getMessage()).append("</dd>");
+                sb.append("<dd>").append(warnings.getString(e)).append("</dd>");
+            }
+            sb.append("</dl></body></html>");
+
+            JOptionPane.showMessageDialog(
+                this, new String(sb), Messages.getString("warning.dialog.title"),
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
     }
 
     private void initComponents(){
