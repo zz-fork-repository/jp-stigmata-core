@@ -1,15 +1,24 @@
 package jp.naist.se.stigmata.event;
 
+/*
+ * $Id$
+ */
+
 import java.util.EventObject;
 
-public class OperationEvent extends EventObject{
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
+public class BirthmarkEngineEvent extends EventObject{
     private static final long serialVersionUID = -1260793588721638917L;
 
     private OperationType type;
     private OperationStage stage;
     private WarningMessages message;
 
-    public OperationEvent(OperationStage stage, OperationType type, WarningMessages message){
+    public BirthmarkEngineEvent(OperationStage stage, OperationType type, WarningMessages message){
         super(type.ordinal());
         this.type = type;
         this.stage = stage;

@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
-import jp.naist.se.stigmata.BirthmarkExtractionException;
+import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
@@ -50,56 +50,56 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * extract birthmark given stream.
      */
-    public final Birthmark extract(InputStream in) throws BirthmarkExtractionException{
+    public final Birthmark extract(InputStream in) throws BirthmarkExtractionFailedException{
         return extract(in, BirthmarkContext.getDefaultContext());
     }
 
     /**
      * extract birthmark given byte array.
      */
-    public final Birthmark extract(byte[] bytecode) throws BirthmarkExtractionException{
+    public final Birthmark extract(byte[] bytecode) throws BirthmarkExtractionFailedException{
         return extract(bytecode, BirthmarkContext.getDefaultContext());
     }
 
     /**
      * extract birthmark given stream.
      */
-    public final Birthmark extract(Birthmark birthmark, InputStream in) throws BirthmarkExtractionException{
+    public final Birthmark extract(Birthmark birthmark, InputStream in) throws BirthmarkExtractionFailedException{
         return extract(birthmark, in, BirthmarkContext.getDefaultContext());
     }
 
     /**
      * extract birthmark given byte array.
      */
-    public final Birthmark extract(Birthmark birthmark, byte[] bytecode) throws BirthmarkExtractionException{
+    public final Birthmark extract(Birthmark birthmark, byte[] bytecode) throws BirthmarkExtractionFailedException{
         return extract(birthmark, bytecode, BirthmarkContext.getDefaultContext());
     }
 
     /**
      * extract birthmark given stream with given context.
      */
-    public final Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionException{
+    public final Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         return extract(createBirthmark(), in, context);
     }
 
     /**
      * extract birthmark given byte array with given context.
      */
-    public final Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionException{
+    public final Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         return extract(birthmark, new ByteArrayInputStream(bytecode), context);
     }
 
     /**
      * extract birthmark given byte array with given context.
      */
-    public final Birthmark extract(byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionException{
+    public final Birthmark extract(byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         return extract(createBirthmark(), new ByteArrayInputStream(bytecode), context);
     }
 
     /**
      * extract birthmark given stream with given context.
      */
-    public abstract Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionException;
+    public abstract Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException;
 
     /**
      * create birthmark.

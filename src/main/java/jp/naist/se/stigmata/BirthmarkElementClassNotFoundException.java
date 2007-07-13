@@ -12,7 +12,7 @@ import java.util.List;
  * @version $Revision$ $Date$
  */
 public class BirthmarkElementClassNotFoundException extends
-               BirthmarkExtractionException {
+               BirthmarkExtractionFailedException {
     private static final long serialVersionUID = 3256723476854L;
 
     private List<String> classnames = new ArrayList<String>();

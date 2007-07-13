@@ -11,24 +11,24 @@ import java.util.List;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkExtractionException extends Exception {
+public class BirthmarkExtractionFailedException extends Exception {
        private static final long serialVersionUID = 21932436457235L;
 
        private List<Throwable> causes = new ArrayList<Throwable>();
 
-       public BirthmarkExtractionException() {
+       public BirthmarkExtractionFailedException() {
                super();
        }
 
-       public BirthmarkExtractionException(String arg0, Throwable cause) {
+       public BirthmarkExtractionFailedException(String arg0, Throwable cause) {
                super(arg0, cause);
        }
 
-       public BirthmarkExtractionException(String arg0) {
+       public BirthmarkExtractionFailedException(String arg0) {
                super(arg0);
        }
 
-       public BirthmarkExtractionException(Throwable cause) {
+       public BirthmarkExtractionFailedException(Throwable cause) {
                super(cause);
        }
 

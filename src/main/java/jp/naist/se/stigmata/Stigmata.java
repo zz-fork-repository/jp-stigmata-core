@@ -23,8 +23,8 @@ import java.util.logging.Logger;
 
 import javax.imageio.spi.ServiceRegistry;
 
-import jp.naist.se.stigmata.event.OperationEvent;
-import jp.naist.se.stigmata.event.OperationListener;
+import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
+import jp.naist.se.stigmata.event.BirthmarkEngineListener;
 import jp.naist.se.stigmata.event.OperationStage;
 import jp.naist.se.stigmata.event.OperationType;
 import jp.naist.se.stigmata.event.WarningMessages;
@@ -54,7 +54,7 @@ public final class Stigmata{
     private boolean configDone = false;
     private Stack<WarningMessages> stack = new Stack<WarningMessages>();
     private WarningMessages warnings;
-    private List<OperationListener> listeners = new ArrayList<OperationListener>();
+    private List<BirthmarkEngineListener> listeners = new ArrayList<BirthmarkEngineListener>();
 
     private Stigmata(){
     }
@@ -63,11 +63,11 @@ public final class Stigmata{
         return instance;
     }
 
-    public void addOperationListener(OperationListener listener){
+    public void addOperationListener(BirthmarkEngineListener listener){
         listeners.add(listener);
     }
 
-    public void removeOperationListener(OperationListener listener){
+    public void removeOperationListener(BirthmarkEngineListener listener){
         listeners.remove(listener);
     }
 
@@ -124,7 +124,7 @@ public final class Stigmata{
         return context;
     }
 
-    public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws BirthmarkExtractionException{
+    public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws BirthmarkExtractionFailedException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
         BirthmarkSet[] set = extract(birthmarks, files, createContext());
         operationDone(OperationType.EXTRACT_BIRTHMARKS);
@@ -133,12 +133,12 @@ public final class Stigmata{
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files,
-                                  BirthmarkContext context) throws BirthmarkExtractionException{
+                                  BirthmarkContext context) throws BirthmarkExtractionFailedException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
         try{
             return extractImpl(birthmarks, files, context);
         } catch(IOException e){
-            throw new BirthmarkExtractionException(e);
+            throw new BirthmarkExtractionFailedException(e);
         } finally{
             operationDone(OperationType.EXTRACT_BIRTHMARKS);
         }
@@ -327,23 +327,23 @@ public final class Stigmata{
         }
         if(warnings == null){
             warnings = new WarningMessages(type);
-            fireEvent(new OperationEvent(OperationStage.OPERATION_START, type, warnings));
+            fireEvent(new BirthmarkEngineEvent(OperationStage.OPERATION_START, type, warnings));
         }
         stack.push(warnings);
-        fireEvent(new OperationEvent(OperationStage.SUB_OPERATION_START, type, warnings));
+        fireEvent(new BirthmarkEngineEvent(OperationStage.SUB_OPERATION_START, type, warnings));
     }
 
     private void operationDone(OperationType type){
-        fireEvent(new OperationEvent(OperationStage.SUB_OPERATION_DONE, type, warnings));
+        fireEvent(new BirthmarkEngineEvent(OperationStage.SUB_OPERATION_DONE, type, warnings));
         stack.pop();
         if(stack.size() == 0){
-            fireEvent(new OperationEvent(OperationStage.OPERATION_DONE, type, warnings));
+            fireEvent(new BirthmarkEngineEvent(OperationStage.OPERATION_DONE, type, warnings));
             warnings = null;
         }
     }
 
-    private void fireEvent(OperationEvent e){
-        for(OperationListener listener: listeners){
+    private void fireEvent(BirthmarkEngineEvent e){
+        for(BirthmarkEngineListener listener: listeners){
             switch(e.getStage()){
             case OPERATION_START:
                 listener.operationStart(e);
@@ -363,7 +363,7 @@ public final class Stigmata{
         }
     }
 
-    private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+    private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkContext context) throws IOException, BirthmarkExtractionFailedException{
         ClassFileArchive[] archives = createArchives(files, context);
         BirthmarkExtractor[] extractors = createExtractors(birthmarks, context);
         ExtractionUnit unit = context.getExtractionUnit();
@@ -380,7 +380,7 @@ public final class Stigmata{
         return null;
     }
 
-    private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+    private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionFailedException{
         Map<String, BirthmarkSet> list = new HashMap<String, BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
@@ -424,7 +424,7 @@ public final class Stigmata{
         return n;
     }
 
-    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionFailedException{
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
@@ -447,7 +447,7 @@ public final class Stigmata{
         return list.toArray(new BirthmarkSet[list.size()]);
     }
 
-    private BirthmarkSet[] extractFromProduct(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionException{
+    private BirthmarkSet[] extractFromProduct(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkContext context) throws IOException, BirthmarkExtractionFailedException{
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){

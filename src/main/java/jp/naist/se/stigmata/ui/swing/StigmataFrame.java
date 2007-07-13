@@ -40,15 +40,15 @@ import javax.swing.filechooser.FileFilter;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
-import jp.naist.se.stigmata.BirthmarkExtractionException;
+import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.Stigmata;
-import jp.naist.se.stigmata.event.OperationAdapter;
-import jp.naist.se.stigmata.event.OperationEvent;
+import jp.naist.se.stigmata.event.BirthmarkEngineAdapter;
+import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
 import jp.naist.se.stigmata.event.WarningMessages;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.ui.swing.actions.AboutAction;
@@ -88,9 +88,9 @@ public class StigmataFrame extends JFrame{
         this.context = context;
         this.fileio = new FileIOManager(this);
 
-        stigmata.addOperationListener(new OperationAdapter(){
+        stigmata.addOperationListener(new BirthmarkEngineAdapter(){
             @Override
-            public void operationDone(OperationEvent e){
+            public void operationDone(BirthmarkEngineEvent e){
                 showWarnings(e.getMessage());
             }
         });
@@ -524,9 +524,9 @@ public class StigmataFrame extends JFrame{
         StringWriter writer = new StringWriter();
         PrintWriter out = new PrintWriter(writer);
         e.printStackTrace(out);
-        if(e instanceof BirthmarkExtractionException){
+        if(e instanceof BirthmarkExtractionFailedException){
             out.println("Causes:");
-            for(Throwable t: ((BirthmarkExtractionException)e).getCauses()){
+            for(Throwable t: ((BirthmarkExtractionFailedException)e).getCauses()){
                 t.printStackTrace(out);
             }
         }

@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkContext;
-import jp.naist.se.stigmata.BirthmarkExtractionException;
+import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 import org.objectweb.asm.ClassReader;
@@ -36,8 +36,8 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
 
     @Override
     public Birthmark extract(Birthmark birthmark, InputStream in,
-                             BirthmarkContext context) throws BirthmarkExtractionException{
-        BirthmarkExtractionException bee = new BirthmarkExtractionException();
+                             BirthmarkContext context) throws BirthmarkExtractionFailedException{
+        BirthmarkExtractionFailedException bee = new BirthmarkExtractionFailedException();
 
         try{
             ClassReader reader = new ClassReader(in);
