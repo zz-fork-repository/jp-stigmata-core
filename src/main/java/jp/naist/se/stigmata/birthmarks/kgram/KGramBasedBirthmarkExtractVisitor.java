@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
 
 import org.objectweb.asm.ClassVisitor;
@@ -25,7 +25,7 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private int kvalue;
     private List<Integer> opcodes = new ArrayList<Integer>();
 
-    public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+    public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
         super(visitor, birthmark, context);
     }
 

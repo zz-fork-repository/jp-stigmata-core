@@ -5,7 +5,7 @@ package jp.naist.se.stigmata.birthmarks.fmc;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -30,7 +30,7 @@ public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context){
         return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context){
             @Override
             protected void addElement(String className, String methodName, String description){

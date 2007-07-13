@@ -16,12 +16,12 @@ import java.util.List;
 public class ComparisonPair implements Iterable<ComparisonPairElement>{
     private BirthmarkSet target1;
     private BirthmarkSet target2;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
     /**
      * constructor.
      */
-    public ComparisonPair(BirthmarkSet target1, BirthmarkSet target2, BirthmarkContext context){
+    public ComparisonPair(BirthmarkSet target1, BirthmarkSet target2, BirthmarkEnvironment context){
         this.target1 = target1;
         this.target2 = target2;
         this.context = context;

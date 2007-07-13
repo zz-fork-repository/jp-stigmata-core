@@ -20,14 +20,14 @@ import java.util.Map;
  * @version  $Revision$ $Date$
  */
 public class CertainPairComparisonResultSet implements ComparisonResultSet{
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
     private List<ComparisonPair> pairList = new ArrayList<ComparisonPair>();
     private Map<URL, BirthmarkSet> sources = new HashMap<URL, BirthmarkSet>();
 
     /**
      * This constructor is the comparison pair list is specified.
      */
-    public CertainPairComparisonResultSet(ComparisonPair[] pairs, BirthmarkContext context){
+    public CertainPairComparisonResultSet(ComparisonPair[] pairs, BirthmarkEnvironment context){
         this.context = context;
         for(int i = 0; i < pairs.length; i++){
             pairList.add(pairs[i]);
@@ -39,7 +39,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
     /**
      * This constructor is the comparison pair was guessed with class name.
      */
-    public CertainPairComparisonResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, BirthmarkContext context){
+    public CertainPairComparisonResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, BirthmarkEnvironment context){
         this.context = context;
         for(int i = 0; i < targetX.length; i++){
             BirthmarkSet target2 = findTarget(targetX[i].getName(), targetY);
@@ -55,7 +55,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
     /**
      * This constructor is the comparison pair was specified as mapping.
      */
-    public CertainPairComparisonResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, Map<String, String> mapping, BirthmarkContext context){
+    public CertainPairComparisonResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, Map<String, String> mapping, BirthmarkEnvironment context){
         this.context = context;
         for(Map.Entry<String, String> entry: mapping.entrySet()){
             BirthmarkSet target1 = findTarget(entry.getKey(), targetX);
@@ -81,7 +81,7 @@ public class CertainPairComparisonResultSet implements ComparisonResultSet{
     /**
      * return the context.
      */
-    public BirthmarkContext getContext(){
+    public BirthmarkEnvironment getContext(){
         return context;
     }
 

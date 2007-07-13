@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
@@ -118,7 +118,7 @@ public class ControlPane extends JPanel{
         );
 
         if(file != null){
-            BirthmarkContext context = generateContext();
+            BirthmarkEnvironment context = generateContext();
             if(!file.getName().endsWith(".xml")){
                 file = new File(file.getParent(), file.getName() + ".xml");
             }
@@ -223,7 +223,7 @@ public class ControlPane extends JPanel{
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
-        BirthmarkContext context = generateContext();
+        BirthmarkEnvironment context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         Set<String> targets = new HashSet<String>();
@@ -245,7 +245,7 @@ public class ControlPane extends JPanel{
     }
 
     private void compareRoundRobinWithFiltering(){
-        BirthmarkContext context = generateContext();
+        BirthmarkEnvironment context = generateContext();
         FilterSelectionPane pane = new FilterSelectionPane(
             context.getFilterManager()
         );
@@ -265,7 +265,7 @@ public class ControlPane extends JPanel{
     }
 
     private void compareRoundRobin(){
-        BirthmarkContext context = generateContext();
+        BirthmarkEnvironment context = generateContext();
 
         stigmata.compareRoundRobin(
             birthmarks.getSelectedServiceTypes(), targetX.getValues(), 
@@ -274,7 +274,7 @@ public class ControlPane extends JPanel{
     }
 
     private void compareSpecifiedPair(){
-        BirthmarkContext context = generateContext();
+        BirthmarkEnvironment context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         stigmata.compareSpecifiedPair(birthmarks.getSelectedServiceTypes(), fileX,
@@ -282,7 +282,7 @@ public class ControlPane extends JPanel{
     }
 
     private void compareGuessedPair(){
-        BirthmarkContext context = generateContext();
+        BirthmarkEnvironment context = generateContext();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
@@ -290,8 +290,8 @@ public class ControlPane extends JPanel{
                 fileY, context);
     }
 
-    private BirthmarkContext generateContext(){
-        BirthmarkContext context = stigmata.getStigmata().createContext();
+    private BirthmarkEnvironment generateContext(){
+        BirthmarkEnvironment context = stigmata.getStigmata().createContext();
         ClasspathContext bytecode = context.getClasspathContext();
         WellknownClassManager manager = context.getWellknownClassManager();
         ComparisonPairFilterManager filterManager = context.getFilterManager();

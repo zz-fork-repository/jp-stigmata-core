@@ -46,7 +46,7 @@ import org.xml.sax.SAXException;
  */
 public final class Main{
     private FormatManager manager = FormatManager.getInstance();
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
     /**
      * main process.

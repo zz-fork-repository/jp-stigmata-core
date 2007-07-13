@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ui.swing.ClippedLRListCellRenderer;
@@ -52,7 +52,7 @@ public class MDSGraphPanel extends JPanel{
         this(stigmata, set, stigmata.getContext());
     }
 
-    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set, BirthmarkContext context){
+    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set, BirthmarkEnvironment context){
         this.stigmata = stigmata;
         this.set = set;
 
@@ -60,7 +60,7 @@ public class MDSGraphPanel extends JPanel{
         initLayouts(matrix);
     }
 
-    private double[][] initData(BirthmarkSet[] set, BirthmarkContext context){
+    private double[][] initData(BirthmarkSet[] set, BirthmarkEnvironment context){
         labels = new LabelMap();
         double[][] matrix = new double[set.length][set.length];
 
@@ -90,7 +90,7 @@ public class MDSGraphPanel extends JPanel{
 
     /**
      * This method must called after
-     * {@link #initData(BirthmarkSet[], BirthmarkContext) <code>initData</code>}.
+     * {@link #initData(BirthmarkSet[], BirthmarkEnvironment) <code>initData</code>}.
      * Because this method uses calculated value in initData method.
      */
     private void initLayouts(double[][] matrix){

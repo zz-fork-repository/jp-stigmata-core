@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata;
 
 /*
- * $Id$
+ * $Id: BirthmarkContext.java 140 2007-06-28 10:48:47Z tama3 $
  */
 
 import java.beans.PropertyChangeEvent;
@@ -25,18 +25,18 @@ import jp.naist.se.stigmata.utils.WellknownClassManager;
 /**
  * This class represents the context for extracting/comparing birthmarks.
  * @author  Haruaki TAMADA
- * @version  $Revision$ $Date$
+ * @version  $Revision: 140 $ $Date: 2007-06-28 19:48:47 +0900 (Thu, 28 Jun 2007) $
  */
-public class BirthmarkContext{
+public class BirthmarkEnvironment{
     /**
      * Default context. All instance of this class is based on default context.
      */
-    private static BirthmarkContext DEFAULT_CONTEXT = new BirthmarkContext(true);
+    private static BirthmarkEnvironment DEFAULT_CONTEXT = new BirthmarkEnvironment(true);
 
     /**
      * parent of this context.
      */
-    private BirthmarkContext parent;
+    private BirthmarkEnvironment parent;
 
     /**
      * context for classpath.
@@ -77,7 +77,7 @@ public class BirthmarkContext{
     /**
      * constructor for root context
      */
-    private BirthmarkContext(boolean flag){
+    private BirthmarkEnvironment(boolean flag){
         manager = new WellknownClassManager();
         bytecodeContext = ClasspathContext.getDefaultContext();
         filterManager = new ComparisonPairFilterManager();
@@ -87,14 +87,14 @@ public class BirthmarkContext{
      * default constructor. The instance constructed by this constructor has
      * default context as the parent.
      */
-    public BirthmarkContext(){
+    public BirthmarkEnvironment(){
         this(getDefaultContext());
     }
 
     /**
      * constructor for specifying parent context.
      */
-    public BirthmarkContext(BirthmarkContext parent){
+    public BirthmarkEnvironment(BirthmarkEnvironment parent){
         this.parent = parent;
         this.manager = new WellknownClassManager(parent.getWellknownClassManager());
         this.bytecodeContext = new ClasspathContext(parent.getClasspathContext());
@@ -104,11 +104,11 @@ public class BirthmarkContext{
     /**
      * returns the default birthmark context.
      */
-    public static final BirthmarkContext getDefaultContext(){
+    public static final BirthmarkEnvironment getDefaultContext(){
         return DEFAULT_CONTEXT;
     }
 
-    public BirthmarkContext getParent(){
+    public BirthmarkEnvironment getParent(){
         return parent;
     }
 

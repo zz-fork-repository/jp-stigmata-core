@@ -16,7 +16,7 @@ public interface ComparisonResultSet extends Iterable<ComparisonPair>{
     /**
      * returns the birthmark context.
      */
-    public BirthmarkContext getContext();
+    public BirthmarkEnvironment getContext();
 
     /**
      * returns a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.

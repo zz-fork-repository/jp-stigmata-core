@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
 import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.ExtractionUnit;
@@ -36,7 +36,7 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
     }
 
     @Override
-    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException{
+    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment context) throws BirthmarkExtractionFailedException{
         BirthmarkElementClassNotFoundException e = new BirthmarkElementClassNotFoundException();
 
         try{

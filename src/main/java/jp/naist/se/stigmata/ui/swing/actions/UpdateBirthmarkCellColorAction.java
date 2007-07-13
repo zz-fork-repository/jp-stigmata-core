@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ui.swing.CompareTableCellRenderer;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.Utility;
@@ -24,16 +24,16 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private static final long serialVersionUID = 2390797591047570440L;
 
     private Component parent;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
     private JColorChooser chooser;
 
-    public UpdateBirthmarkCellColorAction(Component parent, BirthmarkContext context){
+    public UpdateBirthmarkCellColorAction(Component parent, BirthmarkEnvironment context){
         this.parent = parent;
         this.context = context;
     }
 
     public UpdateBirthmarkCellColorAction(Component parent){
-        this(parent, BirthmarkContext.getDefaultContext());
+        this(parent, BirthmarkEnvironment.getDefaultContext());
     }
 
     public void actionPerformed(ActionEvent e){

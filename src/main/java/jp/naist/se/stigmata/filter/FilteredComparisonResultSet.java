@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
@@ -57,7 +57,7 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         return resultset.getComparisonCount();
     }
 
-    public BirthmarkContext getContext(){
+    public BirthmarkEnvironment getContext(){
         return resultset.getContext();
     }
 

@@ -5,7 +5,7 @@ package jp.naist.se.stigmata.birthmarks.kgram;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -37,7 +37,7 @@ public class KGramBasedBirthmarkExtractor extends ASMBirthmarkExtractor{
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context){
         KGramBasedBirthmarkExtractVisitor extractor = new KGramBasedBirthmarkExtractVisitor(writer, birthmark, context);
         extractor.setKValue(getKValue());
         return extractor;

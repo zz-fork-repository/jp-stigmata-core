@@ -38,7 +38,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
 import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.BirthmarkSet;
@@ -70,7 +70,7 @@ public class StigmataFrame extends JFrame{
     private JMenuItem closeTabMenu;
     private JCheckBoxMenuItem expertmodeMenu;
     private Stigmata stigmata;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
     private ControlPane control;
     private FileIOManager fileio;
     private Map<String, Integer> countmap = new HashMap<String, Integer>();
@@ -83,7 +83,7 @@ public class StigmataFrame extends JFrame{
         this(stigmata, stigmata.createContext());
     }
 
-    public StigmataFrame(Stigmata stigmata, BirthmarkContext context){
+    public StigmataFrame(Stigmata stigmata, BirthmarkEnvironment context){
         this.stigmata = stigmata;
         this.context = context;
         this.fileio = new FileIOManager(this);
@@ -102,7 +102,7 @@ public class StigmataFrame extends JFrame{
         return stigmata;
     }
 
-    public BirthmarkContext getContext(){
+    public BirthmarkEnvironment getContext(){
         return context;
     }
 
@@ -152,7 +152,7 @@ public class StigmataFrame extends JFrame{
         control.removeBirthmarkServiceListener(listener);
     }
 
-    public void compareDetails(BirthmarkSet target1, BirthmarkSet target2, BirthmarkContext context){
+    public void compareDetails(BirthmarkSet target1, BirthmarkSet target2, BirthmarkEnvironment context){
         PairComparisonPane detail = new PairComparisonPane(
             this, new ComparisonPair(target1, target2, context)
         );
@@ -170,7 +170,7 @@ public class StigmataFrame extends JFrame{
     }
 
     public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY, 
-                                   BirthmarkContext context){
+                                   BirthmarkEnvironment context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
@@ -193,7 +193,7 @@ public class StigmataFrame extends JFrame{
     }
 
     public void compareRoundRobin(String[] birthmarks, String[] targetX, String[] targetY, 
-                                   String[] filterNames, BirthmarkContext context){
+                                   String[] filterNames, BirthmarkEnvironment context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
@@ -218,7 +218,7 @@ public class StigmataFrame extends JFrame{
     }
 
     public void compareGuessedPair(String[] birthmarks, String[] targetX, String[] targetY,
-                                   BirthmarkContext context){
+                                   BirthmarkEnvironment context){
         try{
             BirthmarkSet[] x = stigmata.extract(birthmarks, targetX, context);
             BirthmarkSet[] y = stigmata.extract(birthmarks, targetY, context);
@@ -241,7 +241,7 @@ public class StigmataFrame extends JFrame{
     }
 
     public void compareSpecifiedPair(String[] birthmarks, String[] targetX, String[] targetY,
-                                     BirthmarkContext context){
+                                     BirthmarkEnvironment context){
         File file = getOpenFile(Messages.getStringArray("comparemapping.extension"),
                                 Messages.getString("comparemapping.description"));
 
@@ -300,7 +300,7 @@ public class StigmataFrame extends JFrame{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
-    public void showExtractionResult(BirthmarkSet[] set, BirthmarkContext context){
+    public void showExtractionResult(BirthmarkSet[] set, BirthmarkEnvironment context){
         int extractCount = getNextCount("extract");
         BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, context, set);
         Utility.addNewTab(
@@ -312,7 +312,7 @@ public class StigmataFrame extends JFrame{
         
     }
 
-    public void extract(String[] birthmarks, String[] targets, BirthmarkContext context){
+    public void extract(String[] birthmarks, String[] targets, BirthmarkEnvironment context){
         try{
             BirthmarkSet[] holders = stigmata.extract(birthmarks, targets, context);
             showExtractionResult(holders, context);

@@ -5,7 +5,7 @@ package jp.naist.se.stigmata.birthmarks.is;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
 import jp.naist.se.stigmata.birthmarks.NullBirthmarkElement;
@@ -21,7 +21,7 @@ import org.objectweb.asm.ClassVisitor;
  * @version $Revision$ $Date$
  */
 public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    public InheritanceStructureBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+    public InheritanceStructureBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
         super(visitor, birthmark, context);
     }
 

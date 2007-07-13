@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkComparator;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
@@ -60,9 +60,9 @@ public class RoundRobinComparisonResultPane extends JPanel{
     private JLabel classCount, comparisonCount, distinctionRatio;
     private JLabel average, minimum, maximum;
     private StigmataFrame stigmataFrame;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
-    public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkContext context,
+    public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkEnvironment context,
                                           BirthmarkSet[] birthmarksX, BirthmarkSet[] birthmarksY){
         this.stigmataFrame = stigmata;
         this.context = context;
@@ -112,7 +112,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         maximum.setText(Double.toString(max));
     }
 
-    private double compare(BirthmarkContext context, BirthmarkSet x, BirthmarkSet y){
+    private double compare(BirthmarkEnvironment context, BirthmarkSet x, BirthmarkSet y){
         double similarity = 0d;
         int count = 0;
 

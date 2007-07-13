@@ -27,7 +27,7 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonPair;
@@ -47,7 +47,7 @@ public class PairComparisonResultSetPane extends JPanel{
     private static final long serialVersionUID = 3298346465652354302L;
 
     private StigmataFrame frame;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
     private DefaultTableModel model = new PairComparisonResultSetTableModel();
     private JTable table = new JTable(model);
     private JLabel averageLabel, maximumLabel, minimumLabel;

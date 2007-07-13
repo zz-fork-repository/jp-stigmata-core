@@ -5,7 +5,7 @@ package jp.naist.se.stigmata.birthmarks.smc;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
 
 import org.objectweb.asm.ClassVisitor;
@@ -20,7 +20,7 @@ import org.objectweb.asm.MethodVisitor;
  * @version $Revision$ $Date$
  */
 public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    public SequentialMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+    public SequentialMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
         super(visitor, birthmark, context);
     }
 

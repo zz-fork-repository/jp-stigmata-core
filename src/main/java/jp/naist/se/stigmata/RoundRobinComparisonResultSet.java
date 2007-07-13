@@ -20,7 +20,7 @@ import java.util.Map;
 public class RoundRobinComparisonResultSet implements ComparisonResultSet{
     private List<BirthmarkSet> holders1;
     private List<BirthmarkSet> holders2;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
     private int compareCount;
     private boolean tablePair = true;
@@ -31,7 +31,7 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * the instance (created by this constructor) compares { a<->b, a<->c,
      * b<->c, }.
      */
-    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkContext context){
+    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkEnvironment context){
         this(holders1, context, false);
     }
 
@@ -42,7 +42,7 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * Otherwise, the instance compares { a<->b, a<->c, b<->c, } when
      * samePair is false.
      */
-    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkContext context,
+    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkEnvironment context,
                                           boolean samePair){
         this.holders1 = Arrays.asList(holders1);
         this.holders2 = Arrays.asList(holders1);
@@ -58,7 +58,7 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * a<->z, b<->x, b<->y, b<->z, c<->x, c<->y, c<->z, }.
      */
     public RoundRobinComparisonResultSet(final BirthmarkSet[] holders1, final BirthmarkSet[] holders2,
-                                          BirthmarkContext context){
+                                          BirthmarkEnvironment context){
         this.holders1 = Arrays.asList(holders1);
         this.holders2 = Arrays.asList(holders2);
         this.context = context;
@@ -70,7 +70,7 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
     /**
      * @return  context
      */
-    public BirthmarkContext getContext(){
+    public BirthmarkEnvironment getContext(){
         return context;
     }
 

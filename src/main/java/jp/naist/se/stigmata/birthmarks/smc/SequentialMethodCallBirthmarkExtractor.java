@@ -5,7 +5,7 @@ package jp.naist.se.stigmata.birthmarks.smc;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -27,7 +27,7 @@ public class SequentialMethodCallBirthmarkExtractor extends ASMBirthmarkExtracto
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context){
         return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context);
     }
 

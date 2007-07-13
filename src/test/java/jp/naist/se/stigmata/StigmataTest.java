@@ -16,7 +16,7 @@ import org.junit.Test;
  * @version $Revision$ $Date$
  */
 public class StigmataTest{
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
     @Before
     public void prepare(){

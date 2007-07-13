@@ -27,7 +27,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 
 /**
  * 
@@ -48,7 +48,7 @@ public class PropertyEditPane extends JPanel{
         initData();
     }
 
-    public void updateContext(BirthmarkContext context){
+    public void updateContext(BirthmarkEnvironment context){
         context.clearProperties();
         for(int i = 0; i < model.getRowCount(); i++){
             context.addProperty(
@@ -59,7 +59,7 @@ public class PropertyEditPane extends JPanel{
     }
 
     private void initData(){
-        BirthmarkContext context = stigmata.getContext();
+        BirthmarkEnvironment context = stigmata.getContext();
         context.addPropertyListener(new PropertyChangeListener(){
             public void propertyChange(PropertyChangeEvent evt){
                 String name = evt.getPropertyName();

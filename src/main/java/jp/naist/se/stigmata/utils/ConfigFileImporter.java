@@ -15,7 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.birthmarks.BirthmarkService;
@@ -31,9 +31,9 @@ import org.xml.sax.helpers.DefaultHandler;
  * @version $Revision$ $Date$
  */
 public class ConfigFileImporter{
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
-    public ConfigFileImporter(BirthmarkContext context){
+    public ConfigFileImporter(BirthmarkEnvironment context){
         this.context = context;
     }
 
@@ -41,7 +41,7 @@ public class ConfigFileImporter{
         // generate context.
     }
 
-    public BirthmarkContext parse(InputStream in) throws IOException{
+    public BirthmarkEnvironment parse(InputStream in) throws IOException{
         try{
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
@@ -57,11 +57,11 @@ public class ConfigFileImporter{
         }
     }
 
-    public BirthmarkContext getContext(){
+    public BirthmarkEnvironment getContext(){
         return context;
     }
 
-    public void setContext(BirthmarkContext context){
+    public void setContext(BirthmarkEnvironment context){
         this.context = context;
     }
 
@@ -70,7 +70,7 @@ public class ConfigFileImporter{
     }
 
     private static class Handler extends DefaultHandler{
-        private BirthmarkContext context;
+        private BirthmarkEnvironment context;
         private WellknownClassManager manager;
         private BirthmarkService service;
         private ComparisonPairFilterSet filter;
@@ -82,15 +82,15 @@ public class ConfigFileImporter{
         private String filterType, filterCriterion, attributeName;
         private Map<String, String> filterAttributes = new HashMap<String, String>();
 
-        public Handler(BirthmarkContext context){
+        public Handler(BirthmarkEnvironment context){
             if(context == null){
-                context = new BirthmarkContext();
+                context = new BirthmarkEnvironment();
             }
             this.context = context;
             this.manager = context.getWellknownClassManager();
         }
 
-        public BirthmarkContext getContext(){
+        public BirthmarkEnvironment getContext(){
             return context;
         }
 

@@ -10,7 +10,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 
 /**
  *
@@ -21,9 +21,9 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
     private static final long serialVersionUID = 234557758658567345L;
     private static final double EPSILON = 1E-8d;
 
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
-    public CompareTableCellRenderer(BirthmarkContext context){
+    public CompareTableCellRenderer(BirthmarkEnvironment context){
         this.context = context;
     }
 
@@ -69,7 +69,7 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
         return c;
     }
 
-    public static Color getBackgroundColor(int rank, BirthmarkContext context){
+    public static Color getBackgroundColor(int rank, BirthmarkEnvironment context){
         Color c = getColor("backcolor_" + rank, context);
         if(c == null){
             return getDefaultBackgroundColor(rank);
@@ -77,7 +77,7 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
         return c;
     }
 
-    public static Color getForegroundColor(int rank, BirthmarkContext context){
+    public static Color getForegroundColor(int rank, BirthmarkEnvironment context){
         Color c = getColor("forecolor_" + rank, context);
         if(c == null){
             c = getDefaultForegroundColor(rank);
@@ -85,7 +85,7 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
         return c;
     }
 
-    private static Color getColor(String key, BirthmarkContext context){
+    private static Color getColor(String key, BirthmarkEnvironment context){
         String v = context.getProperty(key);
         try{
             int color = Integer.parseInt(v, 16);

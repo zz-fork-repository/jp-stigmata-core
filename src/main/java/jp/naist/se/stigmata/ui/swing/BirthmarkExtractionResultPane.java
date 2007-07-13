@@ -15,7 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
 import jp.naist.se.stigmata.format.FormatManager;
@@ -32,7 +32,7 @@ public class BirthmarkExtractionResultPane extends JPanel{
     private List<BirthmarkSet> birthmarks;
     private StigmataFrame frame;
 
-    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkContext context, BirthmarkSet[] sets){
+    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkEnvironment context, BirthmarkSet[] sets){
         this.frame = stigmataFrame;
         this.birthmarks = Arrays.asList(sets);
 

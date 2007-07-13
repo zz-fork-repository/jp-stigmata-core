@@ -34,7 +34,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.birthmarks.BirthmarkService;
 import jp.naist.se.stigmata.spi.BirthmarkComparatorSpi;
 import jp.naist.se.stigmata.spi.BirthmarkExtractorSpi;
@@ -80,7 +80,7 @@ public class BirthmarkDefinitionPane extends JPanel{
         }
     }
 
-    public void updateContext(BirthmarkContext context){
+    public void updateContext(BirthmarkEnvironment context){
         for(BirthmarkSpi service: addedService){
             if(context.getService(service.getType()) == null){
                 if(service instanceof BirthmarkService){
@@ -282,7 +282,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             if(selectedComparator != null){
                 comparatorClass = selectedComparator.toString();
             }
-            BirthmarkContext context = stigmata.getContext();
+            BirthmarkEnvironment context = stigmata.getContext();
 
             boolean flag = newType.length() > 0
                     && displayType.getText().length() > 0

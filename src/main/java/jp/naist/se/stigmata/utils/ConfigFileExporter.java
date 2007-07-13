@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.birthmarks.BirthmarkService;
@@ -24,13 +24,13 @@ import org.apache.commons.beanutils.BeanUtils;
  * @version $Revision$ $Date$
  */
 public class ConfigFileExporter{
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
-    public ConfigFileExporter(BirthmarkContext context){
+    public ConfigFileExporter(BirthmarkEnvironment context){
         this.context = context;
     }
 
-    public void export(BirthmarkContext context, PrintWriter out) throws IOException{
+    public void export(BirthmarkEnvironment context, PrintWriter out) throws IOException{
         new ConfigFileExporter(context).export(out);
     }
 

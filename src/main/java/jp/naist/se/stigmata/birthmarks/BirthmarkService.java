@@ -7,7 +7,7 @@ package jp.naist.se.stigmata.birthmarks;
 import java.lang.reflect.Constructor;
 
 import jp.naist.se.stigmata.BirthmarkComparator;
-import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -27,16 +27,16 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     private BirthmarkExtractor extractorObject;
     private BirthmarkComparator comparatorObject;
     private boolean userDefined = true;
-    private BirthmarkContext context;
+    private BirthmarkEnvironment context;
 
-    public BirthmarkService(BirthmarkContext context){
+    public BirthmarkService(BirthmarkEnvironment context){
         this.context = context;
     }
 
     public BirthmarkService(){
     }
 
-    public void setBirthmarkContext(BirthmarkContext context){
+    public void setBirthmarkContext(BirthmarkEnvironment context){
         this.context = context;
     }
 
