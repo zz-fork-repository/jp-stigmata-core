@@ -21,14 +21,14 @@ import org.objectweb.asm.ClassVisitor;
  * @version $Revision$ $Date$
  */
 public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    public InheritanceStructureBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
-        super(visitor, birthmark, context);
+    public InheritanceStructureBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
+        super(visitor, birthmark, environment);
     }
 
     public void visit(int version, int access, String name, String signature,
                       String superName, String[] interfaces){
         try {
-            Class c = getContext().getClasspathContext().findClass(name.replace('/', '.'));
+            Class c = getEnvironment().getClasspathContext().findClass(name.replace('/', '.'));
             if(c != null && !c.isInterface()){
                 addISBirthmark(c);
             }
@@ -38,7 +38,7 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
     }
 
     private void addISBirthmark(Class c){
-        WellknownClassManager wcm = getContext().getWellknownClassManager();
+        WellknownClassManager wcm = getEnvironment().getWellknownClassManager();
         do{
             String className = c.getName();
 

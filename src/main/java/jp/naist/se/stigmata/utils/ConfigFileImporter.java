@@ -31,25 +31,25 @@ import org.xml.sax.helpers.DefaultHandler;
  * @version $Revision$ $Date$
  */
 public class ConfigFileImporter{
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
-    public ConfigFileImporter(BirthmarkEnvironment context){
-        this.context = context;
+    public ConfigFileImporter(BirthmarkEnvironment environment){
+        this.environment = environment;
     }
 
     public ConfigFileImporter(){
-        // generate context.
+        // generate environment.
     }
 
     public BirthmarkEnvironment parse(InputStream in) throws IOException{
         try{
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
-            Handler handler = new Handler(getContext());
+            Handler handler = new Handler(getEnvironment());
             parser.parse(in, handler);
-            this.context = handler.getContext();
+            this.environment = handler.getEnvironment();
 
-            return context;
+            return environment;
         }catch(ParserConfigurationException e){
             throw new IOException(e.getMessage());
         }catch(SAXException e){
@@ -57,12 +57,8 @@ public class ConfigFileImporter{
         }
     }
 
-    public BirthmarkEnvironment getContext(){
-        return context;
-    }
-
-    public void setContext(BirthmarkEnvironment context){
-        this.context = context;
+    public BirthmarkEnvironment getEnvironment(){
+        return environment;
     }
 
     private static enum Part{
@@ -70,7 +66,7 @@ public class ConfigFileImporter{
     }
 
     private static class Handler extends DefaultHandler{
-        private BirthmarkEnvironment context;
+        private BirthmarkEnvironment environment;
         private WellknownClassManager manager;
         private BirthmarkService service;
         private ComparisonPairFilterSet filter;
@@ -82,16 +78,16 @@ public class ConfigFileImporter{
         private String filterType, filterCriterion, attributeName;
         private Map<String, String> filterAttributes = new HashMap<String, String>();
 
-        public Handler(BirthmarkEnvironment context){
-            if(context == null){
-                context = new BirthmarkEnvironment();
+        public Handler(BirthmarkEnvironment environment){
+            if(environment == null){
+                environment = new BirthmarkEnvironment();
             }
-            this.context = context;
-            this.manager = context.getWellknownClassManager();
+            this.environment = environment;
+            this.manager = environment.getWellknownClassManager();
         }
 
-        public BirthmarkEnvironment getContext(){
-            return context;
+        public BirthmarkEnvironment getEnvironment(){
+            return environment;
         }
 
         @Override
@@ -162,7 +158,7 @@ public class ConfigFileImporter{
                         key = value;
                     }
                     else if(qname.equals("value")){
-                        context.addProperty(key, value);
+                        environment.addProperty(key, value);
                     }
                 }
                 else if(part == Part.WELLKNOWN_CLASSES
@@ -173,7 +169,7 @@ public class ConfigFileImporter{
                 }
                 else if(part == Part.CLASSPATH && qname.equals("classpath")){
                     try{
-                        context.getClasspathContext().addClasspath(
+                        environment.getClasspathContext().addClasspath(
                                 new URL(value));
                     }catch(MalformedURLException e){
                         throw new SAXException(e);
@@ -224,18 +220,18 @@ public class ConfigFileImporter{
         @Override
         public void endElement(String uri, String localname, String qname){
             if(part == Part.SERVICES && qname.equals("birthmark-service")){
-                context.addService(service);
+                environment.addService(service);
                 service = null;
             }
             else if(part == Part.FILTER_DEFINITION && qname.equals("filter")){
-                ComparisonPairFilter f = context.getFilterManager().buildFilter(
+                ComparisonPairFilter f = environment.getFilterManager().buildFilter(
                     filterType, filterCriterion, filterAttributes
                 );
                 filter.addFilter(f);
                 part = Part.FILTER_SET;
             }
             else if(part == Part.FILTER_SET && qname.equals("filterset")){
-                context.getFilterManager().addFilterSet(filter);
+                environment.getFilterManager().addFilterSet(filter);
             }
         }
     }

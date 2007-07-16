@@ -21,10 +21,10 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
     private static final long serialVersionUID = 234557758658567345L;
     private static final double EPSILON = 1E-8d;
 
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
-    public CompareTableCellRenderer(BirthmarkEnvironment context){
-        this.context = context;
+    public CompareTableCellRenderer(BirthmarkEnvironment environment){
+        this.environment = environment;
     }
 
     public Component getTableCellRendererComponent(JTable table, Object obj, boolean isSelected,
@@ -43,8 +43,8 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
             else if((d - 0.8d) < EPSILON) rank = 4;
             else if((d - 1.0d) < EPSILON) rank = 5;
 
-            c.setBackground(getBackgroundColor(rank, context));
-            c.setForeground(getForegroundColor(rank, context));
+            c.setBackground(getBackgroundColor(rank, environment));
+            c.setForeground(getForegroundColor(rank, environment));
         }
 
         return c;
@@ -69,24 +69,24 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
         return c;
     }
 
-    public static Color getBackgroundColor(int rank, BirthmarkEnvironment context){
-        Color c = getColor("backcolor_" + rank, context);
+    public static Color getBackgroundColor(int rank, BirthmarkEnvironment environment){
+        Color c = getColor("backcolor_" + rank, environment);
         if(c == null){
             return getDefaultBackgroundColor(rank);
         }
         return c;
     }
 
-    public static Color getForegroundColor(int rank, BirthmarkEnvironment context){
-        Color c = getColor("forecolor_" + rank, context);
+    public static Color getForegroundColor(int rank, BirthmarkEnvironment environment){
+        Color c = getColor("forecolor_" + rank, environment);
         if(c == null){
             c = getDefaultForegroundColor(rank);
         }
         return c;
     }
 
-    private static Color getColor(String key, BirthmarkEnvironment context){
-        String v = context.getProperty(key);
+    private static Color getColor(String key, BirthmarkEnvironment environment){
+        String v = environment.getProperty(key);
         try{
             int color = Integer.parseInt(v, 16);
 

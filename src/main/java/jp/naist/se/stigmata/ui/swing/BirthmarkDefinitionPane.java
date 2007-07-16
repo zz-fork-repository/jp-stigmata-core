@@ -80,13 +80,13 @@ public class BirthmarkDefinitionPane extends JPanel{
         }
     }
 
-    public void updateContext(BirthmarkEnvironment context){
+    public void updateEnvironment(BirthmarkEnvironment environment){
         for(BirthmarkSpi service: addedService){
-            if(context.getService(service.getType()) == null){
+            if(environment.getService(service.getType()) == null){
                 if(service instanceof BirthmarkService){
-                    ((BirthmarkService)service).setBirthmarkContext(context);
+                    ((BirthmarkService)service).setBirthmarkEnvironment(environment);
                 }
-                context.addService(service);
+                environment.addService(service);
             }
         }
     }
@@ -95,7 +95,7 @@ public class BirthmarkDefinitionPane extends JPanel{
         information.initData();
         model.addElement(Messages.getString("newservice.definition.label"));
 
-        for(BirthmarkSpi service: stigmata.getContext().findServices()){
+        for(BirthmarkSpi service: stigmata.getEnvironment().findServices()){
             model.addElement(service);
         }
     }
@@ -282,7 +282,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             if(selectedComparator != null){
                 comparatorClass = selectedComparator.toString();
             }
-            BirthmarkEnvironment context = stigmata.getContext();
+            BirthmarkEnvironment environment = stigmata.getEnvironment();
 
             boolean flag = newType.length() > 0
                     && displayType.getText().length() > 0
@@ -290,13 +290,13 @@ public class BirthmarkDefinitionPane extends JPanel{
                     && comparatorClass.length() > 0;
 
             // check inputed type is free
-            flag = flag && context.getService(newType) == null;
+            flag = flag && environment.getService(newType) == null;
 
             // check extractor/comparator classes are available
             try{
                 flag = flag
-                    && context.getClasspathContext().find(extractorClass) != null
-                    && context.getClasspathContext().find(comparatorClass) != null;
+                    && environment.getClasspathContext().find(extractorClass) != null
+                    && environment.getClasspathContext().find(comparatorClass) != null;
             } catch(ClassNotFoundException e){
                 flag = false;
             }

@@ -20,7 +20,7 @@ import java.util.Map;
 public class RoundRobinComparisonResultSet implements ComparisonResultSet{
     private List<BirthmarkSet> holders1;
     private List<BirthmarkSet> holders2;
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
     private int compareCount;
     private boolean tablePair = true;
@@ -31,8 +31,8 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * the instance (created by this constructor) compares { a<->b, a<->c,
      * b<->c, }.
      */
-    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkEnvironment context){
-        this(holders1, context, false);
+    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkEnvironment environment){
+        this(holders1, environment, false);
     }
 
     /**
@@ -42,11 +42,11 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * Otherwise, the instance compares { a<->b, a<->c, b<->c, } when
      * samePair is false.
      */
-    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkEnvironment context,
+    public RoundRobinComparisonResultSet(BirthmarkSet[] holders1, BirthmarkEnvironment environment,
                                           boolean samePair){
         this.holders1 = Arrays.asList(holders1);
         this.holders2 = Arrays.asList(holders1);
-        this.context = context;
+        this.environment = environment;
 
         tablePair = false;
         setCompareSamePair(samePair);
@@ -58,20 +58,20 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
      * a<->z, b<->x, b<->y, b<->z, c<->x, c<->y, c<->z, }.
      */
     public RoundRobinComparisonResultSet(final BirthmarkSet[] holders1, final BirthmarkSet[] holders2,
-                                          BirthmarkEnvironment context){
+                                          BirthmarkEnvironment environment){
         this.holders1 = Arrays.asList(holders1);
         this.holders2 = Arrays.asList(holders2);
-        this.context = context;
+        this.environment = environment;
         tablePair = true;
 
         this.compareCount = holders1.length * holders2.length;
     }
 
     /**
-     * @return  context
+     * @return  environment
      */
-    public BirthmarkEnvironment getContext(){
-        return context;
+    public BirthmarkEnvironment getEnvironment(){
+        return environment;
     }
 
     /**
@@ -143,7 +143,7 @@ public class RoundRobinComparisonResultSet implements ComparisonResultSet{
                 i = 0;
                 j++;
             }
-            ComparisonPair pair = new ComparisonPair(holders1.get(i), holders2.get(j), context);
+            ComparisonPair pair = new ComparisonPair(holders1.get(i), holders2.get(j), environment);
             count++;
             i++;
             return pair;

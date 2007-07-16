@@ -28,8 +28,8 @@ public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmark
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context) {
-        return new ConstantValueOfFieldVariableBirthmarkExtractVisitor(writer, birthmark, context);
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment) {
+        return new ConstantValueOfFieldVariableBirthmarkExtractVisitor(writer, birthmark, environment);
     }
 
     public ExtractionUnit[] getAcceptableUnits(){

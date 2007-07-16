@@ -18,20 +18,20 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * Export birthmark context to xml file.
+ * Export birthmark environment to xml file.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
 public class ConfigFileExporter{
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
-    public ConfigFileExporter(BirthmarkEnvironment context){
-        this.context = context;
+    public ConfigFileExporter(BirthmarkEnvironment environment){
+        this.environment = environment;
     }
 
-    public void export(BirthmarkEnvironment context, PrintWriter out) throws IOException{
-        new ConfigFileExporter(context).export(out);
+    public void export(BirthmarkEnvironment environment, PrintWriter out) throws IOException{
+        new ConfigFileExporter(environment).export(out);
     }
 
     public void export(PrintWriter out) throws IOException{
@@ -50,9 +50,9 @@ public class ConfigFileExporter{
 
     private void exportProperties(PrintWriter out) throws IOException{
         out.println("  <properties>");
-        for(Iterator<String> i = context.propertyKeys(); i.hasNext(); ){
+        for(Iterator<String> i = environment.propertyKeys(); i.hasNext(); ){
             String key = i.next();
-            String value = context.getProperty(key);
+            String value = environment.getProperty(key);
             out.println("    <property>");
             out.printf("      <name>%s</name>%n", key);
             out.printf("      <value>%s</value>%n", value);
@@ -63,7 +63,7 @@ public class ConfigFileExporter{
 
     private void exportClasspath(PrintWriter out) throws IOException{
         out.println("  <classpath-list>");
-        for(URL location: context.getClasspathContext()){
+        for(URL location: environment.getClasspathContext()){
             out.printf("    <classpath>%s</classpath>%n", location.toString());
         }
         out.println("  </classpath-list>");
@@ -71,7 +71,7 @@ public class ConfigFileExporter{
 
     private void exportWellknownClasses(PrintWriter out) throws IOException{
         out.println("  <wellknown-classes>");
-        for(WellknownClassJudgeRule rule: context.getWellknownClassManager().getSections()){
+        for(WellknownClassJudgeRule rule: environment.getWellknownClassManager().getSections()){
             int partType = rule.getMatchPartType();
             int match = rule.getMatchType();
             String value = rule.getName();
@@ -95,7 +95,7 @@ public class ConfigFileExporter{
 
     private void exportFilters(PrintWriter out) throws IOException{
         out.println("  <filterset-list>");
-        for(ComparisonPairFilterSet filterset: context.getFilterManager().getFilterSets()){
+        for(ComparisonPairFilterSet filterset: environment.getFilterManager().getFilterSets()){
             out.println("    <filterset>");
             out.printf("      <name>%s</name>%n", filterset.getName());
             out.printf("      <match>%s</match>%n", filterset.isMatchAll()? "all": "any");
@@ -132,7 +132,7 @@ public class ConfigFileExporter{
 
     private void exportServices(PrintWriter out) throws IOException{
         out.println("  <birthmark-services>");
-        for(BirthmarkSpi service: context.getServices()){
+        for(BirthmarkSpi service: environment.getServices()){
             if(service.isExpert() && service instanceof BirthmarkService){
                 out.println("    <birthmark-service>");
                 out.printf("      <type>%s</type>%n", service.getType());

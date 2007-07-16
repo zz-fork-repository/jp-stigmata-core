@@ -14,9 +14,9 @@ import java.util.Iterator;
  */
 public interface ComparisonResultSet extends Iterable<ComparisonPair>{
     /**
-     * returns the birthmark context.
+     * returns the birthmark environment.
      */
-    public BirthmarkEnvironment getContext();
+    public BirthmarkEnvironment getEnvironment();
 
     /**
      * returns a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.

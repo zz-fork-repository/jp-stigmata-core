@@ -61,12 +61,12 @@ public class RoundRobinComparisonResultPane extends JPanel{
     private JLabel classCount, comparisonCount, distinctionRatio;
     private JLabel average, minimum, maximum;
     private StigmataFrame stigmataFrame;
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
-    public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkEnvironment context,
+    public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkEnvironment environment,
                                           BirthmarkSet[] birthmarksX, BirthmarkSet[] birthmarksY){
         this.stigmataFrame = stigmata;
-        this.context = context;
+        this.environment = environment;
         this.birthmarksX = Arrays.asList(birthmarksX);
         this.birthmarksY = Arrays.asList(birthmarksY);
 
@@ -92,7 +92,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             rows[0] = birthmarksY.get(j).getName();
 
             for(int i = 0; i < birthmarksX.size(); i++){
-                double similarity = compare(context, birthmarksX.get(i), birthmarksY.get(j));
+                double similarity = compare(environment, birthmarksX.get(i), birthmarksY.get(j));
                 rows[i + 1] = new Double(similarity);
 
                 if(Math.abs(similarity - 1) < 1E-8){
@@ -113,7 +113,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         maximum.setText(Double.toString(max));
     }
 
-    private double compare(BirthmarkEnvironment context, BirthmarkSet x, BirthmarkSet y){
+    private double compare(BirthmarkEnvironment environment, BirthmarkSet x, BirthmarkSet y){
         double similarity = 0d;
         int count = 0;
 
@@ -121,7 +121,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             Birthmark b1 = x.getBirthmark(type);
             Birthmark b2 = y.getBirthmark(type);
             if(b1 != null && b2 != null){
-                BirthmarkComparator comparator = context.getService(type).getComparator();
+                BirthmarkComparator comparator = environment.getService(type).getComparator();
                 double result = comparator.compare(b1, b2);
                 if(result != Double.NaN){
                     similarity += result;
@@ -138,7 +138,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
         model = new RoundRobinComparisonResultSetTableModel();
         table = new JTable(model);
-        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(context));
+        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(environment));
         table.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 if(e.getClickCount() == 2){
@@ -149,7 +149,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
                         BirthmarkSet b1 = birthmarksX.get(col - 1);
                         BirthmarkSet b2 = birthmarksY.get(row);
 
-                        stigmataFrame.compareDetails(b1, b2, context);
+                        stigmataFrame.compareDetails(b1, b2, environment);
                     }
                 }
             }
@@ -232,7 +232,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
                     service.getComparisonResultFormat().printResult(out,
                         new RoundRobinComparisonResultSet(
                             birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
-                            birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]), context
+                            birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]), environment
                         )
                     );
                 }
@@ -242,7 +242,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         JButton obfuscate = Utility.createButton("obfuscate");
         JButton compare = Utility.createButton("guessedpair");
         JButton updateColor = Utility.createButton(
-            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, context)
+            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, environment)
         );
         JMenuItem mdsMenu = Utility.createJMenuItem("mdsmap");
 
@@ -310,7 +310,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
     private void compareRoundRobinWithFiltering(){
         FilterSelectionPane pane = new FilterSelectionPane(
-            context.getFilterManager()
+            environment.getFilterManager()
         );
         int returnValue = JOptionPane.showConfirmDialog(
             stigmataFrame, pane, Messages.getString("filterselection.dialog.title"),
@@ -323,12 +323,12 @@ public class RoundRobinComparisonResultPane extends JPanel{
             ComparisonResultSet resultset = new RoundRobinComparisonResultSet(
                 birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
                 birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
-                context
+                environment
             );
             
             ComparisonResultSet filterResultSet = new FilteredComparisonResultSet(
                 resultset,
-                context.getFilterManager().getFilterSets(filterSetList)
+                environment.getFilterManager().getFilterSets(filterSetList)
             );
             stigmataFrame.showComparisonResultSet(filterResultSet);
         }
@@ -338,7 +338,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         ComparisonResultSet resultset = new CertainPairComparisonResultSet(
             birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
             birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
-            context
+            environment
         );
         stigmataFrame.showComparisonResultSet(resultset);
     }
@@ -354,7 +354,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(
                 birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
                 birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
-                mapping, context
+                mapping, environment
             );
             stigmataFrame.showComparisonResultSet(resultset);
         }

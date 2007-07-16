@@ -48,10 +48,10 @@ public class PropertyEditPane extends JPanel{
         initData();
     }
 
-    public void updateContext(BirthmarkEnvironment context){
-        context.clearProperties();
+    public void updateEnvironment(BirthmarkEnvironment environment){
+        environment.clearProperties();
         for(int i = 0; i < model.getRowCount(); i++){
-            context.addProperty(
+            environment.addProperty(
                 (String)model.getValueAt(i, 0),
                 (String)model.getValueAt(i, 1)
             );
@@ -59,8 +59,8 @@ public class PropertyEditPane extends JPanel{
     }
 
     private void initData(){
-        BirthmarkEnvironment context = stigmata.getContext();
-        context.addPropertyListener(new PropertyChangeListener(){
+        BirthmarkEnvironment environment = stigmata.getEnvironment();
+        environment.addPropertyListener(new PropertyChangeListener(){
             public void propertyChange(PropertyChangeEvent evt){
                 String name = evt.getPropertyName();
                 String value = (String)evt.getNewValue();
@@ -72,9 +72,9 @@ public class PropertyEditPane extends JPanel{
                 }
             }
         });
-        for(Iterator<String> i = context.propertyKeys(); i.hasNext(); ){
+        for(Iterator<String> i = environment.propertyKeys(); i.hasNext(); ){
             String key = i.next();
-            model.addRow(new Object[] { key, context.getProperty(key), });
+            model.addRow(new Object[] { key, environment.getProperty(key), });
         }
     }
 

@@ -54,7 +54,7 @@ public class WellknownClassesSettingsPane extends JPanel{
 
     public WellknownClassesSettingsPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
-        this.manager = stigmata.getContext().getWellknownClassManager();
+        this.manager = stigmata.getEnvironment().getWellknownClassManager();
 
         initLayouts();
         initializeData();

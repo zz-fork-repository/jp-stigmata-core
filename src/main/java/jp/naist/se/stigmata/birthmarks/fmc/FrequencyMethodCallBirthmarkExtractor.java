@@ -30,8 +30,8 @@ public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context){
-        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context){
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment){
+        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, environment){
             @Override
             protected void addElement(String className, String methodName, String description){
                 addElement(new FrequencyBirthmarkElement(className + "#" + methodName + description));

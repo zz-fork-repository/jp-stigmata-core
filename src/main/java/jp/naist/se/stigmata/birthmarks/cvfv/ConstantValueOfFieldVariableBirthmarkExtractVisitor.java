@@ -29,8 +29,8 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
     private Map<String, TypeAndValueBirthmarkElement> elements = new LinkedHashMap<String, TypeAndValueBirthmarkElement>();
     private String className;
 
-    public ConstantValueOfFieldVariableBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
-        super(visitor, birthmark, context);
+    public ConstantValueOfFieldVariableBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
+        super(visitor, birthmark, environment);
     }
 
     public void visitEnd(){

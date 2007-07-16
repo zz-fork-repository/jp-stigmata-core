@@ -118,12 +118,12 @@ public class ControlPane extends JPanel{
         );
 
         if(file != null){
-            BirthmarkEnvironment context = generateContext();
+            BirthmarkEnvironment environment = generateEnvironment();
             if(!file.getName().endsWith(".xml")){
                 file = new File(file.getParent(), file.getName() + ".xml");
             }
 
-            ConfigFileExporter bce = new ConfigFileExporter(context);
+            ConfigFileExporter bce = new ConfigFileExporter(environment);
             try{
                 PrintWriter out = new PrintWriter(new FileWriter(file));
                 bce.export(out);
@@ -223,7 +223,7 @@ public class ControlPane extends JPanel{
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
-        BirthmarkEnvironment context = generateContext();
+        BirthmarkEnvironment environment = generateEnvironment();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         Set<String> targets = new HashSet<String>();
@@ -240,14 +240,14 @@ public class ControlPane extends JPanel{
 
         stigmata.extract(
             birthmarks.getSelectedServiceTypes(), 
-            targets.toArray(new String[targets.size()]), context
+            targets.toArray(new String[targets.size()]), environment
         );
     }
 
     private void compareRoundRobinWithFiltering(){
-        BirthmarkEnvironment context = generateContext();
+        BirthmarkEnvironment environment = generateEnvironment();
         FilterSelectionPane pane = new FilterSelectionPane(
-            context.getFilterManager()
+            environment.getFilterManager()
         );
         int returnValue = JOptionPane.showConfirmDialog(
             stigmata, pane, Messages.getString("filterselection.dialog.title"),
@@ -259,51 +259,51 @@ public class ControlPane extends JPanel{
 
             stigmata.compareRoundRobin(
                 birthmarks.getSelectedServiceTypes(), targetX.getValues(),
-                targetY.getValues(), filterSetList, context
+                targetY.getValues(), filterSetList, environment
             );
         }
     }
 
     private void compareRoundRobin(){
-        BirthmarkEnvironment context = generateContext();
+        BirthmarkEnvironment environment = generateEnvironment();
 
         stigmata.compareRoundRobin(
             birthmarks.getSelectedServiceTypes(), targetX.getValues(), 
-            targetY.getValues(), context
+            targetY.getValues(), environment
         );
     }
 
     private void compareSpecifiedPair(){
-        BirthmarkEnvironment context = generateContext();
+        BirthmarkEnvironment environment = generateEnvironment();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         stigmata.compareSpecifiedPair(birthmarks.getSelectedServiceTypes(), fileX,
-                fileY, context);
+                fileY, environment);
     }
 
     private void compareGuessedPair(){
-        BirthmarkEnvironment context = generateContext();
+        BirthmarkEnvironment environment = generateEnvironment();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
         stigmata.compareGuessedPair(birthmarks.getSelectedServiceTypes(), fileX,
-                fileY, context);
+                fileY, environment);
     }
 
-    private BirthmarkEnvironment generateContext(){
-        BirthmarkEnvironment context = stigmata.getStigmata().createContext();
-        ClasspathContext bytecode = context.getClasspathContext();
-        WellknownClassManager manager = context.getWellknownClassManager();
-        ComparisonPairFilterManager filterManager = context.getFilterManager();
+    private BirthmarkEnvironment generateEnvironment(){
+        BirthmarkEnvironment environment = stigmata.getStigmata().createEnvironment();
+        ClasspathContext bytecode = environment.getClasspathContext();
+        WellknownClassManager manager = environment.getWellknownClassManager();
+        ComparisonPairFilterManager filterManager = environment.getFilterManager();
 
-        context.setExtractionUnit(parseExtractionUnit());
+        environment.setExtractionUnit(parseExtractionUnit());
         classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
         filters.updateFilterManager(filterManager);
-        definition.updateContext(context);
-        properties.updateContext(context);
+        definition.updateEnvironment(environment);
+        properties.updateEnvironment(environment);
 
-        return context;
+        return environment;
     }
 
     private ExtractionUnit parseExtractionUnit(){

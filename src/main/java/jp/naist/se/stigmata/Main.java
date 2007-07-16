@@ -46,7 +46,7 @@ import org.xml.sax.SAXException;
  */
 public final class Main{
     private FormatManager manager = FormatManager.getInstance();
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
     /**
      * main process.
@@ -58,9 +58,9 @@ public final class Main{
 
         Stigmata stigmata = Stigmata.getInstance();
         stigmata.configuration(commandLine.getOptionValue("config-file"));
-        context = stigmata.createContext();
+        environment = stigmata.createEnvironment();
 
-        addClasspath(context.getClasspathContext(), commandLine);
+        addClasspath(environment.getClasspathContext(), commandLine);
 
         String[] birthmarks = getTargetBirthmarks(commandLine);
         String[] arguments = commandLine.getArgs();
@@ -98,7 +98,7 @@ public final class Main{
                 compareBirthmarks(stigmata, birthmarks, filters, arguments, format);
             }
             else if(mode.equals("gui")){
-                StigmataFrame frame = new StigmataFrame(stigmata, context);
+                StigmataFrame frame = new StigmataFrame(stigmata, environment);
                 frame.setVisible(true);
             }
         }
@@ -110,7 +110,7 @@ public final class Main{
     private void extractBirthmarks(Stigmata stigmata, String[] birthmarks,
                                      String[] args, String format){
         try{
-            BirthmarkSet[] sets = stigmata.extract(birthmarks, args, context);
+            BirthmarkSet[] sets = stigmata.extract(birthmarks, args, environment);
 
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkExtractionResultFormat formatter = spi.getExtractionResultFormat();
@@ -126,8 +126,8 @@ public final class Main{
     private void compareBirthmarks(Stigmata stigmata, String[] birthmarks,
                                      String[] filters, String[] args, String format){
         try{
-            BirthmarkSet[] sets = stigmata.extract(birthmarks, args, context);
-            ComparisonResultSet resultset = stigmata.compare(sets, context);
+            BirthmarkSet[] sets = stigmata.extract(birthmarks, args, environment);
+            ComparisonResultSet resultset = stigmata.compare(sets, environment);
             if(filters != null){
                 resultset = stigmata.filter(resultset, filters);
             }
@@ -142,7 +142,7 @@ public final class Main{
 
     private void listBirthmarks(Stigmata stigmata, String format){
         try{
-            BirthmarkSpi[] spis = stigmata.createContext().findServices();
+            BirthmarkSpi[] spis = stigmata.createEnvironment().findServices();
             ResultFormatSpi spi = manager.getService(format);
             BirthmarkServiceListFormat formatter = spi.getBirthmarkServiceListFormat();
 
@@ -156,7 +156,7 @@ public final class Main{
         String[] birthmarks = cl.getOptionValues("birthmark");
         if(birthmarks == null || birthmarks.length == 0){
             List<String> birthmarkList = new ArrayList<String>();
-            for(BirthmarkSpi service: context.getServices()){
+            for(BirthmarkSpi service: environment.getServices()){
                 if(!service.isExpert()){
                     birthmarkList.add(service.getType());
                 }
@@ -234,7 +234,7 @@ public final class Main{
                 out = new PrintWriter(new FileWriter(file));
             }
 
-            new ConfigFileExporter(context).export(out);
+            new ConfigFileExporter(environment).export(out);
             out.close();
         }catch(IOException e){
         }
@@ -254,7 +254,7 @@ public final class Main{
         );
         System.out.println();
         System.out.println("Available birthmarks:");
-        for(BirthmarkSpi service: context.getServices()){
+        for(BirthmarkSpi service: environment.getServices()){
             if(!service.isExpert()){
                 System.out.printf("    %-5s (%s): %s%n", service.getType(),
                         service.getDisplayType(), service.getDescription());
@@ -262,7 +262,7 @@ public final class Main{
         }
         System.out.println();
         System.out.println("Available filers:");
-        for(ComparisonPairFilterSet filterset: context.getFilterManager()
+        for(ComparisonPairFilterSet filterset: environment.getFilterManager()
                 .getFilterSets()){
             System.out.printf("    %s (%s)%n", filterset.getName(), filterset.isMatchAll()? "match all": "match any");
             for(ComparisonPairFilter filter: filterset){

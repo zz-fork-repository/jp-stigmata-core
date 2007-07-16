@@ -57,8 +57,8 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         return resultset.getComparisonCount();
     }
 
-    public BirthmarkEnvironment getContext(){
-        return resultset.getContext();
+    public BirthmarkEnvironment getEnvironment(){
+        return resultset.getEnvironment();
     }
 
     public Iterator<ComparisonPair> iterator(){

@@ -49,24 +49,24 @@ public class MDSGraphPanel extends JPanel{
     private MDSGraphViewer viewer;
 
     public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set){
-        this(stigmata, set, stigmata.getContext());
+        this(stigmata, set, stigmata.getEnvironment());
     }
 
-    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set, BirthmarkEnvironment context){
+    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set, BirthmarkEnvironment environment){
         this.stigmata = stigmata;
         this.set = set;
 
-        double[][] matrix = initData(set, context);
+        double[][] matrix = initData(set, environment);
         initLayouts(matrix);
     }
 
-    private double[][] initData(BirthmarkSet[] set, BirthmarkEnvironment context){
+    private double[][] initData(BirthmarkSet[] set, BirthmarkEnvironment environment){
         labels = new LabelMap();
         double[][] matrix = new double[set.length][set.length];
 
         for(int i = 0; i < set.length; i++){
             for(int j = 0; j <= i; j++){
-                ComparisonPair pair = new ComparisonPair(set[i], set[j], context);
+                ComparisonPair pair = new ComparisonPair(set[i], set[j], environment);
                 matrix[i][j] = 1d - pair.calculateSimilarity();
                 if(i != j){
                     matrix[j][i] = matrix[i][j];
@@ -103,7 +103,7 @@ public class MDSGraphPanel extends JPanel{
                 for(int i = 0; i < set.length; i++){
                     if(c.equals(set[i].getName())){
                         stigmata.showExtractionResult(
-                            new BirthmarkSet[]{ set[i], }, stigmata.getContext()
+                            new BirthmarkSet[]{ set[i], }, stigmata.getEnvironment()
                         );
                     }
                 }

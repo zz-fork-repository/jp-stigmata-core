@@ -25,19 +25,19 @@ import org.objectweb.asm.signature.SignatureWriter;
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,
-                                              BirthmarkEnvironment context){
-        super(visitor, birthmark, context);
+                                              BirthmarkEnvironment environment){
+        super(visitor, birthmark, environment);
     }
 
     public void visit(int version, int access, String name, String signature,
             String superName, String[] interfaces){
         addSignatureClass(signature);
 
-        if(getContext().getWellknownClassManager().isWellKnownClass(superName)){
+        if(getEnvironment().getWellknownClassManager().isWellKnownClass(superName)){
             add(superName);
         }
         for(String i: interfaces){
-            if(getContext().getWellknownClassManager().isWellKnownClass(i)){
+            if(getEnvironment().getWellknownClassManager().isWellKnownClass(i)){
                 add(i);
             }
         }
@@ -57,7 +57,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                                      String signature, String[] exceptions){
         if(exceptions != null){
             for(String exception: exceptions){
-                if(getContext().getWellknownClassManager().isWellKnownClass(exception)){
+                if(getEnvironment().getWellknownClassManager().isWellKnownClass(exception)){
                     add(exception);
                 }
             }
@@ -103,7 +103,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             }
 
             public void visitFieldInsn(int opcode, String owner, String name, String desc){
-                if(getContext().getWellknownClassManager().isWellKnownClass(owner)){
+                if(getEnvironment().getWellknownClassManager().isWellKnownClass(owner)){
                     add(normalize(owner));
                 }
                 addDescriptor(desc);
@@ -111,7 +111,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             }
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = normalize(owner);
-                if(getContext().getWellknownClassManager().isWellKnownClass(className)){
+                if(getEnvironment().getWellknownClassManager().isWellKnownClass(className)){
                     add(className);
                 }
                 addMethodDescriptor(desc);
@@ -125,7 +125,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             SignatureReader in = new SignatureReader(signature);
             SignatureWriter writer = new SignatureWriter(){
                 public void visitClassType(String classType){
-                    if(getContext().getWellknownClassManager().isWellKnownClass(classType)){
+                    if(getEnvironment().getWellknownClassManager().isWellKnownClass(classType)){
                         add(normalize(classType));
                     }
                 }
@@ -177,7 +177,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
 
         if(type.getSort() == Type.OBJECT){
             String className = type.getClassName();
-            if(getContext().getWellknownClassManager().isWellKnownClass(className)){
+            if(getEnvironment().getWellknownClassManager().isWellKnownClass(className)){
                 return true;
             }
         }

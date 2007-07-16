@@ -22,17 +22,17 @@ import org.objectweb.asm.ClassVisitor;
  */
 public abstract class BirthmarkExtractVisitor extends ClassAdapter{
     private Birthmark birthmark;
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
     private List<Throwable> causes = new ArrayList<Throwable>();
 
-    public BirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
+    public BirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
         super(visitor);
         this.birthmark = birthmark;
-        this.context = context;
+        this.environment = environment;
     }
 
-    protected BirthmarkEnvironment getContext(){
-        return context;
+    protected BirthmarkEnvironment getEnvironment(){
+        return environment;
     }
 
     protected void addElement(BirthmarkElement element){

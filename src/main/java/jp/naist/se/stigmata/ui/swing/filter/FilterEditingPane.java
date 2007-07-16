@@ -115,7 +115,7 @@ public class FilterEditingPane extends JPanel{
 
             ComparisonPairFilterPane pane = service.createComponent(service.getComparisonPairFilterService());
             if(pane instanceof BirthmarkServiceListener){
-                for(BirthmarkSpi bs: stigmata.getContext().getServices()){
+                for(BirthmarkSpi bs: stigmata.getEnvironment().getServices()){
                     ((BirthmarkServiceListener)pane).serviceAdded(bs);
                 }
                 stigmata.addBirthmarkServiceListener((BirthmarkServiceListener)pane);

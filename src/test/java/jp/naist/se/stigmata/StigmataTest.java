@@ -20,7 +20,7 @@ public class StigmataTest{
 
     @Before
     public void prepare(){
-        context = Stigmata.getInstance().createContext();
+        context = Stigmata.getInstance().createEnvironment();
     }
 
     @Test

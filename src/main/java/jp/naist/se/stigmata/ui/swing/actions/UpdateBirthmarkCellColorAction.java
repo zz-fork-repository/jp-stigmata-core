@@ -24,16 +24,16 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private static final long serialVersionUID = 2390797591047570440L;
 
     private Component parent;
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
     private JColorChooser chooser;
 
-    public UpdateBirthmarkCellColorAction(Component parent, BirthmarkEnvironment context){
+    public UpdateBirthmarkCellColorAction(Component parent, BirthmarkEnvironment environment){
         this.parent = parent;
-        this.context = context;
+        this.environment = environment;
     }
 
     public UpdateBirthmarkCellColorAction(Component parent){
-        this(parent, BirthmarkEnvironment.getDefaultContext());
+        this(parent, BirthmarkEnvironment.getDefaultEnvironment());
     }
 
     public void actionPerformed(ActionEvent e){
@@ -47,8 +47,8 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private JComponent createPanel(){
         Box panel = Box.createVerticalBox();
         for(int i = 0; i <= 5; i++){
-            Color fore = CompareTableCellRenderer.getForegroundColor(i, context);
-            Color back = CompareTableCellRenderer.getBackgroundColor(i, context);
+            Color fore = CompareTableCellRenderer.getForegroundColor(i, environment);
+            Color back = CompareTableCellRenderer.getBackgroundColor(i, environment);
 
             UpdateColorPane pane = new UpdateColorPane(i, fore, back);
             panel.add(pane);
@@ -110,13 +110,13 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
                     c = updateColor(c, getRank(), foreground);
                     if(foreground){
                         label.setForeground(c);
-                        context.addProperty(
+                        environment.addProperty(
                             "forecolor_" + getRank(), String.format("%06x", c.getRGB() & 0xffffff)
                         );
                     }
                     else{
                         label.setBackground(c);
-                        context.addProperty(
+                        environment.addProperty(
                             "backcolor_" + getRank(), String.format("%06x", c.getRGB() & 0xffffff)
                         );
                     }

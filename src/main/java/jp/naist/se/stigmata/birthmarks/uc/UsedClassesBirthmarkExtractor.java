@@ -28,8 +28,8 @@ public class UsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context){
-        return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, context);
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment){
+        return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, environment);
     }
 
     public ExtractionUnit[] getAcceptableUnits(){

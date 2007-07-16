@@ -46,14 +46,14 @@ public interface BirthmarkExtractor{
     public Birthmark extract(byte[] bytecode) throws BirthmarkExtractionFailedException;
 
     /**
-     * extract birthmark from given stream with given context.
+     * extract birthmark from given stream with given environment.
      */
-    public Birthmark extract(InputStream in, BirthmarkEnvironment context) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(InputStream in, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
 
     /**
-     * extract birthmark from given byte array with given context.
+     * extract birthmark from given byte array with given environment.
      */
-    public Birthmark extract(byte[] bytecode, BirthmarkEnvironment context) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(byte[] bytecode, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
 
     /**
      * extract birthmark from given stream and add element to given birthmark object.
@@ -66,12 +66,12 @@ public interface BirthmarkExtractor{
     public Birthmark extract(Birthmark birthmark, byte[] bytecode) throws BirthmarkExtractionFailedException;
 
     /**
-     * extract birthmark from given stream with given context and add element to given birthmark object.
+     * extract birthmark from given stream with given environment and add element to given birthmark object.
      */
-    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment context) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
 
     /**
-     * extract birthmark from given byte array with given context and add element to given birthmark object.
+     * extract birthmark from given byte array with given environment and add element to given birthmark object.
      */
-    public Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkEnvironment context) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
 }

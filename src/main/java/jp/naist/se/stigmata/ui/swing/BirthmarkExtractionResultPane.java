@@ -33,7 +33,7 @@ public class BirthmarkExtractionResultPane extends JPanel{
     private List<BirthmarkSet> birthmarks;
     private StigmataFrame frame;
 
-    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkEnvironment context, BirthmarkSet[] sets){
+    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkEnvironment environment, BirthmarkSet[] sets){
         this.frame = stigmataFrame;
         this.birthmarks = Arrays.asList(sets);
 

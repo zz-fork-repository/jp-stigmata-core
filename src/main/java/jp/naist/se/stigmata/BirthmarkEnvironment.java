@@ -29,12 +29,12 @@ import jp.naist.se.stigmata.utils.WellknownClassManager;
  */
 public class BirthmarkEnvironment{
     /**
-     * Default context. All instance of this class is based on default context.
+     * Default environment. All instance of this class is based on default environment.
      */
-    private static BirthmarkEnvironment DEFAULT_CONTEXT = new BirthmarkEnvironment(true);
+    private static BirthmarkEnvironment DEFAULT_ENVIRONMENT = new BirthmarkEnvironment(true);
 
     /**
-     * parent of this context.
+     * parent of this environment.
      */
     private BirthmarkEnvironment parent;
 
@@ -70,12 +70,12 @@ public class BirthmarkEnvironment{
     private ComparisonPairFilterManager filterManager;
 
     /**
-     * birthmark extraction unit.
+     * @deprecated moved to BirthmarkContext
      */
-    private ExtractionUnit unit = ExtractionUnit.CLASS;
+    private ExtractionUnit unit;
 
     /**
-     * constructor for root context
+     * constructor for root environment
      */
     private BirthmarkEnvironment(boolean flag){
         manager = new WellknownClassManager();
@@ -85,14 +85,14 @@ public class BirthmarkEnvironment{
 
     /**
      * default constructor. The instance constructed by this constructor has
-     * default context as the parent.
+     * default environment as the parent.
      */
     public BirthmarkEnvironment(){
-        this(getDefaultContext());
+        this(getDefaultEnvironment());
     }
 
     /**
-     * constructor for specifying parent context.
+     * constructor for specifying parent environment.
      */
     public BirthmarkEnvironment(BirthmarkEnvironment parent){
         this.parent = parent;
@@ -102,10 +102,10 @@ public class BirthmarkEnvironment{
     }
 
     /**
-     * returns the default birthmark context.
+     * returns the default birthmark environment.
      */
-    public static final BirthmarkEnvironment getDefaultContext(){
-        return DEFAULT_CONTEXT;
+    public static final BirthmarkEnvironment getDefaultEnvironment(){
+        return DEFAULT_ENVIRONMENT;
     }
 
     public BirthmarkEnvironment getParent(){
@@ -188,7 +188,7 @@ public class BirthmarkEnvironment{
     }
 
     /**
-     * add given birthmark service to this context.
+     * add given birthmark service to this environment.
      */
     public synchronized void addService(BirthmarkSpi service){
         if(parent == null || parent.getService(service.getType()) == null){
@@ -197,7 +197,7 @@ public class BirthmarkEnvironment{
     }
 
     /**
-     * remove given birthmark service from this context.
+     * remove given birthmark service from this environment.
      */
     public void removeService(String type){
         services.remove(type);
@@ -215,7 +215,7 @@ public class BirthmarkEnvironment{
     }
 
     /**
-     * return all birthmark services searching traverse to root context.
+     * return all birthmark services searching traverse to root environment.
      */
     public synchronized BirthmarkSpi[] getServices(){
         List<BirthmarkSpi> list = getServiceList();
@@ -251,7 +251,7 @@ public class BirthmarkEnvironment{
     }
 
     /**
-     * find the all birthmark services searching to root context.
+     * find the all birthmark services searching to root environment.
      */
     private List<BirthmarkSpi> getServiceList(){
         List<BirthmarkSpi> list = new ArrayList<BirthmarkSpi>();
@@ -270,11 +270,11 @@ public class BirthmarkEnvironment{
         return filterManager;
     }
 
-    public ExtractionUnit getExtractionUnit(){
-        return unit;
-    }
-
     public void setExtractionUnit(ExtractionUnit unit){
         this.unit = unit;
+    }
+
+    public ExtractionUnit getExtractionUnit(){
+        return unit;
     }
 }

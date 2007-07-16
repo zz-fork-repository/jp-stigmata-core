@@ -48,7 +48,7 @@ public class PairComparisonResultSetPane extends JPanel{
     private static final long serialVersionUID = 3298346465652354302L;
 
     private StigmataFrame frame;
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
     private DefaultTableModel model = new PairComparisonResultSetTableModel();
     private JTable table = new JTable(model);
     private JLabel averageLabel, maximumLabel, minimumLabel;
@@ -57,7 +57,7 @@ public class PairComparisonResultSetPane extends JPanel{
 
     public PairComparisonResultSetPane(StigmataFrame frame, ComparisonResultSet resultset){
         this.frame = frame;
-        this.context = resultset.getContext();
+        this.environment = resultset.getEnvironment();
 
         for(ComparisonPair pair: resultset){
             list.add(pair);
@@ -74,7 +74,7 @@ public class PairComparisonResultSetPane extends JPanel{
             BirthmarkSet set1 = obfuscator.obfuscateClassName(pair.getTarget1());
             BirthmarkSet set2 = obfuscator.obfuscateClassName(pair.getTarget2());
 
-            newList.add(new ComparisonPair(set1, set2, context));
+            newList.add(new ComparisonPair(set1, set2, environment));
         }
 
         try{
@@ -134,14 +134,14 @@ public class PairComparisonResultSetPane extends JPanel{
                     }
                     service.getComparisonResultFormat().printResult(
                         out, new CertainPairComparisonResultSet(
-                            list.toArray(new ComparisonPair[list.size()]), context
+                            list.toArray(new ComparisonPair[list.size()]), environment
                         )
                     );
                 }
             })
         );
         JButton updateColorButton = Utility.createButton(
-            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, context)
+            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, environment)
         );
         JButton obfuscateButton = Utility.createButton("obfuscate");
         JScrollPane scroll = new JScrollPane();
@@ -150,7 +150,7 @@ public class PairComparisonResultSetPane extends JPanel{
         minimumLabel = new JLabel(Double.toString(minimum), JLabel.RIGHT);
 
         scroll.setViewportView(table);
-        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(context));
+        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(environment));
         similarityPane.setBorder(new TitledBorder(Messages.getString("similarity.border")));
         averageLabel.setBorder(new TitledBorder(Messages.getString("average.border")));
         maximumLabel.setBorder(new TitledBorder(Messages.getString("maximum.border")));
@@ -181,7 +181,7 @@ public class PairComparisonResultSetPane extends JPanel{
                             && row < table.getRowCount()){
                         ComparisonPair pair = list.get(row);
 
-                        frame.compareDetails(pair.getTarget1(), pair.getTarget2(), context);
+                        frame.compareDetails(pair.getTarget1(), pair.getTarget2(), environment);
                     }
                 }
             }

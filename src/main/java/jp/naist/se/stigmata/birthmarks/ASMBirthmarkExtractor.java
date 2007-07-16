@@ -32,17 +32,17 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
     }
 
     public abstract BirthmarkExtractVisitor
-        createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context);
+        createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment);
 
     @Override
     public Birthmark extract(Birthmark birthmark, InputStream in,
-                             BirthmarkEnvironment context) throws BirthmarkExtractionFailedException{
+                             BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException{
         BirthmarkExtractionFailedException bee = new BirthmarkExtractionFailedException();
 
         try{
             ClassReader reader = new ClassReader(in);
             ClassWriter writer = new ClassWriter(false);
-            BirthmarkExtractVisitor visitor = createExtractVisitor(writer, birthmark, context);
+            BirthmarkExtractVisitor visitor = createExtractVisitor(writer, birthmark, environment);
             reader.accept(visitor, false);
 
             if(!visitor.isSuccess()){

@@ -55,7 +55,7 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         filterPane.reset();
         model.removeAllElements();
         
-        ComparisonPairFilterManager manager = stigmata.getContext().getFilterManager();
+        ComparisonPairFilterManager manager = stigmata.getEnvironment().getFilterManager();
         for(ComparisonPairFilterSet filterset: manager.getFilterSets()){
             addFilterSet(filterset);
         }

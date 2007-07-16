@@ -118,9 +118,9 @@ public final class Stigmata{
      * create a new {@link BirthmarkEnvironment <code>BirthmarkEnvironment</code>}.
      */
     public BirthmarkEnvironment createEnvironment(){
-        operationStart(OperationType.CREATE_CONTEXT);
+        operationStart(OperationType.CREATE_ENVIRONMENT);
         BirthmarkEnvironment environment = new BirthmarkEnvironment();
-        operationDone(OperationType.CREATE_CONTEXT);
+        operationDone(OperationType.CREATE_ENVIRONMENT);
         return environment;
     }
 

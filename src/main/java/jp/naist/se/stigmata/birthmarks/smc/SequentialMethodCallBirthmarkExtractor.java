@@ -27,8 +27,8 @@ public class SequentialMethodCallBirthmarkExtractor extends ASMBirthmarkExtracto
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment context){
-        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context);
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment){
+        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, environment);
     }
 
     @Override

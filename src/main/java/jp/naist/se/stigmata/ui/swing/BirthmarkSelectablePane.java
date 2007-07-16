@@ -138,7 +138,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     }
 
     private void initServices(){
-        BirthmarkSpi[] serviceArray = stigmata.getContext().getServices();
+        BirthmarkSpi[] serviceArray = stigmata.getEnvironment().getServices();
 
         services = new LinkedHashMap<String, BirthmarkSelection>();
         for(BirthmarkSpi service: serviceArray){

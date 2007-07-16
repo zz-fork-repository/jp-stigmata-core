@@ -27,27 +27,27 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     private BirthmarkExtractor extractorObject;
     private BirthmarkComparator comparatorObject;
     private boolean userDefined = true;
-    private BirthmarkEnvironment context;
+    private BirthmarkEnvironment environment;
 
-    public BirthmarkService(BirthmarkEnvironment context){
-        this.context = context;
+    public BirthmarkService(BirthmarkEnvironment environment){
+        this.environment = environment;
     }
 
     public BirthmarkService(){
     }
 
-    public void setBirthmarkContext(BirthmarkEnvironment context){
-        this.context = context;
+    public void setBirthmarkEnvironment(BirthmarkEnvironment environment){
+        this.environment = environment;
     }
 
     public void setExtractorClassName(String extractor){
         try{
             Class<?> c;
-            if(context == null){
+            if(environment == null){
                 c = Class.forName(extractor);
             }
             else{
-                c = context.getClasspathContext().findClass(extractor);
+                c = environment.getClasspathContext().findClass(extractor);
             }
             extractorClass = c.asSubclass(BirthmarkExtractor.class);
             extractorObject = null;
@@ -59,11 +59,11 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     public void setComparatorClassName(String comparator){
         try{
             Class<?> c;
-            if(context == null){
+            if(environment == null){
                 c = Class.forName(comparator);
             }
             else{
-                c = context.getClasspathContext().findClass(comparator);
+                c = environment.getClasspathContext().findClass(comparator);
             }
             comparatorClass = c.asSubclass(BirthmarkComparator.class);
             comparatorObject = null;

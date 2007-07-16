@@ -25,8 +25,8 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private int kvalue;
     private List<Integer> opcodes = new ArrayList<Integer>();
 
-    public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment context){
-        super(visitor, birthmark, context);
+    public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
+        super(visitor, birthmark, environment);
     }
 
     public int getKValue(){

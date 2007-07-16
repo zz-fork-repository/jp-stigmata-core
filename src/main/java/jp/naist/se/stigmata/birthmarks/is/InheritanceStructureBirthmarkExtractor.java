@@ -36,13 +36,13 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
     }
 
     @Override
-    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment context) throws BirthmarkExtractionFailedException{
+    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException{
         BirthmarkElementClassNotFoundException e = new BirthmarkElementClassNotFoundException();
 
         try{
             ClassReader reader = new ClassReader(in);
             ClassWriter writer = new ClassWriter(false);
-            BirthmarkExtractVisitor visitor = new InheritanceStructureBirthmarkExtractVisitor(writer, birthmark, context);
+            BirthmarkExtractVisitor visitor = new InheritanceStructureBirthmarkExtractVisitor(writer, birthmark, environment);
             reader.accept(visitor, false);
 
             if(!visitor.isSuccess()){
