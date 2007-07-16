@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata;
 
 /*
- * $Id: BirthmarkContext.java 140 2007-06-28 10:48:47Z tama3 $
+ * $Id$
  */
 
 import java.beans.PropertyChangeEvent;
@@ -25,7 +25,7 @@ import jp.naist.se.stigmata.utils.WellknownClassManager;
 /**
  * This class represents the context for extracting/comparing birthmarks.
  * @author  Haruaki TAMADA
- * @version  $Revision: 140 $ $Date: 2007-06-28 19:48:47 +0900 (Thu, 28 Jun 2007) $
+ * @version  $Revision$ $Date$
  */
 public class BirthmarkEnvironment{
     /**
