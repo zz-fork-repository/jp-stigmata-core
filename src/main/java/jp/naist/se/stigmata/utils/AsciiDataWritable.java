@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.ui.swing;
+package jp.naist.se.stigmata.utils;
 
 /*
  * $Id$
@@ -6,6 +6,8 @@ package jp.naist.se.stigmata.ui.swing;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
 
 /**
  *
