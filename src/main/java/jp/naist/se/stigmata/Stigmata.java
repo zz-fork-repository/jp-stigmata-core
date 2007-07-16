@@ -230,33 +230,11 @@ public final class Stigmata{
 
     public double compareDetails(BirthmarkSet h1, BirthmarkSet h2, BirthmarkEnvironment environment){
         operationStart(OperationType.COMPARE_DETAIL_BIRTHMARKS);
-
-        List<Double> list = new ArrayList<Double>();
-        int count = 0;
-        for(Iterator<String> i = h1.birthmarkTypes(); i.hasNext(); ){
-            String type = i.next();
-            Birthmark b1 = h1.getBirthmark(type);
-            Birthmark b2 = h2.getBirthmark(type);
-
-            double similarity = Double.NaN;
-            if(b1 != null && b2 != null){
-                BirthmarkSpi spi = environment.getService(type);
-                BirthmarkComparator comparator = spi.getComparator();
-
-                similarity = comparator.compare(b1, b2);
-                count++;
-            }
-            list.add(similarity);
-        }
-
-        double similarity = 0d;
-        for(Double d: list){
-            if(d.doubleValue() != Double.NaN){
-                similarity += d.doubleValue();
-            }
-        }
+        ComparisonPair pair = new ComparisonPair(h1, h2, environment);
+        double sim = pair.calculateSimilarity();
         operationDone(OperationType.COMPARE_DETAIL_BIRTHMARKS);
-        return similarity / count;
+
+        return sim;
     }
 
     private BirthmarkExtractor[] createExtractors(String[] birthmarkTypes, BirthmarkEnvironment environment){
