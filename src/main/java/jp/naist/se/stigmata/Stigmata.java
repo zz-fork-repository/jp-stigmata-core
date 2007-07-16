@@ -50,7 +50,7 @@ import org.apache.commons.beanutils.BeanUtils;
 public final class Stigmata{
     private static final Stigmata instance = new Stigmata();
 
-    private BirthmarkEnvironment defaultContext = BirthmarkEnvironment.getDefaultContext();
+    private BirthmarkEnvironment defaultEnvironment = BirthmarkEnvironment.getDefaultEnvironment();
     private boolean configDone = false;
     private Stack<WarningMessages> stack = new Stack<WarningMessages>();
     private WarningMessages warnings;
@@ -63,11 +63,11 @@ public final class Stigmata{
         return instance;
     }
 
-    public void addOperationListener(BirthmarkEngineListener listener){
+    public void addBirthmarkEngineListener(BirthmarkEngineListener listener){
         listeners.add(listener);
     }
 
-    public void removeOperationListener(BirthmarkEngineListener listener){
+    public void removeBirthmarkEngineListener(BirthmarkEngineListener listener){
         listeners.remove(listener);
     }
 
@@ -115,28 +115,28 @@ public final class Stigmata{
     }
 
     /**
-     * create a new {@link BirthmarkEnvironment <code>BirthmarkContext</code>}.
+     * create a new {@link BirthmarkEnvironment <code>BirthmarkEnvironment</code>}.
      */
-    public BirthmarkEnvironment createContext(){
+    public BirthmarkEnvironment createEnvironment(){
         operationStart(OperationType.CREATE_CONTEXT);
-        BirthmarkEnvironment context = new BirthmarkEnvironment();
-        operationDone(OperationType.EXTRACT_BIRTHMARKS);
-        return context;
+        BirthmarkEnvironment environment = new BirthmarkEnvironment();
+        operationDone(OperationType.CREATE_CONTEXT);
+        return environment;
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files) throws BirthmarkExtractionFailedException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
-        BirthmarkSet[] set = extract(birthmarks, files, createContext());
+        BirthmarkSet[] set = extract(birthmarks, files, createEnvironment());
         operationDone(OperationType.EXTRACT_BIRTHMARKS);
 
         return set;
     }
 
     public BirthmarkSet[] extract(String[] birthmarks, String[] files,
-                                  BirthmarkEnvironment context) throws BirthmarkExtractionFailedException{
+                                  BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
         try{
-            return extractImpl(birthmarks, files, context);
+            return extractImpl(birthmarks, files, environment);
         } catch(IOException e){
             throw new BirthmarkExtractionFailedException(e);
         } finally{
@@ -146,15 +146,15 @@ public final class Stigmata{
 
     public ComparisonResultSet compare(BirthmarkSet[] holders) throws IOException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
-        ComparisonResultSet crs = compare(holders, createContext());
+        ComparisonResultSet crs = compare(holders, createEnvironment());
         operationDone(OperationType.COMPARE_BIRTHMARKS);
 
         return crs;
     }
 
-    public ComparisonResultSet compare(BirthmarkSet[] holders, BirthmarkEnvironment context) throws IOException{
+    public ComparisonResultSet compare(BirthmarkSet[] holders, BirthmarkEnvironment environment) throws IOException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
-        ComparisonResultSet result = new RoundRobinComparisonResultSet(holders, context, true);
+        ComparisonResultSet result = new RoundRobinComparisonResultSet(holders, environment, true);
         operationDone(OperationType.COMPARE_BIRTHMARKS);
 
         return result;
@@ -162,14 +162,14 @@ public final class Stigmata{
 
     public ComparisonResultSet compare(BirthmarkSet[] holders1, BirthmarkSet[] holders2) throws IOException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
-        ComparisonResultSet crs = compare(holders1, holders2, createContext());
+        ComparisonResultSet crs = compare(holders1, holders2, createEnvironment());
         operationDone(OperationType.COMPARE_BIRTHMARKS);
         return crs;
     }
 
-    public ComparisonResultSet compare(BirthmarkSet[] holders1, BirthmarkSet[] holders2, BirthmarkEnvironment context) throws IOException{
+    public ComparisonResultSet compare(BirthmarkSet[] holders1, BirthmarkSet[] holders2, BirthmarkEnvironment environment) throws IOException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
-        ComparisonResultSet result = new RoundRobinComparisonResultSet(holders1, holders2, context);
+        ComparisonResultSet result = new RoundRobinComparisonResultSet(holders1, holders2, environment);
         operationDone(OperationType.COMPARE_BIRTHMARKS);
 
         return result;
@@ -177,17 +177,17 @@ public final class Stigmata{
 
     public ComparisonResultSet filter(ComparisonResultSet resultset, String[] filters){
         operationStart(OperationType.FILTER_BIRTHMARKS);
-        ComparisonResultSet crs = filter(resultset, filters, createContext());
+        ComparisonResultSet crs = filter(resultset, filters, createEnvironment());
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
     }
 
-    public ComparisonResultSet filter(ComparisonResultSet resultset, String[] filters, BirthmarkEnvironment context){
+    public ComparisonResultSet filter(ComparisonResultSet resultset, String[] filters, BirthmarkEnvironment environment){
         operationStart(OperationType.FILTER_BIRTHMARKS);
         if(filters != null){
             List<ComparisonPairFilterSet> filterList = new ArrayList<ComparisonPairFilterSet>();
-            ComparisonPairFilterManager manager = context.getFilterManager();
+            ComparisonPairFilterManager manager = environment.getFilterManager();
             for(int i = 0; i < filters.length; i++){
                 ComparisonPairFilterSet fset = manager.getFilterSet(filters[i]);
                 if(fset != null){
@@ -207,13 +207,13 @@ public final class Stigmata{
 
     public ComparisonResultSet filter(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters){
         operationStart(OperationType.FILTER_BIRTHMARKS);
-        ComparisonResultSet crs = filter(resultset, filters, createContext());
+        ComparisonResultSet crs = filter(resultset, filters, createEnvironment());
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
     }
 
-    public ComparisonResultSet filter(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters, BirthmarkEnvironment context){
+    public ComparisonResultSet filter(ComparisonResultSet resultset, ComparisonPairFilterSet[] filters, BirthmarkEnvironment environment){
         operationStart(OperationType.FILTER_BIRTHMARKS);
         FilteredComparisonResultSet filterResultSet = new FilteredComparisonResultSet(resultset);
         operationDone(OperationType.FILTER_BIRTHMARKS);
@@ -223,12 +223,12 @@ public final class Stigmata{
 
     public double compareDetails(BirthmarkSet h1, BirthmarkSet h2){
         operationStart(OperationType.COMPARE_DETAIL_BIRTHMARKS);
-        double similarity = compareDetails(h1, h2, createContext());
+        double similarity = compareDetails(h1, h2, createEnvironment());
         operationDone(OperationType.COMPARE_DETAIL_BIRTHMARKS);
         return similarity;
     }
 
-    public double compareDetails(BirthmarkSet h1, BirthmarkSet h2, BirthmarkEnvironment context){
+    public double compareDetails(BirthmarkSet h1, BirthmarkSet h2, BirthmarkEnvironment environment){
         operationStart(OperationType.COMPARE_DETAIL_BIRTHMARKS);
 
         List<Double> list = new ArrayList<Double>();
@@ -240,7 +240,7 @@ public final class Stigmata{
 
             double similarity = Double.NaN;
             if(b1 != null && b2 != null){
-                BirthmarkSpi spi = context.getService(type);
+                BirthmarkSpi spi = environment.getService(type);
                 BirthmarkComparator comparator = spi.getComparator();
 
                 similarity = comparator.compare(b1, b2);
@@ -259,17 +259,17 @@ public final class Stigmata{
         return similarity / count;
     }
 
-    private BirthmarkExtractor[] createExtractors(String[] birthmarkTypes, BirthmarkEnvironment context){
+    private BirthmarkExtractor[] createExtractors(String[] birthmarkTypes, BirthmarkEnvironment environment){
         List<BirthmarkExtractor> list = new ArrayList<BirthmarkExtractor>();
         for(String type: birthmarkTypes){
-            BirthmarkExtractor extractor = createExtractor(type, context);
+            BirthmarkExtractor extractor = createExtractor(type, environment);
             list.add(extractor);
         }
         return list.toArray(new BirthmarkExtractor[list.size()]);
     }
 
-    private BirthmarkExtractor createExtractor(String birthmarkType, BirthmarkEnvironment context){
-        BirthmarkSpi spi = context.getService(birthmarkType);
+    private BirthmarkExtractor createExtractor(String birthmarkType, BirthmarkEnvironment environment){
+        BirthmarkSpi spi = environment.getService(birthmarkType);
         if(spi != null){
             BirthmarkExtractor extractor = spi.getExtractor();
             try{
@@ -278,8 +278,8 @@ public final class Stigmata{
                 props.remove("provider");
                 for(Object keyObject: props.keySet()){
                     String key = "extractor." + spi.getType() + "." + String.valueOf(keyObject);
-                    if(context.getProperty(key) != null){
-                        BeanUtils.setProperty(extractor, (String)keyObject, context.getProperty(key));
+                    if(environment.getProperty(key) != null){
+                        BeanUtils.setProperty(extractor, (String)keyObject, environment.getProperty(key));
                     }
                 }
             } catch(InvocationTargetException e){
@@ -309,14 +309,14 @@ public final class Stigmata{
 
     private void initConfiguration(InputStream in){
         try {
-            ConfigFileImporter parser = new ConfigFileImporter(defaultContext);
+            ConfigFileImporter parser = new ConfigFileImporter(defaultEnvironment);
             parser.parse(in);
         } catch(IOException e){
             throw new ApplicationInitializationError(e);
         }
         for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
             BirthmarkSpi service = i.next();
-            defaultContext.addService(service);
+            defaultEnvironment.addService(service);
         }
         configDone = true;
     }
@@ -363,24 +363,24 @@ public final class Stigmata{
         }
     }
 
-    private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
-        ClassFileArchive[] archives = createArchives(files, context);
-        BirthmarkExtractor[] extractors = createExtractors(birthmarks, context);
-        ExtractionUnit unit = context.getExtractionUnit();
+    private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkEnvironment environment) throws IOException, BirthmarkExtractionFailedException{
+        ClassFileArchive[] archives = createArchives(files, environment);
+        BirthmarkExtractor[] extractors = createExtractors(birthmarks, environment);
+        ExtractionUnit unit = environment.getExtractionUnit();
 
         if(unit == ExtractionUnit.CLASS){
-            return extractFromClass(archives, extractors, context);
+            return extractFromClass(archives, extractors, environment);
         }
         else if(unit == ExtractionUnit.PACKAGE){
-            return extractFromPackage(archives, extractors, context);
+            return extractFromPackage(archives, extractors, environment);
         }
         else if(unit == ExtractionUnit.ARCHIVE){
-            return extractFromProduct(archives, extractors, context);
+            return extractFromProduct(archives, extractors, environment);
         }
         return null;
     }
 
-    private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
+    private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment environment) throws IOException, BirthmarkExtractionFailedException{
         Map<String, BirthmarkSet> list = new HashMap<String, BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
@@ -402,7 +402,7 @@ public final class Stigmata{
                                 b = extractor.createBirthmark();
                                 bs.addBirthmark(b);
                             }
-                            extractor.extract(b, new ByteArrayInputStream(data), context);
+                            extractor.extract(b, new ByteArrayInputStream(data), environment);
                         }
                     }
                 } catch(IOException e){
@@ -424,7 +424,7 @@ public final class Stigmata{
         return n;
     }
 
-    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
+    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment environment) throws IOException, BirthmarkExtractionFailedException{
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
@@ -435,7 +435,7 @@ public final class Stigmata{
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
                     for(BirthmarkExtractor extractor: extractors){
                         if(extractor.isAcceptable(ExtractionUnit.CLASS)){
-                            Birthmark b = extractor.extract(new ByteArrayInputStream(data), context);
+                            Birthmark b = extractor.extract(new ByteArrayInputStream(data), environment);
                             birthmarkset.addBirthmark(b);
                         }
                     }
@@ -447,7 +447,7 @@ public final class Stigmata{
         return list.toArray(new BirthmarkSet[list.size()]);
     }
 
-    private BirthmarkSet[] extractFromProduct(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
+    private BirthmarkSet[] extractFromProduct(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment environment) throws IOException, BirthmarkExtractionFailedException{
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
@@ -464,7 +464,7 @@ public final class Stigmata{
                                 b = extractor.createBirthmark();
                                 birthmarkset.addBirthmark(b);
                             }
-                            extractor.extract(b, new ByteArrayInputStream(data), context);
+                            extractor.extract(b, new ByteArrayInputStream(data), environment);
                         }
                     }
                 } catch(IOException e){
@@ -482,8 +482,8 @@ public final class Stigmata{
         return list.toArray(new BirthmarkSet[list.size()]);
     }
 
-    private ClassFileArchive[] createArchives(String[] files, BirthmarkEnvironment context) throws IOException, MalformedURLException{
-        ClasspathContext bytecode = context.getClasspathContext();
+    private ClassFileArchive[] createArchives(String[] files, BirthmarkEnvironment environment) throws IOException, MalformedURLException{
+        ClasspathContext bytecode = environment.getClasspathContext();
         List<ClassFileArchive> archives = new ArrayList<ClassFileArchive>();
         for(int i = 0; i < files.length; i++){
             try{
