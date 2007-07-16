@@ -16,11 +16,11 @@ import java.io.PrintWriter;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
-import jp.naist.se.stigmata.ui.swing.AsciiDataWritable;
-import jp.naist.se.stigmata.ui.swing.BinaryDataWritable;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
+import jp.naist.se.stigmata.utils.AsciiDataWritable;
+import jp.naist.se.stigmata.utils.BinaryDataWritable;
 
 /**
  * 

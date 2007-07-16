@@ -28,6 +28,7 @@ import jp.naist.se.stigmata.ComparisonPairElement;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
+import jp.naist.se.stigmata.utils.AsciiDataWritable;
 
 /**
  * 

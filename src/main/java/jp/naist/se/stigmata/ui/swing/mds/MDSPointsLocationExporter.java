@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
-import jp.naist.se.stigmata.ui.swing.AsciiDataWritable;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
+import jp.naist.se.stigmata.utils.AsciiDataWritable;
 
 /**
  * 

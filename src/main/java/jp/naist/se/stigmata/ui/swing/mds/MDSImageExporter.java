@@ -15,9 +15,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import jp.naist.se.stigmata.ui.swing.BinaryDataWritable;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
+import jp.naist.se.stigmata.utils.BinaryDataWritable;
 
 /**
  * @author Haruaki TAMADA
