@@ -52,10 +52,15 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
      */
     public double calculateSimilarity(){
         double similarity = 0d;
+        int count = 0;
         for(ComparisonPairElement elem: this){
-            similarity += elem.getSimilarity();
+            double sim = elem.getSimilarity();
+            if(!Double.isNaN(sim) && !Double.isInfinite(sim)){
+                similarity += sim;
+                count++;
+            }
         }
-        return similarity / getBirthmarksCount();
+        return similarity / count;
     }
 
     /**
