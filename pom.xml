@@ -21,6 +21,11 @@
       <name>Stigmata Maven2 Repository in sourceforge.jp</name>
       <url>http://stigmata.sourceforge.jp/maven2</url>
     </repository>
+    <repository>
+      <id>talisman.sourceforge.jp</id>
+      <name>Talisman Maven2 Repository in sourceforge.jp</name>
+      <url>http://talisman.sourceforge.jp/maven2</url>
+    </repository>
   </repositories>
 
   <developers>
@@ -53,9 +58,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>jp.cafebabe.commons</groupId>
+      <groupId>jp.sourceforge.talisman</groupId>
       <artifactId>xmlcli</artifactId>
-      <version>1.2</version>
+      <version>1.2.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -64,12 +69,14 @@
       <version>1.0.2</version>
       <scope>compile</scope>
     </dependency>
+<!--
     <dependency>
       <groupId>edu.stanford.ejalbert</groupId>
       <artifactId>browserlauncher</artifactId>
       <version>1.2</version>
       <scope>compile</scope>
     </dependency>
+-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

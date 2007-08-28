@@ -333,6 +333,7 @@ public class TargetSelectionPane extends JPanel{
         }
     };
 
+    @SuppressWarnings("unchecked")
     private class TargetSelectionDropTarget extends DropTarget{
         private static final long serialVersionUID = 3204457621345L;
 

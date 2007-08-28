@@ -84,8 +84,8 @@ public class WellknownClassManager{
             return false;
         }
 
-        for(Iterator i = systemClassesList.iterator(); i.hasNext(); ){
-            WellknownClassJudgeRule section = (WellknownClassJudgeRule)i.next();
+        for(Iterator<WellknownClassJudgeRule> i = systemClassesList.iterator(); i.hasNext(); ){
+            WellknownClassJudgeRule section = i.next();
             String target = fully;
             if(section.isClassNameType()){
                 target = cn;
@@ -115,8 +115,8 @@ public class WellknownClassManager{
     }
 
     private boolean isExcludes(String fully){
-        for(Iterator i = excludes.iterator(); i.hasNext(); ){
-            WellknownClassJudgeRule s = (WellknownClassJudgeRule)i.next();
+        for(Iterator<WellknownClassJudgeRule> i = excludes.iterator(); i.hasNext(); ){
+            WellknownClassJudgeRule s = i.next();
             switch(s.getMatchType()){
             case WellknownClassJudgeRule.PREFIX_TYPE:
                 if(fully.startsWith(s.getName())){
@@ -139,11 +139,11 @@ public class WellknownClassManager{
     }
 
     /**
-     * 以下のどれかのメソッドであれば true を返す．
+     * check system defined methods, which are following methods.
      * <ul>
      *   <li><code>public static void main(String[])</code></li>
-     *   <li><code>static void &lt;clinit&gt;(void)</code>(static イニシャライザ)</li>
-     *   <li><code>void &lt;init&gt;</code>(コンストラクタ)</li>
+     *   <li><code>static void &lt;clinit&gt;(void)</code>(static initializer)</li>
+     *   <li><code>void &lt;init&gt;</code>(constructor)</li>
      * </ul>
      */
     private boolean checkSystemMethod(int access, String methodName, String signature){
@@ -162,7 +162,10 @@ public class WellknownClassManager{
     }
 
     /**
-     * <code>static final long serialVersionUID</code> かどうかを判定する．
+     * check system defined field, which is following field.
+     * <ul>
+     *   <code>static final long serialVersionUID</code>
+     * </ul>
      */
     private boolean checkSystemField(int access, String fieldName, String signature){
         if(fieldName.equals("serialVersionUID")){
@@ -182,9 +185,6 @@ public class WellknownClassManager{
         return checkSystemMethod(access, methodName, signature);
     }
 
-    /**
-     * <code>static final long serialVersionUID</code> かどうかを判定する．
-     */
     public boolean isSystemField(int access, String fieldName, String signature){
         return checkSystemField(access, fieldName, signature);
     }

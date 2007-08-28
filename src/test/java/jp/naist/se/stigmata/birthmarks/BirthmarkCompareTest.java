@@ -19,7 +19,7 @@ public class BirthmarkCompareTest{
             new String[] {
                 "target/classes/jp/naist/se/stigmata/Stigmata.class",
                 "target/classes/jp/naist/se/stigmata/Main.class",
-                "target/classes/jp/naist/se/stigmata/BirthmarkContext.class",
+                "target/classes/jp/naist/se/stigmata/BirthmarkEnvironment.class",
             }
         );
     }

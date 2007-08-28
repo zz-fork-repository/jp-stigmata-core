@@ -31,7 +31,7 @@ class LinkFollower implements HyperlinkListener{
     }
 
     private void browse(URL url) throws Exception{
-        Class c = Class.forName("edu.stanford.ejalbert.BrowserLauncher");
+        Class<?> c = Class.forName("edu.stanford.ejalbert.BrowserLauncher");
         Object o = c.newInstance();
         Method m = c.getMethod("openURLinBrowser", String.class);
         m.invoke(o, url.toString());

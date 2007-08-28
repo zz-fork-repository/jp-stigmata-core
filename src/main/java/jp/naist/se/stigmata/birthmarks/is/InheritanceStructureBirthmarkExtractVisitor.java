@@ -28,7 +28,7 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
     public void visit(int version, int access, String name, String signature,
                       String superName, String[] interfaces){
         try {
-            Class c = getEnvironment().getClasspathContext().findClass(name.replace('/', '.'));
+            Class<?> c = getEnvironment().getClasspathContext().findClass(name.replace('/', '.'));
             if(c != null && !c.isInterface()){
                 addISBirthmark(c);
             }
@@ -37,7 +37,7 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
         }
     }
 
-    private void addISBirthmark(Class c){
+    private void addISBirthmark(Class<?> c){
         WellknownClassManager wcm = getEnvironment().getWellknownClassManager();
         do{
             String className = c.getName();

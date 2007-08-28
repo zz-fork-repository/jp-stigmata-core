@@ -90,8 +90,7 @@ public final class Stigmata{
                 filePath = null;
             }
         }
-
-        if(filePath == null){
+        else{
             File file = new File("stigmata.xml");
             if(!file.exists()){
                 file = new File(System.getProperty("user.home"), ".stigmata.xml");
@@ -246,6 +245,7 @@ public final class Stigmata{
         return list.toArray(new BirthmarkExtractor[list.size()]);
     }
 
+    @SuppressWarnings("unchecked")
     private BirthmarkExtractor createExtractor(String birthmarkType, BirthmarkEnvironment environment){
         BirthmarkSpi spi = environment.getService(birthmarkType);
         if(spi != null){
@@ -346,16 +346,15 @@ public final class Stigmata{
         BirthmarkExtractor[] extractors = createExtractors(birthmarks, environment);
         ExtractionUnit unit = environment.getExtractionUnit();
 
-        if(unit == ExtractionUnit.CLASS){
-            return extractFromClass(archives, extractors, environment);
-        }
-        else if(unit == ExtractionUnit.PACKAGE){
+        if(unit == ExtractionUnit.PACKAGE){
             return extractFromPackage(archives, extractors, environment);
         }
         else if(unit == ExtractionUnit.ARCHIVE){
             return extractFromProduct(archives, extractors, environment);
         }
-        return null;
+        else{
+            return extractFromClass(archives, extractors, environment);
+        }
     }
 
     private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment environment) throws IOException, BirthmarkExtractionFailedException{

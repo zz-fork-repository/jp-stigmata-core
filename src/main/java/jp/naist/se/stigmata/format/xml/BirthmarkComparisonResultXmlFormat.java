@@ -31,12 +31,12 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark>");
         out.println("  <extracted-birthmarks>");
-        list.printBirthmarkHolder(out, pair.getTarget1());
-        list.printBirthmarkHolder(out, pair.getTarget2());
+        list.printBirthmarkSet(out, pair.getTarget1());
+        list.printBirthmarkSet(out, pair.getTarget2());
         out.println("  </extracted-birthmarks>");
-        out.println("  <birthmark-compare-result-set>");
+        out.println("  <comparison-result-set>");
         printComparisonPair(out, pair);
-        out.println("  </birthmark-compare-result-set>");
+        out.println("  </comparison-result-set>");
         out.println("</birthmark>");
     }
 

@@ -25,13 +25,13 @@ public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractio
         out.println("<birthmark>");
         out.println("  <extracted-birthmarks>");
         for(int i = 0; i < holders.length; i++){
-            printBirthmarkHolder(out, holders[i]);
+            printBirthmarkSet(out, holders[i]);
         }
         out.println("  </extracted-birthmarks>");
         out.println("</birthmark>");
     }
 
-    protected void printBirthmarkHolder(PrintWriter out, BirthmarkSet set){
+    protected void printBirthmarkSet(PrintWriter out, BirthmarkSet set){
         out.println("    <extracted-birthmark>");
         out.printf("      <class-name>%s</class-name>%n", escapeToXmlString(set.getName()));
         out.printf("      <location>%s</location>%n", escapeToXmlString(set.getLocation()));

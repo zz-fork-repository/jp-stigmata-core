@@ -9,7 +9,7 @@
       <argument>REQUIRED</argument>
       <argument-name>CLASSPATH</argument-name>
       <value-separator>,</value-separator>
-      <multiple-arg />
+      <multiple-args />
     </definition>
 
     <definition name="birthmark">
@@ -22,7 +22,7 @@
       <argument>REQUIRED</argument>
       <argument-name>BIRTHMARKS</argument-name>
       <value-separator>,</value-separator>
-      <multiple-arg />
+      <multiple-args />
     </definition>
 
     <definition name="mode">

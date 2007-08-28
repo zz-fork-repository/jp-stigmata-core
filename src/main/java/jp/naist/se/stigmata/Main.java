@@ -16,10 +16,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.cafebabe.commons.xmlcli.CommandLinePlus;
-import jp.cafebabe.commons.xmlcli.HelpFormatterPlus;
-import jp.cafebabe.commons.xmlcli.OptionsBuilder;
-import jp.cafebabe.commons.xmlcli.builder.OptionsBuilderFactory;
 import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
 import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
 import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
@@ -29,6 +25,9 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
+import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
+import jp.sourceforge.talisman.xmlcli.OptionsBuilder;
+import jp.sourceforge.talisman.xmlcli.builder.OptionsBuilderFactory;
 
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -242,7 +241,7 @@ public final class Main{
 
     private void printHelp(Options options){
         Package p = getClass().getPackage();
-        HelpFormatter formatter = new HelpFormatterPlus();
+        HelpFormatter formatter = new HelpFormatter();
         System.out.println(options.getClass().getName());
         formatter.printHelp(
             String.format(

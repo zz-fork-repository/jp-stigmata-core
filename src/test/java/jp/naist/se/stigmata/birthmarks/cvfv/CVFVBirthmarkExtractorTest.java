@@ -59,7 +59,7 @@ public class CVFVBirthmarkExtractorTest{
         Assert.assertEquals("Ljp/naist/se/stigmata/Stigmata;",
                             ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
         Assert.assertEquals(null, ((TypeAndValueBirthmarkElement)elements[0]).getValue());
-        Assert.assertEquals("Ljp/naist/se/stigmata/BirthmarkContext;",
+        Assert.assertEquals("Ljp/naist/se/stigmata/BirthmarkEnvironment;",
                             ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
         Assert.assertEquals(null, ((TypeAndValueBirthmarkElement)elements[1]).getValue());
         Assert.assertEquals("Z",   ((TypeAndValueBirthmarkElement)elements[2]).getSignature());
@@ -108,7 +108,7 @@ public class CVFVBirthmarkExtractorTest{
         Assert.assertEquals("Ljava/util/List;",
                             ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
         Assert.assertEquals(null, ((TypeAndValueBirthmarkElement)elements[1]).getValue());
-        Assert.assertEquals("Ljp/naist/se/stigmata/BirthmarkContext;",
+        Assert.assertEquals("Ljp/naist/se/stigmata/BirthmarkEnvironment;",
                             ((TypeAndValueBirthmarkElement)elements[2]).getSignature());
         Assert.assertEquals(null, ((TypeAndValueBirthmarkElement)elements[2]).getValue());
 
