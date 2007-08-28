@@ -40,6 +40,7 @@
       <item name="Tutorial"            href="tutorial.html"/>
       <item name="Tutorial (pdf)"      href="tutorial.pdf"/>
       <item name="FAQ"                 href="faq.html"/>
+      <item name="Relax NG"            href="relaxng.html" />
       <item name="DTD"                 href="dtd.html" />
       <item name="Definition"          href="definition.html" />
       <item name="Survey"              href="survey.html"/>

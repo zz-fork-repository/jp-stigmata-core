@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.birthmarks;
 
+/*
+ * $Id$
+ */
+
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.Stigmata;
 
@@ -7,6 +11,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class BirthmarkCompareTest{
     private Stigmata stigmata;
     private BirthmarkSet[] birthmarks;

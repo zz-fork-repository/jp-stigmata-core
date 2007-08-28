@@ -16,7 +16,7 @@ import jp.naist.se.stigmata.Stigmata;
 /**
  *
  * @author Haruaki TAMADA
- * @version$Revision$ $Date$
+ * @version $Revision$ $Date$
  */
 public class CVFVBirthmarkExtractorTest{
     private Stigmata stigmata;
@@ -38,7 +38,7 @@ public class CVFVBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("cvfv");
         Assert.assertEquals("cvfv", birthmark.getType());
-        Assert.assertEquals(7, birthmark.getElementCount());
+        Assert.assertEquals(6, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals("jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
@@ -53,8 +53,6 @@ public class CVFVBirthmarkExtractorTest{
                             elements[4].getClass().getName());
         Assert.assertEquals("jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
                             elements[5].getClass().getName());
-        Assert.assertEquals("jp.naist.se.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[6].getClass().getName());
 
         Assert.assertEquals("Ljp/naist/se/stigmata/Stigmata;",
                             ((TypeAndValueBirthmarkElement)elements[0]).getSignature());

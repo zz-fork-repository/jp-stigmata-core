@@ -34,9 +34,9 @@ permissions and limitations under the License.
 
  *{{{http://commons.cafebabe.jp/xmlcli/}Jakarta Commons CLI}} 1.0
 
- *{{{http://commons.cafebabe.jp/xmlcli/}XmlCli}} 1.2
+ *{{{http://talisman.sourceforge.jp/xmlcli/}XmlCli}} 1.2.1
 
- *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 or later)
+ *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 or later; this library is destributed from stigmata maven2 remote repository)
 
  *{{{http://browserlaunch2.sourceforge.net/}BrowserLauncher2}} 1.2 (stigmata-1.1.0 or later; as needed)
 
@@ -46,7 +46,7 @@ permissions and limitations under the License.
 
 **How to install requirements into your Maven local repository
 
- If you want to compile stigmata from source codes, you must install
+ If you want to compile stigmata from source codes, you may install
 manually Jama and BrowserLauncher2 into your maven2 local repository.
 Because maven2 default remote repository do not has them.  Other
 libraries can be automatically downloaded by Maven2.
@@ -105,7 +105,7 @@ Next, add dependency tag entry to dependencies tag in `pom.xml.'
     <dependency>
       <groupId>jp.naist.se</groupId>
       <artifactId>stigmata</artifactId>
-      <version>1.0-beta</version>
+      <version>1.0.0</version>
     </dependency>
       :
   </dependencies>

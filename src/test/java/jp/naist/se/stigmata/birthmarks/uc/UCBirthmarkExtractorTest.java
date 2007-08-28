@@ -16,7 +16,7 @@ import jp.naist.se.stigmata.Stigmata;
 /**
  *
  * @author Haruaki TAMADA
- * @version$Revision$ $Date$
+ * @version $Revision$ $Date$
  */
 public class UCBirthmarkExtractorTest{
     private Stigmata stigmata;
