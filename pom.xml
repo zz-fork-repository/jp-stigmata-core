@@ -12,11 +12,6 @@
 
   <repositories>
     <repository>
-      <id>maven.cafebabe.jp</id>
-      <name>The cafebabe Maven2 Repository</name>
-      <url>http://cafebabe.jp/repository/maven2</url>
-    </repository>
-    <repository>
       <id>stigmata.sourceforge.jp</id>
       <name>Stigmata Maven2 Repository in sourceforge.jp</name>
       <url>http://stigmata.sourceforge.jp/maven2</url>

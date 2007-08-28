@@ -1,0 +1,53 @@
+ ----
+ Expert mode
+ ----
+ Haruaki Tamada
+ ----
+ 2007-06-29
+ ----
+
+Comparison Methods
+
+ Let <p> and <q> be a target class files, and <f> be a birthmark
+extraction method.  Then, <f(p)> and <f(q)> be a extracted birthmarks
+which elements are <(e^p_1, e^p_2, ..., e^p_n)> and <(e^q_1, e^q_2,
+..., e^q_m)>.
+
+*Plain
+
+ Let <L> be a number of matched elements of two birthmarks and same
+index.  Then, the similarity of this method is calculated by
+
+ <L> / <(n + m)>
+
+*Logical AND
+
+ |<f(p) cap f(q)>| / |<f(p)>| |<f(q)>|
+
+*DP matching
+
+ DP matching method
+
+*Edit distance
+
+ Edit distance.
+
+*Cosine similarity
+
+ Using this comparison method, birthmarks must have name and its
+frequency.  Threfore, elements of <f(p)> be a set of <(\{name_1,
+freq_1\}, \{name_2, freq_2\}, ..., \{name_n, freq_n\})>.
+
+ Next, if <f(p)> have name <FOO> and <f(q)> do not have <FOO>, we add
+element <\{FOO, 0\}> to f(q).  Both birthmarks makes to appearing all
+names.
+
+ Then, the similarity of <f(p)> and <f(q)>is denoted by
+
+ <norm1 = sqrt(freq^p_1 * freq^p_1 + freq^p_2 * freq^p_2 + ... + freq^p_n * freq^p_n)>
+
+ <norm2 = sqrt(freq^q_1 * freq^q_1 + freq^q_2 * freq^q_2 + ... + freq^q_n * freq^q_n)>
+
+ <product = freq^p_1 * freq^q_1 + freq^p_2 * freq^q_2 + ... + freq^p_n * freq^q_n>
+
+ <similarity = product / (norm1 * norm2)>
