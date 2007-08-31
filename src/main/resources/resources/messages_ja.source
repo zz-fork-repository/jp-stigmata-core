@@ -374,8 +374,8 @@ target.BOTH_TARGET=両方
 target.ONE_OF_TARGET=どちらか
 
 error.dialog.title=エラー
-error.message.classpath=<html><body><p>以下のクラスが見つからなかったため，指定された処理を完了することができませんでした．<br>「コントロール」タブのクラスパス設定を見直して再実行してください．</p></body></html>
-error.message.contactus=<html><body><p>以下の例外が発生したため，指定された処理を完了することができませんでした．<br>エラーメッセージを添付して開発者までレポートをお願いします．</p></body></html>
+error.message.classpath=以下のクラスが見つからなかったため，指定された処理を完了することができませんでした．<br>「コントロール」タブのクラスパス設定を見直して再実行してください．
+error.message.contactus=以下の例外が発生したため，指定された処理を完了することができませんでした．<br>エラーメッセージを添付して開発者までレポートをお願いします．
 error.empty.threshold=閾値が入力されていません．
 error.empty.value=値が入力されていません．
 error.invalid.format={0}: フォーマット以上です．

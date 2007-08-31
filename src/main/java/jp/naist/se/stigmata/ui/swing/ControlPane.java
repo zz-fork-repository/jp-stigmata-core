@@ -77,6 +77,7 @@ public class ControlPane extends JPanel{
         Utility.addNewTab("targets", controlTab, control);
         Utility.addNewTab("wellknown", controlTab, wellknownClassses);
         Utility.addNewTab("classpath", controlTab, classpath);
+        Utility.addNewTab("property", controlTab, properties);
         reset();
     }
 
@@ -101,13 +102,13 @@ public class ControlPane extends JPanel{
         filters.reset();
         updateEnable();
 
-        int index1 = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
-        if(index1 >= 0){
-            controlTab.removeTabAt(index1);
+        int definitionTabIndex = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+        if(definitionTabIndex >= 0){
+            controlTab.removeTabAt(definitionTabIndex);
         }
-        int index2 = controlTab.indexOfTab(Messages.getString("property.tab.label"));
-        if(index2 >= 0){
-            controlTab.removeTabAt(index2);
+        int filterTabIndex = controlTab.indexOfTab(Messages.getString("filter.tab.label"));
+        if(filterTabIndex >= 0){
+            controlTab.removeTabAt(filterTabIndex);
         }
     }
 
@@ -146,12 +147,10 @@ public class ControlPane extends JPanel{
 
         if(expertmode){
             Utility.addNewTab("definition", controlTab, definition);
-            Utility.addNewTab("property", controlTab, properties);
             Utility.addNewTab("filter", controlTab, filters);
         }
         else{
             removeTabByName(Messages.getString("definition.tab.label"));
-            removeTabByName(Messages.getString("property.tab.label"));
             removeTabByName(Messages.getString("filter.tab.label"));
         }
         updateEnable();

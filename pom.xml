@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.naist.se</groupId>
   <artifactId>stigmata</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <name>stigmata</name>
   <description>Java birthmark toolkit</description>
   <url>http://stigmata.sourceforge.jp/</url>
@@ -64,14 +64,12 @@
       <version>1.0.2</version>
       <scope>compile</scope>
     </dependency>
-<!--
     <dependency>
       <groupId>edu.stanford.ejalbert</groupId>
-      <artifactId>browserlauncher</artifactId>
+      <artifactId>BrowserLauncher2</artifactId>
       <version>1.2</version>
       <scope>compile</scope>
     </dependency>
--->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

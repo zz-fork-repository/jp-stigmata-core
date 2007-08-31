@@ -260,6 +260,7 @@ public class BirthmarkEngine{
         return list.toArray(new BirthmarkExtractor[list.size()]);
     }
 
+    @SuppressWarnings("unchecked")
     private BirthmarkExtractor createExtractor(String birthmarkType, BirthmarkEnvironment environment){
         BirthmarkSpi spi = environment.getService(birthmarkType);
         BirthmarkExtractor extractor = null;

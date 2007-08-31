@@ -23,7 +23,12 @@ public class FileIOManager{
 
     public FileIOManager(Component parent){
         this.parent = parent;
-        currentDirectory = new File(".");
+        if(System.getProperty("execution.directory") != null){
+            currentDirectory = new File(System.getProperty("execution.directory"));
+        }
+        else{
+            currentDirectory = new File(".");
+        }
     }
 
     public File getCurrentDirectory(){

@@ -533,7 +533,7 @@ public class StigmataFrame extends JFrame{
         out.close();
         area.setText(writer.toString());
         JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JLabel(Messages.getString("error.message.contactus")), BorderLayout.NORTH);
+        panel.add(new JLabel("<html><body><p>" + Messages.getString("error.message.contactus") + "</p></body></html>"), BorderLayout.NORTH);
         panel.add(new JScrollPane(area), BorderLayout.CENTER);
 
         JOptionPane.showMessageDialog(
