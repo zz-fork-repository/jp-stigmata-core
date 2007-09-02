@@ -22,7 +22,7 @@ XPStyle on
 
 !addplugindir .
 
-Section ""
+Section "running-stigmata"
   System::Call "kernel32::CreateMutexA(i 0, i 0, t 'jelude') i .r1 ?e"
   Pop $R0
   StrCmp $R0 0 +2
@@ -53,7 +53,7 @@ Section ""
   SetOverwrite ifdiff
   SetOutPath $TEMP
   File "..\..\target\${JARFILE}"
-  File "..\..\target\BrowserLauncher2-1.2.jar"
+  File "..\..\target\BrowserLauncher2-1.3.jar"
   File "..\..\target\commons-beanutils-1.7.0.jar"
   File "..\..\target\Jama-1.0.2.jar"
   File "..\..\target\commons-cli-1.1.jar"
@@ -70,14 +70,14 @@ Section ""
   !endif
 
   ExecWait "$R0"
-  Delete "${JARFILE}"
-  Delete "BrowserLauncher2-1.2.jar"
-  Delete "commons-beanutils-1.7.0.jar"
-  Delete "Jama-1.0.2.jar"
-  Delete "commons-cli-1.1.jar"
-  Delete "xmlcli-1.2.1.jar"
-  Delete "asm-all-2.2.3.jar"
-  Delete "commons-logging-1.0.3.jar"
+  Delete "$TEMP\${JARFILE}"
+  Delete "$TEMP\BrowserLauncher2-1.3.jar"
+  Delete "$TEMP\commons-beanutils-1.7.0.jar"
+  Delete "$TEMP\Jama-1.0.2.jar"
+  Delete "$TEMP\commons-cli-1.1.jar"
+  Delete "$TEMP\xmlcli-1.2.1.jar"
+  Delete "$TEMP\asm-all-2.2.3.jar"
+  Delete "$TEMP\commons-logging-1.0.3.jar"
 
   Quit
 
