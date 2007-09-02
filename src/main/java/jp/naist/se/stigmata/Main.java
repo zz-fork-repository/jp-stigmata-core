@@ -242,7 +242,6 @@ public final class Main{
     private void printHelp(Options options){
         Package p = getClass().getPackage();
         HelpFormatter formatter = new HelpFormatter();
-        System.out.println(options.getClass().getName());
         formatter.printHelp(
             String.format(
                 "java -jar stigmata-%s.jar <OPTIONS> <TARGETS>%n" + 

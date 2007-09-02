@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.Component;
+import java.awt.Image;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.MessageFormat;
@@ -148,6 +149,15 @@ public class Utility{
             String iconFile = Messages.getString(label);
             ImageIcon icon = new ImageIcon(Utility.class.getResource(iconPath + iconFile));
             return icon;
+        }
+        return null;
+    }
+
+    public static Image getImage(String imageFilePathLabel){
+        if(Messages.hasString(imageFilePathLabel)){
+            String imageFilePath = Messages.getString(imageFilePathLabel);
+            ImageIcon icon = new ImageIcon(Utility.class.getResource(iconPath + imageFilePath));
+            return icon.getImage();
         }
         return null;
     }

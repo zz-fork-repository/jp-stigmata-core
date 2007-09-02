@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -38,8 +39,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 
-import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.CertainPairComparisonResultSet;
@@ -56,7 +57,6 @@ import jp.naist.se.stigmata.ui.swing.actions.LicenseAction;
 import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
 import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
-
 
 /**
  *
@@ -87,6 +87,10 @@ public class StigmataFrame extends JFrame{
         this.stigmata = stigmata;
         this.environment = environment;
         this.fileio = new FileIOManager(this);
+        Image iconImage = Utility.getImage("stigmata.icon");
+        if(iconImage != null){
+            setIconImage(iconImage);
+        }
 
         stigmata.addBirthmarkEngineListener(new BirthmarkEngineAdapter(){
             @Override
