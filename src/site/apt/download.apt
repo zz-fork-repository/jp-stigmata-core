@@ -81,6 +81,18 @@ $ mvn install:install-file \
 
  {{{https://sourceforge.jp/projects/stigmata/files/}Download}}
 
+ You can see stigmata-x.x.x-bin.jar, stigmata-x.x.x-src.jar, and
+ stigmata-x.x.x-exe.jar.  Each packages mean as followings.
+
+ [stigmata-x.x.x-bin.jar] binary distribution package, contains class
+   files and resource files.
+
+ [stigmata-x.x.x-src.jar] source ditribution package, contains
+ pom.xml, source files, resource files and documents.
+ 
+ [stigmata-x.x.x-exe.jar] Executable ditribution package, contains
+ Windows executable file named stigmata.exe.
+
 *Binary download by maven2 
 
  You can get a jar file of stigmata by Maven2 using below setting.
