@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.Image;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.text.MessageFormat;
 
 import javax.swing.Action;
@@ -22,8 +23,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 
 /**
- * 
- * 
+ * Utility routines for building GUI.
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
@@ -144,20 +144,28 @@ public class Utility{
         return menu;
     }
 
-    public static Icon getIcon(String label){
-        if(Messages.hasString(label)){
-            String iconFile = Messages.getString(label);
-            ImageIcon icon = new ImageIcon(Utility.class.getResource(iconPath + iconFile));
-            return icon;
+    public static URL getResource(String resourcePathLabel){
+        if(Messages.hasString(resourcePathLabel)){
+            String resourcePath = Messages.getString(resourcePathLabel);
+            return Utility.class.getResource(resourcePath);
         }
         return null;
     }
 
+    public static Icon getIcon(String label){
+        URL url = getResource(iconPath + label);
+        if(url != null){
+            ImageIcon icon = new ImageIcon(url);
+            return icon;
+        }
+
+        return null;
+    }
+
     public static Image getImage(String imageFilePathLabel){
-        if(Messages.hasString(imageFilePathLabel)){
-            String imageFilePath = Messages.getString(imageFilePathLabel);
-            ImageIcon icon = new ImageIcon(Utility.class.getResource(iconPath + imageFilePath));
-            return icon.getImage();
+        Icon icon = getIcon(imageFilePathLabel);
+        if(icon != null && icon instanceof ImageIcon){
+            return ((ImageIcon)icon).getImage();
         }
         return null;
     }

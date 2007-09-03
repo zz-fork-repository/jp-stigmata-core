@@ -1,6 +1,8 @@
 # $Id$
 # $Revision$ $Date$
 
+about.message.file=/resources/about.html.ja
+license.file=/META-INF/license.txt.ja
 
 ################################################
 # StigmataFrame
@@ -29,7 +31,7 @@ store.description=結果の保存 ({0})
 
 fileMenu.menu.label=ファイル
 
-newframe.menuitem.label=新たなフレーム
+newframe.menuitem.label=新規フレーム
 newframe.menuitem.tooltip=新しいフレームを作成します
 
 exportsetting.menuitem.label=設定を保存...

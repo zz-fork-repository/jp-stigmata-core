@@ -7,6 +7,7 @@ package jp.naist.se.stigmata.ui.swing.actions;
 import java.awt.Component;
 
 import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.Utility;
 
 /**
  * @author Haruaki TAMADA
@@ -24,6 +25,6 @@ public class LicenseAction extends ShowTextAction{
     }
 
     public String getMessage(){
-        return loadStringFromFile(getClass().getResource("/META-INF/license.txt"));
+        return loadStringFromFile(Utility.getResource("license.file"));
     }
 }

@@ -37,7 +37,7 @@ public class AboutAction extends ShowTextAction{
 
     @Override
     public String getMessage(){
-        String aboutMessage = loadStringFromFile(getClass().getResource("/resources/about.html"));
+        String aboutMessage = loadStringFromFile(Utility.getResource("about.message.file"));
 
         Package p = getClass().getPackage();
         aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
