@@ -2,6 +2,7 @@
 
 !define APPNAME "Stigmata: Java birthmarking toolkit"
 !define JARFILE "stigmata-1.1.0.jar"
+!define LANG_ENGLISH "1033-English"
 
 ;Uncomment the next line to specify an icon for the EXE.
 Icon "stigmata.ico"
@@ -15,10 +16,18 @@ Name "Stigmata"
 Caption "${APPNAME}"
 OutFile "stigmata.exe"
 
+VIProductVersion "1.1.0.0"
 SilentInstall silent
 AutoCloseWindow true
 ShowInstDetails nevershow
-XPStyle on
+
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Stigmata"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "Stigmata: Java birthmark toolkit"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Software Engineering Lab., NAIST, Japan"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "1.1.0"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright (C) 2004-2007 by Haruaki Tamada"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Java birthmark toolkit"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.1.0"
 
 !addplugindir .
 
