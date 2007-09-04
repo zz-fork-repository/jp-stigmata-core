@@ -144,16 +144,23 @@ public class Utility{
         return menu;
     }
 
-    public static URL getResource(String resourcePathLabel){
+    public static URL getResource(String resourcePathLabel, String resourcePathPrefix){
         if(Messages.hasString(resourcePathLabel)){
             String resourcePath = Messages.getString(resourcePathLabel);
+            if(resourcePathPrefix != null){
+                resourcePath = resourcePathPrefix + resourcePath;
+            }
             return Utility.class.getResource(resourcePath);
         }
         return null;
     }
 
+    public static URL getResource(String resourcePathLabel){
+        return getResource(resourcePathLabel, null);
+    }
+
     public static Icon getIcon(String label){
-        URL url = getResource(iconPath + label);
+        URL url = getResource(label, iconPath);
         if(url != null){
             ImageIcon icon = new ImageIcon(url);
             return icon;
