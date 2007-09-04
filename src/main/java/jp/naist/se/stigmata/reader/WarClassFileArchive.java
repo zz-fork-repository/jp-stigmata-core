@@ -41,13 +41,14 @@ public class WarClassFileArchive extends JarClassFileArchive{
             if(entry.getName().endsWith(".class")){
                 URL location = null;
                 try {
-                    location = new URL("jar:" + getLocation() + "!/WEB-INF/classes/" + entry.getName());
+                    location = new URL("jar:" + getLocation() + "!/" + entry.getName());
                     String className = entry.getName();
                     className = className.substring("WEB-INF/classes/".length(), className.length() - ".class".length());
                     className = className.replace('/', '.');
 
                     list.add(new ClassFileEntry(className, location));
                 } catch (MalformedURLException ex) {
+                    ex.printStackTrace();
                 }
             }
         }
