@@ -276,8 +276,9 @@ public class ControlPane extends JPanel{
         BirthmarkEnvironment environment = generateEnvironment();
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
-        stigmata.compareSpecifiedPair(birthmarks.getSelectedServiceTypes(), fileX,
-                fileY, environment);
+        stigmata.compareSpecifiedPair(
+            birthmarks.getSelectedServiceTypes(), fileX, fileY, environment
+        );
     }
 
     private void compareGuessedPair(){
@@ -285,8 +286,9 @@ public class ControlPane extends JPanel{
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
-        stigmata.compareGuessedPair(birthmarks.getSelectedServiceTypes(), fileX,
-                fileY, environment);
+        stigmata.compareGuessedPair(
+            birthmarks.getSelectedServiceTypes(), fileX, fileY, environment
+        );
     }
 
     private BirthmarkEnvironment generateEnvironment(){

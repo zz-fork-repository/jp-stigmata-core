@@ -191,7 +191,7 @@ public class StigmataFrame extends JFrame{
                 }
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        } catch(Exception e){
+        } catch(Throwable e){
             showExceptionMessage(e);
         }
     }
@@ -216,7 +216,7 @@ public class StigmataFrame extends JFrame{
                 }
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        } catch(Exception e){
+        } catch(Throwable e){
             showExceptionMessage(e);
         }
     }
@@ -239,7 +239,7 @@ public class StigmataFrame extends JFrame{
                 }
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        }catch(Exception e){
+        }catch(Throwable e){
             showExceptionMessage(e);
         }
     }
@@ -320,7 +320,7 @@ public class StigmataFrame extends JFrame{
         try{
             BirthmarkSet[] holders = stigmata.extract(birthmarks, targets, environment);
             showExtractionResult(holders, environment);
-        }catch(Exception e){
+        }catch(Throwable e){
             showExceptionMessage(e);
         }
     }
@@ -519,29 +519,44 @@ public class StigmataFrame extends JFrame{
         control.setExpertMode(status);
     }
 
-    private void showExceptionMessage(Exception e){
+    private void showExceptionMessage(Throwable e){
         if(e instanceof BirthmarkElementClassNotFoundException){
             showClassNotFoundMessage((BirthmarkElementClassNotFoundException)e);
-            return;
         }
-        JTextArea area = new JTextArea(20, 60);
-        StringWriter writer = new StringWriter();
-        PrintWriter out = new PrintWriter(writer);
-        e.printStackTrace(out);
-        if(e instanceof BirthmarkExtractionFailedException){
-            out.println("Causes:");
-            for(Throwable t: ((BirthmarkExtractionFailedException)e).getCauses()){
-                t.printStackTrace(out);
+        else if(e instanceof OutOfMemoryError){
+            showOutOfMemoryError();
+        }
+        else{
+            JTextArea area = new JTextArea(20, 60);
+            StringWriter writer = new StringWriter();
+            PrintWriter out = new PrintWriter(writer);
+            e.printStackTrace(out);
+            if(e instanceof BirthmarkExtractionFailedException){
+                out.println("Causes:");
+                for(Throwable t: ((BirthmarkExtractionFailedException)e).getCauses()){
+                    t.printStackTrace(out);
+                }
             }
-        }
-        out.close();
-        area.setText(writer.toString());
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JLabel("<html><body><p>" + Messages.getString("error.message.contactus") + "</p></body></html>"), BorderLayout.NORTH);
-        panel.add(new JScrollPane(area), BorderLayout.CENTER);
+            out.close();
+            area.setText(writer.toString());
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add(new JLabel("<html><body><p>" + Messages.getString("error.message.contactus") + "</p></body></html>"), BorderLayout.NORTH);
+            panel.add(new JScrollPane(area), BorderLayout.CENTER);
 
+            JOptionPane.showMessageDialog(
+                this, panel, Messages.getString("error.dialog.title"),
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
+    }
+
+    private void showOutOfMemoryError(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("<html><body><p>");
+        sb.append(Messages.getString("error.message.outofmemory"));
+        sb.append("</p></body></html>");
         JOptionPane.showMessageDialog(
-            this, panel, Messages.getString("error.dialog.title"),
+            this, new String(sb), Messages.getString("error.dialog.title"),
             JOptionPane.WARNING_MESSAGE
         );
     }

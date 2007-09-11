@@ -69,7 +69,7 @@ Section "running-stigmata"
   File "..\..\target\xmlcli-1.2.1.jar"
   File "..\..\target\asm-all-2.2.3.jar"
   File "..\..\target\commons-logging-1.0.3.jar"
-  StrCpy $R0 '$R0 -Dexecution.directory="$EXEDIR" -jar "${JARFILE}" $R1'
+  StrCpy $R0 '$R0 -Xmx256M -Dexecution.directory="$EXEDIR" -jar "${JARFILE}" $R1'
 
   !ifdef SPLASH_IMAGE
     SetOutPath $TEMP
