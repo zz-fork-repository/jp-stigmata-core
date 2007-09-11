@@ -5,10 +5,11 @@ package jp.naist.se.stigmata.reader;
  */
 
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import jp.naist.se.stigmata.utils.WarClassLoader;
 
 /**
  * @author Haruaki TAMADA
@@ -83,7 +84,7 @@ public class ClasspathContext implements Iterable<URL>{
                 list.add(i.next());
             }
 
-            loader = new URLClassLoader(list.toArray(new URL[list.size()]), getClass().getClassLoader());
+            loader = new WarClassLoader(list.toArray(new URL[list.size()]), getClass().getClassLoader());
         }
         return loader;
     }

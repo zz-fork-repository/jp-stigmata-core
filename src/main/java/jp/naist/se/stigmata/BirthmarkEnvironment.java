@@ -24,6 +24,7 @@ import jp.naist.se.stigmata.utils.WellknownClassManager;
 
 /**
  * This class represents the context for extracting/comparing birthmarks.
+ * 
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */

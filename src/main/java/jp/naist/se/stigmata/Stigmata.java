@@ -342,6 +342,10 @@ public final class Stigmata{
     }
 
     private BirthmarkSet[] extractImpl(String[] birthmarks, String[] files, BirthmarkEnvironment environment) throws IOException, BirthmarkExtractionFailedException{
+        ClasspathContext context = environment.getClasspathContext();
+        for(int i = 0; i < files.length; i++){
+            context.addClasspath(new File(files[i]).toURI().toURL());
+        }
         ClassFileArchive[] archives = createArchives(files, environment);
         BirthmarkExtractor[] extractors = createExtractors(birthmarks, environment);
         ExtractionUnit unit = environment.getExtractionUnit();

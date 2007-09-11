@@ -14,6 +14,7 @@ import java.util.Map;
 import jp.naist.se.stigmata.event.OperationType;
 
 /**
+ * Runtime properties.
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$
