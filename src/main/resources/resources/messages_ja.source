@@ -60,8 +60,8 @@ license.dialog.title=ライセンス
 helpmenu.menuitem.label=ヘルプ...
 helpmenu.menuitem.tooltip=ヘルプを表示
 
-expertmenu.menuitem.label=上級者モード
-expertmenu.menuitem.tooltip=上級者モードに移行 (より多くのバースマークが選択可能になり，新規バースマークの定義も行えます)
+expertmenu.menuitem.label=マニアモード
+expertmenu.menuitem.tooltip=マニアモードに移行 (より多くのバースマークの選択，また，新たなバースマークの定義が可能になります)
 
 lookandfeel.menu.label=ルック&フィール
 
@@ -292,8 +292,8 @@ define.extractor.tooltip=クラスファイルからバースマークを抽出するクラス
 define.extractor.border=バースマーク抽出器
 define.comparator.tooltip=得られたバースマークを比較するクラス
 define.comparator.border=バースマーク比較器
-define.expert.label=上級者向け
-define.expert.tooltip=上級者向けのバースマークであるか
+define.expert.label=マニア向け
+define.expert.tooltip=マニア向けのバースマークであるか
 define.userdef.label=ユーザ定義
 define.userdef.tooltip=ユーザが定義したバースマークであるか
 newservice.definition.label=(新規バースマーク)
@@ -376,7 +376,7 @@ target.BOTH_TARGET=両方
 target.ONE_OF_TARGET=どちらか
 
 error.dialog.title=エラー
-error.message.outofmemory=メモリ不足です．バースマークの抽出・比較に十分なJavaヒープサイズがありません．以下の対応を選択することができます．<ul><li>Javaコマンドに -Xmx オプションを指定し，最大ヒープサイズを増やす</li><li>選択した比較・抽出対象のファイルを減らす</li></ul>
+error.message.outofmemory=メモリ不足です．バースマークの抽出・比較に十分なJavaヒープサイズがありません．以下の対応を選択することができます．<ul><li>Javaコマンドに -Xmx オプションを指定し，最大ヒープサイズを増やす</li><li>選択した比較・抽出対象のファイルを減らす</li><li>抽出するバースマークを減らす</li></ul>
 error.message.classpath=以下のクラスが見つからなかったため，指定された処理を完了することができませんでした．<br>「コントロール」タブのクラスパス設定を見直して再実行してください．
 error.message.contactus=以下の例外が発生したため，指定された処理を完了することができませんでした．<br>エラーメッセージを添付して開発者までレポートをお願いします．
 error.empty.threshold=閾値が入力されていません．
