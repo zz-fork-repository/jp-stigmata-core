@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -50,7 +52,13 @@ public class ClasspathSettingsPane extends JPanel{
         if(cplist != null && cplist.length >= 0){
             for(int i = 0; i < cplist.length; i++){
                 try{
-                    context.addClasspath(new File(cplist[i]).toURI().toURL());
+                    URL url = null;
+                    try{
+                        url = new URL(cplist[i]);
+                    } catch(MalformedURLException e){
+                        url = new File(cplist[i]).toURI().toURL();
+                    }
+                    context.addClasspath(url);
                 }catch(IOException ee){
                 }
             }
@@ -58,7 +66,14 @@ public class ClasspathSettingsPane extends JPanel{
     }
 
     public void reset(){
+        classpath.removeAllElements();
+        bootClasspath.removeAllElements();
         try{
+            ClasspathContext context = stigmata.getEnvironment().getClasspathContext();
+            for(Iterator<URL> i = context.classpath(); i.hasNext(); ){
+                classpath.addValue(i.next().toString());
+            }
+
             addClasspath(bootClasspath, System.getProperty("java.class.path"));
             addClasspath(bootClasspath, System.getProperty("sun.boot.class.path"));
         } catch(SecurityException e){

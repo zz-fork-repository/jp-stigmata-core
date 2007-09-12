@@ -29,13 +29,34 @@ public class ClasspathContext implements Iterable<URL>{
         this.parent = parent;
     }
 
+    public ClasspathContext getParent(){
+        return parent;
+    }
+
     public static final ClasspathContext getDefaultContext(){
         return DEFAULT_CONTEXT;
     }
 
     public synchronized void addClasspath(URL url){
+        System.out.printf("add %s to %s%n", url, this);
         classpath.add(url);
         loader = null;
+    }
+
+    public int getClasspathSize(){
+        int count = classpath.size();
+        if(parent != null){
+            count += parent.getClasspathSize();
+        }
+        return count;
+    }
+
+    public synchronized URL[] getClasspathList(){
+        List<URL> list = new ArrayList<URL>();
+        for(Iterator<URL> i = classpath(); i.hasNext(); ){
+            list.add(i.next());
+        }
+        return list.toArray(new URL[list.size()]);
     }
 
     public void clear(){
