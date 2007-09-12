@@ -143,8 +143,8 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
                 int[] indexes = list.getSelectedIndices();
                 int rows = model.getSize();
 
-                upButton.setEnabled(rows > 1 && indexes[0] != 0 && indexes.length == 1);
-                downButton.setEnabled(rows > 1 && indexes[0] != (rows - 1) && indexes.length == 1);
+                upButton.setEnabled(indexes.length == 1 && rows > 1 && indexes[0] != 0);
+                downButton.setEnabled(indexes.length == 1 && rows > 1 && indexes[0] != (rows - 1));
                 if(indexes.length != 1){
                     definition.setFilterSet(null);
                 }
