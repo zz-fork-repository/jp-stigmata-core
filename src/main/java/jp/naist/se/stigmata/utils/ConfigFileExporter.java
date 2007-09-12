@@ -114,9 +114,15 @@ public class ConfigFileExporter{
                     out.println("          <attributes>");
                     for(Object object: props.entrySet()){
                         Map.Entry entry = (Map.Entry)object;
+                        Object value = entry.getValue();
                         out.println("            <attribute>");
                         out.printf("              <name>%s</name>%n", String.valueOf(entry.getKey()));
-                        out.printf("              <value>%s</value>%n", String.valueOf(entry.getValue()));
+                        if(value == null){
+                            out.println("              <value></value>%n");
+                        }
+                        else{
+                            out.printf("              <value>%s</value>%n", String.valueOf(entry.getValue()));
+                        }
                         out.println("            </attribute>");
                     }
                     out.println("          </attributes>");
