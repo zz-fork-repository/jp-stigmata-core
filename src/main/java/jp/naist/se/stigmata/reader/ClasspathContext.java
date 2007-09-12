@@ -38,7 +38,6 @@ public class ClasspathContext implements Iterable<URL>{
     }
 
     public synchronized void addClasspath(URL url){
-        System.out.printf("add %s to %s%n", url, this);
         classpath.add(url);
         loader = null;
     }

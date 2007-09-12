@@ -78,6 +78,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
                 check.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
                         JCheckBox c = (JCheckBox)e.getSource();
+                        elem.setSelected(c.isSelected());
                         select(elem.getService().getType(), c.isSelected());
                         fireEvent();
                     }
