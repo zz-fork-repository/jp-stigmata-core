@@ -42,7 +42,7 @@ public class BirthmarkEnvironment{
     /**
      * context for classpath.
      */
-    private ClasspathContext bytecodeContext;
+    private ClasspathContext classpathContext;
 
     /**
      * wellknown class manager. This object judge a class is user made class or
@@ -80,7 +80,7 @@ public class BirthmarkEnvironment{
      */
     private BirthmarkEnvironment(boolean flag){
         manager = new WellknownClassManager();
-        bytecodeContext = ClasspathContext.getDefaultContext();
+        classpathContext = ClasspathContext.getDefaultContext();
         filterManager = new ComparisonPairFilterManager();
     }
 
@@ -98,7 +98,7 @@ public class BirthmarkEnvironment{
     public BirthmarkEnvironment(BirthmarkEnvironment parent){
         this.parent = parent;
         this.manager = new WellknownClassManager(parent.getWellknownClassManager());
-        this.bytecodeContext = new ClasspathContext(parent.getClasspathContext());
+        this.classpathContext = new ClasspathContext(parent.getClasspathContext());
         this.filterManager = new ComparisonPairFilterManager(parent.getFilterManager());
     }
 
@@ -185,7 +185,7 @@ public class BirthmarkEnvironment{
      * returns the classpath context.
      */
     public ClasspathContext getClasspathContext(){
-        return bytecodeContext;
+        return classpathContext;
     }
 
     /**

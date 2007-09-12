@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.utils;
 
+/*
+ * $Id$
+ */
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,9 +11,18 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandlerFactory;
 
+/**
+ * ClassLoader for war file.
+ * A war file layouts classes in /WEB-INF/classes directory.
+ * Therefore, plain jar class loader cannot load classes included in war file.
+ * Because plain jar class loader only loads classes in top directory.
+ * Then, this class loader can load classes included in a plain jar file and a war file.
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class WarClassLoader extends URLClassLoader{
-    public WarClassLoader(URL[] urls, ClassLoader parent,
-            URLStreamHandlerFactory factory){
+    public WarClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory){
         super(urls, parent, factory);
     }
 
@@ -26,7 +39,7 @@ public class WarClassLoader extends URLClassLoader{
         Class<?> clazz = null;
         try{
             clazz = super.findClass(name);
-        } catch(Throwable e){
+        } catch(ClassNotFoundException e){
             String path = "WEB-INF/classes/" + name.replace('.', '/') + ".class";
             for(URL url: getURLs()){
                 if(url.toString().endsWith(".war")){

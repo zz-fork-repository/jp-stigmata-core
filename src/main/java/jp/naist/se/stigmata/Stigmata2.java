@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata;
 
+/*
+ * $Id$
+ */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +17,11 @@ import jp.naist.se.stigmata.event.BirthmarkEngineListener;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.ConfigFileImporter;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class Stigmata2{
     private static Stigmata2 stigmata = new Stigmata2();
     private BirthmarkEnvironment defaultEnvironment;
