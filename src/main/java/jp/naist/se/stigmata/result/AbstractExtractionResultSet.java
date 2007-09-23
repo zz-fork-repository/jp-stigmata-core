@@ -108,6 +108,9 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
         return null;
     }
 
+    /**
+     * @return all of BirthmarkSet this instance have. elements is obtained from birthmarkSet.
+     */
     public synchronized BirthmarkSet[] getBirthmarkSets(ExtractionTarget target){
         return AbstractComparisonResultSet.<BirthmarkSet>getArrays(birthmarkSets(target));
     }

@@ -14,23 +14,38 @@ import java.util.Iterator;
  */
 public interface ComparisonResultSet extends Iterable<ComparisonPair>{
     /**
-     * returns the birthmark environment.
+     * the birthmark environment.
      */
     public BirthmarkEnvironment getEnvironment();
 
+    /**
+     * the birthmark context.
+     */
     public BirthmarkContext getContext();
 
     /**
-     * returns a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.
+     * a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.
      */
     public Iterator<ComparisonPair> iterator();
 
+    /**
+     * a comparison pair at given index.
+     */
     public ComparisonPair getPairAt(int index);
 
+    /**
+     * all comparison pairs.
+     */
     public ComparisonPair[] getPairs();
 
+    /**
+     * comparison pair count of this instance has.
+     */
     public int getPairCount();
 
+    /**
+     * comparison source.
+     */
     public BirthmarkSet[] getPairSources();
 
     public Iterator<BirthmarkSet> pairSources();

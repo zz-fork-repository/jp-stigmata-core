@@ -80,6 +80,7 @@ public class KGram<T> implements Serializable{
         return list.hashCode();
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> KGram<T>[] buildKGram(T[] values, int kvalue){
         Set<KGram<T>> kgrams = new LinkedHashSet<KGram<T>>();
 

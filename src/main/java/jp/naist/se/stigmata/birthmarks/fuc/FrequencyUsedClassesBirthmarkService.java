@@ -1,7 +1,7 @@
 package jp.naist.se.stigmata.birthmarks.fuc;
 
 /*
- * $Id: UsedClassesBirthmarkService.java 140 2007-06-28 10:48:47Z tama3 $
+ * $Id$
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;
@@ -15,7 +15,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision: 140 $ $Date: 2007-06-28 19:48:47 +0900 (Thu, 28 Jun 2007) $
+ * @version $Revision$ $Date$
  */
 public class FrequencyUsedClassesBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private BirthmarkComparator comparator = new CosineSimilarityBirthmarkComparator(this);
