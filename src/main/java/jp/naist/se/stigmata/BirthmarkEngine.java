@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import jp.naist.se.stigmata.birthmarks.extractors.BirthmarkExtractorFactory;
 import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
 import jp.naist.se.stigmata.event.BirthmarkEngineListener;
 import jp.naist.se.stigmata.event.OperationStage;
@@ -31,6 +32,9 @@ import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.reader.DefaultClassFileArchive;
 import jp.naist.se.stigmata.reader.JarClassFileArchive;
 import jp.naist.se.stigmata.reader.WarClassFileArchive;
+import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
+import jp.naist.se.stigmata.result.ExtractionResultSetFactory;
+import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -47,13 +51,15 @@ public class BirthmarkEngine{
     private WarningMessages warnings;
     private OperationType latestOperationType;
     private OperationType targetType;
-
-    public BirthmarkEngine(){
-        this(BirthmarkEnvironment.getDefaultEnvironment());
-    }
+    private BirthmarkExtractorFactory factory;
 
     public BirthmarkEngine(BirthmarkEnvironment env){
         this.environment = env;
+        factory = new BirthmarkExtractorFactory(env);
+    }
+
+    public BirthmarkEnvironment getEnvironment(){
+        return environment;
     }
 
     public void addBirthmarkEngineListener(BirthmarkEngineListener listener){
@@ -68,8 +74,8 @@ public class BirthmarkEngine{
         operationStart(OperationType.FILTER_BIRTHMARKS);
 
         ComparisonResultSet crs = compare(target, context);
-        crs = filter(crs, context);
-        
+        crs = filter(crs);
+
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
@@ -79,28 +85,28 @@ public class BirthmarkEngine{
         operationStart(OperationType.FILTER_BIRTHMARKS);
 
         ComparisonResultSet crs = compare(targetX, targetY, context);
-        crs = filter(crs, context);
+        crs = filter(crs);
         
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
     }
 
-    public ComparisonResultSet filter(ExtractionResult er, BirthmarkContext context) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
+    public ComparisonResultSet filter(ExtractionResultSet er) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
         operationStart(OperationType.FILTER_BIRTHMARKS);
 
-        ComparisonResultSet crs = compare(er, context);
-        crs = filter(crs, context);
+        ComparisonResultSet crs = compare(er);
+        crs = filter(crs);
         
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
     }
 
-    public ComparisonResultSet filter(ComparisonResultSet crs, BirthmarkContext context) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
+    public ComparisonResultSet filter(ComparisonResultSet crs) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
         operationStart(OperationType.FILTER_BIRTHMARKS);
 
-        String[] filterTypes = context.getFilterTypes();
+        String[] filterTypes = crs.getContext().getFilterTypes();
 
         if(filterTypes != null){
             List<ComparisonPairFilterSet> filterList = new ArrayList<ComparisonPairFilterSet>();
@@ -123,11 +129,15 @@ public class BirthmarkEngine{
         return crs;
     }
 
+    public ComparisonPair compareDetails(BirthmarkSet bs1, BirthmarkSet bs2, BirthmarkContext context) throws BirthmarkComparisonFailedException{
+        return new ComparisonPair(bs1, bs2, context);
+    }
+
     public ComparisonResultSet compare(String[] target, BirthmarkContext context) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
 
-        ExtractionResult er = extract(target, context);
-        ComparisonResultSet crs = compare(er, context);
+        ExtractionResultSet er = extract(target, context);
+        ComparisonResultSet crs = compare(er);
 
         operationDone(OperationType.COMPARE_BIRTHMARKS);
 
@@ -137,38 +147,33 @@ public class BirthmarkEngine{
     public ComparisonResultSet compare(String[] targetX, String[] targetY, BirthmarkContext context) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
 
-        ExtractionResult er = extract(targetX, targetY, context);
-        ComparisonResultSet crs = compare(er, context);
+        ExtractionResultSet er = extract(targetX, targetY, context);
+        ComparisonResultSet crs = compare(er);
 
         operationDone(OperationType.COMPARE_BIRTHMARKS);
 
         return crs;
     }
 
-    public ComparisonResultSet compare(ExtractionResult er, BirthmarkContext context) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
+    public ComparisonResultSet compare(ExtractionResultSet er) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
+        BirthmarkContext context = er.getContext();
 
         ComparisonResultSet crs = null;
         switch(context.getComparisonMethod()){
-        case ROUND_ROBIN:
-            crs = new RoundRobinComparisonResultSet(
-                er.getBirthmarkSetXY(), environment, true
-            );
+        case ROUND_ROBIN_SAME_PAIR:
+            crs = new RoundRobinComparisonResultSet(er, true);
+            break;
+        case ROUND_ROBIN_WITHOUT_SAME_PAIR:
+            crs = new RoundRobinComparisonResultSet(er, false);
             break;
         case ROUND_ROBIN_XY:
-            crs = new RoundRobinComparisonResultSet(
-                er.getBirthmarkSetX(), er.getBirthmarkSetY(), environment
-            );
+            crs = new RoundRobinComparisonResultSet(er, true);
         case GUESSED_PAIR:
-            crs = new CertainPairComparisonResultSet(
-                er.getBirthmarkSetX(), er.getBirthmarkSetY(), environment
-            );
+            crs = new CertainPairComparisonResultSet(er);
             break;
         case SPECIFIED_PAIR:
-            crs = new CertainPairComparisonResultSet(
-                er.getBirthmarkSetX(), er.getBirthmarkSetY(),
-                context.getNameMappings(), environment
-            );
+            crs = new CertainPairComparisonResultSet(er, context.getNameMappings());
             break;
         }
 
@@ -176,23 +181,24 @@ public class BirthmarkEngine{
         return crs;
     }
 
-    public ExtractionResult extract(String[] target, BirthmarkContext context) throws BirthmarkExtractionFailedException{
+    public ExtractionResultSet extract(String[] target, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
-        ExtractionResult er = extract(target, null, context);
+        ExtractionResultSet er = extract(target, null, context);
         operationDone(OperationType.EXTRACT_BIRTHMARKS);
         return er;
     }
 
-    public ExtractionResult extract(String[] targetX, String[] targetY, BirthmarkContext context) throws BirthmarkExtractionFailedException{
+    public ExtractionResultSet extract(String[] targetX, String[] targetY, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
-        ExtractionResult er = new ExtractionResult();
+        ExtractionResultSet er = ExtractionResultSetFactory.getInstance().createResultSet(context);
 
         try{
             switch(context.getComparisonMethod()){
-            case ROUND_ROBIN:
+            case ROUND_ROBIN_SAME_PAIR:
+            case ROUND_ROBIN_WITHOUT_SAME_PAIR:
+                er.setTableType(false);
                 String[] targetXY = mergeTarget(targetX, targetY);
-                BirthmarkSet[] s = extractImpl(targetXY, context);
-                er.setBirthmarkSetXY(s);
+                extractImpl2(targetXY, er, ExtractionTarget.TARGET_XY);
                 break;
             case GUESSED_PAIR:
             case SPECIFIED_PAIR:
@@ -201,11 +207,45 @@ public class BirthmarkEngine{
                 if(targetX == null || targetY == null){
                     throw new BirthmarkExtractionFailedException("targetX or targetY is null");
                 }
+                er.setTableType(true);
+                extractImpl2(targetX, er, ExtractionTarget.TARGET_X);
+                extractImpl2(targetY, er, ExtractionTarget.TARGET_Y);
+                break;
+            }
+            return er;
+        } catch(IOException e){
+            throw new BirthmarkExtractionFailedException(e);
+        } finally{
+            operationDone(OperationType.EXTRACT_BIRTHMARKS);
+        }
+    }
+
+    public ExtractionResultSet extract2(String[] targetX, String[] targetY, BirthmarkContext context) throws BirthmarkExtractionFailedException{
+        operationStart(OperationType.EXTRACT_BIRTHMARKS);
+        ExtractionResultSet er = ExtractionResultSetFactory.getInstance().createResultSet(context);
+
+        try{
+            switch(context.getComparisonMethod()){
+            case ROUND_ROBIN_SAME_PAIR:
+            case ROUND_ROBIN_WITHOUT_SAME_PAIR:
+                er.setTableType(false);
+                String[] targetXY = mergeTarget(targetX, targetY);
+                BirthmarkSet[] s = extractImpl(targetXY, context);
+                er.setBirthmarkSets(ExtractionTarget.TARGET_XY, s);
+                break;
+            case GUESSED_PAIR:
+            case SPECIFIED_PAIR:
+            case ROUND_ROBIN_XY:
+            default:
+                if(targetX == null || targetY == null){
+                    throw new BirthmarkExtractionFailedException("targetX or targetY is null");
+                }
+                er.setTableType(true);
                 BirthmarkSet[] extractResultX = extractImpl(targetX, context);
                 BirthmarkSet[] extractResultY = extractImpl(targetY, context);
 
-                er.setBirthmarkSetX(extractResultX);
-                er.setBirthmarkSetY(extractResultY);
+                er.setBirthmarkSets(ExtractionTarget.TARGET_X, extractResultX);
+                er.setBirthmarkSets(ExtractionTarget.TARGET_Y, extractResultY);
                 break;
             }
             return er;
@@ -230,6 +270,25 @@ public class BirthmarkEngine{
                 list.add(s);
             }
         }
+    }
+
+    private BirthmarkSet[] extractImpl2(String[] target, ExtractionResultSet er, ExtractionTarget et) throws BirthmarkExtractionFailedException, IOException{
+        ClassFileArchive[] archives = createArchives(target, environment);
+        BirthmarkContext context = er.getContext();
+        ExtractionUnit unit = context.getExtractionUnit();
+
+        BirthmarkSet[] extractResult = null;
+        if(unit == ExtractionUnit.CLASS){
+            extractFromClass2(archives, er, et);
+        }
+        else if(unit == ExtractionUnit.PACKAGE){
+            extractFromPackage2(archives, er, et);
+        }
+        else if(unit == ExtractionUnit.ARCHIVE){
+            extractFromProduct2(archives, er, et);
+        }
+
+        return extractResult;
     }
 
     private BirthmarkSet[] extractImpl(String[] target, BirthmarkContext context) throws BirthmarkExtractionFailedException, IOException{
@@ -292,7 +351,7 @@ public class BirthmarkEngine{
             warnings.addMessage(new ExtractorNotFoundException("extractor not found"), birthmarkType);
         }
 
-        return null;
+        return extractor;
     }
 
     private byte[] inputStreamToByteArray(InputStream in) throws IOException{
@@ -306,6 +365,47 @@ public class BirthmarkEngine{
 
         bout.close();
         return data;
+    }
+
+    private void extractFromPackage2(ClassFileArchive[] archives, ExtractionResultSet er, ExtractionTarget et) throws IOException, BirthmarkExtractionFailedException{
+        Map<String, BirthmarkSet> map = new HashMap<String, BirthmarkSet>();
+        BirthmarkContext context = er.getContext();
+
+        for(ClassFileArchive archive: archives){
+            for(ClassFileEntry entry: archive){
+                try{
+                    String name = entry.getClassName();
+                    String packageName = parsePackageName(name);
+                    BirthmarkSet bs = map.get(packageName);
+                    if(bs == null){
+                        bs = new BirthmarkSet(packageName, archive.getLocation());
+                        map.put(packageName, bs);
+                    }
+
+                    byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
+                    for(String birthmarkType: context.getExtractionTypes()){
+                        try{
+                            BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
+                            if(extractor.isAcceptable(ExtractionUnit.PACKAGE)){
+                                Birthmark b = bs.getBirthmark(extractor.getProvider().getType());
+                                if(b == null){
+                                    b = extractor.createBirthmark();
+                                    bs.addBirthmark(b);
+                                }
+                                extractor.extract(b, new ByteArrayInputStream(data), er.getEnvironment());
+                            }
+                        } catch(ExtractorNotFoundException e){
+                            warnings.addMessage(e, birthmarkType);
+                        }
+                    }
+                } catch(IOException e){
+                    warnings.addMessage(e, archive.getName());
+                }
+            }
+        }
+        for(BirthmarkSet bs: map.values()){
+            er.addBirthmarkSet(et, bs);
+        }
     }
 
     private BirthmarkSet[] extractFromPackage(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
@@ -352,7 +452,37 @@ public class BirthmarkEngine{
         return n;
     }
 
-    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
+    private void extractFromClass2(ClassFileArchive[] archives, ExtractionResultSet er,
+            ExtractionTarget et) throws IOException, BirthmarkExtractionFailedException{
+        BirthmarkContext context = er.getContext();
+
+        for(ClassFileArchive archive: archives){
+            for(ClassFileEntry entry: archive){
+                try{
+                    BirthmarkSet birthmarkset = new BirthmarkSet(entry.getClassName(), entry.getLocation());
+                    byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
+                    
+                    for(String birthmarkType: context.getExtractionTypes()){
+                        try{
+                            BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
+                            if(extractor.isAcceptable(ExtractionUnit.CLASS)){
+                                Birthmark b = extractor.extract(new ByteArrayInputStream(data), er.getEnvironment());
+                                birthmarkset.addBirthmark(b);
+                            }
+                        } catch(ExtractorNotFoundException e){
+                            warnings.addMessage(e, birthmarkType);
+                        }
+                    }
+                    er.addBirthmarkSet(et, birthmarkset);
+                } catch(IOException e){
+                    warnings.addMessage(e, entry.getClassName());
+                }
+            }
+        }
+    }
+
+    private BirthmarkSet[] extractFromClass(ClassFileArchive[] archives,
+            BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
 
         for(ClassFileArchive archive: archives){
@@ -373,6 +503,40 @@ public class BirthmarkEngine{
             }
         }
         return list.toArray(new BirthmarkSet[list.size()]);
+    }
+
+    private void extractFromProduct2(ClassFileArchive[] archives, ExtractionResultSet er, ExtractionTarget et) throws IOException, BirthmarkExtractionFailedException{
+        BirthmarkContext context = er.getContext();
+
+        for(ClassFileArchive archive: archives){
+            BirthmarkSet birthmarkset = new BirthmarkSet(archive.getName(), archive.getLocation());
+
+            for(ClassFileEntry entry: archive){
+                try{
+                    byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
+                    for(String birthmarkType: context.getExtractionTypes()){
+                        try{
+                            BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
+                            if(extractor.isAcceptable(ExtractionUnit.ARCHIVE)){
+                                Birthmark b = birthmarkset.getBirthmark(birthmarkType);
+                                if(b == null){
+                                    b = extractor.createBirthmark();
+                                    birthmarkset.addBirthmark(b);
+                                }
+                                extractor.extract(b, new ByteArrayInputStream(data), er.getEnvironment());
+                            }
+                        } catch(ExtractorNotFoundException e){
+                            warnings.addMessage(e, birthmarkType);
+                        } 
+                    }
+                } catch(IOException e){
+                    warnings.addMessage(e, entry.getClassName());
+                }
+            }
+            if(birthmarkset.getBirthmarksCount() != 0){
+                er.addBirthmarkSet(et, birthmarkset);
+            }
+        }
     }
 
     private BirthmarkSet[] extractFromProduct(ClassFileArchive[] archives, BirthmarkExtractor[] extractors, BirthmarkEnvironment context) throws IOException, BirthmarkExtractionFailedException{

@@ -16,25 +16,28 @@ import org.junit.Test;
  * @version $Revision$ $Date$
  */
 public class StigmataTest{
-    private BirthmarkEnvironment context;
+    private BirthmarkContext context;
+    private BirthmarkEnvironment environment;
 
     @Before
     public void prepare(){
-        context = Stigmata.getInstance().createEnvironment();
+        Stigmata stigmata = Stigmata.getInstance();
+        context = stigmata.createContext();
+        environment = context.getEnvironment();
     }
 
     @Test
     public void checkAvailableServices() throws Exception{
-        Assert.assertNotNull(context.getService("smc"));
-        Assert.assertNotNull(context.getService("cvfv"));
-        Assert.assertNotNull(context.getService("is"));
-        Assert.assertNotNull(context.getService("uc"));
-        Assert.assertNotNull(context.getService("kgram"));
+        Assert.assertNotNull(environment.getService("smc"));
+        Assert.assertNotNull(environment.getService("cvfv"));
+        Assert.assertNotNull(environment.getService("is"));
+        Assert.assertNotNull(environment.getService("uc"));
+        Assert.assertNotNull(environment.getService("kgram"));
     }
 
     @Test
     public void checkSmcBirthmarkService() throws Exception{
-        BirthmarkSpi service = context.getService("smc");
+        BirthmarkSpi service = environment.getService("smc");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -50,7 +53,7 @@ public class StigmataTest{
 
     @Test
     public void checkCvfvBirthmarkService() throws Exception{
-        BirthmarkSpi service = context.getService("cvfv");
+        BirthmarkSpi service = environment.getService("cvfv");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -66,7 +69,7 @@ public class StigmataTest{
 
     @Test
     public void checkIsBirthmarkService() throws Exception{
-        BirthmarkSpi service = context.getService("is");
+        BirthmarkSpi service = environment.getService("is");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -82,7 +85,7 @@ public class StigmataTest{
 
     @Test
     public void checkUcBirthmarkService() throws Exception{
-        BirthmarkSpi service = context.getService("uc");
+        BirthmarkSpi service = environment.getService("uc");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -98,7 +101,7 @@ public class StigmataTest{
 
     @Test
     public void checkKgramBirthmarkService() throws Exception{
-        BirthmarkSpi service = context.getService("kgram");
+        BirthmarkSpi service = environment.getService("kgram");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());

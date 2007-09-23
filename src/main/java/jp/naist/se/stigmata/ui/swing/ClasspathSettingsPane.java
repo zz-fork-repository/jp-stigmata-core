@@ -25,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 
 /**
@@ -89,7 +90,7 @@ public class ClasspathSettingsPane extends JPanel{
 
     private boolean findClass(String className){
         try{
-            ClasspathContext b = stigmata.getStigmata().createEnvironment().getClasspathContext();
+            ClasspathContext b = Stigmata.getInstance().createEnvironment().getClasspathContext();
             ClasspathContext bytecode = new ClasspathContext(b);
             String[] path = classpath.getValues();
             for(String cp: path){

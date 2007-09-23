@@ -6,8 +6,6 @@ package jp.naist.se.stigmata.ui.swing;
 
 import java.awt.BorderLayout;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -15,8 +13,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import jp.naist.se.stigmata.BirthmarkEnvironment;
-import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
 import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
@@ -30,12 +28,12 @@ import jp.naist.se.stigmata.utils.AsciiDataWritable;
 public class BirthmarkExtractionResultPane extends JPanel{
     private static final long serialVersionUID = 239084365756236543L;
 
-    private List<BirthmarkSet> birthmarks;
     private StigmataFrame frame;
+    private ExtractionResultSet extraction;
 
-    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, BirthmarkEnvironment environment, BirthmarkSet[] sets){
+    public BirthmarkExtractionResultPane(StigmataFrame stigmataFrame, ExtractionResultSet ers){
         this.frame = stigmataFrame;
-        this.birthmarks = Arrays.asList(sets);
+        this.extraction = ers;
 
         JComponent southPanel = Box.createHorizontalBox(); 
         JButton saveButton = Utility.createButton("savebirthmark", new SaveAction(frame, new AsciiDataWritable(){
@@ -46,12 +44,12 @@ public class BirthmarkExtractionResultPane extends JPanel{
                 }
 
                 BirthmarkExtractionResultFormat list = service.getExtractionResultFormat();
-                list.printResult(new PrintWriter(out), birthmarks.toArray(new BirthmarkSet[birthmarks.size()]));
+                list.printResult(new PrintWriter(out), extraction);
             }
         }));
         JScrollPane scroll = new JScrollPane();
 
-        scroll.setViewportView(new BirthmarkTree(birthmarks.toArray(new BirthmarkSet[birthmarks.size()])));
+        scroll.setViewportView(new BirthmarkTree(ers.getBirthmarkSets(ExtractionTarget.TARGET_BOTH)));
 
         setLayout(new BorderLayout());
         add(scroll, BorderLayout.CENTER);

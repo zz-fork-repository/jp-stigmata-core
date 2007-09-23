@@ -10,6 +10,8 @@ import java.util.Iterator;
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.format.AbstractBirthmarkExtractionResultFormat;
 
 /**
@@ -20,15 +22,16 @@ import jp.naist.se.stigmata.format.AbstractBirthmarkExtractionResultFormat;
  * @version $Revision$ $Date$
  */
 public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractionResultFormat{
-    public void printResult(PrintWriter out, BirthmarkSet[] holders){
+    public void printResult(PrintWriter out, ExtractionResultSet ers){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark>");
         out.println("  <extracted-birthmarks>");
-        for(int i = 0; i < holders.length; i++){
-            printBirthmarkSet(out, holders[i]);
+        for(Iterator<BirthmarkSet> i = ers.birthmarkSets(ExtractionTarget.TARGET_BOTH); i.hasNext(); ){
+            printBirthmarkSet(out, i.next());
         }
         out.println("  </extracted-birthmarks>");
         out.println("</birthmark>");
+        out.flush();
     }
 
     protected void printBirthmarkSet(PrintWriter out, BirthmarkSet set){

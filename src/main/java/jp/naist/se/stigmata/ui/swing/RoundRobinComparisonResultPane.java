@@ -15,9 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.Box;
@@ -36,11 +35,14 @@ import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
-import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.RoundRobinComparisonResultSet;
+import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
+import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
+import jp.naist.se.stigmata.result.MemoryExtractionResultSet;
+import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
@@ -54,46 +56,59 @@ import jp.naist.se.stigmata.utils.AsciiDataWritable;
 public class RoundRobinComparisonResultPane extends JPanel{
     private static final long serialVersionUID = 2134574576543623L;
 
-    private List<BirthmarkSet> birthmarksX;
-    private List<BirthmarkSet> birthmarksY;
+    private ExtractionResultSet extraction;
+    // private List<BirthmarkSet> birthmarksX;
+    // private List<BirthmarkSet> birthmarksY;
     private JTable table;
     private DefaultTableModel model;
     private JLabel classCount, comparisonCount, distinctionRatio;
     private JLabel average, minimum, maximum;
     private StigmataFrame stigmataFrame;
-    private BirthmarkEnvironment environment;
+    // private BirthmarkEnvironment environment;
 
+    public RoundRobinComparisonResultPane(StigmataFrame stigmata, ExtractionResultSet resultset){
+        this.stigmataFrame = stigmata;
+        this.extraction = resultset;
+        initialize();
+        compare(model);
+    }
+
+    @Deprecated
     public RoundRobinComparisonResultPane(StigmataFrame stigmata, BirthmarkEnvironment environment,
                                           BirthmarkSet[] birthmarksX, BirthmarkSet[] birthmarksY){
         this.stigmataFrame = stigmata;
-        this.environment = environment;
-        this.birthmarksX = Arrays.asList(birthmarksX);
-        this.birthmarksY = Arrays.asList(birthmarksY);
 
         initialize();
         compare(model);
     }
 
     private void compare(DefaultTableModel model){
-        int comparison = birthmarksX.size() * birthmarksY.size();
+        int countX = extraction.getBirthmarkSetSize(ExtractionTarget.TARGET_X);
+        int countY = extraction.getBirthmarkSetSize(ExtractionTarget.TARGET_Y);
+        int comparisonCount = countX * countY;
 
-        classCount.setText(Integer.toString(birthmarksX.size() + birthmarksY.size()));
-        comparisonCount.setText(Integer.toString(comparison));
+        classCount.setText(Integer.toString(countX + countY));
+        this.comparisonCount.setText(Integer.toString(comparisonCount));
         int correct = 0;
         double avg = 0d;
         double max = 0d;
         double min = 100d;
         model.addColumn("");
-        for(BirthmarkSet x: birthmarksX){
+        for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_X); i.hasNext(); ){
+            BirthmarkSet x = i.next();
             model.addColumn(x.getName());
         }
-        for(int j = 0; j < birthmarksY.size(); j++){
-            Object[] rows = new Object[birthmarksX.size() + 1];
-            rows[0] = birthmarksY.get(j).getName();
+        int sizeX = extraction.getBirthmarkSetSize(ExtractionTarget.TARGET_X);
+        for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_Y); i.hasNext(); ){
+            Object[] rows = new Object[sizeX + 1];
+            BirthmarkSet setY = i.next();
+            rows[0] = setY.getName();
 
-            for(int i = 0; i < birthmarksX.size(); i++){
-                double similarity = compare(environment, birthmarksX.get(i), birthmarksY.get(j));
-                rows[i + 1] = new Double(similarity);
+            int index = 0;
+            for(Iterator<BirthmarkSet> j = extraction.birthmarkSets(ExtractionTarget.TARGET_X); j.hasNext(); ){
+                BirthmarkSet setX = j.next();
+                double similarity = compare(setX, setY, extraction.getEnvironment());
+                rows[index + 1] = new Double(similarity);
 
                 if(Math.abs(similarity - 1) < 1E-8){
                     correct += 1;
@@ -101,19 +116,20 @@ public class RoundRobinComparisonResultPane extends JPanel{
                 avg += similarity;
                 if(max < similarity) max = similarity;
                 if(min > similarity) min = similarity;
+                index++;
             }
             model.addRow(rows);
         }
         distinctionRatio.setText(
-            Double.toString((double)(comparison - correct) / (double)comparison)
+            Double.toString((double)(comparisonCount - correct) / (double)comparisonCount)
         );
-        avg = avg / comparison;
+        avg = avg / comparisonCount;
         average.setText(Double.toString(avg));
         minimum.setText(Double.toString(min));
         maximum.setText(Double.toString(max));
     }
 
-    private double compare(BirthmarkEnvironment environment, BirthmarkSet x, BirthmarkSet y){
+    private double compare(BirthmarkSet x, BirthmarkSet y, BirthmarkEnvironment environment){
         double similarity = 0d;
         int count = 0;
 
@@ -123,7 +139,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             if(b1 != null && b2 != null){
                 BirthmarkComparator comparator = environment.getService(type).getComparator();
                 double result = comparator.compare(b1, b2);
-                if(result != Double.NaN){
+                if(!Double.isNaN(result)){
                     similarity += result;
                     count++;
                 }
@@ -138,7 +154,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
         model = new RoundRobinComparisonResultSetTableModel();
         table = new JTable(model);
-        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(environment));
+        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(extraction.getEnvironment()));
         table.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 if(e.getClickCount() == 2){
@@ -146,10 +162,10 @@ public class RoundRobinComparisonResultPane extends JPanel{
                     int col = table.columnAtPoint(e.getPoint());
                     if(col >= 1 && col < table.getColumnCount() && row >= 0
                             && row < table.getRowCount()){
-                        BirthmarkSet b1 = birthmarksX.get(col - 1);
-                        BirthmarkSet b2 = birthmarksY.get(row);
+                        BirthmarkSet b1 = extraction.getBirthmarkSet(ExtractionTarget.TARGET_X, col - 1);
+                        BirthmarkSet b2 = extraction.getBirthmarkSet(ExtractionTarget.TARGET_Y, row);
 
-                        stigmataFrame.compareDetails(b1, b2, environment);
+                        stigmataFrame.compareDetails(b1, b2, extraction.getContext());
                     }
                 }
             }
@@ -187,10 +203,12 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
     private void mdsButtonActionPerformed(ActionEvent e){
         Map<URL, BirthmarkSet> map = new HashMap<URL, BirthmarkSet>();
-        for(BirthmarkSet bs: birthmarksX){
+        for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_X); i.hasNext(); ){
+            BirthmarkSet bs = i.next();
             map.put(bs.getLocation(), bs);
         }
-        for(BirthmarkSet bs: birthmarksY){
+        for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_Y); i.hasNext(); ){
+            BirthmarkSet bs = i.next();
             map.put(bs.getLocation(), bs);
         }
         int index = 0;
@@ -199,8 +217,8 @@ public class RoundRobinComparisonResultPane extends JPanel{
             set[index] = entry.getValue();
             index++;
         }
-
-        stigmataFrame.showMDSGraph(set);
+        
+        stigmataFrame.showMDSGraph(set, extraction.getContext());
     }
 
     private void graphButtonActionPerformed(ActionEvent e){
@@ -229,11 +247,8 @@ public class RoundRobinComparisonResultPane extends JPanel{
                         service = FormatManager.getDefaultFormatService();
                     }
 
-                    service.getComparisonResultFormat().printResult(out,
-                        new RoundRobinComparisonResultSet(
-                            birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]), 
-                            birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]), environment
-                        )
+                    service.getComparisonResultFormat().printResult(
+                        out, new RoundRobinComparisonResultSet(extraction)
                     );
                 }
             }
@@ -242,7 +257,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         JButton obfuscate = Utility.createButton("obfuscate");
         JButton compare = Utility.createButton("guessedpair");
         JButton updateColor = Utility.createButton(
-            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, environment)
+            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, extraction.getEnvironment())
         );
         JMenuItem mdsMenu = Utility.createJMenuItem("mdsmap");
 
@@ -310,7 +325,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
     private void compareRoundRobinWithFiltering(){
         FilterSelectionPane pane = new FilterSelectionPane(
-            environment.getFilterManager()
+            extraction.getEnvironment().getFilterManager()
         );
         int returnValue = JOptionPane.showConfirmDialog(
             stigmataFrame, pane, Messages.getString("filterselection.dialog.title"),
@@ -320,27 +335,18 @@ public class RoundRobinComparisonResultPane extends JPanel{
         if(returnValue == JOptionPane.OK_OPTION){
             String[] filterSetList = pane.getSelectedFilters();
 
-            ComparisonResultSet resultset = new RoundRobinComparisonResultSet(
-                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
-                birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
-                environment
-            );
+            ComparisonResultSet rs = new RoundRobinComparisonResultSet(extraction);
             
             ComparisonResultSet filterResultSet = new FilteredComparisonResultSet(
-                resultset,
-                environment.getFilterManager().getFilterSets(filterSetList)
+                rs, extraction.getEnvironment().getFilterManager().getFilterSets(filterSetList)
             );
             stigmataFrame.showComparisonResultSet(filterResultSet);
         }
     }
 
     private void compareGuessedPair(){
-        ComparisonResultSet resultset = new CertainPairComparisonResultSet(
-            birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
-            birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
-            environment
-        );
-        stigmataFrame.showComparisonResultSet(resultset);
+        ComparisonResultSet rs = new CertainPairComparisonResultSet(extraction);
+        stigmataFrame.showComparisonResultSet(rs);
     }
 
     private void compareSpecifiedPair(){
@@ -351,12 +357,8 @@ public class RoundRobinComparisonResultPane extends JPanel{
         if(file != null){
             Map<String, String> mapping = stigmataFrame.constructMapping(file);
 
-            ComparisonResultSet resultset = new CertainPairComparisonResultSet(
-                birthmarksX.toArray(new BirthmarkSet[birthmarksX.size()]),
-                birthmarksY.toArray(new BirthmarkSet[birthmarksY.size()]),
-                mapping, environment
-            );
-            stigmataFrame.showComparisonResultSet(resultset);
+            ComparisonResultSet comparison = new CertainPairComparisonResultSet(extraction, mapping);
+            stigmataFrame.showComparisonResultSet(comparison);
         }
     }
 
@@ -369,13 +371,16 @@ public class RoundRobinComparisonResultPane extends JPanel{
                 Messages.getString("obfuscationmapping.description")
             );
             if(file != null){
-                for(int i = 0; i < birthmarksX.size(); i++){
-                    birthmarksX.set(i, obfuscator.obfuscateClassName(birthmarksX.get(i)));
+                ExtractionResultSet ers = new MemoryExtractionResultSet(extraction.getContext(), extraction.isTableType());
+                for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_X); i.hasNext(); ){
+                    BirthmarkSet bs = i.next();
+                    ers.addBirthmarkSet(ExtractionTarget.TARGET_X, obfuscator.obfuscateClassName(bs));
                 }
-                for(int i = 0; i < birthmarksY.size(); i++){
-                    birthmarksY.set(i, obfuscator.obfuscateClassName(birthmarksY.get(i)));
+                for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_Y); i.hasNext(); ){
+                    BirthmarkSet bs = i.next();
+                    ers.addBirthmarkSet(ExtractionTarget.TARGET_Y, obfuscator.obfuscateClassName(bs));
                 }
-
+                this.extraction = ers;
                 obfuscator.outputNameMappings(file);
             }
         }catch(IOException e){

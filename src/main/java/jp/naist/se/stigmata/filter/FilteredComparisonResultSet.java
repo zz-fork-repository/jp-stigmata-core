@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
@@ -53,8 +54,32 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         filters.remove(filter);
     }
 
-    public int getComparisonCount(){
-        return resultset.getComparisonCount();
+    public ComparisonPair getPairAt(int index){
+        int currentIndex = 0;
+        for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
+            ComparisonPair pair = i.next();
+            if(currentIndex == index){
+                return pair;
+            }
+            currentIndex++;
+        }
+        return null;
+    }
+
+    public ComparisonPair[] getPairs(){
+        List<ComparisonPair> list = new ArrayList<ComparisonPair>();
+        for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
+            list.add(i.next());
+        }
+        return list.toArray(new ComparisonPair[list.size()]);
+    }
+
+    public int getPairCount(){
+        return resultset.getPairCount();
+    }
+
+    public BirthmarkContext getContext(){
+        return resultset.getContext();
     }
 
     public BirthmarkEnvironment getEnvironment(){
@@ -65,8 +90,16 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         return new FilteredIterator(resultset.iterator());
     }
 
-    public BirthmarkSet[] getComparisonSources(){
-        return resultset.getComparisonSources();
+    public synchronized BirthmarkSet[] getPairSources(){
+        List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
+        for(Iterator<BirthmarkSet> i = pairSources(); i.hasNext(); ){
+            list.add(i.next());
+        }
+        return list.toArray(new BirthmarkSet[list.size()]);
+    }
+
+    public Iterator<BirthmarkSet> pairSources(){
+        return resultset.pairSources();
     }
 
     private class FilteredIterator implements Iterator<ComparisonPair>{

@@ -27,8 +27,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 
+import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
+import jp.naist.se.stigmata.ComparisonMethod;
 import jp.naist.se.stigmata.ExtractionUnit;
+import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
@@ -222,7 +225,8 @@ public class ControlPane extends JPanel{
     }
 
     private void extractButtonActionPerformed(ActionEvent e){
-        BirthmarkEnvironment environment = generateEnvironment();
+        BirthmarkContext context = generateContext();
+
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
         Set<String> targets = new HashSet<String>();
@@ -237,16 +241,14 @@ public class ControlPane extends JPanel{
             }
         }
 
-        stigmata.extract(
-            birthmarks.getSelectedServiceTypes(), 
-            targets.toArray(new String[targets.size()]), environment
-        );
+        stigmata.extract(targets.toArray(new String[targets.size()]), context);
     }
 
     private void compareRoundRobinWithFiltering(){
-        BirthmarkEnvironment environment = generateEnvironment();
+        BirthmarkContext context = generateContext();
+        context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_XY);
         FilterSelectionPane pane = new FilterSelectionPane(
-            environment.getFilterManager()
+            context.getEnvironment().getFilterManager()
         );
         int returnValue = JOptionPane.showConfirmDialog(
             stigmata, pane, Messages.getString("filterselection.dialog.title"),
@@ -255,49 +257,55 @@ public class ControlPane extends JPanel{
         );
         if(returnValue == JOptionPane.OK_OPTION){
             String[] filterSetList = pane.getSelectedFilters();
+            context.setFilterTypes(filterSetList);
 
-            stigmata.compareRoundRobin(
-                birthmarks.getSelectedServiceTypes(), targetX.getValues(),
-                targetY.getValues(), filterSetList, environment
-            );
+            String[] fileX = targetX.getValues();
+            String[] fileY = targetY.getValues();
+            stigmata.compareRoundRobinFilter(fileX, fileY, context);
         }
     }
 
     private void compareRoundRobin(){
-        BirthmarkEnvironment environment = generateEnvironment();
+        BirthmarkContext context = generateContext();
+        context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_XY);
+        String[] fileX = targetX.getValues();
+        String[] fileY = targetY.getValues();
 
-        stigmata.compareRoundRobin(
-            birthmarks.getSelectedServiceTypes(), targetX.getValues(), 
-            targetY.getValues(), environment
-        );
+        stigmata.compareRoundRobin(fileX, fileY, context);
     }
 
     private void compareSpecifiedPair(){
-        BirthmarkEnvironment environment = generateEnvironment();
+        BirthmarkContext context = generateContext();
+        context.setComparisonMethod(ComparisonMethod.SPECIFIED_PAIR);
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
-        stigmata.compareSpecifiedPair(
-            birthmarks.getSelectedServiceTypes(), fileX, fileY, environment
-        );
+        stigmata.compareSpecifiedPair(fileX, fileY, context);
     }
 
     private void compareGuessedPair(){
-        BirthmarkEnvironment environment = generateEnvironment();
+        BirthmarkContext context = generateContext();
+        context.setComparisonMethod(ComparisonMethod.GUESSED_PAIR);
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
 
-        stigmata.compareGuessedPair(
-            birthmarks.getSelectedServiceTypes(), fileX, fileY, environment
-        );
+        stigmata.compareGuessedPair(fileX, fileY, context);
+    }
+
+    private BirthmarkContext generateContext(){
+        BirthmarkContext context = new BirthmarkContext(generateEnvironment());
+        context.setExtractionTypes(birthmarks.getSelectedServiceTypes());
+        context.setExtractionUnit(parseExtractionUnit());
+        
+        return context;
     }
 
     private BirthmarkEnvironment generateEnvironment(){
-        BirthmarkEnvironment environment = stigmata.getStigmata().createEnvironment();
+        BirthmarkEnvironment environment = Stigmata.getInstance().createEnvironment();
         ClasspathContext bytecode = environment.getClasspathContext();
         WellknownClassManager manager = environment.getWellknownClassManager();
         ComparisonPairFilterManager filterManager = environment.getFilterManager();
 
-        environment.setExtractionUnit(parseExtractionUnit());
+        // environment.setExtractionUnit(parseExtractionUnit());
         classpath.updateClasspathContext(bytecode);
         wellknownClassses.setWellknownClasses(manager);
         filters.updateFilterManager(filterManager);

@@ -10,7 +10,7 @@ Download
 
 *License
 
- Stigmata: Java birthmarking toolkit
+ Stigmata: Java birthmark toolkit
 
  Apache License 2.0
 
@@ -36,7 +36,7 @@ permissions and limitations under the License.
 
  *{{{http://talisman.sourceforge.jp/xmlcli/}XmlCli}} 1.2.1
 
- *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 or later; this library is destributed from stigmata maven2 remote repository)
+ *{{{http://math.nist.gov/javanumerics/jama/}Jama}} 1.0.2 (stigmata-1.0.0 or later; this library is distributed from stigmata maven2 remote repository)
 
  *{{{http://browserlaunch2.sourceforge.net/}BrowserLauncher2}} 1.2 (stigmata-1.1.0 or later; as needed)
 
@@ -51,7 +51,7 @@ manually Jama and BrowserLauncher2 into your maven2 local repository.
 Because maven2 default remote repository do not has them.  Other
 libraries can be automatically downloaded by Maven2.
 
- type below command for nstalling jar product into your maven2 local
+ type below command for installing jar product into your maven2 local
 repository.
 
 ----
@@ -87,10 +87,10 @@ $ mvn install:install-file \
  [stigmata-x.x.x-bin.jar] binary distribution package, contains class
    files and resource files.
 
- [stigmata-x.x.x-src.jar] source ditribution package, contains
+ [stigmata-x.x.x-src.jar] source distribution package, contains
  pom.xml, source files, resource files and documents.
  
- [stigmata-x.x.x-exe.jar] Executable ditribution package, contains
+ [stigmata-x.x.x-exe.jar] Executable distribution package, contains
  Windows executable file named stigmata.exe.
 
 *Binary download by maven2 
@@ -137,7 +137,7 @@ $ svn checkout http://svn.sourceforge.jp/svnroot/stigmata/trunk/ stigmata
 
 **Web access
 
- You can brouse the source code from following link.
+ You can browse the source code from following link.
 
  {{http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata}}
 

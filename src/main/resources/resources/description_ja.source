@@ -12,6 +12,8 @@ birthmark.fmc.display.type=メソッド出現頻度
 birthmark.fmc.description=メソッド呼出しの出現頻度
 birthmark.fuc.display.type=依存クラスの頻度
 birthmark.fuc.description=依存クラスの出現頻度
+birthmark.kmc.display.type=メソッド呼出のK-gram
+birthmark.kmc.description=静的なメソッド呼出の系列から作成したK-gram
 
 filter.similarity.display.type=類似度でのフィルタリング
 filter.name.display.type=クラス名でのフィルタリング

@@ -22,9 +22,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
+import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.result.SingleExtractionResultSet;
 import jp.naist.se.stigmata.ui.swing.ClippedLRListCellRenderer;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.PopupButton;
@@ -45,28 +48,26 @@ public class MDSGraphPanel extends JPanel{
 
     private StigmataFrame stigmata;
     private BirthmarkSet[] set;
+    private BirthmarkContext context;
     private LabelMap labels;
     private MDSGraphViewer viewer;
 
-    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set){
-        this(stigmata, set, stigmata.getEnvironment());
-    }
-
-    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set, BirthmarkEnvironment environment){
+    public MDSGraphPanel(StigmataFrame stigmata, BirthmarkSet[] set, BirthmarkContext context){
         this.stigmata = stigmata;
+        this.context = context;
         this.set = set;
 
-        double[][] matrix = initData(set, environment);
+        double[][] matrix = initData(set, context);
         initLayouts(matrix);
     }
 
-    private double[][] initData(BirthmarkSet[] set, BirthmarkEnvironment environment){
+    private double[][] initData(BirthmarkSet[] set, BirthmarkContext context){
         labels = new LabelMap();
         double[][] matrix = new double[set.length][set.length];
 
         for(int i = 0; i < set.length; i++){
             for(int j = 0; j <= i; j++){
-                ComparisonPair pair = new ComparisonPair(set[i], set[j], environment);
+                ComparisonPair pair = new ComparisonPair(set[i], set[j], context);
                 matrix[i][j] = 1d - pair.calculateSimilarity();
                 if(i != j){
                     matrix[j][i] = matrix[i][j];
@@ -102,9 +103,8 @@ public class MDSGraphPanel extends JPanel{
                 String c = e.getActionCommand();
                 for(int i = 0; i < set.length; i++){
                     if(c.equals(set[i].getName())){
-                        stigmata.showExtractionResult(
-                            new BirthmarkSet[]{ set[i], }, stigmata.getEnvironment()
-                        );
+                        ExtractionResultSet ers = new SingleExtractionResultSet(context, set[i]);
+                        stigmata.showExtractionResult(ers);
                     }
                 }
             }

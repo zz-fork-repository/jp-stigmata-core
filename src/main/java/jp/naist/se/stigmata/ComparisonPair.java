@@ -16,15 +16,15 @@ import java.util.List;
 public class ComparisonPair implements Iterable<ComparisonPairElement>{
     private BirthmarkSet target1;
     private BirthmarkSet target2;
-    private BirthmarkEnvironment environment;
+    private BirthmarkContext context;
 
     /**
      * constructor.
      */
-    public ComparisonPair(BirthmarkSet target1, BirthmarkSet target2, BirthmarkEnvironment environment){
+    public ComparisonPair(BirthmarkSet target1, BirthmarkSet target2, BirthmarkContext context){
         this.target1 = target1;
         this.target2 = target2;
-        this.environment = environment;
+        this.context = context;
 
         if(target1.getBirthmarksCount() != target2.getBirthmarksCount()){
             throw new IllegalArgumentException("birthmark count is not matched");
@@ -76,13 +76,16 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
      */
     public synchronized Iterator<ComparisonPairElement> iterator(){
         List<ComparisonPairElement> list = new ArrayList<ComparisonPairElement>();
+        BirthmarkEnvironment env = context.getEnvironment();
         for(Iterator<String> i = target1.birthmarkTypes(); i.hasNext(); ){
             String type = i.next();
 
             Birthmark b1 = target1.getBirthmark(type);
             Birthmark b2 = target2.getBirthmark(type);
             if(b1 != null && b2 != null){
-                list.add(new ComparisonPairElement(b1, b2, environment.getService(type).getComparator()));
+                list.add(new ComparisonPairElement(
+                    b1, b2, env.getService(type).getComparator()
+                ));
             }
         }
         return list.iterator();

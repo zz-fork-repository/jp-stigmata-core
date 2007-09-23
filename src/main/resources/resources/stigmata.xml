@@ -13,6 +13,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>uc_dp</type>
       <display-name>Used Classes (DP matching)</display-name>
@@ -20,6 +21,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.DPMatchingBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>uc_ed</type>
       <display-name>Used Classes (Edit distance)</display-name>
@@ -27,6 +29,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.EditDistanceBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>is_ed</type>
       <display-name>Inheritance Structure (Edit distance)</display-name>
@@ -34,6 +37,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.is.InheritanceStructureBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.EditDistanceBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>is_dp</type>
       <display-name>Inheritance Structure (DP matching)</display-name>
@@ -41,6 +45,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.is.InheritanceStructureBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.DPMatchingBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>smc_ed</type>
       <display-name>Sequence of Method Calls (Edit distance)</display-name>
@@ -48,6 +53,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.EditDistanceBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>smc_dp</type>
       <display-name>Sequence of Method Calls (DP matching)</display-name>
@@ -55,6 +61,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.DPMatchingBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>cvfv_ed</type>
       <display-name>Constant Value of Field Variable (Edit distance)</display-name>
@@ -62,6 +69,7 @@ $Id$
       <extractor>jp.naist.se.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor</extractor>
       <comparator>jp.naist.se.stigmata.birthmarks.comparators.EditDistanceBirthmarkComparator</comparator>
     </birthmark-service>
+
     <birthmark-service>
       <type>cvfv_dp</type>
       <display-name>Constant Value of Field Variable (DP matching)</display-name>
@@ -185,6 +193,10 @@ $Id$
   <properties>
     <property>
       <name>extractor.kgram.KValue</name>
+      <value>4</value>
+    </property>
+    <property>
+      <name>extractor.kmc.KValue</name>
       <value>4</value>
     </property>
 <!--

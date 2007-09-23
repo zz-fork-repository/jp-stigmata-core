@@ -6,7 +6,7 @@ package jp.naist.se.stigmata.format;
 
 import java.io.PrintWriter;
 
-import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.ExtractionResultSet;
 
 /**
  * 
@@ -16,7 +16,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
  * @version $Revision$ $Date$
  */
 public interface BirthmarkExtractionResultFormat{
-    public void printResult(PrintWriter out, BirthmarkSet[] holders);
+    public void printResult(PrintWriter out, ExtractionResultSet ers);
 
-    public String getResult(BirthmarkSet[] holders);
+    public String getResult(ExtractionResultSet ers);
 }

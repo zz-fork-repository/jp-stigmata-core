@@ -4,14 +4,16 @@ package jp.naist.se.stigmata.birthmarks.smc;
  * $Id$
  */
 
+import jp.naist.se.stigmata.Birthmark;
+import jp.naist.se.stigmata.BirthmarkContext;
+import jp.naist.se.stigmata.BirthmarkElement;
+import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.Stigmata;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkElement;
-import jp.naist.se.stigmata.BirthmarkSet;
-import jp.naist.se.stigmata.Stigmata;
 
 /**
  *
@@ -20,18 +22,22 @@ import jp.naist.se.stigmata.Stigmata;
  */
 public class SmcBirthmarkExtractorTest{
     private Stigmata stigmata;
+    private BirthmarkContext context;
 
     @Before
     public void setup(){
         stigmata = Stigmata.getInstance();
+        context = stigmata.createContext();
+        context.addExtractionType("smc");
     }
 
     @Test
     public void checkSmcBirthmark() throws Exception{
-        BirthmarkSet[] array = stigmata.extract(
-            new String[] { "smc", },
-            new String[] { "target/classes/jp/naist/se/stigmata/Stigmata.class", }
+        ExtractionResultSet ers = stigmata.createEngine().extract(
+            new String[] { "target/classes/jp/naist/se/stigmata/Stigmata.class", },
+            context
         );
+        BirthmarkSet[] array = ers.getBirthmarkSets();
 
         Assert.assertEquals(1, array.length);
         Assert.assertNotNull(array[0].getBirthmark("smc"));
@@ -134,17 +140,18 @@ public class SmcBirthmarkExtractorTest{
 
     @Test
     public void checkSmcBirthmark2() throws Exception{
-        BirthmarkSet[] array = stigmata.extract(
-            new String[] { "smc", },
-            new String[] { "target/classes/jp/naist/se/stigmata/RoundRobinComparisonResultSet.class", }
+        ExtractionResultSet ers = stigmata.createEngine().extract(
+            new String[] { "target/classes/jp/naist/se/stigmata/result/RoundRobinComparisonResultSet.class", },
+            context
         );
+        BirthmarkSet[] array = ers.getBirthmarkSets();
 
         Assert.assertEquals(array.length, 1);
         Assert.assertNotNull(array[0].getBirthmark("smc"));
 
         Birthmark birthmark = array[0].getBirthmark("smc");
         Assert.assertEquals("smc", birthmark.getType());
-        Assert.assertEquals(25, birthmark.getElementCount());
+        Assert.assertEquals(18, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         for(int i = 0; i < elements.length; i++){
@@ -155,14 +162,11 @@ public class SmcBirthmarkExtractorTest{
         }
         /*
         int index = 0;
-        // <init>(BirthmarkSet[], BirthmarkContext, boolean)
-        Assert.assertEquals("java.lang.Object#<init>",      elements[index++].toString());
-        Assert.assertEquals("java.util.Arrays#asList",      elements[index++].toString());
-        Assert.assertEquals("java.util.Arrays#asList",      elements[index++].toString());
+        // <init>(ExtractionResult, BirthmarkEnvironment, boolean)
         Assert.assertEquals("java.lang.Object#<init>",      elements[index++].toString());
 
-        // <init>(BirthmarkSet[], BirthmarkSet[], BirthmarkContext, boolean)
-        Assert.assertEquals("java.util.Arrays#asList",      elements[index++].toString());
+        // getComparisonSources
+        Assert.assertEquals("java.util.ArrayArrays#<init>", elements[index++].toString());
         Assert.assertEquals("java.util.Arrays#asList",      elements[index++].toString());
 
         // setCompareSamePair

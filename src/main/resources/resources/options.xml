@@ -88,12 +88,19 @@
       <argument>NONE</argument>
     </definition>
 
-    <definition name="extract-type">
+    <definition name="extraction-unit">
       <short-option>e</short-option>
-      <long-option>extract-type</long-option>
+      <long-option>extraction-unit</long-option>
       <argument>REQUIRED</argument>
-      <argument-name>EXTRACT_TYPE</argument-name>
-      <description>extract birthmark from EXTRACT_TYPE. Available values are CLASS, PACKAGE, and ARCHIVE.  Default is CLASS</description>
+      <argument-name>EXTRACT_UNIT</argument-name>
+      <description>extract birthmark from EXTRACT_UNIT. Available values are CLASS, PACKAGE, and ARCHIVE.  Default is CLASS</description>
+    </definition>
+
+    <definition name="store-target">
+      <long-option>store-target</long-option>
+      <argument>REQUIRED</argument>
+      <argument-name>STORE_TARGET</argument-name>
+      <description>This option represents how to store extracted birthmarks.  Available value is only MEMORY.</description>
     </definition>
   </definitions>
 
@@ -108,6 +115,7 @@
     <option>license</option>
     <option>version</option>
     <option>export-config</option>
-    <option>extract-type</option>
+    <option>extraction-unit</option>
+    <option>store-target</option>
   </available-options>
 </command-line>

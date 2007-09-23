@@ -38,6 +38,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         printComparisonPair(out, pair);
         out.println("  </comparison-result-set>");
         out.println("</birthmark>");
+        out.flush();
     }
 
     @Override
@@ -50,6 +51,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         }
         out.println("  </comparison-result-set>");
         out.println("</birthmark>");
+        out.flush();
     }
 
     private void printComparisonPair(PrintWriter out, ComparisonPair pair){

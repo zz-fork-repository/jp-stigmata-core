@@ -14,8 +14,8 @@ import java.util.Map;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairElement;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.format.AbstractBirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 
 /**
  * 
@@ -33,8 +33,8 @@ public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkCompari
 
     @Override
     public void printResult(PrintWriter out, ComparisonPair pair){
-        list.printBirthmarkHolder(out, pair.getTarget1());
-        list.printBirthmarkHolder(out, pair.getTarget2());
+        list.printBirthmarkSet(out, pair.getTarget1());
+        list.printBirthmarkSet(out, pair.getTarget2());
 
         for(ComparisonPairElement element: pair){
             out.print("compare,");

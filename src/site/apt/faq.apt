@@ -30,7 +30,7 @@ analyzing birthmarks in multi-dimensional scaling.
 birthmark provides a way to detect stolen software without embedding
 any additional information before distribution.
 
- For more defails, see {{{definition.html}Definitions}}.
+ For more details, see {{{definition.html}Definitions}}.
 
 *{Why did I name it stigmata}
 
@@ -52,7 +52,7 @@ with MDS (multi-dimensional scaling).
 birthmark, and a new filter (filtering the result of comparing).
 
  Moreover, a part of extracting/comparing birthmarks is provided as
-plugins, you can define original birthmark plugin and easily install
+plug-ins, you can define original birthmark plug-in and easily install
 it to Stigmata.
 
 *{What is the limitation of extracting birthmarks}

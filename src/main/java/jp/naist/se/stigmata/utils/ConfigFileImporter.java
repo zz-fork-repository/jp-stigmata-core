@@ -18,6 +18,7 @@ import javax.xml.parsers.SAXParserFactory;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
+import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.birthmarks.BirthmarkService;
 
 import org.xml.sax.Attributes;
@@ -80,7 +81,7 @@ public class ConfigFileImporter{
 
         public Handler(BirthmarkEnvironment environment){
             if(environment == null){
-                environment = new BirthmarkEnvironment();
+                environment = Stigmata.getInstance().createEnvironment();
             }
             this.environment = environment;
             this.manager = environment.getWellknownClassManager();

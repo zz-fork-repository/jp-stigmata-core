@@ -11,36 +11,51 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import jp.naist.se.stigmata.event.OperationType;
-
 /**
  * Runtime properties.
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$
  */
-class BirthmarkContext{
-    public enum ExtractionTarget{
-        TARGET_X, TARGET_Y, TARGET_XY;
-    };
+public class BirthmarkContext{
+    private BirthmarkEnvironment environment;
     private List<String> birthmarkTypes = new ArrayList<String>();
-    private ComparisonMethod method = ComparisonMethod.ROUND_ROBIN;
-    private ExtractionTarget et = ExtractionTarget.TARGET_X;
+    private ComparisonMethod method = ComparisonMethod.ROUND_ROBIN_SAME_PAIR;
     private List<String> filterTypes = new ArrayList<String>();
     private Map<String, String> nameMappings = new HashMap<String, String>();
     private ExtractionUnit unit = ExtractionUnit.CLASS;
-    private OperationType operation;
+    private BirthmarkStoreTarget store = BirthmarkStoreTarget.MEMORY;
 
-    public BirthmarkContext(OperationType type){
-        setOperation(type);
+    /**
+     * self constructor.
+     */
+    public BirthmarkContext(BirthmarkContext context){
+        this.environment = context.getEnvironment();
+        this.method = context.getComparisonMethod();
+        this.unit = context.getExtractionUnit();
+        this.birthmarkTypes = new ArrayList<String>(context.birthmarkTypes);
+        this.filterTypes = new ArrayList<String>(context.filterTypes);
+        this.nameMappings = new HashMap<String, String>(context.nameMappings);
     }
 
-    public OperationType getOperation(){
-        return operation;
+    public BirthmarkContext(BirthmarkEnvironment environment){
+        this.environment = environment;
     }
 
-    public void setOperation(OperationType operation){
-        this.operation = operation;
+    public BirthmarkEnvironment getEnvironment(){
+        return environment;
+    }
+
+    public boolean hasNameMapping(){
+        return getNameMappingCount() > 0;
+    }
+
+    public int getNameMappingCount(){
+        return nameMappings.size();
+    }
+
+    public String getNameMapping(String key){
+        return nameMappings.get(key);
     }
 
     public void addNameMapping(String name1, String name2){
@@ -55,12 +70,23 @@ class BirthmarkContext{
         return Collections.unmodifiableMap(nameMappings);
     }
 
-    public void setExtractionTarget(ExtractionTarget target){
-        this.et = target;
+    public Iterator<Map.Entry<String, String>> nameMappingEntries(){
+        return getNameMappings().entrySet().iterator();
     }
 
-    public ExtractionTarget getExtractionTarget(){
-        return et;
+    public void setNameMappings(Map<String, String> mappings){
+        nameMappings.clear();
+        for(Iterator<Map.Entry<String, String>> i = mappings.entrySet().iterator(); i.hasNext(); ){
+            Map.Entry<String, String> entry = i.next();
+            addNameMapping(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public void setExtractionTypes(String[] types){
+        birthmarkTypes.clear();
+        for(int i = 0; i < types.length; i++){
+            addExtractionType(types[i]);
+        }
     }
 
     public void addExtractionType(String type){
@@ -95,8 +121,30 @@ class BirthmarkContext{
         this.unit = unit;
     }
 
+    public BirthmarkStoreTarget getStoreTarget(){
+        return store;
+    }
+
+    public void setStoreTarget(BirthmarkStoreTarget store){
+        this.store = store;
+    }
+
+    public boolean hasFilter(){
+        return filterTypes.size() > 0;
+    }
+
+    public void setFilterTypes(String[] filterTypes){
+        if(filterTypes != null){
+            for(int i = 0; i < filterTypes.length; i++){
+                addFilterType(filterTypes[i]);
+            }
+        }
+    }
+
     public void addFilterType(String filterType){
-        filterTypes.add(filterType);
+        if(filterType != null){
+            filterTypes.add(filterType);
+        }
     }
 
     public void removeFilterType(String filterType){

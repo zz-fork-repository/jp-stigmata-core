@@ -22,7 +22,12 @@ public enum ComparisonMethod{
      * This constants represents comparing all combination between <it>X</it>.
      * <it>x1 - x1, x1 - x2, x1 - x3, ..., xn - xn-1 xn, xn</it>.
      */
-    ROUND_ROBIN,
+    ROUND_ROBIN_SAME_PAIR,
+    /**
+     * This constants represents comparing all combination between <it>X</it>.
+     * <it>x1 - x1, x1 - x2, x1 - x3, ..., xn - xn-1 xn, xn</it>.
+     */
+    ROUND_ROBIN_WITHOUT_SAME_PAIR,
     /**
      * This constants represents comparing some pairs. The pair is guessed by
      * its name. If x1 and y3 have same name, then the pair of x1 and y3 is

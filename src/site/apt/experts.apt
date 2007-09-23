@@ -35,7 +35,7 @@ index.  Then, the similarity of this method is calculated by
 *Cosine similarity
 
  Using this comparison method, birthmarks must have name and its
-frequency.  Threfore, elements of <f(p)> be a set of <(\{name_1,
+frequency.  Therefore, elements of <f(p)> be a set of <(\{name_1,
 freq_1\}, \{name_2, freq_2\}, ..., \{name_n, freq_n\})>.
 
  Next, if <f(p)> have name <FOO> and <f(q)> do not have <FOO>, we add

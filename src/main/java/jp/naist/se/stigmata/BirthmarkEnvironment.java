@@ -71,25 +71,12 @@ public class BirthmarkEnvironment{
     private ComparisonPairFilterManager filterManager;
 
     /**
-     * @deprecated moved to BirthmarkContext
-     */
-    private ExtractionUnit unit;
-
-    /**
      * constructor for root environment
      */
     private BirthmarkEnvironment(boolean flag){
         manager = new WellknownClassManager();
         classpathContext = ClasspathContext.getDefaultContext();
         filterManager = new ComparisonPairFilterManager();
-    }
-
-    /**
-     * default constructor. The instance constructed by this constructor has
-     * default environment as the parent.
-     */
-    public BirthmarkEnvironment(){
-        this(getDefaultEnvironment());
     }
 
     /**
@@ -269,13 +256,5 @@ public class BirthmarkEnvironment{
 
     public ComparisonPairFilterManager getFilterManager(){
         return filterManager;
-    }
-
-    public void setExtractionUnit(ExtractionUnit unit){
-        this.unit = unit;
-    }
-
-    public ExtractionUnit getExtractionUnit(){
-        return unit;
     }
 }

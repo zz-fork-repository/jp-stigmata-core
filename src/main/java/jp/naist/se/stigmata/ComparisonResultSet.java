@@ -18,12 +18,20 @@ public interface ComparisonResultSet extends Iterable<ComparisonPair>{
      */
     public BirthmarkEnvironment getEnvironment();
 
+    public BirthmarkContext getContext();
+
     /**
      * returns a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.
      */
     public Iterator<ComparisonPair> iterator();
 
-    public int getComparisonCount();
+    public ComparisonPair getPairAt(int index);
 
-    public BirthmarkSet[] getComparisonSources();
+    public ComparisonPair[] getPairs();
+
+    public int getPairCount();
+
+    public BirthmarkSet[] getPairSources();
+
+    public Iterator<BirthmarkSet> pairSources();
 }

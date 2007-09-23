@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Box;
@@ -27,12 +28,12 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import jp.naist.se.stigmata.BirthmarkEnvironment;
+import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkSet;
-import jp.naist.se.stigmata.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.format.FormatManager;
+import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
@@ -48,33 +49,32 @@ public class PairComparisonResultSetPane extends JPanel{
     private static final long serialVersionUID = 3298346465652354302L;
 
     private StigmataFrame frame;
-    private BirthmarkEnvironment environment;
+    private ComparisonResultSet comparison;
     private DefaultTableModel model = new PairComparisonResultSetTableModel();
     private JTable table = new JTable(model);
     private JLabel averageLabel, maximumLabel, minimumLabel;
-    private List<ComparisonPair> list = new ArrayList<ComparisonPair>();
     private double average, maximum, minimum;
 
     public PairComparisonResultSetPane(StigmataFrame frame, ComparisonResultSet resultset){
         this.frame = frame;
-        this.environment = resultset.getEnvironment();
-
-        for(ComparisonPair pair: resultset){
-            list.add(pair);
-        }
+        this.comparison = resultset;
 
         initComponent();
-        initData(model, list);
+        initData(model, resultset);
     }
 
     private void obfuscateClassNames(){
         ClassNameObfuscator obfuscator = new ClassNameObfuscator();
         List<ComparisonPair> newList = new ArrayList<ComparisonPair>();
-        for(ComparisonPair pair: list){
+        BirthmarkContext context = comparison.getContext();
+
+        for(Iterator<ComparisonPair> i = comparison.iterator(); i.hasNext(); ){
+            ComparisonPair pair = i.next();
             BirthmarkSet set1 = obfuscator.obfuscateClassName(pair.getTarget1());
             BirthmarkSet set2 = obfuscator.obfuscateClassName(pair.getTarget2());
 
-            newList.add(new ComparisonPair(set1, set2, environment));
+            context = comparison.getContext();
+            newList.add(new ComparisonPair(set1, set2, context));
         }
 
         try{
@@ -93,19 +93,19 @@ public class PairComparisonResultSetPane extends JPanel{
         }
 
         DefaultTableModel newModel = new PairComparisonResultSetTableModel();
-        initData(newModel, newList);
-        list = newList;
+        initData(newModel, new CertainPairComparisonResultSet(newList.toArray(new ComparisonPair[newList.size()]), context));
         model = newModel;
         table.setModel(newModel);
     }
 
-    private void initData(DefaultTableModel model, List<ComparisonPair> list){
+    private void initData(DefaultTableModel model, ComparisonResultSet comparison){
         maximum = 0d;
         minimum = 1d;
         average = 0d;
         model.setColumnIdentifiers(Messages.getStringArray("comparepair.table.columns"));
 
-        for(ComparisonPair pair: list){
+        for(Iterator<ComparisonPair> i = comparison.iterator(); i.hasNext(); ){
+            ComparisonPair pair = i.next();
             double similarity = pair.calculateSimilarity();
             if(similarity > maximum) maximum = similarity;
             if(similarity < minimum) minimum = similarity;
@@ -114,7 +114,7 @@ public class PairComparisonResultSetPane extends JPanel{
             model.addRow(new Object[] { pair.getTarget1().getName(),
                          pair.getTarget2().getName(), new Double(similarity) });
         }
-        average = average / list.size();
+        average = average / comparison.getPairCount();
         
         averageLabel.setText(Double.toString(average));
         maximumLabel.setText(Double.toString(maximum));
@@ -132,16 +132,12 @@ public class PairComparisonResultSetPane extends JPanel{
                     if(service == null){
                         service = FormatManager.getDefaultFormatService();
                     }
-                    service.getComparisonResultFormat().printResult(
-                        out, new CertainPairComparisonResultSet(
-                            list.toArray(new ComparisonPair[list.size()]), environment
-                        )
-                    );
+                    service.getComparisonResultFormat().printResult(out, comparison);
                 }
             })
         );
         JButton updateColorButton = Utility.createButton(
-            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, environment)
+            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, comparison.getEnvironment())
         );
         JButton obfuscateButton = Utility.createButton("obfuscate");
         JScrollPane scroll = new JScrollPane();
@@ -150,7 +146,7 @@ public class PairComparisonResultSetPane extends JPanel{
         minimumLabel = new JLabel(Double.toString(minimum), JLabel.RIGHT);
 
         scroll.setViewportView(table);
-        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(environment));
+        table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(comparison.getEnvironment()));
         similarityPane.setBorder(new TitledBorder(Messages.getString("similarity.border")));
         averageLabel.setBorder(new TitledBorder(Messages.getString("average.border")));
         maximumLabel.setBorder(new TitledBorder(Messages.getString("maximum.border")));
@@ -179,9 +175,9 @@ public class PairComparisonResultSetPane extends JPanel{
                     int col = table.columnAtPoint(e.getPoint());
                     if(col >= 1 && col < table.getColumnCount() && row >= 0
                             && row < table.getRowCount()){
-                        ComparisonPair pair = list.get(row);
+                        ComparisonPair pair = comparison.getPairAt(row);
 
-                        frame.compareDetails(pair.getTarget1(), pair.getTarget2(), environment);
+                        frame.compareDetails(pair.getTarget1(), pair.getTarget2(), comparison.getContext());
                     }
                 }
             }
