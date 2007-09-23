@@ -11,12 +11,12 @@ import jp.naist.se.stigmata.BirthmarkElement;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class KGramBasedBirthmarkElement extends BirthmarkElement{
+public class KGramBasedBirthmarkElement<T> extends BirthmarkElement{
     private static final long serialVersionUID = 28546543857543634L;
 
-    private KGram kgram;
+    private KGram<T> kgram;
 
-    public KGramBasedBirthmarkElement(KGram kgram){
+    public KGramBasedBirthmarkElement(KGram<T> kgram){
         super(kgram.toString());
         this.kgram = kgram;
     }
