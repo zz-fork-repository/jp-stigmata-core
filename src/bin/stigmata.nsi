@@ -25,10 +25,10 @@ ShowInstDetails nevershow
 VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Stigmata"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "Stigmata: Java birthmark toolkit"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Software Engineering Lab., NAIST, Japan"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "$VERSION"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "${VERSION}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright (C) 2004-2007 by Haruaki Tamada"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Java birthmark toolkit"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "$VERSION"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}"
 
 !addplugindir .
 
