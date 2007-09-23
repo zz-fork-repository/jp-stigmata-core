@@ -1,7 +1,8 @@
 ;--------- CONFIGURATION ---------
 
+!define VERSION "1.2.0"
 !define APPNAME "Stigmata: Java birthmarking toolkit"
-!define JARFILE "stigmata-1.1.0.jar"
+!define JARFILE "stigmata-${VERSION}.jar"
 !define LANG_ENGLISH "1033-English"
 
 ;Uncomment the next line to specify an icon for the EXE.
@@ -16,7 +17,7 @@ Name "Stigmata"
 Caption "${APPNAME}"
 OutFile "stigmata.exe"
 
-VIProductVersion "1.1.0.0"
+VIProductVersion "${VERSION}.0"
 SilentInstall silent
 AutoCloseWindow true
 ShowInstDetails nevershow
@@ -24,10 +25,10 @@ ShowInstDetails nevershow
 VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Stigmata"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "Stigmata: Java birthmark toolkit"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Software Engineering Lab., NAIST, Japan"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "1.1.0"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "$VERSION"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright (C) 2004-2007 by Haruaki Tamada"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Java birthmark toolkit"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.1.0"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "$VERSION"
 
 !addplugindir .
 
@@ -69,7 +70,7 @@ Section "running-stigmata"
   File "..\..\target\xmlcli-1.2.1.jar"
   File "..\..\target\asm-all-2.2.3.jar"
   File "..\..\target\commons-logging-1.0.3.jar"
-  StrCpy $R0 '$R0 -Xmx256M -Dexecution.directory="$EXEDIR" -jar "${JARFILE}" $R1'
+  StrCpy $R0 '$R0 -Dexecution.directory="$EXEDIR" -jar "${JARFILE}" $R1'
 
   !ifdef SPLASH_IMAGE
     SetOutPath $TEMP
