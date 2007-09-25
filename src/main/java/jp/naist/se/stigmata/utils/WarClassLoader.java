@@ -56,11 +56,14 @@ public class WarClassLoader extends URLClassLoader{
                         in.close();
                         out.close();
                     
-                        return defineClass(name, classdata, 0, classdata.length);
+                        clazz = defineClass(name, classdata, 0, classdata.length);
+                        break;
                     } catch(IOException exp){
                     }
                 }
             }
+        }
+        if(clazz == null){
             throw new ClassNotFoundException(name);
         }
         return clazz;

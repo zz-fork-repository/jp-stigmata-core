@@ -48,5 +48,8 @@ public interface ComparisonResultSet extends Iterable<ComparisonPair>{
      */
     public BirthmarkSet[] getPairSources();
 
+    /**
+     * returns an array of comparison sources.
+     */
     public Iterator<BirthmarkSet> pairSources();
 }

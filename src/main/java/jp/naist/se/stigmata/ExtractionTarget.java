@@ -5,6 +5,7 @@ package jp.naist.se.stigmata;
  */
 
 /**
+ * This enum represents the mean of extracted birthmarks.
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$

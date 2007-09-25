@@ -5,13 +5,19 @@ package jp.naist.se.stigmata;
  */
 
 /**
- * This enum type represents birthmark extraction unit. The name of
- * {@link jp.naist.se.stigmata.BirthmarkSet <code>BirthmarkSet</code>} is class
- * name, method name, package name, or product name.
+ * This enum type represents birthmark extraction unit.
+ * 
+ * The name of
+ * {@link jp.naist.se.stigmata.BirthmarkSet <code>BirthmarkSet</code>} will be
+ * class name, method name, package name, or product name.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
 public enum ExtractionUnit{
-    CLASS, PACKAGE, ARCHIVE,
+    CLASS,
+    PACKAGE,
+    ARCHIVE,
+    @Deprecated
+    METHOD,
 }

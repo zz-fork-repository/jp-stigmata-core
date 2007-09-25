@@ -177,7 +177,7 @@ public class StigmataFrame extends JFrame{
     public void compareRoundRobin(String[] targetX, String[] targetY, 
             BirthmarkContext context){
         try{
-            BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
+            BirthmarkEngine engine = getStigmata().createEngine(context.getEnvironment());
             ExtractionResultSet ers = engine.extract(targetX, targetY, context);
 
             RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, ers);
@@ -200,7 +200,7 @@ public class StigmataFrame extends JFrame{
     public void compareRoundRobinFilter(String[] targetX, String[] targetY, 
             BirthmarkContext context){
         try{
-            BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
+            BirthmarkEngine engine = getStigmata().createEngine(context.getEnvironment());
 
             ExtractionResultSet ers = engine.extract(targetX, targetY, context);
             ComparisonResultSet resultset = engine.compare(ers);
@@ -225,7 +225,7 @@ public class StigmataFrame extends JFrame{
 
     public void compareGuessedPair(String[] targetX, String[] targetY, BirthmarkContext context){
         try{
-            BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
+            BirthmarkEngine engine = getStigmata().createEngine(context.getEnvironment());
             ExtractionResultSet extraction = engine.extract(targetX, targetY, context);
             int comparePair = getNextCount("compare_pair");
 
@@ -253,7 +253,7 @@ public class StigmataFrame extends JFrame{
             Map<String, String> mapping = constructMapping(file);
 
             try{
-                BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
+                BirthmarkEngine engine = getStigmata().createEngine(context.getEnvironment());
                 context.setNameMappings(mapping);
                 ComparisonResultSet crs = engine.compare(targetX, targetY, context);
                 int comparePair = getNextCount("compare_pair");
@@ -318,7 +318,7 @@ public class StigmataFrame extends JFrame{
 
     public void extract(String[] targets, BirthmarkContext context){
         try{
-            BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
+            BirthmarkEngine engine = getStigmata().createEngine(context.getEnvironment());
             ExtractionResultSet ers = engine.extract(targets, context);
             showExtractionResult(ers);
         }catch(Throwable e){

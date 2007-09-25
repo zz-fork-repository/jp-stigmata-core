@@ -25,14 +25,23 @@ import jp.naist.se.stigmata.utils.ConfigFileImporter;
  * @version $Revision$ $Date$
  */
 public class Stigmata{
+    /**
+     * instance. singleton pattern.
+     */
     private static Stigmata stigmata;
     private BirthmarkEnvironment defaultEnvironment;
     private List<BirthmarkEngineListener> listeners = new ArrayList<BirthmarkEngineListener>();
 
+    /**
+     * private constructor.
+     */
     private Stigmata(){
         configuration();
     }
 
+    /**
+     * gets only instance of this class.
+     */
     public static synchronized Stigmata getInstance(){
         if(stigmata == null){
             stigmata = new Stigmata();
@@ -40,21 +49,35 @@ public class Stigmata{
         return stigmata;
     }
 
+    /**
+     * creates a new birthmark context.
+     */
     public BirthmarkContext createContext(){
         return new BirthmarkContext(createEnvironment());
     }
 
+    /**
+     * creates a new birthmark environment.
+     */
     public BirthmarkEnvironment createEnvironment(){
         return new BirthmarkEnvironment(defaultEnvironment);
     }
 
+    /**
+     * creates a new birthmark engine.
+     */
     public BirthmarkEngine createEngine(){
-        BirthmarkEngine engine = new BirthmarkEngine(createEnvironment());
-        return engine;
+        return createEngine(createEnvironment());
     }
 
+    /**
+     * creates a new birthmark engine with given environment.
+     */
     public BirthmarkEngine createEngine(BirthmarkEnvironment environment){
         BirthmarkEngine engine = new BirthmarkEngine(environment);
+        for(BirthmarkEngineListener listener: listeners){
+            engine.addBirthmarkEngineListener(listener);
+        }
         return engine;
     }
 
