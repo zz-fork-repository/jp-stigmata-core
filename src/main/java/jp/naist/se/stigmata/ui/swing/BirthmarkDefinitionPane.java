@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.imageio.spi.ServiceRegistry;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -318,12 +317,12 @@ public class BirthmarkDefinitionPane extends JPanel{
 
         public void initData(){
             comparator.addItem("");
-            for(Iterator<BirthmarkComparatorSpi> i = ServiceRegistry.lookupProviders(BirthmarkComparatorSpi.class); i.hasNext();){
+            for(Iterator<BirthmarkComparatorSpi> i = stigmata.getEnvironment().lookupProviders(BirthmarkComparatorSpi.class); i.hasNext();){
                 BirthmarkComparatorSpi service = i.next();
                 comparator.addItem(service.getComparatorClassName());
             }
             extractor.addItem("");
-            for(Iterator<BirthmarkExtractorSpi> i = ServiceRegistry.lookupProviders(BirthmarkExtractorSpi.class); i.hasNext();){
+            for(Iterator<BirthmarkExtractorSpi> i = stigmata.getEnvironment().lookupProviders(BirthmarkExtractorSpi.class); i.hasNext();){
                 BirthmarkExtractorSpi service = i.next();
                 extractor.addItem(service.getExtractorClassName());
             }

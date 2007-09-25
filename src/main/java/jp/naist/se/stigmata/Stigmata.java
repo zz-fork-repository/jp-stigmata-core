@@ -7,16 +7,22 @@ package jp.naist.se.stigmata;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.imageio.spi.ServiceRegistry;
-
 import jp.naist.se.stigmata.event.BirthmarkEngineListener;
+import jp.naist.se.stigmata.format.FormatManager;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.naist.se.stigmata.ui.swing.ExtensionFilter;
+import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.naist.se.stigmata.utils.ConfigFileImporter;
 
 /**
@@ -104,9 +110,13 @@ public class Stigmata{
         }
 
         if(filePath == null){
-            File file = new File("stigmata.xml");
+            String currentDirectory = System.getProperty("execution.directory");
+            if(currentDirectory == null){
+                currentDirectory = System.getProperty("user.dir");
+            }
+            File file = new File(currentDirectory, "stigmata.xml");
             if(!file.exists()){
-                file = new File(System.getProperty("user.home"), ".stigmata.xml");
+                file = new File(System.getProperty("user.home"), ".stigmata/stigmata.xml");
                 if(!file.exists()){
                     file = null;
                 }
@@ -130,15 +140,62 @@ public class Stigmata{
         if(defaultEnvironment == null){
             defaultEnvironment = BirthmarkEnvironment.getDefaultEnvironment();
         }
+        buildStigmataDirectory();
+
+        defaultEnvironment.setClassLoader(buildClassLoader());
         try {
             ConfigFileImporter parser = new ConfigFileImporter(defaultEnvironment);
             parser.parse(in);
         } catch(IOException e){
             throw new ApplicationInitializationError(e);
         }
-        for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
+        for(Iterator<BirthmarkSpi> i = defaultEnvironment.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
             BirthmarkSpi service = i.next();
             defaultEnvironment.addService(service);
+        }
+        FormatManager.updateServices(defaultEnvironment);
+        exportConfigFile();
+    }
+
+    private ClassLoader buildClassLoader(){
+        File file = new File(System.getProperty("user.home"), ".stigmata/plugins");
+        File[] jarfiles = file.listFiles(new ExtensionFilter("jar"));
+        if(jarfiles != null && jarfiles.length > 0){
+            try{
+                URL[] urls = new URL[jarfiles.length];
+                for(int i = 0; i < jarfiles.length; i++){
+                    urls[i] = jarfiles[i].toURI().toURL();
+                }
+                return new URLClassLoader(urls);
+            } catch(MalformedURLException e){
+            }
+        }
+        return null;
+    }
+
+    private void buildStigmataDirectory(){
+        File file = new File(System.getProperty("user.home"), ".stigmata");
+        if(file.exists() && !file.isFile()){
+            File dest = new File(file.getParent(), ".stigmata.back");
+            file.renameTo(dest);
+        }
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        File pluginDir = new File(file, "plugins");
+        if(!pluginDir.exists()){
+            pluginDir.mkdirs();
+        }
+    }
+
+    private void exportConfigFile(){
+        try{
+            File file = new File(System.getProperty("user.home"), ".stigmata/stigmata.xml");
+            if(file.exists()){
+                ConfigFileExporter exporter = new ConfigFileExporter(defaultEnvironment);
+                exporter.export(new PrintWriter(new FileWriter(file)));
+            }
+        } catch(IOException e){
         }
     }
 }

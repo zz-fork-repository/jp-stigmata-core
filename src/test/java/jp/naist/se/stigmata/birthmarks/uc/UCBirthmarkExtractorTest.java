@@ -44,21 +44,28 @@ public class UCBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("uc");
         Assert.assertEquals("uc", birthmark.getType());
-        Assert.assertEquals(11, birthmark.getElementCount());
+        Assert.assertEquals(18, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         int index = 0;
         Assert.assertEquals("java.io.File",                      elements[index++].getValue());
+        Assert.assertEquals("java.io.FileFilter",                elements[index++].getValue());
         Assert.assertEquals("java.io.FileInputStream",           elements[index++].getValue());
+        Assert.assertEquals("java.io.FileWriter",                elements[index++].getValue());
         Assert.assertEquals("java.io.InputStream",               elements[index++].getValue());
+        Assert.assertEquals("java.io.PrintWriter",               elements[index++].getValue());
+        Assert.assertEquals("java.io.Writer",                    elements[index++].getValue());
         Assert.assertEquals("java.lang.Class",                   elements[index++].getValue());
+        Assert.assertEquals("java.lang.ClassLoader",             elements[index++].getValue());
         Assert.assertEquals("java.lang.Object",                  elements[index++].getValue());
         Assert.assertEquals("java.lang.String",                  elements[index++].getValue());
         Assert.assertEquals("java.lang.System",                  elements[index++].getValue());
+        Assert.assertEquals("java.net.URI",                      elements[index++].getValue());
+        Assert.assertEquals("java.net.URL",                      elements[index++].getValue());
+        Assert.assertEquals("java.net.URLClassLoader",           elements[index++].getValue());
         Assert.assertEquals("java.util.ArrayList",               elements[index++].getValue());
         Assert.assertEquals("java.util.Iterator",                elements[index++].getValue());
         Assert.assertEquals("java.util.List",                    elements[index++].getValue());
-        Assert.assertEquals("javax.imageio.spi.ServiceRegistry", elements[index++].getValue());
     }
 
     @Test

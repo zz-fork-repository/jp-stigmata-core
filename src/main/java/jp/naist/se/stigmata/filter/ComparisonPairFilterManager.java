@@ -11,8 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.spi.ServiceRegistry;
-
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
@@ -29,12 +28,18 @@ public class ComparisonPairFilterManager{
     private Map<String, ComparisonPairFilterSet> filters = new HashMap<String, ComparisonPairFilterSet>();
     private ComparisonPairFilterManager parent;
 
-    public ComparisonPairFilterManager(ComparisonPairFilterManager parent){
+    public ComparisonPairFilterManager(BirthmarkEnvironment env, ComparisonPairFilterManager parent){
         this.parent = parent;
+        for(Iterator<ComparisonPairFilterSpi> i = env.lookupProviders(ComparisonPairFilterSpi.class); i.hasNext(); ){
+            ComparisonPairFilterSpi service = i.next();
+            if(getService(service.getFilterName()) != null){
+                services.put(service.getFilterName(), service);
+            }
+        }
     }
 
-    public ComparisonPairFilterManager(){
-        for(Iterator<ComparisonPairFilterSpi> i = ServiceRegistry.lookupProviders(ComparisonPairFilterSpi.class); i.hasNext(); ){
+    public ComparisonPairFilterManager(BirthmarkEnvironment env){
+        for(Iterator<ComparisonPairFilterSpi> i = env.lookupProviders(ComparisonPairFilterSpi.class); i.hasNext(); ){
             ComparisonPairFilterSpi service = i.next();
             services.put(service.getFilterName(), service);
         }

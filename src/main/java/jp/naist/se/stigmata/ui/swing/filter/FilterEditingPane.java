@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.spi.ServiceRegistry;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,8 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.ComparisonPairFilter;
-import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
@@ -109,7 +108,8 @@ public class FilterEditingPane extends JPanel{
         cardComponent.add(dummyPanel, "");
         combo.addItem("");
 
-        for(Iterator<ComparisonPairFilterComponentService> i = ServiceRegistry.lookupProviders(ComparisonPairFilterComponentService.class); i.hasNext();){
+        
+        for(Iterator<ComparisonPairFilterComponentService> i = stigmata.getEnvironment().lookupProviders(ComparisonPairFilterComponentService.class); i.hasNext();){
             ComparisonPairFilterComponentService service = i.next();
             String name = service.getDisplayFilterName();
 

@@ -71,12 +71,17 @@ public class BirthmarkEnvironment{
     private ComparisonPairFilterManager filterManager;
 
     /**
+     * 
+     */
+    private ClassLoader loader;
+
+    /**
      * constructor for root environment
      */
     private BirthmarkEnvironment(boolean flag){
         manager = new WellknownClassManager();
         classpathContext = ClasspathContext.getDefaultContext();
-        filterManager = new ComparisonPairFilterManager();
+        filterManager = new ComparisonPairFilterManager(this);
     }
 
     /**
@@ -86,7 +91,7 @@ public class BirthmarkEnvironment{
         this.parent = parent;
         this.manager = new WellknownClassManager(parent.getWellknownClassManager());
         this.classpathContext = new ClasspathContext(parent.getClasspathContext());
-        this.filterManager = new ComparisonPairFilterManager(parent.getFilterManager());
+        this.filterManager = new ComparisonPairFilterManager(this, parent.getFilterManager());
     }
 
     /**
@@ -213,13 +218,20 @@ public class BirthmarkEnvironment{
         return services;
     }
 
+    public <T> Iterator<T> lookupProviders(Class<T> providerClass){
+        Iterator<T> iterator;
+        if(loader != null) iterator = ServiceRegistry.lookupProviders(providerClass, loader);
+        else               iterator = ServiceRegistry.lookupProviders(providerClass);
+        return iterator;
+    }
+
     /**
      * return birthmark services lookup from current class path.
      */
     public synchronized BirthmarkSpi[] findServices(){
         List<BirthmarkSpi> list = getServiceList();
 
-        for(Iterator<BirthmarkSpi> i = ServiceRegistry.lookupProviders(BirthmarkSpi.class); i.hasNext();){
+        for(Iterator<BirthmarkSpi> i = lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
             BirthmarkSpi spi = i.next();
             if(getService(spi.getType()) == null){
                 list.add(spi);
@@ -256,5 +268,9 @@ public class BirthmarkEnvironment{
 
     public ComparisonPairFilterManager getFilterManager(){
         return filterManager;
+    }
+
+    void setClassLoader(ClassLoader loader){
+        this.loader = loader;
     }
 }

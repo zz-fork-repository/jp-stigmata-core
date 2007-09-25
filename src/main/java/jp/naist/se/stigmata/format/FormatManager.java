@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.imageio.spi.ServiceRegistry;
+
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.format.csv.CsvResultFormatService;
 import jp.naist.se.stigmata.spi.ResultFormatSpi;
 
@@ -24,7 +26,15 @@ public class FormatManager{
     private FormatManager(){
         for(Iterator<ResultFormatSpi> i = ServiceRegistry.lookupProviders(ResultFormatSpi.class); i.hasNext(); ){
             ResultFormatSpi spi = i.next();
-            formats.put(spi.getFormat(), spi);
+            addService(spi);
+        }
+    }
+
+    public static void updateServices(BirthmarkEnvironment environment){
+        FormatManager instance = getInstance();
+        for(Iterator<ResultFormatSpi> i = environment.lookupProviders(ResultFormatSpi.class); i.hasNext(); ){
+            ResultFormatSpi spi = i.next();
+            instance.addService(spi);
         }
     }
 
@@ -38,5 +48,9 @@ public class FormatManager{
 
     public ResultFormatSpi getService(String format){
         return formats.get(format);
+    }
+
+    private void addService(ResultFormatSpi service){
+        formats.put(service.getFormat(), service);
     }
 }
