@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileFilter;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class ExtensionFilter extends FileFilter{
+public class ExtensionFilter extends FileFilter implements java.io.FileFilter{
     private List<String> extensions = new ArrayList<String>();
 
     private String description = null;
