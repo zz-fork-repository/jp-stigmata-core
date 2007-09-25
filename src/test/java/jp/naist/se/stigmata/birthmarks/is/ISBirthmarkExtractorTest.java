@@ -29,7 +29,7 @@ public class ISBirthmarkExtractorTest{
     public void setup(){
         engine = Stigmata.getInstance().createEngine();
         context = Stigmata.getInstance().createContext();
-        context.addExtractionType("is");
+        context.addBirthmarkType("is");
     }
 
     @Test

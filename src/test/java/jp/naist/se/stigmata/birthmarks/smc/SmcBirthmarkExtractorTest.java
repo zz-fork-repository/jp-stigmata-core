@@ -28,7 +28,7 @@ public class SmcBirthmarkExtractorTest{
     public void setup(){
         stigmata = Stigmata.getInstance();
         context = stigmata.createContext();
-        context.addExtractionType("smc");
+        context.addBirthmarkType("smc");
     }
 
     @Test

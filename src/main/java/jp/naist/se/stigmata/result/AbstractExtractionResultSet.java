@@ -83,7 +83,7 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
     }
 
     public String[] getBirthmarkTypes(){
-        return context.getExtractionTypes();
+        return context.getBirthmarkTypes();
     }
 
     public BirthmarkSet getBirthmarkSet(ExtractionTarget target, int index){

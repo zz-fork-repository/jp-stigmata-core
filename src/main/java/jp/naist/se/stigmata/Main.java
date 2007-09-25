@@ -175,7 +175,7 @@ public final class Main{
 
         String[] birthmarks = getTargetBirthmarks(env, cl);
         for(int i = 0; i < birthmarks.length; i++){
-            context.addExtractionType(birthmarks[i]);
+            context.addBirthmarkType(birthmarks[i]);
         }
         if(cl.hasOption("filter")){
             String[] filters = cl.getOptionValues("filter");

@@ -186,7 +186,7 @@ public class StigmataFrame extends JFrame{
                 "compare", tabPane, compare,
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
-                    Utility.array2String(context.getExtractionTypes()),
+                    Utility.array2String(context.getBirthmarkTypes()),
                     Utility.array2String(targetX),
                     Utility.array2String(targetY),
                 }
@@ -212,7 +212,7 @@ public class StigmataFrame extends JFrame{
                 "compare", tabPane, new PairComparisonResultSetPane(this, resultset),
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
-                    Utility.array2String(context.getExtractionTypes()),
+                    Utility.array2String(context.getBirthmarkTypes()),
                     Utility.array2String(targetX),
                     Utility.array2String(targetY),
                 }
@@ -234,7 +234,7 @@ public class StigmataFrame extends JFrame{
                 new PairComparisonResultSetPane(this, resultset),
                 new Object[] { new Integer(comparePair), },
                 new Object[] {
-                    Utility.array2String(context.getExtractionTypes()),
+                    Utility.array2String(context.getBirthmarkTypes()),
                     Utility.array2String(targetX),
                     Utility.array2String(targetY),
                 }
@@ -263,7 +263,7 @@ public class StigmataFrame extends JFrame{
                     new PairComparisonResultSetPane(this, crs),
                     new Object[] { new Integer(comparePair), },
                     new Object[] {
-                        Utility.array2String(context.getExtractionTypes()),
+                        Utility.array2String(context.getBirthmarkTypes()),
                         Utility.array2String(targetX),
                         Utility.array2String(targetY),
                     }

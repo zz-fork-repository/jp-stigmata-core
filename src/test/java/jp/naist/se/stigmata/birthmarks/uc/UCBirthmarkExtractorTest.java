@@ -28,7 +28,7 @@ public class UCBirthmarkExtractorTest{
     public void setup(){
         stigmata = Stigmata.getInstance();
         context = stigmata.createContext();
-        context.addExtractionType("uc");
+        context.addBirthmarkType("uc");
     }
 
     @Test

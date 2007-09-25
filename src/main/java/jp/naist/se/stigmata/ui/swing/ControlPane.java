@@ -293,7 +293,7 @@ public class ControlPane extends JPanel{
 
     private BirthmarkContext generateContext(){
         BirthmarkContext context = new BirthmarkContext(generateEnvironment());
-        context.setExtractionTypes(birthmarks.getSelectedServiceTypes());
+        context.setBirthmarkTypes(birthmarks.getSelectedServiceTypes());
         context.setExtractionUnit(parseExtractionUnit());
         
         return context;

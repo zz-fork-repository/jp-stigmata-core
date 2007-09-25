@@ -28,7 +28,7 @@ public class CVFVBirthmarkExtractorTest{
     public void setup(){
         stigmata = Stigmata.getInstance();
         context = stigmata.createContext();
-        context.addExtractionType("cvfv");
+        context.addBirthmarkType("cvfv");
     }
 
     @Test

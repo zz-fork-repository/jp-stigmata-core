@@ -318,7 +318,7 @@ public class BirthmarkEngine{
                     }
 
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
-                    for(String birthmarkType: context.getExtractionTypes()){
+                    for(String birthmarkType: context.getBirthmarkTypes()){
                         try{
                             BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
                             if(extractor.isAcceptable(ExtractionUnit.PACKAGE)){
@@ -363,7 +363,7 @@ public class BirthmarkEngine{
                     BirthmarkSet birthmarkset = new BirthmarkSet(entry.getClassName(), entry.getLocation());
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
                     
-                    for(String birthmarkType: context.getExtractionTypes()){
+                    for(String birthmarkType: context.getBirthmarkTypes()){
                         try{
                             BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
                             if(extractor.isAcceptable(ExtractionUnit.CLASS)){
@@ -391,7 +391,7 @@ public class BirthmarkEngine{
             for(ClassFileEntry entry: archive){
                 try{
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
-                    for(String birthmarkType: context.getExtractionTypes()){
+                    for(String birthmarkType: context.getBirthmarkTypes()){
                         try{
                             BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
                             if(extractor.isAcceptable(ExtractionUnit.ARCHIVE)){

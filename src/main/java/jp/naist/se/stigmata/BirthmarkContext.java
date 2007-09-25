@@ -82,26 +82,26 @@ public class BirthmarkContext{
         }
     }
 
-    public void setExtractionTypes(String[] types){
+    public void setBirthmarkTypes(String[] types){
         birthmarkTypes.clear();
         for(int i = 0; i < types.length; i++){
-            addExtractionType(types[i]);
+            addBirthmarkType(types[i]);
         }
     }
 
-    public void addExtractionType(String type){
+    public void addBirthmarkType(String type){
         birthmarkTypes.add(type);
     }
 
-    public void removeExtractionType(String type){
+    public void removeBirthmarkType(String type){
         birthmarkTypes.remove(type);
     }
 
-    public synchronized String[] getExtractionTypes(){
-        return birthmarkTypes.toArray(new String[getExtractionTypeCount()]);
+    public synchronized String[] getBirthmarkTypes(){
+        return birthmarkTypes.toArray(new String[getBirthmarkTypeSize()]);
     }
 
-    public int getExtractionTypeCount(){
+    public int getBirthmarkTypeSize(){
         return birthmarkTypes.size();
     }
 
