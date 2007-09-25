@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.result;
 
+/*
+ * $Id$
+ */
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -9,6 +13,11 @@ import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ExtractionResultSet;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class ExtractionResultSetFactory{
     private static ExtractionResultSetFactory instance = new ExtractionResultSetFactory();
     private Map<String, Class<? extends ExtractionResultSet>> map = new HashMap<String, Class<? extends ExtractionResultSet>>();

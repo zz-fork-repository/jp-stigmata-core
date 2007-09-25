@@ -5,6 +5,8 @@ package jp.naist.se.stigmata;
  */
 
 /**
+ * Thrown an application fails to launch in initialization.
+ * This error causes invalid deployment. 
  *
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

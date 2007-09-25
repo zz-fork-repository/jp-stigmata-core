@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Runtime properties.
+ * Birthmark runtime context.
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$

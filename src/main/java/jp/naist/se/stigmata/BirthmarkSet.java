@@ -10,19 +10,19 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * This class manages a set of birthmarks which extracted from a Java class file.
+ * This class manages a set of birthmarks which extracted from a target.
  *
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
 public class BirthmarkSet implements Iterable<Birthmark>{
     /**
-     * class name.
+     * this object name.
      */
     private String name;
 
     /**
-     * location of class file is loaded from.
+     * location of target is loaded from.
      */
     private URL location;
 
@@ -59,7 +59,7 @@ public class BirthmarkSet implements Iterable<Birthmark>{
     }
 
     /**
-     * return the class name.
+     * return the name.
      */
     public String getName(){
         return name;
@@ -74,8 +74,12 @@ public class BirthmarkSet implements Iterable<Birthmark>{
 
     /**
      * add given birthmark to this instance.
+     * @throws NullPointerException given birthmark is null.
      */
     public void addBirthmark(Birthmark birthmark){
+        if(birthmark == null){
+            throw new NullPointerException("given birthmark is null");
+        }
         birthmarks.put(birthmark.getType(), birthmark);
     }
 
@@ -86,12 +90,15 @@ public class BirthmarkSet implements Iterable<Birthmark>{
         return birthmarks.get(type);
     }
 
+    /**
+     * does this object have the given birthmark type.
+     */
     public boolean hasBirthmark(String type){
         return birthmarks.get(type) != null;
     }
 
     /**
-     * return the all birthmarks this instance managed.
+     * returns an array containing all of the birthmarks in this object.
      */
     public Birthmark[] getBirthmarks(){
         Birthmark[] b = new Birthmark[getBirthmarksCount()];
@@ -103,19 +110,22 @@ public class BirthmarkSet implements Iterable<Birthmark>{
         return b;
     }
 
+    /**
+     * returns an iterator over the birthmarks in this birthmark-set.
+     */
     public Iterator<Birthmark> iterator(){
         return birthmarks.values().iterator();
     }
 
     /**
-     * return types of birthmarks.
+     * returns an iterator over the birthmark types.
      */
     public Iterator<String> birthmarkTypes(){
         return birthmarks.keySet().iterator();
     }
 
     /**
-     * return types of birthmarks.
+     * returns an array of birthmark types.
      */
     public synchronized String[] getBirthmarkTypes(){
         return birthmarks.keySet().toArray(new String[birthmarks.size()]);

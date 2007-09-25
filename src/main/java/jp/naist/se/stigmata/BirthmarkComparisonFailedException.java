@@ -5,6 +5,7 @@ package jp.naist.se.stigmata;
  */
 
 /**
+ * Thrown to indicate failed to compare two birthmarks. 
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$

@@ -37,12 +37,15 @@ public class ComparisonPairElement{
         return compareCount;
     }
 
+    /**
+     * returns a type of birthmarks.
+     */
     public String getType(){
         return birthmark1.getType();
     }
 
     /**
-     * @return  similarity
+     * returns similarity between two birthmarks.
      */
     public double getSimilarity(){
         return similarity;

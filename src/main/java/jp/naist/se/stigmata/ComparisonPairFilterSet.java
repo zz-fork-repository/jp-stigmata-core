@@ -43,10 +43,16 @@ public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
         return flag;
     }
 
+    /**
+     * returns a flag that all filters must be matched.
+     */
     public boolean isMatchAll(){
         return matchall;
     }
 
+    /**
+     * returns a flag that any filters must be matched.
+     */
     public boolean isMatchAny(){
         return !isMatchAll();
     }

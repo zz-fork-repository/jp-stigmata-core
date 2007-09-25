@@ -7,7 +7,8 @@ package jp.naist.se.stigmata;
 import java.util.Iterator;
 
 /**
- * This interface represents the birthmark.
+ * This interface represents a birthmark.
+ * The birthmark is native characteristics of a program.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$

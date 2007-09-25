@@ -35,8 +35,7 @@ import jp.naist.se.stigmata.result.ExtractionResultSetFactory;
 import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
 
 /**
- * This class is birthmarking engine. 
- * This class extracts birthmarks from given Java class files, compares results of extractions, and filters results of comparisons.
+ * core engine for extracting/comparing/filtering birthmarks.
  * 
  * This class is not thread safe.
  * 

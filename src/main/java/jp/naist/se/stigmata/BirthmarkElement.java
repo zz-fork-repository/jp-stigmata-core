@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 /**
  * element of birthmark.
+ * 
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */

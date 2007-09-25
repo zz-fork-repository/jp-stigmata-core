@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * This class represents comparison pair.
+ * 
  * @author  Haruaki TAMADA
  * @version  $Revision$ $Date$
  */
@@ -48,7 +49,7 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
     }
 
     /**
-     * calculate similarity between target1 and target2.
+     * calculates similarity between target1 and target2.
      */
     public double calculateSimilarity(){
         double similarity = 0d;
@@ -64,7 +65,7 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
     }
 
     /**
-     * Return the number of birthmarks contained a target.
+     * Returns a number of birthmarks contained a target.
      * Note that other target must have same birthmarks.
      */
     public int getBirthmarksCount(){
@@ -72,7 +73,7 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
     }
 
     /**
-     * return the iterator for comparing each birthmarks.
+     * returns an iterator for comparing each birthmarks.
      */
     public synchronized Iterator<ComparisonPairElement> iterator(){
         List<ComparisonPairElement> list = new ArrayList<ComparisonPairElement>();
