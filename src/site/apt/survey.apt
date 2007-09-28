@@ -160,12 +160,19 @@ Related Publications
 
 *Dynamic Birthmark
 
+ * David Schuler, Valentin Dallmeier, and Christian Lindig, ``A
+   Dynamic Birthmark for Java,'' In Proc. the 22nd IEEE/ACM
+   International Conference on Automated Software Engineering,
+   Atlanta, Georgia, USA, November 2007.
+
  * Haruaki Tamada, Keiji Okamoto, Masahide Nakamura, Akito Monden and
    Ken-ichi Matsumoto, ``Design and Evaluation of Dynamic Software
    Birthmarks Based on API Calls'', Information Science Technical
    Report, NAIST-IS-TR2007011, ISSN 0919-9527, Graduate School of
    Information Science, Nara Institute of Science and Technology, May
    2007.
+
+ * 林 晃一郎, 楓 基靖, 真野 芳久, ``特徴抽出と抽象化による動的バースマークの構成とその検証'', 情報処理学会論文誌 (Transactions of Information Processing Society of Japan), Vol.48, No.4 pp. 1799-1808, April 2007.
 
  * 森山 修, 古江 岳大, 遠山 毅, 松本 勉, ``API関数呼出履歴によるソフトウェア動的バースマークの一方式'', 信学技報, vol. 106, no. 235, ISEC2006-82, pp. 77-84, September 2006.
 

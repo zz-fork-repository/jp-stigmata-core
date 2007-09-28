@@ -26,13 +26,13 @@ from Java class files, and compare them.  Differences from
 
  []
 
- A <birthmark> is a set of special informations that the program
-originally possesses.  A birthmark is carefully extracted from
-critical portions of class file. Hence, if a class file <p> has the
-same birthmark as another class file <q>'s, <q> is very likely to be a
-copy of <p>. Thus, the birthmark can be used as a simple but powerful
-signature to distinguish doubtful class files (those which seem to be
-copies).
+ A <software birthmark> is a set of special informations that the
+program originally possesses.  The software birthmark is carefully
+extracted from critical portions of class file. Hence, if a class file
+<p> has the same software birthmark as another class file <q>'s, <q>
+is very likely to be a copy of <p>. Thus, the software birthmark can
+be used as a simple but powerful signature to distinguish doubtful
+class files (those which seem to be copies).
 
 Features
 

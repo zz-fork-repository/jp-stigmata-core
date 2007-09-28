@@ -8,17 +8,17 @@
 
 {FAQ}
 
- *{{{#What is stigmata}What is stigmata}}
+ *{{{#What is Stigmata}What is Stigmata}}
 
  *{{{#What is birthmark}What is birthmark}}
 
- *{{{#Why did I name it stigmata}Why did I name it stigmata}}
+ *{{{#Why did I name it Stigmata}Why did I name it Stigmata}}
 
- *{{{#What kind of features does stigmata have}What kind of features does stigmata have}}
+ *{{{#What kind of features does Stigmata have}What kind of features does Stigmata have}}
 
  *{{{#What is the limitation of extracting birthmarks}What is the limitation of extracting birthmarks}}
 
-*{What is stigmata}
+*{What is Stigmata}
 
  Stigmata is a toolkit for birthmarking Java class files.  Extracting
 birthmarks from Java class files directly and comparing them.  And
@@ -32,7 +32,7 @@ any additional information before distribution.
 
  For more details, see {{{definition.html}Definitions}}.
 
-*{Why did I name it stigmata}
+*{Why did I name it Stigmata}
 
  Birthmark is marks that appear on a person's body in the same places
  as those made on Jesus Christ's body when he was nailed to a cross.
@@ -41,7 +41,7 @@ any additional information before distribution.
 
  We liken birthmarks to holy sign of programs.
 
-*{What kind of features does stigmata have}
+*{What kind of features does Stigmata have}
 
  Stigmata have general mode and expert mode.  In general mode, we can
 extract certain birthmarks from jar file directly, and compare
@@ -57,7 +57,7 @@ it to Stigmata.
 
 *{What is the limitation of extracting birthmarks}
 
- Stigmata loads a target class into StigmataClassLoader when
+ Stigmata loads a target class by StigmataClassLoader when
 birthmarks were extracted from the class.  Therefore, extracting
 birthmarks from sealed classes will be failed.
 
@@ -71,7 +71,7 @@ birthmark is inheritance structure birthmark, and to extract it to
 find super class from loaded classes pool.  So, difference version
 cannot be applied.
 
- References
+**References
 
  *{{{http://java.sun.com/docs/books/tutorial/deployment/jar/}Lesson: Packaging Programs in JAR Files}}
 
