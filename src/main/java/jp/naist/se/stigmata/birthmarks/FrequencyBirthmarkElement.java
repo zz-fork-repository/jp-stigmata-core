@@ -1,7 +1,16 @@
 package jp.naist.se.stigmata.birthmarks;
 
+/*
+ * $Id$
+ */
+
 import jp.naist.se.stigmata.BirthmarkElement;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class FrequencyBirthmarkElement extends BirthmarkElement implements ValueCountable{
     private static final long serialVersionUID = 4454345943098520436L;
 

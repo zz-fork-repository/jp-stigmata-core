@@ -28,7 +28,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         CRITERIA.add(Criterion.MATCH);
         CRITERIA.add(Criterion.NOT_MATCH);
     };
-    private Target target = Target.BOTH_TARGET;
+    private FilterTarget target = FilterTarget.BOTH_TARGET;
     private String value;
 
     public TargetNameComparisonPairFilter(ComparisonPairFilterSpi service){
@@ -47,10 +47,10 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         String v = value;
         if(v == null) v = "";
         boolean flag;
-        if(getTarget() == Target.TARGET_1){
+        if(getTarget() == FilterTarget.TARGET_1){
             flag = checkMatch(pair.getTarget1().getName(), v);
         }
-        else if(getTarget() == Target.TARGET_2){
+        else if(getTarget() == FilterTarget.TARGET_2){
             flag = checkMatch(pair.getTarget2().getName(), v);
         }
         else{
@@ -67,11 +67,11 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         this.value = value;
     }
 
-    public Target getTarget(){
+    public FilterTarget getTarget(){
         return target;
     }
 
-    public void setTarget(Target target){
+    public void setTarget(FilterTarget target){
         this.target = target;
     }
 
@@ -110,7 +110,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         }
         
         boolean flag;
-        if(getTarget() == Target.BOTH_TARGET){
+        if(getTarget() == FilterTarget.BOTH_TARGET){
             flag = flag1 && flag2;
         }
         else{

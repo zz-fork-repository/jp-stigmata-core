@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.filter.BirthmarkElementCountComparisonPairFilter;
 import jp.naist.se.stigmata.filter.BirthmarkElementCountComparisonPairFilterService;
-import jp.naist.se.stigmata.filter.Target;
+import jp.naist.se.stigmata.filter.FilterTarget;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListCellRenderer;
@@ -111,7 +111,7 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         public void resetComponents(){
             threshold.setText("");
             criterionType.setSelectedIndex(0);
-            targetType.setSelectedItem(getDisplayTarget(Target.BOTH_TARGET));
+            targetType.setSelectedItem(getDisplayTarget(FilterTarget.BOTH_TARGET));
         }
 
         @Override

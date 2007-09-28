@@ -29,7 +29,7 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
     };
 
     private int threshold = 0;
-    private Target target;
+    private FilterTarget target;
 
     public TotalElementCountComparisonPairFilter(ComparisonPairFilterSpi service){
         super(service);
@@ -45,10 +45,10 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
 
     public boolean isFiltered(ComparisonPair pair){
         boolean flag;
-        if(getTarget() == Target.TARGET_1){
+        if(getTarget() == FilterTarget.TARGET_1){
             flag = checkFiltered(pair.getTarget1().getSumOfElementCount());
         }
-        else if(getTarget() == Target.TARGET_2){
+        else if(getTarget() == FilterTarget.TARGET_2){
             flag = checkFiltered(pair.getTarget2().getSumOfElementCount());
         }
         else{
@@ -91,8 +91,8 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
             flag2 = false;
             break;
         }
-        return (getTarget() == Target.BOTH_TARGET && flag1 && flag2) ||
-            (getTarget() == Target.ONE_OF_TARGET && (flag1 || flag2));
+        return (getTarget() == FilterTarget.BOTH_TARGET && flag1 && flag2) ||
+            (getTarget() == FilterTarget.ONE_OF_TARGET && (flag1 || flag2));
     }
 
     private boolean checkFiltered(int total){
@@ -134,11 +134,11 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
         this.threshold = threshold;
     }
 
-    public Target getTarget(){
+    public FilterTarget getTarget(){
         return target;
     }
 
-    public void setTarget(Target target){
+    public void setTarget(FilterTarget target){
         this.target = target;
     }
 

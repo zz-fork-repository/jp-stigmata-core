@@ -105,7 +105,7 @@ public class ComparisonPairFilterManager{
                 try{
                     Object value = entry.getValue();
                     if(entry.getKey().equals("target")){
-                        value = Target.valueOf(String.valueOf(value));
+                        value = FilterTarget.valueOf(String.valueOf(value));
                     }
                     BeanUtils.setProperty(filter, entry.getKey(), value);
                 }catch(IllegalAccessException e){

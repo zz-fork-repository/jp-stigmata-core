@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import jp.naist.se.stigmata.ComparisonPairFilter;
-import jp.naist.se.stigmata.filter.Target;
+import jp.naist.se.stigmata.filter.FilterTarget;
 import jp.naist.se.stigmata.filter.TargetNameComparisonPairFilter;
 import jp.naist.se.stigmata.filter.TargetNameComparisonPairFilterService;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
@@ -77,7 +77,7 @@ public class TargetNameComparisonPairFilterComponentService extends AbstractComp
         public void resetComponents(){
             value.setText("");
             criterionType.setSelectedIndex(0);
-            targetType.setSelectedItem(getDisplayTarget(Target.BOTH_TARGET));
+            targetType.setSelectedItem(getDisplayTarget(FilterTarget.BOTH_TARGET));
         }
 
         @Override

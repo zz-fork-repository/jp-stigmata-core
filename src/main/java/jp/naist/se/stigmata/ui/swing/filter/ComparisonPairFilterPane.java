@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.filter.Criterion;
-import jp.naist.se.stigmata.filter.Target;
+import jp.naist.se.stigmata.filter.FilterTarget;
 import jp.naist.se.stigmata.ui.swing.Messages;
 
 /**
@@ -22,7 +22,7 @@ import jp.naist.se.stigmata.ui.swing.Messages;
  */
 public abstract class ComparisonPairFilterPane extends JPanel{
     private Map<String, Criterion> criterionMap = new HashMap<String, Criterion>();
-    private Map<String, Target> targetMap = new HashMap<String, Target>();
+    private Map<String, FilterTarget> targetMap = new HashMap<String, FilterTarget>();
     
     public abstract String[] getErrors();
 
@@ -35,7 +35,7 @@ public abstract class ComparisonPairFilterPane extends JPanel{
     public JComboBox createTargetBox(){
         JComboBox combo = new JComboBox();
         combo.setEditable(false);
-        for(Target target: Target.values()){
+        for(FilterTarget target: FilterTarget.values()){
             String value = Messages.getString("target." + target.name());
             combo.addItem(value);
             targetMap.put(value, target);
@@ -43,11 +43,11 @@ public abstract class ComparisonPairFilterPane extends JPanel{
         return combo;
     }
 
-    public Target getTarget(String value){
+    public FilterTarget getTarget(String value){
         return targetMap.get(value);
     }
 
-    public String getDisplayTarget(Target target){
+    public String getDisplayTarget(FilterTarget target){
         return Messages.getString("target." + target.name());
     }
 
