@@ -140,7 +140,7 @@ public class Stigmata{
         if(defaultEnvironment == null){
             defaultEnvironment = BirthmarkEnvironment.getDefaultEnvironment();
         }
-        buildStigmataDirectory();
+        buildStigmataDirectory(System.getProperty("user.home"), ".stigmata");
 
         defaultEnvironment.setClassLoader(buildClassLoader());
         try {
@@ -154,7 +154,7 @@ public class Stigmata{
             defaultEnvironment.addService(service);
         }
         FormatManager.updateServices(defaultEnvironment);
-        exportConfigFile();
+        exportConfigFile(System.getProperty("user.home"), ".stigmata/stigmata.xml");
     }
 
     private ClassLoader buildClassLoader(){
@@ -166,16 +166,16 @@ public class Stigmata{
                 for(int i = 0; i < jarfiles.length; i++){
                     urls[i] = jarfiles[i].toURI().toURL();
                 }
-                return new URLClassLoader(urls);
+                return new URLClassLoader(urls, getClass().getClassLoader());
             } catch(MalformedURLException e){
             }
         }
         return null;
     }
 
-    private void buildStigmataDirectory(){
-        File file = new File(System.getProperty("user.home"), ".stigmata");
-        if(file.exists() && !file.isFile()){
+    private void buildStigmataDirectory(String parent, String directory){
+        File file = new File(parent, directory);
+        if(file.exists() && file.isFile()){
             File dest = new File(file.getParent(), ".stigmata.back");
             file.renameTo(dest);
         }
@@ -188,10 +188,10 @@ public class Stigmata{
         }
     }
 
-    private void exportConfigFile(){
+    private void exportConfigFile(String parent, String fileName){
         try{
-            File file = new File(System.getProperty("user.home"), ".stigmata/stigmata.xml");
-            if(file.exists()){
+            File file = new File(parent, fileName);
+            if(!file.exists()){
                 ConfigFileExporter exporter = new ConfigFileExporter(defaultEnvironment);
                 exporter.export(new PrintWriter(new FileWriter(file)));
             }
