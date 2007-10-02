@@ -87,7 +87,7 @@ public class StigmataFrame extends JFrame{
     public StigmataFrame(Stigmata stigmata, BirthmarkEnvironment environment){
         this.stigmata = stigmata;
         this.environment = environment;
-        this.fileio = new FileIOManager(this);
+        this.fileio = new FileIOManager(this, environment);
         Image iconImage = Utility.getImage("stigmata.icon");
         if(iconImage != null){
             setIconImage(iconImage);

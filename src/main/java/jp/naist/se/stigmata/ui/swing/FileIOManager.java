@@ -12,6 +12,8 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
+import jp.naist.se.stigmata.BirthmarkEnvironment;
+
 /**
  * 
  * @author Haruaki TAMADA
@@ -20,13 +22,21 @@ import javax.swing.filechooser.FileFilter;
 public class FileIOManager{
     private Component parent;
     private File currentDirectory;
+    private BirthmarkEnvironment env;
 
-    public FileIOManager(Component parent){
+    public FileIOManager(Component parent, BirthmarkEnvironment env){
         this.parent = parent;
-        if(System.getProperty("execution.directory") != null){
+        this.env = env;
+        if(env.getProperty(".current.directory") != null){
+            currentDirectory = new File(env.getProperty(".current.directory"));
+        }
+        if(env.getProperty("startup.directory") != null){
+            currentDirectory = new File(env.getProperty("startup.directory"));
+        }
+        if(currentDirectory == null && System.getProperty("execution.directory") != null){
             currentDirectory = new File(System.getProperty("execution.directory"));
         }
-        else{
+        if(currentDirectory == null){
             currentDirectory = new File(".");
         }
     }
@@ -40,6 +50,7 @@ public class FileIOManager{
             throw new IllegalArgumentException(directory.getName() + " is not directory");
         }
         this.currentDirectory = directory;
+        env.addProperty(".current.directory", directory.getAbsolutePath());
     }
 
     public File findFile(boolean open){
