@@ -136,9 +136,7 @@
       <zeroOrMore>
         <choice>
           <ref name="exclude"/>
-          <ref name="package"/>
-          <ref name="class-name"/>
-          <ref name="fully-name"/>
+          <ref name="judge-rule"/>
         </choice>
       </zeroOrMore>
     </element>
@@ -156,8 +154,16 @@
 
   <define name="exclude">
     <element name="exclude">
-      <ref name="match-type"/>
+      <ref name="judge-rule"/>
     </element>
+  </define>
+
+  <define name="judge-rule">
+    <choice>
+      <ref name="package-name"/>
+      <ref name="class-name"/>
+      <ref name="fully-name"/>
+    </choice>
   </define>
   <define name="package">
     <element name="package">
@@ -180,11 +186,17 @@
       <ref name="prefix"/>
       <ref name="match"/>
       <ref name="suffix"/>
+      <ref name="not-match"/>
     </choice>
   </define>
 
   <define name="match">
     <element name="match">
+      <data type="string"/>
+    </element>
+  </define>
+  <define name="not-match">
+    <element name="not-match">
       <data type="string"/>
     </element>
   </define>

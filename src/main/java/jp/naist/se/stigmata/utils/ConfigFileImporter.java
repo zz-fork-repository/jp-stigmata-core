@@ -72,8 +72,9 @@ public class ConfigFileImporter{
         private BirthmarkService service;
         private ComparisonPairFilterSet filter;
         private Part part;
-        private int wellknownType = 0;
-        private int patternType = 0;
+        private boolean exclude;
+        private WellknownClassJudgeRule.MatchType matchType;
+        private WellknownClassJudgeRule.MatchPartType partType;
         private String qname;
         private String key;
         private String filterType, filterCriterion, attributeName;
@@ -93,7 +94,7 @@ public class ConfigFileImporter{
 
         @Override
         public void startElement(String uri, String localName, String qname,
-                Attributes attributes) throws SAXException{
+                                 Attributes attributes) throws SAXException{
             this.qname = qname;
 
             if(qname.equals("wellknown-classes")){
@@ -125,32 +126,34 @@ public class ConfigFileImporter{
             }
             else if(part == Part.WELLKNOWN_CLASSES){
                 if(qname.equals("exclude")){
-                    wellknownType = WellknownClassJudgeRule.EXCLUDE_TYPE;
+                    exclude = true;
                 }
-                else if(qname.equals("package")){
-                    wellknownType = WellknownClassJudgeRule.PACKAGE_TYPE;
+                else if(qname.equals("package-name")){
+                    partType = WellknownClassJudgeRule.MatchPartType.PACKAGE_NAME;
                 }
                 else if(qname.equals("class-name")){
-                    wellknownType = WellknownClassJudgeRule.CLASS_NAME_TYPE;
+                    partType = WellknownClassJudgeRule.MatchPartType.CLASS_NAME;
                 }
                 else if(qname.equals("fully-name")){
-                    wellknownType = WellknownClassJudgeRule.FULLY_TYPE;
+                    partType = WellknownClassJudgeRule.MatchPartType.FULLY_NAME;
                 }
                 else if(qname.equals("suffix")){
-                    patternType = WellknownClassJudgeRule.SUFFIX_TYPE;
+                    matchType = WellknownClassJudgeRule.MatchType.SUFFIX;
                 }
                 else if(qname.equals("prefix")){
-                    patternType = WellknownClassJudgeRule.PREFIX_TYPE;
+                    matchType = WellknownClassJudgeRule.MatchType.PREFIX;
                 }
                 else if(qname.equals("match")){
-                    patternType = WellknownClassJudgeRule.MATCH_TYPE;
+                    matchType = WellknownClassJudgeRule.MatchType.EXACT;
+                }
+                else if(qname.equals("not-match")){
+                    matchType = WellknownClassJudgeRule.MatchType.NOT_MATCH;
                 }
             }
         }
 
         @Override
-        public void characters(char[] data, int offset, int length)
-                throws SAXException{
+        public void characters(char[] data, int offset, int length) throws SAXException{
             String value = new String(data, offset, length).trim();
 
             if(value.length() > 0){
@@ -163,10 +166,9 @@ public class ConfigFileImporter{
                     }
                 }
                 else if(part == Part.WELLKNOWN_CLASSES
-                        && (qname.equals("suffix") || qname.equals("prefix") || qname
-                                .equals("match"))){
-                    manager.add(new WellknownClassJudgeRule(value,
-                            wellknownType | patternType));
+                        && (qname.equals("suffix") || qname.equals("prefix") || qname.equals("match"))){
+                    manager.add(new WellknownClassJudgeRule(value, matchType, partType, exclude));
+                    exclude = false;
                 }
                 else if(part == Part.CLASSPATH && qname.equals("classpath")){
                     try{

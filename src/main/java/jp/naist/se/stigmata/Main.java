@@ -52,6 +52,7 @@ public final class Main{
 
     /**
      * main process.
+     * @throws org.apache.commons.cli.ParseException 
      */
     public Main(String[] args) throws ParseException{
         Options options = buildOptions();

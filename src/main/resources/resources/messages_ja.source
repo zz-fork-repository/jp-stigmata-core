@@ -34,8 +34,11 @@ fileMenu.menu.label=ƒtƒ@ƒCƒ‹
 newframe.menuitem.label=V‹KƒtƒŒ[ƒ€
 newframe.menuitem.tooltip=V‚µ‚¢ƒtƒŒ[ƒ€‚ğì¬‚µ‚Ü‚·
 
-exportsetting.menuitem.label=İ’è‚ğ•Û‘¶...
-exportsetting.menuitem.tooltip=İ’è‚ğXMLƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·D
+savesetting.menuitem.label=İ’è‚ğ•Û‘¶
+savesetting.menuitem.tooltip=Œ»İ‚Ìİ’è‚ğ•Û‘¶‚µ‚Ü‚·
+
+exportsetting.menuitem.label=İ’è‚ğ•Ê–¼‚Å•Û‘¶...
+exportsetting.menuitem.tooltip=İ’è‚ğXMLƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·
 export.description=İ’èƒtƒ@ƒCƒ‹ ({0})
 
 closetab.menuitem.label=ƒ^ƒu‚ğ•Â‚¶‚é
@@ -89,6 +92,23 @@ unsupportedfiletype.dialog.message=ˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ÍƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚È‚¢Œ`®‚Ìƒtƒ
 addwellknown.button.label=’Ç‰Á...
 addwellknown.button.tooltip=Šù’m‚ÌƒNƒ‰ƒX”»’èƒ‹[ƒ‹‚ğ’Ç‰Á‚µ‚Ü‚·
 addwellknown.dialog.title=V‹K: Šù’m‚ÌƒNƒ‰ƒX”»’èƒ‹[ƒ‹
+
+addwellknown.newrule.pattern.tooltip=V‹Kƒ‹[ƒ‹‚Ì”»’è•¶š—ñƒpƒ^[ƒ“
+addwellknown.newrule.pattern.border=ƒpƒ^[ƒ“
+addwellknown.newrule.exclude.label=œŠOƒ‹[ƒ‹
+addwellknown.newrule.exclude.tooltip=ƒ`ƒFƒbƒN‚ª“ü‚ê‚ç‚ê‚Ä‚¢‚éê‡CˆÈ‰º‚Åw’è‚·‚éƒ‹[ƒ‹‚ÍŠù’m‚ÌƒNƒ‰ƒX”»’èƒ‹[ƒ‹‚©‚çœŠO‚³‚ê‚éƒ‹[ƒ‹‚Æ‚µ‚Äˆµ‚í‚ê‚Ü‚·
+
+updatewellknown.button.label=XV...
+updatewellknown.button.tooltip=‘I‘ğ’†‚Ìƒ‹[ƒ‹‚ğXV‚µ‚Ü‚·
+
+matchparttype.FULLY_NAME=ƒNƒ‰ƒX‚ÌŠ®‘SCü–¼‚ª
+matchparttype.CLASS_NAME=ƒpƒbƒP[ƒW–¼‚ğœ‚­ƒNƒ‰ƒX–¼‚ª
+matchparttype.PACKAGE_NAME=ƒpƒbƒP[ƒW–¼‚ª
+
+matchtype.PREFIX=Ÿ‚Ìƒpƒ^[ƒ“‚Ån‚Ü‚Á‚Ä‚¢‚é
+matchtype.SUFFIX=Ÿ‚Ìƒpƒ^[ƒ“‚ÅI‚í‚Á‚Ä‚¢‚é
+matchtype.EXACT=Ÿ‚Ìƒpƒ^[ƒ“‚ÆŠ®‘S‚Éˆê’v‚µ‚Ä‚¢‚é
+matchtype.NOT_MATCH=Ÿ‚Ìƒpƒ^[ƒ“‚Æˆê’v‚µ‚Ä‚¢‚È‚¢
 
 removewellknown.button.label=íœ...
 removewellknown.button.tooltip=w’è‚³‚ê‚½Šù’m‚ÌƒNƒ‰ƒX”»’èƒ‹[ƒ‹‚ğíœ‚µ‚Ü‚·

@@ -5,52 +5,51 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Box;
-import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
 /**
+ * Well-known classes judge rules management pane.
+ * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
 public class WellknownClassesSettingsPane extends JPanel{
     private static final long serialVersionUID = 329734546345634532L;
 
-    private JTable sectionTable = null;
-    private DefaultTableModel model;
-    private WellknownClassManager manager;
     private StigmataFrame stigmata;
-    private JComboBox checkPartType;
-    private JComboBox matchType;
-    private String matchTypeColumnIdentifier;
-    private String checkPartColumnIdentifier;
-    private String patternColumnIdentifier;
+    private WellknownClassManager manager;
+    private JList list;
+    private DefaultListModel listmodel;
+
+    private Map<String, String> matchTypeMap = new HashMap<String, String>();
+    private Map<String, String> partTypeMap = new HashMap<String, String>();
 
     public WellknownClassesSettingsPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -62,12 +61,9 @@ public class WellknownClassesSettingsPane extends JPanel{
 
     public synchronized void setWellknownClasses(WellknownClassManager manager){
         manager.clear();
-        for(int i = 0; i < model.getRowCount(); i++){
-            int partType = getPartType(model.getValueAt(i, 0));
-            int match = getMatchType(model.getValueAt(i, 1));
-            String value = (String)model.getValueAt(i, 2);
-            WellknownClassJudgeRule sect = new WellknownClassJudgeRule(value, partType | match);
-            manager.add(sect);
+        for(int i = 0; i < listmodel.getSize(); i++){
+            WellknownClassJudgeRule rule = (WellknownClassJudgeRule)listmodel.getElementAt(i);
+            manager.add(rule);
         }
     }
 
@@ -78,9 +74,7 @@ public class WellknownClassesSettingsPane extends JPanel{
     }
 
     public void reset(){
-        for(int i = model.getRowCount() - 1; i >= 0; i--){
-            model.removeRow(i);
-        }
+        listmodel.clear();
         initializeData();
     }
 
@@ -90,114 +84,60 @@ public class WellknownClassesSettingsPane extends JPanel{
         return manager.isWellKnownClass(className);
     }
 
-    private int getPartType(Object object){
-        if(object instanceof Integer){
-            return ((Integer)object).intValue();
-        }
-        else{
-            if(object.equals(Messages.getString("fully.label"))){
-                return WellknownClassJudgeRule.FULLY_TYPE;
-            }
-            else if(object.equals(Messages.getString("package.label"))){
-                return WellknownClassJudgeRule.PACKAGE_TYPE;
-            }
-            else if(object.equals(Messages.getString("classname.label"))){
-                return WellknownClassJudgeRule.CLASS_NAME_TYPE;
-            }
-            else if(object.equals(Messages.getString("exclude.label"))){
-                return WellknownClassJudgeRule.EXCLUDE_TYPE;
+    private String findType(JComboBox combo, Map<String, String> map){
+        String item = (String)combo.getSelectedItem();
+        for(Map.Entry<String, String> entry: map.entrySet()){
+            if(item.equals(entry.getValue())){
+                return entry.getKey();
             }
         }
-        return WellknownClassJudgeRule.FULLY_TYPE;
+        return null;
     }
 
-    private int getMatchType(Object object){
-        if(object instanceof Integer){
-            return ((Integer)object).intValue();
+    public void addRule(WellknownClassJudgeRule rule){
+        if(rule != null){
+            listmodel.addElement(rule);
         }
-        else{
-            if(object.equals(Messages.getString("prefix.label"))){
-                return WellknownClassJudgeRule.PREFIX_TYPE;
-            }
-            else if(object.equals(Messages.getString("suffix.label"))){            
-                return WellknownClassJudgeRule.SUFFIX_TYPE;
-            }
-            else if(object.equals(Messages.getString("exactmatch.label"))){
-                return WellknownClassJudgeRule.MATCH_TYPE;
-            }
-        }
-        return WellknownClassJudgeRule.PREFIX_TYPE;
     }
 
-    public void addSection(){
-        JPanel inputPanel = new JPanel(new GridLayout(3, 2));
-        JTextField text = new JTextField();
-        inputPanel.setOpaque(true);
-        inputPanel.add(new JLabel(matchTypeColumnIdentifier));
-        inputPanel.add(matchType);
-        inputPanel.add(new JLabel(checkPartColumnIdentifier));
-        inputPanel.add(checkPartType);
-        inputPanel.add(new JLabel(patternColumnIdentifier));
-        inputPanel.add(text);
-
-        int value = JOptionPane.showConfirmDialog(
-            stigmata, inputPanel, Messages.getString("addwellknown.dialog.title"),
-            JOptionPane.OK_CANCEL_OPTION
-        );
-        if(value == JOptionPane.OK_OPTION){
-            int part = getPartType(checkPartType.getSelectedItem());
-            int match = getMatchType(matchType.getSelectedItem());
-            String pattern = text.getText();
-
-            model.addRow(new Object[] { new Integer(part), new Integer(match), pattern, });
+    public void editRule(int index){
+        WellknownClassJudgeRule rule = (WellknownClassJudgeRule)listmodel.getElementAt(index);
+        WellknownClassJudgeRule newrule = createOrUpdateRule(rule);
+        if(newrule != null){
+            listmodel.setElementAt(newrule, index);
         }
-        adjustColumnPreferredWidths(sectionTable);
     }
+
 
     private void initializeData(){
-        WellknownClassJudgeRule[] sections = manager.getSections();
-        for(WellknownClassJudgeRule section : sections){
-            model.addRow(new Object[] { new Integer(section.getMatchPartType()),
-                    new Integer(section.getMatchType()), section.getName() });
+        for(WellknownClassJudgeRule rule : manager){
+            listmodel.addElement(rule);
         }
-        adjustColumnPreferredWidths(sectionTable);
-    }
 
-    /**
-     * copy from Swing Hacks.
-     */
-    private void adjustColumnPreferredWidths(JTable table){
-        TableColumnModel columnModel = table.getColumnModel();
-        for(int col = 0; col < table.getColumnCount(); col++){
-            int maxWidth = 0;
-            for(int row = 0; row < table.getRowCount(); row++){
-                TableCellRenderer renderer = table.getCellRenderer(row, col);
-                Object value = table.getValueAt(row, col);
-                Component component = renderer.getTableCellRendererComponent(table, value, false,
-                        false, row, col);
-                maxWidth = (int)Math.max(component.getPreferredSize().getWidth(), maxWidth);
-            }
-            TableColumn column = columnModel.getColumn(col);
-            column.setPreferredWidth(maxWidth);
+        for(WellknownClassJudgeRule.MatchType type: WellknownClassJudgeRule.MatchType.values()){
+            matchTypeMap.put(type.name(), Messages.getString("matchtype." + type.name()));
+        }
+        for(WellknownClassJudgeRule.MatchPartType type: WellknownClassJudgeRule.MatchPartType.values()){
+            partTypeMap.put(type.name(), Messages.getString("matchparttype." + type.name()));
         }
     }
 
     private void initLayouts(){
         setLayout(new BorderLayout());
-
         JPanel center = new JPanel(new BorderLayout());
-        JScrollPane scroll = new JScrollPane();
+        listmodel = new DefaultListModel();
 
-        scroll.setViewportView(getSectionTable());
+        list = new JList(listmodel);
+        JScrollPane scroll = new JScrollPane(list);
+
         center.add(scroll, BorderLayout.CENTER);
         center.add(createSouthPane(), BorderLayout.SOUTH);
-        center.setBorder(new TitledBorder(Messages.getString("rules.border")));
 
         add(center, BorderLayout.CENTER);
-        add(getCheckPanel(), BorderLayout.SOUTH);
+        add(createCheckPane(), BorderLayout.SOUTH);
     }
 
-    private JComponent getCheckPanel(){
+    private JComponent createCheckPane(){
         final JTextField text = new JTextField();
         final JButton checkButton = Utility.createButton("checkwellknown");
         final JLabel label = new JLabel(Utility.getIcon("wellknownclasschecker.default.icon"));
@@ -261,121 +201,111 @@ public class WellknownClassesSettingsPane extends JPanel{
         JButton addButton = Utility.createButton("addwellknown");
         final JButton removeButton = Utility.createButton("removewellknown");
         removeButton.setEnabled(false);
+        final JButton updateButton = Utility.createButton("updatewellknown");
+        updateButton.setEnabled(false);
 
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(addButton);
+        southPanel.add(Box.createHorizontalGlue());
+        southPanel.add(updateButton);
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(removeButton);
         southPanel.add(Box.createHorizontalGlue());
 
         addButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                addSection();
+                addRule(createOrUpdateRule(null));
+            }
+        });
+        updateButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                editRule(list.getSelectedIndex());
             }
         });
 
         removeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                int[] rows = sectionTable.getSelectedRows();
-                for(int i = rows.length - 1; i >= 0; i--){
-                    model.removeRow(rows[i]);
+                int[] indeces = list.getSelectedIndices();
+                for(int i = indeces.length - 1; i >= 0; i--){
+                    listmodel.removeElementAt(indeces[i]);
                 }
-                adjustColumnPreferredWidths(sectionTable);
+                list.getSelectionModel().clearSelection();
             }
         });
 
-        sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        list.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(e.getClickCount() == 2){
+                    editRule(list.getSelectedIndex());
+                }
+            }
+        });
+
+        list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent arg0){
-                removeButton.setEnabled(sectionTable.getSelectedRowCount() > 0);
+                int[] indeces = list.getSelectedIndices();
+                removeButton.setEnabled(indeces != null && indeces.length > 0);
+                updateButton.setEnabled(indeces != null && indeces.length == 1);
             }
         });
 
         return southPanel;
     }
 
-    /**
-     * This method initializes sectionTable
-     * 
-     * @return javax.swing.JTable
-     */
-    private JTable getSectionTable(){
-        if(sectionTable == null){
-            model = new DefaultTableModel(0, 3);
-            matchTypeColumnIdentifier = Messages.getString("matchtype.table.column");
-            checkPartColumnIdentifier = Messages.getString("checkpart.table.column");
-            patternColumnIdentifier = Messages.getString("pattern.table.column");
-            model.setColumnIdentifiers(new Object[] { checkPartColumnIdentifier,
-                    matchTypeColumnIdentifier, patternColumnIdentifier, });
-            sectionTable = new JTable(model);
-
-            checkPartType = new JComboBox();
-            final String[] checkPartItems = Messages.getStringArray("checkpart.items");
-            for(int i = 0; i < checkPartItems.length; i++){
-                checkPartType.addItem(checkPartItems[i]);
-            }
-            TableColumn column1 = sectionTable.getColumn(checkPartColumnIdentifier);
-            column1.setCellEditor(new DefaultCellEditor(checkPartType));
-            column1.setCellRenderer(new DefaultTableCellRenderer(){
-                private static final long serialVersionUID = 923743563L;
-
-                public void setValue(Object value){
-                    if(value instanceof Integer){
-                        int type = ((Integer)value).intValue();
-                        if(type == WellknownClassJudgeRule.FULLY_TYPE){
-                            setText(checkPartItems[0]);
-                        }
-                        else if(type == WellknownClassJudgeRule.PACKAGE_TYPE){
-                            setText(checkPartItems[1]);
-                        }
-                        else if(type == WellknownClassJudgeRule.CLASS_NAME_TYPE){
-                            setText(checkPartItems[2]);
-                        }
-                        else if(type == WellknownClassJudgeRule.EXCLUDE_TYPE){
-                            setText(checkPartItems[3]);
-                        }
-                        else{
-                            setText(value.toString());
-                        }
-                    }
-                    else{
-                        setText(value.toString());
-                    }
-                }
-            });
-
-            matchType = new JComboBox();
-            final String[] matchTypeStrings = Messages.getStringArray("matchtype.items");
-            for(int i = 0; i < matchTypeStrings.length; i++){
-                matchType.addItem(matchTypeStrings[i]);
-            }
-            TableColumn column2 = sectionTable.getColumn(matchTypeColumnIdentifier);
-            column2.setCellEditor(new DefaultCellEditor(matchType));
-            column2.setCellRenderer(new DefaultTableCellRenderer(){
-                private static final long serialVersionUID = 972356346L;
-
-                public void setValue(Object value){
-                    if(value instanceof Integer){
-                        int type = ((Integer)value).intValue();
-                        if(type == WellknownClassJudgeRule.PREFIX_TYPE){
-                            setText(matchTypeStrings[0]);
-                        }
-                        else if(type == WellknownClassJudgeRule.SUFFIX_TYPE){
-                            setText(matchTypeStrings[1]);
-                        }
-                        else if(type == WellknownClassJudgeRule.MATCH_TYPE){
-                            setText(matchTypeStrings[2]);
-                        }
-                        else{
-                            setText(value.toString());
-                        }
-                    }
-                    else{
-                        setText(value.toString());
-                    }
-                }
-            });
+    private WellknownClassJudgeRule createOrUpdateRule(WellknownClassJudgeRule rule){
+        JTextField text = new JTextField();
+        text.setOpaque(true);
+        Utility.decorateJComponent(text, "addwellknown.newrule.pattern");
+        JCheckBox excludeCheck = new JCheckBox(Messages.getString("addwellknown.newrule.exclude.label"), false);
+        Utility.decorateJComponent(excludeCheck, "addwellknown.newrule.exclude");
+        JComboBox matchTypeComboBox = new JComboBox();
+        for(Map.Entry<String, String> entry: matchTypeMap.entrySet()){
+            matchTypeComboBox.addItem(entry.getValue());
         }
-        return sectionTable;
-    }
+        JComboBox partTypeComboBox = new JComboBox();
+        for(Map.Entry<String, String> entry: partTypeMap.entrySet()){
+            partTypeComboBox.addItem(entry.getValue());
+        }
+        if(rule != null){
+            text.setText(rule.getPattern());
+            excludeCheck.setSelected(rule.isExclude());
+            matchTypeComboBox.setSelectedItem(matchTypeMap.get(rule.getMatchType().name()));
+            partTypeComboBox.setSelectedItem(partTypeMap.get(rule.getMatchPartType().name()));
+        }
 
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setOpaque(true);
+        JPanel centerPanel = new JPanel(new FlowLayout());
+
+        centerPanel.add(partTypeComboBox);
+        centerPanel.add(matchTypeComboBox);
+
+        panel.add(excludeCheck, BorderLayout.NORTH);
+        panel.add(centerPanel, BorderLayout.CENTER);
+        panel.add(text, BorderLayout.SOUTH);
+
+        int value = JOptionPane.showConfirmDialog(
+            stigmata, panel, Messages.getString("addwellknown.dialog.title"),
+            JOptionPane.OK_CANCEL_OPTION
+        );
+        if(value == JOptionPane.OK_OPTION){
+            String matchType = findType(matchTypeComboBox, matchTypeMap);
+            String partType = findType(partTypeComboBox, partTypeMap);
+            WellknownClassJudgeRule.MatchType match = null;
+            WellknownClassJudgeRule.MatchPartType part = null;
+            String pattern = text.getText();
+            boolean excludeFlag = excludeCheck.isSelected();
+
+            if(matchType != null && partType != null){
+                match = WellknownClassJudgeRule.MatchType.valueOf(matchType);
+                part = WellknownClassJudgeRule.MatchPartType.valueOf(partType);
+            }
+
+            if(match != null && partType != null && pattern != null && !pattern.equals("")){
+                return new WellknownClassJudgeRule(pattern, match, part, excludeFlag);
+            }
+        }
+        return null;
+    }
 }

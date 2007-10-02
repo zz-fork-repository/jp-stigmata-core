@@ -10,71 +10,99 @@ package jp.naist.se.stigmata.utils;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class WellknownClassJudgeRule{
-    public static final int PREFIX_TYPE = 1;
+public final class WellknownClassJudgeRule{
+    public enum MatchType{
+        PREFIX, SUFFIX, EXACT, NOT_MATCH,
+    };
+    public enum MatchPartType{
+        FULLY_NAME, PACKAGE_NAME, CLASS_NAME,
+    };
 
-    public static final int SUFFIX_TYPE = 2;
+    private MatchType matchType;
+    private MatchPartType partType;
+    private boolean excludeFlag;
 
-    public static final int MATCH_TYPE = 4;
+    private String pattern;
 
-    public static final int FULLY_TYPE = 0x10;
-
-    public static final int PACKAGE_TYPE = 0x20;
-
-    public static final int CLASS_NAME_TYPE = 0x40;
-
-    public static final int EXCLUDE_TYPE = 0x80;
-
-    private int type;
-
-    private String name;
-
-    public WellknownClassJudgeRule(String name, int type){
-        this.name = name;
-        this.type = type;
+    public WellknownClassJudgeRule(String pattern, MatchType matchType, MatchPartType partType){
+        this(pattern, matchType, partType, false);
     }
 
-    public boolean isExcludeType(){
-        return getMatchPartType() == EXCLUDE_TYPE;
+    public WellknownClassJudgeRule(String pattern, MatchType matchType, MatchPartType partType, boolean excludeFlag){
+        this.pattern = pattern;
+        this.matchType = matchType;
+        this.partType = partType;
+        this.excludeFlag = excludeFlag;
     }
 
-    public boolean isFullyType(){
-        return getMatchPartType() == FULLY_TYPE;
+    public void setExclude(boolean excludeFlag){
+        this.excludeFlag = excludeFlag;
     }
 
-    public boolean isPackageType(){
-        return getMatchPartType() == PACKAGE_TYPE;
+    public boolean isExclude(){
+        return excludeFlag;
     }
 
-    public boolean isClassNameType(){
-        return getMatchPartType() == CLASS_NAME_TYPE;
+    public String getPattern(){
+        return pattern;
     }
 
-    public int getMatchPartType(){
-        return getType() & 0xf0;
+    public MatchType getMatchType(){
+        return matchType;
     }
 
-    public int getMatchType(){
-        return getType() & 0xf;
+    public MatchPartType getMatchPartType(){
+        return partType;
     }
 
-    public int getType(){
-        return type;
+    public int hashCode(){
+        int m = getMatchType().hashCode();
+        int p = getMatchPartType().hashCode();
+        int s = getPattern().hashCode();
+
+        return m + p + s;
     }
 
-    public String getName(){
-        return name;
+    public boolean equals(Object o){
+        if(o instanceof WellknownClassJudgeRule){
+            WellknownClassJudgeRule wcjr = (WellknownClassJudgeRule)o;
+            return getPattern().equals(wcjr.getPattern())
+                && getMatchPartType() == wcjr.getMatchPartType()
+                && getMatchType() == wcjr.getMatchType();
+        }
+        return false;
     }
 
     public String toString(){
+        String string = null;
         switch(getMatchType()){
-        case PREFIX_TYPE:
-            return "<prefix>" + getName() + "</prefix>";
-        case SUFFIX_TYPE:
-            return "<suffix>" + getName() + "</suffix>";
-        case MATCH_TYPE:
-            return "<match>" + getName() + "</match>";
+        case PREFIX:
+            string = String.format("<prefix>%s</prefix>", getPattern());
+            break;
+        case SUFFIX:
+            string = String.format("<suffix>%s</suffix>", getPattern());
+            break;
+        case EXACT:
+            string = String.format("<match>%s</match>", getPattern());
+            break;
+        case NOT_MATCH:
+            string = String.format("<not-match>%s</not-match>", getPattern());
+            break;
         }
-        return null;
+        switch(getMatchPartType()){
+        case CLASS_NAME:
+            string = String.format("<class-name>%s</class-name>", string);
+            break;
+        case FULLY_NAME:
+            string = String.format("<fully-name>%s</fully-name>", string);
+            break;
+        case PACKAGE_NAME:
+            string = String.format("<package-name>%s</package-name>", string);
+            break;
+        }
+        if(isExclude()){
+            string = "<exclude>" + string + "</exclude>";
+        }
+        return string;
     }
 }

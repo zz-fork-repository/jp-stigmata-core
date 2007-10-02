@@ -22,11 +22,11 @@
 <!ELEMENT criterion               (#PCDATA)>
 <!ELEMENT filter-type             (#PCDATA)>
 
-<!ELEMENT exclude                 (suffix|prefix|match)>
-<!ELEMENT package                 (suffix|prefix|match)>
-<!ELEMENT class-name              (suffix|prefix|match)>
-<!ELEMENT fully-name              (suffix|prefix|match)>
+<!ELEMENT package                 (suffix|prefix|match|not-match)>
+<!ELEMENT class-name              (suffix|prefix|match|not-match)>
+<!ELEMENT fully-name              (suffix|prefix|match|not-match)>
 
+<!ELEMENT exclude                 (package|class-name|fully-name)>
 <!ELEMENT wellknown-classes       ((exclude|package|class-name|fully-name)*)>
 
 <!ELEMENT property                (name,value)>

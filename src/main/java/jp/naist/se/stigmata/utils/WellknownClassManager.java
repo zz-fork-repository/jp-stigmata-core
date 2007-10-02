@@ -10,129 +10,89 @@ import java.util.List;
 
 import org.objectweb.asm.Opcodes;
 
+import jp.naist.se.stigmata.utils.WellknownClassJudgeRule.MatchType;
+import jp.naist.se.stigmata.utils.WellknownClassJudgeRule.MatchPartType;
+
 /**
  * Managing wellknown class checking rule.
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class WellknownClassManager{
-    public static final int FULLY_PREFIX_TYPE       = WellknownClassJudgeRule.FULLY_TYPE | WellknownClassJudgeRule.PREFIX_TYPE;
-    public static final int FULLY_SUFFIX_TYPE       = WellknownClassJudgeRule.FULLY_TYPE | WellknownClassJudgeRule.SUFFIX_TYPE;
-    public static final int FULLY_MATCH_TYPE        = WellknownClassJudgeRule.FULLY_TYPE | WellknownClassJudgeRule.MATCH_TYPE;
-    public static final int PACKAGE_PREFIX_TYPE     = WellknownClassJudgeRule.PACKAGE_TYPE | WellknownClassJudgeRule.PREFIX_TYPE;
-    public static final int PACKAGE_SUFFIX_TYPE     = WellknownClassJudgeRule.PACKAGE_TYPE | WellknownClassJudgeRule.SUFFIX_TYPE;
-    public static final int PACKAGE_MATCH_TYPE      = WellknownClassJudgeRule.PACKAGE_TYPE | WellknownClassJudgeRule.MATCH_TYPE;
-    public static final int CLASS_NAME_PREFIX_TYPE  = WellknownClassJudgeRule.CLASS_NAME_TYPE | WellknownClassJudgeRule.PREFIX_TYPE;
-    public static final int CLASS_NAME_SUFFIX_TYPE  = WellknownClassJudgeRule.CLASS_NAME_TYPE | WellknownClassJudgeRule.SUFFIX_TYPE;
-    public static final int CLASS_NAME_MATCH_TYPE   = WellknownClassJudgeRule.CLASS_NAME_TYPE | WellknownClassJudgeRule.MATCH_TYPE;
-
-    private List<WellknownClassJudgeRule> systemClassesList = new ArrayList<WellknownClassJudgeRule>();
-    private List<WellknownClassJudgeRule> excludes = new ArrayList<WellknownClassJudgeRule>();
+public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
+    private List<WellknownClassJudgeRule> rules = new ArrayList<WellknownClassJudgeRule>();
 
     public WellknownClassManager(){
     }
 
     public WellknownClassManager(WellknownClassManager manager){
-        systemClassesList = new ArrayList<WellknownClassJudgeRule>(manager.systemClassesList);
-        excludes = new ArrayList<WellknownClassJudgeRule>(manager.excludes);
+        rules = new ArrayList<WellknownClassJudgeRule>(manager.rules);
     }
 
-    public void remove(String value, int type){
-        int index = -1;
-        for(int i = 0; i < systemClassesList.size(); i++){ 
-            WellknownClassJudgeRule section = (WellknownClassJudgeRule)systemClassesList.get(i);
-            if(section.getName().equals(value) && section.getType() == type){
-                index = i;
-                break;
-            }
-        }
-        systemClassesList.remove(index);
+    public void remove(WellknownClassJudgeRule rule){
+        rules.remove(rule);
+    }
+
+    public void remove(String value, MatchType matchType, MatchPartType partType){
+        remove(new WellknownClassJudgeRule(value, matchType, partType));
     }
 
     public void clear(){
-        systemClassesList.clear();
-        excludes.clear();
+        rules.clear();
     }
 
-    public WellknownClassJudgeRule[] getSections(){
-        List<WellknownClassJudgeRule> sections = new ArrayList<WellknownClassJudgeRule>();
-        sections.addAll(excludes);
-        sections.addAll(systemClassesList);
-        return sections.toArray(new WellknownClassJudgeRule[sections.size()]);
+    public synchronized Iterator<WellknownClassJudgeRule> iterator(){
+        List<WellknownClassJudgeRule> copiedRules = new ArrayList<WellknownClassJudgeRule>(rules);
+        return copiedRules.iterator();
     }
 
-    public void add(WellknownClassJudgeRule section){
-        if(section.isExcludeType()){
-            excludes.add(section);
-        }
-        else{
-            systemClassesList.add(section);
+    public synchronized WellknownClassJudgeRule[] getRules(){
+        return rules.toArray(new WellknownClassJudgeRule[rules.size()]);
+    }
+
+    public void add(WellknownClassJudgeRule rule){
+        if(!rules.contains(rule)){
+            rules.add(rule);
         }
     }
 
     private boolean checkSystemClass(String className){
-        String fully = className.replace('/', '.');
-        int index = className.lastIndexOf('.');
-        String cn = className.substring(index + 1);
-        String pn = "";
-        if(index > 0){
-            pn = fully.substring(0, index - 1);
-        }
-
-        if(isExcludes(fully)){
+        Names names = new Names(className);
+        if(isMatch(names, true)){
             return false;
         }
-
-        for(Iterator<WellknownClassJudgeRule> i = systemClassesList.iterator(); i.hasNext(); ){
-            WellknownClassJudgeRule section = i.next();
-            String target = fully;
-            if(section.isClassNameType()){
-                target = cn;
-            }
-            else if(section.isPackageType()){
-                target = pn;
-            }
-            switch(section.getMatchType()){
-            case WellknownClassJudgeRule.PREFIX_TYPE:
-                if(target.startsWith(section.getName())){
-                    return true;
-                }
-                break;
-            case WellknownClassJudgeRule.SUFFIX_TYPE:
-                if(target.endsWith(section.getName())){
-                    return true;
-                }
-                break;
-            case WellknownClassJudgeRule.MATCH_TYPE:
-                if(target.equals(section.getName())){
-                    return true;
-                }
-                break;
-            }
-        }
-        return false;
+        return isMatch(names, false);
     }
 
-    private boolean isExcludes(String fully){
-        for(Iterator<WellknownClassJudgeRule> i = excludes.iterator(); i.hasNext(); ){
+    private boolean isMatch(Names names, boolean excludeFlag){
+        for(Iterator<WellknownClassJudgeRule> i = rules.iterator(); i.hasNext(); ){
             WellknownClassJudgeRule s = i.next();
-            switch(s.getMatchType()){
-            case WellknownClassJudgeRule.PREFIX_TYPE:
-                if(fully.startsWith(s.getName())){
-                    return true;
+            if(s.isExclude() == excludeFlag){
+                boolean flag = false;
+                String partName = names.getFullyName();
+                if(s.getMatchPartType() == MatchPartType.CLASS_NAME){
+                    partName = names.getClassName();
                 }
-                break;
-            case WellknownClassJudgeRule.SUFFIX_TYPE:
-                if(fully.endsWith(s.getName())){
-                    return true;
+                else if(s.getMatchPartType() == MatchPartType.PACKAGE_NAME){
+                    partName = names.getPackageName();
                 }
-                break;
-            case WellknownClassJudgeRule.MATCH_TYPE:
-                if(fully.equals(s.getName())){
-                    return true;
+                switch(s.getMatchType()){
+                case PREFIX:
+                    flag = partName.startsWith(s.getPattern());
+                    break;
+                case SUFFIX:
+                    flag = partName.endsWith(s.getPattern());
+                    break;
+                case EXACT:
+                    flag = partName.equals(s.getPattern());
+                    break;
+                case NOT_MATCH:
+                    flag = !partName.equals(s.getPattern());
+                    break;
                 }
-                break;
+                if(flag){
+                    return flag;
+                }
             }
         }
         return false;
@@ -148,12 +108,12 @@ public class WellknownClassManager{
      */
     private boolean checkSystemMethod(int access, String methodName, String signature){
         if(methodName.equals("main")){
-            return signature.equals("([Ljava/lang/String;)V") && 
-                checkAccess(access, Opcodes.ACC_PUBLIC);
+            return signature.equals("([Ljava/lang/String;)V")
+                && checkAccess(access, Opcodes.ACC_PUBLIC);
         }
         else if(methodName.equals("<clinit>")){
-            return signature.equals("()V") &&
-                checkAccess(access, Opcodes.ACC_STATIC);
+            return signature.equals("()V")
+                && checkAccess(access, Opcodes.ACC_STATIC);
         }
         else if(methodName.equals("<init>")){
             return !checkAccess(access, Opcodes.ACC_STATIC);

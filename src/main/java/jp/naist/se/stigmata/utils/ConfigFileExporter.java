@@ -71,24 +71,45 @@ public class ConfigFileExporter{
 
     private void exportWellknownClasses(PrintWriter out) throws IOException{
         out.println("  <wellknown-classes>");
-        for(WellknownClassJudgeRule rule: environment.getWellknownClassManager().getSections()){
-            int partType = rule.getMatchPartType();
-            int match = rule.getMatchType();
-            String value = rule.getName();
+        for(WellknownClassJudgeRule rule: environment.getWellknownClassManager()){
+            String value = rule.getPattern();
             String tag;
             String matchtag;
-            if(partType == WellknownClassJudgeRule.CLASS_NAME_TYPE)   tag = "class-name";
-            else if(partType == WellknownClassJudgeRule.EXCLUDE_TYPE) tag = "exclude";
-            else if(partType == WellknownClassJudgeRule.FULLY_TYPE)   tag = "fully-name";
-            else if(partType == WellknownClassJudgeRule.PACKAGE_TYPE) tag = "package";
-            else throw new InternalError("unknown part type: " + partType);
+            switch(rule.getMatchPartType()){
+            case CLASS_NAME:
+                tag = "class-name";
+                break;
+            case FULLY_NAME:
+                tag = "fully-name";
+                break;
+            case PACKAGE_NAME:
+                tag = "package-name";
+                break;
+            default:
+                throw new InternalError("unknown part type: " + rule.getMatchPartType());
+            }
+            switch(rule.getMatchType()){
+            case EXACT:
+                matchtag = "match";
+                break;
+            case NOT_MATCH:
+                matchtag = "not-match";
+                break;
+            case PREFIX:
+                matchtag = "prefix";
+                break;
+            case SUFFIX:
+                matchtag = "suffix";
+                break;
+            default:
+                throw new InternalError("unknown match type: " + rule.getMatchType());
+            }
 
-            if(match == WellknownClassJudgeRule.MATCH_TYPE)       matchtag = "match";
-            else if(match == WellknownClassJudgeRule.PREFIX_TYPE) matchtag = "prefix";
-            else if(match == WellknownClassJudgeRule.SUFFIX_TYPE) matchtag = "suffix";
-            else throw new InternalError("unknown match type: " + match);
-
-            out.printf("    <%s><%s>%s</%s></%s>%n", tag, matchtag, value, matchtag, tag);
+            out.print("    ");
+            if(rule.isExclude()) out.print("<exclude>");
+            out.printf("<%s><%s>%s</%s></%s>", tag, matchtag, value, matchtag, tag);
+            if(rule.isExclude()) out.print("</exclude>");
+            out.println();
         }
         out.println("  </wellknown-classes>");
     }
