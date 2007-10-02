@@ -60,6 +60,12 @@
       <argument-name>CONFIG-FILE</argument-name>
     </definition>
 
+    <definition name="reset-config">
+      <long-option>reset-config</long-option>
+      <description>Reset config file.</description>
+      <argument>NONE</argument>
+    </definition>
+
     <definition name="export-config">
       <long-option>export-config</long-option>
       <description>export configuration file to specified file or standard output.</description>
@@ -117,5 +123,6 @@
     <option>export-config</option>
     <option>extraction-unit</option>
     <option>store-target</option>
+    <option>reset-config</option>
   </available-options>
 </command-line>

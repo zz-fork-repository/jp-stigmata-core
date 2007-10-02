@@ -96,10 +96,10 @@ public class Stigmata{
     }
 
     public void configuration(){
-        configuration(null);
+        configuration(null, false);
     }
 
-    public void configuration(String filePath){
+    public void configuration(String filePath, boolean resetFlag){
         InputStream target = null;
         if(filePath != null){
             try{
@@ -130,8 +130,12 @@ public class Stigmata{
                 }
             }
         }
-        if(target == null){
+        if(target == null || resetFlag){
             target = getClass().getResourceAsStream("/resources/stigmata.xml");
+            if(resetFlag){
+                defaultEnvironment = null;
+                BirthmarkEnvironment.resetSettings();
+            }
         }
         initConfiguration(target);
     }
@@ -143,7 +147,7 @@ public class Stigmata{
         buildStigmataDirectory(System.getProperty("user.home"), ".stigmata");
 
         defaultEnvironment.setClassLoader(buildClassLoader());
-        try {
+        try{
             ConfigFileImporter parser = new ConfigFileImporter(defaultEnvironment);
             parser.parse(in);
         } catch(IOException e){

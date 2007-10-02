@@ -48,6 +48,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.Main;
 import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.event.BirthmarkEngineAdapter;
 import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
@@ -58,6 +59,8 @@ import jp.naist.se.stigmata.ui.swing.actions.LicenseAction;
 import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
 import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
+
+import org.apache.commons.cli.ParseException;
 
 /**
  *
@@ -355,6 +358,17 @@ public class StigmataFrame extends JFrame{
         return mapping;
     }
 
+    private void clearSettings(){
+        new File(System.getProperty("user.home"), ".stigmata/stigmata.xml").delete();
+        try{
+            new Main(new String[] { "--reset-config", "--mode=gui", });
+            setVisible(false);
+            dispose();
+        } catch(ParseException e){
+        }
+        
+    }
+
     private void initLayouts(){
         setTitle(Messages.getString("stigmata.frame.title"));
         initComponents();
@@ -410,6 +424,7 @@ public class StigmataFrame extends JFrame{
         JMenuItem newFrameMenu = Utility.createJMenuItem("newframe");
         JMenuItem saveMenu = Utility.createJMenuItem("savesetting");
         JMenuItem exportMenu = Utility.createJMenuItem("exportsetting");
+        JMenuItem clearMenu = Utility.createJMenuItem("clearsetting");
         JMenuItem closeTabMenu = Utility.createJMenuItem("closetab");
         JMenuItem closeMenu = Utility.createJMenuItem("closeframe");
         JMenuItem exitMenu = Utility.createJMenuItem("exit");
@@ -419,6 +434,7 @@ public class StigmataFrame extends JFrame{
         fileMenu.add(new JSeparator());
         fileMenu.add(saveMenu);
         fileMenu.add(exportMenu);
+        fileMenu.add(clearMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);
         fileMenu.add(closeMenu);
@@ -446,6 +462,12 @@ public class StigmataFrame extends JFrame{
         closeTabMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
                 closeTabMenuActionPerformed();
+            }
+        });
+
+        clearMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                clearSettings();
             }
         });
 

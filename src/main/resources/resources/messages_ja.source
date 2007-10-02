@@ -41,6 +41,9 @@ exportsetting.menuitem.label=設定を別名で保存...
 exportsetting.menuitem.tooltip=設定をXMLファイルに保存します
 export.description=設定ファイル ({0})
 
+clearsetting.menuitem.label=設定を初期化
+clearsetting.menuitem.tooltip=設定をデフォルトに初期化します
+
 closetab.menuitem.label=タブを閉じる
 closetab.menuteim.tooltip=現在のタブを閉じます
 

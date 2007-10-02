@@ -16,17 +16,20 @@ import jp.naist.se.stigmata.utils.WarClassLoader;
  * @version $Revision$ $Date$
  */
 public class ClasspathContext implements Iterable<URL>{
-    private static ClasspathContext DEFAULT_CONTEXT = new ClasspathContext();
+    private static ClasspathContext DEFAULT_CONTEXT = new ClasspathContext(false);
 
     private ClasspathContext parent;
     private List<URL> classpath = new ArrayList<URL>();
     private ClassLoader loader = null;
 
     /**
-     * private constructor.
-     * The root context is only one.
+     * private constructor for root context.
      */
-    private ClasspathContext(){
+    private ClasspathContext(boolean flag){
+    }
+
+    public ClasspathContext(){
+        this(DEFAULT_CONTEXT);
     }
 
     /**

@@ -60,7 +60,7 @@ public final class Main{
         CommandLinePlus commandLine = new CommandLinePlus(parser.parse(options, args, false));
 
         Stigmata stigmata = Stigmata.getInstance();
-        stigmata.configuration(commandLine.getOptionValue("config-file"));
+        stigmata.configuration(commandLine.getOptionValue("config-file"), commandLine.hasOption("reset-config"));
 
         String[] arguments = commandLine.getArgs();
 

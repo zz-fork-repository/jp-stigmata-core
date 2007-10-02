@@ -80,7 +80,7 @@ public class BirthmarkEnvironment{
      */
     private BirthmarkEnvironment(boolean flag){
         manager = new WellknownClassManager();
-        classpathContext = ClasspathContext.getDefaultContext();
+        classpathContext = new ClasspathContext();
         filterManager = new ComparisonPairFilterManager(this);
     }
 
@@ -272,5 +272,9 @@ public class BirthmarkEnvironment{
 
     void setClassLoader(ClassLoader loader){
         this.loader = loader;
+    }
+
+    static void resetSettings(){
+        DEFAULT_ENVIRONMENT = new BirthmarkEnvironment(false);
     }
 }
