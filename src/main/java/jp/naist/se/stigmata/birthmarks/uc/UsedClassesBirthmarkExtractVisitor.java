@@ -71,7 +71,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitTypeInsn(int opcode, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
-                    add(normalize(desc));
+                    add(desc);
                 }
                 super.visitTypeInsn(opcode, desc);
             }
@@ -95,7 +95,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitLocalVariable(String name, String desc, String signature,
                                            Label start, Label end, int index){
                 if(checkType(Type.getType(desc))){
-                    add(normalize(desc));
+                    add(desc);
                 }
                 addSignatureClass(signature);
 
@@ -104,7 +104,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
 
             public void visitFieldInsn(int opcode, String owner, String name, String desc){
                 if(getEnvironment().getWellknownClassManager().isWellKnownClass(owner)){
-                    add(normalize(owner));
+                    add(owner);
                 }
                 addDescriptor(desc);
                 super.visitFieldInsn(opcode, owner, name, desc);
@@ -126,7 +126,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             SignatureWriter writer = new SignatureWriter(){
                 public void visitClassType(String classType){
                     if(getEnvironment().getWellknownClassManager().isWellKnownClass(classType)){
-                        add(normalize(classType));
+                        add(classType);
                     }
                 }
             };
@@ -150,7 +150,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private void addDescriptor(String desc){
         Type type = Type.getType(desc);
         if(checkType(type)){
-            add(normalize(desc));
+            add(desc);
         }
     }
 
@@ -194,6 +194,6 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     }
 
     private void add(String name){
-        addElement(new BirthmarkElement(name));
+        addElement(new BirthmarkElement(normalize(name)));
     }
 }
