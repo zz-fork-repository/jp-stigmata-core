@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -71,8 +70,8 @@ public class ClasspathSettingsPane extends JPanel{
         bootClasspath.removeAllElements();
         try{
             ClasspathContext context = stigmata.getEnvironment().getClasspathContext();
-            for(Iterator<URL> i = context.classpath(); i.hasNext(); ){
-                classpath.addValue(i.next().toString());
+            for(URL url: context){
+                classpath.addValue(url.toString());
             }
 
             addClasspath(bootClasspath, System.getProperty("java.class.path"));

@@ -22,26 +22,55 @@ public class ClasspathContext implements Iterable<URL>{
     private List<URL> classpath = new ArrayList<URL>();
     private ClassLoader loader = null;
 
+    /**
+     * private constructor.
+     * The root context is only one.
+     */
     private ClasspathContext(){
     }
 
+    /**
+     * constructor with parent classpath context.
+     */
     public ClasspathContext(ClasspathContext parent){
         this.parent = parent;
     }
 
+    /**
+     * returns parent classpath context.
+     */
     public ClasspathContext getParent(){
         return parent;
     }
 
+    /**
+     * returns default classpath context.
+     */
     public static final ClasspathContext getDefaultContext(){
         return DEFAULT_CONTEXT;
     }
 
+    /**
+     * adds given url to this context.  If this context already has given url or
+     * parent context has given url, this method do nothing.
+     */
     public synchronized void addClasspath(URL url){
-        classpath.add(url);
-        loader = null;
+        if(!contains(url)){
+            classpath.add(url);
+            loader = null;
+        }
     }
 
+    /**
+     * returns that this context or parent context have given url.
+     */
+    public synchronized boolean contains(URL url){
+        return (parent != null && parent.contains(url)) || classpath.contains(url); 
+    }
+
+    /**
+     * returns a size of classpath list, which this context and parent context have.
+     */
     public int getClasspathSize(){
         int count = classpath.size();
         if(parent != null){
@@ -50,29 +79,43 @@ public class ClasspathContext implements Iterable<URL>{
         return count;
     }
 
+    /**
+     * returns an array of all of classpathes include parent context.
+     */
     public synchronized URL[] getClasspathList(){
         List<URL> list = new ArrayList<URL>();
-        for(Iterator<URL> i = classpath(); i.hasNext(); ){
-            list.add(i.next());
+        for(URL url: this){
+            list.add(url);
         }
         return list.toArray(new URL[list.size()]);
     }
 
+    /**
+     * clears all of classpathes of this context. not clear parent context.
+     * If you want to clear this context and parent context, use {@link #clearAll <code>clearAll</code>} method.
+     * @see clearAll
+     */
     public void clear(){
         classpath.clear();
     }
 
-    public Iterator<URL> iterator(){
-        return classpath.iterator();
+    /**
+     * clears all of classpathes of this context and parent context.
+     */
+    public void clearAll(){
+        clear();
+        if(parent != null){
+            parent.clearAll();
+        }
     }
 
-    public Iterator<URL> classpath(){
+    public Iterator<URL> iterator(){
         if(parent == null){
-            return iterator();
+            return classpath.iterator();
         }
         else{
-            final Iterator<URL> parentIterator = parent.classpath();
-            final Iterator<URL> thisIterator = iterator();
+            final Iterator<URL> parentIterator = parent.iterator();
+            final Iterator<URL> thisIterator = classpath.iterator();
             return new Iterator<URL>(){
                 public boolean hasNext(){
                     boolean next = parentIterator.hasNext();
@@ -100,8 +143,8 @@ public class ClasspathContext implements Iterable<URL>{
     public synchronized ClassLoader createClassLoader(){
         if(loader == null){
             List<URL> list = new ArrayList<URL>();
-            for(Iterator<URL> i = classpath(); i.hasNext(); ){
-                list.add(i.next());
+            for(URL url: this){
+                list.add(url);
             }
 
             loader = new WarClassLoader(list.toArray(new URL[list.size()]), getClass().getClassLoader());
