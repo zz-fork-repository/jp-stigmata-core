@@ -115,6 +115,23 @@ public class ControlPane extends JPanel{
         }
     }
 
+    public void saveSettings(File file){
+        BirthmarkEnvironment environment = generateEnvironment();
+        ConfigFileExporter bce = new ConfigFileExporter(environment);
+        try{
+            PrintWriter out = new PrintWriter(new FileWriter(file));
+            bce.export(out);
+            out.close();
+        } catch(IOException e){
+            JOptionPane.showMessageDialog(
+                stigmata,
+                Messages.getString("error.io", e.getMessage()),
+                Messages.getString("error.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
     public void exportSettings(){
         File file = stigmata.getSaveFile(
             Messages.getStringArray("export.extensions"), 
@@ -122,24 +139,10 @@ public class ControlPane extends JPanel{
         );
 
         if(file != null){
-            BirthmarkEnvironment environment = generateEnvironment();
             if(!file.getName().endsWith(".xml")){
                 file = new File(file.getParent(), file.getName() + ".xml");
             }
-
-            ConfigFileExporter bce = new ConfigFileExporter(environment);
-            try{
-                PrintWriter out = new PrintWriter(new FileWriter(file));
-                bce.export(out);
-                out.close();
-            } catch(IOException e){
-                JOptionPane.showMessageDialog(
-                    stigmata,
-                    Messages.getString("error.io", e.getMessage()),
-                    Messages.getString("error.dialog.title"),
-                    JOptionPane.ERROR_MESSAGE
-                );
-            }
+            saveSettings(file);
         }
     }
 

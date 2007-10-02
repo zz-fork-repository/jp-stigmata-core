@@ -408,6 +408,7 @@ public class StigmataFrame extends JFrame{
     private JMenu createFileMenu(){
         JMenu fileMenu = Utility.createJMenu("fileMenu");
         JMenuItem newFrameMenu = Utility.createJMenuItem("newframe");
+        JMenuItem saveMenu = Utility.createJMenuItem("savesetting");
         JMenuItem exportMenu = Utility.createJMenuItem("exportsetting");
         JMenuItem closeTabMenu = Utility.createJMenuItem("closetab");
         JMenuItem closeMenu = Utility.createJMenuItem("closeframe");
@@ -416,6 +417,7 @@ public class StigmataFrame extends JFrame{
 
         fileMenu.add(newFrameMenu);
         fileMenu.add(new JSeparator());
+        fileMenu.add(saveMenu);
         fileMenu.add(exportMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);
@@ -429,6 +431,12 @@ public class StigmataFrame extends JFrame{
                 frame.setVisible(true);
             }
         });
+        saveMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                control.saveSettings(new File(System.getProperty("user.home"), ".stigmata/stigmata.xml"));
+            }
+        });
+
         exportMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 control.exportSettings();
