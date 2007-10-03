@@ -116,7 +116,7 @@ public class Stigmata{
             }
             File file = new File(currentDirectory, "stigmata.xml");
             if(!file.exists()){
-                file = new File(System.getProperty("user.home"), ".stigmata/stigmata.xml");
+                file = new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml");
                 if(!file.exists()){
                     file = null;
                 }
@@ -144,7 +144,7 @@ public class Stigmata{
         if(defaultEnvironment == null){
             defaultEnvironment = BirthmarkEnvironment.getDefaultEnvironment();
         }
-        buildStigmataDirectory(System.getProperty("user.home"), ".stigmata");
+        buildStigmataDirectory(BirthmarkEnvironment.getStigmataHome());
 
         defaultEnvironment.setClassLoader(buildClassLoader());
         try{
@@ -158,11 +158,11 @@ public class Stigmata{
             defaultEnvironment.addService(service);
         }
         FormatManager.updateServices(defaultEnvironment);
-        exportConfigFile(System.getProperty("user.home"), ".stigmata/stigmata.xml");
+        exportConfigFile(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml");
     }
 
     private ClassLoader buildClassLoader(){
-        File file = new File(System.getProperty("user.home"), ".stigmata/plugins");
+        File file = new File(BirthmarkEnvironment.getStigmataHome(), "plugins");
         File[] jarfiles = file.listFiles(new ExtensionFilter("jar"));
         if(jarfiles != null && jarfiles.length > 0){
             try{
@@ -177,8 +177,8 @@ public class Stigmata{
         return null;
     }
 
-    private void buildStigmataDirectory(String parent, String directory){
-        File file = new File(parent, directory);
+    private void buildStigmataDirectory(String homeDirectory){
+        File file = new File(homeDirectory);
         if(file.exists() && file.isFile()){
             File dest = new File(file.getParent(), ".stigmata.back");
             file.renameTo(dest);
@@ -200,6 +200,7 @@ public class Stigmata{
                 exporter.export(new PrintWriter(new FileWriter(file)));
             }
         } catch(IOException e){
+            e.printStackTrace();
         }
     }
 }

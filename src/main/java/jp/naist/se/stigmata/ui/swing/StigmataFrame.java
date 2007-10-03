@@ -359,14 +359,13 @@ public class StigmataFrame extends JFrame{
     }
 
     private void clearSettings(){
-        new File(System.getProperty("user.home"), ".stigmata/stigmata.xml").delete();
+        new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml").delete();
         try{
             new Main(new String[] { "--reset-config", "--mode=gui", });
             setVisible(false);
             dispose();
         } catch(ParseException e){
         }
-        
     }
 
     private void initLayouts(){
@@ -449,7 +448,7 @@ public class StigmataFrame extends JFrame{
         });
         saveMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                control.saveSettings(new File(System.getProperty("user.home"), ".stigmata/stigmata.xml"));
+                control.saveSettings(new File(BirthmarkEnvironment.getStigmataHome(), ".stigmata.xml"));
             }
         });
 

@@ -101,8 +101,8 @@ addwellknown.newrule.pattern.border=パターン
 addwellknown.newrule.exclude.label=除外ルール
 addwellknown.newrule.exclude.tooltip=チェックが入れられている場合，以下で指定するルールは既知のクラス判定ルールから除外されるルールとして扱われます
 
-updatewellknown.button.label=更新...
-updatewellknown.button.tooltip=選択中のルールを更新します
+updatewellknown.button.label=変更...
+updatewellknown.button.tooltip=選択中のルールを変更します
 
 matchparttype.FULLY_NAME=クラスの完全修飾名が
 matchparttype.CLASS_NAME=パッケージ名を除くクラス名が

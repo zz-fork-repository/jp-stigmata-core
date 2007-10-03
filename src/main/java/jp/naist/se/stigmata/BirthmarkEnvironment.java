@@ -6,6 +6,7 @@ package jp.naist.se.stigmata;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,6 +34,11 @@ public class BirthmarkEnvironment{
      * Default environment. All instance of this class is based on default environment.
      */
     private static BirthmarkEnvironment DEFAULT_ENVIRONMENT = new BirthmarkEnvironment(true);
+
+    /**
+     * home directory path.
+     */
+    private static String HOME_DIRECTORY_PATH;
 
     /**
      * parent of this environment.
@@ -99,6 +105,29 @@ public class BirthmarkEnvironment{
      */
     public static final BirthmarkEnvironment getDefaultEnvironment(){
         return DEFAULT_ENVIRONMENT;
+    }
+
+    public static synchronized final String getStigmataHome(){
+        if(HOME_DIRECTORY_PATH == null){
+            String stigmataHome = System.getenv("STIGMATA_HOME");
+            if(stigmataHome == null){
+                String parent = System.getenv("HOME");
+                if(parent == null){
+                    parent = System.getProperty("user.home");
+                }
+                if(parent == null){
+                    parent = ".";
+                }
+                if(parent.startsWith("C:\\Document and Settings\\")){
+                    stigmataHome = parent + File.separator + "Application Data" + File.separator + "stigmata";
+                }
+                else{
+                    stigmataHome = parent + File.separator + ".stigmata";
+                }
+            }
+            HOME_DIRECTORY_PATH = stigmataHome;
+        }
+        return HOME_DIRECTORY_PATH;
     }
 
     public BirthmarkEnvironment getParent(){
