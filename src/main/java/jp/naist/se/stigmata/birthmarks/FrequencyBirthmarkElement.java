@@ -78,7 +78,7 @@ public class FrequencyBirthmarkElement extends BirthmarkElement implements Value
             try{
                 // is number?
                 new Integer(num);
-                return val;
+                return val.trim();
             } catch(NumberFormatException e){
             }
         }

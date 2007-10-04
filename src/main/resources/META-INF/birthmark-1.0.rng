@@ -71,7 +71,7 @@
 
   <define name="extracted-birthmark">
     <element name="extracted-birthmark">
-      <element name="class-name">
+      <element name="name">
         <data type="string"/>
       </element>
       <element name="location">
@@ -124,7 +124,7 @@
   </define>
 
   <define name="target">
-    <element name="class-name">
+    <element name="name">
       <data type="string" />
     </element>
     <element name="location">

@@ -118,7 +118,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
 
     private void writeBirthmarkSet(PrintWriter out, BirthmarkSet set){
         out.println("    <extracted-birthmark>");
-        out.printf("      <class-name>%s</class-name>%n", set.getName());
+        out.printf("      <name>%s</name>%n", set.getName());
         out.printf("      <location>%s</location>%n", set.getLocation());
         for(Birthmark birthmark: set){
             out.printf("      <birthmark type=\"%s\" count=\"%d\">%n", birthmark.getType(), birthmark.getElementCount());
@@ -221,7 +221,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                 XMLEvent event = reader.peek();
                 if(event.isStartElement()){
                     StartElement se = event.asStartElement();
-                    if(se.getName().getLocalPart().equals("class-name")) className = reader.getElementText();
+                    if(se.getName().getLocalPart().equals("name")) className = reader.getElementText();
                     else if(se.getName().getLocalPart().equals("location")){
                         String location = reader.getElementText();
                         if(className == null || location == null){

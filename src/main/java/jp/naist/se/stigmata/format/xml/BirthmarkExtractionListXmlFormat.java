@@ -36,7 +36,7 @@ public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractio
 
     protected void printBirthmarkSet(PrintWriter out, BirthmarkSet set){
         out.println("    <extracted-birthmark>");
-        out.printf("      <class-name>%s</class-name>%n", escapeToXmlString(set.getName()));
+        out.printf("      <name>%s</name>%n", escapeToXmlString(set.getName()));
         out.printf("      <location>%s</location>%n", escapeToXmlString(set.getLocation()));
         for(Iterator<String> i = set.birthmarkTypes(); i.hasNext(); ){
             String type = i.next();

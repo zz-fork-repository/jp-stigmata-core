@@ -15,7 +15,7 @@
 <!ELEMENT type                   (#PCDATA)>
 <!ELEMENT display-type           (#PCDATA)>
 <!ELEMENT description            (#PCDATA)>
-<!ELEMENT class-name             (#PCDATA)>
+<!ELEMENT name                   (#PCDATA)>
 <!ELEMENT location               (#PCDATA)>
 <!ELEMENT element                (#PCDATA)>
 <!ELEMENT birthmark-similarity   (#PCDATA)>
@@ -25,11 +25,11 @@
 <!ELEMENT birthmark-services     (birthmark-service*)>
 
 <!ELEMENT birthmark              (element*)>
-<!ELEMENT extracted-birthmark    (class-name,location,birthmark)>
+<!ELEMENT extracted-birthmark    (name,location,birthmark)>
 <!ELEMENT extracted-birthmarks   (extracted-birthmark*)>
 
-<!ELEMENT target1                (class-name,location)>
-<!ELEMENT target2                (class-name,location)>
+<!ELEMENT target1                (name,location)>
+<!ELEMENT target2                (name,location)>
 <!ELEMENT birthmark-similarities (birthmark-similarity*)>
 <!ELEMENT comparison-result      (target1,target2,birthmark-similarities,similarity)>
 <!ELEMENT comparison-result-set  (comparison-result*)>
