@@ -1,11 +1,11 @@
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
-    <ref name="birthmark"/>
+    <ref name="birthmark-result-set"/>
   </start>
 
-  <define name="birthmark">
-    <element name="birthmark">
+  <define name="birthmark-result-set">
+    <element name="birthmark-result-set">
       <optional>
         <ref name="birthmark-services"/>
       </optional>

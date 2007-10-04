@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.birthmarks.cvfv;
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
 import jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator;
@@ -18,7 +19,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @version $Revision$ $Date$
  */
 public class ConstantValueOfFieldVariableBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
-    private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
+	private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new ConstantValueOfFieldVariableBirthmarkExtractor(this);
 
     public String getType(){
@@ -44,4 +45,32 @@ public class ConstantValueOfFieldVariableBirthmarkService extends AbstractBirthm
     public boolean isUserDefined(){
         return false;
     }
+
+    @Override
+	public BirthmarkElement buildBirthmarkElement(String value) {
+    	String signature = value.substring(0, value.indexOf('='));
+    	String subValue = value.substring(value.indexOf('=') + 1);
+    	Object elementValue = subValue;
+
+        if(subValue.equals("null")){
+            elementValue = null;
+        }
+        else{
+            switch(signature.charAt(0)){
+            case 'Z':{
+                if(value.equals("true")) elementValue = Boolean.TRUE;
+                else                     elementValue = Boolean.FALSE;
+                break;
+            }
+            case 'C': elementValue = new Character(subValue.charAt(0)); break;
+            case 'D': elementValue = new Double(subValue);  break;
+            case 'F': elementValue = new Float(subValue);   break;
+            case 'S': elementValue = new Short(subValue);   break;
+            case 'B': elementValue = new Byte(subValue);    break;
+            case 'I': elementValue = new Integer(subValue); break;
+            default:  elementValue = value; break;
+            }
+    	}
+    	return new TypeAndValueBirthmarkElement(signature, elementValue);
+	}
 }

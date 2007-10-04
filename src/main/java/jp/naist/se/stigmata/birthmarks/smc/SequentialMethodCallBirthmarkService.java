@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.birthmarks.smc;
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
 import jp.naist.se.stigmata.birthmarks.comparators.PlainBirthmarkComparator;
@@ -44,4 +45,13 @@ public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkServi
     public boolean isUserDefined(){
         return false;
     }
+
+	@Override
+	public BirthmarkElement buildBirthmarkElement(String value) {
+		String className = value.substring(0, value.indexOf('#'));
+		String methodName = value.substring(value.indexOf('#') + 1, value.lastIndexOf('!'));
+		String signature = value.substring(value.lastIndexOf('!') + 1);
+
+		return new MethodCallBirthmarkElement(className, methodName, signature);
+	}
 }

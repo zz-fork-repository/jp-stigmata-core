@@ -13,6 +13,8 @@ import java.util.Iterator;
  * @version $Revision$ $Date$
  */
 public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
+    public BirthmarkStoreTarget getStoreTarget();
+
     /**
      * returns an environment of extraction result.
      */
@@ -107,7 +109,7 @@ public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
      * birthmarks is parsed and store into target database in this method.
      * @throws IllegalArgumentsException target is ExtractionTarget.TARGET_BOTH 
      */
-    public void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set);
+    public void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set) throws BirthmarkStoreException;
 
     /**
      * remove all of birthmark-set this object has, then, adds each birthmark-sets to this object. 
@@ -115,7 +117,7 @@ public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
      * @see #addBirthmarkSet(ExtractionTarget, BirthmarkSet)
      * @throws IllegalArgumentsException target is ExtractionTarget.TARGET_BOTH 
      */
-    public void setBirthmarkSets(ExtractionTarget target, BirthmarkSet[] sets);
+    public void setBirthmarkSets(ExtractionTarget target, BirthmarkSet[] sets) throws BirthmarkStoreException;
 
     /**
      * remove specified birthmark-set from specified extraction target.

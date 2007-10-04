@@ -62,5 +62,4 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
 
         return opcodeVisitor;
     }
-
 }

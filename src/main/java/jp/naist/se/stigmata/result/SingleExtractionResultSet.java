@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.utils.NullIterator;
 
@@ -27,6 +28,10 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
 
     public SingleExtractionResultSet(BirthmarkContext context){
         super(context, false);
+    }
+
+    public BirthmarkStoreTarget getStoreTarget(){
+        return BirthmarkStoreTarget.MEMORY_SINGLE;
     }
 
     public void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set){

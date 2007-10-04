@@ -55,7 +55,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
 
         TypeAndValueBirthmarkElement e = elements.get(name);
         if(e == null){
-            e = new TypeAndValueBirthmarkElement(name, desc, value);
+            e = new TypeAndValueBirthmarkElement(desc, value);
         }
         else{
             if(value != null){
@@ -118,7 +118,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
                     if(className.equals(owner) && opcode == Opcodes.PUTFIELD){
                         TypeAndValueBirthmarkElement e = elements.get(name);
                         if(e == null){
-                            e = new TypeAndValueBirthmarkElement(name, desc, constant);
+                            e = new TypeAndValueBirthmarkElement(desc, constant);
                         }
 
                         if(e.getValue() == null && constant != null){

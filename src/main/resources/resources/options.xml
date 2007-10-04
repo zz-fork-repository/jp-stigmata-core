@@ -106,7 +106,7 @@
       <long-option>store-target</long-option>
       <argument>REQUIRED</argument>
       <argument-name>STORE_TARGET</argument-name>
-      <description>This option represents how to store extracted birthmarks.  Available value is only MEMORY.</description>
+      <description>This option represents how to store extracted birthmarks.  Available values are MEMORY, and XMLFILE.</description>
     </definition>
   </definitions>
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.utils.MultipleIterator;
 
@@ -28,6 +29,10 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
 
     public MemoryExtractionResultSet(BirthmarkContext context, boolean tableType){
         super(context, tableType);
+    }
+
+    public BirthmarkStoreTarget getStoreTarget(){
+        return BirthmarkStoreTarget.MEMORY;
     }
 
     public void removeAllBirthmarkSets(ExtractionTarget target){

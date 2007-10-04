@@ -24,13 +24,13 @@ import jp.naist.se.stigmata.format.AbstractBirthmarkExtractionResultFormat;
 public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractionResultFormat{
     public void printResult(PrintWriter out, ExtractionResultSet ers){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<birthmark>");
+        out.println("<birthmark-result-set>");
         out.println("  <extracted-birthmarks>");
         for(Iterator<BirthmarkSet> i = ers.birthmarkSets(ExtractionTarget.TARGET_BOTH); i.hasNext(); ){
             printBirthmarkSet(out, i.next());
         }
         out.println("  </extracted-birthmarks>");
-        out.println("</birthmark>");
+        out.println("</birthmark-result-set>");
         out.flush();
     }
 

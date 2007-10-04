@@ -12,6 +12,7 @@ import java.util.Map;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
@@ -132,18 +133,28 @@ public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
     }
 
     private static ExtractionResultSet createExtractionResultSet(ComparisonPair[] pairs, BirthmarkContext context){
-        ExtractionResultSet ers = new MemoryExtractionResultSet(context, false);
-        for(int i = 0; i < pairs.length; i++){
-            ers.addBirthmarkSet(ExtractionTarget.TARGET_X, pairs[i].getTarget1());
-            ers.addBirthmarkSet(ExtractionTarget.TARGET_Y, pairs[i].getTarget2());
+        ExtractionResultSet ers = ExtractionResultSetFactory.getInstance().createResultSet(context);
+        ers.setTableType(false);
+        try{
+            for(int i = 0; i < pairs.length; i++){
+                ers.addBirthmarkSet(ExtractionTarget.TARGET_X, pairs[i].getTarget1());
+                ers.addBirthmarkSet(ExtractionTarget.TARGET_Y, pairs[i].getTarget2());
+            }
+        }catch(BirthmarkStoreException e){
+            throw new InternalError("never thrown BirthmarkStoreException is thrown");
         }
         return ers;
     }
 
     private static ExtractionResultSet createExtractionResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, BirthmarkContext context){
-        ExtractionResultSet ers = new MemoryExtractionResultSet(context, true);
-        ers.setBirthmarkSets(ExtractionTarget.TARGET_X, targetX);
-        ers.setBirthmarkSets(ExtractionTarget.TARGET_Y, targetY);
+        ExtractionResultSet ers = ExtractionResultSetFactory.getInstance().createResultSet(context);
+        ers.setTableType(true);
+        try{
+            ers.setBirthmarkSets(ExtractionTarget.TARGET_X, targetX);
+            ers.setBirthmarkSets(ExtractionTarget.TARGET_Y, targetY);
+        }catch(BirthmarkStoreException e){
+            throw new InternalError("never thrown BirthmarkStoreException is thrown");
+        }
         return ers;
     }
 

@@ -42,9 +42,9 @@ public class Utility{
             component.setBorder(new TitledBorder(Messages.getString(label + ".border")));
         }
         try{
-            Method[] methods = component.getClass().getMethods();
             Icon icon = getIcon(label + ".icon");
             if(icon != null){
+                Method[] methods = component.getClass().getMethods();
                 for(Method m: methods){
                     if(m.getName().equals("setIcon")){
                         m.invoke(component, icon);

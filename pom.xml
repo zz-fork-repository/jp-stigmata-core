@@ -47,6 +47,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax</artifactId>
+      <version>1.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
       <version>1.7.0</version>
@@ -135,7 +141,7 @@
         <executions>
           <execution>
             <id>copy-dependencies</id>
-            <phase>package</phase>
+            <phase>compile</phase>
             <goals>
               <goal>copy-dependencies</goal>
             </goals>

@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.birthmarks.kgram;
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
 import jp.naist.se.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparator;
@@ -44,4 +45,18 @@ public class KGramBasedBirthmarkService extends AbstractBirthmarkService impleme
     public boolean isUserDefined(){
         return false;
     }
+
+	@Override
+	public BirthmarkElement buildBirthmarkElement(String value) {
+		value = value.trim();
+		if(value.startsWith("{") && value.endsWith("}")){
+			String[] param = value.substring(1, value.length() - 1).split(", *");
+			KGram<Integer> kgram = new KGram<Integer>(param.length);
+			for(int i = 0; i < param.length; i++){
+				kgram.set(i, new Integer(param[i].trim()));
+			}
+			return new KGramBasedBirthmarkElement<Integer>(kgram);
+		}
+		return null;
+	}
 }

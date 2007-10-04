@@ -6,7 +6,9 @@ package jp.naist.se.stigmata.spi;
 
 import java.util.Locale;
 
+import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 
 /**
@@ -47,6 +49,10 @@ public interface BirthmarkSpi extends ServiceProvider{
     public String getDescription();
 
     public String getExtractorClassName();
+
+    public Birthmark buildBirthmark();
+
+    public BirthmarkElement buildBirthmarkElement(String elementValue);
 
     /**
      * returns a extractor for the birthmark of this service.

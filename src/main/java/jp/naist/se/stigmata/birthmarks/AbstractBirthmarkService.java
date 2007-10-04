@@ -6,6 +6,8 @@ package jp.naist.se.stigmata.birthmarks;
 
 import java.util.Locale;
 
+import jp.naist.se.stigmata.Birthmark;
+import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
 
@@ -68,5 +70,16 @@ public abstract class AbstractBirthmarkService implements BirthmarkSpi{
 
     public String getVendorName(){
         return getClass().getPackage().getImplementationVendor();
+    }
+
+    public Birthmark buildBirthmark(){
+    	return getExtractor().createBirthmark();
+    }
+
+    public BirthmarkElement buildBirthmarkElement(String value){
+    	if(value == null){
+    		return NullBirthmarkElement.getInstance();
+    	}
+		return new BirthmarkElement(value);
     }
 }

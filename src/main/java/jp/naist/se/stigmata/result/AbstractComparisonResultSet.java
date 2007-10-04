@@ -35,7 +35,7 @@ public abstract class AbstractComparisonResultSet implements ComparisonResultSet
     public abstract Iterator<BirthmarkSet> pairSources();
 
     public synchronized BirthmarkSet[] getPairSources(){
-        return AbstractComparisonResultSet.<BirthmarkSet>getArrays(pairSources());
+        return AbstractComparisonResultSet.<BirthmarkSet>getArrays(pairSources(), new BirthmarkSet[0]);
     }
 
     public int getPairCount(){
@@ -51,7 +51,7 @@ public abstract class AbstractComparisonResultSet implements ComparisonResultSet
     }
 
     public synchronized ComparisonPair[] getPairs(){
-        return AbstractComparisonResultSet.<ComparisonPair>getArrays(iterator());
+        return AbstractComparisonResultSet.<ComparisonPair>getArrays(iterator(), new ComparisonPair[0]);
     }
 
     public ComparisonPair getPairAt(int index){
@@ -75,16 +75,15 @@ public abstract class AbstractComparisonResultSet implements ComparisonResultSet
     }
 
     @SuppressWarnings("unchecked")
-    static synchronized <T> T[] getArrays(Iterator<T> i){
+    static synchronized <T> T[] getArrays(Iterator<T> i, T[] array){
         List<Object> list = new ArrayList<Object>();
-        Object o = null;
         while(i.hasNext()){
-            o = i.next();
             list.add(i.next());
         }
-        int size = 0;
-        if(o != null) size = list.size();
-        T[] array = (T[])Array.newInstance(o.getClass(), size);
+
+        if(list.size() > array.length){
+            array = (T[])Array.newInstance(array.getClass().getComponentType(), list.size());
+        }
         for(int index = 0; index < list.size(); index++){
             array[index] = (T)list.get(index);
         }

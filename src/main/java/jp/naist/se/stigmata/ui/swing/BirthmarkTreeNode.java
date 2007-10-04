@@ -19,14 +19,12 @@ public class BirthmarkTreeNode extends DefaultMutableTreeNode{
     private Birthmark birthmark;
 
     public BirthmarkTreeNode(Birthmark birthmark){
-        super(birthmark.getType() + "("
-                + birthmark.getElementCount() + ")");
+        super(String.format("%s (%d)", birthmark.getType(), birthmark.getElementCount()));
         setBirthmark(birthmark);
     }
 
     public BirthmarkTreeNode(BirthmarkSet birthmark){
-        super(birthmark.getName() + "(" +
-                + birthmark.getSumOfElementCount() + ")");
+        super(String.format("%s (%d)", birthmark.getName(), birthmark.getSumOfElementCount()));
         setBirthmark(birthmark);
     }
 

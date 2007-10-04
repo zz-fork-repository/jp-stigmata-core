@@ -448,7 +448,7 @@ public class StigmataFrame extends JFrame{
         });
         saveMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                control.saveSettings(new File(BirthmarkEnvironment.getStigmataHome(), ".stigmata.xml"));
+                control.saveSettings(new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml"));
             }
         });
 

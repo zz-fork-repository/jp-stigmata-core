@@ -5,8 +5,10 @@ package jp.naist.se.stigmata.birthmarks.fmc;
  */
 
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkExtractor;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkService;
+import jp.naist.se.stigmata.birthmarks.FrequencyBirthmarkElement;
 import jp.naist.se.stigmata.birthmarks.comparators.CosineSimilarityBirthmarkComparator;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -44,4 +46,9 @@ public class FrequencyMethodCallBirthmarkService extends AbstractBirthmarkServic
     public boolean isUserDefined(){
         return false;
     }
+
+	@Override
+	public BirthmarkElement buildBirthmarkElement(String value) {
+    	return new FrequencyBirthmarkElement(value);
+	}
 }

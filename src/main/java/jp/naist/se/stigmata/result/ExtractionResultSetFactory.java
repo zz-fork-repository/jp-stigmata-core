@@ -23,7 +23,9 @@ public class ExtractionResultSetFactory{
     private Map<String, Class<? extends ExtractionResultSet>> map = new HashMap<String, Class<? extends ExtractionResultSet>>();
 
     private ExtractionResultSetFactory(){
-        map.put(BirthmarkStoreTarget.MEMORY.name(), MemoryExtractionResultSet.class);
+        map.put(BirthmarkStoreTarget.MEMORY.name(),        MemoryExtractionResultSet.class);
+        map.put(BirthmarkStoreTarget.XMLFILE.name(),      XmlFileExtractionResultSet.class);
+        map.put(BirthmarkStoreTarget.MEMORY_SINGLE.name(), SingleExtractionResultSet.class);
     }
 
     public static ExtractionResultSetFactory getInstance(){

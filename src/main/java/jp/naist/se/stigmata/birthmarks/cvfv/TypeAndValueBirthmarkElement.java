@@ -18,7 +18,6 @@ import jp.naist.se.stigmata.BirthmarkElement;
 public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 237098465735321L;
 
-    private String fieldName;
     private String signature;
     private Serializable serialValue;
     private transient Object value;
@@ -26,15 +25,10 @@ public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Se
     /**
      * @param value
      */
-    public TypeAndValueBirthmarkElement(String fieldName, String signature, Object value){
-        super(fieldName + "=" + value);
-        this.fieldName = fieldName;
+    public TypeAndValueBirthmarkElement(String signature, Object value){
+        super(signature + "=" + value);
         this.signature = signature;
         setValue(value);
-    }
-
-    public String getFieldName(){
-        return fieldName;
     }
 
     public String getSignature(){
@@ -66,11 +60,11 @@ public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Se
     }
 
     public String toString(){
-        return signature + " = " + value;
+        return signature + "=" + value;
     }
 
     public int hashCode(){
-        return fieldName.hashCode() + signature.hashCode();
+        return signature.hashCode() + value.hashCode();
     }
 
     public boolean equals(Object o){

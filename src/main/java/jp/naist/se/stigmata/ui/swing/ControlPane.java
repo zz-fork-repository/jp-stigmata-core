@@ -29,6 +29,7 @@ import javax.swing.border.TitledBorder;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
+import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ComparisonMethod;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.Stigmata;
@@ -298,6 +299,14 @@ public class ControlPane extends JPanel{
         BirthmarkContext context = new BirthmarkContext(generateEnvironment());
         context.setBirthmarkTypes(birthmarks.getSelectedServiceTypes());
         context.setExtractionUnit(parseExtractionUnit());
+        BirthmarkStoreTarget bst = BirthmarkStoreTarget.MEMORY;
+        if(context.getEnvironment().getProperty("birthmark.store.target") != null){
+            bst = BirthmarkStoreTarget.valueOf(context.getEnvironment().getProperty("birthmark.store.target"));
+        }
+        if(bst == null){
+            bst = BirthmarkStoreTarget.MEMORY;
+        }
+        context.setStoreTarget(bst);
         
         return context;
     }

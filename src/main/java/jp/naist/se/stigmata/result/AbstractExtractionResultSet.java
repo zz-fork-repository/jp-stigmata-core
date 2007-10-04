@@ -4,11 +4,14 @@ package jp.naist.se.stigmata.result;
  * $Id$
  */
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 
 import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
 
@@ -44,7 +47,7 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
         return context;
     }
 
-    public abstract void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set);
+    public abstract void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set) throws BirthmarkStoreException;
 
     public abstract void removeBirthmarkSet(ExtractionTarget target, BirthmarkSet set);
 
@@ -112,10 +115,10 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
      * @return all of BirthmarkSet this instance have. elements is obtained from birthmarkSet.
      */
     public synchronized BirthmarkSet[] getBirthmarkSets(ExtractionTarget target){
-        return AbstractComparisonResultSet.<BirthmarkSet>getArrays(birthmarkSets(target));
+        return AbstractComparisonResultSet.<BirthmarkSet>getArrays(birthmarkSets(target), new BirthmarkSet[0]);
     }
 
-    public void setBirthmarkSets(ExtractionTarget target, BirthmarkSet[] sets){
+    public void setBirthmarkSets(ExtractionTarget target, BirthmarkSet[] sets) throws BirthmarkStoreException{
         removeAllBirthmarkSets(target);
         for(int i = 0; i < sets.length; i++){
             addBirthmarkSet(target, sets[i]);
@@ -130,4 +133,8 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
         this.tableType = flag;
     }
 
+    protected String generateId(){
+        SimpleDateFormat cdf = new SimpleDateFormat("yyyyMMdd-HH:mm:ss.SSS");
+        return cdf.format(Calendar.getInstance().getTime());
+    }
 }

@@ -13,6 +13,8 @@ package jp.naist.se.stigmata;
  */
 public enum BirthmarkStoreTarget{
     MEMORY,
+    XMLFILE,
+    MEMORY_SINGLE,
 //    DERBY,
 //    FILE,
 //    MYSQL, 

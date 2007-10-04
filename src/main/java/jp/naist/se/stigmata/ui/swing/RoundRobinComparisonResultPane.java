@@ -35,6 +35,7 @@ import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkComparator;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
+import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
@@ -372,13 +373,16 @@ public class RoundRobinComparisonResultPane extends JPanel{
             );
             if(file != null){
                 ExtractionResultSet ers = new MemoryExtractionResultSet(extraction.getContext(), extraction.isTableType());
-                for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_X); i.hasNext(); ){
-                    BirthmarkSet bs = i.next();
-                    ers.addBirthmarkSet(ExtractionTarget.TARGET_X, obfuscator.obfuscateClassName(bs));
-                }
-                for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_Y); i.hasNext(); ){
-                    BirthmarkSet bs = i.next();
-                    ers.addBirthmarkSet(ExtractionTarget.TARGET_Y, obfuscator.obfuscateClassName(bs));
+                try{
+                    for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_X); i.hasNext(); ){
+                        BirthmarkSet bs = i.next();
+                        ers.addBirthmarkSet(ExtractionTarget.TARGET_X, obfuscator.obfuscateClassName(bs));
+                    }
+                    for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_Y); i.hasNext(); ){
+                        BirthmarkSet bs = i.next();
+                        ers.addBirthmarkSet(ExtractionTarget.TARGET_Y, obfuscator.obfuscateClassName(bs));
+                    }
+                } catch(BirthmarkStoreException e){
                 }
                 this.extraction = ers;
                 obfuscator.outputNameMappings(file);

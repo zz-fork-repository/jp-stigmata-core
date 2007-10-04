@@ -34,5 +34,5 @@
 <!ELEMENT comparison-result      (target1,target2,birthmark-similarities,similarity)>
 <!ELEMENT comparison-result-set  (comparison-result*)>
 
-<!ELEMENT birthmark              ((birthmark-services|extracted-birthmarks|comparison-result-set)+)>
+<!ELEMENT birthmark-result-set   ((birthmark-services|extracted-birthmarks|comparison-result-set)+)>
 

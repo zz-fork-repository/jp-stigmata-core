@@ -184,6 +184,14 @@ public final class Main{
                 context.addFilterType(filters[i]);
             }
         }
+        if(cl.hasOption("store-target")){
+            String value = cl.getOptionValue("store-target");
+            BirthmarkStoreTarget bst = BirthmarkStoreTarget.valueOf(value);
+            if(bst == null){
+                bst = BirthmarkStoreTarget.MEMORY;
+            }
+            context.setStoreTarget(bst);
+        }
         if(cl.hasOption("extraction-unit")){
             ExtractionUnit unit = ExtractionUnit.valueOf(cl.getOptionValue("extraction-unit"));
             context.setExtractionUnit(unit);

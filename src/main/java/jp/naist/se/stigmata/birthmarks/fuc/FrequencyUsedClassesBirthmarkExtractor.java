@@ -34,6 +34,7 @@ public class FrequencyUsedClassesBirthmarkExtractor extends ASMBirthmarkExtracto
         return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, environment);
     }
 
+    @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 

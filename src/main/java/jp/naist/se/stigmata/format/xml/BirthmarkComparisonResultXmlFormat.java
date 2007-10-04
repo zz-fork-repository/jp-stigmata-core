@@ -29,7 +29,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
     @Override
     public void printResult(PrintWriter out, ComparisonPair pair){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<birthmark>");
+        out.println("<birthmark-result-set>");
         out.println("  <extracted-birthmarks>");
         list.printBirthmarkSet(out, pair.getTarget1());
         list.printBirthmarkSet(out, pair.getTarget2());
@@ -37,20 +37,20 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.println("  <comparison-result-set>");
         printComparisonPair(out, pair);
         out.println("  </comparison-result-set>");
-        out.println("</birthmark>");
+        out.println("</birthmark-result-set>");
         out.flush();
     }
 
     @Override
     public void printResult(PrintWriter out, ComparisonResultSet resultset){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<birthmark>");
+        out.println("<birthmark-result-set>");
         out.println("  <comparison-result-set>");
         for(ComparisonPair pair: resultset){
             printComparisonPair(out, pair);
         }
         out.println("  </comparison-result-set>");
-        out.println("</birthmark>");
+        out.println("</birthmark-result-set>");
         out.flush();
     }
 
