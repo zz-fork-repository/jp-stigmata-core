@@ -134,7 +134,7 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
     }
 
     protected String generateId(){
-        SimpleDateFormat cdf = new SimpleDateFormat("yyyyMMdd-HH:mm:ss.SSS");
+        SimpleDateFormat cdf = new SimpleDateFormat("yyyyMMdd-HHmmss.SSS");
         return cdf.format(Calendar.getInstance().getTime());
     }
 }
