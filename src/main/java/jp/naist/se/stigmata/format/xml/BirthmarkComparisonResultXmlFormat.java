@@ -74,7 +74,6 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.printf("        <name>%s</name>%n", list.escapeToXmlString(set.getName()));
         out.printf("        <location>%s</location>%n", list.escapeToXmlString(set.getLocation()));
         out.printf("      </target%d>%n", index);
-
     }
 
     private void printPairElement(PrintWriter out, ComparisonPairElement e){

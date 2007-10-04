@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -72,6 +74,7 @@ public class StigmataFrame extends JFrame{
 
     private JTabbedPane tabPane;
     private JMenuItem closeTabMenu;
+    private JMenuItem saveMenu;
     private JCheckBoxMenuItem expertmodeMenu;
     private Stigmata stigmata;
     private BirthmarkEnvironment environment;
@@ -104,6 +107,14 @@ public class StigmataFrame extends JFrame{
         });
 
         initLayouts();
+    }
+
+    public boolean isNeedToSaveSettings(){
+        return saveMenu.isEnabled();
+    }
+
+    public void setNeedToSaveSettings(boolean flag){
+        saveMenu.setEnabled(flag);
     }
 
     public Stigmata getStigmata(){
@@ -376,6 +387,7 @@ public class StigmataFrame extends JFrame{
         control.inititalize();
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
+        setNeedToSaveSettings(false);
         setSize(900, 600);
     }
 
@@ -414,7 +426,29 @@ public class StigmataFrame extends JFrame{
                 closeTabMenu.setEnabled(!title.equals(Messages.getString("control.tab.label")));
             }
         });
-
+        addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                boolean closeFlag = true;
+                if(isNeedToSaveSettings()){
+                    int returnValue = JOptionPane.showConfirmDialog(
+                        StigmataFrame.this,
+                        Messages.getString("needtosave.settings.message"),
+                        Messages.getString("needtosave.settings.title"),
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+                    closeFlag = returnValue != JOptionPane.CANCEL_OPTION;
+                    if(returnValue == JOptionPane.YES_OPTION){
+                        control.saveSettings(new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml"));
+                    }
+                }
+                if(closeFlag){
+                    setVisible(false);
+                    dispose();
+                }
+            }
+        });
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -428,6 +462,8 @@ public class StigmataFrame extends JFrame{
         JMenuItem closeMenu = Utility.createJMenuItem("closeframe");
         JMenuItem exitMenu = Utility.createJMenuItem("exit");
         this.closeTabMenu = closeTabMenu;
+        this.saveMenu = saveMenu;
+        saveMenu.setEnabled(false);
 
         fileMenu.add(newFrameMenu);
         fileMenu.add(new JSeparator());
@@ -449,6 +485,7 @@ public class StigmataFrame extends JFrame{
         saveMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 control.saveSettings(new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml"));
+                setNeedToSaveSettings(false);
             }
         });
 

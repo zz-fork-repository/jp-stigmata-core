@@ -97,6 +97,7 @@ public class WellknownClassesSettingsPane extends JPanel{
     public void addRule(WellknownClassJudgeRule rule){
         if(rule != null){
             listmodel.addElement(rule);
+            stigmata.setNeedToSaveSettings(true);
         }
     }
 
@@ -105,6 +106,7 @@ public class WellknownClassesSettingsPane extends JPanel{
         WellknownClassJudgeRule newrule = createOrUpdateRule(rule);
         if(newrule != null){
             listmodel.setElementAt(newrule, index);
+            stigmata.setNeedToSaveSettings(true);
         }
     }
 
@@ -230,6 +232,7 @@ public class WellknownClassesSettingsPane extends JPanel{
                     listmodel.removeElementAt(indeces[i]);
                 }
                 list.getSelectionModel().clearSelection();
+                stigmata.setNeedToSaveSettings(true);
             }
         });
 

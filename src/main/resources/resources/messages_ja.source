@@ -77,6 +77,9 @@ cannotclosecontroltab.dialog.message=コントロールタブを閉じることはできません
 notdirectory.dialog.title=エラー
 notdirectory.dialog.message={0}はディレクトリではありません．
 
+needtosave.settings.title=設定が変更されています．
+needtosave.settings.message=設定が変更されています．保存しますか．
+
 ################################################
 # TargetSelectionPane
 ################################################

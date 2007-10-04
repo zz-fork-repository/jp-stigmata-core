@@ -36,6 +36,8 @@ import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
+ * This class manages extracted birthmarks as xml file.
+ * This instance do not use {@link ExtractionTarget <code>ExtractionTarget</code>}.
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$

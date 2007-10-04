@@ -83,6 +83,7 @@ public class PropertyEditPane extends JPanel{
         if(index >= 0){
             model.removeRow(index);
         }
+        stigmata.setNeedToSaveSettings(true);
     }
 
     private void addOrUpdateProperty(String name, String value){
@@ -93,6 +94,7 @@ public class PropertyEditPane extends JPanel{
         else{
             model.addRow(new Object[] { name, value, });
         }
+        stigmata.setNeedToSaveSettings(true);
     }
 
     private int findIndex(String name){
@@ -146,6 +148,7 @@ public class PropertyEditPane extends JPanel{
                 name.getText().trim(),
                 value.getText()
             });
+            stigmata.setNeedToSaveSettings(true);
         }
     }
 
@@ -154,6 +157,7 @@ public class PropertyEditPane extends JPanel{
         for(int i = indexes.length - 1; i >= 0; i--){
             model.removeRow(indexes[i]);
         }
+        stigmata.setNeedToSaveSettings(true);
     }
 
     private void initLayouts(){

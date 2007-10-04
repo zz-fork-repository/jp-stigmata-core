@@ -84,6 +84,7 @@ public class ClasspathSettingsPane extends JPanel{
     private void addClasspath(TargetSelectionPane target, String classpath){
         if(classpath != null){
             target.addValues(classpath.split(System.getProperty("path.separator")));
+            stigmata.setNeedToSaveSettings(true);
         }
     }
 
@@ -179,6 +180,13 @@ public class ClasspathSettingsPane extends JPanel{
                 );
             }
         };
+
+        classpath.addDataChangeListener(new DataChangeListener(){
+            public void valueChanged(Object source){
+                stigmata.setNeedToSaveSettings(true);
+            }
+        });
+
         findButton.addActionListener(action);
         text.addActionListener(action);
     }

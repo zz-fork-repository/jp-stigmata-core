@@ -24,7 +24,7 @@ public class ExtractionResultSetFactory{
 
     private ExtractionResultSetFactory(){
         map.put(BirthmarkStoreTarget.MEMORY.name(),        MemoryExtractionResultSet.class);
-        map.put(BirthmarkStoreTarget.XMLFILE.name(),      XmlFileExtractionResultSet.class);
+        map.put(BirthmarkStoreTarget.XMLFILE.name(),       XmlFileExtractionResultSet.class);
         map.put(BirthmarkStoreTarget.MEMORY_SINGLE.name(), SingleExtractionResultSet.class);
     }
 
