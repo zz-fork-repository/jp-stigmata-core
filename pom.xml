@@ -201,14 +201,12 @@
         </configuration>
       </plugin>
 
-      <plugins>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <configuration>
-            <tagBase>https://tama3@svn.sourceforge.jp/svnroot/stigmata/tags</tagBase>
-          </configuration>
-        </plugin>
-      </plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <tagBase>svn+ssh://tama3@svn.sourceforge.jp/svnroot/stigmata/tags</tagBase>
+        </configuration>
+      </plugin>
     </plugins>
 
   </build>
