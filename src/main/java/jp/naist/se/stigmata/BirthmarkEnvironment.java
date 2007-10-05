@@ -147,9 +147,15 @@ public class BirthmarkEnvironment{
      * add given property.
      */
     public void addProperty(String key, String value){
+        boolean contains = properties.containsKey(key);
         String old = getProperty(key);
         properties.put(key, value);
-        firePropertyEvent(new PropertyChangeEvent(this, key, old, value));
+
+        // value is updated?
+        if(!((old != null && old.equals(value)) ||
+             (contains && old == null && value == null))){
+            firePropertyEvent(new PropertyChangeEvent(this, key, old, value));
+        }
     }
 
     /**
