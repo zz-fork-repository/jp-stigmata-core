@@ -156,6 +156,7 @@ public class BirthmarkDefinitionPane extends JPanel{
                 }
             }
         }
+        stigmata.setNeedToSaveSettings(true);
         updateView();
     }
 
@@ -167,6 +168,7 @@ public class BirthmarkDefinitionPane extends JPanel{
         for(BirthmarkServiceListener listener: listeners){
             listener.serviceAdded(service);
         }
+        stigmata.setNeedToSaveSettings(true);
         updateView();
     }
 

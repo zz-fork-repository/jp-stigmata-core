@@ -9,16 +9,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -28,6 +30,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import jp.naist.se.stigmata.BirthmarkEnvironment;
+import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
 
 /**
  * 
@@ -107,7 +110,7 @@ public class PropertyEditPane extends JPanel{
         return -1;
     }
 
-    private void addNewProperty(){
+    private void addNewProperty(int index){
         GridBagLayout layout = new GridBagLayout();
         JPanel panel = new JPanel(layout);
         JLabel nameLabel = new JLabel(Messages.getString("propertyname.label"));
@@ -139,15 +142,28 @@ public class PropertyEditPane extends JPanel{
         layout.setConstraints(value, gbc);
         panel.add(value);
 
+        if(index >= 0){
+            String keyValue = String.valueOf(table.getValueAt(index, 0));
+            String valueValue = String.valueOf(table.getValueAt(index, 1));
+            if(keyValue != null)   name.setText(keyValue);
+            if(valueValue != null) value.setText(valueValue);
+        }
+
         int val = JOptionPane.showConfirmDialog(
             stigmata, panel, Messages.getString("propertyadd.dialog.title"),
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
         );
         if(val == JOptionPane.YES_OPTION){
-            model.addRow(new Object[] {
-                name.getText().trim(),
-                value.getText()
-            });
+            if(index >= 0){
+                model.setValueAt(name.getText(), index, 0);
+                model.setValueAt(value.getText(), index, 1);
+            }
+            else{
+                model.addRow(new Object[] {
+                    name.getText().trim(),
+                    value.getText()
+                });
+            }
             stigmata.setNeedToSaveSettings(true);
         }
     }
@@ -168,36 +184,58 @@ public class PropertyEditPane extends JPanel{
         table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         table.setColumnSelectionAllowed(false);
 
-        JButton add = Utility.createButton("propertyadd");
-        final JButton remove = Utility.createButton("propertyremove");
+        Action addAction = new AbstractAction(){
+            private static final long serialVersionUID = 1283676936119122278L;
+
+            public void actionPerformed(ActionEvent e){
+                addNewProperty(-1);
+            }
+        };
+        final Action removeAction = new AbstractAction(){
+            private static final long serialVersionUID = -411260949451039374L;
+
+            public void actionPerformed(ActionEvent e){
+                removeSelectedProperty();
+            }
+        };
+        final Action changeAction = new AbstractAction(){
+            private static final long serialVersionUID = -7406073660916286349L;
+
+            public void actionPerformed(ActionEvent e){
+                addNewProperty(table.getSelectedRow());
+            }
+        };
+        JButton addButton = Utility.createButton("propertyadd", addAction);
+        JButton changeButton = Utility.createButton("propertychange", changeAction);
+        JButton removeButton = Utility.createButton("propertyremove", removeAction);
+
+        final JPopupMenu popup = new JPopupMenu();
+        popup.add(Utility.createJMenuItem("propertyadd", addAction));
+        popup.add(Utility.createJMenuItem("propertychange", changeAction));
+        popup.add(Utility.createJMenuItem("propertyremove", removeAction));
 
         setLayout(new BorderLayout());
         JScrollPane scroll = new JScrollPane(table);
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
-        box.add(add);
+        box.add(addButton);
         box.add(Box.createHorizontalGlue());
-        box.add(remove);
+        box.add(changeButton);
+        box.add(Box.createHorizontalGlue());
+        box.add(removeButton);
         box.add(Box.createHorizontalGlue());
 
         add(scroll, BorderLayout.CENTER);
         add(box, BorderLayout.SOUTH);
 
-        add.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                addNewProperty();
-            }
-        });
-        remove.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                removeSelectedProperty();
-            }
-        });
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent arg0){
-                remove.setEnabled(table.getSelectedRowCount() != 0);
+                removeAction.setEnabled(table.getSelectedRowCount() != 0);
+                changeAction.setEnabled(table.getSelectedRowCount() == 1);
             }
         });
-        remove.setEnabled(false);
+        table.addMouseListener(new PopupShowAction(popup));
+        changeAction.setEnabled(false);
+        removeAction.setEnabled(false);
     }
 }

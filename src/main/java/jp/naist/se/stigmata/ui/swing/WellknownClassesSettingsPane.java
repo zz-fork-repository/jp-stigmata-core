@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -23,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -31,6 +34,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
@@ -200,11 +204,37 @@ public class WellknownClassesSettingsPane extends JPanel{
 
     private JComponent createSouthPane(){
         JComponent southPanel = Box.createHorizontalBox();
-        JButton addButton = Utility.createButton("addwellknown");
-        final JButton removeButton = Utility.createButton("removewellknown");
-        removeButton.setEnabled(false);
-        final JButton updateButton = Utility.createButton("updatewellknown");
-        updateButton.setEnabled(false);
+        Action addAction = new AbstractAction(){
+            private static final long serialVersionUID = -8749957850400877529L;
+
+            public void actionPerformed(ActionEvent e){
+                addRule(createOrUpdateRule(null));
+            }
+        };
+        final Action removeAction = new AbstractAction(){
+            private static final long serialVersionUID = 8776209200186477040L;
+
+            public void actionPerformed(ActionEvent e){
+                int[] indeces = list.getSelectedIndices();
+                for(int i = indeces.length - 1; i >= 0; i--){
+                    listmodel.removeElementAt(indeces[i]);
+                }
+                list.getSelectionModel().clearSelection();
+                stigmata.setNeedToSaveSettings(true);
+            }
+        };
+        final Action updateAction = new AbstractAction(){
+            private static final long serialVersionUID = 852965501722574084L;
+
+            public void actionPerformed(ActionEvent e){
+                editRule(list.getSelectedIndex());
+            }
+        };
+        JButton addButton = Utility.createButton("addwellknown", addAction);
+        JButton removeButton = Utility.createButton("removewellknown", removeAction);
+        JButton updateButton = Utility.createButton("updatewellknown", updateAction);
+        removeAction.setEnabled(false);
+        updateAction.setEnabled(false);
 
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(addButton);
@@ -214,28 +244,6 @@ public class WellknownClassesSettingsPane extends JPanel{
         southPanel.add(removeButton);
         southPanel.add(Box.createHorizontalGlue());
 
-        addButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                addRule(createOrUpdateRule(null));
-            }
-        });
-        updateButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                editRule(list.getSelectedIndex());
-            }
-        });
-
-        removeButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                int[] indeces = list.getSelectedIndices();
-                for(int i = indeces.length - 1; i >= 0; i--){
-                    listmodel.removeElementAt(indeces[i]);
-                }
-                list.getSelectionModel().clearSelection();
-                stigmata.setNeedToSaveSettings(true);
-            }
-        });
-
         list.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
@@ -244,12 +252,17 @@ public class WellknownClassesSettingsPane extends JPanel{
                 }
             }
         });
+        JPopupMenu popup = new JPopupMenu();
+        popup.add(Utility.createJMenuItem("addwellknown", addAction));
+        popup.add(Utility.createJMenuItem("updatewellknown", updateAction));
+        popup.add(Utility.createJMenuItem("removewellknown", removeAction));
 
+        list.addMouseListener(new PopupShowAction(popup));
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent arg0){
                 int[] indeces = list.getSelectedIndices();
-                removeButton.setEnabled(indeces != null && indeces.length > 0);
-                updateButton.setEnabled(indeces != null && indeces.length == 1);
+                removeAction.setEnabled(indeces != null && indeces.length > 0);
+                updateAction.setEnabled(indeces != null && indeces.length == 1);
             }
         });
 

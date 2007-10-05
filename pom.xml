@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.naist.se</groupId>
   <artifactId>stigmata</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.0-SNAPSHOT</version>
   <name>stigmata</name>
   <description>Java birthmark toolkit</description>
   <url>http://stigmata.sourceforge.jp/</url>
@@ -201,6 +201,14 @@
         </configuration>
       </plugin>
 
+      <plugins>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <configuration>
+            <tagBase>https://tama3@svn.sourceforge.jp/svnroot/stigmata/tags</tagBase>
+          </configuration>
+        </plugin>
+      </plugins>
     </plugins>
 
   </build>

@@ -116,7 +116,7 @@ matchtype.SUFFIX=次のパターンで終わっている
 matchtype.EXACT=次のパターンと完全に一致している
 matchtype.NOT_MATCH=次のパターンと一致していない
 
-removewellknown.button.label=削除...
+removewellknown.button.label=削除
 removewellknown.button.tooltip=指定された既知のクラス判定ルールを削除します
 
 checkwellknown.button.label=チェック
@@ -330,13 +330,19 @@ newservice.definition.label=(新規バースマーク)
 property.tab.label=プロパティ
 property.tab.tooltip=プロパティを編集します．
 
+propertyadd.dialog.title=新規プロパティ
 propertyname.label=プロパティ名
 propertyvalue.label=プロパティ値
+
 propertyadd.button.label=追加...
 propertyadd.button.tooltip=新しいプロパティを追加します．
+
 propertyremove.button.label=削除
 propertyremove.button.tooltip=選択しているプロパティを削除します．
-propertyadd.dialog.title=新規プロパティ
+
+propertychange.button.label=変更
+propertychange.button.tooltip=選択しているプロパティを変更します．
+
 
 ############################################################
 # Filter pane
