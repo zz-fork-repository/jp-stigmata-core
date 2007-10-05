@@ -7,13 +7,14 @@ package jp.naist.se.stigmata.reader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.commons.EmptyVisitor;
 
