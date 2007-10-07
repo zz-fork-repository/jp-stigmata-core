@@ -311,5 +311,20 @@ public class BirthmarkEnvironment{
 
     static void resetSettings(){
         DEFAULT_ENVIRONMENT = new BirthmarkEnvironment(false);
+        File home = new File(getStigmataHome());
+        deleteDirectory(home);
+    }
+
+    private static void deleteDirectory(File dir){
+        File[] files = dir.listFiles();
+        for(File file: files){
+            if(file.isDirectory()){
+                deleteDirectory(file);
+            }
+            else{
+                file.delete();
+            }
+        }
+        dir.delete();
     }
 }
