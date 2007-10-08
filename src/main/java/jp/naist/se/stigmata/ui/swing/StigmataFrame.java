@@ -369,14 +369,31 @@ public class StigmataFrame extends JFrame{
         return mapping;
     }
 
-    private void clearSettings(){
-        new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml").delete();
+    private static void deleteDirectory(File dir){
+        File[] files = dir.listFiles();
+        for(File file: files){
+            if(file.isDirectory()){
+                deleteDirectory(file);
+            }
+            else{
+                file.delete();
+            }
+        }
+        dir.delete();
+    }
+
+    private void reloadSettings(String[] args){
         try{
-            new Main(new String[] { "--reset-config", "--mode=gui", });
             setVisible(false);
             dispose();
+            new Main(args);
         } catch(ParseException e){
         }
+    }
+
+    private void clearSettings(){
+        deleteDirectory(new File(BirthmarkEnvironment.getStigmataHome()));
+        reloadSettings(new String[] { "--reset-config", "--mode", "gui", });
     }
 
     private void initLayouts(){
@@ -458,6 +475,7 @@ public class StigmataFrame extends JFrame{
         JMenuItem saveMenu = Utility.createJMenuItem("savesetting");
         JMenuItem exportMenu = Utility.createJMenuItem("exportsetting");
         JMenuItem clearMenu = Utility.createJMenuItem("clearsetting");
+        JMenuItem refreshMenu = Utility.createJMenuItem("refreshsetting");
         JMenuItem closeTabMenu = Utility.createJMenuItem("closetab");
         JMenuItem closeMenu = Utility.createJMenuItem("closeframe");
         JMenuItem exitMenu = Utility.createJMenuItem("exit");
@@ -469,6 +487,7 @@ public class StigmataFrame extends JFrame{
         fileMenu.add(new JSeparator());
         fileMenu.add(saveMenu);
         fileMenu.add(exportMenu);
+        fileMenu.add(refreshMenu);
         fileMenu.add(clearMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);
@@ -504,6 +523,11 @@ public class StigmataFrame extends JFrame{
         clearMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
                 clearSettings();
+            }
+        });
+        refreshMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                reloadSettings(new String[] { "--mode", "gui", });
             }
         });
 
