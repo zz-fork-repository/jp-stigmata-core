@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format.xml;
+package jp.naist.se.stigmata.printer.xml;
 
 /*
  * $Id$
@@ -6,7 +6,7 @@ package jp.naist.se.stigmata.format.xml;
 
 import java.io.PrintWriter;
 
-import jp.naist.se.stigmata.format.AbstractBirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.AbstractBirthmarkServiceListFormat;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**

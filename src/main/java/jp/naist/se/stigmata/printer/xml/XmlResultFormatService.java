@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format.csv;
+package jp.naist.se.stigmata.printer.xml;
 
 /*
  * $Id$
@@ -6,11 +6,11 @@ package jp.naist.se.stigmata.format.csv;
 
 import java.util.Locale;
 
-import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
-import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
-import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.BirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.BirthmarkExtractionResultFormat;
+import jp.naist.se.stigmata.printer.BirthmarkServiceListFormat;
 import jp.naist.se.stigmata.spi.AbstractServiceProvider;
-import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
 
 /**
@@ -20,10 +20,10 @@ import jp.naist.se.stigmata.utils.LocalizedDescriptionManager;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class CsvResultFormatService extends AbstractServiceProvider implements ResultFormatSpi{
-    private BirthmarkServiceListCsvFormat serviceList = new BirthmarkServiceListCsvFormat();
-    private BirthmarkExtractionResultCsvFormat list = new BirthmarkExtractionResultCsvFormat();
-    private BirthmarkComparisonResultCsvFormat compare = new BirthmarkComparisonResultCsvFormat(list);
+public class XmlResultFormatService extends AbstractServiceProvider implements ResultPrinterSpi{
+    private BirthmarkExtractionListXmlFormat list = new BirthmarkExtractionListXmlFormat();
+    private BirthmarkServiceListXmlFormat serviceList = new BirthmarkServiceListXmlFormat();
+    private BirthmarkComparisonResultXmlFormat compare = new BirthmarkComparisonResultXmlFormat(list);
 
     /**
      * returns a localized description of the birthmark this service provides.
@@ -35,9 +35,9 @@ public class CsvResultFormatService extends AbstractServiceProvider implements R
     }
 
     public String getFormat(){
-        return "csv";
+        return "xml";
     }
-    
+
     public BirthmarkComparisonResultFormat getComparisonResultFormat() {
         return compare;
     }
@@ -49,6 +49,4 @@ public class CsvResultFormatService extends AbstractServiceProvider implements R
     public BirthmarkServiceListFormat getBirthmarkServiceListFormat() {
         return serviceList;
     }
-
-    
 }

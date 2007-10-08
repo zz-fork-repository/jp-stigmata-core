@@ -4,9 +4,9 @@ package jp.naist.se.stigmata.spi;
  * $Id$
  */
 
-import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
-import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
-import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.BirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.BirthmarkExtractionResultFormat;
+import jp.naist.se.stigmata.printer.BirthmarkServiceListFormat;
 
 /**
  * Service provider interface for printing comparison/extracting
@@ -15,7 +15,7 @@ import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public interface ResultFormatSpi extends ServiceProvider{
+public interface ResultPrinterSpi extends ServiceProvider{
     /**
      * return a format.
      */

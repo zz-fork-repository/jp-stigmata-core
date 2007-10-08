@@ -40,11 +40,11 @@ import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
-import jp.naist.se.stigmata.format.FormatManager;
+import jp.naist.se.stigmata.printer.FormatManager;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.result.MemoryExtractionResultSet;
 import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
-import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
 import jp.naist.se.stigmata.utils.AsciiDataWritable;
@@ -243,7 +243,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         JButton save = Utility.createButton(
             "savecomparison", new SaveAction(stigmataFrame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format){
-                    ResultFormatSpi service = FormatManager.getInstance().getService(format);
+                    ResultPrinterSpi service = FormatManager.getInstance().getService(format);
                     if(service == null){
                         service = FormatManager.getDefaultFormatService();
                     }

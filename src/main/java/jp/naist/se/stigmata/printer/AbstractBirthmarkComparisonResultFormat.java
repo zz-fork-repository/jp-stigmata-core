@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format;
+package jp.naist.se.stigmata.printer;
 
 /*
  * $Id$
@@ -21,6 +21,13 @@ public abstract class AbstractBirthmarkComparisonResultFormat implements Birthma
     public abstract void printResult(PrintWriter out, ComparisonResultSet resultset);
 
     public abstract void printResult(PrintWriter out, ComparisonPair pair);
+
+    public void printHeader(PrintWriter out){
+    }
+
+    public void printFooter(PrintWriter out){
+        out.flush();
+    }
 
     public String getResult(ComparisonResultSet resultset){
         StringWriter writer = new StringWriter();

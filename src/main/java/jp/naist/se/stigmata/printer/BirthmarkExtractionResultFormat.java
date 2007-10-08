@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format;
+package jp.naist.se.stigmata.printer;
 
 /*
  * $Id$

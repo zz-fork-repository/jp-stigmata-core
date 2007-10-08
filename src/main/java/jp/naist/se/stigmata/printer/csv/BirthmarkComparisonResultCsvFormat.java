@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format.csv;
+package jp.naist.se.stigmata.printer.csv;
 
 /*
  * $Id$
@@ -14,7 +14,7 @@ import java.util.Map;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairElement;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.format.AbstractBirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.AbstractBirthmarkComparisonResultFormat;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 
 /**

@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format;
+package jp.naist.se.stigmata.printer;
 
 /*
  * $Id$
@@ -7,11 +7,12 @@ package jp.naist.se.stigmata.format;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import javax.imageio.spi.ServiceRegistry;
 
 import jp.naist.se.stigmata.BirthmarkEnvironment;
-import jp.naist.se.stigmata.format.csv.CsvResultFormatService;
-import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.printer.csv.CsvResultFormatService;
+import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 
 /**
  *
@@ -21,24 +22,24 @@ import jp.naist.se.stigmata.spi.ResultFormatSpi;
 public class FormatManager{
     private static final FormatManager manager = new FormatManager();
 
-    private Map<String, ResultFormatSpi> formats = new HashMap<String, ResultFormatSpi>();
+    private Map<String, ResultPrinterSpi> formats = new HashMap<String, ResultPrinterSpi>();
 
     private FormatManager(){
-        for(Iterator<ResultFormatSpi> i = ServiceRegistry.lookupProviders(ResultFormatSpi.class); i.hasNext(); ){
-            ResultFormatSpi spi = i.next();
+        for(Iterator<ResultPrinterSpi> i = ServiceRegistry.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
+            ResultPrinterSpi spi = i.next();
             addService(spi);
         }
     }
 
     public static void updateServices(BirthmarkEnvironment environment){
         FormatManager instance = getInstance();
-        for(Iterator<ResultFormatSpi> i = environment.lookupProviders(ResultFormatSpi.class); i.hasNext(); ){
-            ResultFormatSpi spi = i.next();
+        for(Iterator<ResultPrinterSpi> i = environment.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
+            ResultPrinterSpi spi = i.next();
             instance.addService(spi);
         }
     }
 
-    public static ResultFormatSpi getDefaultFormatService(){
+    public static ResultPrinterSpi getDefaultFormatService(){
         return new CsvResultFormatService();
     }
 
@@ -46,11 +47,11 @@ public class FormatManager{
         return manager;
     }
 
-    public ResultFormatSpi getService(String format){
+    public ResultPrinterSpi getService(String format){
         return formats.get(format);
     }
 
-    private void addService(ResultFormatSpi service){
+    private void addService(ResultPrinterSpi service){
         formats.put(service.getFormat(), service);
     }
 }

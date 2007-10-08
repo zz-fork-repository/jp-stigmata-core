@@ -33,6 +33,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ExtractionTarget;
+import jp.naist.se.stigmata.printer.xml.BirthmarkExtractionListXmlFormat;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -43,11 +44,11 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @version $Revision$ $Date$
  */
 public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
-    private File targetFile;
+    private List<URL> addList = new ArrayList<URL>();
     private boolean addmode = true;
     private int size;
-    private boolean first = true;
-    private List<URL> addList = new ArrayList<URL>();
+    private BirthmarkExtractionListXmlFormat formatter;
+    private File targetFile;
     private PrintWriter out;
 
     public XmlFileExtractionResultSet(BirthmarkContext context, boolean tableType){
@@ -69,22 +70,20 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
     @Override
     public void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set) throws BirthmarkStoreException{
         if(addmode){
-            size++;
-            if(first){
-                first = false;
+            if(formatter == null){
                 try{
                     out = new PrintWriter(new FileWriter(targetFile));
-                    printHeader(out);
+                	formatter = new BirthmarkExtractionListXmlFormat();
+                    formatter.printHeader(out);
                 }catch(IOException e){
-                    e.printStackTrace();
                 }
             }
-            if(out == null){
-                first = true;
+            if(out == null || formatter == null){
                 throw new BirthmarkStoreException("destination is closed on some reason");
             }
+            size++;
             addList.add(set.getLocation());
-            writeBirthmarkSet(out, set);
+            formatter.printBirthmarkSet(out, set);
         }
         else{
             throw new BirthmarkStoreException("destination is already closed.");
@@ -118,28 +117,6 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
-    private void writeBirthmarkSet(PrintWriter out, BirthmarkSet set){
-        out.println("    <extracted-birthmark>");
-        out.printf("      <name>%s</name>%n", set.getName());
-        out.printf("      <location>%s</location>%n", set.getLocation());
-        for(Birthmark birthmark: set){
-            out.printf("      <birthmark type=\"%s\" count=\"%d\">%n", birthmark.getType(), birthmark.getElementCount());
-            for(BirthmarkElement element: birthmark){
-                out.printf("        <element>%s</element>%n", normalize(String.valueOf(element)));
-            }
-            out.printf("      </birthmark>%n");
-        }
-        out.println("    </extracted-birthmark>");
-    }
-
-    private String normalize(String element){
-        element = element.replaceAll("&", "&amp;");
-        element = element.replaceAll("<", "&lt;");
-        element = element.replaceAll(">", "&gt;");
-        element = element.replaceAll("\"", "&quot;");
-        return element;
-    }
-
     private void createTargetFile(){
         targetFile = new File(BirthmarkEnvironment.getStigmataHome(), "extracted_birthmarks/" + generateId() + ".xml");
         if(!targetFile.getParentFile().exists()){
@@ -147,21 +124,13 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
-    private void printHeader(PrintWriter out){
-        out.println("<birthmark-result-set>");
-        out.println("  <extracted-birthmarks>");
-    }
-
-    private void printFooter(PrintWriter out){
-        out.println("  </extracted-birthmarks>");
-        out.println("</birthmark-result-set>");
-    }
-
     private synchronized void checkMode(){
         if(addmode){
             addmode = false;
-            printFooter(out);
+            formatter.printFooter(out);
             out.close();
+            out = null;
+            formatter = null;
         }
     }
 

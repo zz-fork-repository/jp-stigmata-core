@@ -15,9 +15,9 @@ import javax.swing.JScrollPane;
 
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
-import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
-import jp.naist.se.stigmata.format.FormatManager;
-import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.printer.BirthmarkExtractionResultFormat;
+import jp.naist.se.stigmata.printer.FormatManager;
+import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.utils.AsciiDataWritable;
 
@@ -38,7 +38,7 @@ public class BirthmarkExtractionResultPane extends JPanel{
         JComponent southPanel = Box.createHorizontalBox(); 
         JButton saveButton = Utility.createButton("savebirthmark", new SaveAction(frame, new AsciiDataWritable(){
             public void writeAsciiData(PrintWriter out, String format){
-                ResultFormatSpi service = FormatManager.getInstance().getService(format);
+                ResultPrinterSpi service = FormatManager.getInstance().getService(format);
                 if(service == null){
                     service = FormatManager.getDefaultFormatService();
                 }

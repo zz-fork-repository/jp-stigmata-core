@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import jp.naist.se.stigmata.event.BirthmarkEngineListener;
-import jp.naist.se.stigmata.format.FormatManager;
+import jp.naist.se.stigmata.printer.FormatManager;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.ui.swing.ExtensionFilter;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;

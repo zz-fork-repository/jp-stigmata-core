@@ -20,13 +20,13 @@ import java.util.List;
 import jp.naist.se.stigmata.event.BirthmarkEngineAdapter;
 import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
 import jp.naist.se.stigmata.event.WarningMessages;
-import jp.naist.se.stigmata.format.BirthmarkComparisonResultFormat;
-import jp.naist.se.stigmata.format.BirthmarkExtractionResultFormat;
-import jp.naist.se.stigmata.format.BirthmarkServiceListFormat;
-import jp.naist.se.stigmata.format.FormatManager;
+import jp.naist.se.stigmata.printer.BirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.BirthmarkExtractionResultFormat;
+import jp.naist.se.stigmata.printer.BirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.FormatManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
-import jp.naist.se.stigmata.spi.ResultFormatSpi;
+import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
@@ -120,7 +120,7 @@ public final class Main{
             });
             ExtractionResultSet ers = engine.extract(args, context);
 
-            ResultFormatSpi spi = manager.getService(format);
+            ResultPrinterSpi spi = manager.getService(format);
             BirthmarkExtractionResultFormat formatter = spi.getExtractionResultFormat();
             formatter.printResult(new PrintWriter(System.out), ers);
         }catch(Exception ex){
@@ -151,7 +151,7 @@ public final class Main{
                 resultset = engine.filter(resultset);
             }
 
-            ResultFormatSpi spi = manager.getService(format);
+            ResultPrinterSpi spi = manager.getService(format);
             BirthmarkComparisonResultFormat formatter = spi.getComparisonResultFormat();
             formatter.printResult(new PrintWriter(System.out), resultset);
         }catch(Exception e){
@@ -162,7 +162,7 @@ public final class Main{
     private void listBirthmarks(BirthmarkContext context, String format){
         try{
             BirthmarkSpi[] spis = context.getEnvironment().findServices();
-            ResultFormatSpi spi = manager.getService(format);
+            ResultPrinterSpi spi = manager.getService(format);
             BirthmarkServiceListFormat formatter = spi.getBirthmarkServiceListFormat();
 
             formatter.printResult(new PrintWriter(System.out), spis);

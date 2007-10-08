@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format.xml;
+package jp.naist.se.stigmata.printer.xml;
 
 /*
  * $Id$
@@ -10,7 +10,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairElement;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.format.AbstractBirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.AbstractBirthmarkComparisonResultFormat;
 
 /**
  * 
@@ -28,6 +28,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
 
     @Override
     public void printResult(PrintWriter out, ComparisonPair pair){
+        printHeader(out);
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark-result-set>");
         out.println("  <extracted-birthmarks>");
@@ -38,11 +39,12 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         printComparisonPair(out, pair);
         out.println("  </comparison-result-set>");
         out.println("</birthmark-result-set>");
-        out.flush();
+        printFooter(out);
     }
 
     @Override
     public void printResult(PrintWriter out, ComparisonResultSet resultset){
+        printHeader(out);
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark-result-set>");
         out.println("  <comparison-result-set>");
@@ -51,7 +53,7 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         }
         out.println("  </comparison-result-set>");
         out.println("</birthmark-result-set>");
-        out.flush();
+        printFooter(out);
     }
 
     private void printComparisonPair(PrintWriter out, ComparisonPair pair){

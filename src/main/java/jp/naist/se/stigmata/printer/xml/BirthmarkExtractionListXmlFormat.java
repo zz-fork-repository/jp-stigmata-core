@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format.xml;
+package jp.naist.se.stigmata.printer.xml;
 
 /*
  * $Id$
@@ -12,7 +12,7 @@ import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
-import jp.naist.se.stigmata.format.AbstractBirthmarkExtractionResultFormat;
+import jp.naist.se.stigmata.printer.AbstractBirthmarkExtractionResultFormat;
 
 /**
  * 
@@ -23,18 +23,26 @@ import jp.naist.se.stigmata.format.AbstractBirthmarkExtractionResultFormat;
  */
 public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractionResultFormat{
     public void printResult(PrintWriter out, ExtractionResultSet ers){
-        out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<birthmark-result-set>");
-        out.println("  <extracted-birthmarks>");
+        printHeader(out);
         for(Iterator<BirthmarkSet> i = ers.birthmarkSets(ExtractionTarget.TARGET_BOTH); i.hasNext(); ){
             printBirthmarkSet(out, i.next());
         }
+        printFooter(out);
+    }
+
+    public void printHeader(PrintWriter out){
+        out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        out.println("<birthmark-result-set>");
+        out.println("  <extracted-birthmarks>");
+    }
+
+    public void printFooter(PrintWriter out){
         out.println("  </extracted-birthmarks>");
         out.println("</birthmark-result-set>");
         out.flush();
     }
 
-    protected void printBirthmarkSet(PrintWriter out, BirthmarkSet set){
+    public void printBirthmarkSet(PrintWriter out, BirthmarkSet set){
         out.println("    <extracted-birthmark>");
         out.printf("      <name>%s</name>%n", escapeToXmlString(set.getName()));
         out.printf("      <location>%s</location>%n", escapeToXmlString(set.getLocation()));

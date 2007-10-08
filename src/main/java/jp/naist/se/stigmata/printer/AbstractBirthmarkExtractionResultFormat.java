@@ -1,4 +1,4 @@
-package jp.naist.se.stigmata.format;
+package jp.naist.se.stigmata.printer;
 
 /*
  * $Id$
@@ -18,6 +18,13 @@ import jp.naist.se.stigmata.ExtractionResultSet;
  */
 public abstract class AbstractBirthmarkExtractionResultFormat implements BirthmarkExtractionResultFormat{
     public abstract void printResult(PrintWriter out, ExtractionResultSet ers);
+
+    public void printHeader(PrintWriter out){
+    }
+
+    public void printFooter(PrintWriter out){
+        out.flush();
+    }
 
     public String getResult(ExtractionResultSet ers){
         StringWriter writer = new StringWriter();
