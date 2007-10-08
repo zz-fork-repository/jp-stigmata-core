@@ -32,7 +32,7 @@ import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.printer.FormatManager;
+import jp.naist.se.stigmata.printer.PrinterManager;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
@@ -128,11 +128,11 @@ public class PairComparisonResultSetPane extends JPanel{
         JButton saveButton = Utility.createButton(
             "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
-                    ResultPrinterSpi service = FormatManager.getInstance().getService(format);
+                    ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
-                        service = FormatManager.getDefaultFormatService();
+                        service = PrinterManager.getDefaultFormatService();
                     }
-                    service.getComparisonResultFormat().printResult(out, comparison);
+                    service.getComparisonResultSetPrinter().printResult(out, comparison);
                 }
             })
         );

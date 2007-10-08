@@ -16,7 +16,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public abstract class AbstractBirthmarkServiceListFormat implements BirthmarkServiceListFormat{
+public abstract class AbstractBirthmarkServicePrinter implements BirthmarkServicePrinter, Printer{
     public abstract void printResult(PrintWriter out, BirthmarkSpi[] spilist);
 
     public String getResult(BirthmarkSpi[] spilist){
@@ -29,4 +29,10 @@ public abstract class AbstractBirthmarkServiceListFormat implements BirthmarkSer
         return writer.toString();
     }
 
+    public void printHeader(PrintWriter out){
+    }
+
+    public void printFooter(PrintWriter out){
+        out.flush();
+    }
 }

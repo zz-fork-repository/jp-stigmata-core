@@ -20,10 +20,10 @@ import java.util.List;
 import jp.naist.se.stigmata.event.BirthmarkEngineAdapter;
 import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
 import jp.naist.se.stigmata.event.WarningMessages;
-import jp.naist.se.stigmata.printer.BirthmarkComparisonResultFormat;
-import jp.naist.se.stigmata.printer.BirthmarkExtractionResultFormat;
-import jp.naist.se.stigmata.printer.BirthmarkServiceListFormat;
-import jp.naist.se.stigmata.printer.FormatManager;
+import jp.naist.se.stigmata.printer.BirthmarkServicePrinter;
+import jp.naist.se.stigmata.printer.ComparisonResultSetPrinter;
+import jp.naist.se.stigmata.printer.ExtractionResultSetPrinter;
+import jp.naist.se.stigmata.printer.PrinterManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ResultPrinterSpi;
@@ -48,7 +48,7 @@ import org.xml.sax.SAXException;
  * @version $Revision$ $Date$
  */
 public final class Main{
-    private FormatManager manager = FormatManager.getInstance();
+    private PrinterManager manager = PrinterManager.getInstance();
 
     /**
      * main process.
@@ -121,7 +121,7 @@ public final class Main{
             ExtractionResultSet ers = engine.extract(args, context);
 
             ResultPrinterSpi spi = manager.getService(format);
-            BirthmarkExtractionResultFormat formatter = spi.getExtractionResultFormat();
+            ExtractionResultSetPrinter formatter = spi.getExtractionResultSetPrinter();
             formatter.printResult(new PrintWriter(System.out), ers);
         }catch(Exception ex){
             ex.printStackTrace();
@@ -152,7 +152,7 @@ public final class Main{
             }
 
             ResultPrinterSpi spi = manager.getService(format);
-            BirthmarkComparisonResultFormat formatter = spi.getComparisonResultFormat();
+            ComparisonResultSetPrinter formatter = spi.getComparisonResultSetPrinter();
             formatter.printResult(new PrintWriter(System.out), resultset);
         }catch(Exception e){
             e.printStackTrace();
@@ -163,7 +163,7 @@ public final class Main{
         try{
             BirthmarkSpi[] spis = context.getEnvironment().findServices();
             ResultPrinterSpi spi = manager.getService(format);
-            BirthmarkServiceListFormat formatter = spi.getBirthmarkServiceListFormat();
+            BirthmarkServicePrinter formatter = spi.getBirthmarkServicePrinter();
 
             formatter.printResult(new PrintWriter(System.out), spis);
         }catch(IOException e){

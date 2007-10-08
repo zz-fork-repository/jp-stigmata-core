@@ -15,7 +15,7 @@ import jp.naist.se.stigmata.ExtractionResultSet;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public interface BirthmarkExtractionResultFormat{
+public interface ExtractionResultSetPrinter{
     public void printResult(PrintWriter out, ExtractionResultSet ers);
 
     public String getResult(ExtractionResultSet ers);

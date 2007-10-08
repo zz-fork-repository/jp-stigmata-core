@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import jp.naist.se.stigmata.event.BirthmarkEngineListener;
-import jp.naist.se.stigmata.printer.FormatManager;
+import jp.naist.se.stigmata.printer.PrinterManager;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.ui.swing.ExtensionFilter;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
@@ -157,7 +157,7 @@ public class Stigmata{
             BirthmarkSpi service = i.next();
             defaultEnvironment.addService(service);
         }
-        FormatManager.updateServices(defaultEnvironment);
+        PrinterManager.updateServices(defaultEnvironment);
         exportConfigFile(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml");
     }
 

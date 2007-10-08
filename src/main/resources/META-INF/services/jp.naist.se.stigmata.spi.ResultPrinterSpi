@@ -1,0 +1,2 @@
+jp.naist.se.stigmata.printer.xml.XmlResultPrinterService
+jp.naist.se.stigmata.printer.csv.CsvResultPrinterService

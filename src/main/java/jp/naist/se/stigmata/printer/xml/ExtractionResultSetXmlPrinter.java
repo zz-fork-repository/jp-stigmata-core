@@ -12,7 +12,7 @@ import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
-import jp.naist.se.stigmata.printer.AbstractBirthmarkExtractionResultFormat;
+import jp.naist.se.stigmata.printer.AbstractExtractionResultSetPrinter;
 
 /**
  * 
@@ -21,7 +21,7 @@ import jp.naist.se.stigmata.printer.AbstractBirthmarkExtractionResultFormat;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkExtractionListXmlFormat extends AbstractBirthmarkExtractionResultFormat{
+public class ExtractionResultSetXmlPrinter extends AbstractExtractionResultSetPrinter{
     public void printResult(PrintWriter out, ExtractionResultSet ers){
         printHeader(out);
         for(Iterator<BirthmarkSet> i = ers.birthmarkSets(ExtractionTarget.TARGET_BOTH); i.hasNext(); ){

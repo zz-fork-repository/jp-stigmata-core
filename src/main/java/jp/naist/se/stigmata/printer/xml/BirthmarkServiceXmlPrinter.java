@@ -6,7 +6,7 @@ package jp.naist.se.stigmata.printer.xml;
 
 import java.io.PrintWriter;
 
-import jp.naist.se.stigmata.printer.AbstractBirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.AbstractBirthmarkServicePrinter;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -16,7 +16,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkServiceListXmlFormat extends AbstractBirthmarkServiceListFormat{
+public class BirthmarkServiceXmlPrinter extends AbstractBirthmarkServicePrinter{
     public void printResult(PrintWriter out, BirthmarkSpi[] spilist){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark-result-set>");

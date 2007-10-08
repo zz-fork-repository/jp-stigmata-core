@@ -8,35 +8,21 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import jp.naist.se.stigmata.ComparisonPair;
-import jp.naist.se.stigmata.ComparisonResultSet;
 
 /**
  * 
- * 
- *
- * @author Haruaki TAMADA
+ * @author Haruaki Tamada
  * @version $Revision$ $Date$
  */
-public abstract class AbstractBirthmarkComparisonResultFormat implements BirthmarkComparisonResultFormat{
-    public abstract void printResult(PrintWriter out, ComparisonResultSet resultset);
+public abstract class AbstractComparisonPairPrinter implements ComparisonPairPrinter, Printer{
 
     public abstract void printResult(PrintWriter out, ComparisonPair pair);
-
-    public void printHeader(PrintWriter out){
-    }
 
     public void printFooter(PrintWriter out){
         out.flush();
     }
 
-    public String getResult(ComparisonResultSet resultset){
-        StringWriter writer = new StringWriter();
-        PrintWriter out = new PrintWriter(writer);
-
-        printResult(out, resultset);
-
-        out.close();
-        return writer.toString();
+    public void printHeader(PrintWriter out){
     }
 
     public String getResult(ComparisonPair pair){

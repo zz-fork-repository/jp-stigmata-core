@@ -1,36 +1,22 @@
 package jp.naist.se.stigmata.printer.xml;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ComparisonPairElement;
-import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.printer.AbstractBirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.AbstractComparisonPairPrinter;
 
-/**
- * 
- * 
- *
- * @author Haruaki TAMADA
- * @version $Revision$ $Date$
- */
-public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkComparisonResultFormat{
-    private BirthmarkExtractionListXmlFormat list;
+public class ComparisonPairXmlPrinter extends AbstractComparisonPairPrinter{
+    private ExtractionResultSetXmlPrinter list;
 
-    public BirthmarkComparisonResultXmlFormat(BirthmarkExtractionListXmlFormat list){
+    public ComparisonPairXmlPrinter(ExtractionResultSetXmlPrinter list){
         this.list = list;
     }
 
     @Override
     public void printResult(PrintWriter out, ComparisonPair pair){
         printHeader(out);
-        out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<birthmark-result-set>");
         out.println("  <extracted-birthmarks>");
         list.printBirthmarkSet(out, pair.getTarget1());
         list.printBirthmarkSet(out, pair.getTarget2());
@@ -38,25 +24,21 @@ public class BirthmarkComparisonResultXmlFormat extends AbstractBirthmarkCompari
         out.println("  <comparison-result-set>");
         printComparisonPair(out, pair);
         out.println("  </comparison-result-set>");
-        out.println("</birthmark-result-set>");
         printFooter(out);
     }
 
     @Override
-    public void printResult(PrintWriter out, ComparisonResultSet resultset){
-        printHeader(out);
+    public void printHeader(PrintWriter out){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark-result-set>");
-        out.println("  <comparison-result-set>");
-        for(ComparisonPair pair: resultset){
-            printComparisonPair(out, pair);
-        }
-        out.println("  </comparison-result-set>");
-        out.println("</birthmark-result-set>");
-        printFooter(out);
     }
 
-    private void printComparisonPair(PrintWriter out, ComparisonPair pair){
+    @Override
+    public void printFooter(PrintWriter out){
+        out.println("</birthmark-result-set>");
+        out.flush();
+    }
+    public void printComparisonPair(PrintWriter out, ComparisonPair pair){
         out.println("    <comparison-result>");
         printTarget(out, pair.getTarget1(), 1);
         printTarget(out, pair.getTarget2(), 2);

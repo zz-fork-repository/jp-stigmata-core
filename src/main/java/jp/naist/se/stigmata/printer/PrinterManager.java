@@ -11,7 +11,7 @@ import java.util.Map;
 import javax.imageio.spi.ServiceRegistry;
 
 import jp.naist.se.stigmata.BirthmarkEnvironment;
-import jp.naist.se.stigmata.printer.csv.CsvResultFormatService;
+import jp.naist.se.stigmata.printer.csv.CsvResultPrinterService;
 import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 
 /**
@@ -19,12 +19,12 @@ import jp.naist.se.stigmata.spi.ResultPrinterSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class FormatManager{
-    private static final FormatManager manager = new FormatManager();
+public class PrinterManager{
+    private static final PrinterManager manager = new PrinterManager();
 
     private Map<String, ResultPrinterSpi> formats = new HashMap<String, ResultPrinterSpi>();
 
-    private FormatManager(){
+    private PrinterManager(){
         for(Iterator<ResultPrinterSpi> i = ServiceRegistry.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
             ResultPrinterSpi spi = i.next();
             addService(spi);
@@ -32,7 +32,7 @@ public class FormatManager{
     }
 
     public static void updateServices(BirthmarkEnvironment environment){
-        FormatManager instance = getInstance();
+        PrinterManager instance = getInstance();
         for(Iterator<ResultPrinterSpi> i = environment.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
             ResultPrinterSpi spi = i.next();
             instance.addService(spi);
@@ -40,10 +40,10 @@ public class FormatManager{
     }
 
     public static ResultPrinterSpi getDefaultFormatService(){
-        return new CsvResultFormatService();
+        return new CsvResultPrinterService();
     }
 
-    public static FormatManager getInstance(){
+    public static PrinterManager getInstance(){
         return manager;
     }
 

@@ -7,20 +7,13 @@ package jp.naist.se.stigmata.printer;
 import java.io.PrintWriter;
 
 import jp.naist.se.stigmata.ComparisonPair;
-import jp.naist.se.stigmata.ComparisonResultSet;
 
 /**
  * 
- * 
- *
- * @author Haruaki TAMADA
+ * @author Haruaki Tamada
  * @version $Revision$ $Date$
  */
-public interface BirthmarkComparisonResultFormat{
-    public void printResult(PrintWriter out, ComparisonResultSet resultset);
-
-    public String getResult(ComparisonResultSet resultset);
-
+public interface ComparisonPairPrinter{
     public String getResult(ComparisonPair pair);
 
     public void printResult(PrintWriter out, ComparisonPair pair);

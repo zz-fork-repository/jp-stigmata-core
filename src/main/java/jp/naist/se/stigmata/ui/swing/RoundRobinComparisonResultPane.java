@@ -40,7 +40,7 @@ import jp.naist.se.stigmata.ComparisonResultSet;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
-import jp.naist.se.stigmata.printer.FormatManager;
+import jp.naist.se.stigmata.printer.PrinterManager;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 import jp.naist.se.stigmata.result.MemoryExtractionResultSet;
 import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
@@ -243,12 +243,12 @@ public class RoundRobinComparisonResultPane extends JPanel{
         JButton save = Utility.createButton(
             "savecomparison", new SaveAction(stigmataFrame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format){
-                    ResultPrinterSpi service = FormatManager.getInstance().getService(format);
+                    ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
-                        service = FormatManager.getDefaultFormatService();
+                        service = PrinterManager.getDefaultFormatService();
                     }
 
-                    service.getComparisonResultFormat().printResult(
+                    service.getComparisonResultSetPrinter().printResult(
                         out, new RoundRobinComparisonResultSet(extraction)
                     );
                 }

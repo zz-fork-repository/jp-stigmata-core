@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import jp.naist.se.stigmata.ComparisonPair;
-import jp.naist.se.stigmata.ComparisonPairElement;
 import jp.naist.se.stigmata.ComparisonResultSet;
-import jp.naist.se.stigmata.printer.AbstractBirthmarkComparisonResultFormat;
+import jp.naist.se.stigmata.printer.AbstractComparisonResultSetPrinter;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
 
 /**
@@ -24,25 +23,8 @@ import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkComparisonResultCsvFormat extends AbstractBirthmarkComparisonResultFormat{
-    private BirthmarkExtractionResultCsvFormat list;
-
-    public BirthmarkComparisonResultCsvFormat(BirthmarkExtractionResultCsvFormat list){
-        this.list = list;
-    }
-
-    @Override
-    public void printResult(PrintWriter out, ComparisonPair pair){
-        list.printBirthmarkSet(out, pair.getTarget1());
-        list.printBirthmarkSet(out, pair.getTarget2());
-
-        for(ComparisonPairElement element: pair){
-            out.print("compare,");
-            out.print(element.getType());
-            out.print(",");
-            out.println(element.getSimilarity());
-        }
-        out.flush();
+public class ComparisonResultSetCsvPrinter extends AbstractComparisonResultSetPrinter{
+    public ComparisonResultSetCsvPrinter(){
     }
 
     @Override

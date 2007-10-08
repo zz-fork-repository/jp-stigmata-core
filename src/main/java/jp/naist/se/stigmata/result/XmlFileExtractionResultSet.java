@@ -33,7 +33,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ExtractionTarget;
-import jp.naist.se.stigmata.printer.xml.BirthmarkExtractionListXmlFormat;
+import jp.naist.se.stigmata.printer.xml.ExtractionResultSetXmlPrinter;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -47,7 +47,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
     private List<URL> addList = new ArrayList<URL>();
     private boolean addmode = true;
     private int size;
-    private BirthmarkExtractionListXmlFormat formatter;
+    private ExtractionResultSetXmlPrinter formatter;
     private File targetFile;
     private PrintWriter out;
 
@@ -73,7 +73,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             if(formatter == null){
                 try{
                     out = new PrintWriter(new FileWriter(targetFile));
-                	formatter = new BirthmarkExtractionListXmlFormat();
+                	formatter = new ExtractionResultSetXmlPrinter();
                     formatter.printHeader(out);
                 }catch(IOException e){
                 }

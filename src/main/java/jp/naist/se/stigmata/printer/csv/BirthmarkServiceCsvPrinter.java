@@ -6,7 +6,7 @@ package jp.naist.se.stigmata.printer.csv;
 
 import java.io.PrintWriter;
 
-import jp.naist.se.stigmata.printer.AbstractBirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.AbstractBirthmarkServicePrinter;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -16,8 +16,9 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class BirthmarkServiceListCsvFormat extends AbstractBirthmarkServiceListFormat{
+public class BirthmarkServiceCsvPrinter extends AbstractBirthmarkServicePrinter{
     public void printResult(PrintWriter out, BirthmarkSpi[] spilist){
+        printHeader(out);
         for(BirthmarkSpi spi: spilist){
             out.print(spi.getType());
             out.print(",");
@@ -28,6 +29,6 @@ public class BirthmarkServiceListCsvFormat extends AbstractBirthmarkServiceListF
             out.print(spi.getDescription());
             out.println();
         }
-        out.flush();
+        printFooter(out);
     }
 }

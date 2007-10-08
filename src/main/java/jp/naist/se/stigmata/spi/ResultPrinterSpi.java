@@ -4,9 +4,10 @@ package jp.naist.se.stigmata.spi;
  * $Id$
  */
 
-import jp.naist.se.stigmata.printer.BirthmarkComparisonResultFormat;
-import jp.naist.se.stigmata.printer.BirthmarkExtractionResultFormat;
-import jp.naist.se.stigmata.printer.BirthmarkServiceListFormat;
+import jp.naist.se.stigmata.printer.BirthmarkServicePrinter;
+import jp.naist.se.stigmata.printer.ComparisonPairPrinter;
+import jp.naist.se.stigmata.printer.ComparisonResultSetPrinter;
+import jp.naist.se.stigmata.printer.ExtractionResultSetPrinter;
 
 /**
  * Service provider interface for printing comparison/extracting
@@ -21,9 +22,11 @@ public interface ResultPrinterSpi extends ServiceProvider{
      */
     public String getFormat();
 
-    public BirthmarkServiceListFormat getBirthmarkServiceListFormat();
+    public BirthmarkServicePrinter getBirthmarkServicePrinter();
 
-    public BirthmarkComparisonResultFormat getComparisonResultFormat();
+    public ComparisonResultSetPrinter getComparisonResultSetPrinter();
 
-    public BirthmarkExtractionResultFormat getExtractionResultFormat();
+    public ComparisonPairPrinter getComparisonPairPrinter();
+
+    public ExtractionResultSetPrinter getExtractionResultSetPrinter();
 }

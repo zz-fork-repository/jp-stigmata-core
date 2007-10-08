@@ -7,7 +7,7 @@ package jp.naist.se.stigmata.printer;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import jp.naist.se.stigmata.ExtractionResultSet;
+import jp.naist.se.stigmata.ComparisonResultSet;
 
 /**
  * 
@@ -16,8 +16,8 @@ import jp.naist.se.stigmata.ExtractionResultSet;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public abstract class AbstractBirthmarkExtractionResultFormat implements BirthmarkExtractionResultFormat{
-    public abstract void printResult(PrintWriter out, ExtractionResultSet ers);
+public abstract class AbstractComparisonResultSetPrinter implements ComparisonResultSetPrinter, Printer{
+    public abstract void printResult(PrintWriter out, ComparisonResultSet resultset);
 
     public void printHeader(PrintWriter out){
     }
@@ -26,11 +26,11 @@ public abstract class AbstractBirthmarkExtractionResultFormat implements Birthma
         out.flush();
     }
 
-    public String getResult(ExtractionResultSet ers){
+    public String getResult(ComparisonResultSet resultset){
         StringWriter writer = new StringWriter();
         PrintWriter out = new PrintWriter(writer);
 
-        printResult(out, ers);
+        printResult(out, resultset);
 
         out.close();
         return writer.toString();
