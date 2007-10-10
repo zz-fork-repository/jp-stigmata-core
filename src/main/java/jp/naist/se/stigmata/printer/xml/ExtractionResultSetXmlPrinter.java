@@ -24,6 +24,13 @@ import jp.naist.se.stigmata.printer.AbstractExtractionResultSetPrinter;
 public class ExtractionResultSetXmlPrinter extends AbstractExtractionResultSetPrinter{
     public void printResult(PrintWriter out, ExtractionResultSet ers){
         printHeader(out);
+
+        out.printf("    <unit>%s</unit>%n", ers.getExtractionUnit());
+        out.printf("    <birthmark-types>%n");
+        for(String type: ers.getBirthmarkTypes()){
+            out.printf("      <birthmark-type>%s</birthmark-type>%n", type);
+        }
+        out.printf("    </birthmark-types>%n");
         for(Iterator<BirthmarkSet> i = ers.birthmarkSets(ExtractionTarget.TARGET_BOTH); i.hasNext(); ){
             printBirthmarkSet(out, i.next());
         }

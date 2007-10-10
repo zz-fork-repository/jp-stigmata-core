@@ -14,6 +14,7 @@ import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
+import jp.naist.se.stigmata.ExtractionUnit;
 
 /**
  * Abstract class for ExtractionResultSet.
@@ -87,6 +88,10 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
 
     public String[] getBirthmarkTypes(){
         return context.getBirthmarkTypes();
+    }
+
+    public ExtractionUnit getExtractionUnit(){
+        return context.getExtractionUnit();
     }
 
     public BirthmarkSet getBirthmarkSet(ExtractionTarget target, int index){

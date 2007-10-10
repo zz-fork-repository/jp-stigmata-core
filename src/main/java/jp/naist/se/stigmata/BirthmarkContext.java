@@ -90,7 +90,9 @@ public class BirthmarkContext{
     }
 
     public void addBirthmarkType(String type){
-        birthmarkTypes.add(type);
+        if(!birthmarkTypes.contains(type)){
+            birthmarkTypes.add(type);
+        }
     }
 
     public void removeBirthmarkType(String type){

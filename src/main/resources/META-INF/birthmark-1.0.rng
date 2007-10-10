@@ -63,6 +63,24 @@
 
   <define name="extracted-birthmarks">
     <element name="extracted-birthmarks">
+      <optional>
+        <element name="unit">
+          <choice>
+            <value>CLASS</value>
+            <value>PACKAGE</value>
+            <value>ARCHIVE</value>
+          </choice>
+        </element>
+      </optional>
+      <optional>
+        <element name="birthmark-types">
+          <oneOrMore>
+            <element name="birthmark-type">
+              <data type="string" />
+            </element>
+          </oneOrMore>
+        </element>
+      </optional>
       <zeroOrMore>
         <ref name="extracted-birthmark"/>
       </zeroOrMore>

@@ -41,6 +41,8 @@ public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
      */
     public String[] getBirthmarkTypes();
 
+    public ExtractionUnit getExtractionUnit();
+
     /**
      * returns the number of target birthmark-set size (# of classes, packages, or jar files).
      */

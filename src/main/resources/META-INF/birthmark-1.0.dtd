@@ -13,6 +13,8 @@
 >
 
 <!ELEMENT type                   (#PCDATA)>
+<!ELEMENT unit                   (#PCDATA)>
+<!ELEMENT birthmark-type         (#PCDATA)>
 <!ELEMENT display-type           (#PCDATA)>
 <!ELEMENT description            (#PCDATA)>
 <!ELEMENT name                   (#PCDATA)>
@@ -26,7 +28,8 @@
 
 <!ELEMENT birthmark              (element*)>
 <!ELEMENT extracted-birthmark    (name,location,birthmark)>
-<!ELEMENT extracted-birthmarks   (extracted-birthmark*)>
+<!ELEMENT birthmark-types        (birthmark-type+)>
+<!ELEMENT extracted-birthmarks   (unit,birthmark-types,extracted-birthmark*)>
 
 <!ELEMENT target1                (name,location)>
 <!ELEMENT target2                (name,location)>

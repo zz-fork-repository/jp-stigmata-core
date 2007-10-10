@@ -32,7 +32,10 @@ import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.BirthmarkStoreTarget;
+import jp.naist.se.stigmata.ComparisonMethod;
 import jp.naist.se.stigmata.ExtractionTarget;
+import jp.naist.se.stigmata.ExtractionUnit;
+import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.printer.xml.ExtractionResultSetXmlPrinter;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 
@@ -61,6 +64,17 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         super(context);
 
         createTargetFile();
+    }
+
+    public XmlFileExtractionResultSet(File file){
+        super(Stigmata.getInstance().createContext());
+        addmode = false;
+        addList = null;
+        size = -1;
+        targetFile = file;
+
+        getContext().setStoreTarget(BirthmarkStoreTarget.XMLFILE);
+        getContext().setComparisonMethod(ComparisonMethod.ROUND_ROBIN_SAME_PAIR);
     }
 
     public BirthmarkStoreTarget getStoreTarget(){
@@ -94,7 +108,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
     public Iterator<BirthmarkSet> birthmarkSets(ExtractionTarget target){
         checkMode();
 
-        return new BirthmarkSetStAXIterator(targetFile, addList, getEnvironment());
+        return new BirthmarkSetStAXIterator(targetFile, addList, getContext());
     }
 
     @Override
@@ -139,8 +153,9 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         private BirthmarkSet nextObject;
         private List<URL> validItems;
         private BirthmarkEnvironment env;
+        private BirthmarkContext context;
 
-        public BirthmarkSetStAXIterator(File file, List<URL> validItems, BirthmarkEnvironment env){
+        public BirthmarkSetStAXIterator(File file, List<URL> validItems, BirthmarkContext context){
             try{
                 XMLInputFactory factory = XMLInputFactory.newInstance();
                 BufferedReader in = new BufferedReader(new FileReader(file));
@@ -149,7 +164,8 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             } catch(XMLStreamException e){
             }
             this.validItems = validItems;
-            this.env = env;
+            this.context = context;
+            this.env = context.getEnvironment();
             try{
                 nextObject = findNext();
             } catch(XMLStreamException e){
@@ -192,7 +208,21 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                 XMLEvent event = reader.peek();
                 if(event.isStartElement()){
                     StartElement se = event.asStartElement();
-                    if(se.getName().getLocalPart().equals("name")) className = reader.getElementText();
+                    if(se.getName().getLocalPart().equals("unit")){
+                        ExtractionUnit unit = ExtractionUnit.valueOf(reader.getElementText());
+                        if(unit != null){
+                            context.setExtractionUnit(unit);
+                        }                        
+                    }
+                    if(se.getName().getLocalPart().equals("birthmark-type")){
+                        String type = reader.getElementText();
+                        if(env.getService(type) != null){
+                            context.addBirthmarkType(type);
+                        }                        
+                    }
+                    else if(se.getName().getLocalPart().equals("name")){
+                        className = reader.getElementText();
+                    }
                     else if(se.getName().getLocalPart().equals("location")){
                         String location = reader.getElementText();
                         if(className == null || location == null){
@@ -200,7 +230,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                         }
                         try{
                             URL url = new URL(location);
-                            if(!validItems.contains(url)){
+                            if(validItems == null || !validItems.contains(url)){
                                 while(reader.hasNext()){
                                     XMLEvent xmlevent = reader.nextTag();
                                     if(xmlevent.isEndElement() &&
@@ -216,14 +246,21 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                         }
                     }
                     else if(se.getName().getLocalPart().equals("element")){
-                        BirthmarkElement be = service.buildBirthmarkElement(reader.getElementText());
-                        birthmark.addElement(be);
+                        if(service != null){
+                            BirthmarkElement be = service.buildBirthmarkElement(reader.getElementText());
+                            birthmark.addElement(be);
+                        }
                     }
                     else if(se.getName().getLocalPart().equals("birthmark")){
                         String type = se.getAttributeByName(new QName("type")).getValue();
                         service = env.getService(type);
-                        birthmark = service.buildBirthmark();
-                        bs.addBirthmark(birthmark);
+                        if(service != null){
+                            birthmark = service.buildBirthmark();
+                            bs.addBirthmark(birthmark);
+                        }
+                        else{
+                            birthmark = null;
+                        }
                     }
                 }
                 else if(event.isEndElement()){
