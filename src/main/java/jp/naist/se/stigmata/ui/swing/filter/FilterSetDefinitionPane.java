@@ -27,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ui.swing.Messages;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 
 /**
  * 
@@ -125,11 +125,11 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         north.add(matchall);
         north.add(matchany);
 
-        addfilter = Utility.createButton("newfilterset");
-        updatefilter = Utility.createButton("updatefilterset");
-        removefilter = Utility.createButton("removefilterset");
-        upButton = Utility.createButton("moveup");
-        downButton = Utility.createButton("movedown");
+        addfilter = GUIUtility.createButton("newfilterset");
+        updatefilter = GUIUtility.createButton("updatefilterset");
+        removefilter = GUIUtility.createButton("removefilterset");
+        upButton = GUIUtility.createButton("moveup");
+        downButton = GUIUtility.createButton("movedown");
         
         Box south = Box.createHorizontalBox();
         south.add(Box.createHorizontalGlue());
@@ -228,8 +228,8 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
             add(south, BorderLayout.SOUTH);
         }
 
-        Utility.decorateJComponent(name, "filtername");
-        Utility.decorateJComponent(listpane, "filterorder");
+        GUIUtility.decorateJComponent(name, "filtername");
+        GUIUtility.decorateJComponent(listpane, "filterorder");
 
         setEnabled(buttonShown);
 

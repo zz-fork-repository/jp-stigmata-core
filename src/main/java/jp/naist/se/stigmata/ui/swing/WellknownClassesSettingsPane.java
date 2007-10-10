@@ -145,8 +145,8 @@ public class WellknownClassesSettingsPane extends JPanel{
 
     private JComponent createCheckPane(){
         final JTextField text = new JTextField();
-        final JButton checkButton = Utility.createButton("checkwellknown");
-        final JLabel label = new JLabel(Utility.getIcon("wellknownclasschecker.default.icon"));
+        final JButton checkButton = GUIUtility.createButton("checkwellknown");
+        final JLabel label = new JLabel(GUIUtility.getIcon("wellknownclasschecker.default.icon"));
         checkButton.setEnabled(false);
 
         ActionListener listener = new ActionListener(){
@@ -155,10 +155,10 @@ public class WellknownClassesSettingsPane extends JPanel{
                 if(t.length() > 0){
                     String message = Messages.getString("wellknownclasschecker.wellknown.tooltip");
                     if(isWellknownClass(t)){
-                        label.setIcon(Utility.getIcon("wellknownclasschecker.wellknown.icon"));
+                        label.setIcon(GUIUtility.getIcon("wellknownclasschecker.wellknown.icon"));
                     }
                     else{
-                        label.setIcon(Utility.getIcon("wellknownclasschecker.notwellknown.icon"));
+                        label.setIcon(GUIUtility.getIcon("wellknownclasschecker.notwellknown.icon"));
                         message = Messages.getString("wellknownclasschecker.notwellknown.tooltip");
                     }
                     label.setToolTipText(message);
@@ -230,9 +230,9 @@ public class WellknownClassesSettingsPane extends JPanel{
                 editRule(list.getSelectedIndex());
             }
         };
-        JButton addButton = Utility.createButton("addwellknown", addAction);
-        JButton removeButton = Utility.createButton("removewellknown", removeAction);
-        JButton updateButton = Utility.createButton("updatewellknown", updateAction);
+        JButton addButton = GUIUtility.createButton("addwellknown", addAction);
+        JButton removeButton = GUIUtility.createButton("removewellknown", removeAction);
+        JButton updateButton = GUIUtility.createButton("updatewellknown", updateAction);
         removeAction.setEnabled(false);
         updateAction.setEnabled(false);
 
@@ -253,9 +253,9 @@ public class WellknownClassesSettingsPane extends JPanel{
             }
         });
         JPopupMenu popup = new JPopupMenu();
-        popup.add(Utility.createJMenuItem("addwellknown", addAction));
-        popup.add(Utility.createJMenuItem("updatewellknown", updateAction));
-        popup.add(Utility.createJMenuItem("removewellknown", removeAction));
+        popup.add(GUIUtility.createJMenuItem("addwellknown", addAction));
+        popup.add(GUIUtility.createJMenuItem("updatewellknown", updateAction));
+        popup.add(GUIUtility.createJMenuItem("removewellknown", removeAction));
 
         list.addMouseListener(new PopupShowAction(popup));
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -272,9 +272,9 @@ public class WellknownClassesSettingsPane extends JPanel{
     private WellknownClassJudgeRule createOrUpdateRule(WellknownClassJudgeRule rule){
         JTextField text = new JTextField();
         text.setOpaque(true);
-        Utility.decorateJComponent(text, "addwellknown.newrule.pattern");
+        GUIUtility.decorateJComponent(text, "addwellknown.newrule.pattern");
         JCheckBox excludeCheck = new JCheckBox(Messages.getString("addwellknown.newrule.exclude.label"), false);
-        Utility.decorateJComponent(excludeCheck, "addwellknown.newrule.exclude");
+        GUIUtility.decorateJComponent(excludeCheck, "addwellknown.newrule.exclude");
         JComboBox matchTypeComboBox = new JComboBox();
         for(Map.Entry<String, String> entry: matchTypeMap.entrySet()){
             matchTypeComboBox.addItem(entry.getValue());

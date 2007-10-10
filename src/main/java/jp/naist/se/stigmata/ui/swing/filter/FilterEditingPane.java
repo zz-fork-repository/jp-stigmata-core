@@ -29,7 +29,7 @@ import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 
 /**
  * 
@@ -136,9 +136,9 @@ public class FilterEditingPane extends JPanel{
     private void initLayouts(){
         cardComponent = new JPanel();
         combo = new JComboBox();
-        addButton = Utility.createButton("newfilter");
-        removeButton = Utility.createButton("removefilter");
-        updateButton = Utility.createButton("updatefilter");
+        addButton = GUIUtility.createButton("newfilter");
+        removeButton = GUIUtility.createButton("removefilter");
+        updateButton = GUIUtility.createButton("updatefilter");
 
         combo.addItemListener(new ItemListener(){
             public void itemStateChanged(ItemEvent e){

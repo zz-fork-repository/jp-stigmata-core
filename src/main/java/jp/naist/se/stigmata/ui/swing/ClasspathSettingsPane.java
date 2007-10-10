@@ -108,7 +108,7 @@ public class ClasspathSettingsPane extends JPanel{
         classpath = new TargetSelectionPane(stigmata);
         bootClasspath = new TargetSelectionPane(stigmata);
         JComponent south = Box.createHorizontalBox();
-        final JButton findButton = Utility.createButton("findclass");
+        final JButton findButton = GUIUtility.createButton("findclass");
         final JTextField text = new JTextField();
         final JLabel label = new JLabel();
 
@@ -124,7 +124,7 @@ public class ClasspathSettingsPane extends JPanel{
 
         south.setBorder(new TitledBorder(Messages.getString("classpathchecker.border")));
 
-        label.setIcon(Utility.getIcon("classpathchecker.default.icon"));
+        label.setIcon(GUIUtility.getIcon("classpathchecker.default.icon"));
         label.setToolTipText(Messages.getString("classpathchecker.default.tooltip"));
 
         setLayout(new BorderLayout());
@@ -164,10 +164,10 @@ public class ClasspathSettingsPane extends JPanel{
                 boolean flag = findClass(t);
                 String message = Messages.getString("classpathchecker.found.tooltip");
                 if(flag){
-                    label.setIcon(Utility.getIcon("classpathchecker.found.icon"));
+                    label.setIcon(GUIUtility.getIcon("classpathchecker.found.icon"));
                 }
                 else{
-                    label.setIcon(Utility.getIcon("classpathchecker.notfound.icon"));
+                    label.setIcon(GUIUtility.getIcon("classpathchecker.notfound.icon"));
                     message = Messages.getString("classpathchecker.notfound.tooltip");
                 }
                 label.setToolTipText(message);

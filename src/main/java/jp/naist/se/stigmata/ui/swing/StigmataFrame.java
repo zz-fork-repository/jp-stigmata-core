@@ -61,6 +61,7 @@ import jp.naist.se.stigmata.ui.swing.actions.LicenseAction;
 import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
 import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
+import jp.naist.se.stigmata.utils.Utility;
 
 import org.apache.commons.cli.ParseException;
 
@@ -94,7 +95,7 @@ public class StigmataFrame extends JFrame{
         this.stigmata = stigmata;
         this.environment = environment;
         this.fileio = new FileIOManager(this, environment);
-        Image iconImage = Utility.getImage("stigmata.icon");
+        Image iconImage = GUIUtility.getImage("stigmata.icon");
         if(iconImage != null){
             setIconImage(iconImage);
         }
@@ -177,7 +178,7 @@ public class StigmataFrame extends JFrame{
         );
         int compareDetail = getNextCount("compare_detail");
 
-        Utility.addNewTab("comparedetail", tabPane, detail,
+        GUIUtility.addNewTab("comparedetail", tabPane, detail,
             new Object[] { new Integer(compareDetail), },
             new Object[] {
                 Utility.array2String(target1.getBirthmarkTypes()),
@@ -196,7 +197,7 @@ public class StigmataFrame extends JFrame{
 
             RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, ers);
             int compareCount = getNextCount("compare");
-            Utility.addNewTab(
+            GUIUtility.addNewTab(
                 "compare", tabPane, compare,
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
@@ -222,7 +223,7 @@ public class StigmataFrame extends JFrame{
                 resultset = engine.filter(resultset);
             }
             int compareCount = getNextCount("compare");
-            Utility.addNewTab(
+            GUIUtility.addNewTab(
                 "compare", tabPane, new PairComparisonResultSetPane(this, resultset),
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
@@ -244,7 +245,7 @@ public class StigmataFrame extends JFrame{
             int comparePair = getNextCount("compare_pair");
 
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(extraction);
-            Utility.addNewTab("comparepair", tabPane,
+            GUIUtility.addNewTab("comparepair", tabPane,
                 new PairComparisonResultSetPane(this, resultset),
                 new Object[] { new Integer(comparePair), },
                 new Object[] {
@@ -272,7 +273,7 @@ public class StigmataFrame extends JFrame{
                 ComparisonResultSet crs = engine.compare(targetX, targetY, context);
                 int comparePair = getNextCount("compare_pair");
 
-                Utility.addNewTab(
+                GUIUtility.addNewTab(
                     "comparepair", tabPane,
                     new PairComparisonResultSetPane(this, crs),
                     new Object[] { new Integer(comparePair), },
@@ -291,7 +292,7 @@ public class StigmataFrame extends JFrame{
 
     public void showComparisonResultSet(ComparisonResultSet resultset){
         int comparePair = getNextCount("compare_pair");
-        Utility.addNewTab(
+        GUIUtility.addNewTab(
             "comparisonresultset", tabPane,
             new PairComparisonResultSetPane(this, resultset),
             new Object[] { new Integer(comparePair), }, null
@@ -303,7 +304,7 @@ public class StigmataFrame extends JFrame{
         try{
             MDSGraphPanel panel = new MDSGraphPanel(this, set, context);
             int mappingGraphCount = getNextCount("mds_graph");
-            Utility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
+            GUIUtility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         } catch(Exception e){
             showExceptionMessage(e);
@@ -314,14 +315,29 @@ public class StigmataFrame extends JFrame{
         SimilarityDistributionGraphPane graph = new SimilarityDistributionGraphPane(this, distributions);
 
         int similarityGraphCount = getNextCount("similarity_graph");
-        Utility.addNewTab("similaritygraph", tabPane, graph, new Object[] { new Integer(similarityGraphCount), }, null);
+        GUIUtility.addNewTab("similaritygraph", tabPane, graph, new Object[] { new Integer(similarityGraphCount), }, null);
+        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+    }
+
+    public void compareExtractionResult(ExtractionResultSet ers){
+        RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, ers);
+        int compareCount = getNextCount("compare");
+        GUIUtility.addNewTab(
+            "compare", tabPane, compare,
+            new Object[] { new Integer(compareCount), },
+            new Object[] {
+                Utility.array2String(ers.getBirthmarkTypes()),
+                Utility.array2String(new String[0]),
+                Utility.array2String(new String[0]),
+            }
+        );
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
     public void showExtractionResult(ExtractionResultSet ers){
         int extractCount = getNextCount("extract");
         BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, ers);
-        Utility.addNewTab(
+        GUIUtility.addNewTab(
             "extract", tabPane, viewer,
             new Object[] { new Integer(extractCount), },
             new Object[] { Utility.array2String(ers.getBirthmarkTypes()), }
@@ -330,10 +346,10 @@ public class StigmataFrame extends JFrame{
         
     }
 
-    public void extract(String[] targets, BirthmarkContext context){
+    public void extract(String[] targetX, String[] targetY, BirthmarkContext context){
         try{
             BirthmarkEngine engine = getStigmata().createEngine(context.getEnvironment());
-            ExtractionResultSet ers = engine.extract(targets, context);
+            ExtractionResultSet ers = engine.extract(targetX, targetY, context);
             showExtractionResult(ers);
         }catch(Throwable e){
             showExceptionMessage(e);
@@ -369,19 +385,6 @@ public class StigmataFrame extends JFrame{
         return mapping;
     }
 
-    private static void deleteDirectory(File dir){
-        File[] files = dir.listFiles();
-        for(File file: files){
-            if(file.isDirectory()){
-                deleteDirectory(file);
-            }
-            else{
-                file.delete();
-            }
-        }
-        dir.delete();
-    }
-
     private void reloadSettings(String[] args){
         try{
             setVisible(false);
@@ -392,7 +395,7 @@ public class StigmataFrame extends JFrame{
     }
 
     private void clearSettings(){
-        deleteDirectory(new File(BirthmarkEnvironment.getStigmataHome()));
+        Utility.deleteDirectory(new File(BirthmarkEnvironment.getStigmataHome()));
         reloadSettings(new String[] { "--reset-config", "--mode", "gui", });
     }
 
@@ -400,7 +403,7 @@ public class StigmataFrame extends JFrame{
         setTitle(Messages.getString("stigmata.frame.title"));
         initComponents();
 
-        Utility.addNewTab("control", tabPane, control = new ControlPane(this), null, null);
+        GUIUtility.addNewTab("control", tabPane, control = new ControlPane(this), null, null);
         control.inititalize();
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
@@ -470,15 +473,15 @@ public class StigmataFrame extends JFrame{
     }
 
     private JMenu createFileMenu(){
-        JMenu fileMenu = Utility.createJMenu("fileMenu");
-        JMenuItem newFrameMenu = Utility.createJMenuItem("newframe");
-        JMenuItem saveMenu = Utility.createJMenuItem("savesetting");
-        JMenuItem exportMenu = Utility.createJMenuItem("exportsetting");
-        JMenuItem clearMenu = Utility.createJMenuItem("clearsetting");
-        JMenuItem refreshMenu = Utility.createJMenuItem("refreshsetting");
-        JMenuItem closeTabMenu = Utility.createJMenuItem("closetab");
-        JMenuItem closeMenu = Utility.createJMenuItem("closeframe");
-        JMenuItem exitMenu = Utility.createJMenuItem("exit");
+        JMenu fileMenu = GUIUtility.createJMenu("fileMenu");
+        JMenuItem newFrameMenu = GUIUtility.createJMenuItem("newframe");
+        JMenuItem saveMenu = GUIUtility.createJMenuItem("savesetting");
+        JMenuItem exportMenu = GUIUtility.createJMenuItem("exportsetting");
+        JMenuItem clearMenu = GUIUtility.createJMenuItem("clearsetting");
+        JMenuItem refreshMenu = GUIUtility.createJMenuItem("refreshsetting");
+        JMenuItem closeTabMenu = GUIUtility.createJMenuItem("closetab");
+        JMenuItem closeMenu = GUIUtility.createJMenuItem("closeframe");
+        JMenuItem exitMenu = GUIUtility.createJMenuItem("exit");
         this.closeTabMenu = closeTabMenu;
         this.saveMenu = saveMenu;
         saveMenu.setEnabled(false);
@@ -547,11 +550,11 @@ public class StigmataFrame extends JFrame{
     }
 
     private JMenu createHelpMenu(){
-        JMenu menu = Utility.createJMenu("helpmenu");
-        JMenuItem about = Utility.createJMenuItem("about", new AboutAction(this));
-        JMenuItem license = Utility.createJMenuItem("license", new LicenseAction(this));
-        JMenuItem help = Utility.createJMenuItem("helpmenu");
-        expertmodeMenu = Utility.createJCheckBoxMenuItem("expertmenu");
+        JMenu menu = GUIUtility.createJMenu("helpmenu");
+        JMenuItem about = GUIUtility.createJMenuItem("about", new AboutAction(this));
+        JMenuItem license = GUIUtility.createJMenuItem("license", new LicenseAction(this));
+        JMenuItem help = GUIUtility.createJMenuItem("helpmenu");
+        expertmodeMenu = GUIUtility.createJCheckBoxMenuItem("expertmenu");
 
         menu.add(about);
         menu.add(license);
@@ -572,7 +575,7 @@ public class StigmataFrame extends JFrame{
     }
 
     private JMenu createLookAndFeelMenu(){
-        JMenu laf = Utility.createJMenu("lookandfeel");
+        JMenu laf = GUIUtility.createJMenu("lookandfeel");
         ButtonGroup bg = new ButtonGroup();
         UIManager.LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
         LookAndFeel lookfeel = UIManager.getLookAndFeel();

@@ -125,7 +125,7 @@ public class PairComparisonResultSetPane extends JPanel{
         JComponent buttonPanel = Box.createHorizontalBox();
         JPanel similarityPane = new JPanel(new GridLayout(1, 3));
         JComponent southPanel = Box.createVerticalBox();
-        JButton saveButton = Utility.createButton(
+        JButton saveButton = GUIUtility.createButton(
             "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
@@ -136,10 +136,10 @@ public class PairComparisonResultSetPane extends JPanel{
                 }
             })
         );
-        JButton updateColorButton = Utility.createButton(
+        JButton updateColorButton = GUIUtility.createButton(
             "updatecellcolor", new UpdateBirthmarkCellColorAction(this, comparison.getEnvironment())
         );
-        JButton obfuscateButton = Utility.createButton("obfuscate");
+        JButton obfuscateButton = GUIUtility.createButton("obfuscate");
         JScrollPane scroll = new JScrollPane();
         averageLabel = new JLabel(Double.toString(average), JLabel.RIGHT);
         maximumLabel = new JLabel(Double.toString(maximum), JLabel.RIGHT);

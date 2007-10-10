@@ -14,7 +14,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 
 import jp.naist.se.stigmata.ui.swing.Messages;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class ChangeColorAction extends AbstractAction{
 
     public ChangeColorAction(String label, Component component, 
                               Color initialColor, ActionListener listener){
-        super(Messages.getString(label + ".label"), Utility.getIcon(label + ".icon"));
+        super(Messages.getString(label + ".label"), GUIUtility.getIcon(label + ".icon"));
         this.component = component;
         this.listener = listener;
         this.currentColor = initialColor;

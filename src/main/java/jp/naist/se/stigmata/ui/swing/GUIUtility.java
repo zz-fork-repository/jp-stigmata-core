@@ -28,10 +28,10 @@ import javax.swing.border.TitledBorder;
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
-public class Utility{
+public class GUIUtility{
     private static final String iconPath = Messages.getString("icon.directory");
 
-    private Utility(){
+    private GUIUtility(){
     }
 
     public static void decorateJComponent(JComponent component, String label){
@@ -150,7 +150,7 @@ public class Utility{
             if(resourcePathPrefix != null){
                 resourcePath = resourcePathPrefix + resourcePath;
             }
-            return Utility.class.getResource(resourcePath);
+            return GUIUtility.class.getResource(resourcePath);
         }
         return null;
     }
@@ -175,16 +175,6 @@ public class Utility{
             return ((ImageIcon)icon).getImage();
         }
         return null;
-    }
-
-    public static String array2String(String[] values){
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < values.length; i++){
-            if(i != 0)
-                builder.append(", ");
-            builder.append(values[i]);
-        }
-        return new String(builder);
     }
 
     public static void addNewTab(String key, JTabbedPane tabPane, Component comp){

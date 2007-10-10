@@ -112,8 +112,8 @@ public class BirthmarkDefinitionPane extends JPanel{
         panel.add(information = new InformationPane(stigmata, this), BorderLayout.CENTER);
 
         Box buttonPanel = Box.createHorizontalBox();
-        newService = Utility.createButton("newservice");
-        removeService = Utility.createButton("removeservice");
+        newService = GUIUtility.createButton("newservice");
+        removeService = GUIUtility.createButton("removeservice");
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(newService);
         buttonPanel.add(Box.createHorizontalGlue());
@@ -370,13 +370,13 @@ public class BirthmarkDefinitionPane extends JPanel{
             add(scroll);
             add(Box.createVerticalGlue());
 
-            Utility.decorateJComponent(type, "define.type");
-            Utility.decorateJComponent(displayType, "define.displaytype");
-            Utility.decorateJComponent(scroll, "define.description");
-            Utility.decorateJComponent(extractor, "define.extractor");
-            Utility.decorateJComponent(comparator, "define.comparator");
-            Utility.decorateJComponent(expert, "define.expert");
-            Utility.decorateJComponent(userDefined, "define.userdef");
+            GUIUtility.decorateJComponent(type, "define.type");
+            GUIUtility.decorateJComponent(displayType, "define.displaytype");
+            GUIUtility.decorateJComponent(scroll, "define.description");
+            GUIUtility.decorateJComponent(extractor, "define.extractor");
+            GUIUtility.decorateJComponent(comparator, "define.comparator");
+            GUIUtility.decorateJComponent(expert, "define.expert");
+            GUIUtility.decorateJComponent(userDefined, "define.userdef");
 
             userDefined.setEnabled(false);
             expert.setEnabled(false);

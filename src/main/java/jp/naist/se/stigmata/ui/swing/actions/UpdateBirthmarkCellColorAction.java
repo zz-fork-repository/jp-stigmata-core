@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ui.swing.CompareTableCellRenderer;
 import jp.naist.se.stigmata.ui.swing.Messages;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 
 public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private static final long serialVersionUID = 2390797591047570440L;
@@ -95,8 +95,8 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
         private void initLayouts(){
             label = new JLabel(Messages.getString("rank_" + rank + ".label"));
             label.setOpaque(true);
-            JButton fore = Utility.createButton("updatecellfore");
-            JButton back = Utility.createButton("updatecellback");
+            JButton fore = GUIUtility.createButton("updatecellfore");
+            JButton back = GUIUtility.createButton("updatecellback");
 
             ActionListener listener = new ActionListener(){
                 public void actionPerformed(ActionEvent e){

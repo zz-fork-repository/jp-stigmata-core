@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 import jp.naist.se.stigmata.ui.swing.actions.ChangeColorAction;
 
 /**
@@ -148,7 +148,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
         iconLabel = new JLabel();
         Box south = Box.createHorizontalBox();
-        JButton storeImageButton = Utility.createButton("savegraph");
+        JButton storeImageButton = GUIUtility.createButton("savegraph");
         JButton switchColorButton = new JButton(new ChangeColorAction(stigmata, new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 ChangeColorAction action = (ChangeColorAction)e.getSource();

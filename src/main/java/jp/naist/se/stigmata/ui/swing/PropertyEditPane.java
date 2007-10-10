@@ -205,14 +205,14 @@ public class PropertyEditPane extends JPanel{
                 addNewProperty(table.getSelectedRow());
             }
         };
-        JButton addButton = Utility.createButton("propertyadd", addAction);
-        JButton changeButton = Utility.createButton("propertychange", changeAction);
-        JButton removeButton = Utility.createButton("propertyremove", removeAction);
+        JButton addButton = GUIUtility.createButton("propertyadd", addAction);
+        JButton changeButton = GUIUtility.createButton("propertychange", changeAction);
+        JButton removeButton = GUIUtility.createButton("propertyremove", removeAction);
 
         final JPopupMenu popup = new JPopupMenu();
-        popup.add(Utility.createJMenuItem("propertyadd", addAction));
-        popup.add(Utility.createJMenuItem("propertychange", changeAction));
-        popup.add(Utility.createJMenuItem("propertyremove", removeAction));
+        popup.add(GUIUtility.createJMenuItem("propertyadd", addAction));
+        popup.add(GUIUtility.createJMenuItem("propertychange", changeAction));
+        popup.add(GUIUtility.createJMenuItem("propertyremove", removeAction));
 
         setLayout(new BorderLayout());
         JScrollPane scroll = new JScrollPane(table);

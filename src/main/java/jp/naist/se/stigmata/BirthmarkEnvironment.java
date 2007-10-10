@@ -109,7 +109,10 @@ public class BirthmarkEnvironment{
 
     public static synchronized final String getStigmataHome(){
         if(HOME_DIRECTORY_PATH == null){
-            String stigmataHome = System.getenv("STIGMATA_HOME");
+            String stigmataHome = System.getProperty("stigmata.home");
+            if(stigmataHome == null){
+                stigmataHome = System.getenv("STIGMATA_HOME");
+            }
             if(stigmataHome == null){
                 String parent = System.getenv("HOME");
                 if(parent == null){
@@ -118,6 +121,7 @@ public class BirthmarkEnvironment{
                 if(parent == null){
                     parent = ".";
                 }
+                // for windows
                 if(parent.startsWith("C:\\Document and Settings\\")){
                     stigmataHome = parent + File.separator + "Application Data" + File.separator + "stigmata";
                 }

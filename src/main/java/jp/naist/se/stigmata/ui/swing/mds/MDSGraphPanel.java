@@ -32,7 +32,7 @@ import jp.naist.se.stigmata.ui.swing.ClippedLRListCellRenderer;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.PopupButton;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 import jp.naist.se.stigmata.ui.swing.actions.ChangeColorAction;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.ui.swing.mds.mark.DrawerFactory;
@@ -140,16 +140,16 @@ public class MDSGraphPanel extends JPanel{
         saveCoordinate.setDescrpition(Messages.getString("savelocation.description"));
 
         PopupButton colorButton = new PopupButton(
-            Utility.createButton("updatecolor", pointColorAction)
+            GUIUtility.createButton("updatecolor", pointColorAction)
         );
-        colorButton.addMenuItem(Utility.createJMenuItem("updateovercolor", overColorAction));
+        colorButton.addMenuItem(GUIUtility.createJMenuItem("updateovercolor", overColorAction));
         PopupButton saveButton = new PopupButton(
-            Utility.createButton("savemds", saveMDSAction)
+            GUIUtility.createButton("savemds", saveMDSAction)
         );
-        saveButton.addMenuItem(Utility.createJMenuItem("savelocation", saveCoordinate));
+        saveButton.addMenuItem(GUIUtility.createJMenuItem("savelocation", saveCoordinate));
 
         JLabel numberOfDotsLabel = new JLabel(String.valueOf(set.length));
-        Utility.decorateJComponent(numberOfDotsLabel, "mdsgraph.count");
+        GUIUtility.decorateJComponent(numberOfDotsLabel, "mdsgraph.count");
         // set the number of dots of each groups
         JComboBox numberOfGroupsLabelCombo = new JComboBox();
         GeometoryType[] types = GeometoryType.values();
@@ -165,7 +165,7 @@ public class MDSGraphPanel extends JPanel{
         numberOfGroupsLabelCombo.setEditable(false);
         Dimension dim = new Dimension(100, numberOfGroupsLabelCombo.getPreferredSize().height);
         numberOfGroupsLabelCombo.setRenderer(new ClippedLRListCellRenderer(dim, 50));
-        Utility.decorateJComponent(numberOfGroupsLabelCombo, "mdsgraph.group");
+        GUIUtility.decorateJComponent(numberOfGroupsLabelCombo, "mdsgraph.group");
 
         JPanel north = new JPanel(new GridLayout(1, 2));
         north.add(numberOfDotsLabel);

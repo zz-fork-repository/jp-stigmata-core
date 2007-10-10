@@ -240,13 +240,13 @@ public class TargetSelectionPane extends JPanel{
             }
         };
 
-        JButton addButton = Utility.createButton("addpackage", addAction);
-        JButton removeButton = Utility.createButton("removepackage", removeAction);
+        JButton addButton = GUIUtility.createButton("addpackage", addAction);
+        JButton removeButton = GUIUtility.createButton("removepackage", removeAction);
         removeAction.setEnabled(false);
 
         final JPopupMenu popup = new JPopupMenu();
-        popup.add(Utility.createJMenuItem("addpackage", addAction));
-        popup.add(Utility.createJMenuItem("removepackage", removeAction));
+        popup.add(GUIUtility.createJMenuItem("addpackage", addAction));
+        popup.add(GUIUtility.createJMenuItem("removepackage", removeAction));
 
         setLayout(new BorderLayout());
 

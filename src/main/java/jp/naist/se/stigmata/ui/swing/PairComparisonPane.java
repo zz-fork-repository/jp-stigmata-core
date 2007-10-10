@@ -75,7 +75,7 @@ public class PairComparisonPane extends JPanel{
         panel.add(similarityPanel);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton saveButton = Utility.createButton(
+        JButton saveButton = GUIUtility.createButton(
             "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);

@@ -12,9 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -55,6 +53,7 @@ public class ControlPane extends JPanel{
     private BirthmarkDefinitionPane definition;
     private PropertyEditPane properties;
     private FilterManagementPane filters;
+    private ExtractedHistoryPane history;
     private JTabbedPane controlTab;
     private JButton compareButton;
     private JButton extractButton;
@@ -76,12 +75,13 @@ public class ControlPane extends JPanel{
         wellknownClassses = new WellknownClassesSettingsPane(stigmata);
         classpath = new ClasspathSettingsPane(stigmata);
         filters = new FilterManagementPane(stigmata);
+        history = new ExtractedHistoryPane(stigmata);
         initComponents();
 
-        Utility.addNewTab("targets", controlTab, control);
-        Utility.addNewTab("wellknown", controlTab, wellknownClassses);
-        Utility.addNewTab("classpath", controlTab, classpath);
-        Utility.addNewTab("property", controlTab, properties);
+        GUIUtility.addNewTab("targets", controlTab, control);
+        GUIUtility.addNewTab("wellknown", controlTab, wellknownClassses);
+        GUIUtility.addNewTab("classpath", controlTab, classpath);
+        GUIUtility.addNewTab("property", controlTab, properties);
         reset();
     }
 
@@ -153,12 +153,14 @@ public class ControlPane extends JPanel{
         stigmata.setExpertMode(expertmode);
 
         if(expertmode){
-            Utility.addNewTab("definition", controlTab, definition);
-            Utility.addNewTab("filter", controlTab, filters);
+            GUIUtility.addNewTab("definition", controlTab, definition);
+            GUIUtility.addNewTab("filter", controlTab, filters);
+            GUIUtility.addNewTab("history", controlTab, history);
         }
         else{
             removeTabByName(Messages.getString("definition.tab.label"));
             removeTabByName(Messages.getString("filter.tab.label"));
+            removeTabByName(Messages.getString("history.tab.label"));
         }
         updateEnable();
     }
@@ -230,22 +232,12 @@ public class ControlPane extends JPanel{
 
     private void extractButtonActionPerformed(ActionEvent e){
         BirthmarkContext context = generateContext();
+        context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_XY);
 
         String[] fileX = targetX.getValues();
         String[] fileY = targetY.getValues();
-        Set<String> targets = new HashSet<String>();
-        if(fileX != null && fileX.length > 0){
-            for(String file: fileX){
-                targets.add(file);
-            }
-        }
-        if(fileY != null && fileY.length > 0){
-            for(String file: fileY){
-                targets.add(file);
-            }
-        }
 
-        stigmata.extract(targets.toArray(new String[targets.size()]), context);
+        stigmata.extract(fileX, fileY, context);
     }
 
     private void compareRoundRobinWithFiltering(){
@@ -346,9 +338,9 @@ public class ControlPane extends JPanel{
 
     private void initComponents(){
         controlTab = new JTabbedPane();
-        resetButton = Utility.createButton("reset");
-        extractButton = Utility.createButton("extract");
-        compareButton = Utility.createButton("roundrobin");
+        resetButton = GUIUtility.createButton("reset");
+        extractButton = GUIUtility.createButton("extract");
+        compareButton = GUIUtility.createButton("roundrobin");
         comparePopup = new PopupButton(compareButton);
         unitBox = new JComboBox();
 
@@ -404,7 +396,7 @@ public class ControlPane extends JPanel{
 
         String[] comparisonMethods = Messages.getStringArray("comparison.methods");
         for(int i = 1; i < comparisonMethods.length; i++){
-            JMenuItem item = Utility.createJMenuItem(comparisonMethods[i]);
+            JMenuItem item = GUIUtility.createJMenuItem(comparisonMethods[i]);
             comparePopup.addMenuItem(item);
             item.addActionListener(compareListener);
         }

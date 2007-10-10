@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.ui.swing.Messages;
-import jp.naist.se.stigmata.ui.swing.Utility;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 
 /**
  * 
@@ -37,7 +37,7 @@ public class AboutAction extends ShowTextAction{
 
     @Override
     public String getMessage(){
-        String aboutMessage = loadStringFromFile(Utility.getResource("about.message.file"));
+        String aboutMessage = loadStringFromFile(GUIUtility.getResource("about.message.file"));
 
         Package p = getClass().getPackage();
         aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
@@ -49,7 +49,7 @@ public class AboutAction extends ShowTextAction{
 
     @Override
     protected void updatePanel(JPanel panel){
-        JLabel logo = new JLabel(Utility.getIcon("stigmata.logo"));
+        JLabel logo = new JLabel(GUIUtility.getIcon("stigmata.logo"));
         panel.add(logo, BorderLayout.NORTH);
     }
 }

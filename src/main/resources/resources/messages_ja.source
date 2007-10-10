@@ -217,8 +217,10 @@ showlabel.button.label=ラベルの表示
 savebirthmark.button.label=保存
 savebirthmark.button.tooltip=抽出されたバースマークを保存します．
 
-birthmarktree.root.label=バースマーク
+comparebirthmark.button.label=総当たりで比較
+comparebirthmark.button.tooltip=抽出されたバースマークを総当たりで比較します．
 
+birthmarktree.root.label=バースマーク
 
 ################################################
 # graphpane
@@ -432,6 +434,28 @@ both.button.label=${target.BOTH}バースマーク
 target1.name.button.label=${target.TARGET1}クラス名
 target2.name.button.label=${target.TARGET2}クラス名
 both.name.button.label=${target.BOTH}クラス名
+
+############################################################
+# history pane
+############################################################
+
+history.tab.label=バースマーク抽出履歴
+history.tab.tooltip=抽出したバースマークの履歴
+
+historylist.border=抽出履歴
+historylist.tooltip=今までにバースマークを抽出した履歴のリスト
+
+historylocation.border=抽出履歴の保存場所
+historylocation.tooltip=抽出履歴の保存場所のリスト
+
+showhistory.button.label=履歴の表示
+showhistory.button.tooltip=抽出した履歴を表示します．
+
+refreshhistory.button.label=リフレッシュ
+refreshhistory.button.tooltip=履歴を検索しなおします．
+
+deletehistory.button.label=削除
+deletehistory.button.tooltip=選択された履歴を削除します（履歴ファイルを削除します）．
 
 ################################################
 # update table cell color

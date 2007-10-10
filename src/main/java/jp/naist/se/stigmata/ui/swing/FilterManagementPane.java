@@ -106,9 +106,9 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         filterPane.addComparisonPairFilterListener(definition);
         JComponent filtersetlist = createFilterSetPane();
 
-        Utility.decorateJComponent(filtersetlist, "filtersetlist.pane");
-        Utility.decorateJComponent(definition, "filterdefinition.pane");
-        Utility.decorateJComponent(filterPane, "filter.pane");
+        GUIUtility.decorateJComponent(filtersetlist, "filtersetlist.pane");
+        GUIUtility.decorateJComponent(definition, "filterdefinition.pane");
+        GUIUtility.decorateJComponent(filterPane, "filter.pane");
 
         setLayout(new GridLayout(1, 3));
         add(filtersetlist);
@@ -120,8 +120,8 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         model = new DefaultListModel();
         list = new JList(model);
 
-        final JButton upButton = Utility.createButton("moveup");
-        final JButton downButton = Utility.createButton("movedown");
+        final JButton upButton = GUIUtility.createButton("moveup");
+        final JButton downButton = GUIUtility.createButton("movedown");
 
         Box south = Box.createHorizontalBox();
         south.add(Box.createHorizontalGlue());
