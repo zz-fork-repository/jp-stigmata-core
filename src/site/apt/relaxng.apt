@@ -161,9 +161,7 @@ of Stigmata.
       <zeroOrMore>
         <choice>
           <ref name="exclude"/>
-          <ref name="package"/>
-          <ref name="class-name"/>
-          <ref name="fully-name"/>
+          <ref name="judge-rule"/>
         </choice>
       </zeroOrMore>
     </element>
@@ -181,8 +179,16 @@ of Stigmata.
 
   <define name="exclude">
     <element name="exclude">
-      <ref name="match-type"/>
+      <ref name="judge-rule"/>
     </element>
+  </define>
+
+  <define name="judge-rule">
+    <choice>
+      <ref name="package-name"/>
+      <ref name="class-name"/>
+      <ref name="fully-name"/>
+    </choice>
   </define>
   <define name="package">
     <element name="package">
@@ -205,11 +211,17 @@ of Stigmata.
       <ref name="prefix"/>
       <ref name="match"/>
       <ref name="suffix"/>
+      <ref name="not-match"/>
     </choice>
   </define>
 
   <define name="match">
     <element name="match">
+      <data type="string"/>
+    </element>
+  </define>
+  <define name="not-match">
+    <element name="not-match">
       <data type="string"/>
     </element>
   </define>
@@ -256,11 +268,11 @@ information is shown as xml file formatted in this DTD.
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
-    <ref name="birthmark"/>
+    <ref name="birthmark-result-set"/>
   </start>
 
-  <define name="birthmark">
-    <element name="birthmark">
+  <define name="birthmark-result-set">
+    <element name="birthmark-result-set">
       <optional>
         <ref name="birthmark-services"/>
       </optional>
@@ -318,6 +330,24 @@ information is shown as xml file formatted in this DTD.
 
   <define name="extracted-birthmarks">
     <element name="extracted-birthmarks">
+      <optional>
+        <element name="unit">
+          <choice>
+            <value>CLASS</value>
+            <value>PACKAGE</value>
+            <value>ARCHIVE</value>
+          </choice>
+        </element>
+      </optional>
+      <optional>
+        <element name="birthmark-types">
+          <oneOrMore>
+            <element name="birthmark-type">
+              <data type="string" />
+            </element>
+          </oneOrMore>
+        </element>
+      </optional>
       <zeroOrMore>
         <ref name="extracted-birthmark"/>
       </zeroOrMore>
@@ -326,7 +356,7 @@ information is shown as xml file formatted in this DTD.
 
   <define name="extracted-birthmark">
     <element name="extracted-birthmark">
-      <element name="class-name">
+      <element name="name">
         <data type="string"/>
       </element>
       <element name="location">
@@ -379,7 +409,7 @@ information is shown as xml file formatted in this DTD.
   </define>
 
   <define name="target">
-    <element name="class-name">
+    <element name="name">
       <data type="string" />
     </element>
     <element name="location">
