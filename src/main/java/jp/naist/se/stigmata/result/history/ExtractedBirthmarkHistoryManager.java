@@ -29,6 +29,7 @@ public class ExtractedBirthmarkHistoryManager{
 
     static{
         TARGETS.put(BirthmarkStoreTarget.XMLFILE, XmlFileExtractedBirthmarkHistory.class);
+        TARGETS.put(BirthmarkStoreTarget.RDB, RDBExtractedBirthmarkHistory.class);
     }
 
     public ExtractedBirthmarkHistoryManager(BirthmarkEnvironment env){

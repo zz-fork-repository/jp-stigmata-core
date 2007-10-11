@@ -15,6 +15,7 @@ public enum BirthmarkStoreTarget{
     MEMORY,
     XMLFILE,
     MEMORY_SINGLE,
+    RDB,
 //    DERBY,
 //    FILE,
 //    MYSQL, 
