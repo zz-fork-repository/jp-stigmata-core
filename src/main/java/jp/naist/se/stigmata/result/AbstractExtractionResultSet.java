@@ -25,6 +25,7 @@ import jp.naist.se.stigmata.ExtractionUnit;
 public abstract class AbstractExtractionResultSet implements ExtractionResultSet{
     private BirthmarkContext context;
     private boolean tableType = true;
+    private String id;
 
     /**
      * constructor.
@@ -38,6 +39,15 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
      */
     public AbstractExtractionResultSet(BirthmarkContext context, boolean tableType){
         this.context = context;
+        id = generateId();
+    }
+
+    void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return id;
     }
 
     /**

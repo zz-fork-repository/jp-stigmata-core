@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElementClassNotFoundException;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkExtractionFailedException;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.birthmarks.AbstractBirthmarkExtractor;

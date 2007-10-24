@@ -26,8 +26,8 @@ import javax.swing.event.ListSelectionListener;
 
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
+import jp.naist.se.stigmata.ui.swing.Messages;
 
 /**
  * 

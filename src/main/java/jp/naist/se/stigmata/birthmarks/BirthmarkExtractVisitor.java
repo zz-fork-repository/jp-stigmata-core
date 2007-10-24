@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElement;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 
 import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassVisitor;

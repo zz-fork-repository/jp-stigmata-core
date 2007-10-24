@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.result.history;
 
+/*
+ * $Id$
+ */
+
 import java.sql.SQLException;
 import java.util.Iterator;
 
@@ -12,8 +16,17 @@ import jp.naist.se.stigmata.utils.ArrayIterator;
 
 import org.apache.commons.dbutils.QueryRunner;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
     private DataSource source;
+
+    public RDBExtractedBirthmarkHistory(DataSource source){
+        this.source = source;
+    }
 
     public void delete(String id){
         QueryRunner runner = new QueryRunner(source);

@@ -146,7 +146,7 @@ public class Stigmata{
         }
         buildStigmataDirectory(BirthmarkEnvironment.getStigmataHome());
 
-        defaultEnvironment.setClassLoader(buildClassLoader());
+        defaultEnvironment.setClassLoader(buildClassLoader("plugins"));
         try{
             ConfigFileImporter parser = new ConfigFileImporter(defaultEnvironment);
             parser.parse(in);
@@ -159,22 +159,6 @@ public class Stigmata{
         }
         PrinterManager.updateServices(defaultEnvironment);
         exportConfigFile(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml");
-    }
-
-    private ClassLoader buildClassLoader(){
-        File file = new File(BirthmarkEnvironment.getStigmataHome(), "plugins");
-        File[] jarfiles = file.listFiles(new ExtensionFilter("jar"));
-        if(jarfiles != null && jarfiles.length > 0){
-            try{
-                URL[] urls = new URL[jarfiles.length];
-                for(int i = 0; i < jarfiles.length; i++){
-                    urls[i] = jarfiles[i].toURI().toURL();
-                }
-                return new URLClassLoader(urls, getClass().getClassLoader());
-            } catch(MalformedURLException e){
-            }
-        }
-        return null;
     }
 
     private void buildStigmataDirectory(String homeDirectory){
@@ -202,5 +186,21 @@ public class Stigmata{
         } catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    private static ClassLoader buildClassLoader(String path){
+        File directory = new File(BirthmarkEnvironment.getStigmataHome(), path);
+        File[] jarfiles = directory.listFiles(new ExtensionFilter("jar"));
+
+        if(jarfiles == null) jarfiles = new File[0];
+        try{
+            URL[] urls = new URL[jarfiles.length];
+            for(int i = 0; i < jarfiles.length; i++){
+                urls[i] = jarfiles[i].toURI().toURL();
+            }
+            return new URLClassLoader(urls, Stigmata.class.getClassLoader());
+        } catch(MalformedURLException e){
+        }
+        return null;
     }
 }

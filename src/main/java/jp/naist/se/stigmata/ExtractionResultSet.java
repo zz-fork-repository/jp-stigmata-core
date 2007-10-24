@@ -25,6 +25,8 @@ public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
      */
     public BirthmarkContext getContext();
 
+    public String getId();
+
     /**
      * sets extraction 
      */

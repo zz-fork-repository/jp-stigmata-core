@@ -55,8 +55,13 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
     private File baseDirectory;
     private Map<ExtractionTarget, XmlFile> files = new HashMap<ExtractionTarget, XmlFile>();
 
-    public XmlFileExtractionResultSet(BirthmarkContext context){
+    XmlFileExtractionResultSet(BirthmarkContext context){
         super(context);
+    }
+
+    XmlFileExtractionResultSet(BirthmarkContext context, File baseDirectory){
+        super(context);
+        this.baseDirectory = baseDirectory;
     }
 
     public XmlFileExtractionResultSet(BirthmarkContext context, boolean tableType){

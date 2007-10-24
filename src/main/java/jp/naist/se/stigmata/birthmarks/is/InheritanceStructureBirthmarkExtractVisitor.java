@@ -5,8 +5,8 @@ package jp.naist.se.stigmata.birthmarks.is;
  */
 
 import jp.naist.se.stigmata.Birthmark;
-import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkElement;
+import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.birthmarks.BirthmarkExtractVisitor;
 import jp.naist.se.stigmata.birthmarks.NullBirthmarkElement;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
@@ -41,13 +41,15 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
         WellknownClassManager wcm = getEnvironment().getWellknownClassManager();
         do{
             String className = c.getName();
-
+            BirthmarkElement element = null;
             if(wcm.isWellKnownClass(className)){
-                addElement(new BirthmarkElement(className));
+                element = new BirthmarkElement(className);
             }
             else{
-                addElement(NullBirthmarkElement.getInstance());
+                element = NullBirthmarkElement.getInstance();
             }
+
+            addElement(element);
             c = c.getSuperclass();
         } while(!c.getName().equals("java.lang.Object"));
         addElement(new BirthmarkElement("java.lang.Object"));

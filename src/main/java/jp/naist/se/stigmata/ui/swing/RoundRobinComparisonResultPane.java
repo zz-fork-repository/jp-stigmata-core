@@ -33,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkComparator;
+import jp.naist.se.stigmata.BirthmarkContext;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.BirthmarkSet;
 import jp.naist.se.stigmata.BirthmarkStoreException;
@@ -42,7 +43,6 @@ import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
 import jp.naist.se.stigmata.printer.PrinterManager;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
-import jp.naist.se.stigmata.result.MemoryExtractionResultSet;
 import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
 import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
@@ -376,7 +376,9 @@ public class RoundRobinComparisonResultPane extends JPanel{
                 Messages.getString("obfuscationmapping.description")
             );
             if(file != null){
-                ExtractionResultSet ers = new MemoryExtractionResultSet(extraction.getContext(), extraction.isTableType());
+                BirthmarkContext context = extraction.getContext();
+                BirthmarkEnvironment env = context.getEnvironment();
+                ExtractionResultSet ers = env.getHistoryManager().createDefaultResultSet(context);
                 try{
                     for(Iterator<BirthmarkSet> i = extraction.birthmarkSets(ExtractionTarget.TARGET_X); i.hasNext(); ){
                         BirthmarkSet bs = i.next();

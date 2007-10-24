@@ -13,8 +13,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
+import jp.naist.se.stigmata.ui.swing.Messages;
 
 /**
  * 

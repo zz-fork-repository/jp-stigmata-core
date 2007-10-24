@@ -20,6 +20,7 @@ import javax.imageio.spi.ServiceRegistry;
 
 import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.reader.ClasspathContext;
+import jp.naist.se.stigmata.result.history.ExtractedBirthmarkServiceManager;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
 
@@ -77,6 +78,11 @@ public class BirthmarkEnvironment{
     private ComparisonPairFilterManager filterManager;
 
     /**
+     * history manager.
+     */
+    private ExtractedBirthmarkServiceManager historyManager;
+
+    /**
      * 
      */
     private ClassLoader loader;
@@ -88,6 +94,7 @@ public class BirthmarkEnvironment{
         manager = new WellknownClassManager();
         classpathContext = new ClasspathContext();
         filterManager = new ComparisonPairFilterManager(this);
+        historyManager = new ExtractedBirthmarkServiceManager(this);
     }
 
     /**
@@ -98,6 +105,7 @@ public class BirthmarkEnvironment{
         this.manager = new WellknownClassManager(parent.getWellknownClassManager());
         this.classpathContext = new ClasspathContext(parent.getClasspathContext());
         this.filterManager = new ComparisonPairFilterManager(this, parent.getFilterManager());
+        this.historyManager = new ExtractedBirthmarkServiceManager(this, parent.getHistoryManager());
     }
 
     /**
@@ -132,6 +140,10 @@ public class BirthmarkEnvironment{
             HOME_DIRECTORY_PATH = stigmataHome;
         }
         return HOME_DIRECTORY_PATH;
+    }
+
+    static void resetSettings(){
+        DEFAULT_ENVIRONMENT = new BirthmarkEnvironment(false);
     }
 
     public BirthmarkEnvironment getParent(){
@@ -259,8 +271,12 @@ public class BirthmarkEnvironment{
 
     public <T> Iterator<T> lookupProviders(Class<T> providerClass){
         Iterator<T> iterator;
-        if(loader != null) iterator = ServiceRegistry.lookupProviders(providerClass, loader);
-        else               iterator = ServiceRegistry.lookupProviders(providerClass);
+        if(loader != null){
+            iterator = ServiceRegistry.lookupProviders(providerClass, loader);
+        }
+        else{
+            iterator = ServiceRegistry.lookupProviders(providerClass);
+        }
         return iterator;
     }
 
@@ -289,6 +305,18 @@ public class BirthmarkEnvironment{
         return manager;
     }
 
+    public ComparisonPairFilterManager getFilterManager(){
+        return filterManager;
+    }
+
+    public ExtractedBirthmarkServiceManager getHistoryManager(){
+        return historyManager;
+    }
+
+    void setClassLoader(ClassLoader loader){
+        this.loader = loader;
+    }
+
     /**
      * find the all birthmark services searching to root environment.
      */
@@ -303,17 +331,5 @@ public class BirthmarkEnvironment{
             list.add(services.get(key));
         }
         return list;
-    }
-
-    public ComparisonPairFilterManager getFilterManager(){
-        return filterManager;
-    }
-
-    void setClassLoader(ClassLoader loader){
-        this.loader = loader;
-    }
-
-    static void resetSettings(){
-        DEFAULT_ENVIRONMENT = new BirthmarkEnvironment(false);
     }
 }

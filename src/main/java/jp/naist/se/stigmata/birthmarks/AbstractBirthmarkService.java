@@ -77,7 +77,7 @@ public abstract class AbstractBirthmarkService implements BirthmarkSpi{
     }
 
     public BirthmarkElement buildBirthmarkElement(String value){
-    	if(value == null){
+    	if(value == null || value.equals("<null>")){
     		return NullBirthmarkElement.getInstance();
     	}
 		return new BirthmarkElement(value);

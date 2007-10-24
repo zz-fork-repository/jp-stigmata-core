@@ -5,6 +5,7 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import javax.swing.tree.DefaultMutableTreeNode;
+
 import jp.naist.se.stigmata.Birthmark;
 import jp.naist.se.stigmata.BirthmarkElement;
 import jp.naist.se.stigmata.BirthmarkSet;

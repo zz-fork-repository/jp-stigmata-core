@@ -23,11 +23,11 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
     private List<BirthmarkSet> targetX = new ArrayList<BirthmarkSet>();
     private List<BirthmarkSet> targetY = new ArrayList<BirthmarkSet>();
 
-    public MemoryExtractionResultSet(BirthmarkContext context){
+    MemoryExtractionResultSet(BirthmarkContext context){
         this(context, true);
     }
 
-    public MemoryExtractionResultSet(BirthmarkContext context, boolean tableType){
+    MemoryExtractionResultSet(BirthmarkContext context, boolean tableType){
         super(context, tableType);
     }
 

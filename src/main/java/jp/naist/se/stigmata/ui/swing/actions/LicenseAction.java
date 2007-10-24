@@ -6,8 +6,8 @@ package jp.naist.se.stigmata.ui.swing.actions;
 
 import java.awt.Component;
 
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
+import jp.naist.se.stigmata.ui.swing.Messages;
 
 /**
  * @author Haruaki TAMADA

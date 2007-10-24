@@ -26,7 +26,7 @@ import javax.swing.event.ListSelectionListener;
 
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.result.history.ExtractedBirthmarkHistory;
-import jp.naist.se.stigmata.result.history.ExtractedBirthmarkHistoryManager;
+import jp.naist.se.stigmata.result.history.ExtractedBirthmarkServiceManager;
 import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
 
 /**
@@ -42,7 +42,7 @@ public class ExtractedHistoryPane extends JPanel{
     private JComboBox combo;
     private JList list;
     private DefaultListModel model;
-    private ExtractedBirthmarkHistoryManager historyManager;
+    private ExtractedBirthmarkServiceManager historyManager;
     private ExtractedBirthmarkHistory currentHistory;
 
     public ExtractedHistoryPane(StigmataFrame stigmata){
@@ -57,13 +57,14 @@ public class ExtractedHistoryPane extends JPanel{
         currentHistory = historyManager.getHistory(historyId);
         model.clear();
 
+        System.out.println(historyId);
         for(String id: currentHistory){
             model.addElement(id);
         }
     }
 
     private void initData(){
-        historyManager = new ExtractedBirthmarkHistoryManager(stigmata.getEnvironment());
+        historyManager = new ExtractedBirthmarkServiceManager(stigmata.getEnvironment());
 
         for(String id: historyManager.getHistoryIds()){
             combo.addItem(id);

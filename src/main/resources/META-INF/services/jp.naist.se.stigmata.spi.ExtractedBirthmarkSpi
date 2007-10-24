@@ -1,0 +1,3 @@
+jp.naist.se.stigmata.result.MemoryExtractedBirthmarkService
+jp.naist.se.stigmata.result.XmlFileExtractedBirthmarkService
+jp.naist.se.stigmata.result.RDBExtractedBirthmarkService

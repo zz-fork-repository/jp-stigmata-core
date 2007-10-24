@@ -27,9 +27,9 @@ import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListener;
+import jp.naist.se.stigmata.ui.swing.GUIUtility;
 import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
-import jp.naist.se.stigmata.ui.swing.GUIUtility;
 
 /**
  * 

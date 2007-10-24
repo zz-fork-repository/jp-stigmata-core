@@ -1,5 +1,9 @@
 package jp.naist.se.stigmata.result;
 
+/*
+ * $Id$
+ */
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -24,11 +28,17 @@ import jp.naist.se.stigmata.BirthmarkStoreTarget;
 import jp.naist.se.stigmata.ExtractionTarget;
 import jp.naist.se.stigmata.ExtractionUnit;
 import jp.naist.se.stigmata.Stigmata;
+import jp.naist.se.stigmata.utils.ArrayIterator;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
 public class RDBExtractionResultSet extends AbstractExtractionResultSet{
     private String id;
     private DataSource source;
@@ -95,8 +105,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
 
     @Override
     public Iterator<BirthmarkSet> birthmarkSets(ExtractionTarget target){
-        // TODO 
-        return null;
+        return new ArrayIterator<BirthmarkSet>(getBirthmarkSets(target));
     }
 
     @Override

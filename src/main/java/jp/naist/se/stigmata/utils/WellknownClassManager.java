@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.objectweb.asm.Opcodes;
-
-import jp.naist.se.stigmata.utils.WellknownClassJudgeRule.MatchType;
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule.MatchPartType;
+import jp.naist.se.stigmata.utils.WellknownClassJudgeRule.MatchType;
+
+import org.objectweb.asm.Opcodes;
 
 /**
  * Managing wellknown class checking rule.

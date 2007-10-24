@@ -31,7 +31,6 @@ import jp.naist.se.stigmata.reader.DefaultClassFileArchive;
 import jp.naist.se.stigmata.reader.JarClassFileArchive;
 import jp.naist.se.stigmata.reader.WarClassFileArchive;
 import jp.naist.se.stigmata.result.CertainPairComparisonResultSet;
-import jp.naist.se.stigmata.result.ExtractionResultSetFactory;
 import jp.naist.se.stigmata.result.RoundRobinComparisonResultSet;
 
 /**
@@ -223,7 +222,7 @@ public class BirthmarkEngine{
 
     public synchronized ExtractionResultSet extract(String[] targetX, String[] targetY, BirthmarkContext context) throws BirthmarkExtractionFailedException, BirthmarkStoreException{
         operationStart(OperationType.EXTRACT_BIRTHMARKS);
-        ExtractionResultSet er = ExtractionResultSetFactory.getInstance().createResultSet(context);
+        ExtractionResultSet er = context.getEnvironment().getHistoryManager().createDefaultResultSet(context);
 
         try{
             switch(context.getComparisonMethod()){

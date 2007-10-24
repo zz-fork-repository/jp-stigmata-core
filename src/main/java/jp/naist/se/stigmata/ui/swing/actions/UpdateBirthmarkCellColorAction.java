@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ui.swing.CompareTableCellRenderer;
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
+import jp.naist.se.stigmata.ui.swing.Messages;
 
 public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private static final long serialVersionUID = 2390797591047570440L;

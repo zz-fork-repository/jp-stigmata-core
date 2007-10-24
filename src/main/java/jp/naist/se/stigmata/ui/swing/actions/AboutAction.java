@@ -10,8 +10,8 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
+import jp.naist.se.stigmata.ui.swing.Messages;
 
 /**
  * 
