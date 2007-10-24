@@ -16,6 +16,7 @@ import jp.naist.se.stigmata.BirthmarkStoreException;
 import jp.naist.se.stigmata.ComparisonPair;
 import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.ExtractionTarget;
+import jp.naist.se.stigmata.result.history.ExtractedBirthmarkServiceManager;
 
 /**
  * Concrete class for ComparisonResultSet. This instance compare class files by
@@ -133,7 +134,8 @@ public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
     }
 
     private static ExtractionResultSet createExtractionResultSet(ComparisonPair[] pairs, BirthmarkContext context){
-        ExtractionResultSet ers = ExtractionResultSetFactory.getInstance().createResultSet(context);
+        ExtractedBirthmarkServiceManager historyManager = context.getEnvironment().getHistoryManager();
+        ExtractionResultSet ers = historyManager.createDefaultResultSet(context);
         ers.setTableType(false);
         try{
             for(int i = 0; i < pairs.length; i++){
@@ -147,7 +149,7 @@ public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
     }
 
     private static ExtractionResultSet createExtractionResultSet(BirthmarkSet[] targetX, BirthmarkSet[] targetY, BirthmarkContext context){
-        ExtractionResultSet ers = ExtractionResultSetFactory.getInstance().createResultSet(context);
+        ExtractionResultSet ers = context.getEnvironment().getHistoryManager().createDefaultResultSet(context);
         ers.setTableType(true);
         try{
             ers.setBirthmarkSets(ExtractionTarget.TARGET_X, targetX);

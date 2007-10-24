@@ -41,14 +41,18 @@ public class ExtractedBirthmarkServiceManager{
     }
 
     public ExtractionResultSet createDefaultResultSet(BirthmarkContext context){
-        String type = env.getProperty("birthmark.store.target");
-        if(type == null){
-            type = "XMLFILE";
+        BirthmarkStoreTarget bst = context.getStoreTarget();
+        if(bst == null){
+            String type = env.getProperty("birthmark.store.target");
+            if(type == null){
+                type = "XMLFILE";
+            }
+            bst = BirthmarkStoreTarget.valueOf(type);
         }
-        BirthmarkStoreTarget bst = BirthmarkStoreTarget.valueOf(type);
         if(bst == null){
             bst = BirthmarkStoreTarget.XMLFILE;
         }
+
         ExtractedBirthmarkSpi service = findService(bst);
 
         return service.createResultSet(context);

@@ -93,9 +93,11 @@ public class CVFVBirthmarkExtractorTest{
 
         Assert.assertEquals("I",   ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
         Assert.assertEquals(-1,    ((TypeAndValueBirthmarkElement)elements[0]).getValue());
+
         Assert.assertEquals("Z",   ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
         Assert.assertEquals(null,  ((TypeAndValueBirthmarkElement)elements[1]).getValue());
+
         Assert.assertEquals("Z",   ((TypeAndValueBirthmarkElement)elements[2]).getSignature());
-        Assert.assertEquals(false, ((TypeAndValueBirthmarkElement)elements[2]).getValue());
+        Assert.assertEquals(0,     ((TypeAndValueBirthmarkElement)elements[2]).getValue());
     }
 }
