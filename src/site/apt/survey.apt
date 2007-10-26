@@ -109,6 +109,20 @@ Analysis method
    Repositories ({{{http://msr.uwaterloo.ca/msr2006/}MSR Mining
    Challenge 2006}}), pp.171--172, Shanghai, China, May 2006.
 
+Articles
+
+ * Mari-Len De Guzman, ``'Birthmark' scans software for piracy
+   check,'' COMPUTERWORLD, 29 August 2008,
+   {{{http://www.computerworld.com.au/index.php?id=1493459712&rid=-219}http://www.computerworld.com.au/index.php?id=1493459712&rid=-219}}
+
+ * Mari-Len De Guzman, ``German researchers develop ‘Birthmark’ for
+   piracy check,'' IT World Canada, 29 August 2007,
+   {{{http://www.itworldcanada.com/a/News/7ed1b410-7517-4e8a-91c8-f0fae4ea07dc.html}http://www.itworldcanada.com/a/News/7ed1b410-7517-4e8a-91c8-f0fae4ea07dc.html}}.
+
+ * Andreas Zeller, ``A new method to detect software theft,''
+   idw-online, 23 August
+   2007. {{{http://idw-online.de/pages/de/news222661}http://idw-online.de/pages/de/news222661}}.
+
 Related Publications
 
 *Static Birthmark
@@ -163,7 +177,12 @@ Related Publications
  * David Schuler, Valentin Dallmeier, and Christian Lindig, ``A
    Dynamic Birthmark for Java,'' In Proc. the 22nd IEEE/ACM
    International Conference on Automated Software Engineering,
-   Atlanta, Georgia, USA, November 2007.
+   (ASE2007), Atlanta, Georgia, USA, November 2007.
+
+ * Bin Lu, Fenlin Liu, Xin Ge, Bin Liu, Xiangyang Luo, ``A Software
+   Birthmark Based on Dynamic Opcode n-gram,'' Proc. International
+   Conference on Semantic Computing (ICSC 2007), pp.37-44, September
+   2007.
 
  * Haruaki Tamada, Keiji Okamoto, Masahide Nakamura, Akito Monden and
    Ken-ichi Matsumoto, ``Design and Evaluation of Dynamic Software
