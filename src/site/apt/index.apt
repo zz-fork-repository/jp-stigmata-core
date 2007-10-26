@@ -24,6 +24,8 @@ from Java class files, and compare them.  Differences from
 
  * new analysis method for extracted birthmarks
 
+ * show extracted birthmark histories.
+
  []
 
  A <software birthmark> is a set of special informations that the
@@ -47,9 +49,11 @@ files, and written in Java 5 with ASM.
 
  * Jar file and War file support,
 
- * plug-in architecture for new birthmarks, and
+ * plug-in architecture for new birthmarks,
 
- * analysis of extracted birthmarks (MDS)
+ * analysis of extracted birthmarks (MDS), and
+
+ * show back extracted birthmark histories
 
 Related Tools
 
