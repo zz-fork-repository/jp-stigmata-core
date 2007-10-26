@@ -63,13 +63,16 @@ Section "running-stigmata"
   SetOverwrite ifdiff
   SetOutPath $TEMP
   File "..\..\target\${JARFILE}"
-  File "..\..\target\BrowserLauncher2-1.3.jar"
   File "..\..\target\commons-beanutils-1.7.0.jar"
-  File "..\..\target\Jama-1.0.2.jar"
   File "..\..\target\commons-cli-1.1.jar"
+  File "..\..\target\commons-dbutils-1.1.jar"
+  File "..\..\target\commons-logging-1.0.3.jar"
+  File "..\..\target\BrowserLauncher2-1.3.jar"
+  File "..\..\target\Jama-1.0.2.jar"
   File "..\..\target\xmlcli-1.2.1.jar"
   File "..\..\target\asm-all-2.2.3.jar"
-  File "..\..\target\commons-logging-1.0.3.jar"
+  File "..\..\target\stax-1.2.0.jar"
+  File "..\..\target\stax-api-1.0.1.jar"
   StrCpy $R0 '$R0 -Dexecution.directory="$EXEDIR" -jar "${JARFILE}" $R1'
 
   !ifdef SPLASH_IMAGE
@@ -81,13 +84,16 @@ Section "running-stigmata"
 
   ExecWait "$R0"
   Delete "$TEMP\${JARFILE}"
-  Delete "$TEMP\BrowserLauncher2-1.3.jar"
-  Delete "$TEMP\commons-beanutils-1.7.0.jar"
-  Delete "$TEMP\Jama-1.0.2.jar"
-  Delete "$TEMP\commons-cli-1.1.jar"
-  Delete "$TEMP\xmlcli-1.2.1.jar"
-  Delete "$TEMP\asm-all-2.2.3.jar"
-  Delete "$TEMP\commons-logging-1.0.3.jar"
+  Delete "$TEMP\target\commons-beanutils-1.7.0.jar"
+  Delete "$TEMP\target\commons-cli-1.1.jar"
+  Delete "$TEMP\target\commons-dbutils-1.1.jar"
+  Delete "$TEMP\target\commons-logging-1.0.3.jar"
+  Delete "$TEMP\target\BrowserLauncher2-1.3.jar"
+  Delete "$TEMP\target\Jama-1.0.2.jar"
+  Delete "$TEMP\target\xmlcli-1.2.1.jar"
+  Delete "$TEMP\target\asm-all-2.2.3.jar"
+  Delete "$TEMP\target\stax-1.2.0.jar"
+  Delete "$TEMP\target\stax-api-1.0.1.jar"
 
   Quit
 

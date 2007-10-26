@@ -1,6 +1,6 @@
 
                    Stigmata: Java birthmark toolkit
-                            version 1.1.1
+                            version 1.2.0
                    http://stigmata.sourceforge.jp/
 
                               Copyright 2006-2007 Haruaki Tamada, Ph.D
@@ -47,6 +47,10 @@
     stigmata-1.0.0 or later
   - BrowserLauncher2 1.3 (http://browserlaunch2.sourceforge.net/)
     stigmata-1.1.0 or later; as needed
+  - stax-api-1.0.1.jar (http://stax.codehaus.org/)
+    stigmata-1.2.0 or later
+  - stax-1.2.0.jar (http://stax.codehaus.org/)
+    stigmata-1.2.0 or later
   - JUnit 4.1 (http://www.junit.org/) for testing.
 
 * Author
