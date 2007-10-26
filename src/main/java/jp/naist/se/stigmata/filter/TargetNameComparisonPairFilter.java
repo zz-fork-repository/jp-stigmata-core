@@ -28,7 +28,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         CRITERIA.add(Criterion.MATCH);
         CRITERIA.add(Criterion.NOT_MATCH);
     };
-    private FilterTarget target = FilterTarget.BOTH_TARGET;
+    private FilterTarget target = FilterTarget.BOTH_TARGETS;
     private String value;
 
     public TargetNameComparisonPairFilter(ComparisonPairFilterSpi service){
@@ -110,7 +110,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         }
         
         boolean flag;
-        if(getTarget() == FilterTarget.BOTH_TARGET){
+        if(getTarget() == FilterTarget.BOTH_TARGETS){
             flag = flag1 && flag2;
         }
         else{
@@ -149,10 +149,10 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         }
         StringBuilder sb = new StringBuilder();
         switch(getTarget()){
-        case TARGET_1:      sb.append("target1.name");           break;
-        case TARGET_2:      sb.append("target2.name");           break;
-        case BOTH_TARGET:   sb.append("(target1&target2).name"); break;
-        case ONE_OF_TARGET: sb.append("(target1|target2).name"); break; 
+        case TARGET_1:       sb.append("target1.name");           break;
+        case TARGET_2:       sb.append("target2.name");           break;
+        case BOTH_TARGETS:   sb.append("(target1&target2).name"); break;
+        case ONE_OF_TARGETS: sb.append("(target1|target2).name"); break; 
         }
         switch(getCriterion()){
         case STARTS_WITH:     sb.append(" starts with ");     break;

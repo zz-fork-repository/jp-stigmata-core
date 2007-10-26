@@ -91,8 +91,8 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
             flag2 = false;
             break;
         }
-        return (getTarget() == FilterTarget.BOTH_TARGET && flag1 && flag2) ||
-            (getTarget() == FilterTarget.ONE_OF_TARGET && (flag1 || flag2));
+        return (getTarget() == FilterTarget.BOTH_TARGETS && flag1 && flag2) ||
+            (getTarget() == FilterTarget.ONE_OF_TARGETS && (flag1 || flag2));
     }
 
     private boolean checkFiltered(int total){
@@ -145,10 +145,10 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
     public String toString(){
         StringBuilder sb = new StringBuilder();
         switch(getTarget()){
-        case TARGET_1:      sb.append("target1"); break;
-        case TARGET_2:      sb.append("target2"); break;
-        case BOTH_TARGET:   sb.append("(target1&target2)"); break;
-        case ONE_OF_TARGET: sb.append("(target1|target2)"); break;
+        case TARGET_1:       sb.append("target1"); break;
+        case TARGET_2:       sb.append("target2"); break;
+        case BOTH_TARGETS:   sb.append("(target1&target2)"); break;
+        case ONE_OF_TARGETS: sb.append("(target1|target2)"); break;
         }
         sb.append(".element");
         switch(getCriterion()){

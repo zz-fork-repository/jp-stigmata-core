@@ -284,24 +284,26 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                 
             while(reader.hasNext()){
                 XMLEvent event = reader.peek();
+                // XMLEvent event = reader.nextEvent();
                 if(event.isStartElement()){
                     StartElement se = event.asStartElement();
-                    if(se.getName().getLocalPart().equals("unit")){
+                    String part = se.getName().getLocalPart();
+                    if(part.equals("unit")){
                         ExtractionUnit unit = ExtractionUnit.valueOf(reader.getElementText());
                         if(unit != null){
                             context.setExtractionUnit(unit);
                         }                        
                     }
-                    if(se.getName().getLocalPart().equals("birthmark-type")){
+                    else if(part.equals("birthmark-type")){
                         String type = reader.getElementText();
                         if(env.getService(type) != null){
                             context.addBirthmarkType(type);
                         }                        
                     }
-                    else if(se.getName().getLocalPart().equals("name")){
+                    else if(part.equals("name")){
                         className = reader.getElementText();
                     }
-                    else if(se.getName().getLocalPart().equals("location")){
+                    else if(part.equals("location")){
                         String location = reader.getElementText();
                         if(className == null || location == null){
                             throw new XMLStreamException("incompatible with definition");
@@ -313,13 +315,13 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                             e.printStackTrace();
                         }
                     }
-                    else if(se.getName().getLocalPart().equals("element")){
+                    else if(part.equals("element")){
                         if(service != null){
                             BirthmarkElement be = service.buildBirthmarkElement(reader.getElementText());
                             birthmark.addElement(be);
                         }
                     }
-                    else if(se.getName().getLocalPart().equals("birthmark")){
+                    else if(part.equals("birthmark")){
                         String type = se.getAttributeByName(new QName("type")).getValue();
                         service = env.getService(type);
                         if(service != null){

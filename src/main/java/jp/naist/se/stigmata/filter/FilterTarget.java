@@ -11,5 +11,5 @@ package jp.naist.se.stigmata.filter;
  * @version $Revision$ $Date$
  */
 public enum FilterTarget{
-    TARGET_1, TARGET_2, BOTH_TARGET, ONE_OF_TARGET,
+    TARGET_1, TARGET_2, BOTH_TARGETS, ONE_OF_TARGETS,
 }

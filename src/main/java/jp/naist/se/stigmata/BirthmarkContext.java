@@ -19,12 +19,14 @@ import java.util.Map;
  */
 public class BirthmarkContext{
     private BirthmarkEnvironment environment;
-    private List<String> birthmarkTypes = new ArrayList<String>();
+
     private ComparisonMethod method = ComparisonMethod.ROUND_ROBIN_SAME_PAIR;
-    private List<String> filterTypes = new ArrayList<String>();
-    private Map<String, String> nameMappings = new HashMap<String, String>();
     private ExtractionUnit unit = ExtractionUnit.CLASS;
     private BirthmarkStoreTarget store = BirthmarkStoreTarget.MEMORY;
+
+    private List<String> birthmarkTypes = new ArrayList<String>();
+    private List<String> filterTypes = new ArrayList<String>();
+    private Map<String, String> nameMappings = new HashMap<String, String>();
 
     /**
      * self constructor.

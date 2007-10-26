@@ -77,7 +77,7 @@ public class TargetNameComparisonPairFilterComponentService extends AbstractComp
         public void resetComponents(){
             value.setText("");
             criterionType.setSelectedIndex(0);
-            targetType.setSelectedItem(getDisplayTarget(FilterTarget.BOTH_TARGET));
+            targetType.setSelectedItem(getDisplayTarget(FilterTarget.BOTH_TARGETS));
         }
 
         @Override

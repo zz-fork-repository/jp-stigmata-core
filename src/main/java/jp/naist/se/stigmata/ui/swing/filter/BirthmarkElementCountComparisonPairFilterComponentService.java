@@ -111,7 +111,7 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         public void resetComponents(){
             threshold.setText("");
             criterionType.setSelectedIndex(0);
-            targetType.setSelectedItem(getDisplayTarget(FilterTarget.BOTH_TARGET));
+            targetType.setSelectedItem(getDisplayTarget(FilterTarget.BOTH_TARGETS));
         }
 
         @Override

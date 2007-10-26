@@ -61,28 +61,28 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
 
             switch(getCriterion()){
             case GREATER_EQUALS:
-                flag = (target == FilterTarget.BOTH_TARGET && elem1 >= threshold && elem2 >= threshold) ||
-                (target == FilterTarget.ONE_OF_TARGET && (elem1 >= threshold || elem2 >= threshold));
+                flag = (target == FilterTarget.BOTH_TARGETS && elem1 >= threshold && elem2 >= threshold) ||
+                (target == FilterTarget.ONE_OF_TARGETS && (elem1 >= threshold || elem2 >= threshold));
                 break;
             case GREATER_THAN:
-                flag = (target == FilterTarget.BOTH_TARGET && elem1 > threshold && elem2 > threshold) ||
-                    (target == FilterTarget.ONE_OF_TARGET && (elem1 > threshold || elem2 > threshold));
+                flag = (target == FilterTarget.BOTH_TARGETS && elem1 > threshold && elem2 > threshold) ||
+                    (target == FilterTarget.ONE_OF_TARGETS && (elem1 > threshold || elem2 > threshold));
                 break;
             case LESS_EQUALS:
-                flag = (target == FilterTarget.BOTH_TARGET && elem1 <= threshold && elem2 <= threshold) ||
-                (target == FilterTarget.ONE_OF_TARGET && (elem1 <= threshold || elem2 <= threshold));
+                flag = (target == FilterTarget.BOTH_TARGETS && elem1 <= threshold && elem2 <= threshold) ||
+                (target == FilterTarget.ONE_OF_TARGETS && (elem1 <= threshold || elem2 <= threshold));
                 break;
             case LESS_THAN:
-                flag = (target == FilterTarget.BOTH_TARGET && elem1 < threshold && elem2 < threshold) ||
-                    (target == FilterTarget.ONE_OF_TARGET && (elem1 < threshold || elem2 < threshold));
+                flag = (target == FilterTarget.BOTH_TARGETS && elem1 < threshold && elem2 < threshold) ||
+                    (target == FilterTarget.ONE_OF_TARGETS && (elem1 < threshold || elem2 < threshold));
                 break;
             case EQUALS_AS:
-                flag = (target == FilterTarget.BOTH_TARGET && elem1 == threshold && elem2 == threshold) ||
-                (target == FilterTarget.ONE_OF_TARGET && (elem1 == threshold || elem2 == threshold));
+                flag = (target == FilterTarget.BOTH_TARGETS && elem1 == threshold && elem2 == threshold) ||
+                (target == FilterTarget.ONE_OF_TARGETS && (elem1 == threshold || elem2 == threshold));
                 break;
             case NOT_EQUALS_AS:
-                flag = (target == FilterTarget.BOTH_TARGET && elem1 != threshold && elem2 != threshold) ||
-                    (target == FilterTarget.ONE_OF_TARGET && (elem1 != threshold || elem2 != threshold));
+                flag = (target == FilterTarget.BOTH_TARGETS && elem1 != threshold && elem2 != threshold) ||
+                    (target == FilterTarget.ONE_OF_TARGETS && (elem1 != threshold || elem2 != threshold));
                 break;
             default:
                 flag = false;
@@ -93,7 +93,7 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
     }
 
     public boolean isFiltered(ComparisonPair pair){
-        if(target == FilterTarget.BOTH_TARGET || target == FilterTarget.ONE_OF_TARGET){
+        if(target == FilterTarget.BOTH_TARGETS || target == FilterTarget.ONE_OF_TARGETS){
             return isFilteredTwo(pair);
         }
         boolean flag = false;
@@ -156,10 +156,10 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
     public String toString(){
         StringBuilder sb = new StringBuilder();
         switch(getTarget()){
-        case TARGET_1:      sb.append("target1"); break;
-        case TARGET_2:      sb.append("target2"); break;
-        case BOTH_TARGET:   sb.append("(target1&target2)");    break;
-        case ONE_OF_TARGET: sb.append("(target1|target2)");
+        case TARGET_1:       sb.append("target1"); break;
+        case TARGET_2:       sb.append("target2"); break;
+        case BOTH_TARGETS:   sb.append("(target1&target2)");    break;
+        case ONE_OF_TARGETS: sb.append("(target1|target2)");
         }
         sb.append(".").append(birthmarkType);
         sb.append(".size");
