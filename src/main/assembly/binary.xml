@@ -12,9 +12,17 @@
     </fileSet>
     <fileSet>
       <directory>target</directory>
-      <outputDirectory></outputDirectory>
+      <outputDirectory>lib/</outputDirectory>
       <includes>
         <include>*.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>src/bin</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>stigmata.sh</include>
+        <include>stigmata.bat</include>
       </includes>
     </fileSet>
   </fileSets>
