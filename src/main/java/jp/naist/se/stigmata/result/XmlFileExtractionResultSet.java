@@ -52,16 +52,16 @@ import jp.naist.se.stigmata.utils.MultipleIterator;
  */
 public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
     private boolean addmode = true;
-    private File baseDirectory;
+    private File storeDirectory;
     private Map<ExtractionTarget, XmlFile> files = new HashMap<ExtractionTarget, XmlFile>();
 
     XmlFileExtractionResultSet(BirthmarkContext context){
         super(context);
     }
 
-    XmlFileExtractionResultSet(BirthmarkContext context, File baseDirectory){
+    XmlFileExtractionResultSet(BirthmarkContext context, File storeDirectory){
         super(context);
-        this.baseDirectory = baseDirectory;
+        this.storeDirectory = storeDirectory;
     }
 
     public XmlFileExtractionResultSet(BirthmarkContext context, boolean tableType){
@@ -72,7 +72,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         super(Stigmata.getInstance().createContext());
 
         addmode = false;
-        baseDirectory = directory;
+        storeDirectory = directory;
 
         BirthmarkContext context = getContext();
         context.setStoreTarget(BirthmarkStoreTarget.XMLFILE);
@@ -84,7 +84,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_SAME_PAIR);
         }
 
-        for(File file: baseDirectory.listFiles(new ExtensionFilter("xml"))){
+        for(File file: storeDirectory.listFiles(new ExtensionFilter("xml"))){
             String fileName = file.getName();
             String name = fileName.substring(0, fileName.lastIndexOf('.'));
             ExtractionTarget et = ExtractionTarget.valueOf(name);
@@ -102,7 +102,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             }
             XmlFile xml = files.get(target);
             if(xml == null){
-                xml = new XmlFile(new File(getBaseDirectory(), target.name() + ".xml"), getContext());
+                xml = new XmlFile(new File(getStoreDirectory(), target.name() + ".xml"), getContext());
                 files.put(target, xml);
             }
             xml.addBirthmarkSet(set);
@@ -193,14 +193,14 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
-    private File getBaseDirectory(){
-        if(baseDirectory == null){
-            baseDirectory = new File(BirthmarkEnvironment.getStigmataHome(), "extracted_birthmarks/" + generateId());
-            if(!baseDirectory.exists()){
-                baseDirectory.mkdirs();
-            }
+    private File getStoreDirectory(){
+        if(storeDirectory == null){
+            storeDirectory = new File(BirthmarkEnvironment.getStigmataHome(), "extracted_birthmarks/" + generateId());
         }
-        return baseDirectory;
+        if(!storeDirectory.exists()){
+            storeDirectory.mkdirs();
+        }
+        return storeDirectory;
     }
 
     private void closeAllStream(){

@@ -30,7 +30,7 @@ public class MemoryExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     }
 
     public ExtractionResultSet getResultSet(String id){
-        return history.getExtractionResultSet(id);
+        return history.getResultSet(id);
     }
 
     public BirthmarkStoreTarget getTarget(){

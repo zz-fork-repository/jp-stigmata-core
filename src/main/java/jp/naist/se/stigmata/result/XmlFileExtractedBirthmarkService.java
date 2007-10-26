@@ -34,7 +34,9 @@ public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     }
 
     public ExtractionResultSet createResultSet(BirthmarkContext context, File base){
-        return new XmlFileExtractionResultSet(context, base);
+        return new XmlFileExtractionResultSet(
+            context, new File(base, AbstractExtractionResultSet.generateId())
+        );
     }
 
     public ExtractedBirthmarkHistory getHistory(String parameter){

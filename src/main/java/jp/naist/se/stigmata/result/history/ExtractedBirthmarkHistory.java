@@ -9,6 +9,7 @@ import java.util.Iterator;
 import jp.naist.se.stigmata.ExtractionResultSet;
 
 /**
+ * This interface indicates extracted history management.
  * 
  * @author Haruaki Tamada
  * @version $Revision$ $Date$
@@ -22,22 +23,22 @@ public interface ExtractedBirthmarkHistory extends Iterable<String>{
     /**
      * returns an array of history ids.
      */
-    public String[] getIds();
+    public String[] getResultSetIds();
 
     /**
      * returns an extraction result set corresponding id.
      */
-    public ExtractionResultSet getExtractionResultSet(String id);
+    public ExtractionResultSet getResultSet(String id);
 
     /**
      * deletes all histories this instance is managed.
      */
-    public void deleteAll();
+    public void deleteAllResultSets();
 
     /**
      * deletes an extraction result set corresponding id.
      */
-    public void delete(String id);
+    public void deleteResultSet(String id);
 
     /**
      * refreshes histories.

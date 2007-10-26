@@ -194,7 +194,7 @@ public abstract class AbstractExtractionResultSet implements ExtractionResultSet
         this.tableType = flag;
     }
 
-    protected String generateId(){
+    protected static String generateId(){
         SimpleDateFormat cdf = new SimpleDateFormat("yyyyMMdd-HHmmss.SSS");
         return cdf.format(Calendar.getInstance().getTime());
     }

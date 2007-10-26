@@ -47,7 +47,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         }
     }
 
-    public void deleteAll(){
+    public void deleteAllResultSets(){
         for(File file: parent.listFiles()){
             if(isTarget(file)){
                 Utility.deleteDirectory(file);
@@ -55,7 +55,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         }
     }
 
-    public void delete(String id){
+    public void deleteResultSet(String id){
         File file = files.get(id);
         if(file != null){
             if(file.isDirectory()){
@@ -67,7 +67,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         }
     }
 
-    public ExtractionResultSet getExtractionResultSet(String id){
+    public ExtractionResultSet getResultSet(String id){
         File file = files.get(id);
         if(file != null){
             return new XmlFileExtractionResultSet(file);
@@ -75,7 +75,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         return null;
     }
 
-    public synchronized String[] getIds(){
+    public synchronized String[] getResultSetIds(){
         return files.keySet().toArray(new String[files.size()]);
     }
 

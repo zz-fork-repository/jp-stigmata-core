@@ -28,7 +28,7 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         this.source = source;
     }
 
-    public void delete(String id){
+    public void deleteResultSet(String id){
         QueryRunner runner = new QueryRunner(source);
 
         try{
@@ -39,7 +39,7 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         }
     }
 
-    public void deleteAll(){
+    public void deleteAllResultSets(){
         QueryRunner runner = new QueryRunner(source);
         try{
             runner.update("DELETE FROM EXTRACTED_BIRTHMARK_TYPES");
@@ -49,11 +49,11 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         }
     }
 
-    public ExtractionResultSet getExtractionResultSet(String id){
+    public ExtractionResultSet getResultSet(String id){
         return new RDBExtractionResultSet(source, id);
     }
 
-    public String[] getIds(){
+    public String[] getResultSetIds(){
         QueryRunner runner = new QueryRunner(source);
         try{
             String[] ids = (String[])runner.query(
@@ -66,7 +66,7 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
     }
 
     public Iterator<String> iterator(){
-        return new ArrayIterator<String>(getIds());
+        return new ArrayIterator<String>(getResultSetIds());
     }
 
     public void refresh(){

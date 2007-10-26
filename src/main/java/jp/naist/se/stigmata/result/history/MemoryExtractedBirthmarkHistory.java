@@ -24,19 +24,19 @@ public class MemoryExtractedBirthmarkHistory implements ExtractedBirthmarkHistor
         map.put(mers.getId(), mers);
     }
 
-    public void delete(String id){
+    public void deleteResultSet(String id){
         map.remove(id);
     }
 
-    public void deleteAll(){
+    public void deleteAllResultSets(){
         map.clear();
     }
 
-    public ExtractionResultSet getExtractionResultSet(String id){
+    public ExtractionResultSet getResultSet(String id){
         return map.get(id);
     }
 
-    public synchronized String[] getIds(){
+    public synchronized String[] getResultSetIds(){
         return map.keySet().toArray(new String[map.size()]);
     }
 

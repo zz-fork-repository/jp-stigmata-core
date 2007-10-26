@@ -57,7 +57,6 @@ public class ExtractedHistoryPane extends JPanel{
         currentHistory = historyManager.getHistory(historyId);
         model.clear();
 
-        System.out.println(historyId);
         for(String id: currentHistory){
             model.addElement(id);
         }
@@ -72,7 +71,7 @@ public class ExtractedHistoryPane extends JPanel{
     }
 
     private void showAction(String id){
-        ExtractionResultSet ers = currentHistory.getExtractionResultSet(id);
+        ExtractionResultSet ers = currentHistory.getResultSet(id);
         stigmata.showExtractionResult(ers);
     }
 
@@ -100,7 +99,7 @@ public class ExtractedHistoryPane extends JPanel{
                 int[] indeces = list.getSelectedIndices();
                 for(int i = indeces.length - 1; i >= 0; i--){
                     String id = (String)model.get(indeces[i]);
-                    currentHistory.delete(id);
+                    currentHistory.deleteResultSet(id);
                     model.remove(indeces[i]);
                 }
                 list.clearSelection();
@@ -117,6 +116,7 @@ public class ExtractedHistoryPane extends JPanel{
         JButton refreshButton = GUIUtility.createButton("refreshhistory", refreshAction);
         JButton deleteButton = GUIUtility.createButton("deletehistory", deleteAction);
         deleteAction.setEnabled(false);
+        showAction.setEnabled(false);
 
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent e){
