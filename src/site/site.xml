@@ -34,14 +34,24 @@
       <item name="Introduction"        href="index.html"/>
       <item name="Download"            href="download.html" />
       <item name="License"             href="license.html"/>
+      <item name="FAQ"                 href="faq.html"/>
+    </menu>
+
+    <menu name="For Users">
       <item name="Tutorial"            href="tutorial.html"/>
       <item name="Tutorial (pdf)"      href="tutorial.pdf"/>
-      <item name="FAQ"                 href="faq.html"/>
-      <item name="Relax NG"            href="relaxng.html" />
-      <item name="DTD"                 href="dtd.html" />
+    </menu>
+
+    <menu name="For Researchers">
       <item name="Definition"          href="definition.html" />
       <item name="Survey"              href="survey.html"/>
       <item name="Maniac mode"         href="maniac.html"/>
+    </menu>
+
+    <menu name="For Developers">
+      <item name="Extend Stigmata"     href="developer.html" />
+      <item name="Relax NG"            href="relaxng.html" />
+      <item name="DTD"                 href="dtd.html" />
       <item name="Project Page"        href="http://sourceforge.jp/projects/stigmata/"/>
     </menu>
 
