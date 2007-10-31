@@ -1,0 +1,28 @@
+<assembly>
+  <id>macosx</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>README*</include>
+        <include>LICENSE*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>target</directory>
+      <outputDirectory>Stigmata.app/Contents/Resources/Java/</outputDirectory>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>src/main/assembly/macosx/</directory>
+      <outputDirectory>Stigmata.app/Contents/</outputDirectory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>
