@@ -35,6 +35,7 @@ import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
 import jp.sourceforge.talisman.xmlcli.OptionsBuilder;
 import jp.sourceforge.talisman.xmlcli.ResourceHelpFormatter;
+import jp.sourceforge.talisman.xmlcli.XmlCliConfigurationException;
 import jp.sourceforge.talisman.xmlcli.builder.OptionsBuilderFactory;
 
 import org.apache.commons.cli.CommandLineParser;
@@ -43,7 +44,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.w3c.dom.DOMException;
-import org.xml.sax.SAXException;
 
 /**
  * Front end class.
@@ -278,9 +278,9 @@ public final class Main{
             Options options = builder.buildOptions();
 
             return options;
-        }catch(DOMException ex){
+        }catch(XmlCliConfigurationException ex){
             ex.printStackTrace();
-        }catch(SAXException ex){
+        }catch(DOMException ex){
             ex.printStackTrace();
         }catch(IOException ex){
             ex.printStackTrace();
