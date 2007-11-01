@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import jp.naist.se.stigmata.event.BirthmarkEngineAdapter;
 import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
@@ -33,6 +34,7 @@ import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
 import jp.sourceforge.talisman.xmlcli.OptionsBuilder;
+import jp.sourceforge.talisman.xmlcli.ResourceHelpFormatter;
 import jp.sourceforge.talisman.xmlcli.builder.OptionsBuilderFactory;
 
 import org.apache.commons.cli.CommandLineParser;
@@ -307,17 +309,17 @@ public final class Main{
 
     public void printHelp(BirthmarkEnvironment env, Options options){
         Package p = getClass().getPackage();
-        HelpFormatter formatter = new HelpFormatter();
+        ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
+        HelpFormatter formatter = new ResourceHelpFormatter(helpResource);
         formatter.printHelp(
             String.format(
-                "java -jar stigmata-%s.jar <OPTIONS> <TARGETS>%n" + 
-                "TARGETS is allowed as jar files, war files, class files, and classpath directory.",
+                helpResource.getString("cli.interface"),
                 p.getImplementationVersion()
             ),
             options
         );
         System.out.println();
-        System.out.println("Available birthmarks:");
+        System.out.println(helpResource.getString("cli.interface.birthmarks"));
         for(BirthmarkSpi service: env.getServices()){
             if(!service.isExpert()){
                 System.out.printf("    %-5s (%s): %s%n", service.getType(),
@@ -325,17 +327,18 @@ public final class Main{
             }
         }
         System.out.println();
-        System.out.println("Available filers:");
-        for(ComparisonPairFilterSet filterset: env.getFilterManager()
-                .getFilterSets()){
-            System.out.printf("    %s (%s)%n", filterset.getName(), filterset.isMatchAll()? "match all": "match any");
+        System.out.println(helpResource.getString("cli.interface.filters"));
+        for(ComparisonPairFilterSet filterset: env.getFilterManager().getFilterSets()){
+            String matchString = helpResource.getString("cli.interface.filter.matchall");
+            if(filterset.isMatchAny()) matchString = helpResource.getString("cli.interface.filter.matchany");
+            System.out.printf("    %s (%s)%n", filterset.getName(), matchString);
             for(ComparisonPairFilter filter: filterset){
                 System.out.printf("        %s%n", filter);
             }
         }
         System.out.println();
-        System.out.println("Copyright (C) by Haruaki Tamada, Ph.D.");
-        System.out.println("Please notify us some bugs and requests to <stigmata-info[ at ]lists.sourceforge.jp>");
+        System.out.println(helpResource.getString("cli.interface.copyright"));
+        System.out.println(helpResource.getString("cli.interface.mailto"));
     }
 
     public void printLicense(){
@@ -354,8 +357,9 @@ public final class Main{
     }
 
     public void printVersion(){
+        ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
         Package p = getClass().getPackage();
-        System.out.println("stigmata version " + p.getImplementationVersion());
+        System.out.printf("%s %s%n", helpResource.getString("cli.version.header"), p.getImplementationVersion());
     }
 
     public static void main(String[] args) throws Exception{
