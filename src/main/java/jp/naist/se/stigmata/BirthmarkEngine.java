@@ -24,6 +24,8 @@ import jp.naist.se.stigmata.event.OperationType;
 import jp.naist.se.stigmata.event.WarningMessages;
 import jp.naist.se.stigmata.filter.ComparisonPairFilterManager;
 import jp.naist.se.stigmata.filter.FilteredComparisonResultSet;
+import jp.naist.se.stigmata.hook.Phase;
+import jp.naist.se.stigmata.hook.StigmataHookManager;
 import jp.naist.se.stigmata.reader.ClassFileArchive;
 import jp.naist.se.stigmata.reader.ClassFileEntry;
 import jp.naist.se.stigmata.reader.ClasspathContext;
@@ -103,7 +105,7 @@ public class BirthmarkEngine{
 
         ComparisonResultSet crs = compare(targetX, targetY, context);
         crs = filter(crs);
-        
+
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
@@ -121,7 +123,7 @@ public class BirthmarkEngine{
 
         ComparisonResultSet crs = compare(er);
         crs = filter(crs);
-        
+
         operationDone(OperationType.FILTER_BIRTHMARKS);
 
         return crs;
@@ -134,6 +136,7 @@ public class BirthmarkEngine{
      */
     public synchronized ComparisonResultSet filter(ComparisonResultSet crs) throws BirthmarkExtractionFailedException, BirthmarkComparisonFailedException{
         operationStart(OperationType.FILTER_BIRTHMARKS);
+        StigmataHookManager.getInstance().runHook(Phase.BEFORE_FILTERING, crs.getContext());
 
         String[] filterTypes = crs.getContext().getFilterTypes();
 
@@ -153,8 +156,10 @@ public class BirthmarkEngine{
 
             crs = new FilteredComparisonResultSet(crs, cpfs);
         }
-        
+
+        StigmataHookManager.getInstance().runHook(Phase.AFTER_FILTERING, crs.getContext());
         operationDone(OperationType.FILTER_BIRTHMARKS);
+
         return crs;
     }
 
@@ -191,6 +196,7 @@ public class BirthmarkEngine{
         operationStart(OperationType.COMPARE_BIRTHMARKS);
         BirthmarkContext context = er.getContext();
 
+        StigmataHookManager.getInstance().runHook(Phase.BEFORE_COMPARISON, context);
         ComparisonResultSet crs = null;
         switch(context.getComparisonMethod()){
         case ROUND_ROBIN_SAME_PAIR:
@@ -209,7 +215,9 @@ public class BirthmarkEngine{
             break;
         }
 
+        StigmataHookManager.getInstance().runHook(Phase.AFTER_COMPARISON, context);
         operationDone(OperationType.COMPARE_BIRTHMARKS);
+
         return crs;
     }
 
@@ -225,6 +233,8 @@ public class BirthmarkEngine{
         ExtractionResultSet er = context.getEnvironment().getHistoryManager().createDefaultResultSet(context);
 
         try{
+            StigmataHookManager.getInstance().runHook(Phase.BEFORE_EXTRACTION, context);
+
             switch(context.getComparisonMethod()){
             case ROUND_ROBIN_SAME_PAIR:
             case ROUND_ROBIN_WITHOUT_SAME_PAIR:
@@ -248,6 +258,7 @@ public class BirthmarkEngine{
         } catch(IOException e){
             throw new BirthmarkExtractionFailedException(e);
         } finally{
+            StigmataHookManager.getInstance().runHook(Phase.AFTER_EXTRACTION, context);
             operationDone(OperationType.EXTRACT_BIRTHMARKS);
         }
     }
@@ -363,7 +374,7 @@ public class BirthmarkEngine{
                 try{
                     BirthmarkSet birthmarkset = new BirthmarkSet(entry.getClassName(), entry.getLocation());
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
-                    
+
                     for(String birthmarkType: context.getBirthmarkTypes()){
                         try{
                             BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
