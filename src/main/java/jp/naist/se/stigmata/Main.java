@@ -20,6 +20,8 @@ import java.util.List;
 import jp.naist.se.stigmata.event.BirthmarkEngineAdapter;
 import jp.naist.se.stigmata.event.BirthmarkEngineEvent;
 import jp.naist.se.stigmata.event.WarningMessages;
+import jp.naist.se.stigmata.hook.Phase;
+import jp.naist.se.stigmata.hook.StigmataHookManager;
 import jp.naist.se.stigmata.printer.BirthmarkServicePrinter;
 import jp.naist.se.stigmata.printer.ComparisonResultSetPrinter;
 import jp.naist.se.stigmata.printer.ExtractionResultSetPrinter;
@@ -84,6 +86,7 @@ public final class Main{
                 printHelp(context.getEnvironment(), options);
                 return;
             }
+            StigmataHookManager.getInstance().runHook(Phase.SETUP, context.getEnvironment());
 
             if(mode.equals("list")){
                 listBirthmarks(context, format);
@@ -97,6 +100,20 @@ public final class Main{
             else if(mode.equals("gui")){
                 StigmataFrame frame = new StigmataFrame(stigmata, context.getEnvironment());
                 frame.setVisible(true);
+            }
+
+            if(!mode.equals("gui")){
+                StigmataHookManager.getInstance().runHook(Phase.TEAR_DOWN, context.getEnvironment());
+            }
+            else{
+                final BirthmarkEnvironment env = context.getEnvironment();
+                Runtime.getRuntime().addShutdownHook(new Thread(){
+                    public void run(){
+                        StigmataHookManager.getInstance().runHook(
+                            Phase.TEAR_DOWN, env
+                        );
+                    }
+                });
             }
         }
     }
