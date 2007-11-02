@@ -21,7 +21,7 @@
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleIconFile</key>
-    <string>Stigmata-logo.icns</string>
+    <string>stigmata.icns</string>
     <key>Java</key>
     <dict>
       <key>MainClass</key>
