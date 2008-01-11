@@ -5,21 +5,17 @@ package jp.naist.se.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.plaf.metal.MetalComboBoxIcon;
 
 /**
  * Popup button.
@@ -39,7 +35,7 @@ public class PopupButton extends JPanel{
         setLayout(new BorderLayout());
 
         button = initButton;
-        icon = createIcon();
+        icon = new MetalComboBoxIcon();
         arrowButton = new JButton(icon);
         popup = new JPopupMenu();
         add(button, BorderLayout.CENTER);
@@ -88,17 +84,5 @@ public class PopupButton extends JPanel{
             arrowButton.setSize(arrowButton.getPreferredSize());
             setSize(getPreferredSize());
         }
-    }
-
-    private Icon createIcon(){
-        BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = image.createGraphics();
-        int[] x = new int[] { 0, 5, 10, };
-        int[] y = new int[] { 3, 8, 3, };
-        Polygon polygon = new Polygon(x, y, x.length);
-        g.setColor(Color.black);
-        g.fill(polygon);
-
-        return new ImageIcon(image);
     }
 }
