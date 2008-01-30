@@ -85,15 +85,14 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
 
         public BirthmarkSet next(){
             if(first){
+                first = false;
                 return bs;
             }
             throw new NoSuchElementException();
         }
 
         public boolean hasNext(){
-            boolean flag = first;
-            first = false;
-            return flag;
+            return first;
         }
 
         public void remove(){
