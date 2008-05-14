@@ -44,6 +44,9 @@ public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
         if(parameter != null){
             file = new File(parameter);
         }
+        if(!file.exists()){
+            file.mkdirs();
+        }
         return new XmlFileExtractedBirthmarkHistory(file);
     }
 
