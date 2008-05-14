@@ -122,15 +122,15 @@ public class BirthmarkEnvironment{
                 stigmataHome = System.getenv("STIGMATA_HOME");
             }
             if(stigmataHome == null){
-                String parent = System.getenv("HOME");
+                String parent = System.getProperty("user.home");
                 if(parent == null){
-                    parent = System.getProperty("user.home");
+                    parent = System.getenv("HOME");
                 }
                 if(parent == null){
                     parent = ".";
                 }
                 // for windows
-                if(parent.startsWith("C:\\Document and Settings\\")){
+                if(parent.startsWith("C:\\Documents and Settings\\")){
                     stigmataHome = parent + File.separator + "Application Data" + File.separator + "stigmata";
                 }
                 else{

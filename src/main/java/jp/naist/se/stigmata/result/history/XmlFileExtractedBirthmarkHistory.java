@@ -40,9 +40,11 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
     public void refresh(){
         files.clear();
 
-        for(File file: parent.listFiles()){
-            if(isTarget(file)){
-                files.put(file.getName(), file);
+        if(parent.exists()){
+            for(File file: parent.listFiles()){
+                if(isTarget(file)){
+                    files.put(file.getName(), file);
+                }
             }
         }
     }
