@@ -70,7 +70,7 @@ import org.apache.commons.cli.ParseException;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class StigmataFrame extends JFrame{
     private static final long serialVersionUID = 92345543665342134L;
@@ -490,7 +490,7 @@ public class StigmataFrame extends JFrame{
                 }
             }
         });
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
     private JMenu createFileMenu(){
