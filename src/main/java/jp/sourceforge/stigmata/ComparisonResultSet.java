@@ -1,0 +1,55 @@
+package jp.sourceforge.stigmata;
+
+/*
+ * $Id$
+ */
+
+import java.util.Iterator;
+
+/**
+ * result set of birthmark comparison.
+ *
+ * @author Haruaki TAMADA
+ * @version $Revision$ $Date$
+ */
+public interface ComparisonResultSet extends Iterable<ComparisonPair>{
+    /**
+     * the birthmark environment.
+     */
+    public BirthmarkEnvironment getEnvironment();
+
+    /**
+     * the birthmark context.
+     */
+    public BirthmarkContext getContext();
+
+    /**
+     * a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.
+     */
+    public Iterator<ComparisonPair> iterator();
+
+    /**
+     * a comparison pair at given index.
+     */
+    public ComparisonPair getPairAt(int index);
+
+    /**
+     * all comparison pairs.
+     */
+    public ComparisonPair[] getPairs();
+
+    /**
+     * comparison pair count of this instance has.
+     */
+    public int getPairCount();
+
+    /**
+     * comparison source.
+     */
+    public BirthmarkSet[] getPairSources();
+
+    /**
+     * returns an array of comparison sources.
+     */
+    public Iterator<BirthmarkSet> pairSources();
+}

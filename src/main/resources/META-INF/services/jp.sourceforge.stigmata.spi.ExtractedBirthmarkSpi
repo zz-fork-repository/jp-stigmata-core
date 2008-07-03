@@ -1,0 +1,3 @@
+jp.sourceforge.stigmata.result.MemoryExtractedBirthmarkService
+jp.sourceforge.stigmata.result.XmlFileExtractedBirthmarkService
+jp.sourceforge.stigmata.result.RDBExtractedBirthmarkService

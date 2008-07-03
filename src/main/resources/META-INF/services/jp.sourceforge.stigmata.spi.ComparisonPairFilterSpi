@@ -1,0 +1,4 @@
+jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilterService
+jp.sourceforge.stigmata.filter.SimilarityComparisonPairFilterService
+jp.sourceforge.stigmata.filter.TargetNameComparisonPairFilterService
+jp.sourceforge.stigmata.filter.TotalElementCountComparisonPairFilterService

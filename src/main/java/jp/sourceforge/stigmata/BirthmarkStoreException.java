@@ -1,0 +1,30 @@
+package jp.sourceforge.stigmata;
+
+/*
+ * $Id$
+ */
+
+/**
+ * This exception class will be thrown when birthmark storing is failed.
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
+public class BirthmarkStoreException extends BirthmarkException{
+    private static final long serialVersionUID = -7106053809841281816L;
+
+    public BirthmarkStoreException(){
+    }
+
+    public BirthmarkStoreException(String message, Throwable cause){
+        super(message, cause);
+    }
+
+    public BirthmarkStoreException(String message){
+        super(message);
+    }
+
+    public BirthmarkStoreException(Throwable cause){
+        super(cause);
+    }
+}

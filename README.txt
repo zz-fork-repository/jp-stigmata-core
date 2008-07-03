@@ -56,11 +56,10 @@
 * Author
 
   Name:        Haruaki TAMADA, Ph.D.
-  Affiliation: Software Engineering Laboratory, Graduate School of
-               Information and Science, Nara Institute of Science and
-               Technology
-  E-mail:      harua-t[ at ]is.naist.jp
-  Web Page:    http://se.naist.jp/~harua-t/
+  Affiliation: Department of Computer Science, Faculty of Computer
+               Science and Engineering, Kyoto Sangyo University
+  E-mail:      tama3[ at ]users.sourceforge.jp
+  Web Page:    http://stigmata.sourceforge.jp/
 
   Please notify us some bugs and requests to 
   mailto:stigmata-info[ at ]lists.sourceforge.jp

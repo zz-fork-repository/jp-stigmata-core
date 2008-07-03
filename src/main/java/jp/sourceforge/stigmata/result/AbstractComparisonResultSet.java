@@ -1,0 +1,92 @@
+package jp.sourceforge.stigmata.result;
+
+/*
+ * $Id$
+ */
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkSet;
+import jp.sourceforge.stigmata.ComparisonPair;
+import jp.sourceforge.stigmata.ComparisonResultSet;
+import jp.sourceforge.stigmata.ExtractionResultSet;
+
+/**
+ * Abstract class for ComparisonResultSet.
+ *
+ * @author Haruaki Tamada
+ * @version $Revision$ $Date$
+ */
+public abstract class AbstractComparisonResultSet implements ComparisonResultSet{
+    protected ExtractionResultSet extraction;
+    private int count = -1;
+
+    public AbstractComparisonResultSet(ExtractionResultSet extraction){
+        this.extraction = extraction;
+    }
+
+    public abstract Iterator<ComparisonPair> iterator();
+
+    public abstract Iterator<BirthmarkSet> pairSources();
+
+    public synchronized BirthmarkSet[] getPairSources(){
+        return AbstractComparisonResultSet.<BirthmarkSet>getArrays(pairSources(), new BirthmarkSet[0]);
+    }
+
+    public int getPairCount(){
+        if(count < 0){
+            int calculateCount = 0;
+            for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
+                calculateCount++;
+                i.next();
+            }
+            this.count = calculateCount;
+        }
+        return count;
+    }
+
+    public synchronized ComparisonPair[] getPairs(){
+        return AbstractComparisonResultSet.<ComparisonPair>getArrays(iterator(), new ComparisonPair[0]);
+    }
+
+    public ComparisonPair getPairAt(int index){
+        int currentIndex = 0;
+        for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
+            ComparisonPair pair = i.next();
+            if(currentIndex == index){
+                return pair;
+            }
+            currentIndex++;
+        }
+        return null;
+    }
+
+    public BirthmarkContext getContext(){
+        return extraction.getContext();
+    }
+
+    public BirthmarkEnvironment getEnvironment(){
+        return extraction.getEnvironment();
+    }
+
+    @SuppressWarnings("unchecked")
+    static synchronized <T> T[] getArrays(Iterator<T> i, T[] array){
+        List<Object> list = new ArrayList<Object>();
+        while(i.hasNext()){
+            list.add(i.next());
+        }
+
+        if(list.size() > array.length){
+            array = (T[])Array.newInstance(array.getClass().getComponentType(), list.size());
+        }
+        for(int index = 0; index < list.size(); index++){
+            array[index] = (T)list.get(index);
+        }
+        return array;
+    }
+}

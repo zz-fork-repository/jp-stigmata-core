@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>jp.naist.se</groupId>
+  <groupId>jp.sourceforge</groupId>
   <artifactId>stigmata</artifactId>
   <version>1.2.0</version>
   <name>stigmata</name>
@@ -26,16 +26,16 @@
     <developer>
       <id>tama</id>
       <name>Haruaki TAMADA</name>
-      <email>harua-t[ at ]is.naist.jp</email>
-      <organization>NAIST, Software Engineering Lab.</organization>
-      <organizationUrl>http://se.naist.jp/</organizationUrl>
+      <email>tama3[ at ]users.sourceforge.jp</email>
+      <organization>sourceforge.jp</organization>
+      <organizationUrl>http://sourceforge.jp/</organizationUrl>
       <timezone>-9</timezone>
     </developer>
   </developers>
 
   <organization>
-    <name>Software Engineering Lab., NAIST</name>
-    <url>http://se.naist.jp/</url>
+    <name>Kyoto Sangyo University, Japan</name>
+    <url>http://www.kyoto-su.ac.jp/</url>
   </organization>
 
   <dependencies>
@@ -154,7 +154,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>jp.naist.se.stigmata.Main</mainClass>
+              <mainClass>jp.sourceforge.stigmata.Main</mainClass>
               <addClasspath>true</addClasspath>
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>

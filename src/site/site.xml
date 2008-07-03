@@ -2,10 +2,9 @@
 
 <project name="Stigmata">
   <bannerLeft>
-    <name>NAIST SE Lab.</name>
-    <src>images/logos/selogo.png</src>
-    <href>http://se.naist.jp/</href>
-    <alt>se.naist.jp</alt>
+    <name>sourceforge.jp</name>
+    <href>http://sourceforge.jp/</href>
+    <alt>sourceforge.jp</alt>
   </bannerLeft>
   <bannerRight>
     <name>Stigmata</name>
@@ -57,6 +56,7 @@
 
     <menu name="Links">
       <item name="SE Lab., NAIST" href="http://se.naist.jp/" />
+      <item name="Kyoto Sangyo University" href="http://www.kyoto-su.ac.jp/" />
       <item name="DonQuixote"     href="http://donquixote.cafebabe.jp/" />
     </menu>
 
