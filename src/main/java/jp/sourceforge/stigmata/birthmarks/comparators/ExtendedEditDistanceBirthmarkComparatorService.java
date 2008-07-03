@@ -23,7 +23,7 @@ public class ExtendedEditDistanceBirthmarkComparatorService extends AbstractBirt
     }
 
     public String getComparatorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.comparators.ExtendedEditDistanceBirthmarkComparator";
+        return ExtendedEditDistanceBirthmarkComparator.class.getName();
     }
 
     /**

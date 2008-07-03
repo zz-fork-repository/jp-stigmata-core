@@ -24,7 +24,7 @@ public class FrequencyMethodCallBirthmarkExtractorService extends AbstractBirthm
     }
 
     public String getExtractorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.fmc.FrequencyMethodCallBirthmarkExtractor";
+        return FrequencyMethodCallBirthmarkExtractor.class.getName();
     }
 
     /**

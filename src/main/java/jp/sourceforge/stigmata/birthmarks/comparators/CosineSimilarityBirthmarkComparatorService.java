@@ -23,7 +23,7 @@ public class CosineSimilarityBirthmarkComparatorService extends AbstractBirthmar
     }
 
     public String getComparatorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.comparators.CosineSimilarityBirthmarkComparator";
+        return CosineSimilarityBirthmarkComparator.class.getName();
     }
 
     /**

@@ -24,7 +24,7 @@ public class InheritanceStructureBirthmarkExtractorService extends AbstractBirth
     }
 
     public String getExtractorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.is.InheritanceStructureBirthmarkExtractor";
+        return InheritanceStructureBirthmarkExtractor.class.getName();
     }
 
     /**

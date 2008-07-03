@@ -24,7 +24,7 @@ public class KGramBasedBirthmarkExtractorService extends AbstractBirthmarkExtrac
     }
 
     public String getExtractorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.kgram.KGramBasedBirthmarkExtractor";
+        return KGramBasedBirthmarkExtractor.class.getName();
     }
 
     /**

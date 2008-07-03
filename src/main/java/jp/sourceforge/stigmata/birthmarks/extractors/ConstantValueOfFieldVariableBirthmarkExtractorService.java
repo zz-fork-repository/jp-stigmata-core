@@ -24,7 +24,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractorService extends Abstr
     }
 
     public String getExtractorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor";
+        return ConstantValueOfFieldVariableBirthmarkExtractor.class.getName();
     }
 
     /**

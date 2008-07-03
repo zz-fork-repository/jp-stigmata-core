@@ -19,7 +19,7 @@ import org.objectweb.asm.ClassWriter;
  * Abstract birthmark extractor using ASM.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
     public ASMBirthmarkExtractor(BirthmarkSpi spi){

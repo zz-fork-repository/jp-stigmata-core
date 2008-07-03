@@ -24,7 +24,7 @@ public class SequentialMethodCallBirthmarkExtractorService extends AbstractBirth
     }
 
     public String getExtractorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor";
+        return SequentialMethodCallBirthmarkExtractor.class.getName();
     }
 
     /**

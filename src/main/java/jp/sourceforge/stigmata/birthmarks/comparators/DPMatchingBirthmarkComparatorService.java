@@ -23,7 +23,7 @@ public class DPMatchingBirthmarkComparatorService extends AbstractBirthmarkCompa
     }
 
     public String getComparatorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.comparators.DPMatchingBirthmarkComparator";
+        return DPMatchingBirthmarkComparator.class.getName();
     }
 
     /**

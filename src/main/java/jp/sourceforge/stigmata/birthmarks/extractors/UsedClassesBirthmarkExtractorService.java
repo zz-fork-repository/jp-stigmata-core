@@ -24,7 +24,7 @@ public class UsedClassesBirthmarkExtractorService extends AbstractBirthmarkExtra
     }
 
     public String getExtractorClassName(){
-        return "jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor";
+        return UsedClassesBirthmarkExtractor.class.getName();
     }
 
     /**
