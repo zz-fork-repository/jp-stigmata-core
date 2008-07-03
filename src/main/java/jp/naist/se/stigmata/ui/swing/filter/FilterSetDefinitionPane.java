@@ -27,17 +27,19 @@ import javax.swing.event.ListSelectionListener;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.ComparisonPairFilterSet;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFilterListener{
     private static final long serialVersionUID = 7519306603672717119L;
 
     private ComparisonPairFilterRetainable manager;
+    private StigmataFrame stigmata;
 
     private JTextField name;
     private JRadioButton matchall, matchany;
@@ -52,11 +54,12 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
     private JButton upButton;
     private JButton downButton;
     
-    public FilterSetDefinitionPane(ComparisonPairFilterRetainable manager){
-        this(manager, true);
+    public FilterSetDefinitionPane(StigmataFrame frame, ComparisonPairFilterRetainable manager){
+        this(frame, manager, true);
     }
 
-    public FilterSetDefinitionPane(ComparisonPairFilterRetainable manager, boolean showButtons){
+    public FilterSetDefinitionPane(StigmataFrame frame, ComparisonPairFilterRetainable manager, boolean showButtons){
+        this.stigmata = frame;
         this.manager = manager;
         
         initLayouts(showButtons);
@@ -110,14 +113,15 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
     }
 
     private void initLayouts(boolean showButtons){
+        Messages messages = stigmata.getMessages();
         this.buttonShown = showButtons;
 
         ButtonGroup group = new ButtonGroup();
-        matchall = new JRadioButton(Messages.getString("matchall.button.label"), true);
-        matchall.setToolTipText(Messages.getString("matchall.button.tooltip"));
+        matchall = new JRadioButton(messages.get("matchall.button.label"), true);
+        matchall.setToolTipText(messages.get("matchall.button.tooltip"));
         group.add(matchall);
-        matchany = new JRadioButton(Messages.getString("matchany.button.label"), false);
-        matchany.setToolTipText(Messages.getString("matchany.button.tooltip"));
+        matchany = new JRadioButton(messages.get("matchany.button.label"), false);
+        matchany.setToolTipText(messages.get("matchany.button.tooltip"));
         group.add(matchany);
         
         JPanel north = new JPanel(new GridLayout(3, 1));
@@ -125,11 +129,11 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         north.add(matchall);
         north.add(matchany);
 
-        addfilter = GUIUtility.createButton("newfilterset");
-        updatefilter = GUIUtility.createButton("updatefilterset");
-        removefilter = GUIUtility.createButton("removefilterset");
-        upButton = GUIUtility.createButton("moveup");
-        downButton = GUIUtility.createButton("movedown");
+        addfilter = GUIUtility.createButton(messages, "newfilterset");
+        updatefilter = GUIUtility.createButton(messages, "updatefilterset");
+        removefilter = GUIUtility.createButton(messages, "removefilterset");
+        upButton = GUIUtility.createButton(messages, "moveup");
+        downButton = GUIUtility.createButton(messages, "movedown");
         
         Box south = Box.createHorizontalBox();
         south.add(Box.createHorizontalGlue());
@@ -228,8 +232,8 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
             add(south, BorderLayout.SOUTH);
         }
 
-        GUIUtility.decorateJComponent(name, "filtername");
-        GUIUtility.decorateJComponent(listpane, "filterorder");
+        GUIUtility.decorateJComponent(messages, name, "filtername");
+        GUIUtility.decorateJComponent(messages, listpane, "filterorder");
 
         setEnabled(buttonShown);
 

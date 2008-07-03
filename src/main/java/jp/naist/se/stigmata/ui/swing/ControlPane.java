@@ -78,10 +78,10 @@ public class ControlPane extends JPanel{
         history = new ExtractedHistoryPane(stigmata);
         initComponents();
 
-        GUIUtility.addNewTab("targets", controlTab, control);
-        GUIUtility.addNewTab("wellknown", controlTab, wellknownClassses);
-        GUIUtility.addNewTab("classpath", controlTab, classpath);
-        GUIUtility.addNewTab("property", controlTab, properties);
+        GUIUtility.addNewTab(stigmata.getMessages(), "targets", controlTab, control);
+        GUIUtility.addNewTab(stigmata.getMessages(), "wellknown", controlTab, wellknownClassses);
+        GUIUtility.addNewTab(stigmata.getMessages(), "classpath", controlTab, classpath);
+        GUIUtility.addNewTab(stigmata.getMessages(), "property", controlTab, properties);
         reset();
     }
 
@@ -106,11 +106,11 @@ public class ControlPane extends JPanel{
         filters.reset();
         updateEnable();
 
-        int definitionTabIndex = controlTab.indexOfTab(Messages.getString("definition.tab.label"));
+        int definitionTabIndex = controlTab.indexOfTab(stigmata.getMessages().get("definition.tab.label"));
         if(definitionTabIndex >= 0){
             controlTab.removeTabAt(definitionTabIndex);
         }
-        int filterTabIndex = controlTab.indexOfTab(Messages.getString("filter.tab.label"));
+        int filterTabIndex = controlTab.indexOfTab(stigmata.getMessages().get("filter.tab.label"));
         if(filterTabIndex >= 0){
             controlTab.removeTabAt(filterTabIndex);
         }
@@ -126,8 +126,8 @@ public class ControlPane extends JPanel{
         } catch(IOException e){
             JOptionPane.showMessageDialog(
                 stigmata,
-                Messages.getString("error.io", e.getMessage()),
-                Messages.getString("error.dialog.title"),
+                stigmata.getMessages().get("error.io", e.getMessage()),
+                stigmata.getMessages().get("error.dialog.title"),
                 JOptionPane.ERROR_MESSAGE
             );
         }
@@ -135,8 +135,8 @@ public class ControlPane extends JPanel{
 
     public void exportSettings(){
         File file = stigmata.getSaveFile(
-            Messages.getStringArray("export.extensions"), 
-            Messages.getString("export.description")
+            stigmata.getMessages().getArray("export.extensions"), 
+            stigmata.getMessages().get("export.description")
         );
 
         if(file != null){
@@ -153,14 +153,14 @@ public class ControlPane extends JPanel{
         stigmata.setExpertMode(expertmode);
 
         if(expertmode){
-            GUIUtility.addNewTab("definition", controlTab, definition);
-            GUIUtility.addNewTab("filter", controlTab, filters);
-            GUIUtility.addNewTab("history", controlTab, history);
+            GUIUtility.addNewTab(stigmata.getMessages(), "definition", controlTab, definition);
+            GUIUtility.addNewTab(stigmata.getMessages(), "filter", controlTab, filters);
+            GUIUtility.addNewTab(stigmata.getMessages(), "history", controlTab, history);
         }
         else{
-            removeTabByName(Messages.getString("definition.tab.label"));
-            removeTabByName(Messages.getString("filter.tab.label"));
-            removeTabByName(Messages.getString("history.tab.label"));
+            removeTabByName(stigmata.getMessages().get("definition.tab.label"));
+            removeTabByName(stigmata.getMessages().get("filter.tab.label"));
+            removeTabByName(stigmata.getMessages().get("history.tab.label"));
         }
         updateEnable();
     }
@@ -182,15 +182,15 @@ public class ControlPane extends JPanel{
         targetX = new TargetSelectionPane(stigmata);
         targetY = new TargetSelectionPane(stigmata);
 
-        birthmarks.setBorder(new TitledBorder(Messages.getString("birthmarkspane.border")));
+        birthmarks.setBorder(new TitledBorder(stigmata.getMessages().get("birthmarkspane.border")));
 
-        targetX.addTargetExtensions(Messages.getStringArray("targets.extensions"));
-        targetX.setDescription(Messages.getString("targets.description"));
-        targetX.setBorder(new TitledBorder(Messages.getString("targetx.border")));
+        targetX.addTargetExtensions(stigmata.getMessages().getArray("targets.extensions"));
+        targetX.setDescription(stigmata.getMessages().get("targets.description"));
+        targetX.setBorder(new TitledBorder(stigmata.getMessages().get("targetx.border")));
 
-        targetY.addTargetExtensions(Messages.getStringArray("targets.extensions"));
-        targetY.setDescription(Messages.getString("targets.description"));
-        targetY.setBorder(new TitledBorder(Messages.getString("targety.border")));
+        targetY.addTargetExtensions(stigmata.getMessages().getArray("targets.extensions"));
+        targetY.setDescription(stigmata.getMessages().get("targets.description"));
+        targetY.setBorder(new TitledBorder(stigmata.getMessages().get("targety.border")));
 
         center.add(mainPane, BorderLayout.CENTER);
         center.add(birthmarks, BorderLayout.SOUTH);
@@ -244,10 +244,10 @@ public class ControlPane extends JPanel{
         BirthmarkContext context = generateContext();
         context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_XY);
         FilterSelectionPane pane = new FilterSelectionPane(
-            context.getEnvironment().getFilterManager()
+            stigmata, context.getEnvironment().getFilterManager()
         );
         int returnValue = JOptionPane.showConfirmDialog(
-            stigmata, pane, Messages.getString("filterselection.dialog.title"),
+            stigmata, pane, stigmata.getMessages().get("filterselection.dialog.title"),
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE
         );
@@ -338,9 +338,9 @@ public class ControlPane extends JPanel{
 
     private void initComponents(){
         controlTab = new JTabbedPane();
-        resetButton = GUIUtility.createButton("reset");
-        extractButton = GUIUtility.createButton("extract");
-        compareButton = GUIUtility.createButton("roundrobin");
+        resetButton = GUIUtility.createButton(stigmata.getMessages(), "reset");
+        extractButton = GUIUtility.createButton(stigmata.getMessages(), "extract");
+        compareButton = GUIUtility.createButton(stigmata.getMessages(), "roundrobin");
         comparePopup = new PopupButton(compareButton);
         unitBox = new JComboBox();
 
@@ -394,16 +394,16 @@ public class ControlPane extends JPanel{
         };
         compareButton.addActionListener(compareListener);
 
-        String[] comparisonMethods = Messages.getStringArray("comparison.methods");
+        String[] comparisonMethods = stigmata.getMessages().getArray("comparison.methods");
         for(int i = 1; i < comparisonMethods.length; i++){
-            JMenuItem item = GUIUtility.createJMenuItem(comparisonMethods[i]);
+            JMenuItem item = GUIUtility.createJMenuItem(stigmata.getMessages(), comparisonMethods[i]);
             comparePopup.addMenuItem(item);
             item.addActionListener(compareListener);
         }
 
-        String[] extractionUnits = Messages.getStringArray("extraction.units");
+        String[] extractionUnits = stigmata.getMessages().getArray("extraction.units");
         for(int i = 0; i < extractionUnits.length; i++){
-            String label = Messages.getString(extractionUnits[i]);
+            String label = stigmata.getMessages().get(extractionUnits[i]);
             unitLabels.put(label, extractionUnits[i]);
             unitBox.addItem(label);
         }

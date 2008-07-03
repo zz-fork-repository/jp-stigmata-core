@@ -36,8 +36,8 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
         setLayout(new BorderLayout());
         add(checks, BorderLayout.CENTER);
 
-        JButton checkAll = GUIUtility.createButton("checkall");
-        JButton uncheckAll = GUIUtility.createButton("uncheckall");
+        JButton checkAll = GUIUtility.createButton(getMessages(), "checkall");
+        JButton uncheckAll = GUIUtility.createButton(getMessages(), "uncheckall");
 
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());

@@ -21,7 +21,7 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListCellRenderer;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListener;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 /**
  * 
@@ -31,8 +31,8 @@ import jp.naist.se.stigmata.ui.swing.Messages;
 public class BirthmarkElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService implements BirthmarkServiceListener{
     private Pane pane;
 
-    public ComparisonPairFilterPane createComponent(ComparisonPairFilterSpi service){
-        pane = new Pane(service);
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+        pane = new Pane(frame, service);
         return pane;
     }
 
@@ -61,7 +61,8 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         private JComboBox targetType;
         private JComboBox birthmarks;
 
-        public Pane(ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+            super(frame);
             this.service = service;
             initLayouts();
         }
@@ -78,15 +79,15 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         public String[] getErrors(){
             List<String> errors = new ArrayList<String>();
             if(threshold.getText().trim().equals("")){
-                errors.add(Messages.getString("error.empty.threshold"));
+                errors.add(getMessages().get("error.empty.threshold"));
             }
             try{
                 int v = Integer.parseInt(threshold.getText());
                 if(v < 0){
-                    errors.add(Messages.getString("error.negative.value", v));
+                    errors.add(getMessages().format("error.negative.value", v));
                 }
             } catch(NumberFormatException e){
-                errors.add(Messages.getString("error.invalid.format.integer", threshold.getText()));
+                errors.add(getMessages().format("error.invalid.format.integer", threshold.getText()));
             }
 
             return errors.toArray(new String[errors.size()]);
@@ -123,12 +124,12 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         }
 
         private void initLayouts(){
-            JLabel label = new JLabel(Messages.getString("filter.elementcount.label"));
+            JLabel label = new JLabel(getMessages().get("filter.elementcount.label"));
             threshold = new JTextField();
             criterionType = createCriteriaBox(BirthmarkElementCountComparisonPairFilter.getValidCriteria());
             birthmarks = new JComboBox();
             birthmarks.setRenderer(new BirthmarkServiceListCellRenderer(new Dimension(200, 20), 60));
-            JLabel label2 = new JLabel(Messages.getString("filter.elementcount.label.next"));
+            JLabel label2 = new JLabel(getMessages().get("filter.elementcount.label.next"));
             targetType = createTargetBox();
 
             setLayout(new GridLayout(6, 1));

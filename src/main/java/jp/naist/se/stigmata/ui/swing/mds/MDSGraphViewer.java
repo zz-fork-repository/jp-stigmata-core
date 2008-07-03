@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import jp.naist.se.stigmata.ui.swing.mds.mark.DrawerFactory;
+import jp.sourceforge.talisman.i18n.Messages;
 import Jama.Matrix;
 
 /**
@@ -32,6 +33,7 @@ public class MDSGraphViewer extends JLayeredPane{
     private static final int POINT_LAYER = DEFAULT_LAYER;
     private static final int LABEL_LAYER = DEFAULT_LAYER;
 
+    private Messages messages;
     private MDSMethod mds;
     private List<Coordinate> plots = new ArrayList<Coordinate>();
     private Color overColor = PointComponent.DEFAULT_OVER_COLOR;
@@ -41,11 +43,12 @@ public class MDSGraphViewer extends JLayeredPane{
     private List<PointComponent> points = new ArrayList<PointComponent>();
     private List<ActionListener> listeners = new ArrayList<ActionListener>();
 
-    public MDSGraphViewer(MDSMethod mds){
-        this(mds, null);
+    public MDSGraphViewer(Messages messages, MDSMethod mds){
+        this(messages, mds, null);
     }
 
-    public MDSGraphViewer(MDSMethod mds, LabelMap labels){
+    public MDSGraphViewer(Messages messages, MDSMethod mds, LabelMap labels){
+        this.messages = messages;
         this.mds = mds;
 
         setSize(500, 500);
@@ -59,6 +62,17 @@ public class MDSGraphViewer extends JLayeredPane{
 
     public void removeActionListener(ActionListener listener){
         listeners.remove(listener);
+    }
+
+    public Messages getMessages(){
+        return messages;
+    }
+
+    public void setMessages(Messages messages){
+        if(messages == null){
+            throw new NullPointerException();
+        }
+        this.messages = messages;
     }
 
     @Override
@@ -269,7 +283,7 @@ public class MDSGraphViewer extends JLayeredPane{
         mds = new MDSMethod(matrix);
 
         mds.getCoordinateMatrix().print(8, 4);
-        MDSGraphViewer viewer = new MDSGraphViewer(mds, labels);
+        MDSGraphViewer viewer = new MDSGraphViewer(new Messages("resources.messages"), mds, labels);
         viewer.setShowLabel(true);
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

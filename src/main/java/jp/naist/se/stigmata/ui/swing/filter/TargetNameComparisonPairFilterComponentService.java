@@ -17,7 +17,7 @@ import jp.naist.se.stigmata.filter.FilterTarget;
 import jp.naist.se.stigmata.filter.TargetNameComparisonPairFilter;
 import jp.naist.se.stigmata.filter.TargetNameComparisonPairFilterService;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 /**
  * @author Haruaki TAMADA
@@ -25,8 +25,8 @@ import jp.naist.se.stigmata.ui.swing.Messages;
  */
 public class TargetNameComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
-    public ComparisonPairFilterPane createComponent(ComparisonPairFilterSpi service){
-        return new Pane(service);
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+        return new Pane(frame, service);
     }
 
     public String getFilterName(){
@@ -44,7 +44,8 @@ public class TargetNameComparisonPairFilterComponentService extends AbstractComp
         private JTextField value;
         private JComboBox targetType;
 
-        public Pane(ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+            super(frame);
             this.service = service;
             initLayouts();
         }
@@ -53,7 +54,7 @@ public class TargetNameComparisonPairFilterComponentService extends AbstractComp
         public String[] getErrors(){
             List<String> errors = new ArrayList<String>();
             if(value.getText().trim().equals("")){
-                errors.add(Messages.getString("error.empty.value"));
+                errors.add(getMessages().get("error.empty.value"));
             }
 
             return errors.toArray(new String[errors.size()]);
@@ -89,7 +90,7 @@ public class TargetNameComparisonPairFilterComponentService extends AbstractComp
         }
 
         private void initLayouts(){
-            JLabel label = new JLabel(Messages.getString("filter.name.label"));
+            JLabel label = new JLabel(getMessages().get("filter.name.label"));
             value = new JTextField();
             criterionType = createCriteriaBox(TargetNameComparisonPairFilter.getValidCriteria());
             targetType = createTargetBox();

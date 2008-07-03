@@ -41,6 +41,7 @@ public class FilterSelectionPane extends JPanel implements ComparisonPairFilterR
     private static final long serialVersionUID = 1825547576389498336L;
     private static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
+    private StigmataFrame stigmata;
     private ComparisonPairFilterManager manager;
     private FilterSetDefinitionPane filterDef;
     private Map<String, Boolean> enableMap = new HashMap<String, Boolean>();
@@ -48,7 +49,8 @@ public class FilterSelectionPane extends JPanel implements ComparisonPairFilterR
     private DefaultListModel model;
     private JList list;
 
-    public FilterSelectionPane(ComparisonPairFilterManager manager){
+    public FilterSelectionPane(StigmataFrame stigmata, ComparisonPairFilterManager manager){
+        this.stigmata = stigmata;
         this.manager = manager;
 
         initLayout();
@@ -103,7 +105,7 @@ public class FilterSelectionPane extends JPanel implements ComparisonPairFilterR
         list.setCellRenderer(new CheckableListCellRenderer());
 
         JScrollPane scroll = new JScrollPane(list);
-        filterDef = new FilterSetDefinitionPane(this, false);
+        filterDef = new FilterSetDefinitionPane(stigmata, this, false);
 
         add(scroll, BorderLayout.WEST);
         add(filterDef, BorderLayout.CENTER);

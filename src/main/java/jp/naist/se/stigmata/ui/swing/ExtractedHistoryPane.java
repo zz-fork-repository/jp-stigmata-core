@@ -28,6 +28,7 @@ import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.result.history.ExtractedBirthmarkHistory;
 import jp.naist.se.stigmata.result.history.ExtractedBirthmarkServiceManager;
 import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * Birthmark extraction history viewer.
@@ -76,6 +77,7 @@ public class ExtractedHistoryPane extends JPanel{
     }
 
     private void initLayouts(){
+        final Messages messages = stigmata.getMessages();
         setLayout(new BorderLayout());
 
         final Action showAction = new AbstractAction(){
@@ -109,12 +111,12 @@ public class ExtractedHistoryPane extends JPanel{
         list = new JList(model);
         combo = new JComboBox();
         list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        GUIUtility.decorateJComponent(list, "historylist");
-        GUIUtility.decorateJComponent(combo, "historylocation");
+        GUIUtility.decorateJComponent(messages, list, "historylist");
+        GUIUtility.decorateJComponent(messages, combo, "historylocation");
 
-        JButton showButton = GUIUtility.createButton("showhistory", showAction);
-        JButton refreshButton = GUIUtility.createButton("refreshhistory", refreshAction);
-        JButton deleteButton = GUIUtility.createButton("deletehistory", deleteAction);
+        JButton showButton = GUIUtility.createButton(messages, "showhistory", showAction);
+        JButton refreshButton = GUIUtility.createButton(messages, "refreshhistory", refreshAction);
+        JButton deleteButton = GUIUtility.createButton(messages, "deletehistory", deleteAction);
         deleteAction.setEnabled(false);
         showAction.setEnabled(false);
 
@@ -156,9 +158,9 @@ public class ExtractedHistoryPane extends JPanel{
         add(south, BorderLayout.SOUTH);
 
         JPopupMenu popup = new JPopupMenu();
-        popup.add(GUIUtility.createJMenuItem("showhistory"), showAction);
-        popup.add(GUIUtility.createJMenuItem("refreshhistory"), refreshAction);
-        popup.add(GUIUtility.createJMenuItem("deletehistory"), deleteAction);
+        popup.add(GUIUtility.createJMenuItem(messages, "showhistory"), showAction);
+        popup.add(GUIUtility.createJMenuItem(messages, "refreshhistory"), refreshAction);
+        popup.add(GUIUtility.createJMenuItem(messages, "deletehistory"), deleteAction);
         list.addMouseListener(new PopupShowAction(popup));
     }
 }

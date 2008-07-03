@@ -26,16 +26,16 @@ public class BirthmarkTree extends JTree{
     private DefaultTreeModel model;
     private DefaultMutableTreeNode root;
 
-    public BirthmarkTree(){
+    public BirthmarkTree(StigmataFrame frame){
         super(new DefaultTreeModel(new DefaultMutableTreeNode(
-            Messages.getString("birthmarktree.root.label"), true)
+            frame.getMessages().get("birthmarktree.root.label"), true)
         ));
         model = (DefaultTreeModel)getModel();
         root = (DefaultMutableTreeNode)model.getRoot();
     }
 
-    public BirthmarkTree(BirthmarkSet[] birthmarks){
-        this();
+    public BirthmarkTree(StigmataFrame frame, BirthmarkSet[] birthmarks){
+        this(frame);
         setBirthmarks(birthmarks);
     }
 

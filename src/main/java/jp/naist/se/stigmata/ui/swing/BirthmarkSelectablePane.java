@@ -15,6 +15,7 @@ import java.util.Set;
 import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -36,6 +37,10 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     }
 
     protected abstract void updateLayouts();
+
+    public Messages getMessages(){
+        return stigmata.getMessages();
+    }
 
     public void setExpertMode(boolean expertmode){
         this.expertmode = expertmode;

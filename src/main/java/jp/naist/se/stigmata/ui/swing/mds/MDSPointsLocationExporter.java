@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
 import jp.naist.se.stigmata.utils.AsciiDataWritable;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class MDSPointsLocationExporter implements AsciiDataWritable{
     private MDSGraphViewer viewer;
@@ -27,7 +26,7 @@ public class MDSPointsLocationExporter implements AsciiDataWritable{
     public void writeAsciiData(PrintWriter out, String format)
             throws IOException, UnsupportedFormatException{
         if(!format.equals("csv")){
-            throw new UnsupportedFormatException(Messages.getString("error.unsupportedformat", format));
+            throw new UnsupportedFormatException(viewer.getMessages().format("error.unsupportedformat", format));
         }
         for(Iterator<Coordinate> i = viewer.coordinates(); i.hasNext(); ){
             Coordinate c = i.next();

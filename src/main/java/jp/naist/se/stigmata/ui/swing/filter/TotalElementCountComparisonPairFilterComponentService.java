@@ -17,7 +17,7 @@ import jp.naist.se.stigmata.filter.FilterTarget;
 import jp.naist.se.stigmata.filter.TotalElementCountComparisonPairFilter;
 import jp.naist.se.stigmata.filter.TotalElementCountComparisonPairFilterService;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 /**
  * @author Haruaki TAMADA
@@ -25,8 +25,8 @@ import jp.naist.se.stigmata.ui.swing.Messages;
  */
 public class TotalElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
-    public ComparisonPairFilterPane createComponent(ComparisonPairFilterSpi service){
-        return new Pane(service);
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+        return new Pane(frame, service);
     }
 
     public String getFilterName(){
@@ -44,7 +44,8 @@ public class TotalElementCountComparisonPairFilterComponentService extends Abstr
         private JTextField threshold;
         private JComboBox targetType;
 
-        public Pane(ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+            super(frame);
             this.service = service;
             initLayouts();
         }
@@ -53,15 +54,15 @@ public class TotalElementCountComparisonPairFilterComponentService extends Abstr
         public String[] getErrors(){
             List<String> errors = new ArrayList<String>();
             if(threshold.getText().trim().equals("")){
-                errors.add(Messages.getString("error.empty.threshold"));
+                errors.add(getMessages().get("error.empty.threshold"));
             }
             try{
                 int v = Integer.parseInt(threshold.getText());
                 if(v < 0){
-                    errors.add(Messages.getString("error.negative.value", v));
+                    errors.add(getMessages().format("error.negative.value", v));
                 }
             } catch(NumberFormatException e){
-                errors.add(Messages.getString("error.invalid.format.integer", threshold.getText()));
+                errors.add(getMessages().format("error.invalid.format.integer", threshold.getText()));
             }
             return errors.toArray(new String[errors.size()]);
         }
@@ -96,7 +97,7 @@ public class TotalElementCountComparisonPairFilterComponentService extends Abstr
         }
 
         private void initLayouts(){
-            JLabel label = new JLabel(Messages.getString("filter.totalelementcount.label"));
+            JLabel label = new JLabel(getMessages().get("filter.totalelementcount.label"));
             threshold = new JTextField();
             criterionType = createCriteriaBox(TotalElementCountComparisonPairFilter.getValidCriteria());
             targetType = createTargetBox();

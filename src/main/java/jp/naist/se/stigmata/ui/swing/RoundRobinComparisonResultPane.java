@@ -48,6 +48,7 @@ import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
 import jp.naist.se.stigmata.utils.AsciiDataWritable;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -57,15 +58,15 @@ import jp.naist.se.stigmata.utils.AsciiDataWritable;
 public class RoundRobinComparisonResultPane extends JPanel{
     private static final long serialVersionUID = 2134574576543623L;
 
+    private StigmataFrame stigmata;
     private ExtractionResultSet extraction;
     private JTable table;
     private DefaultTableModel model;
     private JLabel classCount, comparisonCount, distinctionRatio;
     private JLabel average, minimum, maximum;
-    private StigmataFrame stigmataFrame;
 
     public RoundRobinComparisonResultPane(StigmataFrame stigmata, ExtractionResultSet resultset){
-        this.stigmataFrame = stigmata;
+        this.stigmata = stigmata;
         this.extraction = resultset;
         initialize();
         compare(model);
@@ -170,7 +171,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
                         BirthmarkSet b1 = extraction.getBirthmarkSet(ExtractionTarget.TARGET_X, col - 1);
                         BirthmarkSet b2 = extraction.getBirthmarkSet(ExtractionTarget.TARGET_Y, row);
 
-                        stigmataFrame.compareDetails(b1, b2, extraction.getContext());
+                        stigmata.compareDetails(b1, b2, extraction.getContext());
                     }
                 }
             }
@@ -188,18 +189,18 @@ public class RoundRobinComparisonResultPane extends JPanel{
         box1.add(distinctionRatio = new JLabel());
         south.add(box1);
         JPanel box2 = new JPanel(new GridLayout(1, 3));
-        box2.setBorder(new TitledBorder(Messages.getString("similarity.border")));
+        box2.setBorder(new TitledBorder(stigmata.getMessages().get("similarity.border")));
         box2.add(average = new JLabel());
         box2.add(minimum = new JLabel());
         box2.add(maximum = new JLabel());
         south.add(box2);
 
-        classCount.setBorder(new TitledBorder(Messages.getString("numberofclasses.border")));
-        comparisonCount.setBorder(new TitledBorder(Messages.getString("comparisoncount.border")));
-        distinctionRatio.setBorder(new TitledBorder(Messages.getString("distinctionratio.border")));
-        average.setBorder(new TitledBorder(Messages.getString("average.border")));
-        minimum.setBorder(new TitledBorder(Messages.getString("minimum.border")));
-        maximum.setBorder(new TitledBorder(Messages.getString("maximum.border")));
+        classCount.setBorder(new TitledBorder(stigmata.getMessages().get("numberofclasses.border")));
+        comparisonCount.setBorder(new TitledBorder(stigmata.getMessages().get("comparisoncount.border")));
+        distinctionRatio.setBorder(new TitledBorder(stigmata.getMessages().get("distinctionratio.border")));
+        average.setBorder(new TitledBorder(stigmata.getMessages().get("average.border")));
+        minimum.setBorder(new TitledBorder(stigmata.getMessages().get("minimum.border")));
+        maximum.setBorder(new TitledBorder(stigmata.getMessages().get("maximum.border")));
 
         panel.add(south, BorderLayout.SOUTH);
 
@@ -223,7 +224,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             index++;
         }
         
-        stigmataFrame.showMDSGraph(set, extraction.getContext());
+        stigmata.showMDSGraph(set, extraction.getContext());
     }
 
     private void graphButtonActionPerformed(ActionEvent e){
@@ -240,12 +241,13 @@ public class RoundRobinComparisonResultPane extends JPanel{
                 values.put(new Integer(similarity), dist);
             }
         }
-        stigmataFrame.showSimilarityDistributionGraph(values);
+        stigmata.showSimilarityDistributionGraph(values);
     }
 
     private void initialize(){
+        final Messages messages = stigmata.getMessages();
         JButton save = GUIUtility.createButton(
-            "savecomparison", new SaveAction(stigmataFrame, new AsciiDataWritable(){
+            messages, "savecomparison", new SaveAction(stigmata, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format){
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
@@ -258,13 +260,14 @@ public class RoundRobinComparisonResultPane extends JPanel{
                 }
             }
         ));
-        JButton graph = GUIUtility.createButton("showgraph");
-        JButton obfuscate = GUIUtility.createButton("obfuscate");
-        JButton compare = GUIUtility.createButton("guessedpair");
+        JButton graph = GUIUtility.createButton(messages, "showgraph");
+        JButton obfuscate = GUIUtility.createButton(messages, "obfuscate");
+        JButton compare = GUIUtility.createButton(messages, "guessedpair");
         JButton updateColor = GUIUtility.createButton(
-            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, extraction.getEnvironment())
+            messages, "updatecellcolor",
+            new UpdateBirthmarkCellColorAction(stigmata, extraction.getEnvironment())
         );
-        JMenuItem mdsMenu = GUIUtility.createJMenuItem("mdsmap");
+        JMenuItem mdsMenu = GUIUtility.createJMenuItem(messages, "mdsmap");
 
         PopupButton comparePopup = new PopupButton(compare);
         PopupButton graphPopup = new PopupButton(graph);
@@ -319,9 +322,9 @@ public class RoundRobinComparisonResultPane extends JPanel{
         };
 
         compare.addActionListener(compareListener);
-        String[] comparisonMethods = Messages.getStringArray("comparison.methods.inroundrobinresult");
+        String[] comparisonMethods = stigmata.getMessages().getArray("comparison.methods.inroundrobinresult");
         for(int i = 1; i < comparisonMethods.length; i++){
-            JMenuItem item = GUIUtility.createJMenuItem(comparisonMethods[i]);
+            JMenuItem item = GUIUtility.createJMenuItem(messages, comparisonMethods[i]);
             comparePopup.addMenuItem(item);
             item.addActionListener(compareListener);
         }
@@ -330,10 +333,10 @@ public class RoundRobinComparisonResultPane extends JPanel{
 
     private void compareRoundRobinWithFiltering(){
         FilterSelectionPane pane = new FilterSelectionPane(
-            extraction.getEnvironment().getFilterManager()
+            stigmata, extraction.getEnvironment().getFilterManager()
         );
         int returnValue = JOptionPane.showConfirmDialog(
-            stigmataFrame, pane, Messages.getString("filterselection.dialog.title"),
+            stigmata, pane, stigmata.getMessages().get("filterselection.dialog.title"),
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE
         );
@@ -345,25 +348,25 @@ public class RoundRobinComparisonResultPane extends JPanel{
             ComparisonResultSet filterResultSet = new FilteredComparisonResultSet(
                 rs, extraction.getEnvironment().getFilterManager().getFilterSets(filterSetList)
             );
-            stigmataFrame.showComparisonResultSet(filterResultSet);
+            stigmata.showComparisonResultSet(filterResultSet);
         }
     }
 
     private void compareGuessedPair(){
         ComparisonResultSet rs = new CertainPairComparisonResultSet(extraction);
-        stigmataFrame.showComparisonResultSet(rs);
+        stigmata.showComparisonResultSet(rs);
     }
 
     private void compareSpecifiedPair(){
-        File file = stigmataFrame.getOpenFile(
-            Messages.getStringArray("comparemapping.extension"),
-            Messages.getString("comparemapping.description")
+        File file = stigmata.getOpenFile(
+            stigmata.getMessages().getArray("comparemapping.extension"),
+            stigmata.getMessages().get("comparemapping.description")
         );
         if(file != null){
-            Map<String, String> mapping = stigmataFrame.constructMapping(file);
+            Map<String, String> mapping = stigmata.constructMapping(file);
 
             ComparisonResultSet comparison = new CertainPairComparisonResultSet(extraction, mapping);
-            stigmataFrame.showComparisonResultSet(comparison);
+            stigmata.showComparisonResultSet(comparison);
         }
     }
 
@@ -371,9 +374,9 @@ public class RoundRobinComparisonResultPane extends JPanel{
         ClassNameObfuscator obfuscator = new ClassNameObfuscator();
 
         try{
-            File file = stigmataFrame.getSaveFile(
-                Messages.getStringArray("obfuscationmapping.extension"),
-                Messages.getString("obfuscationmapping.description")
+            File file = stigmata.getSaveFile(
+                stigmata.getMessages().getArray("obfuscationmapping.extension"),
+                stigmata.getMessages().get("obfuscationmapping.description")
             );
             if(file != null){
                 BirthmarkContext context = extraction.getContext();
@@ -394,8 +397,10 @@ public class RoundRobinComparisonResultPane extends JPanel{
                 obfuscator.outputNameMappings(file);
             }
         }catch(IOException e){
-            JOptionPane.showMessageDialog(this, e.getMessage(), Messages
-                    .getString("error.dialog.title"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this, e.getMessage(), stigmata.getMessages().get("error.dialog.title"),
+                JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
 

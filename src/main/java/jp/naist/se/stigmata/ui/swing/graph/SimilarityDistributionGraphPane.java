@@ -29,7 +29,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.ui.swing.actions.ChangeColorAction;
 
@@ -123,7 +122,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
 
         g.drawString("0", 10, height - 5);
         g.drawString("50%", (width - 20) / 2 + 10, height - 5);
-        g.drawString(Messages.getString("similarity.label"), width - 60, height - 5);
+        g.drawString(stigmata.getMessages().get("similarity.label"), width - 60, height - 5);
         g.drawString("50%", 0, (height - 20) / 2);
     }
 
@@ -148,7 +147,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
         iconLabel = new JLabel();
         Box south = Box.createHorizontalBox();
-        JButton storeImageButton = GUIUtility.createButton("savegraph");
+        JButton storeImageButton = GUIUtility.createButton(stigmata.getMessages(), "savegraph");
         JButton switchColorButton = new JButton(new ChangeColorAction(stigmata, new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 ChangeColorAction action = (ChangeColorAction)e.getSource();
@@ -178,7 +177,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
     private void storeGraphImage(){
         String[] exts = getSupportedFormats();
         File file = stigmata.getSaveFile(
-            exts, Messages.getString("savegraph.description")
+            exts, stigmata.getMessages().get("savegraph.description")
         );
         try{
             if(file != null){
@@ -190,8 +189,8 @@ public class SimilarityDistributionGraphPane extends JPanel{
         } catch(IOException e){
             JOptionPane.showMessageDialog(
                 this,
-                Messages.getString("error.io", e.getMessage()),
-                Messages.getString("error.dialog.title"),
+                stigmata.getMessages().get("error.io", e.getMessage()),
+                stigmata.getMessages().get("error.dialog.title"),
                 JOptionPane.ERROR_MESSAGE
             );
         }

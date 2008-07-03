@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing.actions;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -21,15 +20,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.sourceforge.talisman.i18n.Messages;
+
 /**
  * 
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
 abstract class ShowTextAction extends AbstractAction{
-    private Component parent;
+    private StigmataFrame parent;
 
-    public ShowTextAction(Component parent){
+    public ShowTextAction(StigmataFrame parent){
         this.parent = parent;
     }
 
@@ -42,6 +44,10 @@ abstract class ShowTextAction extends AbstractAction{
 
     public boolean isHtmlDocument(){
         return false;
+    }
+
+    public Messages getMessages(){
+        return parent.getMessages();
     }
 
     public void actionPerformed(ActionEvent e){

@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
 import jp.naist.se.stigmata.utils.BinaryDataWritable;
 
@@ -45,7 +44,7 @@ public class MDSImageExporter implements BinaryDataWritable{
         } catch(IOException e){
             JOptionPane.showMessageDialog(
                 SwingUtilities.getRoot(viewer), e.getMessage(),
-                Messages.getString("error.dialog.title"),
+                viewer.getMessages().get("error.dialog.title"),
                 JOptionPane.WARNING_MESSAGE
             );
         }

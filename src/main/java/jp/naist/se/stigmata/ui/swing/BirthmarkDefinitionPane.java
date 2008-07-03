@@ -38,6 +38,7 @@ import jp.naist.se.stigmata.birthmarks.BirthmarkService;
 import jp.naist.se.stigmata.spi.BirthmarkComparatorSpi;
 import jp.naist.se.stigmata.spi.BirthmarkExtractorSpi;
 import jp.naist.se.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -92,7 +93,7 @@ public class BirthmarkDefinitionPane extends JPanel{
 
     private void initData(){
         information.initData();
-        model.addElement(Messages.getString("newservice.definition.label"));
+        model.addElement(stigmata.getMessages().get("newservice.definition.label"));
 
         for(BirthmarkSpi service: stigmata.getEnvironment().findServices()){
             model.addElement(service);
@@ -100,20 +101,21 @@ public class BirthmarkDefinitionPane extends JPanel{
     }
 
     private void initLayouts(){
+        Messages messages = stigmata.getMessages();
         JPanel panel = new JPanel(new BorderLayout());
         serviceList = new JList(model = new DefaultListModel());
         serviceList.setCellRenderer(new BirthmarkServiceListCellRenderer(new Dimension(250, 20), 60));
         JScrollPane scroll = new JScrollPane(serviceList);
 
-        scroll.setBorder(new TitledBorder(Messages.getString("servicelist.border")));
-        serviceList.setToolTipText(Messages.getString("servicelist.tooltip"));
+        scroll.setBorder(new TitledBorder(messages.get("servicelist.border")));
+        serviceList.setToolTipText(messages.get("servicelist.tooltip"));
 
         panel.add(scroll, BorderLayout.WEST);
         panel.add(information = new InformationPane(stigmata, this), BorderLayout.CENTER);
 
         Box buttonPanel = Box.createHorizontalBox();
-        newService = GUIUtility.createButton("newservice");
-        removeService = GUIUtility.createButton("removeservice");
+        newService = GUIUtility.createButton(messages, "newservice");
+        removeService = GUIUtility.createButton(messages, "removeservice");
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(newService);
         buttonPanel.add(Box.createHorizontalGlue());
@@ -335,12 +337,13 @@ public class BirthmarkDefinitionPane extends JPanel{
         }
 
         private void initLayouts(){
+            Messages messages = stigmata.getMessages();
             type = new JTextField();
             displayType = new JTextField();
             extractor = new JComboBox();
             comparator = new JComboBox();
-            expert = new JCheckBox(Messages.getString("define.expert.label"));
-            userDefined = new JCheckBox(Messages.getString("define.userdef.label"));
+            expert = new JCheckBox(messages.get("define.expert.label"));
+            userDefined = new JCheckBox(messages.get("define.userdef.label"));
             description = new JTextArea();
             JScrollPane scroll = new JScrollPane(description);
             type.setColumns(10);
@@ -370,13 +373,13 @@ public class BirthmarkDefinitionPane extends JPanel{
             add(scroll);
             add(Box.createVerticalGlue());
 
-            GUIUtility.decorateJComponent(type, "define.type");
-            GUIUtility.decorateJComponent(displayType, "define.displaytype");
-            GUIUtility.decorateJComponent(scroll, "define.description");
-            GUIUtility.decorateJComponent(extractor, "define.extractor");
-            GUIUtility.decorateJComponent(comparator, "define.comparator");
-            GUIUtility.decorateJComponent(expert, "define.expert");
-            GUIUtility.decorateJComponent(userDefined, "define.userdef");
+            GUIUtility.decorateJComponent(messages, type, "define.type");
+            GUIUtility.decorateJComponent(messages, displayType, "define.displaytype");
+            GUIUtility.decorateJComponent(messages, scroll, "define.description");
+            GUIUtility.decorateJComponent(messages, extractor, "define.extractor");
+            GUIUtility.decorateJComponent(messages, comparator, "define.comparator");
+            GUIUtility.decorateJComponent(messages, expert, "define.expert");
+            GUIUtility.decorateJComponent(messages, userDefined, "define.userdef");
 
             userDefined.setEnabled(false);
             expert.setEnabled(false);

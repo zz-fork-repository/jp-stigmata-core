@@ -78,15 +78,15 @@ public class PairComparisonResultSetPane extends JPanel{
         }
 
         try{
-            File file = frame.getSaveFile(Messages.getStringArray("obfuscationmapping.extension"),
-                    Messages.getString("obfuscationmapping.description"));
+            File file = frame.getSaveFile(frame.getMessages().getArray("obfuscationmapping.extension"),
+                frame.getMessages().get("obfuscationmapping.description"));
             if(file == null){
                 return;
             }
             obfuscator.outputNameMappings(file);
         }catch(IOException e){
             JOptionPane.showMessageDialog(
-                this, e.getMessage(), Messages.getString("error.dialog.title"),
+                this, e.getMessage(), frame.getMessages().get("error.dialog.title"),
                 JOptionPane.ERROR_MESSAGE
             );
             return;
@@ -102,7 +102,7 @@ public class PairComparisonResultSetPane extends JPanel{
         maximum = 0d;
         minimum = 1d;
         average = 0d;
-        model.setColumnIdentifiers(Messages.getStringArray("comparepair.table.columns"));
+        model.setColumnIdentifiers(frame.getMessages().getArray("comparepair.table.columns"));
 
         for(Iterator<ComparisonPair> i = comparison.iterator(); i.hasNext(); ){
             ComparisonPair pair = i.next();
@@ -126,7 +126,7 @@ public class PairComparisonResultSetPane extends JPanel{
         JPanel similarityPane = new JPanel(new GridLayout(1, 3));
         JComponent southPanel = Box.createVerticalBox();
         JButton saveButton = GUIUtility.createButton(
-            "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
+            frame.getMessages(), "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
@@ -137,9 +137,9 @@ public class PairComparisonResultSetPane extends JPanel{
             })
         );
         JButton updateColorButton = GUIUtility.createButton(
-            "updatecellcolor", new UpdateBirthmarkCellColorAction(this, comparison.getEnvironment())
+            frame.getMessages(), "updatecellcolor", new UpdateBirthmarkCellColorAction(frame, comparison.getEnvironment())
         );
-        JButton obfuscateButton = GUIUtility.createButton("obfuscate");
+        JButton obfuscateButton = GUIUtility.createButton(frame.getMessages(), "obfuscate");
         JScrollPane scroll = new JScrollPane();
         averageLabel = new JLabel(Double.toString(average), JLabel.RIGHT);
         maximumLabel = new JLabel(Double.toString(maximum), JLabel.RIGHT);
@@ -147,10 +147,10 @@ public class PairComparisonResultSetPane extends JPanel{
 
         scroll.setViewportView(table);
         table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(comparison.getEnvironment()));
-        similarityPane.setBorder(new TitledBorder(Messages.getString("similarity.border")));
-        averageLabel.setBorder(new TitledBorder(Messages.getString("average.border")));
-        maximumLabel.setBorder(new TitledBorder(Messages.getString("maximum.border")));
-        minimumLabel.setBorder(new TitledBorder(Messages.getString("minimum.border")));
+        similarityPane.setBorder(new TitledBorder(frame.getMessages().get("similarity.border")));
+        averageLabel.setBorder(new TitledBorder(frame.getMessages().get("average.border")));
+        maximumLabel.setBorder(new TitledBorder(frame.getMessages().get("maximum.border")));
+        minimumLabel.setBorder(new TitledBorder(frame.getMessages().get("minimum.border")));
 
         setLayout(new BorderLayout());
         add(scroll, BorderLayout.CENTER);

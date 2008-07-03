@@ -26,6 +26,7 @@ import javax.swing.event.DocumentListener;
 
 import jp.naist.se.stigmata.Stigmata;
 import jp.naist.se.stigmata.reader.ClasspathContext;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -104,28 +105,29 @@ public class ClasspathSettingsPane extends JPanel{
     }
 
     private void initLayouts(){
+        final Messages messages = stigmata.getMessages();
         JComponent panel = new JPanel(new GridLayout(1, 2));
         classpath = new TargetSelectionPane(stigmata);
         bootClasspath = new TargetSelectionPane(stigmata);
         JComponent south = Box.createHorizontalBox();
-        final JButton findButton = GUIUtility.createButton("findclass");
+        final JButton findButton = GUIUtility.createButton(messages, "findclass");
         final JTextField text = new JTextField();
         final JLabel label = new JLabel();
 
-        classpath.setBorder(new TitledBorder(Messages.getString("userclasspath.border")));
-        classpath.addTargetExtensions(Messages.getStringArray("userclasspath.extensions"));
-        classpath.setDescription(Messages.getString("userclasspath.description"));
+        classpath.setBorder(new TitledBorder(stigmata.getMessages().get("userclasspath.border")));
+        classpath.addTargetExtensions(stigmata.getMessages().getArray("userclasspath.extensions"));
+        classpath.setDescription(stigmata.getMessages().get("userclasspath.description"));
         classpath.setDirectorySelectable(true);
 
-        bootClasspath.setBorder(new TitledBorder(Messages.getString("bootclasspath.border")));
+        bootClasspath.setBorder(new TitledBorder(stigmata.getMessages().get("bootclasspath.border")));
         bootClasspath.setEnabled(false);
 
         findButton.setEnabled(false);
 
-        south.setBorder(new TitledBorder(Messages.getString("classpathchecker.border")));
+        south.setBorder(new TitledBorder(stigmata.getMessages().get("classpathchecker.border")));
 
-        label.setIcon(GUIUtility.getIcon("classpathchecker.default.icon"));
-        label.setToolTipText(Messages.getString("classpathchecker.default.tooltip"));
+        label.setIcon(GUIUtility.getIcon(messages, "classpathchecker.default.icon"));
+        label.setToolTipText(stigmata.getMessages().get("classpathchecker.default.tooltip"));
 
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
@@ -162,20 +164,20 @@ public class ClasspathSettingsPane extends JPanel{
             public void actionPerformed(ActionEvent e){
                 String t = text.getText().trim();
                 boolean flag = findClass(t);
-                String message = Messages.getString("classpathchecker.found.tooltip");
+                String message = stigmata.getMessages().get("classpathchecker.found.tooltip");
                 if(flag){
-                    label.setIcon(GUIUtility.getIcon("classpathchecker.found.icon"));
+                    label.setIcon(GUIUtility.getIcon(messages, "classpathchecker.found.icon"));
                 }
                 else{
-                    label.setIcon(GUIUtility.getIcon("classpathchecker.notfound.icon"));
-                    message = Messages.getString("classpathchecker.notfound.tooltip");
+                    label.setIcon(GUIUtility.getIcon(messages, "classpathchecker.notfound.icon"));
+                    message = stigmata.getMessages().get("classpathchecker.notfound.tooltip");
                 }
                 label.setToolTipText(message);
                 String dm = String.format(
                     "<html><body><dl><dt>%s</dt><dd>%s</dd></body></html>", t, message
                 );
                 JOptionPane.showMessageDialog(
-                    stigmata, dm, Messages.getString("classpathchecker.dialog.title"),
+                    stigmata, dm, stigmata.getMessages().get("classpathchecker.dialog.title"),
                     JOptionPane.INFORMATION_MESSAGE
                 );
             }

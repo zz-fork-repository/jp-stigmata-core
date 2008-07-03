@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.filter.Criterion;
 import jp.naist.se.stigmata.filter.FilterTarget;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -21,9 +22,18 @@ import jp.naist.se.stigmata.ui.swing.Messages;
  * @version $Revision$ $Date$
  */
 public abstract class ComparisonPairFilterPane extends JPanel{
+    private jp.naist.se.stigmata.ui.swing.StigmataFrame stigmata;
     private Map<String, Criterion> criterionMap = new HashMap<String, Criterion>();
     private Map<String, FilterTarget> targetMap = new HashMap<String, FilterTarget>();
-    
+
+    public ComparisonPairFilterPane(StigmataFrame frame){
+        this.stigmata = frame;
+    }
+
+    public Messages getMessages(){
+        return stigmata.getMessages();
+    }
+
     public abstract String[] getErrors();
 
     public abstract void setFilter(ComparisonPairFilter filter);
@@ -36,7 +46,7 @@ public abstract class ComparisonPairFilterPane extends JPanel{
         JComboBox combo = new JComboBox();
         combo.setEditable(false);
         for(FilterTarget target: FilterTarget.values()){
-            String value = Messages.getString("target." + target.name());
+            String value = getMessages().get("target." + target.name());
             combo.addItem(value);
             targetMap.put(value, target);
         }
@@ -48,14 +58,14 @@ public abstract class ComparisonPairFilterPane extends JPanel{
     }
 
     public String getDisplayTarget(FilterTarget target){
-        return Messages.getString("target." + target.name());
+        return getMessages().get("target." + target.name());
     }
 
     public JComboBox createCriteriaBox(Criterion[] criteria){
         JComboBox combo = new JComboBox();
         combo.setEditable(false);
         for(int i = 0; i < criteria.length; i++){
-            String value = Messages.getString("criterion." + criteria[i].name());
+            String value = getMessages().get("criterion." + criteria[i].name());
             combo.addItem(value);
             criterionMap.put(value, criteria[i]);
         }
@@ -68,6 +78,6 @@ public abstract class ComparisonPairFilterPane extends JPanel{
     }
 
     public String getDisplayCriterion(Criterion criterion){
-        return Messages.getString("criterion." + criterion.name());
+        return getMessages().get("criterion." + criterion.name());
     }
 }

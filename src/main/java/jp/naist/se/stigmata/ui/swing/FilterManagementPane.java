@@ -101,14 +101,14 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
     }
 
     private void initLayouts(){
-        definition = new FilterSetDefinitionPane(this);
+        definition = new FilterSetDefinitionPane(stigmata, this);
         filterPane = new FilterEditingPane(stigmata);
         filterPane.addComparisonPairFilterListener(definition);
         JComponent filtersetlist = createFilterSetPane();
 
-        GUIUtility.decorateJComponent(filtersetlist, "filtersetlist.pane");
-        GUIUtility.decorateJComponent(definition, "filterdefinition.pane");
-        GUIUtility.decorateJComponent(filterPane, "filter.pane");
+        GUIUtility.decorateJComponent(stigmata.getMessages(), filtersetlist, "filtersetlist.pane");
+        GUIUtility.decorateJComponent(stigmata.getMessages(), definition, "filterdefinition.pane");
+        GUIUtility.decorateJComponent(stigmata.getMessages(), filterPane, "filter.pane");
 
         setLayout(new GridLayout(1, 3));
         add(filtersetlist);
@@ -120,8 +120,8 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         model = new DefaultListModel();
         list = new JList(model);
 
-        final JButton upButton = GUIUtility.createButton("moveup");
-        final JButton downButton = GUIUtility.createButton("movedown");
+        final JButton upButton = GUIUtility.createButton(stigmata.getMessages(), "moveup");
+        final JButton downButton = GUIUtility.createButton(stigmata.getMessages(), "movedown");
 
         Box south = Box.createHorizontalBox();
         south.add(Box.createHorizontalGlue());

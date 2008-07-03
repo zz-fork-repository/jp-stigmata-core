@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.ui.swing.UnsupportedFormatException;
 import jp.naist.se.stigmata.utils.AsciiDataWritable;
@@ -56,8 +55,8 @@ public class SaveAction extends AbstractAction{
 
     public void actionPerformed(ActionEvent e){
         if(extensions == null || description == null){
-            extensions = Messages.getStringArray("store.extensions");
-            description = Messages.getString("store.description");
+            extensions = stigmata.getMessages().getArray("store.extensions");
+            description = stigmata.getMessages().get("store.description");
         }
         File file = stigmata.getSaveFile(extensions, description);
         if(file != null){
@@ -77,12 +76,12 @@ public class SaveAction extends AbstractAction{
                 }
             }catch(IOException ee){
                 JOptionPane.showMessageDialog(
-                    stigmata, ee.getMessage(), Messages.getString("error.dialog.title"),
+                    stigmata, ee.getMessage(), stigmata.getMessages().get("error.dialog.title"),
                     JOptionPane.ERROR_MESSAGE
                 );
             }catch(UnsupportedFormatException ee){
                 JOptionPane.showMessageDialog(
-                    stigmata, ee.getMessage(), Messages.getString("error.dialog.title"),
+                    stigmata, ee.getMessage(), stigmata.getMessages().get("error.dialog.title"),
                     JOptionPane.ERROR_MESSAGE
                 );
             }finally{

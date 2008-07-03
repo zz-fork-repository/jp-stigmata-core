@@ -42,6 +42,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
 import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -52,25 +53,15 @@ public class TargetSelectionPane extends JPanel{
     private static final long serialVersionUID = 3209435745432235432L;
 
     private StigmataFrame stigmata;
-
     private FileFilter[] filters;
-
     private List<String> extensions = new ArrayList<String>();
-
     private String description;
-
     private DefaultListModel model = new DefaultListModel();
-
     private List<DataChangeListener> listeners = new ArrayList<DataChangeListener>();
-
     private boolean directorySelectable = false;
-
     private boolean multipleSelectable = true;
-
     private JList list;
-
     private Action addAction;
-
     private Action removeAction;
 
     public TargetSelectionPane(StigmataFrame stigmata){
@@ -221,6 +212,7 @@ public class TargetSelectionPane extends JPanel{
     }
 
     private void initComponents(){
+        final Messages messages = stigmata.getMessages();
         JScrollPane scroll = new JScrollPane();
         JComponent south = Box.createHorizontalBox();
         list = new JList();
@@ -240,13 +232,13 @@ public class TargetSelectionPane extends JPanel{
             }
         };
 
-        JButton addButton = GUIUtility.createButton("addpackage", addAction);
-        JButton removeButton = GUIUtility.createButton("removepackage", removeAction);
+        JButton addButton = GUIUtility.createButton(messages, "addpackage", addAction);
+        JButton removeButton = GUIUtility.createButton(messages, "removepackage", removeAction);
         removeAction.setEnabled(false);
 
         final JPopupMenu popup = new JPopupMenu();
-        popup.add(GUIUtility.createJMenuItem("addpackage", addAction));
-        popup.add(GUIUtility.createJMenuItem("removepackage", removeAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "addpackage", addAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "removepackage", removeAction));
 
         setLayout(new BorderLayout());
 
@@ -389,7 +381,7 @@ public class TargetSelectionPane extends JPanel{
 
         private void showError(List<String> errorList){
             StringBuilder builder = new StringBuilder("<html><body>");
-            builder.append(Messages.getString("unsupportedfiletype.dialog.message"));
+            builder.append(stigmata.getMessages().get("unsupportedfiletype.dialog.message"));
             builder.append("<ul>");
             for(int i = 0; i < errorList.size(); i++){
                 builder.append("<li>").append(errorList.get(i)).append("</li>");
@@ -397,7 +389,7 @@ public class TargetSelectionPane extends JPanel{
             builder.append("</ul></body></html>");
             JOptionPane.showMessageDialog(
                 TargetSelectionPane.this, new String(builder),
-                Messages.getString("unsupportedfiletype.dialog.title"),
+                stigmata.getMessages().get("unsupportedfiletype.dialog.title"),
                 JOptionPane.ERROR_MESSAGE
             );
         }

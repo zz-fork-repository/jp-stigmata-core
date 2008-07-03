@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
@@ -111,10 +112,11 @@ public class PropertyEditPane extends JPanel{
     }
 
     private void addNewProperty(int index){
+        final Messages messages = stigmata.getMessages();
         GridBagLayout layout = new GridBagLayout();
         JPanel panel = new JPanel(layout);
-        JLabel nameLabel = new JLabel(Messages.getString("propertyname.label"));
-        JLabel valueLabel = new JLabel(Messages.getString("propertyvalue.label"));
+        JLabel nameLabel = new JLabel(messages.get("propertyname.label"));
+        JLabel valueLabel = new JLabel(messages.get("propertyvalue.label"));
         JTextField name = new JTextField(15);
         JTextField value = new JTextField(15);
 
@@ -150,7 +152,7 @@ public class PropertyEditPane extends JPanel{
         }
 
         int val = JOptionPane.showConfirmDialog(
-            stigmata, panel, Messages.getString("propertyadd.dialog.title"),
+            stigmata, panel, messages.get("propertyadd.dialog.title"),
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
         );
         if(val == JOptionPane.YES_OPTION){
@@ -177,9 +179,10 @@ public class PropertyEditPane extends JPanel{
     }
 
     private void initLayouts(){
+        final Messages messages = stigmata.getMessages();
         model = new DefaultTableModel();
-        model.addColumn(Messages.getString("propertyname.label"));
-        model.addColumn(Messages.getString("propertyvalue.label"));
+        model.addColumn(messages.get("propertyname.label"));
+        model.addColumn(messages.get("propertyvalue.label"));
         table = new JTable(model);
         table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         table.setColumnSelectionAllowed(false);
@@ -205,14 +208,14 @@ public class PropertyEditPane extends JPanel{
                 addNewProperty(table.getSelectedRow());
             }
         };
-        JButton addButton = GUIUtility.createButton("propertyadd", addAction);
-        JButton changeButton = GUIUtility.createButton("propertychange", changeAction);
-        JButton removeButton = GUIUtility.createButton("propertyremove", removeAction);
+        JButton addButton = GUIUtility.createButton(messages, "propertyadd", addAction);
+        JButton changeButton = GUIUtility.createButton(messages, "propertychange", changeAction);
+        JButton removeButton = GUIUtility.createButton(messages, "propertyremove", removeAction);
 
         final JPopupMenu popup = new JPopupMenu();
-        popup.add(GUIUtility.createJMenuItem("propertyadd", addAction));
-        popup.add(GUIUtility.createJMenuItem("propertychange", changeAction));
-        popup.add(GUIUtility.createJMenuItem("propertyremove", removeAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "propertyadd", addAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "propertychange", changeAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "propertyremove", removeAction));
 
         setLayout(new BorderLayout());
         JScrollPane scroll = new JScrollPane(table);

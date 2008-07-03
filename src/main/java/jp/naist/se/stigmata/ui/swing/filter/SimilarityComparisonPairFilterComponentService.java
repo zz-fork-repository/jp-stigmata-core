@@ -18,17 +18,17 @@ import jp.naist.se.stigmata.ComparisonPairFilter;
 import jp.naist.se.stigmata.filter.SimilarityComparisonPairFilter;
 import jp.naist.se.stigmata.filter.SimilarityComparisonPairFilterService;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class SimilarityComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
-    public ComparisonPairFilterPane createComponent(ComparisonPairFilterSpi service){
-        return new Pane(service);
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+        return new Pane(frame, service);
     }
 
     public String getFilterName(){
@@ -45,7 +45,8 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
         private JComboBox criterionType;
         private JTextField threshold;
 
-        public Pane(ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+            super(frame);
             this.service = service;
             initLayouts();
         }
@@ -54,18 +55,18 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
         public String[] getErrors(){
             List<String> errors = new ArrayList<String>();
             if(threshold.getText().trim().equals("")){
-                errors.add(Messages.getString("error.empty.threshold"));
+                errors.add(getMessages().get("error.empty.threshold"));
             }
             try{
                 double v = Double.parseDouble(threshold.getText());
                 if(v < 0d){
-                    errors.add(Messages.getString("error.negative.value", v));
+                    errors.add(getMessages().format("error.negative.value", v));
                 }
                 else if(v > 1.0d){
-                    errors.add(Messages.getString("error.over.range", "0-1"));
+                    errors.add(getMessages().format("error.over.range", "0-1"));
                 }
             } catch(NumberFormatException e){
-                errors.add(Messages.getString("error.invalid.format.double", threshold.getText()));
+                errors.add(getMessages().format("error.invalid.format.double", threshold.getText()));
             }
 
             return errors.toArray(new String[errors.size()]);
@@ -103,7 +104,7 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
         }
 
         private void initLayouts(){
-            JLabel label = new JLabel(Messages.getString("filter.similarity.label"));
+            JLabel label = new JLabel(getMessages().get("filter.similarity.label"));
             threshold = new JTextField();
             criterionType = createCriteriaBox(SimilarityComparisonPairFilter.getValidCriteria());
 

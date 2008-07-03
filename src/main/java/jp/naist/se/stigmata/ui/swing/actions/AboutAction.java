@@ -5,13 +5,12 @@ package jp.naist.se.stigmata.ui.swing.actions;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 /**
  * 
@@ -21,8 +20,8 @@ import jp.naist.se.stigmata.ui.swing.Messages;
 public class AboutAction extends ShowTextAction{
     private static final long serialVersionUID = -7060581883871662749L;
 
-    public AboutAction(Component parent){
-        super(parent);
+    public AboutAction(StigmataFrame stigmata){
+        super(stigmata);
     }
 
     @Override
@@ -32,12 +31,12 @@ public class AboutAction extends ShowTextAction{
 
     @Override
     public String getTitle(){
-        return Messages.getString("about.dialog.title");
+        return getMessages().get("about.dialog.title");
     }
 
     @Override
     public String getMessage(){
-        String aboutMessage = loadStringFromFile(GUIUtility.getResource("about.message.file"));
+        String aboutMessage = loadStringFromFile(GUIUtility.getResource(getMessages(), "about.message.file"));
 
         Package p = getClass().getPackage();
         aboutMessage = aboutMessage.replace("${implementation.version}", p.getImplementationVersion());
@@ -49,7 +48,7 @@ public class AboutAction extends ShowTextAction{
 
     @Override
     protected void updatePanel(JPanel panel){
-        JLabel logo = new JLabel(GUIUtility.getIcon("stigmata.logo"));
+        JLabel logo = new JLabel(GUIUtility.getIcon(getMessages(), "stigmata.logo"));
         panel.add(logo, BorderLayout.NORTH);
     }
 }

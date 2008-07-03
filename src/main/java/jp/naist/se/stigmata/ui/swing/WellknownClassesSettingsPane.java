@@ -37,6 +37,7 @@ import javax.swing.event.ListSelectionListener;
 import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
 import jp.naist.se.stigmata.utils.WellknownClassJudgeRule;
 import jp.naist.se.stigmata.utils.WellknownClassManager;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * Well-known classes judge rules management pane.
@@ -107,7 +108,7 @@ public class WellknownClassesSettingsPane extends JPanel{
 
     public void editRule(int index){
         WellknownClassJudgeRule rule = (WellknownClassJudgeRule)listmodel.getElementAt(index);
-        WellknownClassJudgeRule newrule = createOrUpdateRule(rule);
+        WellknownClassJudgeRule newrule = createOrUpdateRule(stigmata.getMessages(), rule);
         if(newrule != null){
             listmodel.setElementAt(newrule, index);
             stigmata.setNeedToSaveSettings(true);
@@ -121,10 +122,10 @@ public class WellknownClassesSettingsPane extends JPanel{
         }
 
         for(WellknownClassJudgeRule.MatchType type: WellknownClassJudgeRule.MatchType.values()){
-            matchTypeMap.put(type.name(), Messages.getString("matchtype." + type.name()));
+            matchTypeMap.put(type.name(), stigmata.getMessages().get("matchtype." + type.name()));
         }
         for(WellknownClassJudgeRule.MatchPartType type: WellknownClassJudgeRule.MatchPartType.values()){
-            partTypeMap.put(type.name(), Messages.getString("matchparttype." + type.name()));
+            partTypeMap.put(type.name(), stigmata.getMessages().get("matchparttype." + type.name()));
         }
     }
 
@@ -137,36 +138,36 @@ public class WellknownClassesSettingsPane extends JPanel{
         JScrollPane scroll = new JScrollPane(list);
 
         center.add(scroll, BorderLayout.CENTER);
-        center.add(createSouthPane(), BorderLayout.SOUTH);
+        center.add(createSouthPane(stigmata.getMessages()), BorderLayout.SOUTH);
 
         add(center, BorderLayout.CENTER);
-        add(createCheckPane(), BorderLayout.SOUTH);
+        add(createCheckPane(stigmata.getMessages()), BorderLayout.SOUTH);
     }
 
-    private JComponent createCheckPane(){
+    private JComponent createCheckPane(final Messages messages){
         final JTextField text = new JTextField();
-        final JButton checkButton = GUIUtility.createButton("checkwellknown");
-        final JLabel label = new JLabel(GUIUtility.getIcon("wellknownclasschecker.default.icon"));
+        final JButton checkButton = GUIUtility.createButton(messages, "checkwellknown");
+        final JLabel label = new JLabel(GUIUtility.getIcon(messages, "wellknownclasschecker.default.icon"));
         checkButton.setEnabled(false);
 
         ActionListener listener = new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String t = text.getText().trim();
                 if(t.length() > 0){
-                    String message = Messages.getString("wellknownclasschecker.wellknown.tooltip");
+                    String message = messages.get("wellknownclasschecker.wellknown.tooltip");
                     if(isWellknownClass(t)){
-                        label.setIcon(GUIUtility.getIcon("wellknownclasschecker.wellknown.icon"));
+                        label.setIcon(GUIUtility.getIcon(messages, "wellknownclasschecker.wellknown.icon"));
                     }
                     else{
-                        label.setIcon(GUIUtility.getIcon("wellknownclasschecker.notwellknown.icon"));
-                        message = Messages.getString("wellknownclasschecker.notwellknown.tooltip");
+                        label.setIcon(GUIUtility.getIcon(messages, "wellknownclasschecker.notwellknown.icon"));
+                        message = messages.get("wellknownclasschecker.notwellknown.tooltip");
                     }
                     label.setToolTipText(message);
                     String dm = String.format(
                         "<html><body><dl><dt>%s</dt><dd>%s</dd></body></html>", t, message
                     );
                     JOptionPane.showMessageDialog(
-                        stigmata, dm, Messages.getString("wellknownclasschecker.dialog.title"),
+                        stigmata, dm, stigmata.getMessages().get("wellknownclasschecker.dialog.title"),
                         JOptionPane.INFORMATION_MESSAGE
                     );
                 }
@@ -197,18 +198,18 @@ public class WellknownClassesSettingsPane extends JPanel{
         south.add(label);
         south.add(Box.createHorizontalGlue());
 
-        south.setBorder(new TitledBorder(Messages.getString("wellknownclasschecker.border")));
+        south.setBorder(new TitledBorder(stigmata.getMessages().get("wellknownclasschecker.border")));
 
         return south;
     }
 
-    private JComponent createSouthPane(){
+    private JComponent createSouthPane(final Messages messages){
         JComponent southPanel = Box.createHorizontalBox();
         Action addAction = new AbstractAction(){
             private static final long serialVersionUID = -8749957850400877529L;
 
             public void actionPerformed(ActionEvent e){
-                addRule(createOrUpdateRule(null));
+                addRule(createOrUpdateRule(messages, null));
             }
         };
         final Action removeAction = new AbstractAction(){
@@ -230,9 +231,9 @@ public class WellknownClassesSettingsPane extends JPanel{
                 editRule(list.getSelectedIndex());
             }
         };
-        JButton addButton = GUIUtility.createButton("addwellknown", addAction);
-        JButton removeButton = GUIUtility.createButton("removewellknown", removeAction);
-        JButton updateButton = GUIUtility.createButton("updatewellknown", updateAction);
+        JButton addButton = GUIUtility.createButton(messages, "addwellknown", addAction);
+        JButton removeButton = GUIUtility.createButton(messages, "removewellknown", removeAction);
+        JButton updateButton = GUIUtility.createButton(messages, "updatewellknown", updateAction);
         removeAction.setEnabled(false);
         updateAction.setEnabled(false);
 
@@ -253,9 +254,9 @@ public class WellknownClassesSettingsPane extends JPanel{
             }
         });
         JPopupMenu popup = new JPopupMenu();
-        popup.add(GUIUtility.createJMenuItem("addwellknown", addAction));
-        popup.add(GUIUtility.createJMenuItem("updatewellknown", updateAction));
-        popup.add(GUIUtility.createJMenuItem("removewellknown", removeAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "addwellknown", addAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "updatewellknown", updateAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "removewellknown", removeAction));
 
         list.addMouseListener(new PopupShowAction(popup));
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -269,12 +270,12 @@ public class WellknownClassesSettingsPane extends JPanel{
         return southPanel;
     }
 
-    private WellknownClassJudgeRule createOrUpdateRule(WellknownClassJudgeRule rule){
+    private WellknownClassJudgeRule createOrUpdateRule(Messages messages, WellknownClassJudgeRule rule){
         JTextField text = new JTextField();
         text.setOpaque(true);
-        GUIUtility.decorateJComponent(text, "addwellknown.newrule.pattern");
-        JCheckBox excludeCheck = new JCheckBox(Messages.getString("addwellknown.newrule.exclude.label"), false);
-        GUIUtility.decorateJComponent(excludeCheck, "addwellknown.newrule.exclude");
+        GUIUtility.decorateJComponent(messages, text, "addwellknown.newrule.pattern");
+        JCheckBox excludeCheck = new JCheckBox(messages.get("addwellknown.newrule.exclude.label"), false);
+        GUIUtility.decorateJComponent(messages, excludeCheck, "addwellknown.newrule.exclude");
         JComboBox matchTypeComboBox = new JComboBox();
         for(Map.Entry<String, String> entry: matchTypeMap.entrySet()){
             matchTypeComboBox.addItem(entry.getValue());
@@ -302,7 +303,7 @@ public class WellknownClassesSettingsPane extends JPanel{
         panel.add(text, BorderLayout.SOUTH);
 
         int value = JOptionPane.showConfirmDialog(
-            stigmata, panel, Messages.getString("addwellknown.dialog.title"),
+            stigmata, panel, stigmata.getMessages().get("addwellknown.dialog.title"),
             JOptionPane.OK_CANCEL_OPTION
         );
         if(value == JOptionPane.OK_OPTION){

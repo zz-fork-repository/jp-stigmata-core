@@ -62,6 +62,8 @@ import jp.naist.se.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.naist.se.stigmata.ui.swing.mds.MDSGraphPanel;
 import jp.naist.se.stigmata.ui.swing.tab.EditableTabbedPane;
 import jp.naist.se.stigmata.utils.Utility;
+import jp.sourceforge.talisman.i18n.Messages;
+import jp.sourceforge.talisman.i18n.ResourceNotFoundException;
 
 import org.apache.commons.cli.ParseException;
 
@@ -73,6 +75,7 @@ import org.apache.commons.cli.ParseException;
 public class StigmataFrame extends JFrame{
     private static final long serialVersionUID = 92345543665342134L;
 
+    private Messages messages;
     private JTabbedPane tabPane;
     private JMenuItem closeTabMenu;
     private JMenuItem saveMenu;
@@ -95,7 +98,12 @@ public class StigmataFrame extends JFrame{
         this.stigmata = stigmata;
         this.environment = environment;
         this.fileio = new FileIOManager(this, environment);
-        Image iconImage = GUIUtility.getImage("stigmata.icon");
+        try{
+            this.messages = new Messages("resources.messages");
+        } catch(ResourceNotFoundException e){
+            throw new InternalError(e.getMessage());
+        }
+        Image iconImage = GUIUtility.getImage(getMessages(), "stigmata.icon");
         if(iconImage != null){
             setIconImage(iconImage);
         }
@@ -108,6 +116,10 @@ public class StigmataFrame extends JFrame{
         });
 
         initLayouts();
+    }
+
+    public Messages getMessages(){
+        return messages;
     }
 
     public boolean isNeedToSaveSettings(){
@@ -136,8 +148,8 @@ public class StigmataFrame extends JFrame{
         } catch(IllegalArgumentException e){
             JOptionPane.showMessageDialog(
                 this,
-                Messages.getString("notdirectory.dialog.message", file.getName()),
-                Messages.getString("notdirectory.dialog.title"),
+                getMessages().get("notdirectory.dialog.message", file.getName()),
+                getMessages().get("notdirectory.dialog.title"),
                 JOptionPane.ERROR_MESSAGE
             );
         } catch(Exception e){
@@ -178,7 +190,7 @@ public class StigmataFrame extends JFrame{
         );
         int compareDetail = getNextCount("compare_detail");
 
-        GUIUtility.addNewTab("comparedetail", tabPane, detail,
+        GUIUtility.addNewTab(getMessages(), "comparedetail", tabPane, detail,
             new Object[] { new Integer(compareDetail), },
             new Object[] {
                 Utility.array2String(target1.getBirthmarkTypes()),
@@ -198,7 +210,7 @@ public class StigmataFrame extends JFrame{
             RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, ers);
             int compareCount = getNextCount("compare");
             GUIUtility.addNewTab(
-                "compare", tabPane, compare,
+                getMessages(), "compare", tabPane, compare,
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
                     Utility.array2String(context.getBirthmarkTypes()),
@@ -224,7 +236,7 @@ public class StigmataFrame extends JFrame{
             }
             int compareCount = getNextCount("compare");
             GUIUtility.addNewTab(
-                "compare", tabPane, new PairComparisonResultSetPane(this, resultset),
+                getMessages(), "compare", tabPane, new PairComparisonResultSetPane(this, resultset),
                 new Object[] { new Integer(compareCount), },
                 new Object[] {
                     Utility.array2String(context.getBirthmarkTypes()),
@@ -245,7 +257,8 @@ public class StigmataFrame extends JFrame{
             int comparePair = getNextCount("compare_pair");
 
             ComparisonResultSet resultset = new CertainPairComparisonResultSet(extraction);
-            GUIUtility.addNewTab("comparepair", tabPane,
+            GUIUtility.addNewTab(
+                getMessages(), "comparepair", tabPane,
                 new PairComparisonResultSetPane(this, resultset),
                 new Object[] { new Integer(comparePair), },
                 new Object[] {
@@ -261,8 +274,10 @@ public class StigmataFrame extends JFrame{
     }
 
     public void compareSpecifiedPair(String[] targetX, String[] targetY, BirthmarkContext context){
-        File file = getOpenFile(Messages.getStringArray("comparemapping.extension"),
-                                Messages.getString("comparemapping.description"));
+        File file = getOpenFile(
+            getMessages().getArray("comparemapping.extension"),
+            getMessages().get("comparemapping.description")
+        );
 
         if(file != null){
             Map<String, String> mapping = constructMapping(file);
@@ -274,7 +289,7 @@ public class StigmataFrame extends JFrame{
                 int comparePair = getNextCount("compare_pair");
 
                 GUIUtility.addNewTab(
-                    "comparepair", tabPane,
+                    getMessages(), "comparepair", tabPane,
                     new PairComparisonResultSetPane(this, crs),
                     new Object[] { new Integer(comparePair), },
                     new Object[] {
@@ -293,7 +308,7 @@ public class StigmataFrame extends JFrame{
     public void showComparisonResultSet(ComparisonResultSet resultset){
         int comparePair = getNextCount("compare_pair");
         GUIUtility.addNewTab(
-            "comparisonresultset", tabPane,
+            getMessages(), "comparisonresultset", tabPane,
             new PairComparisonResultSetPane(this, resultset),
             new Object[] { new Integer(comparePair), }, null
         );
@@ -304,7 +319,10 @@ public class StigmataFrame extends JFrame{
         try{
             MDSGraphPanel panel = new MDSGraphPanel(this, set, context);
             int mappingGraphCount = getNextCount("mds_graph");
-            GUIUtility.addNewTab("mappinggraph", tabPane, panel, new Object[] { new Integer(mappingGraphCount), }, null);
+            GUIUtility.addNewTab(
+                getMessages(), "mappinggraph", tabPane, panel,
+                new Object[] { new Integer(mappingGraphCount), }, null
+            );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         } catch(Exception e){
             showExceptionMessage(e);
@@ -315,7 +333,10 @@ public class StigmataFrame extends JFrame{
         SimilarityDistributionGraphPane graph = new SimilarityDistributionGraphPane(this, distributions);
 
         int similarityGraphCount = getNextCount("similarity_graph");
-        GUIUtility.addNewTab("similaritygraph", tabPane, graph, new Object[] { new Integer(similarityGraphCount), }, null);
+        GUIUtility.addNewTab(
+            getMessages(), "similaritygraph", tabPane, graph,
+            new Object[] { new Integer(similarityGraphCount), }, null
+        );
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
@@ -323,7 +344,7 @@ public class StigmataFrame extends JFrame{
         RoundRobinComparisonResultPane compare = new RoundRobinComparisonResultPane(this, ers);
         int compareCount = getNextCount("compare");
         GUIUtility.addNewTab(
-            "compare", tabPane, compare,
+            getMessages(), "compare", tabPane, compare,
             new Object[] { new Integer(compareCount), },
             new Object[] {
                 Utility.array2String(ers.getBirthmarkTypes()),
@@ -338,7 +359,7 @@ public class StigmataFrame extends JFrame{
         int extractCount = getNextCount("extract");
         BirthmarkExtractionResultPane viewer = new BirthmarkExtractionResultPane(this, ers);
         GUIUtility.addNewTab(
-            "extract", tabPane, viewer,
+            getMessages(), "extract", tabPane, viewer,
             new Object[] { new Integer(extractCount), },
             new Object[] { Utility.array2String(ers.getBirthmarkTypes()), }
         );
@@ -400,10 +421,10 @@ public class StigmataFrame extends JFrame{
     }
 
     private void initLayouts(){
-        setTitle(Messages.getString("stigmata.frame.title"));
+        setTitle(getMessages().get("stigmata.frame.title"));
         initComponents();
 
-        GUIUtility.addNewTab("control", tabPane, control = new ControlPane(this), null, null);
+        GUIUtility.addNewTab(getMessages(), "control", tabPane, control = new ControlPane(this), null, null);
         control.inititalize();
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 
@@ -423,7 +444,7 @@ public class StigmataFrame extends JFrame{
             sb.append("</dl></body></html>");
 
             JOptionPane.showMessageDialog(
-                this, new String(sb), Messages.getString("warning.dialog.title"),
+                this, new String(sb), getMessages().get("warning.dialog.title"),
                 JOptionPane.WARNING_MESSAGE
             );
         }
@@ -443,7 +464,7 @@ public class StigmataFrame extends JFrame{
         tabPane.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent arg0){
                 String title = tabPane.getTitleAt(tabPane.getSelectedIndex());
-                closeTabMenu.setEnabled(!title.equals(Messages.getString("control.tab.label")));
+                closeTabMenu.setEnabled(!title.equals(getMessages().get("control.tab.label")));
             }
         });
         addWindowListener(new WindowAdapter(){
@@ -453,8 +474,8 @@ public class StigmataFrame extends JFrame{
                 if(isNeedToSaveSettings()){
                     int returnValue = JOptionPane.showConfirmDialog(
                         StigmataFrame.this,
-                        Messages.getString("needtosave.settings.message"),
-                        Messages.getString("needtosave.settings.title"),
+                        getMessages().get("needtosave.settings.message"),
+                        getMessages().get("needtosave.settings.title"),
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.WARNING_MESSAGE
                     );
@@ -473,15 +494,15 @@ public class StigmataFrame extends JFrame{
     }
 
     private JMenu createFileMenu(){
-        JMenu fileMenu = GUIUtility.createJMenu("fileMenu");
-        JMenuItem newFrameMenu = GUIUtility.createJMenuItem("newframe");
-        JMenuItem saveMenu = GUIUtility.createJMenuItem("savesetting");
-        JMenuItem exportMenu = GUIUtility.createJMenuItem("exportsetting");
-        JMenuItem clearMenu = GUIUtility.createJMenuItem("clearsetting");
-        JMenuItem refreshMenu = GUIUtility.createJMenuItem("refreshsetting");
-        JMenuItem closeTabMenu = GUIUtility.createJMenuItem("closetab");
-        JMenuItem closeMenu = GUIUtility.createJMenuItem("closeframe");
-        JMenuItem exitMenu = GUIUtility.createJMenuItem("exit");
+        JMenu fileMenu = GUIUtility.createJMenu(getMessages(), "fileMenu");
+        JMenuItem newFrameMenu = GUIUtility.createJMenuItem(getMessages(), "newframe");
+        JMenuItem saveMenu = GUIUtility.createJMenuItem(getMessages(), "savesetting");
+        JMenuItem exportMenu = GUIUtility.createJMenuItem(getMessages(), "exportsetting");
+        JMenuItem clearMenu = GUIUtility.createJMenuItem(getMessages(), "clearsetting");
+        JMenuItem refreshMenu = GUIUtility.createJMenuItem(getMessages(), "refreshsetting");
+        JMenuItem closeTabMenu = GUIUtility.createJMenuItem(getMessages(), "closetab");
+        JMenuItem closeMenu = GUIUtility.createJMenuItem(getMessages(), "closeframe");
+        JMenuItem exitMenu = GUIUtility.createJMenuItem(getMessages(), "exit");
         this.closeTabMenu = closeTabMenu;
         this.saveMenu = saveMenu;
         saveMenu.setEnabled(false);
@@ -550,11 +571,11 @@ public class StigmataFrame extends JFrame{
     }
 
     private JMenu createHelpMenu(){
-        JMenu menu = GUIUtility.createJMenu("helpmenu");
-        JMenuItem about = GUIUtility.createJMenuItem("about", new AboutAction(this));
-        JMenuItem license = GUIUtility.createJMenuItem("license", new LicenseAction(this));
-        JMenuItem help = GUIUtility.createJMenuItem("helpmenu");
-        expertmodeMenu = GUIUtility.createJCheckBoxMenuItem("expertmenu");
+        JMenu menu = GUIUtility.createJMenu(getMessages(), "helpmenu");
+        JMenuItem about = GUIUtility.createJMenuItem(getMessages(), "about", new AboutAction(this));
+        JMenuItem license = GUIUtility.createJMenuItem(getMessages(), "license", new LicenseAction(this));
+        JMenuItem help = GUIUtility.createJMenuItem(getMessages(), "helpmenu");
+        expertmodeMenu = GUIUtility.createJCheckBoxMenuItem(getMessages(), "expertmenu");
 
         menu.add(about);
         menu.add(license);
@@ -575,7 +596,7 @@ public class StigmataFrame extends JFrame{
     }
 
     private JMenu createLookAndFeelMenu(){
-        JMenu laf = GUIUtility.createJMenu("lookandfeel");
+        JMenu laf = GUIUtility.createJMenu(getMessages(), "lookandfeel");
         ButtonGroup bg = new ButtonGroup();
         UIManager.LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
         LookAndFeel lookfeel = UIManager.getLookAndFeel();
@@ -634,11 +655,11 @@ public class StigmataFrame extends JFrame{
             out.close();
             area.setText(writer.toString());
             JPanel panel = new JPanel(new BorderLayout());
-            panel.add(new JLabel("<html><body><p>" + Messages.getString("error.message.contactus") + "</p></body></html>"), BorderLayout.NORTH);
+            panel.add(new JLabel("<html><body><p>" + getMessages().get("error.message.contactus") + "</p></body></html>"), BorderLayout.NORTH);
             panel.add(new JScrollPane(area), BorderLayout.CENTER);
 
             JOptionPane.showMessageDialog(
-                this, panel, Messages.getString("error.dialog.title"),
+                this, panel, getMessages().get("error.dialog.title"),
                 JOptionPane.WARNING_MESSAGE
             );
         }
@@ -647,10 +668,10 @@ public class StigmataFrame extends JFrame{
     private void showOutOfMemoryError(){
         StringBuffer sb = new StringBuffer();
         sb.append("<html><body><p>");
-        sb.append(Messages.getString("error.message.outofmemory"));
+        sb.append(getMessages().get("error.message.outofmemory"));
         sb.append("</p></body></html>");
         JOptionPane.showMessageDialog(
-            this, new String(sb), Messages.getString("error.dialog.title"),
+            this, new String(sb), getMessages().get("error.dialog.title"),
             JOptionPane.WARNING_MESSAGE
         );
     }
@@ -658,14 +679,14 @@ public class StigmataFrame extends JFrame{
     private void showClassNotFoundMessage(BirthmarkElementClassNotFoundException e){
         StringBuffer sb = new StringBuffer();
         sb.append("<html><body><p>");
-        sb.append(Messages.getString("error.message.classpath"));
+        sb.append(getMessages().get("error.message.classpath"));
         sb.append("</p><ul>");
         for(String name: e.getClassNames()){
             sb.append("<li>").append(name).append("</li>");
         }
         sb.append("</ul></body></html>");
         JOptionPane.showMessageDialog(
-            this, new String(sb), Messages.getString("error.dialog.title"),
+            this, new String(sb), getMessages().get("error.dialog.title"),
             JOptionPane.WARNING_MESSAGE
         );
     }
@@ -674,8 +695,8 @@ public class StigmataFrame extends JFrame{
         int index = tabPane.getSelectedIndex();
         if(index == 0){
             JOptionPane.showMessageDialog(
-                this, Messages.getString("cannotclosecontroltab.dialog.message"),
-                Messages.getString("cannotclosecontroltab.dialog.title"),
+                this, getMessages().get("cannotclosecontroltab.dialog.message"),
+                getMessages().get("cannotclosecontroltab.dialog.title"),
                 JOptionPane.ERROR_MESSAGE
             );
         }

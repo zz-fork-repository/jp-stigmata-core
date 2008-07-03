@@ -22,6 +22,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 
+import jp.sourceforge.talisman.i18n.Messages;
+
 /**
  * Utility routines for building GUI.
  *
@@ -29,20 +31,18 @@ import javax.swing.border.TitledBorder;
  * @version $Revision$ $Date$
  */
 public class GUIUtility{
-    private static final String iconPath = Messages.getString("icon.directory");
-
     private GUIUtility(){
     }
 
-    public static void decorateJComponent(JComponent component, String label){
-        if(Messages.hasString(label + ".tooltip")){
-            component.setToolTipText(Messages.getString(label + ".tooltip"));
+    public static void decorateJComponent(Messages messages, JComponent component, String label){
+        if(messages.hasValue(label + ".tooltip")){
+            component.setToolTipText(messages.get(label + ".tooltip"));
         }
-        if(Messages.hasString(label + ".border")){
-            component.setBorder(new TitledBorder(Messages.getString(label + ".border")));
+        if(messages.hasValue(label + ".border")){
+            component.setBorder(new TitledBorder(messages.get(label + ".border")));
         }
         try{
-            Icon icon = getIcon(label + ".icon");
+            Icon icon = getIcon(messages, label + ".icon");
             if(icon != null){
                 Method[] methods = component.getClass().getMethods();
                 for(Method m: methods){
@@ -58,14 +58,14 @@ public class GUIUtility{
         }
     }
 
-    public static JButton createButton(String label, Action action){
+    public static JButton createButton(Messages messages, String label, Action action){
         JButton button = new JButton(action);
-        button.setText(Messages.getString(label + ".button.label"));
+        button.setText(messages.get(label + ".button.label"));
         button.setActionCommand(label);
-        if(Messages.hasString(label + ".button.tooltip")){
-            button.setToolTipText(Messages.getString(label + ".button.tooltip"));
+        if(messages.hasValue(label + ".button.tooltip")){
+            button.setToolTipText(messages.get(label + ".button.tooltip"));
         }
-        Icon icon = getIcon(label + ".button.icon");
+        Icon icon = getIcon(messages, label + ".button.icon");
         if(icon != null){
             button.setIcon(icon);
         }
@@ -73,13 +73,13 @@ public class GUIUtility{
         return button;
     }
 
-    public static JButton createButton(String label){
-        JButton button = new JButton(Messages.getString(label + ".button.label"));
+    public static JButton createButton(Messages messages, String label){
+        JButton button = new JButton(messages.get(label + ".button.label"));
         button.setActionCommand(label);
-        if(Messages.hasString(label + ".button.tooltip")){
-            button.setToolTipText(Messages.getString(label + ".button.tooltip"));
+        if(messages.hasValue(label + ".button.tooltip")){
+            button.setToolTipText(messages.get(label + ".button.tooltip"));
         }
-        Icon icon = getIcon(label + ".button.icon");
+        Icon icon = getIcon(messages, label + ".button.icon");
         if(icon != null){
             button.setIcon(icon);
         }
@@ -87,66 +87,66 @@ public class GUIUtility{
         return button;
     }
 
-    public static JCheckBoxMenuItem createJCheckBoxMenuItem(String label){
-        return createJCheckBoxMenuItem(label, false);
+    public static JCheckBoxMenuItem createJCheckBoxMenuItem(Messages messages, String label){
+        return createJCheckBoxMenuItem(messages, label, false);
     }
 
-    public static JCheckBoxMenuItem createJCheckBoxMenuItem(String label, boolean status){
-        JCheckBoxMenuItem item = new JCheckBoxMenuItem(Messages.getString(label + ".menuitem.label"), status);
+    public static JCheckBoxMenuItem createJCheckBoxMenuItem(Messages messages, String label, boolean status){
+        JCheckBoxMenuItem item = new JCheckBoxMenuItem(messages.get(label + ".menuitem.label"), status);
         item.setActionCommand(label);
-        if(Messages.hasString(label + ".menuitem.tooltip")){
-            item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
+        if(messages.hasValue(label + ".menuitem.tooltip")){
+            item.setToolTipText(messages.get(label + ".menuitem.tooltip"));
         }
-        Icon icon = getIcon(label + ".menuitem.icon");
+        Icon icon = getIcon(messages, label + ".menuitem.icon");
         if(icon != null){
             item.setIcon(icon);
         }
         return item;
     }
 
-    public static JMenuItem createJMenuItem(String label, Action action){
+    public static JMenuItem createJMenuItem(Messages messages, String label, Action action){
         JMenuItem item = new JMenuItem(action);
-        item.setText(Messages.getString(label + ".menuitem.label"));
+        item.setText(messages.get(label + ".menuitem.label"));
         item.setActionCommand(label);
-        if(Messages.hasString(label + ".menuitem.tooltip")){
-            item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
+        if(messages.hasValue(label + ".menuitem.tooltip")){
+            item.setToolTipText(messages.get(label + ".menuitem.tooltip"));
         }
-        Icon icon = getIcon(label + ".menuitem.icon");
+        Icon icon = getIcon(messages, label + ".menuitem.icon");
         if(icon != null){
             item.setIcon(icon);
         }
         return item;
     }
 
-    public static JMenuItem createJMenuItem(String label){
-        JMenuItem item = new JMenuItem(Messages.getString(label + ".menuitem.label"));
+    public static JMenuItem createJMenuItem(Messages messages, String label){
+        JMenuItem item = new JMenuItem(messages.get(label + ".menuitem.label"));
         item.setActionCommand(label);
-        if(Messages.hasString(label + ".menuitem.tooltip")){
-            item.setToolTipText(Messages.getString(label + ".menuitem.tooltip"));
+        if(messages.hasValue(label + ".menuitem.tooltip")){
+            item.setToolTipText(messages.get(label + ".menuitem.tooltip"));
         }
-        Icon icon = getIcon(label + ".menuitem.icon");
+        Icon icon = getIcon(messages, label + ".menuitem.icon");
         if(icon != null){
             item.setIcon(icon);
         }
         return item;
     }
 
-    public static JMenu createJMenu(String label){
-        JMenu menu = new JMenu(Messages.getString(label + ".menu.label"));
+    public static JMenu createJMenu(Messages messages, String label){
+        JMenu menu = new JMenu(messages.get(label + ".menu.label"));
         menu.setActionCommand(label);
-        if(Messages.hasString(label + ".menu.tooltip")){
-            menu.setToolTipText(Messages.getString(label + ".menu.tooltip"));
+        if(messages.hasValue(label + ".menu.tooltip")){
+            menu.setToolTipText(messages.get(label + ".menu.tooltip"));
         }
-        Icon icon = getIcon(label + ".menu.icon");
+        Icon icon = getIcon(messages, label + ".menu.icon");
         if(icon != null){
             menu.setIcon(icon);
         }
         return menu;
     }
 
-    public static URL getResource(String resourcePathLabel, String resourcePathPrefix){
-        if(Messages.hasString(resourcePathLabel)){
-            String resourcePath = Messages.getString(resourcePathLabel);
+    public static URL getResource(Messages messages, String resourcePathLabel, String resourcePathPrefix){
+        if(messages.hasValue(resourcePathLabel)){
+            String resourcePath = messages.get(resourcePathLabel);
             if(resourcePathPrefix != null){
                 resourcePath = resourcePathPrefix + resourcePath;
             }
@@ -155,12 +155,12 @@ public class GUIUtility{
         return null;
     }
 
-    public static URL getResource(String resourcePathLabel){
-        return getResource(resourcePathLabel, null);
+    public static URL getResource(Messages messages, String resourcePathLabel){
+        return getResource(messages, resourcePathLabel, null);
     }
 
-    public static Icon getIcon(String label){
-        URL url = getResource(label, iconPath);
+    public static Icon getIcon(Messages messages, String label){
+        URL url = getResource(messages, label, messages.get("icon.path"));
         if(url != null){
             ImageIcon icon = new ImageIcon(url);
             return icon;
@@ -169,22 +169,22 @@ public class GUIUtility{
         return null;
     }
 
-    public static Image getImage(String imageFilePathLabel){
-        Icon icon = getIcon(imageFilePathLabel);
+    public static Image getImage(Messages messages, String imageFilePathLabel){
+        Icon icon = getIcon(messages, imageFilePathLabel);
         if(icon != null && icon instanceof ImageIcon){
             return ((ImageIcon)icon).getImage();
         }
         return null;
     }
 
-    public static void addNewTab(String key, JTabbedPane tabPane, Component comp){
-        addNewTab(key, tabPane, comp, null, null);
+    public static void addNewTab(Messages messages, String key, JTabbedPane tabPane, Component comp){
+        addNewTab(messages, key, tabPane, comp, null, null);
     }
 
-    public static void addNewTab(String key, JTabbedPane tabPane, Component comp, Object[] tabnameValues, Object[] values){
-        String tabName = Messages.getString(key + ".tab.label");
-        String tooltip = Messages.getString(key + ".tab.tooltip");
-        Icon icon = getIcon(key + ".tab.icon");
+    public static void addNewTab(Messages messages, String key, JTabbedPane tabPane, Component comp, Object[] tabnameValues, Object[] values){
+        String tabName = messages.get(key + ".tab.label");
+        String tooltip = messages.get(key + ".tab.tooltip");
+        Icon icon = getIcon(messages, key + ".tab.icon");
 
         if(tabnameValues != null){
             tabName = MessageFormat.format(tabName, tabnameValues);

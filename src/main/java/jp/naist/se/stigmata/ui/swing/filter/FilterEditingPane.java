@@ -28,13 +28,13 @@ import jp.naist.se.stigmata.spi.BirthmarkSpi;
 import jp.naist.se.stigmata.spi.ComparisonPairFilterSpi;
 import jp.naist.se.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class FilterEditingPane extends JPanel{
     private static final long serialVersionUID = -2607954525579006086L;
@@ -113,7 +113,7 @@ public class FilterEditingPane extends JPanel{
             ComparisonPairFilterComponentService service = i.next();
             String name = service.getDisplayFilterName();
 
-            ComparisonPairFilterPane pane = service.createComponent(service.getComparisonPairFilterService());
+            ComparisonPairFilterPane pane = service.createComponent(stigmata, service.getComparisonPairFilterService());
             if(pane instanceof BirthmarkServiceListener){
                 for(BirthmarkSpi bs: stigmata.getEnvironment().getServices()){
                     ((BirthmarkServiceListener)pane).serviceAdded(bs);
@@ -134,11 +134,12 @@ public class FilterEditingPane extends JPanel{
     }
 
     private void initLayouts(){
+        Messages messages = stigmata.getMessages();
         cardComponent = new JPanel();
         combo = new JComboBox();
-        addButton = GUIUtility.createButton("newfilter");
-        removeButton = GUIUtility.createButton("removefilter");
-        updateButton = GUIUtility.createButton("updatefilter");
+        addButton = GUIUtility.createButton(messages, "newfilter");
+        removeButton = GUIUtility.createButton(messages, "removefilter");
+        updateButton = GUIUtility.createButton(messages, "updatefilter");
 
         combo.addItemListener(new ItemListener(){
             public void itemStateChanged(ItemEvent e){
@@ -214,7 +215,7 @@ public class FilterEditingPane extends JPanel{
 
     private void showErrorMessage(String[] messages){
         StringBuilder sb = new StringBuilder("<html><body>");
-        sb.append("<p>").append(Messages.getString("error.filter.cannotcreate")).append("</p>");
+        sb.append("<p>").append(stigmata.getMessages().get("error.filter.cannotcreate")).append("</p>");
         sb.append("<ul>");
         for(int i = 0; i < messages.length; i++){
             sb.append("<li>").append(messages[i]).append("</li>");
@@ -222,7 +223,7 @@ public class FilterEditingPane extends JPanel{
         sb.append("</ul></body></html>");
 
         JOptionPane.showMessageDialog(
-            stigmata, new String(sb), Messages.getString("error.dialog.title"),
+            stigmata, new String(sb), stigmata.getMessages().get("error.dialog.title"),
             JOptionPane.ERROR_MESSAGE
         );
     }

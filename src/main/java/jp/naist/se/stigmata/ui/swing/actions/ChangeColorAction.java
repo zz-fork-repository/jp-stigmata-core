@@ -5,7 +5,6 @@ package jp.naist.se.stigmata.ui.swing.actions;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +13,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 /**
  * 
@@ -24,16 +23,16 @@ import jp.naist.se.stigmata.ui.swing.Messages;
 public class ChangeColorAction extends AbstractAction{
     private static final long serialVersionUID = -7617597154707466764L;
 
+    private StigmataFrame frame;
     private Color currentColor = Color.RED;
     private JColorChooser chooser;
-    private Component component;
     private boolean colorSelected = false;
     private ActionListener listener;
 
-    public ChangeColorAction(String label, Component component, 
+    public ChangeColorAction(String label, StigmataFrame frame, 
                               Color initialColor, ActionListener listener){
-        super(Messages.getString(label + ".label"), GUIUtility.getIcon(label + ".icon"));
-        this.component = component;
+        super(frame.getMessages().get(label + ".label"), GUIUtility.getIcon(frame.getMessages(), label + ".icon"));
+        this.frame = frame;
         this.listener = listener;
         this.currentColor = initialColor;
 
@@ -41,12 +40,12 @@ public class ChangeColorAction extends AbstractAction{
         chooser.setColor(initialColor);
     }
 
-    public ChangeColorAction(Component component, Color color, ActionListener listener){
-        this("changecolor", component, color, listener);
+    public ChangeColorAction(StigmataFrame frame, Color color, ActionListener listener){
+        this("changecolor", frame, color, listener);
     }
 
-    public ChangeColorAction(Component component, ActionListener listener){
-        this(component, Color.RED, listener);
+    public ChangeColorAction(StigmataFrame frame, ActionListener listener){
+        this(frame, Color.RED, listener);
     }
 
     public boolean isColorSelected(){
@@ -60,7 +59,7 @@ public class ChangeColorAction extends AbstractAction{
     public void actionPerformed(ActionEvent e){
         chooser.setColor(currentColor);
         JDialog dialog = JColorChooser.createDialog(
-            component, Messages.getString("changecolor.title"), 
+            frame, frame.getMessages().get("changecolor.title"), 
             true, chooser,
             new ActionListener(){ // ok
                 public void actionPerformed(ActionEvent e){

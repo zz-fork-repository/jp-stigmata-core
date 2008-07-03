@@ -1,7 +1,6 @@
 package jp.naist.se.stigmata.ui.swing.actions;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,28 +17,28 @@ import javax.swing.JPanel;
 import jp.naist.se.stigmata.BirthmarkEnvironment;
 import jp.naist.se.stigmata.ui.swing.CompareTableCellRenderer;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
+import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 
 public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private static final long serialVersionUID = 2390797591047570440L;
 
-    private Component parent;
+    private StigmataFrame parent;
     private BirthmarkEnvironment environment;
     private JColorChooser chooser;
 
-    public UpdateBirthmarkCellColorAction(Component parent, BirthmarkEnvironment environment){
+    public UpdateBirthmarkCellColorAction(StigmataFrame parent, BirthmarkEnvironment environment){
         this.parent = parent;
         this.environment = environment;
     }
 
-    public UpdateBirthmarkCellColorAction(Component parent){
+    public UpdateBirthmarkCellColorAction(StigmataFrame parent){
         this(parent, BirthmarkEnvironment.getDefaultEnvironment());
     }
 
     public void actionPerformed(ActionEvent e){
         JComponent c = createPanel();
         JOptionPane.showMessageDialog(
-            parent, c, Messages.getString("updatecellcolor.dialog.title"),
+            parent, c, parent.getMessages().get("updatecellcolor.dialog.title"),
             JOptionPane.INFORMATION_MESSAGE
         );
     }
@@ -62,9 +61,9 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
             chooser = new JColorChooser();
         }
         chooser.setColor(c);
-        String l = Messages.getString((foreground? "forecolor_": "backcolor_") + rank + ".label");
+        String l = parent.getMessages().get((foreground? "forecolor_": "backcolor_") + rank + ".label");
         int returnValue = JOptionPane.showConfirmDialog(
-            parent, chooser, Messages.getString("updatecell.title", l),
+            parent, chooser, parent.getMessages().get("updatecell.title", l),
             JOptionPane.INFORMATION_MESSAGE
         );
         if(returnValue == JOptionPane.OK_OPTION){
@@ -93,10 +92,10 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
         }
 
         private void initLayouts(){
-            label = new JLabel(Messages.getString("rank_" + rank + ".label"));
+            label = new JLabel(parent.getMessages().get("rank_" + rank + ".label"));
             label.setOpaque(true);
-            JButton fore = GUIUtility.createButton("updatecellfore");
-            JButton back = GUIUtility.createButton("updatecellback");
+            JButton fore = GUIUtility.createButton(parent.getMessages(), "updatecellfore");
+            JButton back = GUIUtility.createButton(parent.getMessages(), "updatecellback");
 
             ActionListener listener = new ActionListener(){
                 public void actionPerformed(ActionEvent e){

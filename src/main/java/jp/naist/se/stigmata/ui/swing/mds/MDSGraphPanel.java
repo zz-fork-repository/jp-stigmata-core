@@ -30,12 +30,12 @@ import jp.naist.se.stigmata.ExtractionResultSet;
 import jp.naist.se.stigmata.result.SingleExtractionResultSet;
 import jp.naist.se.stigmata.ui.swing.ClippedLRListCellRenderer;
 import jp.naist.se.stigmata.ui.swing.GUIUtility;
-import jp.naist.se.stigmata.ui.swing.Messages;
 import jp.naist.se.stigmata.ui.swing.PopupButton;
 import jp.naist.se.stigmata.ui.swing.StigmataFrame;
 import jp.naist.se.stigmata.ui.swing.actions.ChangeColorAction;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.ui.swing.mds.mark.DrawerFactory;
+import jp.sourceforge.talisman.i18n.Messages;
 import Jama.Matrix;
 
 /**
@@ -95,7 +95,8 @@ public class MDSGraphPanel extends JPanel{
      * Because this method uses calculated value in initData method.
      */
     private void initLayouts(double[][] matrix){
-        viewer = new MDSGraphViewer(new MDSMethod(new Matrix(matrix)), labels);
+        final Messages messages = stigmata.getMessages();
+        viewer = new MDSGraphViewer(stigmata.getMessages(), new MDSMethod(new Matrix(matrix)), labels);
         viewer.setShowLabel(true);
 
         viewer.addActionListener(new ActionListener(){
@@ -109,7 +110,7 @@ public class MDSGraphPanel extends JPanel{
                 }
             }
         });
-        JCheckBox check = new JCheckBox(Messages.getString("showlabel.button.label"), true);
+        JCheckBox check = new JCheckBox(stigmata.getMessages().get("showlabel.button.label"), true);
         check.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 JCheckBox c = (JCheckBox)e.getSource();
@@ -132,24 +133,24 @@ public class MDSGraphPanel extends JPanel{
             }
         });
         SaveAction saveMDSAction = new SaveAction(stigmata, new MDSImageExporter(viewer));
-        saveMDSAction.setExtensions(Messages.getStringArray("savemds.extensions"));
-        saveMDSAction.setDescrpition(Messages.getString("savemds.description"));
+        saveMDSAction.setExtensions(stigmata.getMessages().getArray("savemds.extensions"));
+        saveMDSAction.setDescrpition(stigmata.getMessages().get("savemds.description"));
 
         SaveAction saveCoordinate = new SaveAction(stigmata, new MDSPointsLocationExporter(viewer));
-        saveCoordinate.setExtensions(Messages.getStringArray("savelocation.extensions"));
-        saveCoordinate.setDescrpition(Messages.getString("savelocation.description"));
+        saveCoordinate.setExtensions(stigmata.getMessages().getArray("savelocation.extensions"));
+        saveCoordinate.setDescrpition(stigmata.getMessages().get("savelocation.description"));
 
         PopupButton colorButton = new PopupButton(
-            GUIUtility.createButton("updatecolor", pointColorAction)
+            GUIUtility.createButton(messages, "updatecolor", pointColorAction)
         );
-        colorButton.addMenuItem(GUIUtility.createJMenuItem("updateovercolor", overColorAction));
+        colorButton.addMenuItem(GUIUtility.createJMenuItem(messages, "updateovercolor", overColorAction));
         PopupButton saveButton = new PopupButton(
-            GUIUtility.createButton("savemds", saveMDSAction)
+            GUIUtility.createButton(messages, "savemds", saveMDSAction)
         );
-        saveButton.addMenuItem(GUIUtility.createJMenuItem("savelocation", saveCoordinate));
+        saveButton.addMenuItem(GUIUtility.createJMenuItem(messages, "savelocation", saveCoordinate));
 
         JLabel numberOfDotsLabel = new JLabel(String.valueOf(set.length));
-        GUIUtility.decorateJComponent(numberOfDotsLabel, "mdsgraph.count");
+        GUIUtility.decorateJComponent(messages, numberOfDotsLabel, "mdsgraph.count");
         // set the number of dots of each groups
         JComboBox numberOfGroupsLabelCombo = new JComboBox();
         GeometoryType[] types = GeometoryType.values();
@@ -165,7 +166,7 @@ public class MDSGraphPanel extends JPanel{
         numberOfGroupsLabelCombo.setEditable(false);
         Dimension dim = new Dimension(100, numberOfGroupsLabelCombo.getPreferredSize().height);
         numberOfGroupsLabelCombo.setRenderer(new ClippedLRListCellRenderer(dim, 50));
-        GUIUtility.decorateJComponent(numberOfGroupsLabelCombo, "mdsgraph.group");
+        GUIUtility.decorateJComponent(messages, numberOfGroupsLabelCombo, "mdsgraph.group");
 
         JPanel north = new JPanel(new GridLayout(1, 2));
         north.add(numberOfDotsLabel);

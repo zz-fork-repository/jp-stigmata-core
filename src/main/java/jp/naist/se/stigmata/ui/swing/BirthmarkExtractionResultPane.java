@@ -25,6 +25,7 @@ import jp.naist.se.stigmata.spi.ResultPrinterSpi;
 import jp.naist.se.stigmata.ui.swing.actions.PopupShowAction;
 import jp.naist.se.stigmata.ui.swing.actions.SaveAction;
 import jp.naist.se.stigmata.utils.AsciiDataWritable;
+import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * @author Haruaki TAMADA
@@ -63,15 +64,16 @@ public class BirthmarkExtractionResultPane extends JPanel{
                 frame.compareExtractionResult(extraction);
             }
         };
-        JButton saveButton = GUIUtility.createButton("savebirthmark", saveAction);
-        JButton compareButton = GUIUtility.createButton("comparebirthmark", compareAction);
+        Messages messages = frame.getMessages();
+        JButton saveButton = GUIUtility.createButton(messages, "savebirthmark", saveAction);
+        JButton compareButton = GUIUtility.createButton(messages, "comparebirthmark", compareAction);
 
         JPopupMenu popup = new JPopupMenu();
-        popup.add(GUIUtility.createJMenuItem("savebirthmark", saveAction));
-        popup.add(GUIUtility.createJMenuItem("comparebirthmark", compareAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "savebirthmark", saveAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "comparebirthmark", compareAction));
 
         JScrollPane scroll = new JScrollPane();
-        scroll.setViewportView(new BirthmarkTree(extraction.getBirthmarkSets(ExtractionTarget.TARGET_BOTH)));
+        scroll.setViewportView(new BirthmarkTree(frame, extraction.getBirthmarkSets(ExtractionTarget.TARGET_BOTH)));
 
         setLayout(new BorderLayout());
         add(popup);

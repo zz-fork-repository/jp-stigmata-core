@@ -45,38 +45,38 @@ public class PairComparisonPane extends JPanel{
         this.frame = frame;
         this.pair = pair;
 
-        initialize();
+        initialize(frame);
     }
 
-    private void initialize(){
+    private void initialize(StigmataFrame frame){
         this.setLayout(new java.awt.BorderLayout());
-        this.add(getSouthPanel(), java.awt.BorderLayout.SOUTH);
-        this.add(getMainPane(), java.awt.BorderLayout.CENTER);
+        this.add(getSouthPanel(frame), java.awt.BorderLayout.SOUTH);
+        this.add(getMainPane(frame), java.awt.BorderLayout.CENTER);
     }
 
-    private JPanel getSouthPanel(){
+    private JPanel getSouthPanel(StigmataFrame stigmata){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JPanel similarityPanel = new JPanel();
         similarityPanel.setLayout(new GridLayout(1, 3));
 
         JLabel label = new JLabel(Double.toString(pair.calculateSimilarity()));
-        label.setBorder(BorderFactory.createTitledBorder(Messages.getString("result.border")));
+        label.setBorder(BorderFactory.createTitledBorder(stigmata.getMessages().get("result.border")));
         JComboBox combo = new JComboBox();
         for(ComparisonPairElement elem : pair){
             combo.addItem(new ClippedLRListCellRenderer.LRItem(elem.getType(), elem.getSimilarity()));
         }
         combo.setRenderer(new ClippedLRListCellRenderer(new Dimension(100, combo.getPreferredSize().height), 50));
-        combo.setBorder(BorderFactory.createTitledBorder(Messages.getString("eachbirthmarksimilarity.border")));
+        combo.setBorder(BorderFactory.createTitledBorder(stigmata.getMessages().get("eachbirthmarksimilarity.border")));
         similarityPanel.add(label);
         similarityPanel.add(combo);
-        similarityPanel.setBorder(new TitledBorder(Messages.getString("similarity.border")));
+        similarityPanel.setBorder(new TitledBorder(stigmata.getMessages().get("similarity.border")));
 
         panel.add(similarityPanel);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton saveButton = GUIUtility.createButton(
-            "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
+            frame.getMessages(), "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
@@ -94,17 +94,17 @@ public class PairComparisonPane extends JPanel{
         return panel;
     }
 
-    private JSplitPane getMainPane(){
+    private JSplitPane getMainPane(StigmataFrame frame){
         JSplitPane spliter = new javax.swing.JSplitPane();
-        spliter.setLeftComponent(getSpliterPanel(pair.getTarget1()));
-        spliter.setRightComponent(getSpliterPanel(pair.getTarget2()));
+        spliter.setLeftComponent(getSpliterPanel(frame, pair.getTarget1()));
+        spliter.setRightComponent(getSpliterPanel(frame, pair.getTarget2()));
         spliter.setDividerLocation((spliter.getWidth() - spliter.getDividerSize()) / 2);
         spliter.setContinuousLayout(true);
 
         return spliter;
     }
 
-    private JPanel getSpliterPanel(BirthmarkSet birthmark){
+    private JPanel getSpliterPanel(StigmataFrame stigmata, BirthmarkSet birthmark){
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JTree tree = new JTree(new BirthmarkTreeNode(birthmark));
@@ -114,7 +114,7 @@ public class PairComparisonPane extends JPanel{
         panel.add(south, BorderLayout.SOUTH);
 
         JLabel elementCount = new JLabel(Integer.toString(birthmark.getSumOfElementCount()));
-        elementCount.setBorder(new TitledBorder(Messages.getString("elementcount.border")));
+        elementCount.setBorder(new TitledBorder(stigmata.getMessages().get("elementcount.border")));
         south.add(elementCount, BorderLayout.CENTER);
 
         return panel;
