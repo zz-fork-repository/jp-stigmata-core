@@ -4,7 +4,7 @@ package jp.sourceforge.stigmata.ui.swing.actions;
  * $Id$
  */
 
-import java.lang.reflect.Method;
+import java.awt.Desktop;
 import java.net.URL;
 
 import javax.swing.event.HyperlinkEvent;
@@ -31,9 +31,9 @@ class LinkFollower implements HyperlinkListener{
     }
 
     private void browse(URL url) throws Exception{
-        Class<?> c = Class.forName("edu.stanford.ejalbert.BrowserLauncher");
-        Object o = c.newInstance();
-        Method m = c.getMethod("openURLinBrowser", String.class);
-        m.invoke(o, url.toString());
+    	Desktop desktop = Desktop.getDesktop();
+    	if(desktop.isSupported(Desktop.Action.BROWSE)){
+    		desktop.browse(url.toURI());
+    	}
     }
 }
