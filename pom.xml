@@ -46,12 +46,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>stax</groupId>
-      <artifactId>stax</artifactId>
-      <version>1.2.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>commons-dbutils</groupId>
       <artifactId>commons-dbutils</artifactId>
       <version>1.1</version>
@@ -76,22 +70,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>Jama</groupId>
-      <artifactId>Jama</artifactId>
-      <version>1.0.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>commons-dbutils</groupId>
       <artifactId>commons-dbutils</artifactId>
       <version>1.1</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>edu.stanford.ejalbert</groupId>
-      <artifactId>BrowserLauncher2</artifactId>
-      <version>1.3</version>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -142,8 +124,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
           <encoding>shift_jis</encoding>
         </configuration>
       </plugin>

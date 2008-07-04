@@ -283,8 +283,8 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             BirthmarkSpi service = null;
                 
             while(reader.hasNext()){
-                XMLEvent event = reader.peek();
-                // XMLEvent event = reader.nextEvent();
+                // XMLEvent event = reader.peek();
+                XMLEvent event = reader.nextEvent();
                 if(event.isStartElement()){
                     StartElement se = event.asStartElement();
                     String part = se.getName().getLocalPart();
@@ -340,7 +340,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                         break;
                     }
                 }
-                reader.nextEvent();
+                // reader.nextEvent();
             }
             return bs;
         }
