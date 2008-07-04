@@ -22,7 +22,9 @@ import jp.sourceforge.talisman.i18n.Messages;
  * @version $Revision$ $Date$
  */
 public abstract class ComparisonPairFilterPane extends JPanel{
-    private jp.sourceforge.stigmata.ui.swing.StigmataFrame stigmata;
+	private static final long serialVersionUID = -5201125568912008141L;
+
+	private StigmataFrame stigmata;
     private Map<String, Criterion> criterionMap = new HashMap<String, Criterion>();
     private Map<String, FilterTarget> targetMap = new HashMap<String, FilterTarget>();
 

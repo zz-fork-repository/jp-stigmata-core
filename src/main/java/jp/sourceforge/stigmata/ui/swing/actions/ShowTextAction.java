@@ -29,7 +29,9 @@ import jp.sourceforge.talisman.i18n.Messages;
  * @version $Revision$ $Date$
  */
 abstract class ShowTextAction extends AbstractAction{
-    private StigmataFrame parent;
+	private static final long serialVersionUID = 7341139545864209076L;
+
+	private StigmataFrame parent;
 
     public ShowTextAction(StigmataFrame parent){
         this.parent = parent;

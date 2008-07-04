@@ -23,7 +23,9 @@ import jp.sourceforge.talisman.i18n.Messages;
  * @version $Revision$ $Date$
  */
 public abstract class BirthmarkSelectablePane extends JPanel implements BirthmarkServiceListener{
-    private StigmataFrame stigmata;
+	private static final long serialVersionUID = 7057130952947891635L;
+
+	private StigmataFrame stigmata;
     private Set<String> selectedServices = new HashSet<String>();
     private Map<String, BirthmarkSelection> services;
     private List<DataChangeListener> listeners = new ArrayList<DataChangeListener>();

@@ -19,7 +19,9 @@ import jp.sourceforge.stigmata.BirthmarkElement;
  * @version  $Revision$ $Date$
  */
 public abstract class AbstractBirthmark implements Birthmark, Serializable{
-    /**
+	private static final long serialVersionUID = -1300436185045832554L;
+
+	/**
      * collections for elements.
      */
     protected List<BirthmarkElement> elements = new ArrayList<BirthmarkElement>();
