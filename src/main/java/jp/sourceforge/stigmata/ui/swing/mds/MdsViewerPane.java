@@ -20,6 +20,7 @@ import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,6 +31,7 @@ import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.BirthmarkSet;
 import jp.sourceforge.stigmata.ComparisonPair;
+import jp.sourceforge.stigmata.ui.swing.ClippedLRListCellRenderer;
 import jp.sourceforge.stigmata.ui.swing.GUIUtility;
 import jp.sourceforge.stigmata.ui.swing.PopupButton;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
@@ -41,6 +43,7 @@ import jp.sourceforge.talisman.mds.Item;
 import jp.sourceforge.talisman.mds.MdsMethod;
 import jp.sourceforge.talisman.mds.Table;
 import jp.sourceforge.talisman.mds.ui.MdsGraphSetting;
+import jp.sourceforge.talisman.mds.ui.mark.DrawerFactory;
 import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 import jp.sourceforge.talisman.mds.ui.swing.actions.AntiClockwiseRotateAction;
 import jp.sourceforge.talisman.mds.ui.swing.actions.ClearAction;
@@ -57,8 +60,7 @@ import jp.sourceforge.talisman.mds.ui.swing.actions.ZoomOutAction;
  * @author Haruaki TAMADA
  * @version $Revision$ 
  */
-public class MdsViewerPane extends JPanel implements ZoomEnabler,
-        MessageManager{
+public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager{
     private static final long serialVersionUID = -7256554014379112897L;
     private static final int[] ZOOM_PATTERN = { 30, 40, 50, 75, 100, 125, 150,
             200, 300, 400, };
@@ -68,6 +70,7 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
     private BirthmarkContext context;
     private MdsPane mdspane;
     private MdsGraphSetting setting;
+    private LabelMap labels;
 
     private int currentZoomPattern = 4;
     private boolean userInputtedValue = false;
@@ -82,8 +85,6 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
 
         try{
             initLayouts();
-
-            setGroups();
         } catch(ResourceNotFoundException e){
             e.printStackTrace();
             throw new InternalError(e.getMessage());
@@ -133,10 +134,8 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
 
         for(int i = 0; i < set.length; i++){
             for(int j = 0; j <= i; j++){
-                ComparisonPair pair = new ComparisonPair(set[i], set[j],
-                        context);
-                table.addValue(set[i].getName(), set[j].getName(), 1d - pair
-                        .calculateSimilarity());
+                ComparisonPair pair = new ComparisonPair(set[i], set[j], context);
+                table.addValue(set[i].getName(), set[j].getName(), 1d - pair.calculateSimilarity());
             }
         }
         return table;
@@ -151,24 +150,19 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
     }
 
     private void setGroups(){
+        labels = new LabelMap();
+        labels.setGroupEnabled(true);
         Item[] items = mdspane.getItems();
         Map<String, BirthmarkSet> map = new HashMap<String, BirthmarkSet>();
-        Map<String, Integer> groupMap = new HashMap<String, Integer>();
         for(BirthmarkSet s: set) map.put(s.getName(), s);
         
         for(Item item: items){
             BirthmarkSet s = map.get(item.getName());
-            int groupId = 0;
             if(s != null){
-                String groupName = getGroupName(s.getLocation());
-                Integer i = groupMap.get(groupName);
-                if(i == null){
-                    i = groupMap.size() + 1;
-                    groupMap.put(groupName, i);
-                }
-                groupId = i;
+                labels.addLabel(s.getName());
+                labels.setGroup(s.getName(), getGroupName(s.getLocation()));
             }
-            item.setGroupId(groupId);
+            item.setGroupId(labels.getGroupIdFromElementName(item.getName()));
         }
     }
 
@@ -184,6 +178,7 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
         setting = new MdsGraphSetting();
         mdspane = new MdsPane(new MdsMethod<String>(table), setting, messages);
         setting.setShowLabels(true);
+        setGroups();
 
         JCheckBox check = new JCheckBox(stigmata.getMessages().get("showlabel.button.label"), true);
         check.addActionListener(new ActionListener(){
@@ -198,10 +193,8 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
 
         SaveAction exportMdsImageAction = new SaveAction(stigmata,
                 new MdsImageExporter(mdspane));
-        exportMdsImageAction.setExtensions(stigmata.getMessages().getArray(
-            "savemds.extensions"));
-        exportMdsImageAction.setDescrpition(stigmata.getMessages().get(
-            "savemds.description"));
+        exportMdsImageAction.setExtensions(stigmata.getMessages().getArray("savemds.extensions"));
+        exportMdsImageAction.setDescrpition(stigmata.getMessages().get("savemds.description"));
 
         SaveAction exportItemsAction = new SaveAction(stigmata, new MdsItemsLocationExporter(mdspane));
         exportItemsAction.setExtensions(stigmata.getMessages().getArray("savelocation.extensions"));
@@ -232,6 +225,16 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
                 }
             }
         });
+        JComboBox combo = new JComboBox();
+        combo.setRenderer(new ClippedLRListCellRenderer(new Dimension(100, combo.getPreferredSize().height), 50));
+        DrawerFactory factory = DrawerFactory.getInstance();
+        for(Map.Entry<String, Integer> entry: labels.getGroupElementCounts().entrySet()){
+            int groupId = labels.getGroupId(entry.getKey());
+            ClippedLRListCellRenderer.LRItem item = new ClippedLRListCellRenderer.LRItem(entry.getKey(), entry.getValue());
+            item.setIcon(factory.createIcon(groupId));
+            combo.addItem(item);
+        }
+        GUIUtility.decorateJComponent(messages, combo, "mdsgraph.group");
 
         JToolBar toolbar = new JToolBar();
         toolbar.add(new ClockwiseRotateAction(mdspane));
@@ -242,9 +245,10 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler,
         toolbar.add(zoomout = new ZoomOutAction(this, this));
         toolbar.add(new ClearAction(mdspane));
 
-        JPanel south1 = new JPanel(new GridLayout(1, 2));
+        JPanel south1 = new JPanel(new GridLayout(1, 3));
         south1.add(numberOfDotsLabel);
         south1.add(zoomRatio);
+        south1.add(combo);
 
         Box south2 = Box.createHorizontalBox();
         south2.add(Box.createHorizontalGlue());

@@ -4,6 +4,7 @@ package jp.sourceforge.stigmata.ui.swing.mds;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +95,19 @@ class LabelMap{
         }
 
         return names;
+    }
+
+    public synchronized Map<String, Integer> getGroupElementCounts(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+
+        for(Map.Entry<String, String> entry: groups.entrySet()){
+            Integer i = map.get(entry.getValue());
+            if(i == null){
+                i = new Integer(0);
+            }
+            map.put(entry.getValue(), i + 1);
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     public synchronized int getGroupElementCount(String group){
