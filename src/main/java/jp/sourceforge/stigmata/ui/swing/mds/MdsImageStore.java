@@ -17,15 +17,16 @@ import javax.swing.SwingUtilities;
 
 import jp.sourceforge.stigmata.ui.swing.UnsupportedFormatException;
 import jp.sourceforge.stigmata.utils.BinaryDataWritable;
+import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 
 /**
  * @author Haruaki TAMADA
  * @version $Revision$ $Date$
  */
 public class MDSImageExporter implements BinaryDataWritable{
-    private MDSGraphViewer viewer;
+    private MdsPane viewer;
 
-    public MDSImageExporter(MDSGraphViewer viewer){
+    public MDSImageExporter(MdsPane viewer){
         this.viewer = viewer;
     }
 
