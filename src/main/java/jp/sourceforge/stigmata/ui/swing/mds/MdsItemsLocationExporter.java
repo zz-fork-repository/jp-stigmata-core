@@ -6,20 +6,21 @@ package jp.sourceforge.stigmata.ui.swing.mds;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 
 import jp.sourceforge.stigmata.ui.swing.UnsupportedFormatException;
 import jp.sourceforge.stigmata.utils.AsciiDataWritable;
+import jp.sourceforge.talisman.mds.Item;
+import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 
 /**
  * 
  * @author Haruaki TAMADA
  * @version $Revision$
  */
-public class MDSPointsLocationExporter implements AsciiDataWritable{
-    private MDSGraphViewer viewer;
+public class MdsItemsLocationExporter implements AsciiDataWritable{
+    private MdsPane viewer;
 
-    public MDSPointsLocationExporter(MDSGraphViewer viewer){
+    public MdsItemsLocationExporter(MdsPane viewer){
         this.viewer = viewer;
     }
 
@@ -28,9 +29,8 @@ public class MDSPointsLocationExporter implements AsciiDataWritable{
         if(!format.equals("csv")){
             throw new UnsupportedFormatException(viewer.getMessages().format("error.unsupportedformat", format));
         }
-        for(Iterator<Coordinate> i = viewer.coordinates(); i.hasNext(); ){
-            Coordinate c = i.next();
-            out.printf("%s,%s,%g,%g%n", c.getLabel(), c.getGroupId(), c.getX(), c.getY());
+        for(Item item: viewer.getItems()){
+            out.printf("%s,%s,%g,%g%n", item.getName(), item.getGroupId(), item.get(0), item.get(1));
         }
     }
 

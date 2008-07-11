@@ -59,7 +59,7 @@ import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.ui.swing.actions.AboutAction;
 import jp.sourceforge.stigmata.ui.swing.actions.LicenseAction;
 import jp.sourceforge.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
-import jp.sourceforge.stigmata.ui.swing.mds.MDSGraphPanel;
+import jp.sourceforge.stigmata.ui.swing.mds.MdsViewerPane;
 import jp.sourceforge.stigmata.ui.swing.tab.EditableTabbedPane;
 import jp.sourceforge.stigmata.utils.Utility;
 import jp.sourceforge.talisman.i18n.Messages;
@@ -315,9 +315,9 @@ public class StigmataFrame extends JFrame{
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
-    public void showMDSGraph(BirthmarkSet[] set, BirthmarkContext context){
+    public void showMdsGraph(BirthmarkSet[] set, BirthmarkContext context){
         try{
-            MDSGraphPanel panel = new MDSGraphPanel(this, set, context);
+            MdsViewerPane panel = new MdsViewerPane(this, set, context);
             int mappingGraphCount = getNextCount("mds_graph");
             GUIUtility.addNewTab(
                 getMessages(), "mappinggraph", tabPane, panel,

@@ -21,12 +21,12 @@ import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
-public class MDSImageExporter implements BinaryDataWritable{
+public class MdsImageExporter implements BinaryDataWritable{
     private MdsPane viewer;
 
-    public MDSImageExporter(MdsPane viewer){
+    public MdsImageExporter(MdsPane viewer){
         this.viewer = viewer;
     }
 

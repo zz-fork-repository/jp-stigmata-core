@@ -224,7 +224,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             index++;
         }
         
-        stigmata.showMDSGraph(set, extraction.getContext());
+        stigmata.showMdsGraph(set, extraction.getContext());
     }
 
     private void graphButtonActionPerformed(ActionEvent e){
