@@ -10,7 +10,7 @@ import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractComparisonPairFilter implements ComparisonPairFilter{
     private ComparisonPairFilterSpi service;

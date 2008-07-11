@@ -20,7 +20,7 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
  * Abstract class for ComparisonResultSet.
  *
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractComparisonResultSet implements ComparisonResultSet{
     protected ExtractionResultSet extraction;

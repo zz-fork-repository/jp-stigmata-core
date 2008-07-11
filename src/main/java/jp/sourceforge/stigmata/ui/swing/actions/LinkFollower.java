@@ -13,7 +13,7 @@ import javax.swing.event.HyperlinkListener;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 class LinkFollower implements HyperlinkListener{
     public void hyperlinkUpdate(HyperlinkEvent e){

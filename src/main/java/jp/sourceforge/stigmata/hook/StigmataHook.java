@@ -9,7 +9,7 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date
+ * @version $Revision$ 
  */
 public interface StigmataHook{
     public void onHook(Phase phase, BirthmarkEnvironment env);

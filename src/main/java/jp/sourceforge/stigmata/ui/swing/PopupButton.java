@@ -21,7 +21,7 @@ import javax.swing.plaf.metal.MetalComboBoxIcon;
  * Popup button.
  * 
  * @author tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class PopupButton extends JPanel{
     private static final long serialVersionUID = -4428839967597028837L;

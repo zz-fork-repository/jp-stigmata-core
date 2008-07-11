@@ -16,7 +16,7 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class RDBExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     private DataSource source;

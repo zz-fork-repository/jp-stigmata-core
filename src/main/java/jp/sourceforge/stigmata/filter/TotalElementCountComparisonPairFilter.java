@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class TotalElementCountComparisonPairFilter extends AbstractComparisonPairFilter{
     private static final List<Criterion> CRITERIA = new ArrayList<Criterion>();

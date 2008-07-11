@@ -9,7 +9,7 @@ import java.util.Iterator;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revission$ $Date$
+ * @version $Revission$ 
  */
 public class ArrayIterator<T> implements Iterator<T>{
     private T[] values;

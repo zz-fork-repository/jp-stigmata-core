@@ -12,7 +12,7 @@ package jp.sourceforge.stigmata;
  * class name, method name, package name, or product name.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public enum ExtractionUnit{
     CLASS,

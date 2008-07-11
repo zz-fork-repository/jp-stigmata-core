@@ -10,7 +10,7 @@ import java.util.Locale;
  * Base interface for birthmark SPI.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface ServiceProvider{
     public String getDescription(Locale locale);

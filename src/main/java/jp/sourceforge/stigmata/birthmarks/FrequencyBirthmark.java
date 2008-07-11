@@ -16,7 +16,7 @@ import jp.sourceforge.stigmata.utils.ArrayIterator;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class FrequencyBirthmark extends AbstractBirthmark{
     private static final long serialVersionUID = 1905526895627693908L;

@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class LocalizedDescriptionManager{
     public static enum ServiceCategory{

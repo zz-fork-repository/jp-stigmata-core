@@ -70,7 +70,9 @@ public class OpenItemsAction extends AbstractAction{
         else{
             items = mdsPane.getItems();
         }
-        showItems(items);
+        if(items.length > 0){
+            showItems(items);
+        }
     }
 
     private void showItems(Item[] items){

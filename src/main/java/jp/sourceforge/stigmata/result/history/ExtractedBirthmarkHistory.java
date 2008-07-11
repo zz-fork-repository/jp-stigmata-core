@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
  * This interface indicates extracted history management.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface ExtractedBirthmarkHistory extends Iterable<String>{
     /**

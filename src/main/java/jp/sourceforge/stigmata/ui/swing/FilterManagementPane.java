@@ -32,7 +32,7 @@ import jp.sourceforge.stigmata.ui.swing.filter.FilterSetDefinitionPane;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class FilterManagementPane extends JPanel implements ComparisonPairFilterRetainable{
     private static final long serialVersionUID = 972135792354L;

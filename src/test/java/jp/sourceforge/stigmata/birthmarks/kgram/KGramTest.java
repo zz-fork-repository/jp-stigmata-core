@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class KGramTest{
     private String[] plainValues;

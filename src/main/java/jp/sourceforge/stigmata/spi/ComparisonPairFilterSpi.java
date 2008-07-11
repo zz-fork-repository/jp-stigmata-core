@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.ComparisonPairFilter;
  * Service provider interface for filtering comparison pair.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface ComparisonPairFilterSpi extends ServiceProvider{
     public String getDisplayFilterName(Locale locale);

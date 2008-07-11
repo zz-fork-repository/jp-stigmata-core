@@ -15,7 +15,7 @@ import org.objectweb.asm.ClassWriter;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class SequentialMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor{
     public SequentialMethodCallBirthmarkExtractor(BirthmarkSpi spi){

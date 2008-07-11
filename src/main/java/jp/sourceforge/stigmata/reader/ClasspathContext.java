@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.utils.WarClassLoader;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ClasspathContext implements Iterable<URL>{
     private static ClasspathContext DEFAULT_CONTEXT = new ClasspathContext(false);

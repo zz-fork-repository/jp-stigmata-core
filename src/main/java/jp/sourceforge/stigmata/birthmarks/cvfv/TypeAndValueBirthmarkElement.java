@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.BirthmarkElement;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 237098465735321L;

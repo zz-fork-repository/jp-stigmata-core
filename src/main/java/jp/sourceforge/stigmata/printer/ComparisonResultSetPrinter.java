@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.ComparisonResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface ComparisonResultSetPrinter{
     public void printResult(PrintWriter out, ComparisonResultSet resultset);

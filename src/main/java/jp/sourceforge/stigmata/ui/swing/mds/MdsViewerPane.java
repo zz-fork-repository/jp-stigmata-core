@@ -55,7 +55,7 @@ import jp.sourceforge.talisman.mds.ui.swing.actions.ZoomOutAction;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class MdsViewerPane extends JPanel implements ZoomEnabler,
         MessageManager{

@@ -29,7 +29,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * configuration file parser.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ConfigFileImporter{
     private BirthmarkEnvironment environment;

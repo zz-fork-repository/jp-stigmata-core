@@ -37,7 +37,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class RDBExtractionResultSet extends AbstractExtractionResultSet{
     private String id;

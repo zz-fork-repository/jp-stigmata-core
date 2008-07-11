@@ -13,7 +13,7 @@ import java.util.Iterator;
  * abstract presentation of class file archive's location.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface ClassFileArchive extends Iterable<ClassFileEntry>{
     public URL getLocation();

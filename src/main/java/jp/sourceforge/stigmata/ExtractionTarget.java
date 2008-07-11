@@ -8,7 +8,7 @@ package jp.sourceforge.stigmata;
  * This enum represents the mean of extracted birthmarks.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public enum ExtractionTarget{
     TARGET_X,

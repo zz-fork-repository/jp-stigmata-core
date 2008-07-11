@@ -7,7 +7,7 @@ package jp.sourceforge.stigmata;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ExtractorNotFoundException extends BirthmarkException{
     private static final long serialVersionUID = 2050231007494812969L;

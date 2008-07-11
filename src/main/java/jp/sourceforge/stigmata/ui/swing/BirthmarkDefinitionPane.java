@@ -43,7 +43,7 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkDefinitionPane extends JPanel{
     private static final long serialVersionUID = 3932637653297802978L;

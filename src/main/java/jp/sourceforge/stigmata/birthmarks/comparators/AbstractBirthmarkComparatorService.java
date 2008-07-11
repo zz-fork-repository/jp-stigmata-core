@@ -18,7 +18,7 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Abstract service provider interface for comparing birthmarks.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvider implements BirthmarkComparatorSpi{
     /**

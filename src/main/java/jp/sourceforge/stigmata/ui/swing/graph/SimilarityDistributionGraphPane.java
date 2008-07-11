@@ -35,7 +35,7 @@ import jp.sourceforge.stigmata.ui.swing.actions.ChangeColorAction;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class SimilarityDistributionGraphPane extends JPanel{
     private static final long serialVersionUID = 2314463453465L;

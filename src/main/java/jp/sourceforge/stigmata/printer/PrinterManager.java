@@ -17,7 +17,7 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class PrinterManager{
     private static final PrinterManager manager = new PrinterManager();

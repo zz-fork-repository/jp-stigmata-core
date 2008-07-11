@@ -10,7 +10,7 @@ import jp.sourceforge.stigmata.spi.StigmataHookSpi;
  * 
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractStigmataHookService implements StigmataHookSpi{
     public StigmataRuntimeHook afterComparison(){

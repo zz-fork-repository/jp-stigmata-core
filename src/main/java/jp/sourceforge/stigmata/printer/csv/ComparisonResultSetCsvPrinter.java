@@ -21,7 +21,7 @@ import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ComparisonResultSetCsvPrinter extends AbstractComparisonResultSetPrinter{
     public ComparisonResultSetCsvPrinter(){

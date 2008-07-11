@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Comparing birthmarks by cosine similarity algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class CosineSimilarityBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
     /**

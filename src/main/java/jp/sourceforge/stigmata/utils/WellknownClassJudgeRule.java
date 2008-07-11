@@ -8,7 +8,7 @@ package jp.sourceforge.stigmata.utils;
  * A rule for checking wellknown class or not.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public final class WellknownClassJudgeRule{
     public enum MatchType{

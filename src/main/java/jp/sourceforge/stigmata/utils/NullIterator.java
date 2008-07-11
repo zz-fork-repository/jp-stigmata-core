@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 /**
  * 
  * @author Haruaki Tamada 
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class NullIterator<T> implements Iterator<T>{
     public boolean hasNext(){

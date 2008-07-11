@@ -19,7 +19,7 @@ import org.apache.commons.dbutils.QueryRunner;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
     private DataSource source;

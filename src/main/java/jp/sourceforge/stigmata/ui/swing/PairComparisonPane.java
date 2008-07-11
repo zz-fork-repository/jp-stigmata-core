@@ -33,7 +33,7 @@ import jp.sourceforge.stigmata.utils.AsciiDataWritable;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class PairComparisonPane extends JPanel{
     private static final long serialVersionUID = 2342856785474356234L;

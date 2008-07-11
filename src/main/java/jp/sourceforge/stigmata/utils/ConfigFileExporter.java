@@ -21,7 +21,7 @@ import org.apache.commons.beanutils.BeanUtils;
  * Export birthmark environment to xml file.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ConfigFileExporter{
     private BirthmarkEnvironment environment;

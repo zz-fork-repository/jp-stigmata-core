@@ -8,7 +8,7 @@ package jp.sourceforge.stigmata;
  * Interface for comparing given two birthmarks and calculate similarity.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface BirthmarkComparator {
     /**

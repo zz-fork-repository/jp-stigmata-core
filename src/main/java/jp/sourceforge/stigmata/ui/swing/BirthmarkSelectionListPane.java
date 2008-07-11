@@ -28,7 +28,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
     private static final long serialVersionUID = 3209854654743223453L;

@@ -17,7 +17,7 @@ import org.objectweb.asm.Opcodes;
  * Managing wellknown class checking rule.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     private List<WellknownClassJudgeRule> rules = new ArrayList<WellknownClassJudgeRule>();

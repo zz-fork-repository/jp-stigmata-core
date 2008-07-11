@@ -21,7 +21,7 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class TotalElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 

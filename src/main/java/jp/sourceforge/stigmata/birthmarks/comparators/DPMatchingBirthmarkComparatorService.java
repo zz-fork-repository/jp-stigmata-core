@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Comparing birthmarks by DP matching algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class DPMatchingBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
     /**

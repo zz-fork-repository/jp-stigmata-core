@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ISBirthmarkExtractorTest{
     private BirthmarkEngine engine;

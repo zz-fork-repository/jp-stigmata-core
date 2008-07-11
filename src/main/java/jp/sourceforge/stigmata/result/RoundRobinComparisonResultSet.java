@@ -22,7 +22,7 @@ import jp.sourceforge.stigmata.ExtractionTarget;
  * Concrete class for ComparisonResultSet. This instance compare class files by round robin.
  *
  * @author  Haruaki TAMADA
- * @version  $Revision$ $Date$
+ * @version  $Revision$ 
  */
 public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
     private int compareCount = -1;

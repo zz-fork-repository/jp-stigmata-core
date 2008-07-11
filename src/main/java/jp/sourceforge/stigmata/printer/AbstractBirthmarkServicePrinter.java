@@ -14,7 +14,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractBirthmarkServicePrinter implements BirthmarkServicePrinter, Printer{
     public abstract void printResult(PrintWriter out, BirthmarkSpi[] spilist);

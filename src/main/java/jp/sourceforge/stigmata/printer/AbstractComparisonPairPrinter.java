@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.ComparisonPair;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractComparisonPairPrinter implements ComparisonPairPrinter, Printer{
 

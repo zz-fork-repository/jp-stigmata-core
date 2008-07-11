@@ -14,7 +14,7 @@ import jp.sourceforge.stigmata.ComparisonResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractComparisonResultSetPrinter implements ComparisonResultSetPrinter, Printer{
     public abstract void printResult(PrintWriter out, ComparisonResultSet resultset);

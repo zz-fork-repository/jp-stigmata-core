@@ -13,7 +13,7 @@ import java.util.Map;
  * memory?, databases?, or files?
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkStoreTarget implements Serializable, Comparable<BirthmarkStoreTarget>{
     private static final long serialVersionUID = -4225861589804166362L;

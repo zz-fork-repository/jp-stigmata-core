@@ -10,7 +10,7 @@ import jp.sourceforge.stigmata.ComparisonPairFilterSet;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface ComparisonPairFilterRetainable{
     public void filterSelected(ComparisonPairFilter filter);

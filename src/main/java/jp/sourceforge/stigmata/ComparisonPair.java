@@ -12,7 +12,7 @@ import java.util.List;
  * This class represents comparison pair.
  * 
  * @author  Haruaki TAMADA
- * @version  $Revision$ $Date$
+ * @version  $Revision$ 
  */
 public class ComparisonPair implements Iterable<ComparisonPairElement>{
     private BirthmarkSet target1;

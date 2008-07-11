@@ -17,7 +17,7 @@ import jp.sourceforge.stigmata.utils.Utility;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
     private File parent;

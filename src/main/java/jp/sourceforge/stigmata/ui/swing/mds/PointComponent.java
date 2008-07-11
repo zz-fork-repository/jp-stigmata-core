@@ -18,11 +18,13 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
-import jp.sourceforge.stigmata.ui.swing.mds.mark.DrawerFactory;
+import jp.sourceforge.talisman.mds.ui.mark.DrawerFactory;
+import jp.sourceforge.talisman.mds.ui.swing.GeometoryType;
+import jp.sourceforge.talisman.mds.ui.swing.MarkDrawer;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 class PointComponent extends JLabel{
     private static final long serialVersionUID = 6945871049990818511L;

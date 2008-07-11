@@ -22,7 +22,7 @@ import javax.swing.ListCellRenderer;
  * http://terai.xrea.jp/Swing/ClippedLRComboBox.html
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ClippedLRListCellRenderer extends JPanel implements ListCellRenderer{
     private static final long serialVersionUID = 32943674625674235L;

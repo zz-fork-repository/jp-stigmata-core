@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.BirthmarkExtractor;
  * Service provider interface for extracting birhtmark from given class files.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface BirthmarkExtractorSpi extends ServiceProvider{
     /**

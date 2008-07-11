@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 class Names implements Serializable{
     private static final long serialVersionUID = 1911603124143509407L;

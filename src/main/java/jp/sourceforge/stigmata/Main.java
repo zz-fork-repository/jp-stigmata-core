@@ -49,7 +49,7 @@ import org.w3c.dom.DOMException;
  * Front end class.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public final class Main{
     private PrinterManager manager = PrinterManager.getInstance();

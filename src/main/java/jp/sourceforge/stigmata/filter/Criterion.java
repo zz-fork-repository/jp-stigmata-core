@@ -7,7 +7,7 @@ package jp.sourceforge.stigmata.filter;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public enum Criterion{
     LESS_THAN,

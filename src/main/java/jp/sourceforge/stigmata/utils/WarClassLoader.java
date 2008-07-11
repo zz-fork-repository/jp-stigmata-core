@@ -19,7 +19,7 @@ import java.net.URLStreamHandlerFactory;
  * Then, this class loader can load classes included in a plain jar file and a war file.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class WarClassLoader extends URLClassLoader{
     public WarClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory){

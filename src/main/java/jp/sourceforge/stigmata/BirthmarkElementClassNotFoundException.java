@@ -11,7 +11,7 @@ import java.util.List;
  * Thrown if extracting birthmark is failed to find a class definition.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkElementClassNotFoundException extends
                BirthmarkExtractionFailedException {

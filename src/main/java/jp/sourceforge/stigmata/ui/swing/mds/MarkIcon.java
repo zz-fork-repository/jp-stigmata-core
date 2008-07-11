@@ -11,10 +11,12 @@ import java.awt.Graphics2D;
 
 import javax.swing.Icon;
 
+import jp.sourceforge.talisman.mds.ui.swing.MarkDrawer;
+
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class MarkIcon implements Icon{
     private static final int DEFAULT_ICON_WIDTH = 16;

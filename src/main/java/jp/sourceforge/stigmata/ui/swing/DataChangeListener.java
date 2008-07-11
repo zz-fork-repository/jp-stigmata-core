@@ -11,7 +11,7 @@ import java.util.EventListener;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface DataChangeListener extends EventListener{
     public void valueChanged(Object source);

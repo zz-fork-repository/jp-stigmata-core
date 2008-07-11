@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  * 
  * @author Haruaki Tamada
  * @author Terai Atsuhiro
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 class EditableGlassPane extends JPanel{
     private static final long serialVersionUID = 9009103705988625476L;

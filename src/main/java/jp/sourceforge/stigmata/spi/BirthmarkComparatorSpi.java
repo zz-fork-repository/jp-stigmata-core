@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.BirthmarkComparator;
  * Service provider interface for comparing birthmarks.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface BirthmarkComparatorSpi extends ServiceProvider{
     /**

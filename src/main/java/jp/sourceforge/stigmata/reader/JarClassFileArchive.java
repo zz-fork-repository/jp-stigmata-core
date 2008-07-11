@@ -19,7 +19,7 @@ import java.util.jar.JarFile;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class JarClassFileArchive implements ClassFileArchive{
     private File file;

@@ -28,7 +28,7 @@ import jp.sourceforge.stigmata.utils.ConfigFileImporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class Stigmata{
     /**

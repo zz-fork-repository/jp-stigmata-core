@@ -15,7 +15,7 @@ import jp.sourceforge.stigmata.BirthmarkExtractor;
  * Birthmark service provider interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public interface BirthmarkSpi extends ServiceProvider{
     /**

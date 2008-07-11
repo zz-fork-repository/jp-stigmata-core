@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  * 
  * @author Haruaki Tamada
  * @author Terai Atsuhiro
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class EditableTabbedPane extends JTabbedPane{
     private static final long serialVersionUID = -66174062280771547L;

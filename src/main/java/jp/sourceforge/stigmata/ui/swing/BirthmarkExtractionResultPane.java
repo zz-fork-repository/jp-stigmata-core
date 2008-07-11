@@ -29,7 +29,7 @@ import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkExtractionResultPane extends JPanel{
     private static final long serialVersionUID = 239084365756236543L;

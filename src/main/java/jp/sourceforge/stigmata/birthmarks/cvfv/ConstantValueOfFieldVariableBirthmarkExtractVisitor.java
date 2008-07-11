@@ -23,7 +23,7 @@ import org.objectweb.asm.Type;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private Map<String, TypeAndValueBirthmarkElement> elements = new LinkedHashMap<String, TypeAndValueBirthmarkElement>();

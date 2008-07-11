@@ -23,7 +23,7 @@ import org.objectweb.asm.commons.EmptyVisitor;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class DefaultClassFileArchive implements ClassFileArchive{
     private File file;

@@ -24,7 +24,7 @@ import jp.sourceforge.stigmata.utils.BinaryDataWritable;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class SaveAction extends AbstractAction{
     private static final long serialVersionUID = 1427912047636729211L;

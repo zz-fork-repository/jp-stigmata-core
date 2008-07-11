@@ -14,7 +14,7 @@ import org.objectweb.asm.Opcodes;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class OpcodeExtractionMethodVisitor extends MethodAdapter{
     private List<Integer> opcodes;

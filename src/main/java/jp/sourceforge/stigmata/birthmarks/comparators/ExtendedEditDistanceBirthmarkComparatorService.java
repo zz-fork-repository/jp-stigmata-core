@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Comparing birthmarks by extended edit distance algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ExtendedEditDistanceBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
     /**

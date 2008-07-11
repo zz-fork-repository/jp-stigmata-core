@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class MultipleStigmataHook implements StigmataHook, StigmataRuntimeHook{
     private List<StigmataHook> hooks = new ArrayList<StigmataHook>();

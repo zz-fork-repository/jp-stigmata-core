@@ -15,7 +15,7 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Abstract class for {@link BirthmarkSpi <code>BirthmarkSpi</code>}
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public abstract class AbstractBirthmarkService implements BirthmarkSpi{
     public String getDisplayType(){

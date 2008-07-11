@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
     private static final long serialVersionUID = 3209854654743223453L;

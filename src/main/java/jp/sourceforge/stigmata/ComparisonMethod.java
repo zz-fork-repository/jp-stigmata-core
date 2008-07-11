@@ -10,7 +10,7 @@ package jp.sourceforge.stigmata;
  * <it>{ y1, y2, ..., ym, }</it>.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public enum ComparisonMethod{
     /**

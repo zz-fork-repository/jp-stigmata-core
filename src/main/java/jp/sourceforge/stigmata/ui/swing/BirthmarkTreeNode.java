@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.BirthmarkSet;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkTreeNode extends DefaultMutableTreeNode{
     private static final long serialVersionUID = -12323457653245L;

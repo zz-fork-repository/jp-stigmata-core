@@ -18,7 +18,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * {@link ValueCountable <code>ValueCountable</code>} interface.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
 public class CosineSimilarityBirthmarkComparator extends
         AbstractBirthmarkComparator{
@@ -51,7 +51,7 @@ public class CosineSimilarityBirthmarkComparator extends
         // double radian = Math.acos(product / (norm1 * norm2));
         // double angle = 90 - (180 * radian / Math.PI);
         // double sim = angle / 90;
-        // System.out.printf("angle: %g (%g“x, %g)%n", radian, angle, sim);
+        // System.out.printf("angle: %g (%gï¿½x, %g)%n", radian, angle, sim);
 
         return similarity;
     }

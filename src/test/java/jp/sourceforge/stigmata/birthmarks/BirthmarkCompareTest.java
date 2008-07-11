@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkCompareTest{
     private BirthmarkContext context;

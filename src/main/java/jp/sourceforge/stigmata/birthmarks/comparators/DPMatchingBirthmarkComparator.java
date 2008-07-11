@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * calculate similarities between two birthmarks by DP matching algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class DPMatchingBirthmarkComparator extends AbstractBirthmarkComparator{
     private int mismatchPenalty = 5;

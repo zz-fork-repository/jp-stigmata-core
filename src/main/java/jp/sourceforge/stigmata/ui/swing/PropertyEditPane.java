@@ -36,7 +36,7 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class PropertyEditPane extends JPanel{
     private static final long serialVersionUID = 12397342543653L;

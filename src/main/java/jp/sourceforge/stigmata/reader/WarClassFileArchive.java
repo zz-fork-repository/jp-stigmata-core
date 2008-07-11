@@ -19,7 +19,7 @@ import java.util.jar.JarEntry;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class WarClassFileArchive extends JarClassFileArchive{
     public WarClassFileArchive(String jarfile) throws IOException{

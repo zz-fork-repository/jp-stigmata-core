@@ -8,9 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.sourceforge.talisman.mds.ui.swing.GeometoryType;
+
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 class LabelMap{
     private List<String> labels = new ArrayList<String>();

@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Birthmark Service Provider Interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class UsedClassesBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
 

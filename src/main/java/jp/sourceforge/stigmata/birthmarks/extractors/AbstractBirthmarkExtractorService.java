@@ -18,7 +18,7 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Birthmark Service Provider Interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 abstract class AbstractBirthmarkExtractorService extends AbstractServiceProvider implements BirthmarkExtractorSpi{
     /**

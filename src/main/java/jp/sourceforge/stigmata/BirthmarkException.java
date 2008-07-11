@@ -8,7 +8,7 @@ package jp.sourceforge.stigmata;
  * This exception represents occuring some exceptions caused birthmarking.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class BirthmarkException extends Exception{
     private static final long serialVersionUID = -6422474631148213820L;

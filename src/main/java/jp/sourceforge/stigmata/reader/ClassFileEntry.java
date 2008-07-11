@@ -10,7 +10,7 @@ import java.net.URL;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class ClassFileEntry{
     private URL location;

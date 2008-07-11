@@ -16,7 +16,7 @@ import jp.sourceforge.stigmata.utils.NullIterator;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class SingleExtractionResultSet extends AbstractExtractionResultSet{
     private BirthmarkSet bs;

@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 abstract class AbstractComparisonPairFilterService extends AbstractServiceProvider implements ComparisonPairFilterSpi{
     public String getDescription(Locale locale){

@@ -19,7 +19,7 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
+ * @version $Revision$ 
  */
 public class CsvResultPrinterService extends AbstractServiceProvider implements ResultPrinterSpi{
     private BirthmarkServiceCsvPrinter serviceList = new BirthmarkServiceCsvPrinter();
