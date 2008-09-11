@@ -41,22 +41,21 @@
       <item name="Tutorial (pdf)"      href="tutorial.pdf"/>
     </menu>
 
-    <menu name="For Researchers">
-      <item name="Definition"          href="definition.html" />
-      <item name="Survey"              href="survey.html"/>
-      <item name="Maniac mode"         href="maniac.html"/>
-    </menu>
-
     <menu name="For Developers">
       <item name="Extend Stigmata"     href="developer.html" />
       <item name="Relax NG"            href="relaxng.html" />
       <item name="DTD"                 href="dtd.html" />
-      <item name="Project Page"        href="http://sourceforge.jp/projects/stigmata/"/>
+      <item name="Implementation"      href="implementation.html"/>
+      <item name="Maniac mode"         href="maniac.html"/>
+    </menu>
+
+    <menu name="For Researchers">
+      <item name="Definition"          href="definition.html" />
+      <item name="Survey"              href="survey.html"/>
     </menu>
 
     <menu name="Links">
-      <item name="SE Lab., NAIST" href="http://se.naist.jp/" />
-      <item name="Kyoto Sangyo University" href="http://www.kyoto-su.ac.jp/" />
+      <item name="Project Page"   href="http://sourceforge.jp/projects/stigmata/"/>
       <item name="DonQuixote"     href="http://donquixote.cafebabe.jp/" />
     </menu>
 

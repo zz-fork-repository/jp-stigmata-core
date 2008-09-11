@@ -3,111 +3,8 @@
  ----
  Haruaki Tamada
  ----
- 2007-06-13
+ 2008-09-11
  ----
-
-Implemented Birthmarks
-
-*CVFV birthmark
-
- [Proposers] H. Tamada, et al.
-
- [Description] Constant values of field variables and its field type
-
- [Paper] Haruaki Tamada, Masahide Nakamura, Akito Monden, and Ken-ichi
- Matsumoto, "Java Birthmarks --Detecting the Software Theft--," IEICE
- Transactions on Information and Systems, Vol. E88-D, No. 9, September
- 2005.
-
-*SMC birthmark
-
- [Proposers] H. Tamada, et al.
-
- [Description] Sequence of method calls in definition order (not execution order).
-
- [Paper] Haruaki Tamada, Masahide Nakamura, Akito Monden, and Ken-ichi
- Matsumoto, "Java Birthmarks --Detecting the Software Theft--," IEICE
- Transactions on Information and Systems, Vol. E88-D, No. 9, September
- 2005.
-
-*IS birthmark
-
- [Proposers] H. Tamada, et al.
-
- [Description] Inheritance structure of target class.  If a class in
- this birthmark elements is not wellknown-class, replace it to <null>.
-
- [Paper] Haruaki Tamada, Masahide Nakamura, Akito Monden, and Ken-ichi
- Matsumoto, "Java Birthmarks --Detecting the Software Theft--," IEICE
- Transactions on Information and Systems, Vol. E88-D, No. 9, September
- 2005.
-
-*UC birthmark
-
- [Proposers] H. Tamada, et al.
-
- [Description] A set of used classes.  Elements of this birthmark is
- appeared in field type, method argument types, return type and used
- in methods.
-
- [Paper] Haruaki Tamada, Masahide Nakamura, Akito Monden, and Ken-ichi
- Matsumoto, "Java Birthmarks --Detecting the Software Theft--," IEICE
- Transactions on Information and Systems, Vol. E88-D, No. 9, September
- 2005.
-
-*k-gram based birthmark
-
- [Proposers] G. Myles and C. Collberg
-
- [Description] Construct k-gram from instructions.
-
- [Paper] Ginger Myles, Christian Collberg, ``K-gram based software
- birthmarks,'' In Proc. of the 2005 ACM symposium on Applied
- computing, 2005.
-
-*FMC birthmark
-
- [Proposers] H. Tamada
-
- [Description] Frequency of method calls.
-
- [Papers] Not published
-
- [Related Papers] Haruaki Tamada, Keiji Okamoto, Masahide Nakamura,
-   Akito Monden, and Ken-ichi Matsumoto, ``Dynamic Software Birthmarks
-   to Detect the Theft of Windows Applications,'' In
-   Proc. International Symposium on Future Software Technology 2004
-   (ISFST 2004), CD-ROM, Xi'an, China, 20-22 October 2004.
-
-*FUC birthmark
-
- [Proposers] H. Tamada
-
- [Description] Frequency of used classes.
-
- [Papers] Not published
-
- [Related Papers] Haruaki Tamada, Keiji Okamoto, Masahide Nakamura,
-   Akito Monden, and Ken-ichi Matsumoto, ``Dynamic Software Birthmarks
-   to Detect the Theft of Windows Applications,'' In
-   Proc. International Symposium on Future Software Technology 2004
-   (ISFST 2004), CD-ROM, Xi'an, China, 20-22 October 2004.
-
-Analysis method
-
-*MDS (Multi-dimensional scaling)
-
- [Proposer?] T. Kakimoto, et al.
-
- [Description] plotting classes into plane based on their similarities
- between each pairs.
-
- [Paper] Takeshi Kakimoto, Akito Monden, Yasutaka Kamei, Haruaki
-   Tamada, Masateru Tsunoda, and Ken-ichi Matsumoto, ``Using Software
-   Birthmarks to Identify Similar Classes and Major Functionalities,''
-   In Proc. the 3rd International Workshop on Mining Software
-   Repositories ({{{http://msr.uwaterloo.ca/msr2006/}MSR Mining
-   Challenge 2006}}), pp.171--172, Shanghai, China, May 2006.
 
 Articles
 
@@ -115,7 +12,7 @@ Articles
    check,'' COMPUTERWORLD, 29 August 2008,
    {{{http://www.computerworld.com.au/index.php?id=1493459712&rid=-219}http://www.computerworld.com.au/index.php?id=1493459712&rid=-219}}
 
- * Mari-Len De Guzman, ``German researchers develop â€˜Birthmarkâ€™ for
+ * Mari-Len De Guzman, ``German researchers develop ``Birthmark'' for
    piracy check,'' IT World Canada, 29 August 2007,
    {{{http://www.itworldcanada.com/a/News/7ed1b410-7517-4e8a-91c8-f0fae4ea07dc.html}http://www.itworldcanada.com/a/News/7ed1b410-7517-4e8a-91c8-f0fae4ea07dc.html}}.
 
@@ -127,10 +24,10 @@ Related Publications
 
 *Static Birthmark
 
- * Jianlong Yang, Jianmin Wang, Deyi Li, ``Detecting the Theft of
-   Natural Language Text Using Birthmark,'' iih-msp, pp. 699-702, 2006
-   International Conference on Intelligent Information Hiding and
-   Multimedia, 2006.
+ * Heewan Park, Hyun-il Lim, Seokwoo Choi and Taisook Han, ``A Static
+   Java Birthmark Based on Operand Stack Behaviors,'' In Proc. of 2008
+   International Conference on Information Security and Assurance,
+   pp.133-136, 2008.
 
  * Takeshi Kakimoto, Akito Monden, Yasutaka Kamei, Haruaki Tamada,
    Masateru Tsunoda, and Ken-ichi Matsumoto, ``Using Software
@@ -170,7 +67,7 @@ Related Publications
    0919-9527, Graduate School of Information Science, Nara Institute
    of Science and Technology, November 2003.
 
- * ç‰ç”° æ˜¥æ˜­, ç¥å´ é›„ä¸€éƒ, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``Java ã‚¯ãƒ©ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ãƒ—ãƒ­ã‚°ãƒ©ãƒ æŒ‡ç´‹ã‚’æŠ½å‡ºã™ã‚‹æ–¹æ³•ã®ææ¡ˆ'', ä¿¡å­¦æŠ€å ± æƒ…å ±ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ç ”ç©¶ä¼š, Vol. ISEC2003-29, pp.127--133, July 2003.
+ * ¶ÌÅÄ ½Õ¾¼, ¿Àºê Íº°ìÏº, ÃæÂ¼ ¶©½¨, ÌçÅÄ ¶Ç¿Í, ¾¾ËÜ ·ò°ì, ``Java ¥¯¥é¥¹¥Õ¥¡¥¤¥ë¤«¤é¥×¥í¥°¥é¥à»ØÌæ¤òÃê½Ğ¤¹¤ëÊıË¡¤ÎÄó°Æ'', ¿®³Øµ»Êó ¾ğÊó¥»¥­¥å¥ê¥Æ¥£¸¦µæ²ñ, Vol. ISEC2003-29, pp.127--133, July 2003.
 
 *Dynamic Birthmark
 
@@ -191,21 +88,20 @@ Related Publications
    Information Science, Nara Institute of Science and Technology, May
    2007.
 
- * æ— æ™ƒä¸€éƒ, æ¥“ åŸºé–, çœŸé‡ èŠ³ä¹…, ``ç‰¹å¾´æŠ½å‡ºã¨æŠ½è±¡åŒ–ã«ã‚ˆã‚‹å‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®æ§‹æˆã¨ãã®æ¤œè¨¼'', æƒ…å ±å‡¦ç†å­¦ä¼šè«–æ–‡èªŒ (Transactions of Information Processing Society of Japan), Vol.48, No.4 pp. 1799-1808, April 2007.
+ * ÎÓ ¹¸°ìÏº, Éö ´ğÌ÷, ¿¿Ìî Ë§µ×, ``ÆÃÄ§Ãê½Ğ¤ÈÃê¾İ²½¤Ë¤è¤ëÆ°Åª¥Ğ¡¼¥¹¥Ş¡¼¥¯¤Î¹½À®¤È¤½¤Î¸¡¾Ú'', ¾ğÊó½èÍı³Ø²ñÏÀÊ¸»ï (Transactions of Information Processing Society of Japan), Vol.48, No.4 pp. 1799-1808, April 2007.
 
- * æ£®å±± ä¿®, å¤æ±Ÿ å²³å¤§, é å±± æ¯…, æ¾æœ¬ å‹‰, ``APIé–¢æ•°å‘¼å‡ºå±¥æ­´ã«ã‚ˆã‚‹ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®ä¸€æ–¹å¼'', ä¿¡å­¦æŠ€å ±, vol. 106, no. 235, ISEC2006-82, pp. 77-84, September 2006.
+ * ¿¹»³ ½¤, ¸Å¹¾ ³ÙÂç, ±ó»³ µ£, ¾¾ËÜ ÊÙ, ``API´Ø¿ô¸Æ½ĞÍúÎò¤Ë¤è¤ë¥½¥Õ¥È¥¦¥§¥¢Æ°Åª¥Ğ¡¼¥¹¥Ş¡¼¥¯¤Î°ìÊı¼°'', ¿®³Øµ»Êó, vol. 106, no. 235, ISEC2006-82, pp. 77-84, September 2006.
 
- * å²¡æœ¬ åœ­å¸, ç‰ç”° æ˜¥æ˜­, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``APIå‘¼ã³å‡ºã—ã‚’ç”¨ã„ãŸå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯'', é›»å­æƒ…å ±é€šä¿¡å­¦ä¼šè«–æ–‡èªŒ, Vol.J89-D, No.8, pp.1751-1763, August 2006.
+ * ²¬ËÜ ·½»Ê, ¶ÌÅÄ ½Õ¾¼, ÃæÂ¼ ¶©½¨, ÌçÅÄ ¶Ç¿Í, ¾¾ËÜ ·ò°ì, ``API¸Æ¤Ó½Ğ¤·¤òÍÑ¤¤¤¿Æ°Åª¥Ğ¡¼¥¹¥Ş¡¼¥¯'', ÅÅ»Ò¾ğÊóÄÌ¿®³Ø²ñÏÀÊ¸»ï, Vol.J89-D, No.8, pp.1751-1763, August 2006.
 
  * David Schuler and Valentin Dallmeier, ``Detecting Software Theft
    with API Call Sequence Sets,'' Workshops Software Reengineering
    (WSR 2006), pp.56-57, May 2006.
 
- * å¤ç”° å£®å®, çœŸé‡ èŠ³ä¹…, ``å®Ÿè¡Œç³»åˆ—ã®æŠ½è±¡è¡¨ç¾ã‚’åˆ©ç”¨ã—ãŸå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯'', é›»å­æƒ…å ±é€šä¿¡å­¦ä¼šè«–æ–‡èªŒ Vol.J88-D1, No.10, pp.1595--1599, October 2005.
+ * ¸ÅÅÄ ÁÔ¹¨, ¿¿Ìî Ë§µ×, ``¼Â¹Ô·ÏÎó¤ÎÃê¾İÉ½¸½¤òÍøÍÑ¤·¤¿Æ°Åª¥Ğ¡¼¥¹¥Ş¡¼¥¯'', ÅÅ»Ò¾ğÊóÄÌ¿®³Ø²ñÏÀÊ¸»ï Vol.J88-D1, No.10, pp.1595--1599, October 2005.
 
- * å²¡æœ¬ åœ­å¸, ç‰ç”° æ˜¥æ˜­, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å®Ÿè¡Œæ™‚ã®APIå‘¼ã³å‡ºã—å±¥æ­´ã«åŸºã¥ãå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®å®Ÿé¨“çš„è©•ä¾¡'', ç¬¬46å›ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°ãƒ»ã‚·ãƒ³ãƒã‚¸ã‚¦ãƒ å ±å‘Šé›†, pp. 41--50, January 2005
-
- * å²¡æœ¬ åœ­å¸, ç‰ç”° æ˜¥æ˜­, ä¸­æ‘ åŒ¡ç§€, é–€ç”° æšäºº, æ¾æœ¬ å¥ä¸€, ``ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å®Ÿè¡Œæ™‚ã®APIå‘¼ã³å‡ºã—å±¥æ­´ã«åŸºã¥ãå‹•çš„ãƒãƒ¼ã‚¹ãƒãƒ¼ã‚¯ã®ææ¡ˆ'', ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢å·¥å­¦ã®åŸºç¤XI, æ—¥æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ç§‘å­¦ä¼š FOSE2004 (FOSE2004), pp.85--88, November 2004. 
+ * ²¬ËÜ ·½»Ê, ¶ÌÅÄ ½Õ¾¼, ÃæÂ¼ ¶©½¨, ÌçÅÄ ¶Ç¿Í, ¾¾ËÜ ·ò°ì, ``¥½¥Õ¥È¥¦¥§¥¢¼Â¹Ô»ş¤ÎAPI¸Æ¤Ó½Ğ¤·ÍúÎò¤Ë´ğ¤Å¤¯Æ°Åª¥Ğ¡¼¥¹¥Ş¡¼¥¯¤Î¼Â¸³ÅªÉ¾²Á'', Âè46²ó¥×¥í¥°¥é¥ß¥ó¥°¡¦¥·¥ó¥İ¥¸¥¦¥àÊó¹ğ½¸, pp. 41--50, January 2005
+ * ²¬ËÜ ·½»Ê, ¶ÌÅÄ ½Õ¾¼, ÃæÂ¼ ¶©½¨, ÌçÅÄ ¶Ç¿Í, ¾¾ËÜ ·ò°ì, ``¥½¥Õ¥È¥¦¥§¥¢¼Â¹Ô»ş¤ÎAPI¸Æ¤Ó½Ğ¤·ÍúÎò¤Ë´ğ¤Å¤¯Æ°Åª¥Ğ¡¼¥¹¥Ş¡¼¥¯¤ÎÄó°Æ'', ¥½¥Õ¥È¥¦¥§¥¢¹©³Ø¤Î´ğÁÃXI, ÆüËÜ¥½¥Õ¥È¥¦¥§¥¢²Ê³Ø²ñ FOSE2004 (FOSE2004), pp.85--88, November 2004. 
 
  * Haruaki Tamada, Keiji Okamoto, Masahide Nakamura, Akito Monden, and
    Ken-ichi Matsumoto, ``Dynamic Software Birthmarks to Detect the
@@ -216,3 +112,17 @@ Related Publications
  * Ginger Myles and Christian Collberg, ``Detecting Software Theft via
    Whole Program Path Birthmarks,'' In Proc. Information Security
    Conference, September 27-29, 2004.
+
+*Other Birthmark
+
+ * Xiaoming Zhou, Xingming Sun, Guang Sun and Ying Yang, ``A Combined
+   Static and Dynamic Software Birthmark Based on Component Dependence
+   Graph,'' Proc. 2008 International Conference on Intelligent
+   Information Hiding and Multimedia Signal Processing, iih-msp,
+   pp.1416--1421, August 2008.
+
+ * Jianlong Yang, Jianmin Wang, Deyi Li, ``Detecting the Theft of
+   Natural Language Text Using Birthmark,''
+   International Conference on Intelligent Information Hiding and
+   Multimedia, iih-msp, pp. 699-702, 2006
+
