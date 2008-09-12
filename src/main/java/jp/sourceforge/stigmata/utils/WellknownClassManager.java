@@ -22,9 +22,15 @@ import org.objectweb.asm.Opcodes;
 public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     private List<WellknownClassJudgeRule> rules = new ArrayList<WellknownClassJudgeRule>();
 
+    /**
+     * default constructor.
+     */
     public WellknownClassManager(){
     }
 
+    /**
+     * constructor with parent WellknownClassManager.
+     */
     public WellknownClassManager(WellknownClassManager manager){
         rules = new ArrayList<WellknownClassJudgeRule>(manager.rules);
     }

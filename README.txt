@@ -1,6 +1,6 @@
 
                    Stigmata: Java birthmark toolkit
-                            version 1.2.0
+                            version 2.0.0
                    http://stigmata.sourceforge.jp/
 
                               Copyright 2006-2007 Haruaki Tamada, Ph.D
@@ -41,23 +41,19 @@
   Stigmata requires following libraries.
 
   - ASM 2.2.3 (http://asm.objectweb.org/)
-  - Jakarta Commons CLI 1.1 (http://commons.cafebabe.jp/xmlcli/)
-  - XmlCli 1.2.1 (http://talisman.sourceforge.jp/xmlcli/)
-  - Jama 1.0.2 (http://math.nist.gov/javanumerics/jama/)
-    stigmata-1.0.0 or later
-  - BrowserLauncher2 1.3 (http://browserlaunch2.sourceforge.net/)
-    stigmata-1.1.0 or later; as needed
-  - stax-api-1.0.1.jar (http://stax.codehaus.org/)
-    stigmata-1.2.0 or later
-  - stax-1.2.0.jar (http://stax.codehaus.org/)
-    stigmata-1.2.0 or later
+  - Apache Commons DBUtils 1.1 (http://commons.apache.org/dbutils/)
+  - Apache Commons Beanutils 1.7.0 (http://commons.apache.org/beanutils/)
+  - Talisman XmlCli 1.2.2 (http://talisman.sourceforge.jp/xmlcli/)
+  - Talisman MDS 1.0.1 (http://talisman.sourceforge.jp/mds/)
+  - Talisman i18n 1.0.1 (http://talisman.sourceforge.jp/i18n/)
+  - Stigmata Digger 1.0.0 (http://stigmata.sourceforge.jp/digger/)
+
   - JUnit 4.1 (http://www.junit.org/) for testing.
 
 * Author
 
-  Name:        Haruaki TAMADA, Ph.D.
-  Affiliation: Department of Computer Science, Faculty of Computer
-               Science and Engineering, Kyoto Sangyo University
+  Name:        Haruaki TAMADA.
+  Affiliation: Stigmata Project, Sourceforge.jp
   E-mail:      tama3[ at ]users.sourceforge.jp
   Web Page:    http://stigmata.sourceforge.jp/
 

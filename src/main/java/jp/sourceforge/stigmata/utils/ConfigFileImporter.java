@@ -38,10 +38,6 @@ public class ConfigFileImporter{
         this.environment = environment;
     }
 
-    public ConfigFileImporter(){
-        // generate environment.
-    }
-
     public BirthmarkEnvironment parse(InputStream in) throws IOException{
         try{
             SAXParserFactory factory = SAXParserFactory.newInstance();
