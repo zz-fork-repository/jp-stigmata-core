@@ -7,7 +7,8 @@ package jp.sourceforge.stigmata.utils;
 import java.io.Serializable;
 
 /**
- *
+ * This class represents a fully class name.
+ * 
  * @author Haruaki Tamada
  * @version $Revision$ 
  */
@@ -17,14 +18,24 @@ class FullyClassName implements Serializable{
     private String className;
     private String packageName;
 
+    /**
+     * basic constructor.
+     * @param fullyName fully class name
+     */
     public FullyClassName(final String fullyName){
         this.fullyName = fullyName.replace('/', '.');
     }
 
+    /**
+     * returns fully class name.
+     */
     public String getFullyName(){
         return fullyName;
     }
 
+    /**
+     * returns a class name exclude package name.
+     */
     public String getClassName(){
         if(className == null){
             generateClassAndPackageName();
@@ -32,6 +43,9 @@ class FullyClassName implements Serializable{
         return className;
     }
 
+    /**
+     * returns a package name. (exclude class name from fully class name)
+     */
     public String getPackageName(){
         if(packageName == null){
             generateClassAndPackageName();
