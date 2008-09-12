@@ -2,15 +2,18 @@
 
 <project name="Stigmata">
   <bannerLeft>
-    <name>sourceforge.jp</name>
-    <href>http://sourceforge.jp/</href>
-    <alt>sourceforge.jp</alt>
+    <name>Stigmata</name>
+    <href>http://stigmata.sourceforge.jp</href>
+    <src>images/logos/stigmata_logo.png</src>
+    <alt>Stigmata: Java birthmark toolkit</alt>
   </bannerLeft>
+
   <bannerRight>
     <name>Stigmata</name>
     <src>images/logos/stigmata_logo.png</src>
     <alt>Stigmata: Java birthmark toolkit</alt>
   </bannerRight>
+
   <poweredBy>
     <logo name="Powered by ASM"
           href="http://asm.objectweb.org/"
@@ -27,6 +30,7 @@
     <links>
       <item name="jbirth 1.x" href="http://se.naist.jp/jbirth/" />
       <item name="Stigmata (jbirth 2.x)" href="http://stigmata.sourceforge.jp/" />
+      <item name="Digger" href="http://stigmata.sourceforge.jp/digger/" />
     </links>
 
     <menu name="Stigmata">

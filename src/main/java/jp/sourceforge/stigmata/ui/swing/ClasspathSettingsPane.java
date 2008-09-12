@@ -25,7 +25,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import jp.sourceforge.stigmata.Stigmata;
-import jp.sourceforge.stigmata.reader.ClasspathContext;
+import jp.sourceforge.stigmata.digger.ClasspathContext;
 import jp.sourceforge.talisman.i18n.Messages;
 
 /**

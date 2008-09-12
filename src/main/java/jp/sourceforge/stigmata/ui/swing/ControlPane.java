@@ -31,8 +31,8 @@ import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ComparisonMethod;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.Stigmata;
+import jp.sourceforge.stigmata.digger.ClasspathContext;
 import jp.sourceforge.stigmata.filter.ComparisonPairFilterManager;
-import jp.sourceforge.stigmata.reader.ClasspathContext;
 import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.stigmata.utils.WellknownClassManager;
 

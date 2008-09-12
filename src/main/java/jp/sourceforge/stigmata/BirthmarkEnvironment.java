@@ -18,8 +18,8 @@ import java.util.Set;
 
 import javax.imageio.spi.ServiceRegistry;
 
+import jp.sourceforge.stigmata.digger.ClasspathContext;
 import jp.sourceforge.stigmata.filter.ComparisonPairFilterManager;
-import jp.sourceforge.stigmata.reader.ClasspathContext;
 import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkServiceManager;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 import jp.sourceforge.stigmata.utils.WellknownClassManager;

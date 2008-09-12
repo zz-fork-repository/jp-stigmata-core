@@ -17,6 +17,12 @@ import java.util.Map;
 import java.util.Stack;
 
 import jp.sourceforge.stigmata.birthmarks.extractors.BirthmarkExtractorFactory;
+import jp.sourceforge.stigmata.digger.ClassFileArchive;
+import jp.sourceforge.stigmata.digger.ClassFileEntry;
+import jp.sourceforge.stigmata.digger.ClasspathContext;
+import jp.sourceforge.stigmata.digger.DefaultClassFileArchive;
+import jp.sourceforge.stigmata.digger.JarClassFileArchive;
+import jp.sourceforge.stigmata.digger.WarClassFileArchive;
 import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
 import jp.sourceforge.stigmata.event.BirthmarkEngineListener;
 import jp.sourceforge.stigmata.event.OperationStage;
@@ -26,12 +32,6 @@ import jp.sourceforge.stigmata.filter.ComparisonPairFilterManager;
 import jp.sourceforge.stigmata.filter.FilteredComparisonResultSet;
 import jp.sourceforge.stigmata.hook.Phase;
 import jp.sourceforge.stigmata.hook.StigmataHookManager;
-import jp.sourceforge.stigmata.reader.ClassFileArchive;
-import jp.sourceforge.stigmata.reader.ClassFileEntry;
-import jp.sourceforge.stigmata.reader.ClasspathContext;
-import jp.sourceforge.stigmata.reader.DefaultClassFileArchive;
-import jp.sourceforge.stigmata.reader.JarClassFileArchive;
-import jp.sourceforge.stigmata.reader.WarClassFileArchive;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.result.RoundRobinComparisonResultSet;
 

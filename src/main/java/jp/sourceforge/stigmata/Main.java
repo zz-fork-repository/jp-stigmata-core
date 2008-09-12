@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import jp.sourceforge.stigmata.digger.ClasspathContext;
 import jp.sourceforge.stigmata.event.BirthmarkEngineAdapter;
 import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
 import jp.sourceforge.stigmata.event.WarningMessages;
@@ -27,7 +28,6 @@ import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
 import jp.sourceforge.stigmata.printer.ComparisonResultSetPrinter;
 import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
 import jp.sourceforge.stigmata.printer.PrinterManager;
-import jp.sourceforge.stigmata.reader.ClasspathContext;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
