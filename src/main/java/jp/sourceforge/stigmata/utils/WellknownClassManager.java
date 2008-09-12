@@ -57,24 +57,24 @@ public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     }
 
     private boolean checkSystemClass(String className){
-        Names names = new Names(className);
-        if(isMatch(names, true)){
+        FullyClassName name = new FullyClassName(className);
+        if(isMatch(name, true)){
             return false;
         }
-        return isMatch(names, false);
+        return isMatch(name, false);
     }
 
-    private boolean isMatch(Names names, boolean excludeFlag){
+    private boolean isMatch(FullyClassName name, boolean excludeFlag){
         for(Iterator<WellknownClassJudgeRule> i = rules.iterator(); i.hasNext(); ){
             WellknownClassJudgeRule s = i.next();
             if(s.isExclude() == excludeFlag){
                 boolean flag = false;
-                String partName = names.getFullyName();
+                String partName = name.getFullyName();
                 if(s.getMatchPartType() == MatchPartType.CLASS_NAME){
-                    partName = names.getClassName();
+                    partName = name.getClassName();
                 }
                 else if(s.getMatchPartType() == MatchPartType.PACKAGE_NAME){
-                    partName = names.getPackageName();
+                    partName = name.getPackageName();
                 }
                 switch(s.getMatchType()){
                 case PREFIX:

@@ -11,13 +11,13 @@ import java.io.Serializable;
  * @author Haruaki Tamada
  * @version $Revision$ 
  */
-class Names implements Serializable{
+class FullyClassName implements Serializable{
     private static final long serialVersionUID = 1911603124143509407L;
     private final String fullyName;
     private String className;
     private String packageName;
 
-    public Names(final String fullyName){
+    public FullyClassName(final String fullyName){
         this.fullyName = fullyName.replace('/', '.');
     }
 
