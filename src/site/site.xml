@@ -50,7 +50,7 @@
       <item name="Relax NG"            href="relaxng.html" />
       <item name="DTD"                 href="dtd.html" />
       <item name="Implementation"      href="implementation.html"/>
-      <item name="Maniac mode"         href="maniac.html"/>
+      <item name="Experimental mode"   href="experimental.html"/>
     </menu>
 
     <menu name="For Researchers">

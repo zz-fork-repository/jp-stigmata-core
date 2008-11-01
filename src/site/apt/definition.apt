@@ -6,20 +6,20 @@
  2007-06-11
  ----
 
-Definitions
+Birthmark
 
  A birthmark is unique and native characteristics of a program.  For
 pair of programs <p> and <q>, if <q> has the same birthmark as <p>'s,
 <q> is suspected as a <<copy>> of <p>.  Ideally, the birthmarks should
 satisfy the following properties: 
 
- [[(a)]] <<preservation>>: the birthmarks should be preserved even
+ [[1]] <<preservation>>: the birthmarks should be preserved even
 if the original class file is tampered with, and
 
- [[(b)]] <<distinction>>: independent class files must be
+ [[2]] <<distinction>>: independent class files must be
 distinguished by completely different birthmarks.
 
-*Birthmark
+*Definition of Birthmark
 
  Let <p>, <q> be programs and <f(p)> be a set of characteristics
 extracted from <p> by a certain method <f>. Then <f(p)> is called a

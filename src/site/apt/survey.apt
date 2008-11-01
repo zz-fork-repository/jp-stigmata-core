@@ -24,6 +24,11 @@ Related Publications
 
 *Static Birthmark
 
+ * Hyun-il Lim, Heewan Park, Seokwoo Choi, Taisook Han, ``Detecting
+   Theft of Java Applications via a Static Birthmark Based on Weighted
+   Stack Patterns,'' IEICE Transactions on Information and Systems,
+   Vol.E91-D No.9 pp.2323-2332, September 2008.
+
  * Heewan Park, Hyun-il Lim, Seokwoo Choi and Taisook Han, ``A Static
    Java Birthmark Based on Operand Stack Behaviors,'' In Proc. of 2008
    International Conference on Information Security and Assurance,
