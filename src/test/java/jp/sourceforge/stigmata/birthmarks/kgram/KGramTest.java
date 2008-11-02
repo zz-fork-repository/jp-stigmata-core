@@ -26,7 +26,7 @@ public class KGramTest{
 
     @Test
     public void checkPlainKGram(){
-        KGram<String>[] kgrams = KGram.buildKGram(plainValues, 4);
+        KGram<String>[] kgrams = KGramBuilder.getInstance().buildKGram(plainValues, 4);
         assertEquals(4, kgrams.length);
 
         assertEquals(4, kgrams[0].getKValue());
@@ -42,7 +42,7 @@ public class KGramTest{
 
     @Test
     public void checkPlainKGram2(){
-        KGram<String>[] kgrams = KGram.buildKGram(plainValues, 3);
+        KGram<String>[] kgrams = KGramBuilder.getInstance().buildKGram(plainValues, 3);
         assertEquals(5, kgrams.length);
 
         assertEquals(3, kgrams[0].getKValue());
@@ -60,7 +60,7 @@ public class KGramTest{
 
     @Test
     public void checkComplexKGram(){
-        KGram<String>[] kgrams = KGram.buildKGram(complexValues, 3);
+        KGram<String>[] kgrams = KGramBuilder.getInstance().buildKGram(complexValues, 3);
 
         assertEquals(7, kgrams.length);
 
@@ -71,7 +71,8 @@ public class KGramTest{
         assertEquals(new String[] { "c", "a", "d", }, kgrams[4].toArray());
         assertEquals(new String[] { "a", "d", "a", }, kgrams[5].toArray());
         assertEquals(new String[] { "d", "a", "b", }, kgrams[6].toArray());
-//      assertEquals(new String[] { "a", "b", "r", }, kgrams[0].toArray());
-//      assertEquals(new String[] { "b", "r", "a", }, kgrams[0].toArray());
+        // following kgram is appeared in above.
+        // assertEquals(new String[] { "a", "b", "r", }, kgrams[0].toArray());
+        // assertEquals(new String[] { "b", "r", "a", }, kgrams[1].toArray());
     }
 }
