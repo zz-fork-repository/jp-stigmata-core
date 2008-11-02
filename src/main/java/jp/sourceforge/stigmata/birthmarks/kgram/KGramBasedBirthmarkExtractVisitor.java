@@ -38,18 +38,9 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     }
 
     public void visitEnd(){
-        Set<KGram<Integer>> kgrams = new HashSet<KGram<Integer>>();
-        if(opcodes.size() >= getKValue()){
-            int kvalue = getKValue();
-            int max = opcodes.size() - (kvalue - 1);
-            for(int i = 0; i < max; i++){
-                KGram<Integer> kgram = new KGram<Integer>(kvalue);
-                for(int j = 0; j < kvalue; j++){
-                    kgram.set(j, opcodes.get(i + j));
-                }
-                kgrams.add(kgram);
-            }
-        }
+        KGramBuilder builder = KGramBuilder.getInstance();
+        KGram<Integer>[] kgrams = builder.<Integer>buildKGram(opcodes, getKValue());
+
         for(KGram<Integer> kgram: kgrams){
             addElement(new KGramBasedBirthmarkElement<Integer>(kgram));
         }

@@ -106,7 +106,7 @@ public class KGram<T> implements Serializable{
      * @param value value for addition.
      * @return added index.
      */
-    pulic int add(T value){
+    public int add(T value){
         int index = -1;
         for(int i = 0; i < values.length; i++){
             if(values[i] == null){
@@ -150,22 +150,5 @@ public class KGram<T> implements Serializable{
 
     public int hashCode(){
         return Arrays.hashCode(values);
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <T> KGram<T>[] buildKGram(T[] values, int kvalue){
-        Set<KGram<T>> kgrams = new LinkedHashSet<KGram<T>>();
-
-        if(values.length >= kvalue){
-            int max = values.length - (kvalue - 1);
-            for(int i = 0; i < max; i++){
-                KGram<T> kgram = new KGram<T>(kvalue);
-                for(int j = 0; j < kvalue; j++){
-                    kgram.set(j, values[i + j]);
-                }
-                kgrams.add(kgram);
-            }
-        }
-        return kgrams.toArray(new KGram[kgrams.size()]);
     }
 }

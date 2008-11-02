@@ -176,15 +176,15 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
 
     public static class StringHandler implements ResultSetHandler{
         private int index;
-    
+
         public StringHandler(){
             this(0);
         }
-    
+
         public StringHandler(int index){
             this.index = index;
         }
-    
+
         public Object handle(ResultSet rs) throws SQLException{
             List<String> list = new ArrayList<String>();
             while(rs.next()){
@@ -216,7 +216,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
                         map.put(url, bs);
                     }
                     String type = rs.getString("TYPE");
-                    
+
                     Birthmark birthmark = bs.getBirthmark(type);
                     if(birthmark == null){
                         birthmark = env.getService(type).buildBirthmark();

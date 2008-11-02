@@ -87,6 +87,6 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
 
     private boolean isTarget(File file){
         return file.isDirectory()
-        && file.getName().matches("\\d\\d\\d\\d\\d\\d\\d\\d-\\d\\d\\d\\d\\d\\d.\\d\\d\\d"); 
+            && file.getName().matches("\\d\\d\\d\\d\\d\\d\\d\\d-\\d\\d\\d\\d\\d\\d.\\d\\d\\d"); 
     }
 }
