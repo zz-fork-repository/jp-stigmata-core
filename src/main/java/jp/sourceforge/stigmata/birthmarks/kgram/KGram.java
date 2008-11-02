@@ -60,9 +60,9 @@ public class KGram<T> implements Serializable{
     }
 
     /**
-     * sets a element to given index.
-     * @param index element index.
-     * @param value element value.
+     * sets the given value to kgram element at given index.
+     * @param index index.
+     * @param value value.
      */
     @SuppressWarnings("unchecked")
     public void set(int index, T value){
@@ -94,6 +94,31 @@ public class KGram<T> implements Serializable{
     }
 
     /**
+     * adds value at last index.
+     * 
+     * this object is called with given 2 when following situation, 
+     * <ul>
+     *   <li>``{ 1, 3, null, null }'' -&gt; ``{ 1, 2, 3, null }'' and return 2<li>
+     *   <li>``{ 1, null, 3, null }'' -&gt; ``{ 1, 2, 3, null }'' and return 1<li>
+     *   <li>``{ 1, 2, 3, 4 }'' -&gt; ``{ 1, 2, 3, 4 }'' and return -1<li>
+     * </ul>
+     * 
+     * @param value value for addition.
+     * @return added index.
+     */
+    pulic int add(T value){
+        int index = -1;
+        for(int i = 0; i < values.length; i++){
+            if(values[i] == null){
+                index = i;
+                values[i] = value;
+                break;
+            }
+        }
+        return index;
+    }
+
+    /**
      * returns an array of elements this object has.
      * @return
      */
@@ -115,6 +140,7 @@ public class KGram<T> implements Serializable{
             for(int i = 0; !flag && i < maxLength; i++){
                 if(!get(i).equals(kgram.get(i))){
                     flag = false;
+                    break;
                 }
             }
             return flag;
