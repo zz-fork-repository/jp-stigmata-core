@@ -11,8 +11,6 @@ import java.util.List;
 import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule.MatchPartType;
 import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule.MatchType;
 
-import org.objectweb.asm.Opcodes;
-
 /**
  * Managing wellknown class checking rule.
  * 
@@ -21,6 +19,29 @@ import org.objectweb.asm.Opcodes;
  */
 public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     private List<WellknownClassJudgeRule> rules = new ArrayList<WellknownClassJudgeRule>();
+
+    /**
+     * public field/method flag defined in JVM specification.
+     */
+    private static final int OPCODE_ACC_PUBLIC = 1;
+    /**
+     * private field/method flag defined in JVM specification.
+     */
+    @SuppressWarnings("unused")
+    private static final int OPCODE_ACC_PRIVATE = 2;
+    /**
+     * protected field/method flag defined in JVM specification.
+     */
+    @SuppressWarnings("unused")
+    private static final int OPCODE_ACC_PROTECTED = 4;
+    /**
+     * static field/method flag defined in JVM specification.
+     */
+    private static final int OPCODE_ACC_STATIC = 8;
+    /**
+     * final field/method flag defined in JVM specification.
+     */
+    private static final int OPCODE_ACC_FINAL = 16;
 
     /**
      * default constructor.
@@ -115,14 +136,14 @@ public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     private boolean checkSystemMethod(int access, String methodName, String signature){
         if(methodName.equals("main")){
             return signature.equals("([Ljava/lang/String;)V")
-                && checkAccess(access, Opcodes.ACC_PUBLIC);
+                && checkAccess(access, OPCODE_ACC_PUBLIC);
         }
         else if(methodName.equals("<clinit>")){
             return signature.equals("()V")
-                && checkAccess(access, Opcodes.ACC_STATIC);
+                && checkAccess(access, OPCODE_ACC_STATIC);
         }
         else if(methodName.equals("<init>")){
-            return !checkAccess(access, Opcodes.ACC_STATIC);
+            return !checkAccess(access, OPCODE_ACC_STATIC);
         }
         return false;
     }
@@ -135,8 +156,8 @@ public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
      */
     private boolean checkSystemField(int access, String fieldName, String signature){
         if(fieldName.equals("serialVersionUID")){
-            return checkAccess(access, Opcodes.ACC_STATIC) &&
-                checkAccess(access, Opcodes.ACC_FINAL) &&
+            return checkAccess(access, OPCODE_ACC_STATIC) &&
+                checkAccess(access, OPCODE_ACC_FINAL) &&
                 signature.equals("J");
         }
 
