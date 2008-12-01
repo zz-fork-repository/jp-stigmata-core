@@ -5,6 +5,7 @@ package jp.sourceforge.stigmata.birthmarks.comparators;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
@@ -38,7 +39,7 @@ public class DPMatchingBirthmarkComparator extends AbstractBirthmarkComparator{
         this.shiftPenalty = shiftPenalty;
     }
 
-    public double compare(Birthmark b1, Birthmark b2) {
+    public double compare(Birthmark b1, Birthmark b2, BirthmarkContext context){
         if(!b1.getType().equals(b2.getType())){
             return Double.NaN;
         }

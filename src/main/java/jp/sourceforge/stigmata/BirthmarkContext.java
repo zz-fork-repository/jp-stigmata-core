@@ -27,6 +27,10 @@ public class BirthmarkContext{
     private List<String> birthmarkTypes = new ArrayList<String>();
     private List<String> filterTypes = new ArrayList<String>();
     private Map<String, String> nameMappings = new HashMap<String, String>();
+    /**
+     * properties which available on a session.
+     */
+    private Map<String, Object> properties = new HashMap<String, Object>();
 
     /**
      * self constructor.
@@ -165,5 +169,25 @@ public class BirthmarkContext{
 
     public int getFilterTypesCount(){
         return filterTypes.size();
+    }
+
+    public Object getProperty(String key){
+        return getProperty(key, null);
+    }
+
+    public Object getProperty(String key, Object defaultValue){
+        Object value = properties.get(key);
+        if(value == null){
+            value = defaultValue;
+        }
+        return value;
+    }
+
+    public void removeProperty(String key){
+        properties.remove(key);
+    }
+
+    public void putProperty(String key, Object value){
+        properties.put(key, value);
     }
 }

@@ -5,7 +5,7 @@ package jp.sourceforge.stigmata.birthmarks.cvfv;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -28,8 +28,8 @@ public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmark
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment) {
-        return new ConstantValueOfFieldVariableBirthmarkExtractVisitor(writer, birthmark, environment);
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context) {
+        return new ConstantValueOfFieldVariableBirthmarkExtractVisitor(writer, birthmark, context);
     }
 
     public ExtractionUnit[] getAcceptableUnits(){

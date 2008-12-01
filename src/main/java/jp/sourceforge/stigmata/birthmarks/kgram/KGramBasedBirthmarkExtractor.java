@@ -5,7 +5,7 @@ package jp.sourceforge.stigmata.birthmarks.kgram;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -37,8 +37,8 @@ public class KGramBasedBirthmarkExtractor extends ASMBirthmarkExtractor{
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment){
-        KGramBasedBirthmarkExtractVisitor extractor = new KGramBasedBirthmarkExtractVisitor(writer, birthmark, environment);
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
+        KGramBasedBirthmarkExtractVisitor extractor = new KGramBasedBirthmarkExtractVisitor(writer, birthmark, context);
         extractor.setKValue(getKValue());
         return extractor;
     }

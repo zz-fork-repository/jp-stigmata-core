@@ -113,7 +113,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             int index = 0;
             for(Iterator<BirthmarkSet> j = extraction.birthmarkSets(targetX); j.hasNext(); ){
                 BirthmarkSet setX = j.next();
-                double similarity = compare(setX, setY, extraction.getEnvironment());
+                double similarity = compare(setX, setY, extraction.getContext());
                 rows[index + 1] = new Double(similarity);
 
                 if(Math.abs(similarity - 1) < 1E-8){
@@ -135,7 +135,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         maximum.setText(Double.toString(max));
     }
 
-    private double compare(BirthmarkSet x, BirthmarkSet y, BirthmarkEnvironment environment){
+    private double compare(BirthmarkSet x, BirthmarkSet y, BirthmarkContext context){
         double similarity = 0d;
         int count = 0;
 
@@ -143,8 +143,8 @@ public class RoundRobinComparisonResultPane extends JPanel{
             Birthmark b1 = x.getBirthmark(type);
             Birthmark b2 = y.getBirthmark(type);
             if(b1 != null && b2 != null){
-                BirthmarkComparator comparator = environment.getService(type).getComparator();
-                double result = comparator.compare(b1, b2);
+                BirthmarkComparator comparator = context.getEnvironment().getService(type).getComparator();
+                double result = comparator.compare(b1, b2, context);
                 if(!Double.isNaN(result)){
                     similarity += result;
                     count++;

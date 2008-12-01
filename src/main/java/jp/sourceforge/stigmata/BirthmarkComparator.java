@@ -14,7 +14,7 @@ public interface BirthmarkComparator {
     /**
      * compare given two birthmarks and returns calculated similarity. 
      */
-    public double compare(Birthmark b1, Birthmark b2);
+    public double compare(Birthmark b1, Birthmark b2, BirthmarkContext context);
 
     /**
      * returns the number of comparison. 

@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
 
 import org.objectweb.asm.ClassVisitor;
@@ -29,8 +29,8 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
     private Map<String, TypeAndValueBirthmarkElement> elements = new LinkedHashMap<String, TypeAndValueBirthmarkElement>();
     private String className;
 
-    public ConstantValueOfFieldVariableBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
-        super(visitor, birthmark, environment);
+    public ConstantValueOfFieldVariableBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+        super(visitor, birthmark, context);
     }
 
     public void visitEnd(){

@@ -6,6 +6,7 @@ package jp.sourceforge.stigmata.birthmarks.comparators;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkComparator;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 /**
@@ -33,7 +34,7 @@ public abstract class AbstractBirthmarkComparator implements BirthmarkComparator
         return spi.getType();
     }
 
-    public abstract double compare(Birthmark b1, Birthmark b2);
+    public abstract double compare(Birthmark b1, Birthmark b2, BirthmarkContext context);
 
     public int getCompareCount(Birthmark b1, Birthmark b2){
         return b1.getElementCount() + b2.getElementCount();

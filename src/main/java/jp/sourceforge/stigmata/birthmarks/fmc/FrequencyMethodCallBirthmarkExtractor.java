@@ -5,7 +5,7 @@ package jp.sourceforge.stigmata.birthmarks.fmc;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -30,12 +30,12 @@ public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment){
-        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, environment){
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
+        return new SequentialMethodCallBirthmarkExtractVisitor(writer, birthmark, context){
             @Override
             protected void addElement(String className, String methodName, String description){
                 addElement(new FrequencyBirthmarkElement(className + "#" + methodName + description));
-            }            
+            }
         };
     }
 

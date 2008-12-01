@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
 
 import org.objectweb.asm.ClassVisitor;
@@ -23,8 +23,8 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private int kvalue;
     private List<Integer> opcodes = new ArrayList<Integer>();
 
-    public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
-        super(visitor, birthmark, environment);
+    public KGramBasedBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+        super(visitor, birthmark, context);
     }
 
     public int getKValue(){

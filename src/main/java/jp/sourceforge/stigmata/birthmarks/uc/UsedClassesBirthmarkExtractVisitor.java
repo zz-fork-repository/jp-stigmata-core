@@ -5,8 +5,8 @@ package jp.sourceforge.stigmata.birthmarks.uc;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
 
 import org.objectweb.asm.ClassVisitor;
@@ -25,8 +25,8 @@ import org.objectweb.asm.signature.SignatureWriter;
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,
-                                              BirthmarkEnvironment environment){
-        super(visitor, birthmark, environment);
+            BirthmarkContext context){
+        super(visitor, birthmark, context);
     }
 
     public void visit(int version, int access, String name, String signature,

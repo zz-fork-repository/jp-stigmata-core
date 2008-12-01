@@ -5,7 +5,7 @@ package jp.sourceforge.stigmata.birthmarks.smc;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
 
 import org.objectweb.asm.ClassVisitor;
@@ -20,8 +20,8 @@ import org.objectweb.asm.MethodVisitor;
  * @version $Revision$ 
  */
 public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
-    public SequentialMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
-        super(visitor, birthmark, environment);
+    public SequentialMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
+        super(visitor, birthmark, context);
     }
 
     public MethodVisitor visitMethod(int access, String name, String desc,

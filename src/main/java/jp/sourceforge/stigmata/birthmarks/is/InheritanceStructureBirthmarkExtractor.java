@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import jp.sourceforge.stigmata.Birthmark;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElementClassNotFoundException;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.BirthmarkExtractionFailedException;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.AbstractBirthmarkExtractor;
@@ -36,13 +36,13 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
     }
 
     @Override
-    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException{
+    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         BirthmarkElementClassNotFoundException e = new BirthmarkElementClassNotFoundException();
 
         try{
             ClassReader reader = new ClassReader(in);
             ClassWriter writer = new ClassWriter(false);
-            BirthmarkExtractVisitor visitor = new InheritanceStructureBirthmarkExtractVisitor(writer, birthmark, environment);
+            BirthmarkExtractVisitor visitor = new InheritanceStructureBirthmarkExtractVisitor(writer, birthmark, context);
             reader.accept(visitor, false);
 
             if(!visitor.isSuccess()){

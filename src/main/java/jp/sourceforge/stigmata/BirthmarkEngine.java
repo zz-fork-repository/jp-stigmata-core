@@ -336,7 +336,7 @@ public class BirthmarkEngine{
                                     b = extractor.createBirthmark();
                                     bs.addBirthmark(b);
                                 }
-                                extractor.extract(b, new ByteArrayInputStream(data), er.getEnvironment());
+                                extractor.extract(b, new ByteArrayInputStream(data), er.getContext());
                             }
                         } catch(ExtractorNotFoundException e){
                             warnings.addMessage(e, birthmarkType);
@@ -379,7 +379,7 @@ public class BirthmarkEngine{
                         try{
                             BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
                             if(extractor.isAcceptable(ExtractionUnit.CLASS)){
-                                Birthmark b = extractor.extract(new ByteArrayInputStream(data), er.getEnvironment());
+                                Birthmark b = extractor.extract(new ByteArrayInputStream(data), er.getContext());
                                 birthmarkset.addBirthmark(b);
                             }
                         } catch(ExtractorNotFoundException e){
@@ -412,7 +412,7 @@ public class BirthmarkEngine{
                                     b = extractor.createBirthmark();
                                     birthmarkset.addBirthmark(b);
                                 }
-                                extractor.extract(b, new ByteArrayInputStream(data), er.getEnvironment());
+                                extractor.extract(b, new ByteArrayInputStream(data), er.getContext());
                             }
                         } catch(ExtractorNotFoundException e){
                             warnings.addMessage(e, birthmarkType);

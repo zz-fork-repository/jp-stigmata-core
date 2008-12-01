@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkExtractionFailedException;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
@@ -32,17 +32,17 @@ public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
     }
 
     public abstract BirthmarkExtractVisitor
-        createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment);
+        createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context);
 
     @Override
     public Birthmark extract(Birthmark birthmark, InputStream in,
-                             BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException{
+            BirthmarkContext context) throws BirthmarkExtractionFailedException{
         BirthmarkExtractionFailedException bee = new BirthmarkExtractionFailedException();
 
         try{
             ClassReader reader = new ClassReader(in);
             ClassWriter writer = new ClassWriter(false);
-            BirthmarkExtractVisitor visitor = createExtractVisitor(writer, birthmark, environment);
+            BirthmarkExtractVisitor visitor = createExtractVisitor(writer, birthmark, context);
             reader.accept(visitor, false);
 
             if(!visitor.isSuccess()){

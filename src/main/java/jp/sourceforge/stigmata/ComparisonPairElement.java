@@ -17,7 +17,7 @@ public class ComparisonPairElement{
     private int compareCount = -1;
 
     public ComparisonPairElement(Birthmark birthmark1, Birthmark birthmark2,
-            BirthmarkComparator comparator){
+            BirthmarkComparator comparator, BirthmarkContext context){
         this.birthmark1 = birthmark1;
         this.birthmark2 = birthmark2;
         this.comparator = comparator;
@@ -26,7 +26,7 @@ public class ComparisonPairElement{
             throw new IllegalArgumentException("birthmark type mismatch");
         }
         // cached
-        similarity = comparator.compare(birthmark1, birthmark2);
+        similarity = comparator.compare(birthmark1, birthmark2, context);
     }
 
     public synchronized int getComparisonCount(){

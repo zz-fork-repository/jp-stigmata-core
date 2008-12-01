@@ -48,12 +48,12 @@ public interface BirthmarkExtractor{
     /**
      * extract birthmark from given stream with given environment.
      */
-    public Birthmark extract(InputStream in, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException;
 
     /**
      * extract birthmark from given byte array with given environment.
      */
-    public Birthmark extract(byte[] bytecode, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionFailedException;
 
     /**
      * extract birthmark from given stream and add element to given birthmark object.
@@ -68,10 +68,10 @@ public interface BirthmarkExtractor{
     /**
      * extract birthmark from given stream with given environment and add element to given birthmark object.
      */
-    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException;
 
     /**
      * extract birthmark from given byte array with given environment and add element to given birthmark object.
      */
-    public Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkEnvironment environment) throws BirthmarkExtractionFailedException;
+    public Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionFailedException;
 }

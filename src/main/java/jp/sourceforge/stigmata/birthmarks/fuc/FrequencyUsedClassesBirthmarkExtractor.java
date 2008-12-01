@@ -5,7 +5,7 @@ package jp.sourceforge.stigmata.birthmarks.fuc;
  */
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -30,8 +30,8 @@ public class FrequencyUsedClassesBirthmarkExtractor extends ASMBirthmarkExtracto
     }
 
     @Override
-    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkEnvironment environment){
-        return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, environment);
+    public BirthmarkExtractVisitor createExtractVisitor(ClassWriter writer, Birthmark birthmark, BirthmarkContext context){
+        return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, context);
     }
 
     @Override

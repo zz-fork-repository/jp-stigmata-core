@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jp.sourceforge.stigmata.Birthmark;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.birthmarks.ValueCountable;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
@@ -27,7 +28,7 @@ public class CosineSimilarityBirthmarkComparator extends
         super(spi);
     }
 
-    public double compare(Birthmark b1, Birthmark b2){
+    public double compare(Birthmark b1, Birthmark b2, BirthmarkContext context){
         if(!b1.getType().equals(b2.getType())){
             return Double.NaN;
         }

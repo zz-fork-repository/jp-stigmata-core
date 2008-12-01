@@ -85,7 +85,7 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
             Birthmark b2 = target2.getBirthmark(type);
             if(b1 != null && b2 != null){
                 list.add(new ComparisonPairElement(
-                    b1, b2, env.getService(type).getComparator()
+                    b1, b2, env.getService(type).getComparator(), context
                 ));
             }
         }

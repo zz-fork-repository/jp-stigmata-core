@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.Birthmark;
+import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 
@@ -22,17 +23,21 @@ import org.objectweb.asm.ClassVisitor;
  */
 public abstract class BirthmarkExtractVisitor extends ClassAdapter{
     private Birthmark birthmark;
-    private BirthmarkEnvironment environment;
+    private BirthmarkContext context;
     private List<Throwable> causes = new ArrayList<Throwable>();
 
-    public BirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkEnvironment environment){
+    public BirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
         super(visitor);
         this.birthmark = birthmark;
-        this.environment = environment;
+        this.context = context;
     }
 
     protected BirthmarkEnvironment getEnvironment(){
-        return environment;
+        return context.getEnvironment();
+    }
+
+    protected BirthmarkContext getContext(){
+        return context;
     }
 
     protected void addElement(BirthmarkElement element){
