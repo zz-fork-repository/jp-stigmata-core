@@ -95,5 +95,4 @@ public class OpcodeExtractionMethodVisitor extends MethodAdapter{
         opcodes.add(opcode);
         super.visitVarInsn(opcode, var);
     }
-
 }

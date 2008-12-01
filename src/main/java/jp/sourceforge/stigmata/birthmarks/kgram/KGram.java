@@ -7,8 +7,6 @@ package jp.sourceforge.stigmata.birthmarks.kgram;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * This class represents k-gram of the some sequence. 

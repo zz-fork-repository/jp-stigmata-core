@@ -59,6 +59,7 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
             e.addCause(ee);
         } finally{
             if(e.isFailed()){
+                System.out.printf("fail: %s%n", e.getMessage());
                 throw e;
             }
         }
