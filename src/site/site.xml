@@ -8,12 +8,6 @@
     <alt>Stigmata: Java birthmark toolkit</alt>
   </bannerLeft>
 
-  <bannerRight>
-    <name>Stigmata</name>
-    <src>images/logos/stigmata_logo.png</src>
-    <alt>Stigmata: Java birthmark toolkit</alt>
-  </bannerRight>
-
   <poweredBy>
     <logo name="Powered by ASM"
           href="http://asm.objectweb.org/"

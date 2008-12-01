@@ -24,15 +24,30 @@ Related Publications
 
 *Static Birthmark
 
+ * Heewan Park, Seokwoo Choi, Hyun-il Lim, and Taisook Han,
+   ``Detecting Java Theft Based on Static API Trace Birthmark,'' In
+   Proc. of the 3rd International Workshop on Security (IWSEC2008),
+   November 2008. (LNCS)
+
  * Hyun-il Lim, Heewan Park, Seokwoo Choi, Taisook Han, ``Detecting
    Theft of Java Applications via a Static Birthmark Based on Weighted
    Stack Patterns,'' IEICE Transactions on Information and Systems,
    Vol.E91-D No.9 pp.2323-2332, September 2008.
 
+ * Heewan Park, Seokwoo Choi, Hyun-il Lim, and Taisook Han,
+   ``Detecting Code Theft via a Static Instruction Trace Birthmark for
+   Java Methods,'' In Proc. of the 6th IEEE International Conference on
+   Industrial Informatics (INDIN), July 2008.
+
  * Heewan Park, Hyun-il Lim, Seokwoo Choi and Taisook Han, ``A Static
    Java Birthmark Based on Operand Stack Behaviors,'' In Proc. of 2008
    International Conference on Information Security and Assurance,
-   pp.133-136, 2008.
+   pp.133-136, April 2008.
+
+ * Seokwoo Choi, Heewan Park, Hyun-il Lim, and Taisook Han, ``A Static
+   Birthmark of Binary Executables Based on API call Structure,'' In
+   Proc. of the 12th Asian Computing Science Conference (ASIAN), December
+   2007. (LNCS4846)
 
  * Takeshi Kakimoto, Akito Monden, Yasutaka Kamei, Haruaki Tamada,
    Masateru Tsunoda, and Ken-ichi Matsumoto, ``Using Software
