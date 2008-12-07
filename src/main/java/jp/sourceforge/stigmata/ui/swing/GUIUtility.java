@@ -5,7 +5,11 @@ package jp.sourceforge.stigmata.ui.swing;
  */
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -17,10 +21,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
 
 import jp.sourceforge.talisman.i18n.Messages;
 
@@ -182,6 +189,12 @@ public class GUIUtility{
     }
 
     public static void addNewTab(Messages messages, String key, JTabbedPane tabPane, Component comp, Object[] tabnameValues, Object[] values){
+        addNewTab(messages, key, tabPane, comp, tabnameValues, values, false);
+    }
+
+    public static void addNewTab(Messages messages, String key, final JTabbedPane tabPane,
+                                 final Component comp, Object[] tabnameValues, Object[] values,
+                                 boolean closable){
         String tabName = messages.get(key + ".tab.label");
         String tooltip = messages.get(key + ".tab.tooltip");
         Icon icon = getIcon(messages, key + ".tab.icon");
@@ -194,5 +207,28 @@ public class GUIUtility{
             tooltip = MessageFormat.format(tooltip, values);
         }
         tabPane.addTab(tabName, icon, comp, tooltip);
+        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
+        if(closable){
+            JLabel label = new JLabel(tabName);
+            if(icon != null){
+                label.setIcon(icon);
+            }
+            Icon closeIcon = getIcon(messages, "closetab.tabicon");
+            JButton button = new JButton(closeIcon);
+            button.setPreferredSize(new Dimension(closeIcon.getIconWidth(), closeIcon.getIconHeight()));
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.setOpaque(false);
+            label.setBorder(new EmptyBorder(0, 0, 0, 4));
+            panel.add(label, BorderLayout.WEST);
+            panel.add(button, BorderLayout.EAST);
+            button.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    tabPane.remove(comp);
+                }
+            });
+            button.setBorder(new EmptyBorder(1, 1, 1, 1));
+            panel.setBorder(new EmptyBorder(2, 1, 1, 1));
+            tabPane.setTabComponentAt(tabPane.getTabCount() - 1, panel);
+        }
     }
 }

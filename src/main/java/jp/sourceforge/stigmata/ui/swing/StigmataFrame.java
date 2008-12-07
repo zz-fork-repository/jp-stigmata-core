@@ -196,9 +196,8 @@ public class StigmataFrame extends JFrame{
                 Utility.array2String(target1.getBirthmarkTypes()),
                 target1.getName(),
                 target2.getName(),
-            }
+            }, true
         );
-        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
     public void compareRoundRobin(String[] targetX, String[] targetY, 
@@ -216,9 +215,8 @@ public class StigmataFrame extends JFrame{
                     Utility.array2String(context.getBirthmarkTypes()),
                     Utility.array2String(targetX),
                     Utility.array2String(targetY),
-                }
+                }, true
             );
-            tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         } catch(Throwable e){
             showExceptionMessage(e);
         }
@@ -242,9 +240,8 @@ public class StigmataFrame extends JFrame{
                     Utility.array2String(context.getBirthmarkTypes()),
                     Utility.array2String(targetX),
                     Utility.array2String(targetY),
-                }
+                }, true
             );
-            tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         } catch(Throwable e){
             showExceptionMessage(e);
         }
@@ -265,7 +262,7 @@ public class StigmataFrame extends JFrame{
                     Utility.array2String(context.getBirthmarkTypes()),
                     Utility.array2String(targetX),
                     Utility.array2String(targetY),
-                }
+                }, true
             );
             tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         }catch(Throwable e){
@@ -296,9 +293,8 @@ public class StigmataFrame extends JFrame{
                         Utility.array2String(context.getBirthmarkTypes()),
                         Utility.array2String(targetX),
                         Utility.array2String(targetY),
-                    }
+                    }, true
                 );
-                tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
             }catch(Exception e){
                 showExceptionMessage(e);
             }
@@ -310,9 +306,8 @@ public class StigmataFrame extends JFrame{
         GUIUtility.addNewTab(
             getMessages(), "comparisonresultset", tabPane,
             new PairComparisonResultSetPane(this, resultset),
-            new Object[] { new Integer(comparePair), }, null
+            new Object[] { new Integer(comparePair), }, null, true
         );
-        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
     public void showMdsGraph(BirthmarkSet[] set, BirthmarkContext context){
@@ -321,9 +316,8 @@ public class StigmataFrame extends JFrame{
             int mappingGraphCount = getNextCount("mds_graph");
             GUIUtility.addNewTab(
                 getMessages(), "mappinggraph", tabPane, panel,
-                new Object[] { new Integer(mappingGraphCount), }, null
+                new Object[] { new Integer(mappingGraphCount), }, null, true
             );
-            tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
         } catch(Exception e){
             showExceptionMessage(e);
         }
@@ -335,9 +329,8 @@ public class StigmataFrame extends JFrame{
         int similarityGraphCount = getNextCount("similarity_graph");
         GUIUtility.addNewTab(
             getMessages(), "similaritygraph", tabPane, graph,
-            new Object[] { new Integer(similarityGraphCount), }, null
+            new Object[] { new Integer(similarityGraphCount), }, null, true
         );
-        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
     public void compareExtractionResult(ExtractionResultSet ers){
@@ -350,9 +343,8 @@ public class StigmataFrame extends JFrame{
                 Utility.array2String(ers.getBirthmarkTypes()),
                 Utility.array2String(new String[0]),
                 Utility.array2String(new String[0]),
-            }
+            }, true
         );
-        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
     }
 
     public void showExtractionResult(ExtractionResultSet ers){
@@ -361,10 +353,8 @@ public class StigmataFrame extends JFrame{
         GUIUtility.addNewTab(
             getMessages(), "extract", tabPane, viewer,
             new Object[] { new Integer(extractCount), },
-            new Object[] { Utility.array2String(ers.getBirthmarkTypes()), }
+            new Object[] { Utility.array2String(ers.getBirthmarkTypes()), }, true
         );
-        tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
-        
     }
 
     public void extract(String[] targetX, String[] targetY, BirthmarkContext context){
@@ -424,7 +414,7 @@ public class StigmataFrame extends JFrame{
         setTitle(getMessages().get("stigmata.frame.title"));
         initComponents();
 
-        GUIUtility.addNewTab(getMessages(), "control", tabPane, control = new ControlPane(this), null, null);
+        GUIUtility.addNewTab(getMessages(), "control", tabPane, control = new ControlPane(this), null, null, false);
         control.inititalize();
         tabPane.setSelectedIndex(tabPane.getTabCount() - 1);
 

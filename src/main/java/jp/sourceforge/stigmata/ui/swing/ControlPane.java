@@ -82,6 +82,8 @@ public class ControlPane extends JPanel{
         GUIUtility.addNewTab(stigmata.getMessages(), "wellknown", controlTab, wellknownClassses);
         GUIUtility.addNewTab(stigmata.getMessages(), "classpath", controlTab, classpath);
         GUIUtility.addNewTab(stigmata.getMessages(), "property", controlTab, properties);
+        controlTab.setSelectedIndex(0);
+
         reset();
     }
 
@@ -153,9 +155,11 @@ public class ControlPane extends JPanel{
         stigmata.setExpertMode(expertmode);
 
         if(expertmode){
+            int index = controlTab.getSelectedIndex();
             GUIUtility.addNewTab(stigmata.getMessages(), "definition", controlTab, definition);
             GUIUtility.addNewTab(stigmata.getMessages(), "filter", controlTab, filters);
             GUIUtility.addNewTab(stigmata.getMessages(), "history", controlTab, history);
+            controlTab.setSelectedIndex(index);
         }
         else{
             removeTabByName(stigmata.getMessages().get("definition.tab.label"));
@@ -299,7 +303,7 @@ public class ControlPane extends JPanel{
             bst = BirthmarkStoreTarget.MEMORY;
         }
         context.setStoreTarget(bst);
-        
+
         return context;
     }
 
