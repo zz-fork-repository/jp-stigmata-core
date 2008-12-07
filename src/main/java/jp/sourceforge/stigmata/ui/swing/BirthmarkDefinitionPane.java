@@ -347,9 +347,14 @@ public class BirthmarkDefinitionPane extends JPanel{
             description.setColumns(40);
             description.setRows(10);
 
-            Box box1 = Box.createHorizontalBox();
-            box1.add(type);
-            box1.add(displayType);
+            JPanel typePane = new JPanel(new BorderLayout());
+            JPanel displayTypePane = new JPanel(new BorderLayout());
+            typePane.add(type, BorderLayout.CENTER);
+            displayTypePane.add(displayType, BorderLayout.CENTER);
+
+            JPanel box1 = new JPanel(new BorderLayout());
+            box1.add(typePane, BorderLayout.WEST);
+            box1.add(displayTypePane, BorderLayout.CENTER);
 
             Box box2 = Box.createHorizontalBox();
             box2.add(Box.createHorizontalGlue());
@@ -358,22 +363,26 @@ public class BirthmarkDefinitionPane extends JPanel{
             box2.add(userDefined);
             box2.add(Box.createHorizontalGlue());
 
-            JPanel panel = new JPanel(new GridLayout(3, 1));
+            JPanel extractorPane = new JPanel(new BorderLayout());
+            extractorPane.add(extractor, BorderLayout.CENTER);
+            JPanel comparatorPane = new JPanel(new BorderLayout());
+            comparatorPane.add(comparator, BorderLayout.CENTER);
+
+            Box panel = Box.createVerticalBox();
             panel.add(box1);
-            panel.add(extractor);
-            panel.add(comparator);
+            panel.add(extractorPane);
+            panel.add(comparatorPane);
+            panel.add(box2);
 
-            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-            add(panel);
-            add(box2);
-            add(scroll);
-            add(Box.createVerticalGlue());
+            setLayout(new BorderLayout());
+            add(panel, BorderLayout.NORTH);
+            add(scroll, BorderLayout.CENTER);
 
-            GUIUtility.decorateJComponent(messages, type, "define.type");
-            GUIUtility.decorateJComponent(messages, displayType, "define.displaytype");
+            GUIUtility.decorateJComponent(messages, typePane, "define.type");
+            GUIUtility.decorateJComponent(messages, displayTypePane, "define.displaytype");
             GUIUtility.decorateJComponent(messages, scroll, "define.description");
-            GUIUtility.decorateJComponent(messages, extractor, "define.extractor");
-            GUIUtility.decorateJComponent(messages, comparator, "define.comparator");
+            GUIUtility.decorateJComponent(messages, extractorPane, "define.extractor");
+            GUIUtility.decorateJComponent(messages, comparatorPane, "define.comparator");
             GUIUtility.decorateJComponent(messages, expert, "define.expert");
             GUIUtility.decorateJComponent(messages, userDefined, "define.userdef");
 
