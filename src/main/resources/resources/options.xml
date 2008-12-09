@@ -22,14 +22,6 @@
       <multiple-args />
     </definition>
 
-    <definition name="mode">
-      <short-option>m</short-option>
-      <long-option>mode</long-option>
-      <description>$(cli.option.mode)</description>
-      <argument>REQUIRED</argument>
-      <argument-name>MODE</argument-name>
-    </definition>
-
     <definition name="format">
       <short-option>f</short-option>
       <long-option>format</long-option>
@@ -59,34 +51,6 @@
       <argument>NONE</argument>
     </definition>
 
-    <definition name="export-config">
-      <long-option>export-config</long-option>
-      <description>$(cli.option.export-config)</description>
-      <argument>OPTIONAL</argument>
-      <argument-name>FILE</argument-name>
-    </definition>
-
-    <definition name="help">
-      <short-option>h</short-option>
-      <long-option>help</long-option>
-      <description>$(cli.option.help)</description>
-      <argument>NONE</argument>
-    </definition>
-
-    <definition name="license">
-      <short-option>l</short-option>
-      <long-option>license</long-option>
-      <description>$(cli.option.license)</description>
-      <argument>NONE</argument>
-    </definition>
-
-    <definition name="version">
-      <short-option>v</short-option>
-      <long-option>version</long-option>
-      <description>$(cli.option.version)</description>
-      <argument>NONE</argument>
-    </definition>
-
     <definition name="extraction-unit">
       <short-option>e</short-option>
       <long-option>extraction-unit</long-option>
@@ -104,7 +68,6 @@
   </definitions>
 
   <available-options>
-    <option>mode</option>
     <option>classpath</option>
     <option>birthmark</option>
     <option>filter</option>
@@ -113,11 +76,6 @@
 
     <option>store-target</option>
     <option>config-file</option>
-    <option>export-config</option>
     <option>reset-config</option>
-
-    <option>help</option>
-    <option>license</option>
-    <option>version</option>
   </available-options>
 </command-line>

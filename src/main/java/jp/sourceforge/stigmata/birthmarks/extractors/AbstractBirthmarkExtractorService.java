@@ -20,7 +20,7 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * @author Haruaki TAMADA
  * @version $Revision$ 
  */
-abstract class AbstractBirthmarkExtractorService extends AbstractServiceProvider implements BirthmarkExtractorSpi{
+public abstract class AbstractBirthmarkExtractorService extends AbstractServiceProvider implements BirthmarkExtractorSpi{
     /**
      * returns a type of the birthmark this service provides.
      */

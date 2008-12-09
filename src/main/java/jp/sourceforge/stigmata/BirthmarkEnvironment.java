@@ -323,7 +323,7 @@ public class BirthmarkEnvironment{
     private List<BirthmarkSpi> getServiceList(){
         List<BirthmarkSpi> list = new ArrayList<BirthmarkSpi>();
         if(parent != null){
-            for(BirthmarkSpi spi : parent.getServices()){
+            for(BirthmarkSpi spi: parent.getServices()){
                 list.add(spi);
             }
         }

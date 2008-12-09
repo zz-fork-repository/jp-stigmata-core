@@ -35,6 +35,7 @@ public class Stigmata{
      * instance. singleton pattern.
      */
     private static Stigmata stigmata;
+    private PrinterManager manager = PrinterManager.getInstance();
     private BirthmarkEnvironment defaultEnvironment;
     private List<BirthmarkEngineListener> listeners = new ArrayList<BirthmarkEngineListener>();
 
@@ -85,6 +86,10 @@ public class Stigmata{
             engine.addBirthmarkEngineListener(listener);
         }
         return engine;
+    }
+
+    public PrinterManager getPrinterManager(){
+        return manager;
     }
 
     public void addBirthmarkEngineListener(BirthmarkEngineListener listener){

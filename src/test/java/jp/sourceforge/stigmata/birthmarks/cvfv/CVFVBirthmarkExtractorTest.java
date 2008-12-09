@@ -44,7 +44,7 @@ public class CVFVBirthmarkExtractorTest{
 
         Birthmark birthmark = array[0].getBirthmark("cvfv");
         Assert.assertEquals("cvfv", birthmark.getType());
-        Assert.assertEquals(3, birthmark.getElementCount());
+        Assert.assertEquals(4, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
         Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
@@ -53,18 +53,24 @@ public class CVFVBirthmarkExtractorTest{
                             elements[1].getClass().getName());
         Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
                             elements[2].getClass().getName());
+        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
+                            elements[3].getClass().getName());
 
         Assert.assertEquals("Ljp/sourceforge/stigmata/Stigmata;",
-                            ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
+            ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
         Assert.assertNull(((TypeAndValueBirthmarkElement)elements[0]).getValue());
 
-        Assert.assertEquals("Ljp/sourceforge/stigmata/BirthmarkEnvironment;",
-                            ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
+        Assert.assertEquals("Ljp/sourceforge/stigmata/printer/PrinterManager;",
+            ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
         Assert.assertNull(((TypeAndValueBirthmarkElement)elements[1]).getValue());
 
-        Assert.assertEquals("Ljava/util/List;",
+        Assert.assertEquals("Ljp/sourceforge/stigmata/BirthmarkEnvironment;",
                             ((TypeAndValueBirthmarkElement)elements[2]).getSignature());
         Assert.assertNull(((TypeAndValueBirthmarkElement)elements[2]).getValue());
+
+        Assert.assertEquals("Ljava/util/List;",
+                            ((TypeAndValueBirthmarkElement)elements[3]).getSignature());
+        Assert.assertNull(((TypeAndValueBirthmarkElement)elements[3]).getValue());
     }
 
     @Test

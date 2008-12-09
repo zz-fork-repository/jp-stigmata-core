@@ -238,6 +238,10 @@ $Id$
       <name>birthmark.store.target</name>
       <value>MEMORY</value>
     </property>
+    <property>
+      <name>override.exists.plugin</name>
+      <value>yes</value>
+    </property>
 <!--
     <property>
       <property-name>name</property-name>

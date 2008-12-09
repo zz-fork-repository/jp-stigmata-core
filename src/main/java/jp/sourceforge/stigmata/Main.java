@@ -4,42 +4,25 @@ package jp.sourceforge.stigmata;
  * $Id$
  */
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ResourceBundle;
 
+import jp.sourceforge.stigmata.command.HelpCommand;
+import jp.sourceforge.stigmata.command.StigmataCommandFactory;
 import jp.sourceforge.stigmata.digger.ClasspathContext;
-import jp.sourceforge.stigmata.event.BirthmarkEngineAdapter;
-import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
-import jp.sourceforge.stigmata.event.WarningMessages;
 import jp.sourceforge.stigmata.hook.Phase;
 import jp.sourceforge.stigmata.hook.StigmataHookManager;
-import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
-import jp.sourceforge.stigmata.printer.ComparisonResultSetPrinter;
-import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
-import jp.sourceforge.stigmata.printer.PrinterManager;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
-import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
-import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
 import jp.sourceforge.talisman.xmlcli.OptionsBuilder;
-import jp.sourceforge.talisman.xmlcli.ResourceHelpFormatter;
 import jp.sourceforge.talisman.xmlcli.XmlCliConfigurationException;
 import jp.sourceforge.talisman.xmlcli.builder.OptionsBuilderFactory;
 
 import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
@@ -52,8 +35,6 @@ import org.w3c.dom.DOMException;
  * @version $Revision$ 
  */
 public final class Main{
-    private PrinterManager manager = PrinterManager.getInstance();
-
     /**
      * main process.
      * @throws org.apache.commons.cli.ParseException 
@@ -67,127 +48,43 @@ public final class Main{
         stigmata.configuration(commandLine.getOptionValue("config-file"), commandLine.hasOption("reset-config"));
 
         String[] arguments = commandLine.getArgs();
+        String commandString = "gui";
 
-        String mode = commandLine.getOptionValue("mode");
-        String format = commandLine.getOptionValue("format");
+        if(arguments.length > 0){
+            commandString = arguments[0];
+        }
 
-        if(format == null){
-            format = "xml";
-        }
-        if(mode == null){
-            mode = "gui";
-        }
+        arguments = shiftArray(arguments);
+
         BirthmarkContext context = stigmata.createContext();
         updateContext(context, commandLine);
 
-        boolean exitFlag = executeOption(context.getEnvironment(), commandLine, options);
+        StigmataCommandFactory factory = StigmataCommandFactory.getInstance();
+        factory.registerCommand("help", new HelpCommand(options));
 
-        if(!exitFlag){
-            if(!("gui".equals(mode) || "list".equals(mode)) && (arguments == null || arguments.length == 0)){
-
-                printHelp(context.getEnvironment(), options);
-                return;
-            }
-            StigmataHookManager.getInstance().runHook(Phase.SETUP, context.getEnvironment());
-
-            if(mode.equals("list")){
-                listBirthmarks(context, format);
-            }
-            else if(mode.equals("extract")){
-                extractBirthmarks(stigmata, arguments, format, context);
-            }
-            else if(mode.equals("compare")){
-                compareBirthmarks(stigmata, arguments, format, context);
-            }
-            else if(mode.equals("gui")){
-                StigmataFrame frame = new StigmataFrame(stigmata, context.getEnvironment());
-                frame.setVisible(true);
-            }
-
-            if(!mode.equals("gui")){
-                StigmataHookManager.getInstance().runHook(Phase.TEAR_DOWN, context.getEnvironment());
-            }
-            else{
-                final BirthmarkEnvironment env = context.getEnvironment();
-                Runtime.getRuntime().addShutdownHook(new Thread(){
-                    public void run(){
-                        StigmataHookManager.getInstance().runHook(
-                            Phase.TEAR_DOWN, env
-                        );
-                    }
-                });
-            }
+        StigmataCommand command = factory.getCommand(commandString);
+        if(!command.isAvailableArguments(arguments)){
+            command = factory.getCommand("help");
         }
+
+        StigmataHookManager.getInstance().runHook(Phase.SETUP, context.getEnvironment());
+
+        command.setUp(context.getEnvironment());
+        command.perform(stigmata, context, arguments);
+        command.tearDown(context.getEnvironment());
     }
 
     /**
-     * extract birthmarks.
+     * shift right given array.
+     * @param args
      */
-    private void extractBirthmarks(Stigmata stigmata, String[] args, String format,
-            BirthmarkContext context){
-        try{
-            context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_SAME_PAIR);
-            BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
-
-            engine.addBirthmarkEngineListener(new BirthmarkEngineAdapter(){
-                public void operationDone(BirthmarkEngineEvent e){
-                    WarningMessages warnings = e.getMessage();
-                    for(Iterator<Exception> i = warnings.exceptions(); i.hasNext(); ){
-                        i.next().printStackTrace();
-                    }
-                }
-            });
-            ExtractionResultSet ers = engine.extract(args, context);
-
-            ResultPrinterSpi spi = manager.getService(format);
-            ExtractionResultSetPrinter formatter = spi.getExtractionResultSetPrinter();
-            formatter.printResult(new PrintWriter(System.out), ers);
-        }catch(Exception ex){
-            ex.printStackTrace();
+    private String[] shiftArray(String[] args){
+        if(args.length > 0){
+            String[] arguments = new String[args.length - 1];
+            System.arraycopy(args, 1, arguments, 0, arguments.length);
+            args = arguments;
         }
-    }
-
-    /**
-     * 
-     */
-    private void compareBirthmarks(Stigmata stigmata, String[] args, String format,
-            BirthmarkContext context){
-        try{
-            BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
-            context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_SAME_PAIR);
-            engine.addBirthmarkEngineListener(new BirthmarkEngineAdapter(){
-                public void operationDone(BirthmarkEngineEvent e){
-                    WarningMessages warnings = e.getMessage();
-                    for(Iterator<Exception> i = warnings.exceptions(); i.hasNext(); ){
-                        i.next().printStackTrace();
-                    }
-                }
-            });
-
-            ExtractionResultSet rs = engine.extract(args, context);
-            ComparisonResultSet resultset = engine.compare(rs);
-            if(context.hasFilter()){
-                resultset = engine.filter(resultset);
-            }
-
-            ResultPrinterSpi spi = manager.getService(format);
-            ComparisonResultSetPrinter formatter = spi.getComparisonResultSetPrinter();
-            formatter.printResult(new PrintWriter(System.out), resultset);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private void listBirthmarks(BirthmarkContext context, String format){
-        try{
-            BirthmarkSpi[] spis = context.getEnvironment().findServices();
-            ResultPrinterSpi spi = manager.getService(format);
-            BirthmarkServicePrinter formatter = spi.getBirthmarkServicePrinter();
-
-            formatter.printResult(new PrintWriter(System.out), spis);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        return args;
     }
 
     private void updateContext(BirthmarkContext context, CommandLinePlus cl){
@@ -214,6 +111,12 @@ public final class Main{
         if(cl.hasOption("extraction-unit")){
             ExtractionUnit unit = ExtractionUnit.valueOf(cl.getOptionValue("extraction-unit"));
             context.setExtractionUnit(unit);
+        }
+        if(cl.hasOption("format")){
+            context.setFormat(cl.getOptionValue("format"));
+        }
+        else{
+            context.setFormat("xml");
         }
 
         addClasspath(env.getClasspathContext(), cl);
@@ -249,27 +152,6 @@ public final class Main{
         }
     }
 
-    private boolean executeOption(BirthmarkEnvironment env, CommandLinePlus commandLine, Options options){
-        boolean exitFlag = false;
-        if(commandLine.hasOption("help")){
-            printHelp(env, options);
-            exitFlag = true;
-        }
-        if(commandLine.hasOption("version")){
-            printVersion();
-            exitFlag = true;
-        }
-        if(commandLine.hasOption("license")){
-            printLicense();
-            exitFlag = true;
-        }
-        if(commandLine.hasOption("export-config")){
-            exportConfiguration(env, commandLine.getOptionValue("export-config"));
-            exitFlag = true;
-        }
-        return exitFlag;
-    }
-
     private Options buildOptions(){
         try{
             OptionsBuilderFactory factory = OptionsBuilderFactory.getInstance();
@@ -286,80 +168,6 @@ public final class Main{
             ex.printStackTrace();
         }
         return null;
-    }
-
-    public void exportConfiguration(BirthmarkEnvironment env, String file){
-        try{
-            PrintWriter out;
-            if(file == null){
-                out = new PrintWriter(System.out);
-            }
-            else{
-                if(!file.endsWith(".xml")){
-                    file = file + ".xml";
-                }
-                out = new PrintWriter(new FileWriter(file));
-            }
-
-            new ConfigFileExporter(env).export(out);
-            out.close();
-        }catch(IOException e){
-        }
-    }
-
-    public void printHelp(BirthmarkEnvironment env, Options options){
-        Package p = getClass().getPackage();
-        ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
-        HelpFormatter formatter = new ResourceHelpFormatter(helpResource);
-        formatter.printHelp(
-            String.format(
-                helpResource.getString("cli.interface"),
-                p.getImplementationVersion()
-            ),
-            options
-        );
-        System.out.println();
-        System.out.println(helpResource.getString("cli.interface.birthmarks"));
-        for(BirthmarkSpi service: env.getServices()){
-            if(!service.isExpert()){
-                System.out.printf("    %-5s (%s): %s%n", service.getType(),
-                        service.getDisplayType(), service.getDescription());
-            }
-        }
-        System.out.println();
-        System.out.println(helpResource.getString("cli.interface.filters"));
-        for(ComparisonPairFilterSet filterset: env.getFilterManager().getFilterSets()){
-            String matchString = helpResource.getString("cli.interface.filter.matchall");
-            if(filterset.isMatchAny()) matchString = helpResource.getString("cli.interface.filter.matchany");
-            System.out.printf("    %s (%s)%n", filterset.getName(), matchString);
-            for(ComparisonPairFilter filter: filterset){
-                System.out.printf("        %s%n", filter);
-            }
-        }
-        System.out.println();
-        System.out.println(helpResource.getString("cli.interface.copyright"));
-        System.out.println(helpResource.getString("cli.interface.mailto"));
-    }
-
-    public void printLicense(){
-        try{
-            InputStream in = getClass().getResourceAsStream("/META-INF/license.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-
-            while((line = reader.readLine()) != null){
-                System.out.println(line);
-            }
-            reader.close();
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }
-    }
-
-    public void printVersion(){
-        ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
-        Package p = getClass().getPackage();
-        System.out.printf("%s %s%n", helpResource.getString("cli.version.header"), p.getImplementationVersion());
     }
 
     public static void main(String[] args) throws Exception{

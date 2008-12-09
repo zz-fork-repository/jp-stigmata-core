@@ -27,6 +27,7 @@ public class BirthmarkContext{
     private List<String> birthmarkTypes = new ArrayList<String>();
     private List<String> filterTypes = new ArrayList<String>();
     private Map<String, String> nameMappings = new HashMap<String, String>();
+    private String format;
     /**
      * properties which available on a session.
      */
@@ -103,6 +104,14 @@ public class BirthmarkContext{
 
     public void removeBirthmarkType(String type){
         birthmarkTypes.remove(type);
+    }
+
+    public String getFormat(){
+        return format;
+    }
+
+    public void setFormat(String format){
+        this.format = format;
     }
 
     public synchronized String[] getBirthmarkTypes(){
