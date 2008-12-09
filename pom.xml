@@ -61,7 +61,7 @@
     <dependency>
       <groupId>jp.sourceforge.talisman</groupId>
       <artifactId>mds</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -73,13 +73,13 @@
     <dependency>
       <groupId>jp.sourceforge.talisman</groupId>
       <artifactId>i18n</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>jp.sourceforge.stigmata</groupId>
       <artifactId>digger</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

@@ -12,6 +12,8 @@ package jp.sourceforge.stigmata.hook;
 public enum Phase{
     SETUP,
     TEAR_DOWN,
+    BEFORE_PREPROCESS,
+    AFTER_PREPROCESS,
     BEFORE_EXTRACTION,
     AFTER_EXTRACTION,
     BEFORE_COMPARISON,

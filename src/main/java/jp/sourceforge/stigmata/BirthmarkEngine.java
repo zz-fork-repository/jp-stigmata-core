@@ -12,8 +12,10 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import jp.sourceforge.stigmata.birthmarks.extractors.BirthmarkExtractorFactory;
@@ -34,6 +36,7 @@ import jp.sourceforge.stigmata.hook.Phase;
 import jp.sourceforge.stigmata.hook.StigmataHookManager;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.result.RoundRobinComparisonResultSet;
+import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 /**
  * core engine for extracting/comparing/filtering birthmarks.
@@ -233,6 +236,8 @@ public class BirthmarkEngine{
         ExtractionResultSet er = context.getEnvironment().getHistoryManager().createDefaultResultSet(context);
 
         try{
+            prepare(targetX, targetY, context);
+
             StigmataHookManager.getInstance().runHook(Phase.BEFORE_EXTRACTION, context);
 
             switch(context.getComparisonMethod()){
@@ -261,6 +266,30 @@ public class BirthmarkEngine{
             StigmataHookManager.getInstance().runHook(Phase.AFTER_EXTRACTION, context);
             operationDone(OperationType.EXTRACT_BIRTHMARKS);
         }
+    }
+
+    public BirthmarkContext prepare(String[] targetX, String[] targetY, BirthmarkContext context) throws MalformedURLException, IOException{
+        StigmataHookManager.getInstance().runHook(Phase.BEFORE_PREPROCESS, context);
+
+        Set<String> set = new HashSet<String>();
+        if(targetX != null){
+            for(String t: targetX) set.add(t);
+        }
+        if(targetY != null){
+            for(String t: targetY) set.add(t);
+        }
+        String[] target = set.toArray(new String[set.size()]);
+        ClassFileArchive[] archives = createArchives(target, environment);
+        for(String type: context.getBirthmarkTypes()){
+            BirthmarkSpi service = context.getEnvironment().getService(type);
+            if(service != null && service.getPreprocessor() != null){
+                BirthmarkPreprocessor preprocessor = service.getPreprocessor();
+                preprocessor.preprocess(archives, context);
+            }
+        }
+        StigmataHookManager.getInstance().runHook(Phase.AFTER_PREPROCESS, context);
+
+        return context;
     }
 
     private String[] mergeTarget(String[] t1, String[] t2){

@@ -7,7 +7,10 @@ package jp.sourceforge.stigmata.birthmarks;
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.Birthmark;
+import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkElement;
+import jp.sourceforge.stigmata.BirthmarkExtractor;
+import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
 
@@ -44,12 +47,29 @@ public abstract class AbstractBirthmarkService implements BirthmarkSpi{
         return description;
     }
 
+    public abstract BirthmarkComparator getComparator();
+
     public String getComparatorClassName(){
         return getComparator().getClass().getName();
     }
 
+    public abstract BirthmarkExtractor getExtractor();
+
     public String getExtractorClassName(){
         return getExtractor().getClass().getName();
+    }
+
+    public BirthmarkPreprocessor getPreprocessor(){
+        return null;
+    }
+
+    public String getPreprocessorClassName(){
+        BirthmarkPreprocessor preprocessor = getPreprocessor();
+        String name = null;
+        if(preprocessor != null){
+            name = preprocessor.getClass().getName();
+        }
+        return name;
     }
 
     public abstract String getType();

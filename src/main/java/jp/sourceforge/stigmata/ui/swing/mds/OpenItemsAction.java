@@ -61,7 +61,6 @@ public class OpenItemsAction extends AbstractAction{
         });
     }
 
-    @Override
     public void actionPerformed(ActionEvent e){
         Item[] items;
         if(selectedItemFlag){

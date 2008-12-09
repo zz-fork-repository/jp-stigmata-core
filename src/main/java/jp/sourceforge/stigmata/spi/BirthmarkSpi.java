@@ -10,6 +10,7 @@ import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
+import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 
 /**
  * Birthmark service provider interface.
@@ -53,6 +54,10 @@ public interface BirthmarkSpi extends ServiceProvider{
     public Birthmark buildBirthmark();
 
     public BirthmarkElement buildBirthmarkElement(String elementValue);
+
+    public BirthmarkPreprocessor getPreprocessor();
+
+    public String getPreprocessorClassName();
 
     /**
      * returns a extractor for the birthmark of this service.
