@@ -3,7 +3,7 @@
  ----
  Haruaki Tamada
  ----
- 2007-07-08
+ 2008-12-10
  ----
 
 Download
@@ -32,7 +32,7 @@ permissions and limitations under the License.
 
  *Java SE 6 as runtime environment
 
- *{{{http://asm.objectweb.org/}ASM}} 2.2.3
+ *{{{http://asm.objectweb.org/}ASM}} 3.1
 
  *{{{http://commons.apache.org/cli/}Jakarta Commons CLI}} 1.0
 
@@ -44,44 +44,13 @@ permissions and limitations under the License.
 
  *{{{http://talisman.sourceforge.jp/mds/}MDS}} 1.0.0
 
- *{{{http://talisman.sourceforge.jp/mds/}Talisman i18n}} 1.0.0
+ *{{{http://talisman.sourceforge.jp/mds/}Talisman i18n}} 1.0.1
 
- *{{{http://stigmata.sourceforge.jp/digger/}Digger}} 1.0.0
+ *{{{http://stigmata.sourceforge.jp/digger/}Digger}} 1.1.0
 
- *{{{http://www.junit.org/}JUnit}} 4.1
+ *{{{http://www.junit.org/}JUnit}} 4.3
 
  []
-
-**How to install requirements into our Maven local repository
-
- If we want to compile stigmata from source codes, we may install
-manually Jama and BrowserLauncher2 into our maven2 local repository.
-Because maven2 default remote repository do not has them.  Other
-libraries can be automatically downloaded by Maven2.
-
- type below command for installing jar product into our maven2 local
-repository.
-
-----
-$ mvn install:install-file \
-  -Dfile=<jar file path to install> \
-  -DgroupId=<groupId> \
-  -DartifactID=<artifactId> \
-  -Dversion=<version> \
-  -Dpackaging=jar
-----
-
- For example, installing Jama-1.0.2.jar into maven local repository,
-copy and paste below command.
-
-----
-$ mvn install:install-file \
-  -Dfile=./Jama-1.0.2.jar \
-  -DgroupId=Jama \
-  -DartifactID=Jama \
-  -Dversion=1.0.2 \
-  -Dpackaging=jar
-----
 
 *Manually download
 

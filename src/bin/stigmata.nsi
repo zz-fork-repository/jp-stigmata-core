@@ -1,6 +1,6 @@
 ;--------- CONFIGURATION ---------
 
-!define VERSION "1.2.0"
+!define VERSION "2.0.0"
 !define APPNAME "Stigmata: Java birthmarking toolkit"
 !define JARFILE "stigmata-${VERSION}.jar"
 !define LANG_ENGLISH "1033-English"
@@ -67,14 +67,12 @@ Section "running-stigmata"
   File "..\..\target\commons-cli-1.1.jar"
   File "..\..\target\commons-dbutils-1.1.jar"
   File "..\..\target\commons-logging-1.0.3.jar"
-  File "..\..\target\BrowserLauncher2-1.3.jar"
-  File "..\..\target\Jama-1.0.2.jar"
-  File "..\..\target\asm-all-2.2.3.jar"
-  File "..\..\target\stax-1.2.0.jar"
-  File "..\..\target\stax-api-1.0.1.jar"
+  File "..\..\target\asm-all-3.1.jar"
   File "..\..\target\xmlcli-1.2.2.jar"
   File "..\..\target\mds-1.0.0.jar"
   File "..\..\target\i18n-1.0.1.jar"
+  File "..\..\target\digger-1.1.0.jar"
+
   StrCpy $R0 '$R0 -Dexecution.directory="$EXEDIR" -jar "${JARFILE}" $R1'
 
   !ifdef SPLASH_IMAGE
@@ -84,25 +82,22 @@ Section "running-stigmata"
     Delete "$TEMP\spltmp.bmp"
   !endif
 
+
   ExecWait "$R0"
   Delete "$TEMP\${JARFILE}"
   Delete "$TEMP\commons-beanutils-1.7.0.jar"
   Delete "$TEMP\commons-cli-1.1.jar"
   Delete "$TEMP\commons-dbutils-1.1.jar"
   Delete "$TEMP\commons-logging-1.0.3.jar"
-  Delete "$TEMP\BrowserLauncher2-1.3.jar"
-  Delete "$TEMP\Jama-1.0.2.jar"
-  Delete "$TEMP\asm-all-2.2.3.jar"
-  Delete "$TEMP\stax-1.2.0.jar"
-  Delete "$TEMP\stax-api-1.0.1.jar"
+  Delete "$TEMP\asm-all-3.1.jar"
   Delete "$TEMP\xmlcli-1.2.2.jar"
   Delete "$TEMP\mds-1.0.0.jar"
   Delete "$TEMP\i18n-1.0.1.jar"
+  Delete "$TEMP\digger-1.1.0.jar"
 
   Quit
 
   NotFound:
-  Sleep 800
   MessageBox MB_ICONEXCLAMATION|MB_YESNO \
           'Could not find a Java Runtime Environment installed on your computer. \
           $\nWithout it you cannot run "${APPNAME}". \
