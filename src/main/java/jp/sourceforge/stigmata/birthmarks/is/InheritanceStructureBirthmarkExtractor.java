@@ -41,9 +41,9 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
 
         try{
             ClassReader reader = new ClassReader(in);
-            ClassWriter writer = new ClassWriter(false);
+            ClassWriter writer = new ClassWriter(0);
             BirthmarkExtractVisitor visitor = new InheritanceStructureBirthmarkExtractVisitor(writer, birthmark, context);
-            reader.accept(visitor, false);
+            reader.accept(visitor, 0);
 
             if(!visitor.isSuccess()){
                 for(Throwable t: visitor.getCauses()){
