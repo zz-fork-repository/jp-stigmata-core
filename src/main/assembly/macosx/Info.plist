@@ -7,7 +7,7 @@
     <key>CFBundleName</key>
     <string>Stigmata</string>
     <key>CFBundleVersion</key>
-    <string>1.2.0</string>
+    <string>2.0.0</string>
     <key>CFBundleAllowMixedLocalizations</key>
     <false/>
     <key>CFBundleInfoDictionaryVersion</key>
@@ -27,22 +27,19 @@
       <key>MainClass</key>
       <string>jp.sourceforge.stigmata.Main</string>
       <key>JVMVersion</key>
-      <string>1.5+</string>
+      <string>1.6+</string>
       <key>ClassPath</key>
       <array>
-        <string>$JAVAROOT/stigmata-1.2.0.jar</string>
+        <string>$JAVAROOT/stigmata-2.0.0.jar</string>
         <string>$JAVAROOT/commons-cli-1.1.jar</string>
         <string>$JAVAROOT/commons-dbutils-1.1.jar</string>
         <string>$JAVAROOT/commons-logging-1.0.3.jar</string>
         <string>$JAVAROOT/commons-beanutils-1.7.0.jar</string>
-        <string>$JAVAROOT/asm-all-2.2.3.jar</string>
-        <string>$JAVAROOT/stax-api-1.0.1.jar</string>
-        <string>$JAVAROOT/stax-1.2.0.jar</string>
-        <string>$JAVAROOT/BrowserLauncher2-1.3.jar</string>
-        <string>$JAVAROOT/Jama-1.0.2.jar</string>
+        <string>$JAVAROOT/asm-all-3.1.jar</string>
         <string>$JAVAROOT/xmlcli-1.2.2.jar</string>
         <string>$JAVAROOT/mds-1.0.0.jar</string>
         <string>$JAVAROOT/i18n-1.0.1.jar</string>
+        <string>$JAVAROOT/digger-1.1.0.jar</string>
       </array>
       <key>Properties</key>
       <dict>

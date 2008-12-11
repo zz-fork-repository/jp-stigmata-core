@@ -4,9 +4,8 @@
                    http://stigmata.sourceforge.jp/
 
                               Copyright 2006-2007 Haruaki Tamada, Ph.D
-                                            Software Engineering Lab.,
-                           Graduate School of Information and Science,
-                             Nara Institute of Science and Technology,
+                          Faculty of Computer Science and Engineering,
+                                              Kyoto Sangyo University.
 
 * Overview
 
@@ -25,7 +24,7 @@
 * Features
 
     Stigmata support the extracting birthmarks from Java class
-  files, and written in Java 5 with ASM.
+  files, and written in Java SE 6 with ASM.
 
   The main features are:
 
@@ -40,15 +39,15 @@
 
   Stigmata requires following libraries.
 
-  - ASM 2.2.3 (http://asm.objectweb.org/)
+  - ASM 3.1 (http://asm.objectweb.org/)
   - Apache Commons DBUtils 1.1 (http://commons.apache.org/dbutils/)
   - Apache Commons Beanutils 1.7.0 (http://commons.apache.org/beanutils/)
   - Talisman XmlCli 1.2.2 (http://talisman.sourceforge.jp/xmlcli/)
   - Talisman MDS 1.0.1 (http://talisman.sourceforge.jp/mds/)
   - Talisman i18n 1.0.1 (http://talisman.sourceforge.jp/i18n/)
-  - Stigmata Digger 1.0.0 (http://stigmata.sourceforge.jp/digger/)
+  - Stigmata Digger 1.1.0 (http://stigmata.sourceforge.jp/digger/)
 
-  - JUnit 4.1 (http://www.junit.org/) for testing.
+  - JUnit 4.3 (http://www.junit.org/) for testing.
 
 * Author
 
