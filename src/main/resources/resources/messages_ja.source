@@ -34,6 +34,13 @@ fileMenu.menu.label=ファイル
 newframe.menuitem.label=新規フレーム
 newframe.menuitem.tooltip=新しいフレームを作成します
 
+installplugin.menuitem.label=プラグインのインストール...
+installplugin.menuitem.tooltip=Stigmataのプラグインをインストールします．
+installplugin.fileopen.description=Stigmataのプラグインjarファイル
+reload.after.installplugin=<html><body><p>プラグインのインストールは終了しました．<br>インストールしたプラグインを使うためには，Stigmataを再起動する必要があります．<br>再起動しますか．</p></body></html>
+reload.after.installplugin.title=Stigmataの再起動
+reload.manually=インストールしたプラグインはStigmataの再起動後，使えるようになります．
+
 savesetting.menuitem.label=設定を保存
 savesetting.menuitem.tooltip=現在の設定を保存します
 

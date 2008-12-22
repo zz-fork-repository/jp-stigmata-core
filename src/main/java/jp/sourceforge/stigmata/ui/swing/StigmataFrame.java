@@ -52,6 +52,8 @@ import jp.sourceforge.stigmata.ComparisonResultSet;
 import jp.sourceforge.stigmata.ExtractionResultSet;
 import jp.sourceforge.stigmata.Main;
 import jp.sourceforge.stigmata.Stigmata;
+import jp.sourceforge.stigmata.StigmataCommand;
+import jp.sourceforge.stigmata.command.StigmataCommandFactory;
 import jp.sourceforge.stigmata.event.BirthmarkEngineAdapter;
 import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
 import jp.sourceforge.stigmata.event.WarningMessages;
@@ -407,7 +409,7 @@ public class StigmataFrame extends JFrame{
 
     private void clearSettings(){
         Utility.deleteDirectory(new File(BirthmarkEnvironment.getStigmataHome()));
-        reloadSettings(new String[] { "--reset-config", "--mode", "gui", });
+        reloadSettings(new String[] { "--reset-config", "gui", });
     }
 
     private void initLayouts(){
@@ -436,6 +438,34 @@ public class StigmataFrame extends JFrame{
             JOptionPane.showMessageDialog(
                 this, new String(sb), getMessages().get("warning.dialog.title"),
                 JOptionPane.WARNING_MESSAGE
+            );
+        }
+    }
+
+    private void installPlugin(){
+        File pluginFile = getOpenFile(
+            new String[] { "jar", },
+            messages.get("installplugin.fileopen.description")
+        );
+        if(pluginFile != null && pluginFile.exists()){
+            StigmataCommandFactory factory = StigmataCommandFactory.getInstance();
+            StigmataCommand command = factory.getCommand("install");
+            String path = pluginFile.getPath();
+            command.perform(getStigmata(), new String[] { path });
+        }
+
+        int flag = JOptionPane.showConfirmDialog(
+            this, getMessages().get("reload.after.installplugin"),
+            getMessages().get("reload.after.installplugin.title"),
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+        );
+
+        if(flag == JOptionPane.YES_OPTION){
+            reloadSettings(new String[] { "gui", });
+        }
+        else{
+            JOptionPane.showMessageDialog(
+                this, getMessages().get("reload.manually")
             );
         }
     }
@@ -490,6 +520,7 @@ public class StigmataFrame extends JFrame{
         JMenuItem exportMenu = GUIUtility.createJMenuItem(getMessages(), "exportsetting");
         JMenuItem clearMenu = GUIUtility.createJMenuItem(getMessages(), "clearsetting");
         JMenuItem refreshMenu = GUIUtility.createJMenuItem(getMessages(), "refreshsetting");
+        JMenuItem installMenu = GUIUtility.createJMenuItem(getMessages(), "installplugin");
         JMenuItem closeTabMenu = GUIUtility.createJMenuItem(getMessages(), "closetab");
         JMenuItem closeMenu = GUIUtility.createJMenuItem(getMessages(), "closeframe");
         JMenuItem exitMenu = GUIUtility.createJMenuItem(getMessages(), "exit");
@@ -503,6 +534,8 @@ public class StigmataFrame extends JFrame{
         fileMenu.add(exportMenu);
         fileMenu.add(refreshMenu);
         fileMenu.add(clearMenu);
+        fileMenu.add(new JSeparator());
+        fileMenu.add(installMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);
         fileMenu.add(closeMenu);
@@ -539,9 +572,14 @@ public class StigmataFrame extends JFrame{
                 clearSettings();
             }
         });
+        installMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                installPlugin();
+            }
+        });
         refreshMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
-                reloadSettings(new String[] { "--mode", "gui", });
+                reloadSettings(new String[] { "gui", });
             }
         });
 

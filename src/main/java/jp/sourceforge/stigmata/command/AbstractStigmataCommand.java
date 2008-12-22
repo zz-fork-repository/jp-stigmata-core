@@ -4,6 +4,7 @@ package jp.sourceforge.stigmata.command;
  * $Id$
  */
 
+import jp.sourceforge.stigmata.Stigmata;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.StigmataCommand;
 import jp.sourceforge.stigmata.hook.Phase;
@@ -15,6 +16,13 @@ import jp.sourceforge.stigmata.hook.StigmataHookManager;
  * @version $Revision$
  */
 public abstract class AbstractStigmataCommand implements StigmataCommand{
+    /**
+     * {@link perform(Stigmata, BirthmarkContext, String[]) <code>perform(stigmata, stigmata.createContext(), args)</code>}.
+     */
+    public void perform(Stigmata stigmata, String[] args){
+        perform(stigmata, stigmata.createContext(), args);
+    }
+
     public boolean isAvailableArguments(String[] args){
         return true;
     }

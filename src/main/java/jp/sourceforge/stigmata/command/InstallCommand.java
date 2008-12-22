@@ -43,7 +43,8 @@ public class InstallCommand extends AbstractStigmataCommand{
             }
             if(pluginDest.exists()){
                 String override = env.getProperty("override.exists.plugin");
-                if(override != null && (override.equalsIgnoreCase("true") || override.equalsIgnoreCase("yes"))){
+                if(override != null &&
+                   (override.equalsIgnoreCase("true") || override.equalsIgnoreCase("yes"))){
                     pluginDest.delete();
                 }
                 else{
