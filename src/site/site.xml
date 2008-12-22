@@ -25,6 +25,7 @@
       <item name="jbirth 1.x" href="http://se.naist.jp/jbirth/" />
       <item name="Stigmata (jbirth 2.x)" href="http://stigmata.sourceforge.jp/" />
       <item name="Digger" href="http://stigmata.sourceforge.jp/digger/" />
+      <item name="Stigmata Plugins" href="http://stigmata.sourceforge.jp/plugins/" />
     </links>
 
     <menu name="Stigmata">
@@ -54,6 +55,7 @@
 
     <menu name="Links">
       <item name="Project Page"   href="http://sourceforge.jp/projects/stigmata/"/>
+      <item name="Talisman"       href="http://talisman.sourceforge.jp/"/>
       <item name="DonQuixote"     href="http://donquixote.cafebabe.jp/" />
     </menu>
 
