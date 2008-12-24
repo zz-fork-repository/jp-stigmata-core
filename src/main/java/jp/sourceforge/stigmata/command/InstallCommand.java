@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.Stigmata;
+import jp.sourceforge.stigmata.utils.Utility;
 
 /**
  * 
@@ -38,8 +39,8 @@ public class InstallCommand extends AbstractStigmataCommand{
             File pluginSource = new File(args[i]);
             File pluginDest = new File(pluginsDir, pluginSource.getName());
 
-            if(!pluginSource.getName().endsWith(".jar")){
-                throw new IllegalArgumentException("plugin is allowed only jar archive: " + args[i]);
+            if(!Utility.isStigmataPluginJarFile(pluginSource)){
+                throw new IllegalArgumentException(pluginSource + ": not stigmata plugin file.");
             }
             if(pluginDest.exists()){
                 String override = env.getProperty("override.exists.plugin");

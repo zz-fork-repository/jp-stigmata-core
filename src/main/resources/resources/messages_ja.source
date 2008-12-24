@@ -39,7 +39,15 @@ installplugin.menuitem.tooltip=Stigmataのプラグインをインストールします．
 installplugin.fileopen.description=Stigmataのプラグインjarファイル
 reload.after.installplugin=<html><body><p>プラグインのインストールは終了しました．<br>インストールしたプラグインを使うためには，Stigmataを再起動する必要があります．<br>再起動しますか．</p></body></html>
 reload.after.installplugin.title=Stigmataの再起動
-reload.manually=インストールしたプラグインはStigmataの再起動後，使えるようになります．
+reload.manually.title=再起動
+reload.manually=<html><body><p>インストールしたプラグインを使うために，Stigmataを再起動，<br>もしくは，「${fileMenu.menu.label}」メニューから「${refreshsetting.menuitem.label}」を選択してください．</p></body></html>
+
+install.error.title=インストール失敗
+install.error={0}: インストールに失敗しました．\
+原因は以下の通りです．
+install.error.file.missing=ファイルが見つかりません．
+install.error.servicedescriptor.missing=サービス記述子がjarファイル内に含まれていません．
+install.error.notjarfile=jarファイルではありません．
 
 savesetting.menuitem.label=設定を保存
 savesetting.menuitem.tooltip=現在の設定を保存します

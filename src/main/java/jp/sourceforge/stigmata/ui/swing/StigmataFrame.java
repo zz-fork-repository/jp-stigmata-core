@@ -16,8 +16,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ButtonGroup;
@@ -447,25 +449,43 @@ public class StigmataFrame extends JFrame{
             new String[] { "jar", },
             messages.get("installplugin.fileopen.description")
         );
-        if(pluginFile != null && pluginFile.exists()){
-            StigmataCommandFactory factory = StigmataCommandFactory.getInstance();
-            StigmataCommand command = factory.getCommand("install");
+        List<String> messages = new ArrayList<String>();
+
+        if(Utility.isStigmataPluginJarFile(pluginFile, messages)){
+            StigmataCommand command = StigmataCommandFactory.getInstance().getCommand("install");
             String path = pluginFile.getPath();
             command.perform(getStigmata(), new String[] { path });
-        }
 
-        int flag = JOptionPane.showConfirmDialog(
-            this, getMessages().get("reload.after.installplugin"),
-            getMessages().get("reload.after.installplugin.title"),
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
-        );
+            int flag = JOptionPane.showConfirmDialog(
+                this, getMessages().get("reload.after.installplugin"),
+                getMessages().get("reload.after.installplugin.title"),
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+            );
 
-        if(flag == JOptionPane.YES_OPTION){
-            reloadSettings(new String[] { "gui", });
+            if(flag == JOptionPane.YES_OPTION){
+                reloadSettings(new String[] { "gui", });
+            }
+            else{
+                JOptionPane.showMessageDialog(
+                    this, getMessages().get("reload.manually"),
+                    getMessages().get("reload.manually.title"),
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
         }
         else{
+            StringBuilder sb = new StringBuilder("<html><body>");
+            sb.append("<p>").append(getMessages().format("install.error", pluginFile.getPath())).append("</p>");
+            sb.append("<ul>");
+            for(String message: messages){
+                sb.append("<li>").append(getMessages().get(message)).append("</li>");
+            }
+            sb.append("</ul></body></html>");
+
             JOptionPane.showMessageDialog(
-                this, getMessages().get("reload.manually")
+                this, new String(sb),
+                getMessages().get("install.error.title"),
+                JOptionPane.ERROR_MESSAGE
             );
         }
     }
