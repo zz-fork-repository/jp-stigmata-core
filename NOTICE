@@ -1,0 +1,18 @@
+   =========================================================================
+   ==  NOTICE file corresponding to the section 4 d of                    ==
+   ==  the Apache License, Version 2.0,                                   ==
+   ==  in this case for the Apache Ant distribution.                      ==
+   =========================================================================
+
+   Stigmata
+   Copyright 2006-2009, Haruaki Tamada.
+
+   This product includes following software:
+     - ASM 3.1 (http://asm.objectweb.org/)
+     - Apache Commons DBUtils 1.1 (http://commons.apache.org/dbutils/)
+     - Apache Commons Beanutils 1.7.0 (http://commons.apache.org/beanutils/)
+     - Talisman XmlCli 1.2.2 (http://talisman.sourceforge.jp/xmlcli/)
+     - Talisman MDS 1.0.1 (http://talisman.sourceforge.jp/mds/)
+     - Talisman i18n 1.0.1 (http://talisman.sourceforge.jp/i18n/)
+     - Stigmata Digger 1.1.0 (http://stigmata.sourceforge.jp/digger/)
+     - JUnit 4.3 (http://www.junit.org/) for testing.
