@@ -39,7 +39,7 @@ public class BirthmarkEnvironment{
     /**
      * home directory path.
      */
-    private static StigmataHomeManager stigmataHome;
+    private static StigmataHomeManager stigmataHome = new StigmataHomeManager();
 
     /**
      * parent of this environment.

@@ -49,6 +49,11 @@ install.error.file.missing=ファイルが見つかりません．
 install.error.servicedescriptor.missing=サービス記述子がjarファイル内に含まれていません．
 install.error.notjarfile=jarファイルではありません．
 
+opensettingdir.menuitem.label=設定ディレクトリを開く
+opensettingdir.menuitem.tooltip=Stigmata の設定ディレクトリを開きます．
+opensettingdir.fail=<html><body><p>フォルダを開けませんでした．</p><p>原因: {0}</p></body></html>
+opensettingdir.fail.title=フォルダが開けませんでした
+
 savesetting.menuitem.label=設定を保存
 savesetting.menuitem.tooltip=現在の設定を保存します
 

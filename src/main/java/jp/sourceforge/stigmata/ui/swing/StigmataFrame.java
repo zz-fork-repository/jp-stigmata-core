@@ -62,6 +62,7 @@ import jp.sourceforge.stigmata.event.WarningMessages;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.ui.swing.actions.AboutAction;
 import jp.sourceforge.stigmata.ui.swing.actions.LicenseAction;
+import jp.sourceforge.stigmata.ui.swing.actions.OpenSettingDirAction;
 import jp.sourceforge.stigmata.ui.swing.graph.SimilarityDistributionGraphPane;
 import jp.sourceforge.stigmata.ui.swing.mds.MdsViewerPane;
 import jp.sourceforge.stigmata.ui.swing.tab.EditableTabbedPane;
@@ -450,6 +451,9 @@ public class StigmataFrame extends JFrame{
             messages.get("installplugin.fileopen.description")
         );
         List<String> messages = new ArrayList<String>();
+        if(pluginFile == null){
+            return;
+        }
 
         if(Utility.isStigmataPluginJarFile(pluginFile, messages)){
             StigmataCommand command = StigmataCommandFactory.getInstance().getCommand("install");
@@ -541,6 +545,7 @@ public class StigmataFrame extends JFrame{
         JMenuItem clearMenu = GUIUtility.createJMenuItem(getMessages(), "clearsetting");
         JMenuItem refreshMenu = GUIUtility.createJMenuItem(getMessages(), "refreshsetting");
         JMenuItem installMenu = GUIUtility.createJMenuItem(getMessages(), "installplugin");
+        JMenuItem openSettingDirMenu = GUIUtility.createJMenuItem(getMessages(), "opensettingdir", new OpenSettingDirAction(this, getMessages()));
         JMenuItem closeTabMenu = GUIUtility.createJMenuItem(getMessages(), "closetab");
         JMenuItem closeMenu = GUIUtility.createJMenuItem(getMessages(), "closeframe");
         JMenuItem exitMenu = GUIUtility.createJMenuItem(getMessages(), "exit");
@@ -555,6 +560,7 @@ public class StigmataFrame extends JFrame{
         fileMenu.add(refreshMenu);
         fileMenu.add(clearMenu);
         fileMenu.add(new JSeparator());
+        fileMenu.add(openSettingDirMenu);
         fileMenu.add(installMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);

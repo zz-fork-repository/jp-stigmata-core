@@ -1,5 +1,9 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
+/*
+ * $Id$
+ */
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -19,6 +23,11 @@ import jp.sourceforge.stigmata.ui.swing.CompareTableCellRenderer;
 import jp.sourceforge.stigmata.ui.swing.GUIUtility;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ * @version $Revision$
+ */
 public class UpdateBirthmarkCellColorAction extends AbstractAction{
     private static final long serialVersionUID = 2390797591047570440L;
 
