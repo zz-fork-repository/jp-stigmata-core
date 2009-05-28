@@ -71,7 +71,7 @@ public interface BirthmarkSpi extends ServiceProvider{
      */
     public BirthmarkComparator getComparator();
 
-    public boolean isExpert();
+    public boolean isExperimental();
 
     public boolean isUserDefined();
 

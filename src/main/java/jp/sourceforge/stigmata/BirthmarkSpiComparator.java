@@ -24,10 +24,10 @@ class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
     }
 
     public int compare(BirthmarkSpi s1, BirthmarkSpi s2){
-        if(s1.isExpert() && !s2.isExpert()){
+        if(s1.isExperimental() && !s2.isExperimental()){
             return 1;
         }
-        else if(!s1.isExpert() && s2.isExpert()){
+        else if(!s1.isExperimental() && s2.isExperimental()){
             return -1;
         }
         else{

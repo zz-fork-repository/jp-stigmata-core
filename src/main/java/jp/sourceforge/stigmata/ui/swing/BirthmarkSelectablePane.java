@@ -29,7 +29,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     private Set<String> selectedServices = new HashSet<String>();
     private Map<String, BirthmarkSelection> services;
     private List<DataChangeListener> listeners = new ArrayList<DataChangeListener>();
-    private boolean expertmode;
+    private boolean experimentalMode;
 
     public BirthmarkSelectablePane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -44,13 +44,13 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
         return stigmata.getMessages();
     }
 
-    public void setExpertMode(boolean expertmode){
-        this.expertmode = expertmode;
+    public void setExperimentalMode(boolean experimentalMode){
+        this.experimentalMode = experimentalMode;
         updateLayouts();
     }
 
-    public boolean isExpertMode(){
-        return expertmode;
+    public boolean isExperimentalMode(){
+        return experimentalMode;
     }
 
     public String[] getSelectedServiceTypes(){
@@ -98,7 +98,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     public void reset(){
         selectedServices.clear();
         initServices();
-        expertmode = false;
+        experimentalMode = false;
         updateLayouts();
         fireEvent();
     }

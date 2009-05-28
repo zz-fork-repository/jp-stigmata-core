@@ -26,8 +26,8 @@ class BirthmarkSelection implements Serializable{
         return service;
     }
 
-    public boolean isVisible(boolean expertFlag){
-        return expertFlag || (!expertFlag && !service.isExpert());
+    public boolean isVisible(boolean experimentalFlag){
+        return experimentalFlag || (!experimentalFlag && !service.isExperimental());
     }
 
     public boolean isSelected(){

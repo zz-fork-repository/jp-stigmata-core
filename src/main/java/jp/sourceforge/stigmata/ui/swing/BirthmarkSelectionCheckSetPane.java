@@ -72,7 +72,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
 
         for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
             final BirthmarkSelection elem = i.next();
-            if(elem.isVisible(isExpertMode())){
+            if(elem.isVisible(isExperimentalMode())){
                 JCheckBox check = new JCheckBox(elem.getService().getDisplayType());
                 check.setSelected(elem.isSelected());
                 check.addActionListener(new ActionListener(){
@@ -86,7 +86,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
                 checks.add(check);
             }
 
-            select(elem.getType(), elem.isVisible(isExpertMode()) && elem.isSelected());
+            select(elem.getType(), elem.isVisible(isExperimentalMode()) && elem.isSelected());
         }
         updateUI();
     }
@@ -96,7 +96,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
         int cols = 0;
         for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
             BirthmarkSelection selection = i.next();
-            if(selection.isVisible(isExpertMode())){
+            if(selection.isVisible(isExperimentalMode())){
                 cols++;
             }
         }

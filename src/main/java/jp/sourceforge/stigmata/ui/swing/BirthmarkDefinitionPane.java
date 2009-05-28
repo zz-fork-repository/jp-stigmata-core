@@ -226,7 +226,7 @@ public class BirthmarkDefinitionPane extends JPanel{
         private JTextArea description;
         private JComboBox extractor;
         private JComboBox comparator;
-        private JCheckBox expert;
+        private JCheckBox experimental;
         private JCheckBox userDefined;
 
         public InformationPane(StigmataFrame stigmata, BirthmarkDefinitionPane thisPane){
@@ -268,7 +268,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             extractor.getModel().setSelectedItem(null);
             comparator.getModel().setSelectedItem(null);
             userDefined.setSelected(true);
-            expert.setSelected(true);
+            experimental.setSelected(true);
         }
 
         public boolean isAvailableService(){
@@ -308,7 +308,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             selectComboBoxItem(extractor, service.getExtractorClassName());
             selectComboBoxItem(comparator, service.getComparatorClassName());
             userDefined.setSelected(service.isUserDefined());
-            expert.setSelected(service.isExpert());
+            experimental.setSelected(service.isExperimental());
 
             setEnabled(service.isUserDefined());
         }
@@ -336,7 +336,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             displayType = new JTextField();
             extractor = new JComboBox();
             comparator = new JComboBox();
-            expert = new JCheckBox(messages.get("define.expert.label"));
+            experimental = new JCheckBox(messages.get("define.experimental.label"));
             userDefined = new JCheckBox(messages.get("define.userdef.label"));
             description = new JTextArea();
             JScrollPane scroll = new JScrollPane(description);
@@ -356,7 +356,7 @@ public class BirthmarkDefinitionPane extends JPanel{
 
             Box box2 = Box.createHorizontalBox();
             box2.add(Box.createHorizontalGlue());
-            box2.add(expert);
+            box2.add(experimental);
             box2.add(Box.createHorizontalGlue());
             box2.add(userDefined);
             box2.add(Box.createHorizontalGlue());
@@ -381,13 +381,13 @@ public class BirthmarkDefinitionPane extends JPanel{
             GUIUtility.decorateJComponent(messages, scroll, "define.description");
             GUIUtility.decorateJComponent(messages, extractorPane, "define.extractor");
             GUIUtility.decorateJComponent(messages, comparatorPane, "define.comparator");
-            GUIUtility.decorateJComponent(messages, expert, "define.expert");
+            GUIUtility.decorateJComponent(messages, experimental, "define.experimental");
             GUIUtility.decorateJComponent(messages, userDefined, "define.userdef");
 
             userDefined.setEnabled(false);
-            expert.setEnabled(false);
+            experimental.setEnabled(false);
             userDefined.setSelected(true);
-            expert.setSelected(true);
+            experimental.setSelected(true);
 
             extractor.setEditable(true);
             comparator.setEditable(true);

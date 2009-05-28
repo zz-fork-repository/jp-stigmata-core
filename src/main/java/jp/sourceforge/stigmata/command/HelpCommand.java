@@ -50,7 +50,7 @@ public class HelpCommand extends AbstractStigmataCommand{
         System.out.println();
         System.out.println(helpResource.getString("cli.interface.birthmarks"));
         for(BirthmarkSpi service: env.getServices()){
-            if(!service.isExpert()){
+            if(!service.isExperimental()){
                 System.out.printf("    %-5s (%s): %s%n", service.getType(),
                         service.getDisplayType(), service.getDescription());
             }

@@ -37,7 +37,7 @@ public class UsedClassesBirthmarkService extends AbstractBirthmarkService implem
         return comparator;
     }
 
-    public boolean isExpert(){
+    public boolean isExperimental(){
         return false;
     }
 

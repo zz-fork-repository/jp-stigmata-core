@@ -38,7 +38,7 @@ public class KGramBasedBirthmarkService extends AbstractBirthmarkService impleme
         return comparator;
     }
 
-    public boolean isExpert(){
+    public boolean isExperimental(){
         return false;
     }
 

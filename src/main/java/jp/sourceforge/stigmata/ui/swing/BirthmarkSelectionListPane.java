@@ -100,11 +100,11 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
 
         for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
             BirthmarkSelection elem = i.next();
-            if(elem.isVisible(isExpertMode())){
+            if(elem.isVisible(isExperimentalMode())){
                 model.addElement(elem);
             }
 
-            select(elem.getType(), elem.isVisible(isExpertMode()) && elem.isSelected());
+            select(elem.getType(), elem.isVisible(isExperimentalMode()) && elem.isSelected());
         }
         updateUI();
     }

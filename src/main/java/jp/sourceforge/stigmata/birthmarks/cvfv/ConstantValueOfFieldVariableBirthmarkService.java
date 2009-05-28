@@ -38,7 +38,7 @@ public class ConstantValueOfFieldVariableBirthmarkService extends AbstractBirthm
         return comparator;
     }
 
-    public boolean isExpert(){
+    public boolean isExperimental(){
         return false;
     }
 

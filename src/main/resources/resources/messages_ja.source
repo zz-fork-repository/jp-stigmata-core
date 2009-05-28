@@ -89,8 +89,8 @@ license.dialog.title=ライセンス
 helpmenu.menuitem.label=ヘルプ...
 helpmenu.menuitem.tooltip=ヘルプを表示
 
-expertmenu.menuitem.label=実験的機能モード
-expertmenu.menuitem.tooltip=実験的機能モードに移行 (より多くのバースマークの選択，また，新たなバースマークの定義が可能になります．ただし，まだ実験的な機能です)
+experimentalmenu.menuitem.label=実験的機能モード
+experimentalmenu.menuitem.tooltip=実験的機能モードに移行 (より多くのバースマークの選択，また，新たなバースマークの定義が可能になります．ただし，まだ実験的な機能です)
 
 lookandfeel.menu.label=ルック&フィール
 
@@ -343,8 +343,8 @@ define.extractor.tooltip=クラスファイルからバースマークを抽出するクラス
 define.extractor.border=バースマーク抽出器
 define.comparator.tooltip=得られたバースマークを比較するクラス
 define.comparator.border=バースマーク比較器
-define.expert.label=実験的機能
-define.expert.tooltip=実験的なバースマークであるか
+define.experimental.label=実験的機能
+define.experimental.tooltip=実験的なバースマークであるか
 define.userdef.label=ユーザ定義
 define.userdef.tooltip=ユーザが定義したバースマークであるか
 newservice.definition.label=(新規バースマーク)

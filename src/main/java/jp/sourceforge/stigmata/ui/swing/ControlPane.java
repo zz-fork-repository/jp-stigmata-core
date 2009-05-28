@@ -61,7 +61,7 @@ public class ControlPane extends JPanel{
     private PopupButton comparePopup;
     private JComboBox unitBox;
     private Map<String, String> unitLabels = new HashMap<String, String>();
-    private boolean expertmode = false;
+    private boolean experimentalMode = false;
 
     public ControlPane(StigmataFrame stigmata){
         this.stigmata = stigmata;
@@ -96,10 +96,10 @@ public class ControlPane extends JPanel{
     }
 
     public void reset(){
-        this.expertmode = false;
+        this.experimentalMode = false;
         definition.reset();
         birthmarks.reset();
-        stigmata.setExpertMode(false);
+        stigmata.setExperimentalMode(false);
         targetX.removeAllElements();
         targetY.removeAllElements();
 
@@ -149,12 +149,12 @@ public class ControlPane extends JPanel{
         }
     }
 
-    public void setExpertMode(boolean expertmode){
-        this.expertmode = expertmode;
-        birthmarks.setExpertMode(expertmode);
-        stigmata.setExpertMode(expertmode);
+    public void setExperimentalMode(boolean experimentalModeFlag){
+        this.experimentalMode = experimentalModeFlag;
+        birthmarks.setExperimentalMode(experimentalModeFlag);
+        stigmata.setExperimentalMode(experimentalModeFlag);
 
-        if(expertmode){
+        if(experimentalModeFlag){
             int index = controlTab.getSelectedIndex();
             GUIUtility.addNewTab(stigmata.getMessages(), "definition", controlTab, definition);
             GUIUtility.addNewTab(stigmata.getMessages(), "filter", controlTab, filters);
@@ -169,8 +169,8 @@ public class ControlPane extends JPanel{
         updateEnable();
     }
 
-    public boolean isExpertMode(){
-        return expertmode;
+    public boolean isExperimentalMode(){
+        return experimentalMode;
     }
 
     private void removeTabByName(String tabname){

@@ -39,7 +39,7 @@ public class FrequencyMethodCallBirthmarkService extends AbstractBirthmarkServic
         return comparator;
     }
 
-    public boolean isExpert(){
+    public boolean isExperimental(){
         return false;
     }
 

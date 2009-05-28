@@ -76,7 +76,7 @@ public abstract class AbstractBirthmarkService implements BirthmarkSpi{
 
     public abstract String getDefaultDescription();
 
-    public boolean isExpert(){
+    public boolean isExperimental(){
         return true;
     }
 

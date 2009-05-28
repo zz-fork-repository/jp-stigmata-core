@@ -84,7 +84,7 @@ public class StigmataFrame extends JFrame{
     private JTabbedPane tabPane;
     private JMenuItem closeTabMenu;
     private JMenuItem saveMenu;
-    private JCheckBoxMenuItem expertmodeMenu;
+    private JCheckBoxMenuItem experimentalMode;
     private Stigmata stigmata;
     private BirthmarkEnvironment environment;
     private ControlPane control;
@@ -629,7 +629,7 @@ public class StigmataFrame extends JFrame{
         JMenuItem about = GUIUtility.createJMenuItem(getMessages(), "about", new AboutAction(this));
         JMenuItem license = GUIUtility.createJMenuItem(getMessages(), "license", new LicenseAction(this));
         JMenuItem help = GUIUtility.createJMenuItem(getMessages(), "helpmenu");
-        expertmodeMenu = GUIUtility.createJCheckBoxMenuItem(getMessages(), "expertmenu");
+        experimentalMode = GUIUtility.createJCheckBoxMenuItem(getMessages(), "experimentalmenu");
 
         menu.add(about);
         menu.add(license);
@@ -637,11 +637,11 @@ public class StigmataFrame extends JFrame{
         menu.add(new JSeparator());
         menu.add(createLookAndFeelMenu());
         menu.add(new JSeparator());
-        menu.add(expertmodeMenu);
+        menu.add(experimentalMode);
 
-        expertmodeMenu.addActionListener(new ActionListener(){
+        experimentalMode.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                expertMenuActionPerformed(((JCheckBoxMenuItem)e.getSource()).getState());
+                updateExperimentalModeState(((JCheckBoxMenuItem)e.getSource()).getState());
             }
         });
         help.setEnabled(false);
@@ -680,12 +680,12 @@ public class StigmataFrame extends JFrame{
         return laf;
     }
 
-    public void setExpertMode(boolean expertmode){
-        expertmodeMenu.setState(expertmode);
+    public void setExperimentalMode(boolean experimentalModeFlag){
+        experimentalMode.setState(experimentalModeFlag);
     }
 
-    private void expertMenuActionPerformed(boolean status){
-        control.setExpertMode(status);
+    private void updateExperimentalModeState(boolean status){
+        control.setExperimentalMode(status);
     }
 
     private void showExceptionMessage(Throwable e){
