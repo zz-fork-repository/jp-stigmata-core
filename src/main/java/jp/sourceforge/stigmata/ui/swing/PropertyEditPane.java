@@ -115,8 +115,7 @@ public class PropertyEditPane extends JPanel{
 
     private void addNewProperty(int index){
         final Messages messages = stigmata.getMessages();
-        GridBagLayout layout = new GridBagLayout();
-        JPanel panel = new JPanel(layout);
+        JPanel panel = new JPanel(new GridBagLayout());
         JLabel nameLabel = new JLabel(messages.get("propertyname.label"));
         JLabel valueLabel = new JLabel(messages.get("propertyvalue.label"));
         JTextField name = new JTextField(15);
@@ -126,25 +125,19 @@ public class PropertyEditPane extends JPanel{
         gbc.gridx = 0; gbc.gridwidth = 1;
         gbc.gridy = 0; gbc.gridheight = 1;
         gbc.insets = new Insets(5, 5, 5, 0);
-        layout.setConstraints(nameLabel, gbc);
-        panel.add(nameLabel);
+        gbc.weightx = 0d;
+        panel.add(nameLabel, gbc);
 
-        gbc.gridx = 1; gbc.gridwidth = 2;
-        gbc.gridy = 0; gbc.gridheight = 1;
+        gbc.gridy = 1;
+        panel.add(valueLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1d;
+        panel.add(value, gbc);
+
+        gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        layout.setConstraints(name, gbc);
-        panel.add(name);
-
-        gbc.gridx = 0; gbc.gridwidth = 1;
-        gbc.gridy = 1; gbc.gridheight = 1;
-        layout.setConstraints(valueLabel, gbc);
-        panel.add(valueLabel);
-
-        gbc.gridx = 1; gbc.gridwidth = 2;
-        gbc.gridy = 1; gbc.gridheight = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        layout.setConstraints(value, gbc);
-        panel.add(value);
+        panel.add(name, gbc);
 
         if(index >= 0){
             String keyValue = String.valueOf(table.getValueAt(index, 0));
