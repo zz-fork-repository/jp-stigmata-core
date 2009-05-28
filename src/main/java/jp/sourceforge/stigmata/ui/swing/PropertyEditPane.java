@@ -9,6 +9,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Iterator;
@@ -180,7 +182,14 @@ public class PropertyEditPane extends JPanel{
 
     private void initLayouts(){
         final Messages messages = stigmata.getMessages();
-        model = new DefaultTableModel();
+        model = new DefaultTableModel(){
+            private static final long serialVersionUID = -4689972147506006970L;
+
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         model.addColumn(messages.get("propertyname.label"));
         model.addColumn(messages.get("propertyvalue.label"));
         table = new JTable(model);
@@ -201,20 +210,28 @@ public class PropertyEditPane extends JPanel{
                 removeSelectedProperty();
             }
         };
-        final Action changeAction = new AbstractAction(){
+        final Action editAction = new AbstractAction(){
             private static final long serialVersionUID = -7406073660916286349L;
 
             public void actionPerformed(ActionEvent e){
                 addNewProperty(table.getSelectedRow());
             }
         };
+        table.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(e.getClickCount() == 2){
+                    addNewProperty(table.getSelectedRow());
+                }
+            }
+        });
         JButton addButton = GUIUtility.createButton(messages, "propertyadd", addAction);
-        JButton changeButton = GUIUtility.createButton(messages, "propertychange", changeAction);
+        JButton changeButton = GUIUtility.createButton(messages, "propertychange", editAction);
         JButton removeButton = GUIUtility.createButton(messages, "propertyremove", removeAction);
 
         final JPopupMenu popup = new JPopupMenu();
         popup.add(GUIUtility.createJMenuItem(messages, "propertyadd", addAction));
-        popup.add(GUIUtility.createJMenuItem(messages, "propertychange", changeAction));
+        popup.add(GUIUtility.createJMenuItem(messages, "propertychange", editAction));
         popup.add(GUIUtility.createJMenuItem(messages, "propertyremove", removeAction));
 
         setLayout(new BorderLayout());
@@ -234,11 +251,11 @@ public class PropertyEditPane extends JPanel{
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent arg0){
                 removeAction.setEnabled(table.getSelectedRowCount() != 0);
-                changeAction.setEnabled(table.getSelectedRowCount() == 1);
+                editAction.setEnabled(table.getSelectedRowCount() == 1);
             }
         });
         table.addMouseListener(new PopupShowAction(popup));
-        changeAction.setEnabled(false);
+        editAction.setEnabled(false);
         removeAction.setEnabled(false);
     }
 }
