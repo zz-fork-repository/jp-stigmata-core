@@ -4,12 +4,14 @@ package jp.sourceforge.stigmata.ui.swing;
  * $Id$
  */
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -24,10 +26,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.border.TitledBorder;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import jp.sourceforge.talisman.i18n.Messages;
 
@@ -230,5 +235,22 @@ public class GUIUtility{
             panel.setBorder(new EmptyBorder(2, 1, 1, 1));
             tabPane.setTabComponentAt(tabPane.getTabCount() - 1, panel);
         }
+    }
+
+    public static void showErrorDialog(Component parent, Messages messages, Exception e){
+        JPanel panel = new JPanel(new BorderLayout());
+        JTextArea area = new JTextArea();
+        StringWriter out = new StringWriter();
+        e.printStackTrace(new PrintWriter(out));
+        String stackTrace = out.toString();
+
+        panel.add(new JLabel(e.getLocalizedMessage()), BorderLayout.NORTH);
+        panel.add(new JScrollPane(area), BorderLayout.CENTER);
+        area.setText(stackTrace);
+        area.setEditable(false);
+        panel.setPreferredSize(new Dimension(500, 400));
+        panel.setSize(panel.getPreferredSize());
+
+        JOptionPane.showMessageDialog(parent, panel, messages.get("error.dialog.title"), JOptionPane.WARNING_MESSAGE);
     }
 }

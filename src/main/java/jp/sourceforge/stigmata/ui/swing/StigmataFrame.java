@@ -445,6 +445,11 @@ public class StigmataFrame extends JFrame{
         }
     }
 
+    private void onlineUpdate(){
+        UpdatePluginsPane pane = new UpdatePluginsPane(this);
+        JOptionPane.showMessageDialog(this, pane);
+    }
+
     private void installPlugin(){
         File pluginFile = getOpenFile(
             new String[] { "jar", },
@@ -498,6 +503,7 @@ public class StigmataFrame extends JFrame{
         setDefaultUI();
         JMenuBar menubar = new JMenuBar();
         menubar.add(createFileMenu());
+        menubar.add(createPluginsMenu());
         menubar.add(createHelpMenu());
 
         setJMenuBar(menubar);
@@ -537,6 +543,31 @@ public class StigmataFrame extends JFrame{
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
+    private JMenu createPluginsMenu(){
+        JMenu pluginsMenu = GUIUtility.createJMenu(getMessages(), "pluginsMenu");
+        JMenuItem installMenu = GUIUtility.createJMenuItem(getMessages(), "installplugin");
+        JMenuItem openSettingDirMenu = GUIUtility.createJMenuItem(getMessages(), "opensettingdir", new OpenSettingDirAction(this, getMessages()));
+        JMenuItem onlineUpdate = GUIUtility.createJMenuItem(getMessages(), "onlineupdate");
+
+        pluginsMenu.add(openSettingDirMenu);
+        pluginsMenu.add(installMenu);
+        pluginsMenu.add(new JSeparator());
+        pluginsMenu.add(onlineUpdate);
+
+        installMenu.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                installPlugin();
+            }
+        });
+        onlineUpdate.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                onlineUpdate();
+            }
+        });
+
+        return pluginsMenu;
+    }
+
     private JMenu createFileMenu(){
         JMenu fileMenu = GUIUtility.createJMenu(getMessages(), "fileMenu");
         JMenuItem newFrameMenu = GUIUtility.createJMenuItem(getMessages(), "newframe");
@@ -544,8 +575,6 @@ public class StigmataFrame extends JFrame{
         JMenuItem exportMenu = GUIUtility.createJMenuItem(getMessages(), "exportsetting");
         JMenuItem clearMenu = GUIUtility.createJMenuItem(getMessages(), "clearsetting");
         JMenuItem refreshMenu = GUIUtility.createJMenuItem(getMessages(), "refreshsetting");
-        JMenuItem installMenu = GUIUtility.createJMenuItem(getMessages(), "installplugin");
-        JMenuItem openSettingDirMenu = GUIUtility.createJMenuItem(getMessages(), "opensettingdir", new OpenSettingDirAction(this, getMessages()));
         JMenuItem closeTabMenu = GUIUtility.createJMenuItem(getMessages(), "closetab");
         JMenuItem closeMenu = GUIUtility.createJMenuItem(getMessages(), "closeframe");
         JMenuItem exitMenu = GUIUtility.createJMenuItem(getMessages(), "exit");
@@ -559,9 +588,6 @@ public class StigmataFrame extends JFrame{
         fileMenu.add(exportMenu);
         fileMenu.add(refreshMenu);
         fileMenu.add(clearMenu);
-        fileMenu.add(new JSeparator());
-        fileMenu.add(openSettingDirMenu);
-        fileMenu.add(installMenu);
         fileMenu.add(new JSeparator());
         fileMenu.add(closeTabMenu);
         fileMenu.add(closeMenu);
@@ -598,11 +624,7 @@ public class StigmataFrame extends JFrame{
                 clearSettings();
             }
         });
-        installMenu.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evt){
-                installPlugin();
-            }
-        });
+
         refreshMenu.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent evt){
                 reloadSettings(new String[] { "gui", });

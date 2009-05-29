@@ -512,3 +512,23 @@ rank_3.label=類似度: (0.4, 0.6]
 rank_4.label=類似度: (0.6, 0.8]
 rank_5.label=類似度: (0.8, 1.0]
 
+
+hermes.check.button.label=更新確認
+hermes.check.button.tooltip=依存ライブラリが更新可能か確認します．
+hermes.update.button.label=更新
+hermes.update.button.tooltip=依存ライブラリが更新可能であれば，更新します．
+hermes.artifacts.labels=グループID,アーティファクトID,古いバージョン,新しいバージョン,スコープ,状態
+
+pluginsMenu.menu.label=プラグイン
+onlineupdate.menuitem.label=オンラインアップデート...
+onlineupdate.menuitem.tooltip=オンラインアップデートを実行します．
+
+progress.done=ダウンロード終了
+progress.canceled=キャンセル
+progress.not_started=ダウンロード可能
+availabe.artifacts.notfound=更新可能なライブラリは見つかりませんでした．
+restart.stigmata.requrested=更新したライブラリを使うにはStigmataを再起動する必要があります．
+今すぐ再起動を行いますか?
+message.dialog.title=メッセージ
+restart.now=再起動
+restart.later=手動で再起動

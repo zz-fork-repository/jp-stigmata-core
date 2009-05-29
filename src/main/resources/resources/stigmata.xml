@@ -242,6 +242,17 @@ $Id$
       <name>override.exists.plugin</name>
       <value>yes</value>
     </property>
+    <property>
+      <name>update.plugins.startup</name>
+      <value>yes</value>
+    </property>
+<!--
+  If you want to use latest plugins, uncomment below property.
+    <property>
+      <name>location.hermes.config</name>
+      <value>http://stigmata.sourceforge.jp/plugins/hermes.xml</value>
+    </property>
+-->
 <!--
     <property>
       <property-name>name</property-name>
