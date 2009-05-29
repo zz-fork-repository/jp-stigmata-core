@@ -2,24 +2,35 @@ package jp.sourceforge.stigmata.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-import org.apache.commons.cli.ParseException;
 
 import jp.sourceforge.stigmata.Main;
 import jp.sourceforge.stigmata.utils.HermesUtility;
@@ -28,7 +39,10 @@ import jp.sourceforge.talisman.hermes.HermesException;
 import jp.sourceforge.talisman.hermes.HermesPercentageListener;
 import jp.sourceforge.talisman.hermes.InvalidHermesConfigException;
 import jp.sourceforge.talisman.hermes.maven.Artifact;
+import jp.sourceforge.talisman.hermes.maven.License;
 import jp.sourceforge.talisman.i18n.Messages;
+
+import org.apache.commons.cli.ParseException;
 
 public class UpdatePluginsPane extends JPanel{
     private static final long serialVersionUID = 7595296740059360819L;
@@ -78,6 +92,12 @@ public class UpdatePluginsPane extends JPanel{
         }
     }
 
+    private boolean applyLicenses() throws IOException, HermesException{
+        LicensePane licensePane = new LicensePane(stigmata, hermes.getUpdateTarget());
+        JOptionPane.showMessageDialog(stigmata, licensePane);
+        return licensePane.isApply();
+    }
+
     private void showLists() throws IOException, HermesException{
         Artifact[] artifacts = hermes.getUpdateTarget();
         showLists(artifacts);
@@ -119,8 +139,10 @@ public class UpdatePluginsPane extends JPanel{
         updateButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 try{
-                    updateArtifacts();
-                    updateButton.setEnabled(false);
+                    if(applyLicenses()){
+                        updateArtifacts();
+                        updateButton.setEnabled(false);
+                    }
                 } catch(IOException e1){
                     GUIUtility.showErrorDialog(stigmata, stigmata.getMessages(), e1);
                 } catch(HermesException e1){
@@ -136,30 +158,18 @@ public class UpdatePluginsPane extends JPanel{
         buttonPane.add(updateButton);
         buttonPane.add(Box.createHorizontalGlue());
 
-        model = new DefaultTableModel(){
-            private static final long serialVersionUID = -2538706137335748099L;
+        UneditableDefaultTableModel uneditableModel = new UneditableDefaultTableModel();
+        uneditableModel.setColumnClass(ProgressRenderer.PROGRESS_COLUMN, Integer.class);
+        uneditableModel.setColumnIdentifiers(stigmata.getMessages().getArray("hermes.artifacts.labels"));
 
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-
-            public Class<?> getColumnClass(int column){
-                Class<?> clazz = String.class;
-                if(column == ProgressRenderer.PROGRESS_COLUMN){
-                    clazz = Integer.class;
-                }
-                return clazz;
-            }
-        };
-        table = new JTable(model);
+        table = new JTable(uneditableModel);
         table.setDefaultRenderer(Integer.class, new ProgressRenderer());
-
-        model.setColumnIdentifiers(stigmata.getMessages().getArray("hermes.artifacts.labels"));
 
         setLayout(new BorderLayout());
         add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
         add(buttonPane, BorderLayout.SOUTH);
+
+        this.model = uneditableModel;
     }
 
     private static class UpdatePluginsPaneHermesListener implements HermesPercentageListener{
@@ -237,6 +247,145 @@ public class UpdatePluginsPane extends JPanel{
             progressBar.setValue(value);
 
             return progressBar;
+        }
+    }
+
+    private static class LicensePane extends JPanel{
+        private static final long serialVersionUID = -1992258036940405393L;
+
+        private StigmataFrame parent;
+        private Map<License, String> map = new HashMap<License, String>();
+        private Artifact[] artifacts;
+        private DefaultTableModel model = new UneditableDefaultTableModel();
+        private JTextArea area;
+        private JRadioButton applyButton;
+        private JRadioButton discardButton;
+        
+
+        public LicensePane(StigmataFrame parent, Artifact[] artifacts){
+            this.parent = parent;
+            this.artifacts = artifacts;
+
+            initLayout();
+        }
+
+        public boolean isApply(){
+            return applyButton.isSelected();
+        }
+
+        private void showLicense(License license){
+            String licenseTerm = map.get(license);
+            if(licenseTerm == null){
+                try{
+                    licenseTerm = loadLicenseTerm(license);
+                } catch(IOException e){
+                    GUIUtility.showErrorDialog(parent, parent.getMessages(), e);
+                }
+            }
+            area.setText(licenseTerm);
+        }
+
+        private String loadLicenseTerm(License license) throws IOException{
+            URL url = new URL(license.getUrl());
+            StringWriter out = new StringWriter();
+            PrintWriter writer = new PrintWriter(out);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+            while((line = in.readLine()) != null){
+                writer.println(line);
+            }
+            in.close();
+            writer.close();
+
+            String term = out.toString();
+
+            map.put(license, term);
+            return term;
+        }
+
+        private void initLayout(){
+            Messages messages = parent.getMessages();
+            JTable table = new JTable(model);
+            final JComboBox licenseNames = new JComboBox();
+
+            model.setColumnIdentifiers(messages.getArray("hermes.artifacts.basic.labels"));
+            area = new JTextArea();
+
+            applyButton = new JRadioButton(messages.get("apply.licenses"));
+            discardButton = new JRadioButton(messages.get("discard.licenses"), true);
+            ButtonGroup group = new ButtonGroup();
+            group.add(applyButton);
+            group.add(discardButton);
+
+            for(Artifact artifact: artifacts){
+                model.addRow(new String[] { artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion(), });
+            }
+            table.addMouseListener(new MouseAdapter(){
+                public void mouseClicked(MouseEvent e){
+                    int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
+                    License[] licenses = artifacts[row].getPom().getLicenses();
+
+                    licenseNames.removeAllItems();
+                    for(int i = 0; i < licenses.length; i++){
+                        licenseNames.addItem(licenses[i]);
+                    }
+                    if(licenses.length > 0){
+                        licenseNames.setSelectedIndex(0);
+                    }
+                    else{
+                        licenseNames.addItem(parent.getMessages().get("no.valid.licenses"));
+                    }
+                }
+            });
+            licenseNames.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    String name = (String)((JComboBox)e.getSource()).getSelectedItem();
+                    boolean missingLicenseFlag = true;
+                    for(Map.Entry<License, String> entry: map.entrySet()){
+                        License license = entry.getKey();
+                        if(license.getName().equals(name)){
+                            missingLicenseFlag = false;
+                            showLicense(license);
+                        }
+                    }
+                    if(missingLicenseFlag){
+                        area.setText(parent.getMessages().get("no.valid.licenses"));
+                    }
+                }
+            });
+
+            setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridheight = 2;
+            gbc.gridwidth = 1;
+            gbc.weightx = 0.5d;
+            gbc.weighty = 1d;
+            gbc.fill = GridBagConstraints.BOTH;
+            add(new JScrollPane(table), gbc);
+            gbc.gridheight = 1;
+            gbc.gridx = 1;
+            gbc.weightx = 0.5d;
+            gbc.weighty = 0d;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            add(licenseNames, gbc);
+            gbc.gridy = 1;
+            gbc.fill = GridBagConstraints.BOTH;
+            add(new JScrollPane(area), gbc);
+            gbc.gridwidth = 2;
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.weightx = 1d;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.anchor = GridBagConstraints.WEST;
+            add(applyButton, gbc);
+            gbc.gridy = 3;
+            add(discardButton, gbc);
+
+//            setSize(800, 300);
+//            setPreferredSize(getSize());
         }
     }
 }

@@ -175,14 +175,7 @@ public class PropertyEditPane extends JPanel{
 
     private void initLayouts(){
         final Messages messages = stigmata.getMessages();
-        model = new DefaultTableModel(){
-            private static final long serialVersionUID = -4689972147506006970L;
-
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };
+        model = new UneditableDefaultTableModel();
         model.addColumn(messages.get("propertyname.label"));
         model.addColumn(messages.get("propertyvalue.label"));
         table = new JTable(model);
