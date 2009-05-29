@@ -532,3 +532,7 @@ restart.stigmata.requrested=更新したライブラリを使うにはStigmataを再起動する必要
 message.dialog.title=メッセージ
 restart.now=再起動
 restart.later=手動で再起動
+
+apply.licenses=ライセンス条項を受け入れます．
+discard.licenses=ライセンス条項を受け入れません．
+no.valid.licenses=ライセンスが定義されていません．

@@ -383,9 +383,6 @@ public class UpdatePluginsPane extends JPanel{
             add(applyButton, gbc);
             gbc.gridy = 3;
             add(discardButton, gbc);
-
-//            setSize(800, 300);
-//            setPreferredSize(getSize());
         }
     }
 }
