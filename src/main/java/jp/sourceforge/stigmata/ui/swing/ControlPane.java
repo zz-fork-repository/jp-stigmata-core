@@ -5,6 +5,8 @@ package jp.sourceforge.stigmata.ui.swing;
  */
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -348,16 +350,18 @@ public class ControlPane extends JPanel{
         comparePopup = new PopupButton(compareButton);
         unitBox = new JComboBox();
 
-        Box south = Box.createHorizontalBox();
-        south.add(Box.createHorizontalGlue());
-        south.add(resetButton);
-        south.add(Box.createHorizontalGlue());
-        south.add(extractButton);
-        south.add(Box.createHorizontalGlue());
-        south.add(comparePopup);
-        south.add(Box.createHorizontalGlue());
-        south.add(unitBox);
-        south.add(Box.createHorizontalGlue());
+        JPanel south = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 1d;
+        gbc.weighty = 0d;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        south.add(resetButton, gbc);   gbc.gridx++;
+        south.add(extractButton, gbc); gbc.gridx++;
+        south.add(comparePopup, gbc);  gbc.gridx++;
+        south.add(unitBox, gbc);
 
         setLayout(new BorderLayout());
         add(south, BorderLayout.SOUTH);

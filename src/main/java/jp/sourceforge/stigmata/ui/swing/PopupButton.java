@@ -4,13 +4,13 @@ package jp.sourceforge.stigmata.ui.swing;
  * $Id$
  */
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -29,17 +29,11 @@ public class PopupButton extends JPanel{
     private JButton button;
     private JPopupMenu popup;
     private JButton arrowButton;
-    private Icon icon;
 
     public PopupButton(JButton initButton){
-        setLayout(new BorderLayout());
-
         button = initButton;
-        icon = new MetalComboBoxIcon();
-        arrowButton = new JButton(icon);
+        arrowButton = new JButton(new MetalComboBoxIcon());
         popup = new JPopupMenu();
-        add(button, BorderLayout.CENTER);
-        add(arrowButton, BorderLayout.EAST);
 
         arrowButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -47,6 +41,21 @@ public class PopupButton extends JPanel{
                 popup.show(PopupButton.this, p.x, button.getHeight());
             }
         });
+        Insets insets = arrowButton.getMargin();
+        arrowButton.setMargin(new Insets(insets.top, 1, insets.bottom, 1));
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 0d; gbc.weighty = 0d;
+        gbc.gridx = 0;    gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        add(button, gbc);
+
+        gbc.weightx = 0d;
+        gbc.gridx = 1;
+        add(arrowButton, gbc);
+
         updateUI();
     }
 
@@ -63,26 +72,5 @@ public class PopupButton extends JPanel{
 
     public JMenuItem addMenuItem(JMenuItem menuItem){
         return popup.add(menuItem);
-    }
-
-    public void updateUI(){
-        super.updateUI();
-        if(button != null){
-            Dimension prefferedSize = button.getPreferredSize();
-
-            arrowButton.setPreferredSize(new Dimension(icon.getIconWidth() + 4, prefferedSize.height));
-            setPreferredSize(new Dimension(prefferedSize.width + icon.getIconWidth() + 4, prefferedSize.height));
-
-            Dimension maxSize = button.getMaximumSize();
-            arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, maxSize.height));
-            setMaximumSize(new Dimension(maxSize.width + icon.getIconWidth() + 4, maxSize.height));
-
-            Dimension minSize = button.getMinimumSize();
-            arrowButton.setMaximumSize(new Dimension(icon.getIconWidth() + 4, minSize.height));
-            setMinimumSize(new Dimension(minSize.width + icon.getIconWidth() + 4, minSize.height));
-
-            arrowButton.setSize(arrowButton.getPreferredSize());
-            setSize(getPreferredSize());
-        }
     }
 }
