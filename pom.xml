@@ -115,9 +115,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.sourceforge.jp/svnroot/stigmata/trunk</connection>
-    <developerConnection>scm:svn:svn+ssh://tama3@svn.sourceforge.jp/svnroot/stigmata/trunk/</developerConnection>
-    <url>http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata</url>
+    <connection>scm:git:git://git.sourceforge.jp:/gitroot/stigmata/stigmata</connection>
+    <developerConnection>scm:git:tama3@git.sourceforge.jp:/gitroot/stigmata/stigmata/</developerConnection>
+    <url>http://git.sourceforge.jp/view?p=stigmata/stigmata.git</url>
   </scm>
 
   <build>

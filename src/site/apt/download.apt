@@ -104,7 +104,27 @@ Next, add dependency tag entry to dependencies tag in `pom.xml.'
 
 *SCM
 
-**Subversion
+**Git
+
+ This project has three repositories: stigmata, stigmata-plugins, and digger.
+
+ * stigmata: the main repository of stigmata.
+
+ * stigmata-plugins: the repository for stigmata plugins.
+
+ * digger: the library for loading classes which is used in stigmata.
+
+ []
+
+----
+$ git clone git://git.sourceforge.jp:/gitroot/stigmata/REPOSITORY_NAME
+----
+
+ REPOSITORY_NAME is replaced as the one of stigmata, stigmata-plugins and digger.
+
+**Subversion 
+
+ This scm is obsolete.
 
  The source can be checked out anonymously from Subversion.
 
@@ -116,5 +136,8 @@ $ svn checkout http://svn.sourceforge.jp/svnroot/stigmata/trunk/ stigmata
 
  We can browse the source code from following link.
 
- {{http://svn.sourceforge.jp/cgi-bin/viewcvs.cgi/?root=stigmata}}
+ * stigmata: {{http://git.sourceforge.jp/view?p=stigmata/stigmata.git}}
 
+ * stigmata-plugins: {{http://git.sourceforge.jp/view?p=stigmata/stigmata-plugins.git}}
+
+ * digger: {{http://git.sourceforge.jp/view?p=stigmata/digger.git}}
