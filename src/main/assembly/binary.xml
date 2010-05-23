@@ -7,12 +7,6 @@
   </formats>
   <fileSets>
     <fileSet>
-      <includes>
-        <include>README*</include>
-        <include>LICENSE*</include>
-      </includes>
-    </fileSet>
-    <fileSet>
       <directory>target</directory>
       <outputDirectory>lib/</outputDirectory>
       <includes>
@@ -28,4 +22,16 @@
       </includes>
     </fileSet>
   </fileSets>
+  <files>
+    <file>
+      <source>README.txt</source>
+      <outputDirectory>/</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+    <file>
+      <source>LICENSE.txt</source>
+      <outputDirectory>/</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+  </files>
 </assembly>

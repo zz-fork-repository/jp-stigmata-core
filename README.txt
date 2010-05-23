@@ -1,15 +1,15 @@
 
                    Stigmata: Java birthmark toolkit
-                            version 2.0.0
-                   http://stigmata.sourceforge.jp/
+                            version 2.0.1-SNAPSHOT
+                   http://stigmata.sourceforge.jp
 
-                              Copyright 2006-2007 Haruaki Tamada, Ph.D
-                          Faculty of Computer Science and Engineering,
-                                              Kyoto Sangyo University.
+                              Copyright 2006-2010 Haruaki Tamada, Ph.D
+                                      Stigmata Project, Sourceforge.jp
+
 
 * Overview
 
-    Stigmata is Java birthmark toolkit, which aims to detect the
+    Stigmata is the Java birthmark toolkit, which aims to detect the
   theft of programs.  This tool can extract birthmarks from Java
   class files directory, and compare them.
 
@@ -45,9 +45,10 @@
   - Talisman XmlCli 1.2.2 (http://talisman.sourceforge.jp/xmlcli/)
   - Talisman MDS 1.0.1 (http://talisman.sourceforge.jp/mds/)
   - Talisman i18n 1.0.1 (http://talisman.sourceforge.jp/i18n/)
+  - Talisman hermes 1.0.0 (http://talisman.sourceforge.jp/i18n/)
   - Stigmata Digger 1.1.0 (http://stigmata.sourceforge.jp/digger/)
 
-  - JUnit 4.3 (http://www.junit.org/) for testing.
+  - JUnit 4.8.1 (http://www.junit.org/) for testing.
 
 * Author
 
