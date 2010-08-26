@@ -151,6 +151,7 @@ public class WellknownClassesSettingsPane extends JPanel{
         checkButton.setEnabled(false);
 
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 String t = text.getText().trim();
                 if(t.length() > 0){
@@ -176,14 +177,17 @@ public class WellknownClassesSettingsPane extends JPanel{
         checkButton.addActionListener(listener);
         text.addActionListener(listener);
         text.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
             public void changedUpdate(DocumentEvent arg0){
                 checkButton.setEnabled(text.getText().trim().length() > 0);
             }
 
+            @Override
             public void insertUpdate(DocumentEvent arg0){
                 checkButton.setEnabled(text.getText().trim().length() > 0);
             }
 
+            @Override
             public void removeUpdate(DocumentEvent arg0){
                 checkButton.setEnabled(text.getText().trim().length() > 0);
             }
@@ -208,6 +212,7 @@ public class WellknownClassesSettingsPane extends JPanel{
         Action addAction = new AbstractAction(){
             private static final long serialVersionUID = -8749957850400877529L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 addRule(createOrUpdateRule(messages, null));
             }
@@ -215,6 +220,7 @@ public class WellknownClassesSettingsPane extends JPanel{
         final Action removeAction = new AbstractAction(){
             private static final long serialVersionUID = 8776209200186477040L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 int[] indeces = list.getSelectedIndices();
                 for(int i = indeces.length - 1; i >= 0; i--){
@@ -227,6 +233,7 @@ public class WellknownClassesSettingsPane extends JPanel{
         final Action updateAction = new AbstractAction(){
             private static final long serialVersionUID = 852965501722574084L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 editRule(list.getSelectedIndex());
             }
@@ -260,6 +267,7 @@ public class WellknownClassesSettingsPane extends JPanel{
 
         list.addMouseListener(new PopupShowAction(popup));
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent arg0){
                 int[] indeces = list.getSelectedIndices();
                 removeAction.setEnabled(indeces != null && indeces.length > 0);

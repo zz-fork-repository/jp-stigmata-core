@@ -24,18 +24,22 @@ public class RDBExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     public RDBExtractedBirthmarkService(){
     }
 
+    @Override
     public ExtractionResultSet createResultSet(BirthmarkContext context){
         return new RDBExtractionResultSet(context);
     }
 
+    @Override
     public ExtractedBirthmarkHistory getHistory(String parameter){
         return new RDBExtractedBirthmarkHistory(source);
     }
 
+    @Override
     public ExtractionResultSet getResultSet(String id){
         return new RDBExtractionResultSet(source, id);
     }
 
+    @Override
     public BirthmarkStoreTarget getTarget(){
         return BirthmarkStoreTarget.RDB;
     }

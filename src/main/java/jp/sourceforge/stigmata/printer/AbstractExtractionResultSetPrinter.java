@@ -17,6 +17,7 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
  * @version $Revision$ 
  */
 public abstract class AbstractExtractionResultSetPrinter implements ExtractionResultSetPrinter{
+    @Override
     public abstract void printResult(PrintWriter out, ExtractionResultSet ers);
 
     public void printHeader(PrintWriter out){
@@ -26,6 +27,7 @@ public abstract class AbstractExtractionResultSetPrinter implements ExtractionRe
         out.flush();
     }
 
+    @Override
     public String getResult(ExtractionResultSet ers){
         StringWriter writer = new StringWriter();
         PrintWriter out = new PrintWriter(writer);

@@ -19,10 +19,12 @@ public class InheritanceStructureBirthmarkExtractorService extends AbstractBirth
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "is";
     }
 
+    @Override
     public String getExtractorClassName(){
         return InheritanceStructureBirthmarkExtractor.class.getName();
     }
@@ -30,6 +32,7 @@ public class InheritanceStructureBirthmarkExtractorService extends AbstractBirth
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(BirthmarkSpi service){
         return new InheritanceStructureBirthmarkExtractor(service);
     }

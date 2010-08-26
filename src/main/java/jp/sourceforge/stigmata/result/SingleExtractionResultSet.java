@@ -30,18 +30,22 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
         super(context, false);
     }
 
+    @Override
     public BirthmarkStoreTarget getStoreTarget(){
         return BirthmarkStoreTarget.MEMORY_SINGLE;
     }
 
+    @Override
     public void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set){
         this.bs = set;
     }
 
+    @Override
     public void setBirthmarkSets(ExtractionTarget target, BirthmarkSet[] sets){
         this.bs = sets[0];
     }
 
+    @Override
     public Iterator<BirthmarkSet> birthmarkSets(ExtractionTarget target){
         if(bs != null){
             return new SingleIterator(bs);
@@ -49,14 +53,17 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
         return new NullIterator<BirthmarkSet>();
     }
 
+    @Override
     public void removeBirthmarkSet(ExtractionTarget target, BirthmarkSet set){
         bs = null;
     }
 
+    @Override
     public void removeAllBirthmarkSets(ExtractionTarget target){
         bs = null;
     }
 
+    @Override
     public BirthmarkSet getBirthmarkSet(ExtractionTarget target, int index){
         if(index != 0){
             throw new IndexOutOfBoundsException("illegal index: " + index);
@@ -64,6 +71,7 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
         return bs;
     }
 
+    @Override
     public BirthmarkSet getBirthmarkSet(ExtractionTarget target, String name){
         if(bs.getName().equals(name)){
             return bs;
@@ -71,6 +79,7 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
         return null;
     }
 
+    @Override
     public int getBirthmarkSetSize(ExtractionTarget target){
         return 1;
     }
@@ -83,6 +92,7 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
             this.bs = bs;
         }
 
+        @Override
         public BirthmarkSet next(){
             if(first){
                 first = false;
@@ -91,10 +101,12 @@ public class SingleExtractionResultSet extends AbstractExtractionResultSet{
             throw new NoSuchElementException();
         }
 
+        @Override
         public boolean hasNext(){
             return first;
         }
 
+        @Override
         public void remove(){
         }
     }

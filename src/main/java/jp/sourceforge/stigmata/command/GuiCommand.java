@@ -17,6 +17,7 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
  * @version $Revision$
  */
 public class GuiCommand extends AbstractStigmataCommand{
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         StigmataFrame frame = new StigmataFrame(stigmata, context.getEnvironment());
         frame.setVisible(true);
@@ -30,6 +31,7 @@ public class GuiCommand extends AbstractStigmataCommand{
     @Override
     public void tearDown(final BirthmarkEnvironment env){
         Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
             public void run(){
                 StigmataHookManager.getInstance().runHook(
                     Phase.TEAR_DOWN, env

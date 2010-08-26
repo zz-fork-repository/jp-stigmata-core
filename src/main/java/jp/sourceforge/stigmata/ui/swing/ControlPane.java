@@ -208,6 +208,7 @@ public class ControlPane extends JPanel{
         mainPane.add(Box.createHorizontalGlue());
 
         DataChangeListener dcl = new DataChangeListener(){
+            @Override
             public void valueChanged(Object source){
                 updateEnable();
             }
@@ -371,18 +372,21 @@ public class ControlPane extends JPanel{
         comparePopup.setEnabled(false);
 
         resetButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 reset();
             }
         });
 
         extractButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 extractButtonActionPerformed(e);
             }
         });
 
         ActionListener compareListener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 String command = e.getActionCommand();
 

@@ -31,6 +31,7 @@ class EditableGlassPane extends JPanel{
 
         setOpaque(false);
         addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
                 if(rect == null || rect.contains(e.getPoint()))
                     return;

@@ -145,22 +145,26 @@ public class ClasspathSettingsPane extends JPanel{
         south.add(Box.createHorizontalGlue());
 
         text.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
             public void changedUpdate(DocumentEvent arg0){
                 String t = text.getText();
                 findButton.setEnabled(t.trim().length() > 0);
             }
 
+            @Override
             public void insertUpdate(DocumentEvent arg0){
                 String t = text.getText();
                 findButton.setEnabled(t.trim().length() > 0);
             }
 
+            @Override
             public void removeUpdate(DocumentEvent arg0){
                 String t = text.getText();
                 findButton.setEnabled(t.trim().length() > 0);
             }
         });
         ActionListener action = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 String t = text.getText().trim();
                 boolean flag = findClass(t);
@@ -184,6 +188,7 @@ public class ClasspathSettingsPane extends JPanel{
         };
 
         classpath.addDataChangeListener(new DataChangeListener(){
+            @Override
             public void valueChanged(Object source){
                 stigmata.setNeedToSaveSettings(true);
             }

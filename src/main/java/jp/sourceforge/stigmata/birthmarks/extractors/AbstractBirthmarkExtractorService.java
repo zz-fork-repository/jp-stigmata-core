@@ -24,11 +24,13 @@ public abstract class AbstractBirthmarkExtractorService extends AbstractServiceP
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public abstract String getType();
 
     /**
      * returns a localized description of the birthmark this service provides.
      */
+    @Override
     public String getDescription(Locale locale){
         return LocalizedDescriptionManager.getInstance().getDescription(
             locale, getType(), LocalizedDescriptionManager.ServiceCategory.extractor
@@ -38,15 +40,18 @@ public abstract class AbstractBirthmarkExtractorService extends AbstractServiceP
     /**
      * returns a localized description of the birthmark in default locale.
      */
+    @Override
     public String getDescription(){
         return getDescription(Locale.getDefault());
     }
 
+    @Override
     public abstract String getExtractorClassName();
 
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(BirthmarkSpi service){
         try{
             Class<?> c = Class.forName(getExtractorClassName());

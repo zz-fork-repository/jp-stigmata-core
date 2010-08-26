@@ -25,14 +25,17 @@ public class NullBirthmarkElement extends BirthmarkElement{
         return ELEMENT;
     }
 
+    @Override
     public int hashCode(){
         return 0;
     }
 
+    @Override
     public boolean equals(Object o){
         return o instanceof NullBirthmarkElement;
     }
 
+    @Override
     public String toString(){
         return "<null>";
     }

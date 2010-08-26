@@ -52,6 +52,7 @@ abstract class ShowTextAction extends AbstractAction{
         return parent.getMessages();
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         String message = getMessage();
         JPanel panel = new JPanel(new BorderLayout());

@@ -45,6 +45,7 @@ public class BirthmarkServiceListCellRenderer extends JPanel implements ListCell
         this.setPreferredSize(dim);
     }
 
+    @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean hasFocus){
         if(value instanceof BirthmarkSpi){
             BirthmarkSpi service = (BirthmarkSpi)value;

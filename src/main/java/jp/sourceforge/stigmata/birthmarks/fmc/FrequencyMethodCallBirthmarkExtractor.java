@@ -39,6 +39,7 @@ public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor
         };
     }
 
+    @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 

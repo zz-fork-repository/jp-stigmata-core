@@ -91,6 +91,7 @@ public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
         return filters.get(index);
     }
 
+    @Override
     public Iterator<ComparisonPairFilter> iterator(){
         return filters.iterator();
     }
@@ -103,6 +104,7 @@ public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
         return filters.size();
     }
 
+    @Override
     public String toString(){
         StringBuilder sb = new StringBuilder("filterset{ ");
         sb.append("name=").append(getName()).append(", ");

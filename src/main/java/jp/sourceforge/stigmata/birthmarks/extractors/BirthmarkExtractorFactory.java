@@ -37,7 +37,7 @@ public class BirthmarkExtractorFactory{
         return extractor;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     private BirthmarkExtractor buildExtractor(String birthmarkType) throws ExtractorNotFoundException{
         BirthmarkSpi spi = environment.getService(birthmarkType);
         BirthmarkExtractor extractor = null;

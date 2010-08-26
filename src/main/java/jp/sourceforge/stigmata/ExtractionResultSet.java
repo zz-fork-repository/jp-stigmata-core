@@ -53,6 +53,7 @@ public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
     /**
      * returns an iterator for all of birthmark-sets.
      */
+    @Override
     public Iterator<BirthmarkSet> iterator();
 
     /**

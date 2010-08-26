@@ -141,6 +141,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
+    @Override
     public BirthmarkStoreTarget getStoreTarget(){
         return BirthmarkStoreTarget.RDB;
     }
@@ -185,6 +186,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
             this.index = index;
         }
 
+        @Override
         public Object handle(ResultSet rs) throws SQLException{
             List<String> list = new ArrayList<String>();
             while(rs.next()){
@@ -201,6 +203,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
             this.env = env;
         }
 
+        @Override
         public Object handle(ResultSet rs) throws SQLException{
             Map<URL, BirthmarkSet> map = new HashMap<URL, BirthmarkSet>();
 

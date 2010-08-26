@@ -26,6 +26,7 @@ public interface ComparisonResultSet extends Iterable<ComparisonPair>{
     /**
      * a iterator for {@link ComparisonPair <code>ComparisonPair</code>}.
      */
+    @Override
     public Iterator<ComparisonPair> iterator();
 
     /**

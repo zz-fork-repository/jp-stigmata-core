@@ -220,6 +220,7 @@ public class TargetSelectionPane extends JPanel{
         addAction = new AbstractAction(){
             private static final long serialVersionUID = 1406018312294328837L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 addButtonActionPerformed(e);
             }
@@ -227,6 +228,7 @@ public class TargetSelectionPane extends JPanel{
         removeAction = new AbstractAction(){
             private static final long serialVersionUID = 7910621850068803554L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 removeButtonActionPerformed(e);
             }
@@ -250,6 +252,7 @@ public class TargetSelectionPane extends JPanel{
         south.add(Box.createHorizontalGlue());
 
         list.addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent evt){
                 listValueChanged(evt);
             }
@@ -304,6 +307,7 @@ public class TargetSelectionPane extends JPanel{
             this.list = list;
         }
 
+        @Override
         public void dragGestureRecognized(DragGestureEvent dge){
             int[] indeces = list.getSelectedIndices();
             if(indeces.length > 0){
@@ -321,7 +325,6 @@ public class TargetSelectionPane extends JPanel{
         }
     };
 
-    @SuppressWarnings("unchecked")
     private class TargetSelectionDropTarget extends DropTarget{
         private static final long serialVersionUID = 3204457621345L;
 
@@ -343,8 +346,8 @@ public class TargetSelectionPane extends JPanel{
             Transferable trans = dtde.getTransferable();
             try{
                 if(trans.isDataFlavorSupported(DataFlavor.javaFileListFlavor)){
-                    List list = (List)trans
-                        .getTransferData(DataFlavor.javaFileListFlavor);
+                    @SuppressWarnings("rawtypes")
+                    List list = (List)trans.getTransferData(DataFlavor.javaFileListFlavor);
                     List<String> errorList = checkAndAddDroppedFile(list);
                     if(errorList.size() > 0){
                         showError(errorList);
@@ -359,6 +362,7 @@ public class TargetSelectionPane extends JPanel{
         public void dropActionChanged(DropTargetDragEvent arg0){
         }
 
+        @SuppressWarnings("rawtypes")
         private List<String> checkAndAddDroppedFile(List list){
             List<String> errorList = new ArrayList<String>();
 
@@ -402,6 +406,7 @@ public class TargetSelectionPane extends JPanel{
             this.strings = strings;
         }
 
+        @Override
         public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException,
                                                         IOException{
             List<File> list = new ArrayList<File>();
@@ -411,10 +416,12 @@ public class TargetSelectionPane extends JPanel{
             return list;
         }
 
+        @Override
         public DataFlavor[] getTransferDataFlavors(){
             return new DataFlavor[] { DataFlavor.javaFileListFlavor, };
         }
 
+        @Override
         public boolean isDataFlavorSupported(DataFlavor flavor){
             return flavor.equals(DataFlavor.javaFileListFlavor);
         }

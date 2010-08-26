@@ -127,6 +127,7 @@ public class PairComparisonResultSetPane extends JPanel{
         JComponent southPanel = Box.createVerticalBox();
         JButton saveButton = GUIUtility.createButton(
             frame.getMessages(), "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
+                @Override
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
@@ -169,6 +170,7 @@ public class PairComparisonResultSetPane extends JPanel{
         buttonPanel.add(Box.createHorizontalGlue());
 
         table.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
                 if(e.getClickCount() == 2){
                     int row = table.rowAtPoint(e.getPoint());
@@ -184,6 +186,7 @@ public class PairComparisonResultSetPane extends JPanel{
         });
 
         obfuscateButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 obfuscateClassNames();
             }

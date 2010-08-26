@@ -16,6 +16,7 @@ import javax.swing.event.HyperlinkListener;
  * @version $Revision$ 
  */
 class LinkFollower implements HyperlinkListener{
+    @Override
     public void hyperlinkUpdate(HyperlinkEvent e){
         if(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
             URL url = null;

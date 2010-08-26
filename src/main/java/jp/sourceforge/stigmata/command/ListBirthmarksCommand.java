@@ -25,6 +25,7 @@ public class ListBirthmarksCommand extends AbstractStigmataCommand{
         return "list-birthmarks";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         BirthmarkSpi[] spis = context.getEnvironment().findServices();
         ResultPrinterSpi spi = stigmata.getPrinterManager().getService(context.getFormat());

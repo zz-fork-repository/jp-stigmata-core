@@ -18,10 +18,12 @@ public class LogicalAndBirthmarkComparatorService extends AbstractBirthmarkCompa
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "and";
     }
 
+    @Override
     public String getComparatorClassName(){
         return LogicalAndBirthmarkComparator.class.getName();
     }
@@ -29,6 +31,7 @@ public class LogicalAndBirthmarkComparatorService extends AbstractBirthmarkCompa
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkComparator getComparator(BirthmarkSpi service){
         return new LogicalAndBirthmarkComparator(service);
     }

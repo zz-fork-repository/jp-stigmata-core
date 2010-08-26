@@ -42,10 +42,12 @@ public class BirthmarkStoreTarget implements Serializable, Comparable<BirthmarkS
         return ordinal;
     }
 
+    @Override
     public boolean equals(Object o){
         return this == o;
     }
 
+    @Override
     public int compareTo(BirthmarkStoreTarget other){
         return ordinal - other.ordinal;
     }

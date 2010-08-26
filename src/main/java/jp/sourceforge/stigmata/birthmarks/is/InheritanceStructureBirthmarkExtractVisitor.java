@@ -25,6 +25,7 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
         super(visitor, birthmark, context);
     }
 
+    @Override
     public void visit(int version, int access, String name, String signature,
                       String superName, String[] interfaces){
         try {

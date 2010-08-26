@@ -47,6 +47,7 @@ public class BirthmarkExtractionResultPane extends JPanel{
     private void initLayouts(){
         JComponent southPanel = Box.createHorizontalBox();
         Action saveAction = new SaveAction(frame, new AsciiDataWritable(){
+            @Override
             public void writeAsciiData(PrintWriter out, String format){
                 ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                 if(service == null){
@@ -60,6 +61,7 @@ public class BirthmarkExtractionResultPane extends JPanel{
         Action compareAction = new AbstractAction(){
             private static final long serialVersionUID = -1938101718384412339L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 frame.compareExtractionResult(extraction);
             }

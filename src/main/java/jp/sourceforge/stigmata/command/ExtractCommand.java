@@ -24,6 +24,7 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
  * @version $Revision$
  */
 public class ExtractCommand extends AbstractStigmataCommand{
+    @Override
     public boolean isAvailableArguments(String[] args){
         return args.length > 0;
     }
@@ -33,12 +34,14 @@ public class ExtractCommand extends AbstractStigmataCommand{
         return "extract";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         try{
             context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_SAME_PAIR);
             BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
 
             engine.addBirthmarkEngineListener(new BirthmarkEngineAdapter(){
+                @Override
                 public void operationDone(BirthmarkEngineEvent e){
                     WarningMessages warnings = e.getMessage();
                     for(Iterator<Exception> i = warnings.exceptions(); i.hasNext(); ){

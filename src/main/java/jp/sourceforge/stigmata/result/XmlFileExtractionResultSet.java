@@ -165,6 +165,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
         return size;
     }
 
+    @Override
     public BirthmarkStoreTarget getStoreTarget(){
         return BirthmarkStoreTarget.XMLFILE;
     }
@@ -243,6 +244,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             }
         }
 
+        @Override
         public boolean hasNext(){
             boolean flag = nextObject != null;
             if(!flag){
@@ -255,6 +257,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             return flag;
         }
 
+        @Override
         public BirthmarkSet next(){
             BirthmarkSet next = nextObject;
             try{
@@ -265,6 +268,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             return next;
         }
 
+        @Override
         public void remove(){
         }
 

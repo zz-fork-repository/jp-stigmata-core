@@ -83,18 +83,21 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         }
     }
 
+    @Override
     public void filterAdded(ComparisonPairFilter filter){
         model.addElement(filter);
         list.setSelectedIndex(model.getSize() - 1);
         updateButtonEnabled();
     }
 
+    @Override
     public void filterRemoved(ComparisonPairFilter filter){
         model.removeElement(filter);
         list.clearSelection();
         updateButtonEnabled();
     }
 
+    @Override
     public void filterUpdated(ComparisonPairFilter oldfilter, ComparisonPairFilter newfilter){
         int index = model.indexOf(oldfilter);
         if(index >= 0){
@@ -103,6 +106,7 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         updateButtonEnabled();
     }
 
+    @Override
     public void setEnabled(boolean flag){
         super.setEnabled(flag);
 
@@ -153,6 +157,7 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent e){
                 manager.filterSelected((ComparisonPairFilter)list.getSelectedValue());
                 updateButtonEnabled();
@@ -160,6 +165,7 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         });
 
         addfilter.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 ComparisonPairFilterSet current = createCurrentFilterSet();
                 filterset = current;
@@ -172,6 +178,7 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         });
 
         removefilter.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 manager.removeFilterSet(filterset.getName());
                 filterset = null;
@@ -186,6 +193,7 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         });
 
         updatefilter.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 ComparisonPairFilterSet current = createCurrentFilterSet();
                 manager.updateFilterSet(filterset.getName(), current);
@@ -197,6 +205,7 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
         });
 
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 int index = list.getSelectedIndex();
                 int step = 1;
@@ -209,14 +218,17 @@ public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFil
             }
         };
         name.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
             public void changedUpdate(DocumentEvent e){
                 updateButtonEnabled();
             }
 
+            @Override
             public void insertUpdate(DocumentEvent e){
                 updateButtonEnabled();
             }
 
+            @Override
             public void removeUpdate(DocumentEvent e){
                 updateButtonEnabled();
             }

@@ -26,6 +26,7 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
      */
     protected List<BirthmarkElement> elements = new ArrayList<BirthmarkElement>();
 
+    @Override
     public void addElement(BirthmarkElement element){
         elements.add(element);
     }
@@ -33,6 +34,7 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
     /**
      * returns the number of elements.
      */
+    @Override
     public int getElementCount(){
         int numberOfElement = 0;
         BirthmarkElement[] elements = getElements();
@@ -46,6 +48,7 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
      * returns elements.
      * @return  elements
      */
+    @Override
     public BirthmarkElement[] getElements(){
         return elements.toArray(new BirthmarkElement[elements.size()]);
     }
@@ -53,6 +56,7 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
     /**
      * returns elements.
      */
+    @Override
     public Iterator<BirthmarkElement> iterator(){
         return elements.iterator();
     }
@@ -60,11 +64,13 @@ public abstract class AbstractBirthmark implements Birthmark, Serializable{
     /**
      * returns the type of this birthmark.
      */
+    @Override
     public abstract String getType();
 
     /**
      * Is given birthmark the same type.
      */
+    @Override
     public boolean isSameType(Birthmark b){
         return getType().equals(b.getType());
     }

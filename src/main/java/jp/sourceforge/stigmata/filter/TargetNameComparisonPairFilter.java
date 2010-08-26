@@ -35,6 +35,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         super(service);
     }
 
+    @Override
     public Criterion[] getAcceptableCriteria(){
         return getValidCriteria();
     }
@@ -43,6 +44,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         return CRITERIA.toArray(new Criterion[CRITERIA.size()]);
     }
 
+    @Override
     public boolean isFiltered(ComparisonPair pair){
         String v = value;
         if(v == null) v = "";
@@ -141,6 +143,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         return flag;
     }
 
+    @Override
     public String toString(){
         if(getCriterion() == Criterion.MATCH || getCriterion() == Criterion.NOT_MATCH){
             String value = " match ";

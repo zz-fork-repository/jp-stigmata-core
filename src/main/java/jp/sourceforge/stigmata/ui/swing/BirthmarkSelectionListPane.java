@@ -42,6 +42,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
         initLayouts();
     }
 
+    @Override
     public void serviceRemoved(BirthmarkSpi service){
         BirthmarkSelection elem = getSelection(service.getType());
         model.removeElement(elem);
@@ -68,6 +69,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
         add(box, BorderLayout.SOUTH);
 
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 boolean flag = e.getActionCommand().equals("checkall");
                 for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
@@ -95,6 +97,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
     /**
      * update layouts and update selected birthmarks list.
      */
+    @Override
     protected void updateLayouts(){
         model.removeAllElements();
 
@@ -117,6 +120,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
             setOpaque(true);
         }
 
+        @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean forcus){
             BirthmarkSelection elem = (BirthmarkSelection)value;
             setText(elem.getService().getDisplayType());

@@ -21,12 +21,14 @@ public class KGramBasedBirthmarkElement<T> extends BirthmarkElement{
         this.kgram = kgram;
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("rawtypes")
     public boolean equals(Object o){
         return o instanceof KGramBasedBirthmarkElement &&
             kgram.equals(((KGramBasedBirthmarkElement)o).kgram);
     }
 
+    @Override
     public int hashCode(){
         int v = kgram.hashCode();
 

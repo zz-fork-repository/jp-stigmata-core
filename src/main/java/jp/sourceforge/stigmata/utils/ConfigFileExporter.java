@@ -114,7 +114,7 @@ public class ConfigFileExporter{
         out.println("  </wellknown-classes>");
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     private void exportFilters(PrintWriter out) throws IOException{
         out.println("  <filterset-list>");
         for(ComparisonPairFilterSet filterset: environment.getFilterManager().getFilterSets()){

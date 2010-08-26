@@ -37,6 +37,7 @@ public class BirthmarkElement implements Serializable{
     /**
      * to string.
      */
+    @Override
     public String toString(){
         return String.valueOf(getValue());
     }
@@ -44,6 +45,7 @@ public class BirthmarkElement implements Serializable{
     /**
      * hash code for overriding equals method.
      */
+    @Override
     public int hashCode(){
         if(getValue() == null){
             return 0;
@@ -56,6 +58,7 @@ public class BirthmarkElement implements Serializable{
     /**
      * equals method.
      */
+    @Override
     public boolean equals(Object o){
         if(o instanceof BirthmarkElement){
             if(getValue() != null){

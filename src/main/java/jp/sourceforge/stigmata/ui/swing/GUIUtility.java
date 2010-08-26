@@ -227,6 +227,7 @@ public class GUIUtility{
             panel.add(label, BorderLayout.WEST);
             panel.add(button, BorderLayout.EAST);
             button.addActionListener(new ActionListener(){
+                @Override
                 public void actionPerformed(ActionEvent e){
                     tabPane.remove(comp);
                 }

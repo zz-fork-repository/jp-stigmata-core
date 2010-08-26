@@ -12,14 +12,17 @@ import jp.sourceforge.stigmata.ComparisonPairFilter;
  * @version $Revision$ 
  */
 public class SimilarityComparisonPairFilterService extends AbstractComparisonPairFilterService{
+    @Override
     public ComparisonPairFilter getFilter(){
         return new SimilarityComparisonPairFilter(this);
     }
 
+    @Override
     public String getFilterClassName(){
         return SimilarityComparisonPairFilter.class.getName();
     }
 
+    @Override
     public String getFilterName(){
         return "similarity";
     }

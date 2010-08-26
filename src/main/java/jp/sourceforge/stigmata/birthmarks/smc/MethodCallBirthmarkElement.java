@@ -40,14 +40,17 @@ public class MethodCallBirthmarkElement extends BirthmarkElement implements Seri
         return signature;
     }
 
+    @Override
     public Object getValue(){
         return getClassName() + "#" + getMethodName() + "!" + getSignature();
     }
 
+    @Override
     public int hashCode(){
         return System.identityHashCode(this);
     }
 
+    @Override
     public boolean equals(Object o){
         boolean flag = false;
         if(o instanceof MethodCallBirthmarkElement){

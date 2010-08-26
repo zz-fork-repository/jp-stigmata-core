@@ -22,26 +22,32 @@ public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkServi
     private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new SequentialMethodCallBirthmarkExtractor(this);
 
+    @Override
     public String getType(){
         return "smc";
     }
 
+    @Override
     public String getDefaultDescription(){
         return "Sequence of method call which order is appeared in method definition.";
     }
 
+    @Override
     public BirthmarkExtractor getExtractor(){
         return extractor;
     }
 
+    @Override
     public BirthmarkComparator getComparator(){
         return comparator;
     }
 
+    @Override
     public boolean isExperimental(){
         return false;
     }
 
+    @Override
     public boolean isUserDefined(){
         return false;
     }

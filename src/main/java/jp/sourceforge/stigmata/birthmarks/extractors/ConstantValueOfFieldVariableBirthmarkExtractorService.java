@@ -19,10 +19,12 @@ public class ConstantValueOfFieldVariableBirthmarkExtractorService extends Abstr
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "cvfv";
     }
 
+    @Override
     public String getExtractorClassName(){
         return ConstantValueOfFieldVariableBirthmarkExtractor.class.getName();
     }
@@ -30,6 +32,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractorService extends Abstr
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(BirthmarkSpi service){
         return new ConstantValueOfFieldVariableBirthmarkExtractor(service);
     }

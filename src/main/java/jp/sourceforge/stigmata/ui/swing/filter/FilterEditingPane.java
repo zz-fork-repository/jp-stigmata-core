@@ -142,6 +142,7 @@ public class FilterEditingPane extends JPanel{
         updateButton = GUIUtility.createButton(messages, "updatefilter");
 
         combo.addItemListener(new ItemListener(){
+            @Override
             public void itemStateChanged(ItemEvent e){
                 String item = (String)combo.getSelectedItem();
                 card.show(cardComponent, item);
@@ -164,6 +165,7 @@ public class FilterEditingPane extends JPanel{
             }
         });
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 String command = e.getActionCommand();
                 ComparisonPairFilter newfilter = currentPane.getFilter();
@@ -185,6 +187,7 @@ public class FilterEditingPane extends JPanel{
         addButton.addActionListener(listener);
         updateButton.addActionListener(listener);
         removeButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 for(ComparisonPairFilterListener listener: listeners){
                     listener.filterRemoved(filter);

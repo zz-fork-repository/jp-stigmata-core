@@ -54,10 +54,12 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
     /**
      * @return  environment
      */
+    @Override
     public BirthmarkEnvironment getEnvironment(){
         return extraction.getEnvironment();
     }
 
+    @Override
     public BirthmarkContext getContext(){
         return extraction.getContext();
     }
@@ -93,6 +95,7 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
     /**
      * returns the compare count of birthmark sets.
      */
+    @Override
     public int getPairCount(){
         return compareCount;
     }
@@ -100,6 +103,7 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
     /**
      * return a iterator of whole comparison.
      */
+    @Override
     public Iterator<ComparisonPair> iterator(){
         if(tableType){
             return new CompareTableIterator();
@@ -109,6 +113,7 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
         }
     }
 
+    @Override
     public BirthmarkSet[] getPairSources(){
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
         for(Iterator<BirthmarkSet> i = pairSources(); i.hasNext(); ){
@@ -118,6 +123,7 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
         return list.toArray(new BirthmarkSet[list.size()]);
     }
 
+    @Override
     public Iterator<BirthmarkSet> pairSources(){
         Map<URL, BirthmarkSet> map = new HashMap<URL, BirthmarkSet>();
         if(extraction.isTableType()){
@@ -144,10 +150,12 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
         private Iterator<BirthmarkSet> iy = extraction.birthmarkSets(ExtractionTarget.TARGET_Y);
         private BirthmarkSet x = ix.next();
 
+        @Override
         public boolean hasNext(){
             return ix.hasNext() || iy.hasNext();
         }
 
+        @Override
         public ComparisonPair next(){
             if(!iy.hasNext()){
                 iy = extraction.birthmarkSets(ExtractionTarget.TARGET_Y);
@@ -158,6 +166,7 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
             return new ComparisonPair(x, y, extraction.getContext());
         }
 
+        @Override
         public void remove(){
         }
     }
@@ -176,10 +185,12 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
             iterator = extraction.birthmarkSets(ExtractionTarget.TARGET_XY);
             next = findNext();
         }
+        @Override
         public boolean hasNext(){
             return next != null;
         }
 
+        @Override
         public ComparisonPair next(){
             ComparisonPair returnValue = next;
             next = findNext();
@@ -216,6 +227,7 @@ public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
             return pair;
         }
 
+        @Override
         public void remove(){
         }
     }

@@ -22,6 +22,7 @@ import jp.sourceforge.stigmata.printer.AbstractExtractionResultSetPrinter;
  * @version $Revision$ 
  */
 public class ExtractionResultSetCsvPrinter extends AbstractExtractionResultSetPrinter{
+    @Override
     public void printResult(PrintWriter out, ExtractionResultSet ers){
         printHeader(out);
         for(Iterator<BirthmarkSet> i = ers.birthmarkSets(ExtractionTarget.TARGET_BOTH); i.hasNext(); ){

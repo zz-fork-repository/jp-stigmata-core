@@ -24,6 +24,7 @@ public class ExportConfigCommand extends AbstractStigmataCommand{
         return "export-config";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         try{
             PrintWriter out;

@@ -83,6 +83,7 @@ public class ExtractedHistoryPane extends JPanel{
         final Action showAction = new AbstractAction(){
             private static final long serialVersionUID = 2156350514762218963L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 showAction((String)model.get(list.getSelectedIndex()));
             }
@@ -90,6 +91,7 @@ public class ExtractedHistoryPane extends JPanel{
         final Action refreshAction = new AbstractAction(){
             private static final long serialVersionUID = 214765021455345371L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 updateList();
             }
@@ -97,6 +99,7 @@ public class ExtractedHistoryPane extends JPanel{
         final Action deleteAction = new AbstractAction(){
             private static final long serialVersionUID = 8145188292702648924L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 int[] indeces = list.getSelectedIndices();
                 for(int i = indeces.length - 1; i >= 0; i--){
@@ -121,6 +124,7 @@ public class ExtractedHistoryPane extends JPanel{
         showAction.setEnabled(false);
 
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent e){
                 int[] indeces = list.getSelectedIndices();
                 showAction.setEnabled(currentHistory != null && indeces.length == 1);
@@ -137,6 +141,7 @@ public class ExtractedHistoryPane extends JPanel{
             }
         });
         combo.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 updateList();
             }

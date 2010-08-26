@@ -18,10 +18,12 @@ public class LicenseAction extends ShowTextAction{
         super(parent);
     }
 
+    @Override
     public String getTitle(){
         return getMessages().get("license.dialog.title");
     }
 
+    @Override
     public String getMessage(){
         return loadStringFromFile(GUIUtility.getResource(getMessages(), "license.file"));
     }

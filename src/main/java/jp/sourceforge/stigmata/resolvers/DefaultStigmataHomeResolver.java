@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 class DefaultStigmataHomeResolver implements StigmataHomeResolver{
+    @Override
     public String getStigmataHome() throws IOException{
         return getUserHome() + File.separator + ".stigmata";
     }
@@ -19,6 +20,7 @@ class DefaultStigmataHomeResolver implements StigmataHomeResolver{
         return userHome;
     }
 
+    @Override
     public boolean isTarget(String osName){
         return true;
     }

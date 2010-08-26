@@ -42,6 +42,7 @@ public class FrequencyBirthmark extends AbstractBirthmark{
             index++;
         }
         Arrays.sort(elements, new Comparator<FrequencyBirthmarkElement>(){
+            @Override
             public int compare(FrequencyBirthmarkElement o1, FrequencyBirthmarkElement o2){
                 return o1.getValueName().compareTo(o2.getValueName());
             }
@@ -55,6 +56,7 @@ public class FrequencyBirthmark extends AbstractBirthmark{
         return new ArrayIterator<BirthmarkElement>(getElements());
     }
 
+    @Override
     public void addElement(BirthmarkElement element){
         String value;
         if(element instanceof FrequencyBirthmarkElement){

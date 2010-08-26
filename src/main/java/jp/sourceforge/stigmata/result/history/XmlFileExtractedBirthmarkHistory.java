@@ -37,6 +37,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         refresh();
     }
 
+    @Override
     public void refresh(){
         files.clear();
 
@@ -49,6 +50,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         }
     }
 
+    @Override
     public void deleteAllResultSets(){
         for(File file: parent.listFiles()){
             if(isTarget(file)){
@@ -57,6 +59,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         }
     }
 
+    @Override
     public void deleteResultSet(String id){
         File file = files.get(id);
         if(file != null){
@@ -69,6 +72,7 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         }
     }
 
+    @Override
     public ExtractionResultSet getResultSet(String id){
         File file = files.get(id);
         if(file != null){
@@ -77,10 +81,12 @@ public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHisto
         return null;
     }
 
+    @Override
     public synchronized String[] getResultSetIds(){
         return files.keySet().toArray(new String[files.size()]);
     }
 
+    @Override
     public Iterator<String> iterator(){
         return files.keySet().iterator();
     }

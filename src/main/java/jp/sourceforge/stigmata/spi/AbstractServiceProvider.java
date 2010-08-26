@@ -17,6 +17,7 @@ public abstract class AbstractServiceProvider implements ServiceProvider{
     /**
      * returning implementation vendor name of this SPI.
      */
+    @Override
     public String getDescription(){
         return getDescription(Locale.getDefault());
     }
@@ -24,6 +25,7 @@ public abstract class AbstractServiceProvider implements ServiceProvider{
     /**
      * returning implementation vendor name of this SPI.
      */
+    @Override
     public String getVendorName(){
         return getClass().getPackage().getImplementationVendor();
     }
@@ -31,6 +33,7 @@ public abstract class AbstractServiceProvider implements ServiceProvider{
     /**
      * returning version of this SPI.
      */
+    @Override
     public String getVersion(){
         return getClass().getPackage().getImplementationVersion();
     }

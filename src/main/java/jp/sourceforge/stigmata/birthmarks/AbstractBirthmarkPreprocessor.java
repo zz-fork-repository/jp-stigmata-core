@@ -23,5 +23,6 @@ public abstract class AbstractBirthmarkPreprocessor implements BirthmarkPreproce
         return service;
     }
 
+    @Override
     public abstract void preprocess(ClassFileArchive[] targets, BirthmarkContext context);
 }

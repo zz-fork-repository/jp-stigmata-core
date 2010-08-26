@@ -107,6 +107,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
         listeners.add(listener);
     }
 
+    @Override
     public void serviceAdded(BirthmarkSpi service){
         if(services.get(service.getType()) == null){
             BirthmarkSelection elem = new BirthmarkSelection(service);
@@ -117,6 +118,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
         fireEvent();
     }
 
+    @Override
     public void serviceRemoved(BirthmarkSpi service){
         BirthmarkSelection elem = services.get(service);
         if(elem != null){

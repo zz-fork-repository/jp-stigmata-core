@@ -43,6 +43,7 @@ public class KGramBasedBirthmarkExtractor extends ASMBirthmarkExtractor{
         return extractor;
     }
 
+    @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 

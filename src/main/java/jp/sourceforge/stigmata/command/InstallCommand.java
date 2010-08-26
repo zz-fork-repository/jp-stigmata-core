@@ -22,6 +22,7 @@ import jp.sourceforge.stigmata.utils.Utility;
  * @version $Revision$
  */
 public class InstallCommand extends AbstractStigmataCommand{
+    @Override
     public boolean isAvailableArguments(String[] args){
         return args.length > 0;
     }
@@ -31,6 +32,7 @@ public class InstallCommand extends AbstractStigmataCommand{
         return "install";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         File pluginsDir = new File(BirthmarkEnvironment.getStigmataHome(), "plugins");
         BirthmarkEnvironment env = context.getEnvironment();

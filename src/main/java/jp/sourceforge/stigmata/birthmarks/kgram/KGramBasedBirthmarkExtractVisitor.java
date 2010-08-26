@@ -35,6 +35,7 @@ public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         this.kvalue = kvalue;
     }
 
+    @Override
     public void visitEnd(){
         KGramBuilder builder = KGramBuilder.getInstance();
         KGram<Integer>[] kgrams = builder.<Integer>buildKGram(opcodes, getKValue());

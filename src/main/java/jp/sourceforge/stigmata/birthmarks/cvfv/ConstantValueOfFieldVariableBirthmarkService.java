@@ -22,26 +22,32 @@ public class ConstantValueOfFieldVariableBirthmarkService extends AbstractBirthm
 	private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new ConstantValueOfFieldVariableBirthmarkExtractor(this);
 
+    @Override
     public String getType(){
         return "cvfv";
     }
 
+    @Override
     public String getDefaultDescription(){
         return "Field type and its initial value.";
     }
 
+    @Override
     public BirthmarkExtractor getExtractor(){
         return extractor;
     }
 
+    @Override
     public BirthmarkComparator getComparator(){
         return comparator;
     }
 
+    @Override
     public boolean isExperimental(){
         return false;
     }
 
+    @Override
     public boolean isUserDefined(){
         return false;
     }

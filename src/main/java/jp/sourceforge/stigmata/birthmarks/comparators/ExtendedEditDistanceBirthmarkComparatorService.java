@@ -18,10 +18,12 @@ public class ExtendedEditDistanceBirthmarkComparatorService extends AbstractBirt
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "editdistanceext";
     }
 
+    @Override
     public String getComparatorClassName(){
         return ExtendedEditDistanceBirthmarkComparator.class.getName();
     }
@@ -29,6 +31,7 @@ public class ExtendedEditDistanceBirthmarkComparatorService extends AbstractBirt
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkComparator getComparator(BirthmarkSpi service){
         return new ExtendedEditDistanceBirthmarkComparator(service);
     }

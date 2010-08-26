@@ -31,10 +31,12 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         super(context, tableType);
     }
 
+    @Override
     public BirthmarkStoreTarget getStoreTarget(){
         return BirthmarkStoreTarget.MEMORY;
     }
 
+    @Override
     public void removeAllBirthmarkSets(ExtractionTarget target){
         switch(target){
         case TARGET_X:
@@ -50,6 +52,7 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
+    @Override
     public void removeBirthmarkSet(ExtractionTarget target, BirthmarkSet set){
         switch(target){
         case TARGET_X:
@@ -65,6 +68,7 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
+    @Override
     public void addBirthmarkSet(ExtractionTarget target, BirthmarkSet set){
         switch(target){
         case TARGET_X:
@@ -80,6 +84,7 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
+    @Override
     public Iterator<BirthmarkSet> birthmarkSets(ExtractionTarget target){
         Iterator<BirthmarkSet> iterator;
         switch(target){
@@ -100,6 +105,7 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         }
         return iterator;
     }
+    @Override
     public int getBirthmarkSetSize(ExtractionTarget target){
         int count = 0;
         switch(target){
@@ -118,6 +124,7 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         return count;
     }
 
+    @Override
     public BirthmarkSet getBirthmarkSet(ExtractionTarget target, int index){
         BirthmarkSet set;
         switch(target){
@@ -141,6 +148,7 @@ public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
         return set;
     }
 
+    @Override
     public BirthmarkSet[] getBirthmarkSets(ExtractionTarget target){
         BirthmarkSet[] sets;
         switch(target){

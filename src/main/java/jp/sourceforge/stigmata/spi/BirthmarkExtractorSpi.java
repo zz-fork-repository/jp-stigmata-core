@@ -23,11 +23,13 @@ public interface BirthmarkExtractorSpi extends ServiceProvider{
     /**
      * returns a localized description of the birthmark this service provides.
      */
+    @Override
     public String getDescription(Locale locale);
 
     /**
      * returns a localized description of the birthmark in default locale.
      */
+    @Override
     public String getDescription();
 
     public String getExtractorClassName();

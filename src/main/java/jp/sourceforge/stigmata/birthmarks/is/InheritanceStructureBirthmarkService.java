@@ -21,26 +21,32 @@ public class InheritanceStructureBirthmarkService extends AbstractBirthmarkServi
     private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new InheritanceStructureBirthmarkExtractor(this);
 
+    @Override
     public String getType(){
         return "is";
     }
 
+    @Override
     public String getDefaultDescription(){
         return "Inheritance sequence to root class and user classes is replaced to <null>.";
     }
 
+    @Override
     public BirthmarkExtractor getExtractor(){
         return extractor;
     }
 
+    @Override
     public BirthmarkComparator getComparator(){
         return comparator;
     }
 
+    @Override
     public boolean isExperimental(){
         return false;
     }
 
+    @Override
     public boolean isUserDefined(){
         return false;
     }

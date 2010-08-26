@@ -67,6 +67,7 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         }
     }
 
+    @Override
     public void addFilterSet(ComparisonPairFilterSet filterset){
         filters.put(filterset.getName(), filterset);
 
@@ -74,6 +75,7 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         list.setSelectedIndex(model.getSize() - 1);
     }
 
+    @Override
     public void removeFilterSet(String name){
         filters.remove(name);
         model.removeElement(name);
@@ -81,6 +83,7 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         list.clearSelection();
     }
 
+    @Override
     public void updateFilterSet(String oldName, ComparisonPairFilterSet newfilter){
         for(int i = 0; i < model.getSize(); i++){
             if(oldName.equals(model.getElementAt(i))){
@@ -92,10 +95,12 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
         filters.put(newfilter.getName(), newfilter);
     }
 
+    @Override
     public ComparisonPairFilterSet getFilterSet(String name){
         return filters.get(name);
     }
 
+    @Override
     public void filterSelected(ComparisonPairFilter filter){
         filterPane.setFilter(filter);
     }
@@ -139,6 +144,7 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
             }
         });
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent e){
                 int[] indexes = list.getSelectedIndices();
                 int rows = model.getSize();
@@ -154,6 +160,7 @@ public class FilterManagementPane extends JPanel implements ComparisonPairFilter
             }
         });
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 int step = 1;
                 if(e.getActionCommand().equals("moveup")){

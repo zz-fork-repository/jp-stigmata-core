@@ -19,10 +19,12 @@ class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
     public BirthmarkSpiComparator(){
     }
 
+    @Override
     public int hashCode(){
         return System.identityHashCode(this);
     }
 
+    @Override
     public int compare(BirthmarkSpi s1, BirthmarkSpi s2){
         if(s1.isExperimental() && !s2.isExperimental()){
             return 1;
@@ -35,6 +37,7 @@ class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
         }
     }
 
+    @Override
     public boolean equals(Object o){
         String className = null;
         if(o != null){

@@ -75,6 +75,7 @@ public class ComparisonPair implements Iterable<ComparisonPairElement>{
     /**
      * returns an iterator for comparing each birthmarks.
      */
+    @Override
     public synchronized Iterator<ComparisonPairElement> iterator(){
         List<ComparisonPairElement> list = new ArrayList<ComparisonPairElement>();
         BirthmarkEnvironment env = context.getEnvironment();

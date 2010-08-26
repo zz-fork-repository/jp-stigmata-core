@@ -88,6 +88,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
         this.displayType = displayType;
     }
 
+    @Override
     public String getDisplayType(){
         return displayType;
     }
@@ -96,6 +97,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
         this.description = description;
     }
 
+    @Override
     public String getDescription(){
         String desc = description;
         if(description == null){
@@ -112,6 +114,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
         return description;
     }
 
+    @Override
     public String getExtractorClassName(){
         return extractorClass.getName();
     }
@@ -119,6 +122,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(){
         if(extractorObject == null){
             try{
@@ -131,6 +135,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
         return extractorObject;
     }
 
+    @Override
     public String getComparatorClassName(){
         return comparatorClass.getName();
     }
@@ -138,6 +143,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
     /**
      * returns a comparator for the birthmark of this service.
      */
+    @Override
     public BirthmarkComparator getComparator(){
         if(comparatorObject == null){
             try{
@@ -150,6 +156,7 @@ public class BirthmarkService extends AbstractBirthmarkService implements Birthm
         return comparatorObject;
     }
 
+    @Override
     public boolean isUserDefined(){
         return userDefined;
     }

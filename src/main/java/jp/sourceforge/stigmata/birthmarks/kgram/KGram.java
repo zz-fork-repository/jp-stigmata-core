@@ -47,6 +47,7 @@ public class KGram<T> implements Serializable{
     /**
      * returns string representation of this object.
      */
+    @Override
     public String toString(){
         StringBuffer buffer = new StringBuffer("{ ");
         for(int i = 0; i < maxLength; i++){
@@ -130,10 +131,10 @@ public class KGram<T> implements Serializable{
         return newarray;
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
     public boolean equals(Object o){
         if(o instanceof KGram){
-            KGram kgram = (KGram)o;
+            KGram<?> kgram = (KGram<?>)o;
             boolean flag = getKValue() == kgram.getKValue();
             for(int i = 0; !flag && i < maxLength; i++){
                 if(!get(i).equals(kgram.get(i))){
@@ -146,6 +147,7 @@ public class KGram<T> implements Serializable{
         return false;
     }
 
+    @Override
     public int hashCode(){
         return Arrays.hashCode(values);
     }

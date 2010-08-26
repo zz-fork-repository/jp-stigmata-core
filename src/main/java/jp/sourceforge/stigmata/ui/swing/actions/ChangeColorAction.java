@@ -56,12 +56,14 @@ public class ChangeColorAction extends AbstractAction{
         return currentColor;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         chooser.setColor(currentColor);
         JDialog dialog = JColorChooser.createDialog(
             frame, frame.getMessages().get("changecolor.title"), 
             true, chooser,
             new ActionListener(){ // ok
+                @Override
                 public void actionPerformed(ActionEvent e){
                     currentColor = chooser.getColor();
                     colorSelected = true;
@@ -69,6 +71,7 @@ public class ChangeColorAction extends AbstractAction{
                 }
             },
             new ActionListener(){ // cancel
+                @Override
                 public void actionPerformed(ActionEvent e){
                     colorSelected = false;
                 }

@@ -27,6 +27,7 @@ public class CompareTableCellRenderer extends DefaultTableCellRenderer{
         this.environment = environment;
     }
 
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object obj, boolean isSelected,
                                                     boolean hasForcus, int row, int col){
         Object value = table.getValueAt(row, col);

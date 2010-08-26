@@ -33,6 +33,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
         super(visitor, birthmark, context);
     }
 
+    @Override
     public void visitEnd(){
         for(String key: elements.keySet()){
             addElement(elements.get(key));
@@ -40,6 +41,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
         super.visitEnd();
     }
 
+    @Override
     public void visit(int version, int access, String name, String signature,
                       String superName, String[] interfaces){
         this.className = name;
@@ -67,6 +69,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
         return visitor;
     }
 
+    @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature,
                                      String[] exceptions){
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
@@ -75,6 +78,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
             visitor = new MethodAdapter(visitor){
                 private Object constant = null;
 
+                @Override
                 public void visitIntInsn(int opcode, int operand){
                     if(opcode == Opcodes.BIPUSH || opcode == Opcodes.SIPUSH){
                         constant = new Integer(operand);
@@ -82,6 +86,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
                     super.visitIntInsn(opcode, operand);
                 }
 
+                @Override
                 public void visitMethodInsn(int opcode, String owner, String name, String desc){
                     Type type = Type.getReturnType(desc);
                     if(!type.equals(Type.VOID_TYPE)){
@@ -90,6 +95,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
                     super.visitMethodInsn(opcode, owner, name, desc);
                 }
 
+                @Override
                 public void visitInsn(int opcode){
                     if(opcode == Opcodes.ICONST_M1)     constant = new Integer(-1);
                     else if(opcode == Opcodes.ICONST_0) constant = new Integer(0);
@@ -109,11 +115,13 @@ public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends Birthma
                     super.visitInsn(opcode);
                 }
 
+                @Override
                 public void visitLdcInsn(Object object){
                     constant = object;
                     super.visitLdcInsn(object);
                 }
 
+                @Override
                 public void visitFieldInsn(int opcode, String owner, String name, String desc){
                     if(className.equals(owner) && opcode == Opcodes.PUTFIELD){
                         TypeAndValueBirthmarkElement e = elements.get(name);

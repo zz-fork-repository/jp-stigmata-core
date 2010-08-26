@@ -25,14 +25,17 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
  */
 public class TotalElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
+    @Override
     public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
         return new Pane(frame, service);
     }
 
+    @Override
     public String getFilterName(){
         return "totalelementcount";
     }
 
+    @Override
     public ComparisonPairFilterSpi getComparisonPairFilterService(){
         return new TotalElementCountComparisonPairFilterService();
     }

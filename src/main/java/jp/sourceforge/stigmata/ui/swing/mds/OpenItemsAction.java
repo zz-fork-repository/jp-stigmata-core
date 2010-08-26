@@ -43,6 +43,7 @@ public class OpenItemsAction extends AbstractAction{
             putValue(SMALL_ICON, icon);
         }
         initMdsPane.addItemsSelectionListener(new ItemsSelectionListener(){
+            @Override
             public void valueChanged(ItemsSelectionEvent e){
                 Item[] items = mdsPane.getSelectedItems();
                 selectedItemFlag = items.length != 0;
@@ -55,12 +56,14 @@ public class OpenItemsAction extends AbstractAction{
             }
         });
         initMdsPane.addItemsOpenListener(new ItemsOpenListener(){
+            @Override
             public void itemOpened(ItemsOpenEvent e){
                 showItems(e.getItems());
             }
         });
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         Item[] items;
         if(selectedItemFlag){

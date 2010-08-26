@@ -22,26 +22,32 @@ public class KGramBasedBirthmarkService extends AbstractBirthmarkService impleme
     private BirthmarkComparator comparator = new LogicalAndBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new KGramBasedBirthmarkExtractor(this);
 
+    @Override
     public String getType(){
         return "kgram";
     }
 
+    @Override
     public String getDefaultDescription(){
         return "k-gram based birthmark.";
     }
 
+    @Override
     public BirthmarkExtractor getExtractor(){
         return extractor;
     }
 
+    @Override
     public BirthmarkComparator getComparator(){
         return comparator;
     }
 
+    @Override
     public boolean isExperimental(){
         return false;
     }
 
+    @Override
     public boolean isUserDefined(){
         return false;
     }

@@ -25,6 +25,7 @@ public interface Birthmark extends Iterable<BirthmarkElement>{
      * returns the iterator for all elements of this birthmark.
      * @return iterator for accessing to elements of this birthmark.
      */
+    @Override
     public Iterator<BirthmarkElement> iterator();
 
     /**

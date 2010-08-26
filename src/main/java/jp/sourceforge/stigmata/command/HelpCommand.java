@@ -34,6 +34,7 @@ public class HelpCommand extends AbstractStigmataCommand{
         return "help";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         BirthmarkEnvironment env = context.getEnvironment();
         Package p = getClass().getPackage();

@@ -48,6 +48,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
         add(box, BorderLayout.SOUTH);
 
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 boolean flag = e.getActionCommand().equals("checkall");
                 for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
@@ -65,6 +66,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
     /**
      * update layouts and update selected birthmarks list.
      */
+    @Override
     protected void updateLayouts(){
         checks.removeAll();
         Dimension d = calculateDimension();
@@ -76,6 +78,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
                 JCheckBox check = new JCheckBox(elem.getService().getDisplayType());
                 check.setSelected(elem.isSelected());
                 check.addActionListener(new ActionListener(){
+                    @Override
                     public void actionPerformed(ActionEvent e){
                         JCheckBox c = (JCheckBox)e.getSource();
                         elem.setSelected(c.isSelected());

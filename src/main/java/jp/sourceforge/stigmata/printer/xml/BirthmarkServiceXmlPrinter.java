@@ -17,6 +17,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * @version $Revision$ 
  */
 public class BirthmarkServiceXmlPrinter extends AbstractBirthmarkServicePrinter{
+    @Override
     public void printResult(PrintWriter out, BirthmarkSpi[] spilist){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark-result-set>");

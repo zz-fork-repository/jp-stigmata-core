@@ -26,16 +26,19 @@ public class ArrayIterator<T> implements Iterator<T>{
         }
     }
 
+    @Override
     public boolean hasNext(){
         return currentIndex < length;
     }
 
+    @Override
     public T next(){
         T value = values[currentIndex];
         currentIndex++;
         return value;
     }
 
+    @Override
     public void remove(){
     }
 }

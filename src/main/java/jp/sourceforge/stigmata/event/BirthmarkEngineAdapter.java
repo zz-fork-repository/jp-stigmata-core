@@ -10,15 +10,19 @@ package jp.sourceforge.stigmata.event;
  */
 public class BirthmarkEngineAdapter implements BirthmarkEngineListener{
 
+    @Override
     public void operationDone(BirthmarkEngineEvent e){
     }
 
+    @Override
     public void operationStart(BirthmarkEngineEvent e){
     }
 
+    @Override
     public void subOperationDone(BirthmarkEngineEvent e){
     }
 
+    @Override
     public void subOperationStart(BirthmarkEngineEvent e){
     }
 }

@@ -29,6 +29,7 @@ public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
         );
     }
 
+    @Override
     public ExtractionResultSet createResultSet(BirthmarkContext context){
         return createResultSet(context, defaultBaseDirectory);
     }
@@ -39,6 +40,7 @@ public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
         );
     }
 
+    @Override
     public ExtractedBirthmarkHistory getHistory(String parameter){
         File file = defaultBaseDirectory;
         if(parameter != null){
@@ -50,10 +52,12 @@ public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
         return new XmlFileExtractedBirthmarkHistory(file);
     }
 
+    @Override
     public ExtractionResultSet getResultSet(String id){
         return new XmlFileExtractionResultSet(new File(id));
     }
 
+    @Override
     public BirthmarkStoreTarget getTarget(){
         return BirthmarkStoreTarget.XMLFILE;
     }

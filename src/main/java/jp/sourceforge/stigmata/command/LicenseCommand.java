@@ -23,6 +23,7 @@ public class LicenseCommand extends AbstractStigmataCommand{
         return "license";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         try{
             InputStream in = getClass().getResourceAsStream("/META-INF/license.txt");

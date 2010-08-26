@@ -43,6 +43,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * returns the provider of this extractor.
      */
+    @Override
     public BirthmarkSpi getProvider(){
         return spi;
     }
@@ -50,6 +51,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * extract birthmark given stream with given environment.
      */
+    @Override
     public final Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         return extract(createBirthmark(), in, context);
     }
@@ -57,6 +59,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * extract birthmark given byte array with given environment.
      */
+    @Override
     public final Birthmark extract(Birthmark birthmark, byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         return extract(birthmark, new ByteArrayInputStream(bytecode), context);
     }
@@ -64,6 +67,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * extract birthmark given byte array with given environment.
      */
+    @Override
     public final Birthmark extract(byte[] bytecode, BirthmarkContext context) throws BirthmarkExtractionFailedException{
         return extract(createBirthmark(), new ByteArrayInputStream(bytecode), context);
     }
@@ -71,18 +75,22 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * extract birthmark given stream with given environment.
      */
+    @Override
     public abstract Birthmark extract(Birthmark birthmark, InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException;
 
     /**
      * create birthmark.
      * @see jp.sourceforge.stigmata.BirthmarkExtractor#createBirthmark()
      */
+    @Override
     public Birthmark createBirthmark(){
         return new PlainBirthmark(getProvider().getType());
     }
 
+    @Override
     public abstract ExtractionUnit[] getAcceptableUnits();
 
+    @Override
     public boolean isAcceptable(ExtractionUnit unit){
         ExtractionUnit[] units = getAcceptableUnits();
 

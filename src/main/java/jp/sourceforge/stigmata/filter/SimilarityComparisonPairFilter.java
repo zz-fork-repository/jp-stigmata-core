@@ -35,6 +35,7 @@ public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter
         setThreshold(0.8d);
     }
     
+    @Override
     public boolean isFiltered(ComparisonPair pair){
         double similarity = pair.calculateSimilarity();
         boolean flag;
@@ -68,6 +69,7 @@ public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter
         return CRITERIA.toArray(new Criterion[CRITERIA.size()]);
     }
 
+    @Override
     public Criterion[] getAcceptableCriteria(){
         return getValidCriteria();
     }
@@ -83,6 +85,7 @@ public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter
         this.threshold = threshold;
     }
 
+    @Override
     public String toString(){
         StringBuffer sb = new StringBuffer();
         sb.append("similarity");

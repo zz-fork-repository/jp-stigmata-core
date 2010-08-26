@@ -29,6 +29,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         super(visitor, birthmark, context);
     }
 
+    @Override
     public void visit(int version, int access, String name, String signature,
             String superName, String[] interfaces){
         addSignatureClass(signature);
@@ -43,6 +44,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         }
     }
 
+    @Override
     public FieldVisitor visitField(int access, String name, String desc,
             String signature, Object value){
         FieldVisitor visitor = super.visitField(access, name, desc, signature, value);
@@ -53,6 +55,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         return visitor;
     }
 
+    @Override
     public MethodVisitor visitMethod(int access, String name, String desc,
                                      String signature, String[] exceptions){
         if(exceptions != null){
@@ -68,6 +71,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
 
         return new MethodAdapter(visitor){
+            @Override
             public void visitTypeInsn(int opcode, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
@@ -76,6 +80,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 super.visitTypeInsn(opcode, desc);
             }
 
+            @Override
             public void visitTryCatchBlock(Label start, Label end, Label handle, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
@@ -84,6 +89,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 super.visitTryCatchBlock(start, end, handle, desc);
             }
 
+            @Override
             public void visitMultiANewArrayInsn(String desc, int dims){
                 Type type = Type.getType(desc);
                 if(checkType(type)){
@@ -92,6 +98,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 super.visitMultiANewArrayInsn(desc, dims);
             }
 
+            @Override
             public void visitLocalVariable(String name, String desc, String signature,
                                            Label start, Label end, int index){
                 if(checkType(Type.getType(desc))){
@@ -102,6 +109,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 super.visitLocalVariable(name, desc, signature, start, end, index);
             }
 
+            @Override
             public void visitFieldInsn(int opcode, String owner, String name, String desc){
                 if(getEnvironment().getWellknownClassManager().isWellKnownClass(owner)){
                     add(owner);
@@ -109,6 +117,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                 addDescriptor(desc);
                 super.visitFieldInsn(opcode, owner, name, desc);
             }
+            @Override
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = normalize(owner);
                 if(getEnvironment().getWellknownClassManager().isWellKnownClass(className)){
@@ -124,6 +133,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         if(signature != null){
             SignatureReader in = new SignatureReader(signature);
             SignatureWriter writer = new SignatureWriter(){
+                @Override
                 public void visitClassType(String classType){
                     if(getEnvironment().getWellknownClassManager().isWellKnownClass(classType)){
                         add(classType);

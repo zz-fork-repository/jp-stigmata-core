@@ -162,6 +162,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         table = new JTable(model);
         table.setDefaultRenderer(Double.class, new CompareTableCellRenderer(extraction.getEnvironment()));
         table.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
                 if(e.getClickCount() == 2){
                     int row = table.rowAtPoint(e.getPoint());
@@ -248,6 +249,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
         final Messages messages = stigmata.getMessages();
         JButton save = GUIUtility.createButton(
             messages, "savecomparison", new SaveAction(stigmata, new AsciiDataWritable(){
+                @Override
                 public void writeAsciiData(PrintWriter out, String format){
                     ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
                     if(service == null){
@@ -290,23 +292,27 @@ public class RoundRobinComparisonResultPane extends JPanel{
         southPanel.add(Box.createHorizontalGlue());
 
         graph.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 graphButtonActionPerformed(e);
             }
         });
         mdsMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 mdsButtonActionPerformed(e);
             }
         });
 
         obfuscate.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 obfuscateClassNames();
             }
         });
 
         ActionListener compareListener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 String item = e.getActionCommand();
                 if(item.equals("guessedpair")){
@@ -418,6 +424,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             return false;
         }
 
+        @Override
         public Class<?> getColumnClass(int column){
             if(column == 0){
                 return String.class;

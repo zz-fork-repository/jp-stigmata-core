@@ -28,6 +28,7 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         this.source = source;
     }
 
+    @Override
     public void deleteResultSet(String id){
         QueryRunner runner = new QueryRunner(source);
 
@@ -39,6 +40,7 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         }
     }
 
+    @Override
     public void deleteAllResultSets(){
         QueryRunner runner = new QueryRunner(source);
         try{
@@ -49,10 +51,12 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         }
     }
 
+    @Override
     public ExtractionResultSet getResultSet(String id){
         return new RDBExtractionResultSet(source, id);
     }
 
+    @Override
     public String[] getResultSetIds(){
         QueryRunner runner = new QueryRunner(source);
         try{
@@ -65,10 +69,12 @@ public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
         return new String[0];
     }
 
+    @Override
     public Iterator<String> iterator(){
         return new ArrayIterator<String>(getResultSetIds());
     }
 
+    @Override
     public void refresh(){
         // do nothing.
     }

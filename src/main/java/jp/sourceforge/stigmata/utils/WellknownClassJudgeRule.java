@@ -55,6 +55,7 @@ public final class WellknownClassJudgeRule{
         return partType;
     }
 
+    @Override
     public int hashCode(){
         int m = getMatchType().hashCode();
         int p = getMatchPartType().hashCode();
@@ -63,6 +64,7 @@ public final class WellknownClassJudgeRule{
         return m + p + s;
     }
 
+    @Override
     public boolean equals(Object o){
         if(o instanceof WellknownClassJudgeRule){
             WellknownClassJudgeRule wcjr = (WellknownClassJudgeRule)o;
@@ -73,6 +75,7 @@ public final class WellknownClassJudgeRule{
         return false;
     }
 
+    @Override
     public String toString(){
         String string = null;
         switch(getMatchType()){

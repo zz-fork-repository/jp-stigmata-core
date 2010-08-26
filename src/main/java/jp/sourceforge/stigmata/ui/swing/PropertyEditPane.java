@@ -67,6 +67,7 @@ public class PropertyEditPane extends JPanel{
     private void initData(){
         BirthmarkEnvironment environment = stigmata.getEnvironment();
         environment.addPropertyListener(new PropertyChangeListener(){
+            @Override
             public void propertyChange(PropertyChangeEvent evt){
                 String name = evt.getPropertyName();
                 String value = (String)evt.getNewValue();
@@ -185,6 +186,7 @@ public class PropertyEditPane extends JPanel{
         Action addAction = new AbstractAction(){
             private static final long serialVersionUID = 1283676936119122278L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 addNewProperty(-1);
             }
@@ -192,6 +194,7 @@ public class PropertyEditPane extends JPanel{
         final Action removeAction = new AbstractAction(){
             private static final long serialVersionUID = -411260949451039374L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 removeSelectedProperty();
             }
@@ -199,6 +202,7 @@ public class PropertyEditPane extends JPanel{
         final Action editAction = new AbstractAction(){
             private static final long serialVersionUID = -7406073660916286349L;
 
+            @Override
             public void actionPerformed(ActionEvent e){
                 addNewProperty(table.getSelectedRow());
             }
@@ -235,6 +239,7 @@ public class PropertyEditPane extends JPanel{
         add(box, BorderLayout.SOUTH);
 
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent arg0){
                 removeAction.setEnabled(table.getSelectedRowCount() != 0);
                 editAction.setEnabled(table.getSelectedRowCount() == 1);

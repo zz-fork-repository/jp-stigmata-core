@@ -30,14 +30,18 @@ public abstract class AbstractComparisonResultSet implements ComparisonResultSet
         this.extraction = extraction;
     }
 
+    @Override
     public abstract Iterator<ComparisonPair> iterator();
 
+    @Override
     public abstract Iterator<BirthmarkSet> pairSources();
 
+    @Override
     public synchronized BirthmarkSet[] getPairSources(){
         return AbstractComparisonResultSet.<BirthmarkSet>getArrays(pairSources(), new BirthmarkSet[0]);
     }
 
+    @Override
     public int getPairCount(){
         if(count < 0){
             int calculateCount = 0;
@@ -50,10 +54,12 @@ public abstract class AbstractComparisonResultSet implements ComparisonResultSet
         return count;
     }
 
+    @Override
     public synchronized ComparisonPair[] getPairs(){
         return AbstractComparisonResultSet.<ComparisonPair>getArrays(iterator(), new ComparisonPair[0]);
     }
 
+    @Override
     public ComparisonPair getPairAt(int index){
         int currentIndex = 0;
         for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
@@ -66,10 +72,12 @@ public abstract class AbstractComparisonResultSet implements ComparisonResultSet
         return null;
     }
 
+    @Override
     public BirthmarkContext getContext(){
         return extraction.getContext();
     }
 
+    @Override
     public BirthmarkEnvironment getEnvironment(){
         return extraction.getEnvironment();
     }

@@ -512,6 +512,7 @@ public class StigmataFrame extends JFrame{
         add(tabPane, BorderLayout.CENTER);
 
         tabPane.addChangeListener(new ChangeListener(){
+            @Override
             public void stateChanged(ChangeEvent arg0){
                 String title = tabPane.getTitleAt(tabPane.getSelectedIndex());
                 closeTabMenu.setEnabled(!title.equals(getMessages().get("control.tab.label")));
@@ -555,11 +556,13 @@ public class StigmataFrame extends JFrame{
         pluginsMenu.add(onlineUpdate);
 
         installMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 installPlugin();
             }
         });
         onlineUpdate.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 onlineUpdate();
             }
@@ -595,12 +598,14 @@ public class StigmataFrame extends JFrame{
         fileMenu.add(exitMenu);
 
         newFrameMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 StigmataFrame frame = new StigmataFrame(stigmata, environment);
                 frame.setVisible(true);
             }
         });
         saveMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 control.saveSettings(new File(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml"));
                 setNeedToSaveSettings(false);
@@ -608,30 +613,35 @@ public class StigmataFrame extends JFrame{
         });
 
         exportMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 control.exportSettings();
             }
         });
 
         closeTabMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 closeTabMenuActionPerformed();
             }
         });
 
         clearMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 clearSettings();
             }
         });
 
         refreshMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 reloadSettings(new String[] { "gui", });
             }
         });
 
         closeMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 setVisible(false);
                 dispose();
@@ -639,6 +649,7 @@ public class StigmataFrame extends JFrame{
         });
 
         exitMenu.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent evt){
                 System.exit(0);
             }
@@ -662,6 +673,7 @@ public class StigmataFrame extends JFrame{
         menu.add(experimentalMode);
 
         experimentalMode.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 updateExperimentalModeState(((JCheckBoxMenuItem)e.getSource()).getState());
             }
@@ -678,6 +690,7 @@ public class StigmataFrame extends JFrame{
         LookAndFeel lookfeel = UIManager.getLookAndFeel();
 
         ActionListener listener = new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 try{
                     String command = e.getActionCommand();

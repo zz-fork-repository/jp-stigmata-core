@@ -25,6 +25,7 @@ public class LogicalAndBirthmarkComparator extends AbstractBirthmarkComparator{
         super(spi);
     }
 
+    @Override
     public double compare(Birthmark b1, Birthmark b2, BirthmarkContext context){
         if(!b1.getType().equals(b2.getType())){
             return Double.NaN;
@@ -55,6 +56,7 @@ public class LogicalAndBirthmarkComparator extends AbstractBirthmarkComparator{
         return similarity;
     }
 
+    @Override
     public int getCompareCount(Birthmark b1, Birthmark b2){
         return b1.getElementCount() + b2.getElementCount();
     }

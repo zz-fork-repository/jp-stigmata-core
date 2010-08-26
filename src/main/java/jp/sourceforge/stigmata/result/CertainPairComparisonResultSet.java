@@ -112,6 +112,7 @@ public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
         return sources.iterator();
     }
 
+    @Override
     public BirthmarkSet[] getPairSources(){
         if(sources == null){
             sources = createSources();
@@ -174,16 +175,19 @@ public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
             next = findNext();
         }
 
+        @Override
         public boolean hasNext(){
             return next != null;
         }
 
+        @Override
         public ComparisonPair next(){
             ComparisonPair returnValue = next;
             next = findNext();
             return returnValue;
         }
 
+        @Override
         public void remove(){
         }
 
@@ -227,16 +231,19 @@ public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
             nextPair = findNextPair();
         }
 
+        @Override
         public ComparisonPair next(){
             ComparisonPair cp = nextPair;
             nextPair = findNextPair();
             return cp;
         }
 
+        @Override
         public boolean hasNext(){
             return nextPair != null;
         }
 
+        @Override
         public void remove(){
         }
 

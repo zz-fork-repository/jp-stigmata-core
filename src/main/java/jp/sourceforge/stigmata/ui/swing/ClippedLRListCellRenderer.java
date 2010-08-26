@@ -43,6 +43,7 @@ public class ClippedLRListCellRenderer extends JPanel implements ListCellRendere
         setPreferredSize(dim);
     }
 
+    @Override
     public Component getListCellRendererComponent(JList list, Object value, int index,
             boolean isSelected, boolean cellHasFocus){
         LRItem item = (LRItem)value;

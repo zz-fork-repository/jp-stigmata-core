@@ -54,6 +54,7 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         filters.remove(filter);
     }
 
+    @Override
     public ComparisonPair getPairAt(int index){
         int currentIndex = 0;
         for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
@@ -66,6 +67,7 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         return null;
     }
 
+    @Override
     public ComparisonPair[] getPairs(){
         List<ComparisonPair> list = new ArrayList<ComparisonPair>();
         for(Iterator<ComparisonPair> i = iterator(); i.hasNext(); ){
@@ -74,22 +76,27 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         return list.toArray(new ComparisonPair[list.size()]);
     }
 
+    @Override
     public int getPairCount(){
         return resultset.getPairCount();
     }
 
+    @Override
     public BirthmarkContext getContext(){
         return resultset.getContext();
     }
 
+    @Override
     public BirthmarkEnvironment getEnvironment(){
         return resultset.getEnvironment();
     }
 
+    @Override
     public Iterator<ComparisonPair> iterator(){
         return new FilteredIterator(resultset.iterator());
     }
 
+    @Override
     public synchronized BirthmarkSet[] getPairSources(){
         List<BirthmarkSet> list = new ArrayList<BirthmarkSet>();
         for(Iterator<BirthmarkSet> i = pairSources(); i.hasNext(); ){
@@ -98,6 +105,7 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
         return list.toArray(new BirthmarkSet[list.size()]);
     }
 
+    @Override
     public Iterator<BirthmarkSet> pairSources(){
         return resultset.pairSources();
     }
@@ -112,16 +120,19 @@ public class FilteredComparisonResultSet implements ComparisonResultSet{
             next = findNext();
         }
 
+        @Override
         public boolean hasNext(){
             return next != null;
         }
 
+        @Override
         public ComparisonPair next(){
             ComparisonPair returnValue = next;
             next = findNext();
             return returnValue;
         }
 
+        @Override
         public void remove(){
             throw new InternalError("not implemented");
         }

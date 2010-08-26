@@ -149,6 +149,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
         Box south = Box.createHorizontalBox();
         JButton storeImageButton = GUIUtility.createButton(stigmata.getMessages(), "savegraph");
         JButton switchColorButton = new JButton(new ChangeColorAction(stigmata, new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 ChangeColorAction action = (ChangeColorAction)e.getSource();
                 if(action.isColorSelected()){
@@ -157,6 +158,7 @@ public class SimilarityDistributionGraphPane extends JPanel{
             }
         }));
         storeImageButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 storeGraphImage();
             }

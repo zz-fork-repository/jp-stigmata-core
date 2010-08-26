@@ -19,6 +19,7 @@ public class MultipleStigmataHook implements StigmataHook, StigmataRuntimeHook{
     private List<StigmataHook> hooks = new ArrayList<StigmataHook>();
     private List<StigmataRuntimeHook> runtimeHooks = new ArrayList<StigmataRuntimeHook>();
 
+    @Override
     public void onHook(Phase phase, BirthmarkContext context){
         for(StigmataRuntimeHook hook: runtimeHooks){
             if(hook != null){
@@ -27,6 +28,7 @@ public class MultipleStigmataHook implements StigmataHook, StigmataRuntimeHook{
         }
     }
 
+    @Override
     public void onHook(Phase phase, BirthmarkEnvironment env){
         for(StigmataHook hook: hooks){
             if(hook != null){

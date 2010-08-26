@@ -55,18 +55,22 @@ public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Se
         }
     }
 
+    @Override
     public Object getValue(){
         return value;
     }
 
+    @Override
     public String toString(){
         return signature + "=" + value;
     }
 
+    @Override
     public int hashCode(){
         return signature.hashCode() + value.hashCode();
     }
 
+    @Override
     public boolean equals(Object o){
         if(o instanceof TypeAndValueBirthmarkElement){
             TypeAndValueBirthmarkElement tvbe = (TypeAndValueBirthmarkElement)o;

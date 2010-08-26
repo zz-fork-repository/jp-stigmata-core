@@ -127,18 +127,21 @@ public class BirthmarkDefinitionPane extends JPanel{
         removeService.setEnabled(false);
 
         serviceList.addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent e){
                 listValueChanged(e);
             }
         });
 
         newService.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 addNewService();
             }
         });
 
         removeService.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 removeService();
             }
@@ -239,6 +242,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             return type.getText();
         }
 
+        @Override
         public void setEnabled(boolean flag){
             super.setEnabled(flag);
 
@@ -393,14 +397,17 @@ public class BirthmarkDefinitionPane extends JPanel{
             comparator.setEditable(true);
 
             DocumentListener listener = new DocumentListener(){
+                @Override
                 public void insertUpdate(DocumentEvent e){
                     thisPane.updateView();
                 }
 
+                @Override
                 public void removeUpdate(DocumentEvent e){
                     thisPane.updateView();
                 }
 
+                @Override
                 public void changedUpdate(DocumentEvent e){
                     thisPane.updateView();
                 }
@@ -410,6 +417,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             displayType.getDocument().addDocumentListener(listener);
             description.getDocument().addDocumentListener(listener);
             ItemListener itemListener = new ItemListener(){
+                @Override
                 public void itemStateChanged(ItemEvent e){
                     thisPane.updateView();
                 }
@@ -417,6 +425,7 @@ public class BirthmarkDefinitionPane extends JPanel{
             comparator.addItemListener(itemListener);
             extractor.addItemListener(itemListener);
             ActionListener actionListener = new ActionListener(){
+                @Override
                 public void actionPerformed(ActionEvent e){
                     thisPane.updateView();
                 }

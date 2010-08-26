@@ -21,6 +21,7 @@ public class EditDistanceBirthmarkComparator extends AbstractBirthmarkComparator
         super(spi);
     }
 
+    @Override
     public double compare(Birthmark b1, Birthmark b2, BirthmarkContext context){
         if(!b1.getType().equals(b2.getType())){
             return Double.NaN;

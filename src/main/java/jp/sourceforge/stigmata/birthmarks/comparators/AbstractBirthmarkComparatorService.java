@@ -24,11 +24,13 @@ abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvide
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public abstract String getType();
 
     /**
      * returns a localized description of the birthmark this service provides.
      */
+    @Override
     public String getDescription(Locale locale){
         return LocalizedDescriptionManager.getInstance().getDescription(
             locale, getType(), LocalizedDescriptionManager.ServiceCategory.comparator
@@ -38,15 +40,18 @@ abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvide
     /**
      * returns a localized description of the birthmark in default locale.
      */
+    @Override
     public String getDescription(){
         return getDescription(Locale.getDefault());
     }
 
+    @Override
     public abstract String getComparatorClassName();
 
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkComparator getComparator(BirthmarkSpi service){
         try{
             Class<?> c = Class.forName(getComparatorClassName());

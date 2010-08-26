@@ -27,14 +27,17 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
  */
 public class SimilarityComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
+    @Override
     public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
         return new Pane(frame, service);
     }
 
+    @Override
     public String getFilterName(){
         return "similarity";
     }
 
+    @Override
     public ComparisonPairFilterSpi getComparisonPairFilterService(){
         return new SimilarityComparisonPairFilterService();
     }
@@ -114,12 +117,15 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
             add(threshold);
 
             threshold.getDocument().addDocumentListener(new DocumentListener(){
+                @Override
                 public void changedUpdate(DocumentEvent e){
                 }
 
+                @Override
                 public void insertUpdate(DocumentEvent e){
                 }
 
+                @Override
                 public void removeUpdate(DocumentEvent e){
                 }
             });

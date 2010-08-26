@@ -45,11 +45,13 @@ public class EditableTabbedPane extends JTabbedPane{
 
         editor.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         editor.addFocusListener(new FocusAdapter(){
+            @Override
             public void focusGained(final FocusEvent e){
                 ((JTextField)e.getSource()).selectAll();
             }
         });
         editor.addKeyListener(new KeyAdapter(){
+            @Override
             public void keyPressed(KeyEvent e){
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     renameTab();
@@ -60,6 +62,7 @@ public class EditableTabbedPane extends JTabbedPane{
             }
         });
         addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent me){
                 if(me.getClickCount() == 2){
                     startEditing();
@@ -67,6 +70,7 @@ public class EditableTabbedPane extends JTabbedPane{
             }
         });
         addKeyListener(new KeyAdapter(){
+            @Override
             public void keyPressed(KeyEvent e){
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     startEditing();

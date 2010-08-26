@@ -17,6 +17,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * @version $Revision$ 
  */
 public class BirthmarkServiceCsvPrinter extends AbstractBirthmarkServicePrinter{
+    @Override
     public void printResult(PrintWriter out, BirthmarkSpi[] spilist){
         printHeader(out);
         for(BirthmarkSpi spi: spilist){

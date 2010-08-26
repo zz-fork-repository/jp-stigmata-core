@@ -19,10 +19,12 @@ public class FrequencyMethodCallBirthmarkExtractorService extends AbstractBirthm
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "fmc";
     }
 
+    @Override
     public String getExtractorClassName(){
         return FrequencyMethodCallBirthmarkExtractor.class.getName();
     }
@@ -30,6 +32,7 @@ public class FrequencyMethodCallBirthmarkExtractorService extends AbstractBirthm
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(BirthmarkSpi service){
         return new FrequencyMethodCallBirthmarkExtractor(service);
     }

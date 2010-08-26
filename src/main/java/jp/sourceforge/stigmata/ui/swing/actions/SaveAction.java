@@ -53,6 +53,7 @@ public class SaveAction extends AbstractAction{
         this.description = description;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         if(extensions == null || description == null){
             extensions = stigmata.getMessages().getArray("store.extensions");

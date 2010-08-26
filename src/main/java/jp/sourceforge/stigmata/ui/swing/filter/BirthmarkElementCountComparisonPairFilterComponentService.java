@@ -31,23 +31,28 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 public class BirthmarkElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService implements BirthmarkServiceListener{
     private Pane pane;
 
+    @Override
     public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
         pane = new Pane(frame, service);
         return pane;
     }
 
+    @Override
     public String getFilterName(){
         return "elementcount";
     }
 
+    @Override
     public void serviceAdded(BirthmarkSpi service){
         pane.serviceAdded(service);
     }
 
+    @Override
     public void serviceRemoved(BirthmarkSpi service){
         pane.serviceRemoved(service);
     }
 
+    @Override
     public ComparisonPairFilterSpi getComparisonPairFilterService(){
         return new BirthmarkElementCountComparisonPairFilterService();
     }
@@ -67,10 +72,12 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
             initLayouts();
         }
 
+        @Override
         public void serviceAdded(BirthmarkSpi service){
             birthmarks.addItem(service);
         }
 
+        @Override
         public void serviceRemoved(BirthmarkSpi service){
             birthmarks.removeItem(service);
         }

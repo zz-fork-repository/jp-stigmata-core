@@ -16,15 +16,19 @@ import jp.sourceforge.stigmata.ComparisonPair;
  */
 public abstract class AbstractComparisonPairPrinter implements ComparisonPairPrinter, Printer{
 
+    @Override
     public abstract void printResult(PrintWriter out, ComparisonPair pair);
 
+    @Override
     public void printFooter(PrintWriter out){
         out.flush();
     }
 
+    @Override
     public void printHeader(PrintWriter out){
     }
 
+    @Override
     public String getResult(ComparisonPair pair){
         StringWriter writer = new StringWriter();
         PrintWriter out = new PrintWriter(writer);

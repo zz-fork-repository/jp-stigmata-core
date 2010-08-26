@@ -32,6 +32,7 @@ public class OpenSettingDirAction extends AbstractAction{
         this.messages = messages;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         String home = BirthmarkEnvironment.getStigmataHome();
         Desktop desktop = Desktop.getDesktop();

@@ -30,12 +30,15 @@ public abstract class AbstractBirthmarkComparator implements BirthmarkComparator
         return spi;
     }
 
+    @Override
     public String getType(){
         return spi.getType();
     }
 
+    @Override
     public abstract double compare(Birthmark b1, Birthmark b2, BirthmarkContext context);
 
+    @Override
     public int getCompareCount(Birthmark b1, Birthmark b2){
         return b1.getElementCount() + b2.getElementCount();
     }

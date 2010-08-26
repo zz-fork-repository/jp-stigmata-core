@@ -125,6 +125,7 @@ public class UpdatePluginsPane extends JPanel{
         final JButton updateButton = GUIUtility.createButton(stigmata.getMessages(), "hermes.update");
 
         checkButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 try{
                     showLists();
@@ -137,6 +138,7 @@ public class UpdatePluginsPane extends JPanel{
             }
         });
         updateButton.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 try{
                     if(applyLicenses()){
@@ -182,14 +184,17 @@ public class UpdatePluginsPane extends JPanel{
             this.pane = pane;
         }
 
+        @Override
         public void downloadDone(HermesEvent e){
             Artifact a = e.getArtifact();
             model.setValueAt(ProgressRenderer.DONE, map.get(a.getGroupId()).get(a.getArtifactId()), ProgressRenderer.PROGRESS_COLUMN);
         }
 
+        @Override
         public void fileSizeGotten(HermesEvent e){
         }
 
+        @Override
         public void progress(HermesEvent e, double progress){
             Artifact a = e.getArtifact();
             model.setValueAt(
@@ -198,9 +203,11 @@ public class UpdatePluginsPane extends JPanel{
             );
         }
 
+        @Override
         public void finish(HermesEvent e){
         }
 
+        @Override
         public void targetResolved(HermesEvent e){
             Artifact[] artifacts = e.getArtifacts();
             map = buildArtifactsIndexMap(artifacts);
@@ -322,13 +329,14 @@ public class UpdatePluginsPane extends JPanel{
                 model.addRow(new String[] { artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion(), });
             }
             table.addMouseListener(new MouseAdapter(){
+                @Override
                 public void mouseClicked(MouseEvent e){
                     int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
                     License[] licenses = artifacts[row].getPom().getLicenses();
 
                     licenseNames.removeAllItems();
                     for(int i = 0; i < licenses.length; i++){
-                        licenseNames.addItem(licenses[i]);
+                        licenseNames.addItem(licenses[i].getName());
                     }
                     if(licenses.length > 0){
                         licenseNames.setSelectedIndex(0);
@@ -339,6 +347,7 @@ public class UpdatePluginsPane extends JPanel{
                 }
             });
             licenseNames.addActionListener(new ActionListener(){
+                @Override
                 public void actionPerformed(ActionEvent e){
                     String name = (String)((JComboBox)e.getSource()).getSelectedItem();
                     boolean missingLicenseFlag = true;

@@ -56,25 +56,30 @@ public class FilterSelectionPane extends JPanel implements ComparisonPairFilterR
         initLayout();
     }
 
+    @Override
     public void addFilterSet(ComparisonPairFilterSet filter){
         filters.put(filter.getName(), filter);
         enableMap.put(filter.getName(), false);
         model.addElement(filter.getName());
     }
 
+    @Override
     public void filterSelected(ComparisonPairFilter filter){
     }
 
+    @Override
     public ComparisonPairFilterSet getFilterSet(String name){
         return filters.get(name);
     }
 
+    @Override
     public void removeFilterSet(String name){
         filters.remove(name);
         enableMap.remove(name);
         model.removeElement(name);
     }
 
+    @Override
     public void updateFilterSet(String name, ComparisonPairFilterSet filter){
         int index = model.indexOf(name);
         model.set(index, filter.getName());
@@ -111,6 +116,7 @@ public class FilterSelectionPane extends JPanel implements ComparisonPairFilterR
         add(filterDef, BorderLayout.CENTER);
 
         list.addListSelectionListener(new ListSelectionListener(){
+            @Override
             public void valueChanged(ListSelectionEvent e){
                 String name = (String)list.getSelectedValue();
                 filterDef.setFilterSet(filters.get(name));
@@ -142,6 +148,7 @@ public class FilterSelectionPane extends JPanel implements ComparisonPairFilterR
             setOpaque(true);
         }
 
+        @Override
         public Component getListCellRendererComponent(JList list, Object v, int index, boolean isSelected, boolean cellHasFocus){
             String value = (String)v;
             setText(value);

@@ -24,12 +24,14 @@ public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtrac
         super(visitor, birthmark, context);
     }
 
+    @Override
     public MethodVisitor visitMethod(int access, String name, String desc,
                                       String signature, String[] exceptions){
 
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
 
         return new MethodAdapter(visitor){
+            @Override
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = owner.replace('/', '.');
                 if(getEnvironment().getWellknownClassManager().isWellKnownClass(className)){

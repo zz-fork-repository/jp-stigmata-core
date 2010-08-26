@@ -18,10 +18,12 @@ public class CosineSimilarityBirthmarkComparatorService extends AbstractBirthmar
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "cosine";
     }
 
+    @Override
     public String getComparatorClassName(){
         return CosineSimilarityBirthmarkComparator.class.getName();
     }
@@ -29,6 +31,7 @@ public class CosineSimilarityBirthmarkComparatorService extends AbstractBirthmar
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkComparator getComparator(BirthmarkSpi service){
         return new CosineSimilarityBirthmarkComparator(service);
     }

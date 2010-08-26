@@ -57,6 +57,7 @@ public class ExtensionFilter extends FileFilter implements java.io.FileFilter{
         return extensions.toArray(new String[extensions.size()]);
     }
 
+    @Override
     public boolean accept(File f){
         String fileName = f.getName();
         String extension = fileName.substring(fileName.lastIndexOf('.') + 1);
@@ -79,6 +80,7 @@ public class ExtensionFilter extends FileFilter implements java.io.FileFilter{
         this.description = description;
     }
 
+    @Override
     public String getDescription(){
         return description;
     }

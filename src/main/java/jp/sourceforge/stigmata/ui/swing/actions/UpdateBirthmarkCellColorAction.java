@@ -44,6 +44,7 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
         this(parent, BirthmarkEnvironment.getDefaultEnvironment());
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){
         JComponent c = createPanel();
         JOptionPane.showMessageDialog(
@@ -107,6 +108,7 @@ public class UpdateBirthmarkCellColorAction extends AbstractAction{
             JButton back = GUIUtility.createButton(parent.getMessages(), "updatecellback");
 
             ActionListener listener = new ActionListener(){
+                @Override
                 public void actionPerformed(ActionEvent e){
                     String command = e.getActionCommand();
                     boolean foreground = command.equals("updatecellfore");

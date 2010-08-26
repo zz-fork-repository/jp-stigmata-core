@@ -18,6 +18,7 @@ public interface ExtractedBirthmarkHistory extends Iterable<String>{
     /**
      * returns a list of histor ids as iterator.
      */
+    @Override
     public Iterator<String> iterator();
 
     /**

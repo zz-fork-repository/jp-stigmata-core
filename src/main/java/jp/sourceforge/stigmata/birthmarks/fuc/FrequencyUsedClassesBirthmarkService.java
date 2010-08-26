@@ -23,26 +23,32 @@ public class FrequencyUsedClassesBirthmarkService extends AbstractBirthmarkServi
     private BirthmarkComparator comparator = new CosineSimilarityBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new FrequencyUsedClassesBirthmarkExtractor(this);
 
+    @Override
     public String getType(){
         return "fuc";
     }
 
+    @Override
     public String getDefaultDescription(){
         return "Frequency of used classes in target class.";
     }
 
+    @Override
     public BirthmarkExtractor getExtractor(){
         return extractor;
     }
 
+    @Override
     public BirthmarkComparator getComparator(){
         return comparator;
     }
 
+    @Override
     public boolean isExperimental(){
         return false;
     }
 
+    @Override
     public boolean isUserDefined(){
         return false;
     }

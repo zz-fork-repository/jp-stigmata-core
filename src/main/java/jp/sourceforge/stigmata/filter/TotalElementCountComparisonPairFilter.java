@@ -35,6 +35,7 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
         super(service);
     }
 
+    @Override
     public Criterion[] getAcceptableCriteria(){
         return getValidCriteria();
     }
@@ -43,6 +44,7 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
         return CRITERIA.toArray(new Criterion[CRITERIA.size()]);
     }
 
+    @Override
     public boolean isFiltered(ComparisonPair pair){
         boolean flag;
         if(getTarget() == FilterTarget.TARGET_1){
@@ -142,6 +144,7 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
         this.target = target;
     }
 
+    @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         switch(getTarget()){

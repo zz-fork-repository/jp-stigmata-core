@@ -19,10 +19,12 @@ public class KGramBasedBirthmarkExtractorService extends AbstractBirthmarkExtrac
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "kgram";
     }
 
+    @Override
     public String getExtractorClassName(){
         return KGramBasedBirthmarkExtractor.class.getName();
     }
@@ -30,6 +32,7 @@ public class KGramBasedBirthmarkExtractorService extends AbstractBirthmarkExtrac
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(BirthmarkSpi service){
         return new KGramBasedBirthmarkExtractor(service);
     }

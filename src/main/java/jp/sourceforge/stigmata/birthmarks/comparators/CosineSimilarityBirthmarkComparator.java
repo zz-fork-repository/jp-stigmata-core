@@ -28,6 +28,7 @@ public class CosineSimilarityBirthmarkComparator extends
         super(spi);
     }
 
+    @Override
     public double compare(Birthmark b1, Birthmark b2, BirthmarkContext context){
         if(!b1.getType().equals(b2.getType())){
             return Double.NaN;
@@ -111,7 +112,6 @@ public class CosineSimilarityBirthmarkComparator extends
     /**
      * This method is used for debugging.
      */
-    @SuppressWarnings("unused")
     private void printAll(Map<String, CountPair> pairs){
         System.out.println("----------");
         for(Map.Entry<String, CountPair> entry: pairs.entrySet()){

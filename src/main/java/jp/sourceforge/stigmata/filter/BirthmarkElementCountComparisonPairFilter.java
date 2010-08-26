@@ -47,6 +47,7 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
         return CRITERIA.toArray(new Criterion[CRITERIA.size()]);
     }
 
+    @Override
     public Criterion[] getAcceptableCriteria(){
         return getValidCriteria();
     }
@@ -92,6 +93,7 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
         return flag;
     }
 
+    @Override
     public boolean isFiltered(ComparisonPair pair){
         if(target == FilterTarget.BOTH_TARGETS || target == FilterTarget.ONE_OF_TARGETS){
             return isFilteredTwo(pair);
@@ -153,6 +155,7 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
         this.target = target;
     }
 
+    @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         switch(getTarget()){

@@ -27,12 +27,10 @@ public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     /**
      * private field/method flag defined in JVM specification.
      */
-    @SuppressWarnings("unused")
     private static final int OPCODE_ACC_PRIVATE = 2;
     /**
      * protected field/method flag defined in JVM specification.
      */
-    @SuppressWarnings("unused")
     private static final int OPCODE_ACC_PROTECTED = 4;
     /**
      * static field/method flag defined in JVM specification.
@@ -68,6 +66,7 @@ public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
         rules.clear();
     }
 
+    @Override
     public synchronized Iterator<WellknownClassJudgeRule> iterator(){
         List<WellknownClassJudgeRule> copiedRules = new ArrayList<WellknownClassJudgeRule>(rules);
         return copiedRules.iterator();

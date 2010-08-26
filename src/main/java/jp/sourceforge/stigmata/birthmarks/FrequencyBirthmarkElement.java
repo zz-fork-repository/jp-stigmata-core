@@ -62,10 +62,12 @@ public class FrequencyBirthmarkElement extends BirthmarkElement implements Value
         return hash;
     }
 
+    @Override
     public String getValueName(){
         return (String)super.getValue();
     }
 
+    @Override
     public int getValueCount(){
         return count;
     }

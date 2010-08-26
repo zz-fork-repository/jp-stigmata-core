@@ -30,6 +30,7 @@ public class MdsImageExporter implements BinaryDataWritable{
         this.viewer = viewer;
     }
 
+    @Override
     public void writeBinaryData(OutputStream out, String format)
             throws IOException, UnsupportedFormatException{
         Dimension size = viewer.getSize();

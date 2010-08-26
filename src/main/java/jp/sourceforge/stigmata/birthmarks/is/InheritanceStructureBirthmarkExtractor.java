@@ -66,6 +66,7 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
         return birthmark;
      }
 
+    @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] { ExtractionUnit.CLASS, };
     }

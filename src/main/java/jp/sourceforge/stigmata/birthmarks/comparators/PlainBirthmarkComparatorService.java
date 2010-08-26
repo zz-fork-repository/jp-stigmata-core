@@ -18,10 +18,12 @@ public class PlainBirthmarkComparatorService extends AbstractBirthmarkComparator
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "plain";
     }
 
+    @Override
     public String getComparatorClassName(){
         return PlainBirthmarkComparator.class.getName();
     }
@@ -29,6 +31,7 @@ public class PlainBirthmarkComparatorService extends AbstractBirthmarkComparator
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkComparator getComparator(BirthmarkSpi service){
         return new PlainBirthmarkComparator(service);
     }

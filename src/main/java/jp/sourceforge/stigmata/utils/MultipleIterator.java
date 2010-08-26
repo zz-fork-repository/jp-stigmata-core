@@ -42,6 +42,7 @@ public class MultipleIterator<T> implements Iterator<T>{
         iterators.add(iterator);
     }
 
+    @Override
     public boolean hasNext(){
         while(index < iterators.size()){
             boolean next = iterators.get(index).hasNext();
@@ -55,6 +56,7 @@ public class MultipleIterator<T> implements Iterator<T>{
 
     /** 
      */
+    @Override
     public T next(){
         if(!iterators.get(index).hasNext()){
             index++;
@@ -70,6 +72,7 @@ public class MultipleIterator<T> implements Iterator<T>{
         return iterators.get(index).next();
     }
 
+    @Override
     public void remove(){
         iterators.get(index).remove();
     }

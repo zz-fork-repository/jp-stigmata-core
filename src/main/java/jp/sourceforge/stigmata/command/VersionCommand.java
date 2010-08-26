@@ -20,6 +20,7 @@ public class VersionCommand extends AbstractStigmataCommand{
         return "version";
     }
 
+    @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
         Package p = getClass().getPackage();

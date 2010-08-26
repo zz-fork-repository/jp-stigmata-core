@@ -22,6 +22,7 @@ import jp.sourceforge.stigmata.printer.AbstractExtractionResultSetPrinter;
  * @version $Revision$ 
  */
 public class ExtractionResultSetXmlPrinter extends AbstractExtractionResultSetPrinter{
+    @Override
     public void printResult(PrintWriter out, ExtractionResultSet ers){
         printHeader(out);
 
@@ -37,12 +38,14 @@ public class ExtractionResultSetXmlPrinter extends AbstractExtractionResultSetPr
         printFooter(out);
     }
 
+    @Override
     public void printHeader(PrintWriter out){
         out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.println("<birthmark-result-set>");
         out.println("  <extracted-birthmarks>");
     }
 
+    @Override
     public void printFooter(PrintWriter out){
         out.println("  </extracted-birthmarks>");
         out.println("</birthmark-result-set>");

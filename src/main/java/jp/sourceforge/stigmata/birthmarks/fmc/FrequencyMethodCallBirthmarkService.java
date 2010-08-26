@@ -23,26 +23,32 @@ public class FrequencyMethodCallBirthmarkService extends AbstractBirthmarkServic
     private BirthmarkComparator comparator = new CosineSimilarityBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new FrequencyMethodCallBirthmarkExtractor(this);
 
+    @Override
     public String getType(){
         return "fmc";
     }
 
+    @Override
     public String getDefaultDescription(){
         return "Frequency of method call which order is appeared in method definition.";
     }
 
+    @Override
     public BirthmarkExtractor getExtractor(){
         return extractor;
     }
 
+    @Override
     public BirthmarkComparator getComparator(){
         return comparator;
     }
 
+    @Override
     public boolean isExperimental(){
         return false;
     }
 
+    @Override
     public boolean isUserDefined(){
         return false;
     }

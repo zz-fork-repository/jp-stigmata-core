@@ -32,6 +32,7 @@ public class UsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
         return new UsedClassesBirthmarkExtractVisitor(writer, birthmark, context);
     }
 
+    @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 

@@ -32,6 +32,7 @@ public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmark
         return new ConstantValueOfFieldVariableBirthmarkExtractVisitor(writer, birthmark, context);
     }
 
+    @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 

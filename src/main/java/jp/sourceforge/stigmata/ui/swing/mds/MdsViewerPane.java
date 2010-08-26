@@ -91,12 +91,14 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager
         }
     }
 
+    @Override
     public void zoomIn(){
         currentZoomPattern++;
         userInputtedValue = false;
         zoom(ZOOM_PATTERN[currentZoomPattern]);
     }
 
+    @Override
     public void zoomOut(){
         if(!userInputtedValue){
             currentZoomPattern--;
@@ -105,6 +107,7 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager
         zoom(ZOOM_PATTERN[currentZoomPattern]);
     }
 
+    @Override
     public void zoom(int ratio){
         for(int i = 0; i < ZOOM_PATTERN.length; i++){
             if(ratio <= ZOOM_PATTERN[i]){
@@ -125,6 +128,7 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager
         mdspane.setZoomRatio(ratio);
     }
 
+    @Override
     public Messages getMessages(){
         return stigmata.getMessages();
     }
@@ -182,6 +186,7 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager
 
         JCheckBox check = new JCheckBox(stigmata.getMessages().get("showlabel.button.label"), true);
         check.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 JCheckBox c = (JCheckBox)e.getSource();
                 setting.setShowLabels(c.isSelected());
@@ -210,6 +215,7 @@ public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager
         GUIUtility.decorateJComponent(messages, zoomRatio, "mdszoomratio");
         zoomRatio.setColumns(5);
         zoomRatio.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
                 try{
                     String label = zoomRatio.getText();

@@ -19,10 +19,12 @@ public class UsedClassesBirthmarkExtractorService extends AbstractBirthmarkExtra
     /**
      * returns a type of the birthmark this service provides.
      */
+    @Override
     public String getType(){
         return "uc";
     }
 
+    @Override
     public String getExtractorClassName(){
         return UsedClassesBirthmarkExtractor.class.getName();
     }
@@ -30,6 +32,7 @@ public class UsedClassesBirthmarkExtractorService extends AbstractBirthmarkExtra
     /**
      * returns a extractor for the birthmark of this service.
      */
+    @Override
     public BirthmarkExtractor getExtractor(BirthmarkSpi service){
         return new UsedClassesBirthmarkExtractor(service);
     }
