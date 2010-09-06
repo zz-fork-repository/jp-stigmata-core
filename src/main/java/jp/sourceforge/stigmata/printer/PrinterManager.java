@@ -7,8 +7,7 @@ package jp.sourceforge.stigmata.printer;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import javax.imageio.spi.ServiceRegistry;
+import java.util.ServiceLoader;
 
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.printer.csv.CsvResultPrinterService;
@@ -21,21 +20,25 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
  */
 public class PrinterManager{
     private static final PrinterManager manager = new PrinterManager();
+    private ServiceLoader<ResultPrinterSpi> serviceLoader;
 
     private Map<String, ResultPrinterSpi> formats = new HashMap<String, ResultPrinterSpi>();
 
     private PrinterManager(){
-        for(Iterator<ResultPrinterSpi> i = ServiceRegistry.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
-            ResultPrinterSpi spi = i.next();
-            addService(spi);
-        }
+        serviceLoader = ServiceLoader.load(ResultPrinterSpi.class);
+        load();
     }
 
-    public static void updateServices(BirthmarkEnvironment environment){
+    public void refresh(){
+        serviceLoader.reload();
+        load();
+    }
+
+    public static void refresh(BirthmarkEnvironment env){
         PrinterManager instance = getInstance();
-        for(Iterator<ResultPrinterSpi> i = environment.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
-            ResultPrinterSpi spi = i.next();
-            instance.addService(spi);
+        instance.formats.clear();
+        for(Iterator<ResultPrinterSpi> i = env.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
+            instance.addService(i.next());
         }
     }
 
@@ -49,6 +52,14 @@ public class PrinterManager{
 
     public ResultPrinterSpi getService(String format){
         return formats.get(format);
+    }
+
+    private void load(){
+        formats.clear();
+        for(Iterator<ResultPrinterSpi> i = serviceLoader.iterator(); i.hasNext(); ){
+            ResultPrinterSpi spi = i.next();
+            addService(spi);
+        }
     }
 
     private void addService(ResultPrinterSpi service){

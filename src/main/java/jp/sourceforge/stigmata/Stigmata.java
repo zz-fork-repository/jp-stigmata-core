@@ -162,7 +162,7 @@ public class Stigmata{
             BirthmarkSpi service = i.next();
             defaultEnvironment.addService(service);
         }
-        PrinterManager.updateServices(defaultEnvironment);
+        PrinterManager.refresh(defaultEnvironment);
         exportConfigFile(BirthmarkEnvironment.getStigmataHome(), "stigmata.xml");
     }
 

@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ServiceLoader;
 import java.util.Set;
 
 import javax.imageio.spi.ServiceRegistry;
@@ -249,7 +250,8 @@ public class BirthmarkEnvironment{
     public <T> Iterator<T> lookupProviders(Class<T> providerClass){
         Iterator<T> iterator;
         if(loader != null){
-            iterator = ServiceRegistry.lookupProviders(providerClass, loader);
+            ServiceLoader<T> services = ServiceLoader.load(providerClass, loader);
+            iterator = services.iterator();
         }
         else{
             iterator = ServiceRegistry.lookupProviders(providerClass);

@@ -112,6 +112,7 @@ public class CosineSimilarityBirthmarkComparator extends
     /**
      * This method is used for debugging.
      */
+    @SuppressWarnings("unused")
     private void printAll(Map<String, CountPair> pairs){
         System.out.println("----------");
         for(Map.Entry<String, CountPair> entry: pairs.entrySet()){
