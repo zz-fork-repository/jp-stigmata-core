@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="euc-jp"?>
-
-<!-- 
-$Id$
--->
+<?xml version="1.0" encoding="utf-8"?>
 
 <stigmata>
   <birthmark-services>
@@ -174,14 +170,15 @@ $Id$
 
   <!--
     Settings for wellknown classes.
-    ¥Ñ¥Ã¥±¡¼¥¸¤ÎÀÜÆ¬¼­¡¤¥¯¥é¥¹Ì¾¤ÎÀÜÈø¼­¡¤¥¯¥é¥¹¤Î´°Á´½¤¾þÌ¾¤Ç
-    ÀßÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë¡¥
+    ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®æŽ¥é ­è¾žï¼Œã‚¯ãƒ©ã‚¹åã®æŽ¥å°¾è¾žï¼Œã‚¯ãƒ©ã‚¹ã®å®Œå…¨ä¿®é£¾åã§
+    è¨­å®šã™ã‚‹ã“ã¨ãŒã§ãã‚‹ï¼Ž
    -->
   <wellknown-classes>
     <!--
       Those names are excluded from wellknown classes, even if
       following parts define the name is contain wellknown classes.
-      ¤³¤ÎÃæ¤Ë´Þ¤Þ¤ì¤ë¤â¤Î¤ÏÂ¾¤Ç¤¤¤¯¤é wellknown ¤ÈÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÌµ»ë¤¹¤ë¡¥
+
+      ã“ã®ä¸­ã«å«ã¾ã‚Œã‚‹ã‚‚ã®ã¯ä»–ã§ã„ãã‚‰ wellknown ã¨è¨­å®šã•ã‚Œã¦ã„ã¦ã‚‚ç„¡è¦–ã™ã‚‹ï¼Ž
     -->
     <exclude><fully-name><suffix>Exception</suffix></fully-name></exclude>
     <exclude><fully-name><suffix>Error</suffix></fully-name></exclude>
@@ -196,7 +193,7 @@ $Id$
     <package-name><prefix>org.w3c</prefix></package-name>
     <package-name><prefix>org.ietf</prefix></package-name>
 
-    <!-- ¤½¤ÎÂ¾¡¤¤è¤¯»È¤ï¤ì¤Æ¤¤¤½¤¦¤Ê¥Ñ¥Ã¥±¡¼¥¸ -->
+    <!-- ãã®ä»–ï¼Œã‚ˆãä½¿ã‚ã‚Œã¦ã„ãã†ãªãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ -->
     <package-name><prefix>org.gnu</prefix></package-name>
     <package-name><prefix>com.apple</prefix></package-name>
     <package-name><prefix>pnuts</prefix></package-name>
@@ -218,7 +215,7 @@ $Id$
   </wellknown-classes>
 
   <classpath-list>
-    <!-- URL·Á¼°¤Î¥¯¥é¥¹¥Ñ¥¹ÀßÄê -->
+    <!-- classpath setting in url representation -->
     <!--
     <classpath>url/format/of/path/to/jar/file</classpath>
     -->
