@@ -19,7 +19,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class ComparisonPairFilterPane extends JPanel{
 	private static final long serialVersionUID = -5201125568912008141L;

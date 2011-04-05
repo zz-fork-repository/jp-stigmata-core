@@ -12,7 +12,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Birthmark Service Provider Interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FrequencyMethodCallBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
 

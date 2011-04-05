@@ -18,7 +18,6 @@ import org.apache.commons.beanutils.BeanUtils;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkExtractorFactory{
     private BirthmarkEnvironment environment;

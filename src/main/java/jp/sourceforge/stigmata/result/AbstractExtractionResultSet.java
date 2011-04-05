@@ -20,7 +20,6 @@ import jp.sourceforge.stigmata.ExtractionUnit;
  * Abstract class for ExtractionResultSet.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public abstract class AbstractExtractionResultSet implements ExtractionResultSet{
     private BirthmarkContext context;

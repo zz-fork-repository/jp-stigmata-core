@@ -18,7 +18,6 @@ import org.objectweb.asm.ClassWriter;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor{
     public FrequencyMethodCallBirthmarkExtractor(BirthmarkSpi spi){

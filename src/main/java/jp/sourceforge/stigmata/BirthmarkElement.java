@@ -10,7 +10,6 @@ import java.io.Serializable;
  * element of birthmark.
  * 
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public class BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 943675475343245243L;

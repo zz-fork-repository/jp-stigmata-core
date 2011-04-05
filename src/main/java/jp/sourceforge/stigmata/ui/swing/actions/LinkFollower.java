@@ -13,7 +13,6 @@ import javax.swing.event.HyperlinkListener;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 class LinkFollower implements HyperlinkListener{
     @Override

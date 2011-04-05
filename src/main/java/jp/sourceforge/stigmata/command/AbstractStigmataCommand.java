@@ -13,7 +13,6 @@ import jp.sourceforge.stigmata.hook.StigmataHookManager;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public abstract class AbstractStigmataCommand implements StigmataCommand{
     /**

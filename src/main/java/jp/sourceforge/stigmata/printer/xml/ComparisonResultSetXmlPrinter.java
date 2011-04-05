@@ -15,7 +15,6 @@ import jp.sourceforge.stigmata.printer.AbstractComparisonResultSetPrinter;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ComparisonResultSetXmlPrinter extends AbstractComparisonResultSetPrinter{
     private ComparisonPairXmlPrinter pairPrinter;

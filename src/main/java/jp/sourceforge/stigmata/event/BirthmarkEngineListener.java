@@ -9,7 +9,6 @@ import java.util.EventListener;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface BirthmarkEngineListener extends EventListener{
     public void operationStart(BirthmarkEngineEvent e);

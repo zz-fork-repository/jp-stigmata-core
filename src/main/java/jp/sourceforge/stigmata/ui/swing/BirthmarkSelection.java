@@ -10,7 +10,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 class BirthmarkSelection implements Serializable{
     private static final long serialVersionUID = -3244323970546344L;

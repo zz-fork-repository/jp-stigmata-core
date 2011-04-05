@@ -12,7 +12,6 @@ import java.util.Arrays;
  * This class represents k-gram of the some sequence. 
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class KGram<T> implements Serializable{
     private static final long serialVersionUID = 273465874532523L;

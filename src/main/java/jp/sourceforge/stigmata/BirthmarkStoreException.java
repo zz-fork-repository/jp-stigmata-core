@@ -8,7 +8,6 @@ package jp.sourceforge.stigmata;
  * This exception class will be thrown when birthmark storing is failed.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkStoreException extends BirthmarkException{
     private static final long serialVersionUID = -7106053809841281816L;

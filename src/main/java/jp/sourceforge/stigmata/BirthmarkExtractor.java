@@ -12,7 +12,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * extract birthmarks from given Java bytecode stream.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkExtractor{
     /**

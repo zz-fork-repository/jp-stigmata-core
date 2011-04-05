@@ -12,7 +12,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public interface ComparisonPairFilterComponentService{
     public String getDisplayFilterName(Locale locale);

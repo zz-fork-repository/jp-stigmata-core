@@ -24,7 +24,6 @@ import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class OpenItemsAction extends AbstractAction{
     private static final long serialVersionUID = 5956900396146338537L;

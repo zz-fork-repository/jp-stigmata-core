@@ -23,7 +23,6 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExtractor{
     public InheritanceStructureBirthmarkExtractor(BirthmarkSpi spi){

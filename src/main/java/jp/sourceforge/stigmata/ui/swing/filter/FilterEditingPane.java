@@ -34,7 +34,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class FilterEditingPane extends JPanel{
     private static final long serialVersionUID = -2607954525579006086L;

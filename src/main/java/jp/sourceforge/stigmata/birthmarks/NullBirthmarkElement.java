@@ -10,7 +10,6 @@ import jp.sourceforge.stigmata.BirthmarkElement;
  * Null birthmark element.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class NullBirthmarkElement extends BirthmarkElement{
     private static final long serialVersionUID = -92345638932523L;

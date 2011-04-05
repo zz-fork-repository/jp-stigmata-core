@@ -7,7 +7,6 @@ package jp.sourceforge.stigmata;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public interface StigmataCommand{
     public boolean isAvailableArguments(String[] args);

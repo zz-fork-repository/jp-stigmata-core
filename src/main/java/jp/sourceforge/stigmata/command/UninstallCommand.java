@@ -23,7 +23,6 @@ import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 @Deprecated
 public class UninstallCommand extends AbstractStigmataCommand{

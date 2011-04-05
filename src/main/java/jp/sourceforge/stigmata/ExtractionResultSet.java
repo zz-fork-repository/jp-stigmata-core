@@ -10,7 +10,6 @@ import java.util.Iterator;
  * This interface represents a set of extracted birthmarks.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface ExtractionResultSet extends Iterable<BirthmarkSet>{
     public BirthmarkStoreTarget getStoreTarget();

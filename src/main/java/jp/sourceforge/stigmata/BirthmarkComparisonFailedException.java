@@ -8,7 +8,6 @@ package jp.sourceforge.stigmata;
  * Thrown to indicate failed to compare two birthmarks. 
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkComparisonFailedException extends BirthmarkException{
     private static final long serialVersionUID = 3194872113405859851L;

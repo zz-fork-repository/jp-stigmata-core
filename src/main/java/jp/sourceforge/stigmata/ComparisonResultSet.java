@@ -10,7 +10,6 @@ import java.util.Iterator;
  * result set of birthmark comparison.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface ComparisonResultSet extends Iterable<ComparisonPair>{
     /**

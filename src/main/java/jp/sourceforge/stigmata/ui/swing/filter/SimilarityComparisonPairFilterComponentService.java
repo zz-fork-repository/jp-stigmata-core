@@ -23,7 +23,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class SimilarityComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 

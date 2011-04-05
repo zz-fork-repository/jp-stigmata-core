@@ -14,7 +14,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * algorithm (levenshtein distance).
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class EditDistanceBirthmarkComparator extends AbstractBirthmarkComparator{
     public EditDistanceBirthmarkComparator(BirthmarkSpi spi){

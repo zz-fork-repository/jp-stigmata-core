@@ -13,7 +13,6 @@ import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter{
     private static final List<Criterion> CRITERIA = new ArrayList<Criterion>();

@@ -11,7 +11,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractComparisonPairFilterComponentService implements ComparisonPairFilterComponentService{
     @Override

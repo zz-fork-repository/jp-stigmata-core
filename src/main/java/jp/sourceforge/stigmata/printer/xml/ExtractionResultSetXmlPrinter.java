@@ -19,7 +19,6 @@ import jp.sourceforge.stigmata.printer.AbstractExtractionResultSetPrinter;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ExtractionResultSetXmlPrinter extends AbstractExtractionResultSetPrinter{
     @Override

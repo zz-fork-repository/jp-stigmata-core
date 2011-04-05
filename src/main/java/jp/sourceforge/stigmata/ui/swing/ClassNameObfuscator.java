@@ -17,7 +17,6 @@ import jp.sourceforge.stigmata.BirthmarkSet;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ClassNameObfuscator{
     private Map<String, String> nameMapping = new HashMap<String, String>();

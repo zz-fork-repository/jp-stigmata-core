@@ -18,7 +18,6 @@ import org.junit.Test;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UCBirthmarkExtractorTest{
     private Stigmata stigmata;

@@ -17,7 +17,6 @@ import jp.sourceforge.stigmata.utils.MultipleIterator;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
     private List<BirthmarkSet> targetX = new ArrayList<BirthmarkSet>();

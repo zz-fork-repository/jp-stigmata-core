@@ -53,7 +53,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class RoundRobinComparisonResultPane extends JPanel{
     private static final long serialVersionUID = 2134574576543623L;

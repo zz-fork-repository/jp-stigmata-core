@@ -14,7 +14,6 @@ import javax.swing.filechooser.FileFilter;
  * File filter by file extension.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ExtensionFilter extends FileFilter implements java.io.FileFilter{
     private List<String> extensions = new ArrayList<String>();

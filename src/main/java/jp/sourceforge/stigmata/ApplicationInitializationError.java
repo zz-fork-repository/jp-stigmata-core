@@ -9,7 +9,6 @@ package jp.sourceforge.stigmata;
  * This error causes invalid deployment. 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ApplicationInitializationError extends Error{
     private static final long serialVersionUID = 32097456654328L;

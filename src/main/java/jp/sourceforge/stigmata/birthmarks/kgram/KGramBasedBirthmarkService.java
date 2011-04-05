@@ -16,7 +16,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class KGramBasedBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private BirthmarkComparator comparator = new LogicalAndBirthmarkComparator(this);

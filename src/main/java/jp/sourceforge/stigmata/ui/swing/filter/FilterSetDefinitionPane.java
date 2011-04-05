@@ -33,7 +33,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class FilterSetDefinitionPane extends JPanel implements ComparisonPairFilterListener{
     private static final long serialVersionUID = 7519306603672717119L;

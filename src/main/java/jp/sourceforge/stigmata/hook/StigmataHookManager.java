@@ -13,7 +13,6 @@ import jp.sourceforge.stigmata.spi.StigmataHookSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class StigmataHookManager{
     private static final StigmataHookManager manager = new StigmataHookManager();

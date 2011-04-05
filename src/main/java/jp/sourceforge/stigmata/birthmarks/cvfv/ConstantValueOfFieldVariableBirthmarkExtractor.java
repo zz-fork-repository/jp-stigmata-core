@@ -16,7 +16,6 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmarkExtractor{
     public ConstantValueOfFieldVariableBirthmarkExtractor(BirthmarkSpi spi){

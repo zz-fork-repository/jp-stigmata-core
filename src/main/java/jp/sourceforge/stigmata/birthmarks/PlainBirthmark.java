@@ -10,7 +10,6 @@ import jp.sourceforge.stigmata.BirthmarkElement;
  * Implementation of plain birthmark.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class PlainBirthmark extends AbstractBirthmark{
     private static final long serialVersionUID = 2370435723234463456L;

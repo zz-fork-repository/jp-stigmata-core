@@ -18,7 +18,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Abstract class for {@link BirthmarkSpi <code>BirthmarkSpi</code>}
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractBirthmarkService implements BirthmarkSpi{
     @Override

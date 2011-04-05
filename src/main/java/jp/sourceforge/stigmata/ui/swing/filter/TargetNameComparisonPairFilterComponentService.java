@@ -21,7 +21,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class TargetNameComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 

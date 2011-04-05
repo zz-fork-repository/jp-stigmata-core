@@ -18,7 +18,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * similarity of those birthmarks are defined by |f(p) and f(q)|/|f(p) or f(q)|.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class LogicalAndBirthmarkComparator extends AbstractBirthmarkComparator{
     public LogicalAndBirthmarkComparator(BirthmarkSpi spi){

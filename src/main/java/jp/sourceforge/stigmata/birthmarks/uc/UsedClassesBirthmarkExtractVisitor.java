@@ -21,7 +21,6 @@ import org.objectweb.asm.signature.SignatureWriter;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,

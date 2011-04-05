@@ -19,7 +19,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * {@link ValueCountable <code>ValueCountable</code>} interface.
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class CosineSimilarityBirthmarkComparator extends
         AbstractBirthmarkComparator{

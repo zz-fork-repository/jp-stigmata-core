@@ -17,7 +17,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 /**
  * Abstract class for extracting birthmark.
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**

@@ -19,7 +19,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class OpenSettingDirAction extends AbstractAction{
     private static final long serialVersionUID = -8347328823893358927L;

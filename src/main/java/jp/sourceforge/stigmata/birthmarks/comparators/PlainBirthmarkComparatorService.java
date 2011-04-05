@@ -12,7 +12,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Comparing birthmarks by default matching algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class PlainBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
     /**

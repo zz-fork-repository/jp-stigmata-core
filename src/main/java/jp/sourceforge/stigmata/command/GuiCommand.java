@@ -14,7 +14,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class GuiCommand extends AbstractStigmataCommand{
     @Override

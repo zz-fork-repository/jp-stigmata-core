@@ -10,7 +10,6 @@ import java.util.Locale;
  * Base abstract class for birthmark SPI.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractServiceProvider implements ServiceProvider{
 

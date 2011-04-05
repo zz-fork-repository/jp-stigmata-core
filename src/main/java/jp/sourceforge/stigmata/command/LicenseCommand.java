@@ -15,7 +15,6 @@ import jp.sourceforge.stigmata.Stigmata;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class LicenseCommand extends AbstractStigmataCommand{
     @Override

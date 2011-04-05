@@ -47,7 +47,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class TargetSelectionPane extends JPanel{
     private static final long serialVersionUID = 3209435745432235432L;

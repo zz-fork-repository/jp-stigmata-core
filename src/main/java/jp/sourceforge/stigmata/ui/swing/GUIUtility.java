@@ -40,7 +40,6 @@ import jp.sourceforge.talisman.i18n.Messages;
  * Utility routines for building GUI.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class GUIUtility{
     private GUIUtility(){

@@ -16,7 +16,6 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
     public UsedClassesBirthmarkExtractor(BirthmarkSpi spi){

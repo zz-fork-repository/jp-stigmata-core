@@ -11,7 +11,6 @@ import jp.sourceforge.stigmata.ComparisonPair;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface ComparisonPairPrinter{
     public String getResult(ComparisonPair pair);

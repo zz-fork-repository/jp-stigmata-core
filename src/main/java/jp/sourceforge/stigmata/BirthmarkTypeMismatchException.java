@@ -9,7 +9,6 @@ package jp.sourceforge.stigmata;
  * operation such as merging, and comparing.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkTypeMismatchException extends BirthmarkException{
     private static final long serialVersionUID = -6198325117696243731L;

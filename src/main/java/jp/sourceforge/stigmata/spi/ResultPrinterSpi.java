@@ -14,7 +14,6 @@ import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
  * result to certain output stream.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface ResultPrinterSpi extends ServiceProvider{
     /**

@@ -17,7 +17,6 @@ import org.objectweb.asm.MethodVisitor;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private int kvalue;

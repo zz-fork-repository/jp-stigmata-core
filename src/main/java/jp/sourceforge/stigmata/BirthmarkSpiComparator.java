@@ -10,7 +10,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
     /**

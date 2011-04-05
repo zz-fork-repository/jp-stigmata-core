@@ -14,7 +14,6 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class MemoryExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     private MemoryExtractedBirthmarkHistory history = new MemoryExtractedBirthmarkHistory();

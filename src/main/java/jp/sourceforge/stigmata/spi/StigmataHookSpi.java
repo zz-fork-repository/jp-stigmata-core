@@ -10,7 +10,6 @@ import jp.sourceforge.stigmata.hook.StigmataRuntimeHook;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface StigmataHookSpi{
     public StigmataHook onSetup();

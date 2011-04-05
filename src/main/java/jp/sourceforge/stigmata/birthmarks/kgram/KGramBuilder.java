@@ -10,7 +10,6 @@ import java.util.Set;
 
 /**
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class KGramBuilder{
     private static final KGramBuilder builder = new KGramBuilder();

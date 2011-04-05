@@ -15,7 +15,6 @@ import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule.MatchType;
  * Managing wellknown class checking rule.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     private List<WellknownClassJudgeRule> rules = new ArrayList<WellknownClassJudgeRule>();

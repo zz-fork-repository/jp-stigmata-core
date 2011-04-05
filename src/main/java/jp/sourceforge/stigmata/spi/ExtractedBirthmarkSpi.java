@@ -13,7 +13,6 @@ import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkHistory;
  * This service provider interface manages extracted birthmark histories.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface ExtractedBirthmarkSpi{
     /**

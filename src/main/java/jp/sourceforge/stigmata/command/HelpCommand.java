@@ -20,7 +20,6 @@ import org.apache.commons.cli.Options;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class HelpCommand extends AbstractStigmataCommand{
     private Options options;

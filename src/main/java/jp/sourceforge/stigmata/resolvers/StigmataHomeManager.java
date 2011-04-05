@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class StigmataHomeManager{
     private String home;

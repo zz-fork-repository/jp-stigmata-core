@@ -75,7 +75,6 @@ import org.apache.commons.cli.ParseException;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class StigmataFrame extends JFrame{
     private static final long serialVersionUID = 92345543665342134L;

@@ -21,7 +21,6 @@ import org.apache.commons.beanutils.BeanUtils;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ComparisonPairFilterManager{
     private Map<String, ComparisonPairFilterSpi> services = new HashMap<String, ComparisonPairFilterSpi>();

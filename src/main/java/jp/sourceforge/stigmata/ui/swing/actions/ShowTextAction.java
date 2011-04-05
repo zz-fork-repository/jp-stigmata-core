@@ -26,7 +26,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 abstract class ShowTextAction extends AbstractAction{
 	private static final long serialVersionUID = 7341139545864209076L;

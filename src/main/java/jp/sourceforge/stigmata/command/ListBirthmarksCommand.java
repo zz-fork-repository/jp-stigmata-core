@@ -17,7 +17,6 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class ListBirthmarksCommand extends AbstractStigmataCommand{
     @Override

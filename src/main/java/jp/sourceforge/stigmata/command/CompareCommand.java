@@ -22,7 +22,6 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class CompareCommand extends AbstractStigmataCommand{
     @Override

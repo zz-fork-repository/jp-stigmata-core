@@ -13,7 +13,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * abstract birthmark comparator.
  *
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public abstract class AbstractBirthmarkComparator implements BirthmarkComparator{
     private BirthmarkSpi spi;

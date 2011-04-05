@@ -44,7 +44,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * This class is not thread safe.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkEngine{
     private BirthmarkEnvironment environment;

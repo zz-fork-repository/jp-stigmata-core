@@ -19,7 +19,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * this class is defined as <i>|f(p) and f(q)|/(|f(p)| + |f(q)|)</i>.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class PlainBirthmarkComparator extends AbstractBirthmarkComparator{
     public PlainBirthmarkComparator(BirthmarkSpi spi){

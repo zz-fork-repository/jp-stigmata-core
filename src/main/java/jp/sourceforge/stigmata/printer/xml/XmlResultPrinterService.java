@@ -19,7 +19,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class XmlResultPrinterService extends AbstractServiceProvider implements ResultPrinterSpi{
     private BirthmarkServiceXmlPrinter serviceList = new BirthmarkServiceXmlPrinter();

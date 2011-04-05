@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkExtractionFailedException extends BirthmarkException {
        private static final long serialVersionUID = 21932436457235L;

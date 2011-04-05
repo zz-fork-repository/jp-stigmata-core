@@ -23,7 +23,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkServiceListCellRenderer extends JPanel implements ListCellRenderer{
     private static final long serialVersionUID = 3254763527508235L;

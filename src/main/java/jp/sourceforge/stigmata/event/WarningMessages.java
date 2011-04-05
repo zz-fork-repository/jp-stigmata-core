@@ -11,7 +11,6 @@ import java.util.Map;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class WarningMessages{
     private OperationType type;

@@ -16,7 +16,6 @@ import javax.swing.JTextField;
  * 
  * @author Haruaki Tamada
  * @author Terai Atsuhiro
- * @version $Revision$ 
  */
 class EditableTabbedPaneFocusTraversalPolicy extends FocusTraversalPolicy{
     private JTextField editor;

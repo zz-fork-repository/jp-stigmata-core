@@ -11,7 +11,6 @@ import org.junit.Test;
 
 /**
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class ServiceListTest{
     private BirthmarkEnvironment env;

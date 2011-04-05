@@ -15,7 +15,6 @@ import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class MdsItemsLocationExporter implements AsciiDataWritable{
     private MdsPane viewer;

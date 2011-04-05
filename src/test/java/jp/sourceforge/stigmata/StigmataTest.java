@@ -13,7 +13,6 @@ import org.junit.Test;
 /**
  * test case.
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class StigmataTest{
     private BirthmarkContext context;

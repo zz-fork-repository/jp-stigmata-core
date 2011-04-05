@@ -16,7 +16,6 @@ import jp.sourceforge.stigmata.BirthmarkPreprocessor;
  * Birthmark service provider interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkSpi extends ServiceProvider{
     /**

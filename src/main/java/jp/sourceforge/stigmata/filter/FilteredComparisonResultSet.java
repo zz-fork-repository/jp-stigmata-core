@@ -19,7 +19,6 @@ import jp.sourceforge.stigmata.ComparisonResultSet;
  * Filtering {@link ComparisonResultSet <code>ComparisonResultSet</code>}.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FilteredComparisonResultSet implements ComparisonResultSet{
     private ComparisonResultSet resultset;

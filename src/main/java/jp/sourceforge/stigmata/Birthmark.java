@@ -11,7 +11,6 @@ import java.util.Iterator;
  * The birthmark is native characteristics of a program.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface Birthmark extends Iterable<BirthmarkElement>{
     /**

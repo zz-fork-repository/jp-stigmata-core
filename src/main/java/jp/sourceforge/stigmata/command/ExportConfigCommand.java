@@ -15,7 +15,6 @@ import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class ExportConfigCommand extends AbstractStigmataCommand{
 

@@ -13,7 +13,6 @@ import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter{
     private static final double EQUALS_THRESHOLD = 5E-5;

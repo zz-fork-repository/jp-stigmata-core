@@ -25,7 +25,6 @@ import jp.sourceforge.talisman.hermes.maven.Artifact;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class HermesUtility{
     private HermesContext context;

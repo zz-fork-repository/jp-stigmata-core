@@ -23,7 +23,6 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class ExtractedBirthmarkServiceManager{
     private ExtractedBirthmarkServiceManager parent;

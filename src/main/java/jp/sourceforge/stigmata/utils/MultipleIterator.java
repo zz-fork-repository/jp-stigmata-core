@@ -13,7 +13,6 @@ import java.util.NoSuchElementException;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class MultipleIterator<T> implements Iterator<T>{
     private List<Iterator<T>> iterators = new ArrayList<Iterator<T>>();

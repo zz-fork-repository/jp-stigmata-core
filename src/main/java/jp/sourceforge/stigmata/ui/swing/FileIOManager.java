@@ -17,7 +17,6 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FileIOManager{
     private Component parent;

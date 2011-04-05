@@ -13,7 +13,6 @@ import jp.sourceforge.talisman.mds.ui.swing.GeometoryType;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 class LabelMap{
     private List<String> labels = new ArrayList<String>();

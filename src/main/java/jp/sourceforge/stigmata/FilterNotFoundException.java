@@ -7,7 +7,6 @@ package jp.sourceforge.stigmata;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class FilterNotFoundException extends BirthmarkException{
     private static final long serialVersionUID = -3981002035876805953L;

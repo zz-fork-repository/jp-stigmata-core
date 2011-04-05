@@ -19,7 +19,6 @@ import org.objectweb.asm.ClassVisitor;
  * Abstract visitor class of extracting birthmarks from class file.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class BirthmarkExtractVisitor extends ClassAdapter{
     private Birthmark birthmark;

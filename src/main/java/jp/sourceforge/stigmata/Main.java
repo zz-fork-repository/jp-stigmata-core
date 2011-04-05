@@ -32,7 +32,6 @@ import org.w3c.dom.DOMException;
  * Front end class.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public final class Main{
     /**
