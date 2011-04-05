@@ -1,12 +1,11 @@
 package jp.sourceforge.stigmata.resolvers;
 
 import java.io.File;
-import java.io.IOException;
 
-class MacOSXStigmataHomeResolver extends DefaultStigmataHomeResolver{
+public class MacOSXStigmataHomeResolver implements StigmataHomeResolver{
     @Override
-    public String getStigmataHome() throws IOException{
-        String home = getUserHome();
+    public String getStigmataHome(){
+        String home = StigmataHomeManager.getUserHome();
 
         if(home.startsWith("/Users/")){
             home = home + File.separator + "Library/Application Support" + File.separator + "Stigmata";
