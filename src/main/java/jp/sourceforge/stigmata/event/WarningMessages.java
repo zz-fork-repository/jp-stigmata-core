@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

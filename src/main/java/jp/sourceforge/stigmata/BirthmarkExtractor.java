@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.InputStream;
 
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;

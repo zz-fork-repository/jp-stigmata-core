@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 

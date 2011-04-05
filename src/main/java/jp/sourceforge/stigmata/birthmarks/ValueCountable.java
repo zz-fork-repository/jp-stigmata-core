@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 /**
  * This interface represents that the implemented class have name and its count.
  * 

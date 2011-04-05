@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;

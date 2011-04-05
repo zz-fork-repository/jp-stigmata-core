@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ExtractionResultSet;

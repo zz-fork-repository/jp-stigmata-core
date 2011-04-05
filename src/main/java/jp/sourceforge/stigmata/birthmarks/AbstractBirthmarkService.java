@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.Birthmark;

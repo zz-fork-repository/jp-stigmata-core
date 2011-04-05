@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

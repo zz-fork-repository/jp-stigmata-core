@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import java.util.List;
 
 import org.objectweb.asm.Label;

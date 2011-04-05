@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
 import jp.sourceforge.stigmata.printer.ComparisonPairPrinter;
 import jp.sourceforge.stigmata.printer.ComparisonResultSetPrinter;

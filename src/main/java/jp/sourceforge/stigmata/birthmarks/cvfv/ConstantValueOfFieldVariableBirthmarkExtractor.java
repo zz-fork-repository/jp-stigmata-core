@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.cvfv;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.ExtractionUnit;

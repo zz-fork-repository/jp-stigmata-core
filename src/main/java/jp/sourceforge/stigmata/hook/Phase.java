@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
 /**
  * 
  * @author Haruaki Tamada

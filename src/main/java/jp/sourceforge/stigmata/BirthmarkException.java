@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This exception represents occuring some exceptions caused birthmarking.
  * 

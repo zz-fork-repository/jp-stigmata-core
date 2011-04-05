@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 

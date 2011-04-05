@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This enum represents birthmark comparison method. let <it>X</it> be a set of
  * target <it>{ x1, x2, ..., xn, }</it> and <it>Y</it> be a set of target

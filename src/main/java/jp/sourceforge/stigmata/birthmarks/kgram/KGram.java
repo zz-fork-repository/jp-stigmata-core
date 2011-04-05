@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;

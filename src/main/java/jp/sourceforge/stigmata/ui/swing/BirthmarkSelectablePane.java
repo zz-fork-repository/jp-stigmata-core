@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This exception class be thrown when birthmark types are different in some
  * operation such as merging, and comparing.

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * Thrown to indicate failed to compare two birthmarks. 
  * 

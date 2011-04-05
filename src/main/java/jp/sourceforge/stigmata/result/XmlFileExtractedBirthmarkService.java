@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 
 import jp.sourceforge.stigmata.BirthmarkContext;

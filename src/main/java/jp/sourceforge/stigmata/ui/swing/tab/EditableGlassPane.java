@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.tab;
 
-/*
- * $Id$
- */
-
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;

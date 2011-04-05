@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;

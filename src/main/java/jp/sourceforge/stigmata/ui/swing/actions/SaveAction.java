@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.event.ActionEvent;
 import java.io.BufferedOutputStream;
 import java.io.File;

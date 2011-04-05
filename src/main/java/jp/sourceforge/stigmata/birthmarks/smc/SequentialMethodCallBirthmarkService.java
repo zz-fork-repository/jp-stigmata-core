@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.smc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkExtractor;

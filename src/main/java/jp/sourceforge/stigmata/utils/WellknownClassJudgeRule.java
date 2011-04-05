@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 /**
  * A rule for checking wellknown class or not.
  * 

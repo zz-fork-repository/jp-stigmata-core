@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.hook.StigmataHook;
 import jp.sourceforge.stigmata.hook.StigmataRuntimeHook;
 

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.Stigmata;

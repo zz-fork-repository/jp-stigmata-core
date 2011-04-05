@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 

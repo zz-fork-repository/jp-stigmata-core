@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;

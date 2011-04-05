@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * Interface for comparing given two birthmarks and calculate similarity.
  * 

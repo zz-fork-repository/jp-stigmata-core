@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * Thrown an application fails to launch in initialization.
  * This error causes invalid deployment. 

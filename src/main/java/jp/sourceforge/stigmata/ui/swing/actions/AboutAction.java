@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;

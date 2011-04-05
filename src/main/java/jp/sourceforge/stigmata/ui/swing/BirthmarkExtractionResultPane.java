@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.io.PrintWriter;

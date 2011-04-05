@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;

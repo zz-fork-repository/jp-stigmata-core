@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.extractors;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;

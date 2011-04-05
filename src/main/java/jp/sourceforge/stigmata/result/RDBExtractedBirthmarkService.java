@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import javax.sql.DataSource;
 
 import jp.sourceforge.stigmata.BirthmarkContext;

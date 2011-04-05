@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import jp.sourceforge.stigmata.Birthmark;

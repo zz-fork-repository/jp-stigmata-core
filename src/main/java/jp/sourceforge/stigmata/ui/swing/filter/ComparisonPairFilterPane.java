@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Map;
 

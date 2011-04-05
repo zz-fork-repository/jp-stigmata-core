@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 /**

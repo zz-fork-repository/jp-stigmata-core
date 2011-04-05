@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * $Id$
- */
-
 /**
  * This class represents how to store extracted birthmarks.
  * memory?, databases?, or files?

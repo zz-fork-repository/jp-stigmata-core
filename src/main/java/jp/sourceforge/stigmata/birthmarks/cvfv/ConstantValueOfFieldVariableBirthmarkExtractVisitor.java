@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.cvfv;
 
-/*
- * $Id$
- */
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 

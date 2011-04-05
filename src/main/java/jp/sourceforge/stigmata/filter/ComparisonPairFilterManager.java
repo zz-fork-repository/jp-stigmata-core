@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;

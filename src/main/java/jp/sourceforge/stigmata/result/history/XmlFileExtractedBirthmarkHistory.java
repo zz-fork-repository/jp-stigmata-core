@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedHashMap;

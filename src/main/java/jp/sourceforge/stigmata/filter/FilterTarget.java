@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 /**
  * This enum represents filter target.
  * 

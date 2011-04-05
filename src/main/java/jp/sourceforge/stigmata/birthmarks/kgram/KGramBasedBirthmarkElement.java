@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkElement;
 
 /**

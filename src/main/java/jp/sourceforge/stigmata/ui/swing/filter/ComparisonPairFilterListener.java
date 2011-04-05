@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 
 /**

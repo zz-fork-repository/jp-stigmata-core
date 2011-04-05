@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;

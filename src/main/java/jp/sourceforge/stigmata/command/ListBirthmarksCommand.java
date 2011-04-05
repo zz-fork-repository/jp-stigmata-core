@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;

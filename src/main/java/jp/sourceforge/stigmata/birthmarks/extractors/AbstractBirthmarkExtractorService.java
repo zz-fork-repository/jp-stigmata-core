@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.extractors;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;

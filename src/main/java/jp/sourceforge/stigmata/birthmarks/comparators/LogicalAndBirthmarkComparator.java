@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import java.util.HashSet;
 import java.util.Set;
 

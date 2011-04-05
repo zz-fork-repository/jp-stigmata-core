@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 /**
  * 
  * @author Haruaki Tamada

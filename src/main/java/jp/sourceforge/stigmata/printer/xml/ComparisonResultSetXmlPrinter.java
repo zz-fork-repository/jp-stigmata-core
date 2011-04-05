@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer.xml;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 
 import jp.sourceforge.stigmata.ComparisonPair;

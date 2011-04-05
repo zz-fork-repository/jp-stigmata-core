@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Constructor;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;

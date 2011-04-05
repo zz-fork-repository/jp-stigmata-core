@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,7 +1,4 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
-/*
- * $Id$
- */
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 import java.util.EventObject;
 
 /**

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer.csv;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;

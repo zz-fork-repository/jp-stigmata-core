@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.sql.SQLException;
 import java.util.Iterator;
 

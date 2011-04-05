@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;

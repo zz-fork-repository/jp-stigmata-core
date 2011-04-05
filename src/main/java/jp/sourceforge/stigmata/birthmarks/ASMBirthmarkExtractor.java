@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.InputStream;
 

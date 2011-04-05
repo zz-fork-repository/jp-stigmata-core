@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 
 import jp.sourceforge.stigmata.BirthmarkContext;

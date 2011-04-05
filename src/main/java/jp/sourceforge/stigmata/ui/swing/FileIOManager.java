@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.Component;
 import java.io.File;
 import java.text.MessageFormat;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;

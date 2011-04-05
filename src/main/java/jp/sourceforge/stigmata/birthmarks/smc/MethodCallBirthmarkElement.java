@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.smc;
 
-/*
- * $Id$
- */
-
 import java.io.Serializable;
 
 import jp.sourceforge.stigmata.BirthmarkElement;

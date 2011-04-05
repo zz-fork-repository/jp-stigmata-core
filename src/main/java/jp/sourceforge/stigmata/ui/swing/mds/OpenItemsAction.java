@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;

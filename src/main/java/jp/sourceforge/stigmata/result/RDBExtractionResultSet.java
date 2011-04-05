@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;

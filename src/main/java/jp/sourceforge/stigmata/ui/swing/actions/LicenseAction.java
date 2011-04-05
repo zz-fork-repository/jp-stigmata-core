@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.ui.swing.GUIUtility;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 

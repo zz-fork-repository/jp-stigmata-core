@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.extractors;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;

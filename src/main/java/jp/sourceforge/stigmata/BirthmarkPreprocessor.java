@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.digger.ClassFileArchive;
 
 /**

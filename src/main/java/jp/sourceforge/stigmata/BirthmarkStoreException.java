@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This exception class will be thrown when birthmark storing is failed.
  * 

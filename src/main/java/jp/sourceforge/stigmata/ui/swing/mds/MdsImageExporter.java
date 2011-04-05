@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;

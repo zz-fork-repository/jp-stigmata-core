@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 
 import jp.sourceforge.stigmata.ExtractionResultSet;
