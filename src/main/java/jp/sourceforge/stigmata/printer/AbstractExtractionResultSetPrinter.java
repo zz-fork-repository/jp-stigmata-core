@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -14,7 +10,6 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractExtractionResultSetPrinter implements ExtractionResultSetPrinter{
     @Override

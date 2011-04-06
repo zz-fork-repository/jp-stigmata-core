@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -28,7 +24,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
     private static final long serialVersionUID = 3209854654743223453L;

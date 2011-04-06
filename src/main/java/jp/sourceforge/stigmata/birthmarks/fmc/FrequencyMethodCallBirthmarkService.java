@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.fmc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * 
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FrequencyMethodCallBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private BirthmarkComparator comparator = new CosineSimilarityBirthmarkComparator(this);

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * calculate similarities between two birthmarks by DP matching algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class DPMatchingBirthmarkComparator extends AbstractBirthmarkComparator{
     private int mismatchPenalty = 5;

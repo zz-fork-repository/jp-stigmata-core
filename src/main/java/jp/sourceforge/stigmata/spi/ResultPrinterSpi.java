@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
 import jp.sourceforge.stigmata.printer.ComparisonPairPrinter;
 import jp.sourceforge.stigmata.printer.ComparisonResultSetPrinter;
@@ -14,7 +10,6 @@ import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
  * result to certain output stream.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface ResultPrinterSpi extends ServiceProvider{
     /**

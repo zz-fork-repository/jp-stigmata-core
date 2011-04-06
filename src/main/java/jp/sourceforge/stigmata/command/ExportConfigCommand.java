@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +11,6 @@ import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class ExportConfigCommand extends AbstractStigmataCommand{
 

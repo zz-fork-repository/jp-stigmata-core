@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.Birthmark;
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.BirthmarkPreprocessor;
  * Birthmark service provider interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkSpi extends ServiceProvider{
     /**

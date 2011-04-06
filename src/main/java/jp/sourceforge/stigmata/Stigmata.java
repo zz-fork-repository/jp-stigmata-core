@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +24,6 @@ import jp.sourceforge.stigmata.utils.ConfigFileImporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class Stigmata{
     /**

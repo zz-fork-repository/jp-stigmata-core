@@ -1,12 +1,7 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 /**
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkEngineAdapter implements BirthmarkEngineListener{
 

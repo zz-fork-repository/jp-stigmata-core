@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,7 +21,6 @@ import jp.sourceforge.talisman.hermes.maven.Artifact;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class HermesUtility{
     private HermesContext context;

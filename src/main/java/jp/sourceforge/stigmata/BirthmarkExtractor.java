@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.InputStream;
 
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * extract birthmarks from given Java bytecode stream.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkExtractor{
     /**

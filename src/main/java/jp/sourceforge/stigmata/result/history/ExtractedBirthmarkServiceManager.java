@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,7 +19,6 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class ExtractedBirthmarkServiceManager{
     private ExtractedBirthmarkServiceManager parent;

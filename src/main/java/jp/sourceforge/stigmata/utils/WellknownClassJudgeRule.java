@@ -1,14 +1,9 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 /**
  * A rule for checking wellknown class or not.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public final class WellknownClassJudgeRule{
     public enum MatchType{

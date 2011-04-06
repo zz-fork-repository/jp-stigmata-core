@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.StigmataCommand;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class StigmataCommandFactory{
     private static final StigmataCommandFactory factory = new StigmataCommandFactory();

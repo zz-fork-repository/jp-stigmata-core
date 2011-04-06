@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -14,7 +10,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractBirthmarkServicePrinter implements BirthmarkServicePrinter, Printer{
     @Override

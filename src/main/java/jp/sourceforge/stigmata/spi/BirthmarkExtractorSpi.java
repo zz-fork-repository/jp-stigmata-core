@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.BirthmarkExtractor;
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.BirthmarkExtractor;
  * Service provider interface for extracting birhtmark from given class files.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkExtractorSpi extends ServiceProvider{
     /**

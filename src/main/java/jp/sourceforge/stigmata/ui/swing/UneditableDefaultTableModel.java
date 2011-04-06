@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
  * 
  *
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class UneditableDefaultTableModel extends DefaultTableModel{
     private static final long serialVersionUID = -7483377914997660949L;

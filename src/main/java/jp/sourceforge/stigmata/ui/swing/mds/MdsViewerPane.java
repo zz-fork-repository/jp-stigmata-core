@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -58,7 +54,6 @@ import jp.sourceforge.talisman.mds.ui.swing.actions.ZoomOutAction;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class MdsViewerPane extends JPanel implements ZoomEnabler, MessageManager{
     private static final long serialVersionUID = -7256554014379112897L;

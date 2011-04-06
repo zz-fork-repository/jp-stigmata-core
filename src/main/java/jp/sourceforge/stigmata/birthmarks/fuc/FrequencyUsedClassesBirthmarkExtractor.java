@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.fuc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.ExtractionUnit;
@@ -18,7 +14,6 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FrequencyUsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
     public FrequencyUsedClassesBirthmarkExtractor(BirthmarkSpi spi){

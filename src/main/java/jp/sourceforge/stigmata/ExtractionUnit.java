@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This enum type represents birthmark extraction unit.
  * 
@@ -12,7 +8,6 @@ package jp.sourceforge.stigmata;
  * class name, method name, package name, or product name.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public enum ExtractionUnit{
     CLASS,

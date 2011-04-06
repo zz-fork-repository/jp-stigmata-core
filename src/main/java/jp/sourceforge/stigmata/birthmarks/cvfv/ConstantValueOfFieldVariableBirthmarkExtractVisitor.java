@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.cvfv;
 
-/*
- * $Id$
- */
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,7 +19,6 @@ import org.objectweb.asm.Type;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private Map<String, TypeAndValueBirthmarkElement> elements = new LinkedHashMap<String, TypeAndValueBirthmarkElement>();

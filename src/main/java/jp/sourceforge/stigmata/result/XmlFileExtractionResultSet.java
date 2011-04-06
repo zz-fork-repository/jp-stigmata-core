@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,7 +44,6 @@ import jp.sourceforge.stigmata.utils.MultipleIterator;
  * This instance do not use {@link ExtractionTarget <code>ExtractionTarget</code>}.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
     private boolean addmode = true;
@@ -217,7 +212,6 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
      * Iterator class for reading birthmark xml file by StAX.
      * 
      * @author Haruaki Tamada
-     * @version $Revision$ 
      */
     private static class BirthmarkSetStAXIterator implements Iterator<BirthmarkSet>{
         private XMLEventReader reader = null;
@@ -354,7 +348,6 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
      * This class represents a xml file about XmlFileExtractionResultSet.
      * 
      * @author Haruaki Tamada
-     * @version $Revision$ 
      */
     private static class XmlFile{
         private ExtractionResultSetXmlPrinter formatter;

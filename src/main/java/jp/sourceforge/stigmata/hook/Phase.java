@@ -1,13 +1,8 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public enum Phase{
     SETUP,

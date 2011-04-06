@@ -1,8 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -21,7 +18,6 @@ import org.apache.commons.beanutils.BeanUtils;
  * Export birthmark environment to xml file.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConfigFileExporter{
     private BirthmarkEnvironment environment;

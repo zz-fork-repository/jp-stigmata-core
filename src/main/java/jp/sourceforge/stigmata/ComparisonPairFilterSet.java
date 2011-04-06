@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +9,6 @@ import java.util.List;
  * Set of {@link ComparisonPairFilter <Ccode>ComparisonPairFilter</code>}.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ComparisonPairFilterSet implements Iterable<ComparisonPairFilter>{
     private List<ComparisonPairFilter> filters = new ArrayList<ComparisonPairFilter>();

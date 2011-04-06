@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,7 +40,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * This class is not thread safe.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkEngine{
     private BirthmarkEnvironment environment;

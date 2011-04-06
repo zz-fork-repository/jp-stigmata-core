@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.BirthmarkSet;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ClassNameObfuscator{
     private Map<String, String> nameMapping = new HashMap<String, String>();

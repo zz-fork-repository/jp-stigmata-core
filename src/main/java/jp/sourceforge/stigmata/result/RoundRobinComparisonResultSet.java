@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +18,6 @@ import jp.sourceforge.stigmata.ExtractionTarget;
  * Concrete class for ComparisonResultSet. This instance compare class files by round robin.
  *
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public class RoundRobinComparisonResultSet extends AbstractComparisonResultSet{
     private int compareCount = -1;

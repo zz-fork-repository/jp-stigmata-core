@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.cvfv;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.BirthmarkElement;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class TypeAndValueBirthmarkElement extends BirthmarkElement implements Serializable{
     private static final long serialVersionUID = 237098465735321L;

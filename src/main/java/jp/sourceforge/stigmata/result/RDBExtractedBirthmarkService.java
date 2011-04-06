@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import javax.sql.DataSource;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class RDBExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     private DataSource source;

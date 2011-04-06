@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/* 
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +11,6 @@ import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule.MatchType;
  * Managing wellknown class checking rule.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     private List<WellknownClassJudgeRule> rules = new ArrayList<WellknownClassJudgeRule>();

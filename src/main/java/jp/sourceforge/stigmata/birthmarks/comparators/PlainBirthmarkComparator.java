@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -19,7 +15,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * this class is defined as <i>|f(p) and f(q)|/(|f(p)| + |f(q)|)</i>.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class PlainBirthmarkComparator extends AbstractBirthmarkComparator{
     public PlainBirthmarkComparator(BirthmarkSpi spi){

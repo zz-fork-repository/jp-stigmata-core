@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.extractors;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
@@ -18,7 +14,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Birthmark Service Provider Interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractBirthmarkExtractorService extends AbstractServiceProvider implements BirthmarkExtractorSpi{
     /**

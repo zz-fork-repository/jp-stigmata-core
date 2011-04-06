@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$ 
- */
-
 import java.awt.Color;
 import java.awt.Component;
 
@@ -15,7 +11,6 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class CompareTableCellRenderer extends DefaultTableCellRenderer{
     private static final long serialVersionUID = 234557758658567345L;

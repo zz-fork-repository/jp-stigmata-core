@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 import org.junit.Assert;
@@ -13,7 +9,6 @@ import org.junit.Test;
 /**
  * test case.
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class StigmataTest{
     private BirthmarkContext context;

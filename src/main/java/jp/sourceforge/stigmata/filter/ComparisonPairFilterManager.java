@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +17,6 @@ import org.apache.commons.beanutils.BeanUtils;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ComparisonPairFilterManager{
     private Map<String, ComparisonPairFilterSpi> services = new HashMap<String, ComparisonPairFilterSpi>();

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.Birthmark;
@@ -18,7 +14,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Abstract class for {@link BirthmarkSpi <code>BirthmarkSpi</code>}
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractBirthmarkService implements BirthmarkSpi{
     @Override

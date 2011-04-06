@@ -1,16 +1,11 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.spi.StigmataHookSpi;
 
 /**
  * 
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public abstract class AbstractStigmataHookService implements StigmataHookSpi{
     @Override

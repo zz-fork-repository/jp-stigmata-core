@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer.csv;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 
 import jp.sourceforge.stigmata.printer.AbstractBirthmarkServicePrinter;
@@ -14,7 +10,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkServiceCsvPrinter extends AbstractBirthmarkServicePrinter{
     @Override

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="euc-jp"?>
 
-<!--
- $Id$
--->
-
 <!ELEMENT classpath               (#PCDATA)>
 
 <!ELEMENT type                    (#PCDATA)>

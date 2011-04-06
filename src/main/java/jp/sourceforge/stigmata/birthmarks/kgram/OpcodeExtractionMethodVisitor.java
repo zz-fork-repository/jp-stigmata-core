@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import java.util.List;
 
 import org.objectweb.asm.Label;
@@ -14,7 +10,6 @@ import org.objectweb.asm.Opcodes;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class OpcodeExtractionMethodVisitor extends MethodAdapter{
     private List<Integer> opcodes;

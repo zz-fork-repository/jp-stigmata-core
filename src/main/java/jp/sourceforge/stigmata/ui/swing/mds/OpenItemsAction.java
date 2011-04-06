@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -24,7 +20,6 @@ import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class OpenItemsAction extends AbstractAction{
     private static final long serialVersionUID = 5956900396146338537L;

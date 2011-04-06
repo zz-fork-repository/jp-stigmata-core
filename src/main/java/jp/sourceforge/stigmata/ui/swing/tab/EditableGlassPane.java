@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.tab;
 
-/*
- * $Id$
- */
-
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
@@ -17,7 +13,6 @@ import javax.swing.JPanel;
  * 
  * @author Haruaki Tamada
  * @author Terai Atsuhiro
- * @version $Revision$ 
  */
 class EditableGlassPane extends JPanel{
     private static final long serialVersionUID = 9009103705988625476L;

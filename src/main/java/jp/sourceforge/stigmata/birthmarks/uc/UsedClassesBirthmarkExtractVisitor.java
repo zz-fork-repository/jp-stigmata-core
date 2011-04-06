@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.uc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
@@ -21,7 +17,6 @@ import org.objectweb.asm.signature.SignatureWriter;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,

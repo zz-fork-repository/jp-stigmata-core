@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.utils.Utility;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class XmlFileExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
     private File parent;

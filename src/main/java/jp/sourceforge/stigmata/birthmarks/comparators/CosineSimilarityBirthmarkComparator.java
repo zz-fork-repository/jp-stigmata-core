@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +15,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * {@link ValueCountable <code>ValueCountable</code>} interface.
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class CosineSimilarityBirthmarkComparator extends
         AbstractBirthmarkComparator{

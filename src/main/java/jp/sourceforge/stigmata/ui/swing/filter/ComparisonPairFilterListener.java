@@ -1,15 +1,10 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface ComparisonPairFilterListener{
     public void filterAdded(ComparisonPairFilter filter);

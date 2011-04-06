@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +13,6 @@ import org.objectweb.asm.MethodVisitor;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class KGramBasedBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private int kvalue;

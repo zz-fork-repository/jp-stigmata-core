@@ -1,13 +1,8 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This class represents comparing two birthmarks.
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public class ComparisonPairElement{
     private Birthmark birthmark1;

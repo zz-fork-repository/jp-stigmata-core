@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
@@ -11,7 +7,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractComparisonPairFilterComponentService implements ComparisonPairFilterComponentService{
     @Override

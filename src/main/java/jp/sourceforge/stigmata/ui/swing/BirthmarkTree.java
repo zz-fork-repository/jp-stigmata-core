@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.BirthmarkSet;
  * 
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkTree extends JTree{
     private static final long serialVersionUID = 68345692177534765L;

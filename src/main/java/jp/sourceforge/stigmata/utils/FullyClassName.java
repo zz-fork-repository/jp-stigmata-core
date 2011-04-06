@@ -1,16 +1,11 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.io.Serializable;
 
 /**
  * This class represents a fully class name.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 class FullyClassName implements Serializable{
     private static final long serialVersionUID = 1911603124143509407L;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 
 import jp.sourceforge.stigmata.ExtractionResultSet;
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
  * This interface indicates extracted history management.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface ExtractedBirthmarkHistory extends Iterable<String>{
     /**

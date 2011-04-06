@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     private File defaultBaseDirectory;

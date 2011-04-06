@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.io.PrintWriter;
@@ -29,7 +25,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkExtractionResultPane extends JPanel{
     private static final long serialVersionUID = 239084365756236543L;

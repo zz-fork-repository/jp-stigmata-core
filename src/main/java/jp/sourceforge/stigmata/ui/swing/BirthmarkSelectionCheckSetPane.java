@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,7 +15,6 @@ import javax.swing.JPanel;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
     private static final long serialVersionUID = 3209854654743223453L;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.util.Iterator;
 
@@ -22,7 +18,6 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class CompareCommand extends AbstractStigmataCommand{
     @Override

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.BirthmarkComparator;
  * Service provider interface for comparing birthmarks.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkComparatorSpi extends ServiceProvider{
     /**

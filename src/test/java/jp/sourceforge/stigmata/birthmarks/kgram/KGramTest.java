@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +7,6 @@ import org.junit.Test;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class KGramTest{
     private String[] plainValues;

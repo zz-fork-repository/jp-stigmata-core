@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.filter.Criterion;
 import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
  * </ul>
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface ComparisonPairFilter{
     public boolean isFiltered(ComparisonPair pair);

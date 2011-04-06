@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -37,7 +33,6 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class RDBExtractionResultSet extends AbstractExtractionResultSet{
     private String id;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -35,7 +31,6 @@ import jp.sourceforge.stigmata.ui.swing.filter.FilterSetDefinitionPane;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FilterSelectionPane extends JPanel implements ComparisonPairFilterRetainable{
     private static final long serialVersionUID = 1825547576389498336L;

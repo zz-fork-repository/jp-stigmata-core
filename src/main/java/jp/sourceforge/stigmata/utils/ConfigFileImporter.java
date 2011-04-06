@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -29,7 +25,6 @@ import org.xml.sax.helpers.DefaultHandler;
  * configuration file parser.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConfigFileImporter{
     private BirthmarkEnvironment environment;

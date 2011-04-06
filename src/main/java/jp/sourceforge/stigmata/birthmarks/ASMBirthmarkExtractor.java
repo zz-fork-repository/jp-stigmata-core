@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,7 +15,6 @@ import org.objectweb.asm.ClassWriter;
  * Abstract birthmark extractor using ASM.
  *
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public abstract class ASMBirthmarkExtractor extends AbstractBirthmarkExtractor{
     public ASMBirthmarkExtractor(BirthmarkSpi spi){

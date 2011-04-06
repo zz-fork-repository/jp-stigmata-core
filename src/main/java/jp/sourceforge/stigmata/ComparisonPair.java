@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +8,6 @@ import java.util.List;
  * This class represents comparison pair.
  * 
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public class ComparisonPair implements Iterable<ComparisonPairElement>{
     private BirthmarkSet target1;

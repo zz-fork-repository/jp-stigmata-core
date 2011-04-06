@@ -1,15 +1,10 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 import java.util.EventObject;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkEngineEvent extends EventObject{
     private static final long serialVersionUID = -1260793588721638917L;

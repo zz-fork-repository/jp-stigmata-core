@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -29,7 +25,6 @@ import jp.sourceforge.stigmata.utils.WellknownClassManager;
  * This class represents the context for extracting/comparing birthmarks.
  * 
  * @author  Haruaki TAMADA
- * @version  $Revision$
  */
 public class BirthmarkEnvironment{
     /**

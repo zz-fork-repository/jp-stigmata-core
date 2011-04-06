@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,7 +15,6 @@ import jp.sourceforge.stigmata.utils.Utility;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class InstallCommand extends AbstractStigmataCommand{
     @Override

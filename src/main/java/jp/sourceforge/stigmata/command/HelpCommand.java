@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.util.ResourceBundle;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -20,7 +16,6 @@ import org.apache.commons.cli.Options;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class HelpCommand extends AbstractStigmataCommand{
     private Options options;

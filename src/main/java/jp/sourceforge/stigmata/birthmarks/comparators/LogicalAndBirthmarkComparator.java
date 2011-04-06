@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +14,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * similarity of those birthmarks are defined by |f(p) and f(q)|/|f(p) or f(q)|.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class LogicalAndBirthmarkComparator extends AbstractBirthmarkComparator{
     public LogicalAndBirthmarkComparator(BirthmarkSpi spi){

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer.csv;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +17,6 @@ import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ComparisonResultSetCsvPrinter extends AbstractComparisonResultSetPrinter{
     public ComparisonResultSetCsvPrinter(){

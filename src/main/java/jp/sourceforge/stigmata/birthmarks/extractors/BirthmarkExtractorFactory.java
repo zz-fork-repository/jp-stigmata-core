@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.extractors;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +14,6 @@ import org.apache.commons.beanutils.BeanUtils;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkExtractorFactory{
     private BirthmarkEnvironment environment;

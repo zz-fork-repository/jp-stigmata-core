@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +9,6 @@ import java.util.Map;
  * This class manages a set of birthmarks which extracted from a target.
  *
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public class BirthmarkSet implements Iterable<Birthmark>{
     /**

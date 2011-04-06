@@ -1,15 +1,10 @@
 package jp.sourceforge.stigmata.birthmarks.kgram;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkElement;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class KGramBasedBirthmarkElement<T> extends BirthmarkElement{
     private static final long serialVersionUID = 28546543857543634L;

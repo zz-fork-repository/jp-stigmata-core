@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer.xml;
 
-/*
- * $Id$
- */
-
 import java.util.Locale;
 
 import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
@@ -19,7 +15,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class XmlResultPrinterService extends AbstractServiceProvider implements ResultPrinterSpi{
     private BirthmarkServiceXmlPrinter serviceList = new BirthmarkServiceXmlPrinter();

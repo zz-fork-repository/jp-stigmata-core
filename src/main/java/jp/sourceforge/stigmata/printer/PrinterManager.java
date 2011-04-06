@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class PrinterManager{
     private static final PrinterManager manager = new PrinterManager();

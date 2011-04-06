@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.is;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,7 +19,6 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExtractor{
     public InheritanceStructureBirthmarkExtractor(BirthmarkSpi spi){

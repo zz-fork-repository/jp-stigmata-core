@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.extractors;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Birthmark Service Provider Interface.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
 

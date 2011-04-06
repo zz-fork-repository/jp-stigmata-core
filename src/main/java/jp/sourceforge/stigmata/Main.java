@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -32,7 +28,6 @@ import org.w3c.dom.DOMException;
  * Front end class.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public final class Main{
     /**

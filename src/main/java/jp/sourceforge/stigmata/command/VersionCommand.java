@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.util.ResourceBundle;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.Stigmata;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class VersionCommand extends AbstractStigmataCommand{
     @Override

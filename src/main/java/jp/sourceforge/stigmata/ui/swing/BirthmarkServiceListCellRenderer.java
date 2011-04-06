@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -23,7 +19,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkServiceListCellRenderer extends JPanel implements ListCellRenderer{
     private static final long serialVersionUID = 3254763527508235L;

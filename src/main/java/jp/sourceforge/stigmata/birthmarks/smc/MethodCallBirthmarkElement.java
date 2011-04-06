@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.smc;
 
-/*
- * $Id$
- */
-
 import java.io.Serializable;
 
 import jp.sourceforge.stigmata.BirthmarkElement;
@@ -11,7 +7,6 @@ import jp.sourceforge.stigmata.BirthmarkElement;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class MethodCallBirthmarkElement extends BirthmarkElement implements Serializable {
     private static final long serialVersionUID = -3178451461780859954L;

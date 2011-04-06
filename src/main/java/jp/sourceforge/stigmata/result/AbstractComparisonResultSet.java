@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +16,6 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
  * Abstract class for ComparisonResultSet.
  *
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public abstract class AbstractComparisonResultSet implements ComparisonResultSet{
     protected ExtractionResultSet extraction;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -15,7 +11,6 @@ import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class MdsItemsLocationExporter implements AsciiDataWritable{
     private MdsPane viewer;

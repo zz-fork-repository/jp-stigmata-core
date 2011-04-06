@@ -1,16 +1,11 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.util.Comparator;
 
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
     /**

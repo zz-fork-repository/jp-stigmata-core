@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Constructor;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * configuration files.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
     private Class<? extends BirthmarkExtractor> extractorClass;

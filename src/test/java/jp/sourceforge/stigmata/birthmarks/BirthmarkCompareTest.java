@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEngine;
 import jp.sourceforge.stigmata.BirthmarkSet;
@@ -18,7 +14,6 @@ import org.junit.Test;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkCompareTest{
     private BirthmarkContext context;

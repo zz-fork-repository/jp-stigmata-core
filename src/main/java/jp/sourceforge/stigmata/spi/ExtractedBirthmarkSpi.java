@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ExtractionResultSet;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkHistory;
  * This service provider interface manages extracted birthmark histories.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface ExtractedBirthmarkSpi{
     /**

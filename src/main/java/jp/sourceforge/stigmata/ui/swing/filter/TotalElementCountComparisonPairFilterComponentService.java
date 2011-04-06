@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +17,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class TotalElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 

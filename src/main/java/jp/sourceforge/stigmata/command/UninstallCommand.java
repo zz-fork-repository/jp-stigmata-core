@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,7 +19,6 @@ import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 @Deprecated
 public class UninstallCommand extends AbstractStigmataCommand{

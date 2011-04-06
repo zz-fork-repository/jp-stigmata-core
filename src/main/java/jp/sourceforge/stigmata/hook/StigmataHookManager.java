@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.spi.StigmataHookSpi;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class StigmataHookManager{
     private static final StigmataHookManager manager = new StigmataHookManager();

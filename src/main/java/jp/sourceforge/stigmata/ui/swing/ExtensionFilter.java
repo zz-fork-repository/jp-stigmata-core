@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +10,6 @@ import javax.swing.filechooser.FileFilter;
  * File filter by file extension.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ExtensionFilter extends FileFilter implements java.io.FileFilter{
     private List<String> extensions = new ArrayList<String>();

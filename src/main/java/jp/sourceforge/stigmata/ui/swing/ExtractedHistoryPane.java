@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +30,6 @@ import jp.sourceforge.talisman.i18n.Messages;
  * Birthmark extraction history viewer.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class ExtractedHistoryPane extends JPanel{
     private static final long serialVersionUID = 4070750464486981964L;

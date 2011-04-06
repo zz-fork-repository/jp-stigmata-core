@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.utils.MultipleIterator;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class MemoryExtractionResultSet extends AbstractExtractionResultSet{
     private List<BirthmarkSet> targetX = new ArrayList<BirthmarkSet>();

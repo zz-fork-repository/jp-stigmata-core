@@ -1,13 +1,8 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public interface StigmataCommand{
     public boolean isAvailableArguments(String[] args);

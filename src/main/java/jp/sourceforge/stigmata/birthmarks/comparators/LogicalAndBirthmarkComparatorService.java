@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * Comparing birthmarks by logical AND algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class LogicalAndBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
     /**

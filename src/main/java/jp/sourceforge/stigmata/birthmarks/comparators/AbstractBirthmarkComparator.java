@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * abstract birthmark comparator.
  *
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public abstract class AbstractBirthmarkComparator implements BirthmarkComparator{
     private BirthmarkSpi spi;

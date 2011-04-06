@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.resolvers;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +7,6 @@ import java.util.List;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class StigmataHomeManager{
     private String home;

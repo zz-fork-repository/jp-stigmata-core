@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
@@ -18,7 +14,6 @@ import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
  * Abstract service provider interface for comparing birthmarks.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvider implements BirthmarkComparatorSpi{
     /**
