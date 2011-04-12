@@ -7,7 +7,7 @@ import java.util.Locale;
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.spi.AbstractServiceProvider;
 import jp.sourceforge.stigmata.spi.BirthmarkComparatorSpi;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
 
 /**
@@ -47,11 +47,11 @@ abstract class AbstractBirthmarkComparatorService extends AbstractServiceProvide
      * returns a extractor for the birthmark of this service.
      */
     @Override
-    public BirthmarkComparator getComparator(BirthmarkSpi service){
+    public BirthmarkComparator getComparator(BirthmarkService service){
         try{
             Class<?> c = Class.forName(getComparatorClassName());
             Class<? extends BirthmarkComparator> clazz = c.asSubclass(BirthmarkComparator.class);
-            Constructor<? extends BirthmarkComparator> constructor = clazz.getConstructor(BirthmarkSpi.class);
+            Constructor<? extends BirthmarkComparator> constructor = clazz.getConstructor(BirthmarkService.class);
             return constructor.newInstance(service);
         } catch(NoSuchMethodException e){
         } catch(InstantiationException e){

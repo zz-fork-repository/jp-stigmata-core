@@ -70,7 +70,7 @@ public class BirthmarkSelectionCheckSetPane extends BirthmarkSelectablePane{
         for(Iterator<BirthmarkSelection> i = birthmarkSelections(); i.hasNext(); ){
             final BirthmarkSelection elem = i.next();
             if(elem.isVisible(isExperimentalMode())){
-                JCheckBox check = new JCheckBox(elem.getService().getDisplayType());
+                JCheckBox check = new JCheckBox(elem.getService().getType());
                 check.setSelected(elem.isSelected());
                 check.addActionListener(new ActionListener(){
                     @Override

@@ -3,10 +3,10 @@ package jp.sourceforge.stigmata.birthmarks;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 import jp.sourceforge.stigmata.digger.ClassFileArchive;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 public abstract class AbstractBirthmarkPreprocessor implements BirthmarkPreprocessor{
-    private BirthmarkSpi service;
+    private BirthmarkService service;
 
     /**
      * default constructor.
@@ -15,11 +15,11 @@ public abstract class AbstractBirthmarkPreprocessor implements BirthmarkPreproce
     public AbstractBirthmarkPreprocessor(){
     }
 
-    public AbstractBirthmarkPreprocessor(BirthmarkSpi service){
+    public AbstractBirthmarkPreprocessor(BirthmarkService service){
         this.service = service;
     }
 
-    public BirthmarkSpi getProvider(){
+    public BirthmarkService getProvider(){
         return service;
     }
 

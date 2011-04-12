@@ -9,8 +9,8 @@ import java.util.Map;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.ComparisonPairFilterSet;
-import jp.sourceforge.stigmata.birthmarks.BirthmarkService;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
+import jp.sourceforge.stigmata.spi.ReflectedBirthmarkService;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -156,14 +156,15 @@ public class ConfigFileExporter{
 
     private void exportServices(PrintWriter out) throws IOException{
         out.println("  <birthmark-services>");
-        for(BirthmarkSpi service: environment.getServices()){
+        for(BirthmarkService service: environment.getServices()){
             if(service.isExperimental() && service instanceof BirthmarkService){
                 out.println("    <birthmark-service>");
                 out.printf("      <type>%s</type>%n", service.getType());
-                out.printf("      <display-name>%s</display-name>%n", service.getDisplayType());
-                out.printf("      <description>%s</description>%n", service.getDescription());
-                out.printf("      <extractor>%s</extractor>%n", service.getExtractorClassName());
-                out.printf("      <comparator>%s</comparator>%n", service.getComparatorClassName());
+                if(service instanceof ReflectedBirthmarkService){
+                    out.printf("      <description>%s</description>%n", service.getDescription());
+                    out.printf("      <extractor>%s</extractor>%n", service.getExtractor().getClass().getName());
+                    out.printf("      <comparator>%s</comparator>%n", service.getComparator().getClass().getName());
+                }
                 out.println("    </birthmark-service>");
             }
         }

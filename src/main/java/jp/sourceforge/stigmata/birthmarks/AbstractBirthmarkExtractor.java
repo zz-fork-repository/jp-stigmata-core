@@ -8,7 +8,7 @@ import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkExtractionFailedException;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.ExtractionUnit;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * Abstract class for extracting birthmark.
@@ -18,7 +18,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * provider.
      */
-    private BirthmarkSpi spi;
+    private BirthmarkService spi;
 
     /**
      * default constructor.
@@ -31,7 +31,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
      * constructor.
      * @param spi service provider.
      */
-    public AbstractBirthmarkExtractor(BirthmarkSpi spi){
+    public AbstractBirthmarkExtractor(BirthmarkService spi){
         this.spi = spi;
     }
 
@@ -39,7 +39,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
      * returns the provider of this extractor.
      */
     @Override
-    public BirthmarkSpi getProvider(){
+    public BirthmarkService getProvider(){
         return spi;
     }
 

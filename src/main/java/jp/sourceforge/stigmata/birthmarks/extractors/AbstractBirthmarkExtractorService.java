@@ -7,7 +7,7 @@ import java.util.Locale;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.spi.AbstractServiceProvider;
 import jp.sourceforge.stigmata.spi.BirthmarkExtractorSpi;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.utils.LocalizedDescriptionManager;
 
 /**
@@ -47,11 +47,11 @@ public abstract class AbstractBirthmarkExtractorService extends AbstractServiceP
      * returns a extractor for the birthmark of this service.
      */
     @Override
-    public BirthmarkExtractor getExtractor(BirthmarkSpi service){
+    public BirthmarkExtractor getExtractor(BirthmarkService service){
         try{
             Class<?> c = Class.forName(getExtractorClassName());
             Class<? extends BirthmarkExtractor> clazz = c.asSubclass(BirthmarkExtractor.class);
-            Constructor<? extends BirthmarkExtractor> constructor = clazz.getConstructor(BirthmarkSpi.class);
+            Constructor<? extends BirthmarkExtractor> constructor = clazz.getConstructor(BirthmarkService.class);
             return constructor.newInstance(service);
         } catch(NoSuchMethodException e){
         } catch(InstantiationException e){

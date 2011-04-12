@@ -3,7 +3,7 @@ package jp.sourceforge.stigmata.birthmarks.comparators;
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * calculate similarities between two birthmarks by DP matching algorithm.
@@ -14,7 +14,7 @@ public class DPMatchingBirthmarkComparator extends AbstractBirthmarkComparator{
     private int mismatchPenalty = 5;
     private int shiftPenalty = 1;
 
-    public DPMatchingBirthmarkComparator(BirthmarkSpi spi){
+    public DPMatchingBirthmarkComparator(BirthmarkService spi){
         super(spi);
     }
 

@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.Stigmata;
 import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
 
 /**
@@ -22,7 +22,7 @@ public class ListBirthmarksCommand extends AbstractStigmataCommand{
 
     @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
-        BirthmarkSpi[] spis = context.getEnvironment().findServices();
+        BirthmarkService[] spis = context.getEnvironment().findServices();
         ResultPrinterSpi spi = stigmata.getPrinterManager().getService(context.getFormat());
         BirthmarkServicePrinter formatter = spi.getBirthmarkServicePrinter();
 

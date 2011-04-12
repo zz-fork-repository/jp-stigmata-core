@@ -35,7 +35,7 @@ import jp.sourceforge.stigmata.ExtractionTarget;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.Stigmata;
 import jp.sourceforge.stigmata.printer.xml.ExtractionResultSetXmlPrinter;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.ui.swing.ExtensionFilter;
 import jp.sourceforge.stigmata.utils.MultipleIterator;
 
@@ -278,7 +278,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
             String className = null;
             BirthmarkSet bs = null;
             Birthmark birthmark = null;
-            BirthmarkSpi service = null;
+            BirthmarkService service = null;
                 
             while(reader.hasNext()){
                 // XMLEvent event = reader.peek();
@@ -315,7 +315,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                     }
                     else if(part.equals("element")){
                         if(service != null){
-                            BirthmarkElement be = service.buildBirthmarkElement(reader.getElementText());
+                            BirthmarkElement be = service.getExtractor().buildElement(reader.getElementText());
                             birthmark.addElement(be);
                         }
                     }
@@ -323,7 +323,7 @@ public class XmlFileExtractionResultSet extends AbstractExtractionResultSet{
                         String type = se.getAttributeByName(new QName("type")).getValue();
                         service = env.getService(type);
                         if(service != null){
-                            birthmark = service.buildBirthmark();
+                            birthmark = service.getExtractor().createBirthmark();
                             bs.addBirthmark(birthmark);
                         }
                         else{

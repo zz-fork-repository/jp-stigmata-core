@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilterService;
 import jp.sourceforge.stigmata.filter.FilterTarget;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListCellRenderer;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListener;
@@ -38,12 +38,12 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
     }
 
     @Override
-    public void serviceAdded(BirthmarkSpi service){
+    public void serviceAdded(BirthmarkService service){
         pane.serviceAdded(service);
     }
 
     @Override
-    public void serviceRemoved(BirthmarkSpi service){
+    public void serviceRemoved(BirthmarkService service){
         pane.serviceRemoved(service);
     }
 
@@ -68,12 +68,12 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         }
 
         @Override
-        public void serviceAdded(BirthmarkSpi service){
+        public void serviceAdded(BirthmarkService service){
             birthmarks.addItem(service);
         }
 
         @Override
-        public void serviceRemoved(BirthmarkSpi service){
+        public void serviceRemoved(BirthmarkService service){
             birthmarks.removeItem(service);
         }
 
@@ -144,7 +144,7 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         }
 
         private String getBirthmarkType(){
-            BirthmarkSpi service = (BirthmarkSpi)birthmarks.getSelectedItem();
+            BirthmarkService service = (BirthmarkService)birthmarks.getSelectedItem();
             if(service != null){
                 return service.getType();
             }

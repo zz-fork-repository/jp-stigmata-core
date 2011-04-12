@@ -32,6 +32,6 @@ public interface BirthmarkExtractorSpi extends ServiceProvider{
     /**
      * returns a extractor for the birthmark of this service.
      */
-    public BirthmarkExtractor getExtractor(BirthmarkSpi service);
+    public BirthmarkExtractor getExtractor(BirthmarkService service);
 }
 

@@ -4,7 +4,7 @@ import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * An implementation of {@link BirthmarkComparator
@@ -17,7 +17,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  */
 public class PlainBirthmarkComparator extends AbstractBirthmarkComparator{
-    public PlainBirthmarkComparator(BirthmarkSpi spi){
+    public PlainBirthmarkComparator(BirthmarkService spi){
         super(spi);
     }
 

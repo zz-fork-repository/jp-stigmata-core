@@ -2,7 +2,7 @@ package jp.sourceforge.stigmata.birthmarks.comparators;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * calculate similarities between two birthmarks by edit distance
@@ -11,7 +11,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  */
 public class ExtendedEditDistanceBirthmarkComparator extends EditDistanceBirthmarkComparator{
-    public ExtendedEditDistanceBirthmarkComparator(BirthmarkSpi spi){
+    public ExtendedEditDistanceBirthmarkComparator(BirthmarkService spi){
         super(spi);
     }
 

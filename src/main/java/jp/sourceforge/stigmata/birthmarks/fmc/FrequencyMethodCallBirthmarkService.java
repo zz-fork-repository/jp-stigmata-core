@@ -1,12 +1,10 @@
 package jp.sourceforge.stigmata.birthmarks.fmc;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;
-import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.AbstractBirthmarkService;
-import jp.sourceforge.stigmata.birthmarks.FrequencyBirthmarkElement;
+import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 import jp.sourceforge.stigmata.birthmarks.comparators.CosineSimilarityBirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
@@ -14,18 +12,13 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * 
  * @author Haruaki TAMADA
  */
-public class FrequencyMethodCallBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
+public class FrequencyMethodCallBirthmarkService implements BirthmarkService{
     private BirthmarkComparator comparator = new CosineSimilarityBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new FrequencyMethodCallBirthmarkExtractor(this);
 
     @Override
     public String getType(){
         return "fmc";
-    }
-
-    @Override
-    public String getDefaultDescription(){
-        return "Frequency of method call which order is appeared in method definition.";
     }
 
     @Override
@@ -48,8 +41,13 @@ public class FrequencyMethodCallBirthmarkService extends AbstractBirthmarkServic
         return false;
     }
 
-	@Override
-	public BirthmarkElement buildBirthmarkElement(String value) {
-    	return new FrequencyBirthmarkElement(value);
-	}
+    @Override
+    public String getDescription(){
+        return "Frequency of Method Calls";
+    }
+
+    @Override
+    public BirthmarkPreprocessor getPreprocessor(){
+        return null;
+    }
 }

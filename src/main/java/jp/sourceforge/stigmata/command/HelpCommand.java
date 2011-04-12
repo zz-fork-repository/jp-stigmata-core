@@ -7,7 +7,7 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.ComparisonPairFilterSet;
 import jp.sourceforge.stigmata.Stigmata;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.talisman.xmlcli.ResourceHelpFormatter;
 
 import org.apache.commons.cli.HelpFormatter;
@@ -45,10 +45,10 @@ public class HelpCommand extends AbstractStigmataCommand{
         );
         System.out.println();
         System.out.println(helpResource.getString("cli.interface.birthmarks"));
-        for(BirthmarkSpi service: env.getServices()){
+        for(BirthmarkService service: env.getServices()){
             if(!service.isExperimental()){
                 System.out.printf("    %-5s (%s): %s%n", service.getType(),
-                        service.getDisplayType(), service.getDescription());
+                        service.getType(), service.getDescription());
             }
         }
         System.out.println();

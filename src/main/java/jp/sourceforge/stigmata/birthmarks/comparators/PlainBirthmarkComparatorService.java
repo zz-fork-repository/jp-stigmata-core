@@ -1,7 +1,7 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * SPI of {@link BirthmarkComparator <code>BirthmarkComparator</code>}.
@@ -27,7 +27,7 @@ public class PlainBirthmarkComparatorService extends AbstractBirthmarkComparator
      * returns a extractor for the birthmark of this service.
      */
     @Override
-    public BirthmarkComparator getComparator(BirthmarkSpi service){
+    public BirthmarkComparator getComparator(BirthmarkService service){
         return new PlainBirthmarkComparator(service);
     }
 }

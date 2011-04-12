@@ -1,11 +1,10 @@
 package jp.sourceforge.stigmata.birthmarks.smc;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;
-import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.AbstractBirthmarkService;
+import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 import jp.sourceforge.stigmata.birthmarks.comparators.PlainBirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
@@ -13,7 +12,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  *
  * @author Haruaki TAMADA
  */
-public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
+public class SequentialMethodCallBirthmarkService implements BirthmarkService{
     private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new SequentialMethodCallBirthmarkExtractor(this);
 
@@ -23,7 +22,7 @@ public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkServi
     }
 
     @Override
-    public String getDefaultDescription(){
+    public String getDescription(){
         return "Sequence of method call which order is appeared in method definition.";
     }
 
@@ -47,12 +46,8 @@ public class SequentialMethodCallBirthmarkService extends AbstractBirthmarkServi
         return false;
     }
 
-	@Override
-	public BirthmarkElement buildBirthmarkElement(String value) {
-		String className = value.substring(0, value.indexOf('#'));
-		String methodName = value.substring(value.indexOf('#') + 1, value.lastIndexOf('!'));
-		String signature = value.substring(value.lastIndexOf('!') + 1);
-
-		return new MethodCallBirthmarkElement(className, methodName, signature);
-	}
+    @Override
+    public BirthmarkPreprocessor getPreprocessor(){
+        return null;
+    }
 }

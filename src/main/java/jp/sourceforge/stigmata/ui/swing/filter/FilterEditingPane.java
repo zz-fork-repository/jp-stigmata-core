@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import jp.sourceforge.stigmata.ComparisonPairFilter;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.sourceforge.stigmata.ui.swing.GUIUtility;
@@ -110,7 +110,7 @@ public class FilterEditingPane extends JPanel{
 
             ComparisonPairFilterPane pane = service.createComponent(stigmata, service.getComparisonPairFilterService());
             if(pane instanceof BirthmarkServiceListener){
-                for(BirthmarkSpi bs: stigmata.getEnvironment().getServices()){
+                for(BirthmarkService bs: stigmata.getEnvironment().getServices()){
                     ((BirthmarkServiceListener)pane).serviceAdded(bs);
                 }
                 stigmata.addBirthmarkServiceListener((BirthmarkServiceListener)pane);

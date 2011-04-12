@@ -19,7 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  *
@@ -38,7 +38,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
     }
 
     @Override
-    public void serviceRemoved(BirthmarkSpi service){
+    public void serviceRemoved(BirthmarkService service){
         BirthmarkSelection elem = getSelection(service.getType());
         model.removeElement(elem);
         
@@ -118,7 +118,7 @@ public class BirthmarkSelectionListPane extends BirthmarkSelectablePane{
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean forcus){
             BirthmarkSelection elem = (BirthmarkSelection)value;
-            setText(elem.getService().getDisplayType());
+            setText(elem.getService().getType());
             setToolTipText(elem.getService().getDescription());
             setSelected(elem.isSelected());
 

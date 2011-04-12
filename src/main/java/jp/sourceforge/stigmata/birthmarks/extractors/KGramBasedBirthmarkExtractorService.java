@@ -2,7 +2,7 @@ package jp.sourceforge.stigmata.birthmarks.extractors;
 
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.kgram.KGramBasedBirthmarkExtractor;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * Birthmark Service Provider Interface.
@@ -28,7 +28,7 @@ public class KGramBasedBirthmarkExtractorService extends AbstractBirthmarkExtrac
      * returns a extractor for the birthmark of this service.
      */
     @Override
-    public BirthmarkExtractor getExtractor(BirthmarkSpi service){
+    public BirthmarkExtractor getExtractor(BirthmarkService service){
         return new KGramBasedBirthmarkExtractor(service);
     }
 }

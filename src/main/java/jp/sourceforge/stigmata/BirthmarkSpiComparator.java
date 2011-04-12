@@ -2,12 +2,12 @@ package jp.sourceforge.stigmata;
 
 import java.util.Comparator;
 
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * @author Haruaki TAMADA
  */
-class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
+class BirthmarkSpiComparator implements Comparator<BirthmarkService>{
     /**
      * default constructor
      */
@@ -20,7 +20,7 @@ class BirthmarkSpiComparator implements Comparator<BirthmarkSpi>{
     }
 
     @Override
-    public int compare(BirthmarkSpi s1, BirthmarkSpi s2){
+    public int compare(BirthmarkService s1, BirthmarkService s2){
         if(s1.isExperimental() && !s2.isExperimental()){
             return 1;
         }

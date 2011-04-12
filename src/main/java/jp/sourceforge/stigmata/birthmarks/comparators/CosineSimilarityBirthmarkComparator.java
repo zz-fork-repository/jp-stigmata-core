@@ -7,7 +7,7 @@ import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.birthmarks.ValueCountable;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * Comparing birthmarks by cosine similarity algorithm. This class compares
@@ -19,7 +19,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
 public class CosineSimilarityBirthmarkComparator extends
         AbstractBirthmarkComparator{
 
-    public CosineSimilarityBirthmarkComparator(BirthmarkSpi spi){
+    public CosineSimilarityBirthmarkComparator(BirthmarkService spi){
         super(spi);
     }
 

@@ -2,13 +2,14 @@ package jp.sourceforge.stigmata.birthmarks.fmc;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
 import jp.sourceforge.stigmata.birthmarks.FrequencyBirthmark;
 import jp.sourceforge.stigmata.birthmarks.FrequencyBirthmarkElement;
 import jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractVisitor;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 import org.objectweb.asm.ClassWriter;
 
@@ -16,7 +17,7 @@ import org.objectweb.asm.ClassWriter;
  * @author Haruaki TAMADA
  */
 public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor{
-    public FrequencyMethodCallBirthmarkExtractor(BirthmarkSpi spi){
+    public FrequencyMethodCallBirthmarkExtractor(BirthmarkService spi){
         super(spi);
     }
 
@@ -44,5 +45,11 @@ public class FrequencyMethodCallBirthmarkExtractor extends ASMBirthmarkExtractor
     @Override
     public Birthmark createBirthmark(){
         return new FrequencyBirthmark(getProvider().getType());
+    }
+
+
+    @Override
+    public BirthmarkElement buildElement(String value) {
+        return new FrequencyBirthmarkElement(value);
     }
 }

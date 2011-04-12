@@ -6,7 +6,7 @@ import java.util.Set;
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * this comparator calculate following formula.
@@ -16,7 +16,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * @author Haruaki TAMADA
  */
 public class LogicalAndBirthmarkComparator extends AbstractBirthmarkComparator{
-    public LogicalAndBirthmarkComparator(BirthmarkSpi spi){
+    public LogicalAndBirthmarkComparator(BirthmarkService spi){
         super(spi);
     }
 

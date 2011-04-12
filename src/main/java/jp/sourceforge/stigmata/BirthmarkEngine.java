@@ -32,7 +32,7 @@ import jp.sourceforge.stigmata.hook.Phase;
 import jp.sourceforge.stigmata.hook.StigmataHookManager;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.result.RoundRobinComparisonResultSet;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * core engine for extracting/comparing/filtering birthmarks.
@@ -276,7 +276,7 @@ public class BirthmarkEngine{
         String[] target = set.toArray(new String[set.size()]);
         ClassFileArchive[] archives = createArchives(target, environment);
         for(String type: context.getBirthmarkTypes()){
-            BirthmarkSpi service = context.getEnvironment().getService(type);
+            BirthmarkService service = context.getEnvironment().getService(type);
             if(service != null && service.getPreprocessor() != null){
                 BirthmarkPreprocessor preprocessor = service.getPreprocessor();
                 preprocessor.preprocess(archives, context);

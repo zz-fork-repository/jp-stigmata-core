@@ -7,7 +7,7 @@ import java.util.Map;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.ExtractorNotFoundException;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -34,7 +34,7 @@ public class BirthmarkExtractorFactory{
 
     @SuppressWarnings("rawtypes")
     private BirthmarkExtractor buildExtractor(String birthmarkType) throws ExtractorNotFoundException{
-        BirthmarkSpi spi = environment.getService(birthmarkType);
+        BirthmarkService spi = environment.getService(birthmarkType);
         BirthmarkExtractor extractor = null;
         if(spi != null){
             extractor = spi.getExtractor();

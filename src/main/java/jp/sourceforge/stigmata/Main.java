@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.command.StigmataCommandFactory;
 import jp.sourceforge.stigmata.digger.ClasspathContext;
 import jp.sourceforge.stigmata.hook.Phase;
 import jp.sourceforge.stigmata.hook.StigmataHookManager;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
 import jp.sourceforge.talisman.xmlcli.OptionsBuilder;
 import jp.sourceforge.talisman.xmlcli.XmlCliConfigurationException;
@@ -121,7 +121,7 @@ public final class Main{
         String[] birthmarks = cl.getOptionValues("birthmark");
         if(birthmarks == null || birthmarks.length == 0){
             List<String> birthmarkList = new ArrayList<String>();
-            for(BirthmarkSpi service: env.getServices()){
+            for(BirthmarkService service: env.getServices()){
                 if(!service.isExperimental()){
                     birthmarkList.add(service.getType());
                 }
