@@ -23,7 +23,7 @@ public class UsedClassesBirthmarkService implements BirthmarkService{
 
     @Override
     public String getDescription(){
-        return "Set of used classes in target class.";
+        return "Used classes birthmark";
     }
 
     @Override

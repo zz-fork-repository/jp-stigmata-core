@@ -1,7 +1,7 @@
-package jp.sourceforge.stigmata.birthmarks.extractors;
+package jp.sourceforge.stigmata.birthmarks.fuc;
 
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.kgram.KGramBasedBirthmarkExtractor;
+import jp.sourceforge.stigmata.spi.BirthmarkExtractorService;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
@@ -9,19 +9,14 @@ import jp.sourceforge.stigmata.spi.BirthmarkService;
  *
  * @author Haruaki TAMADA
  */
-public class KGramBasedBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
+public class FrequencyUsedClassesBirthmarkExtractorService implements BirthmarkExtractorService{
 
     /**
      * returns a type of the birthmark this service provides.
      */
     @Override
     public String getType(){
-        return "kgram";
-    }
-
-    @Override
-    public String getExtractorClassName(){
-        return KGramBasedBirthmarkExtractor.class.getName();
+        return "fuc";
     }
 
     /**
@@ -29,6 +24,11 @@ public class KGramBasedBirthmarkExtractorService extends AbstractBirthmarkExtrac
      */
     @Override
     public BirthmarkExtractor getExtractor(BirthmarkService service){
-        return new KGramBasedBirthmarkExtractor(service);
+        return new FrequencyUsedClassesBirthmarkExtractor(service);
+    }
+
+    @Override
+    public String getDescription(){
+        return "Frequency of Used Classes birthmark";
     }
 }

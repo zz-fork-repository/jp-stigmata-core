@@ -12,7 +12,7 @@ import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.FilterTarget;
 import jp.sourceforge.stigmata.filter.TotalElementCountComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.TotalElementCountComparisonPairFilterService;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 
 /**
@@ -21,7 +21,7 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 public class TotalElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
     @Override
-    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterService service){
         return new Pane(frame, service);
     }
 
@@ -31,18 +31,18 @@ public class TotalElementCountComparisonPairFilterComponentService extends Abstr
     }
 
     @Override
-    public ComparisonPairFilterSpi getComparisonPairFilterService(){
+    public ComparisonPairFilterService getComparisonPairFilterService(){
         return new TotalElementCountComparisonPairFilterService();
     }
 
     private static class Pane extends ComparisonPairFilterPane{
         private static final long serialVersionUID = 8912037614500713027L;
-        private ComparisonPairFilterSpi service;
+        private ComparisonPairFilterService service;
         private JComboBox criterionType;
         private JTextField threshold;
         private JComboBox targetType;
 
-        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterService service){
             super(frame);
             this.service = service;
             initLayouts();

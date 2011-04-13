@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.ComparisonPair;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
     private FilterTarget target = FilterTarget.BOTH_TARGETS;
     private String value;
 
-    public TargetNameComparisonPairFilter(ComparisonPairFilterSpi service){
+    public TargetNameComparisonPairFilter(ComparisonPairFilterService service){
         super(service);
     }
 

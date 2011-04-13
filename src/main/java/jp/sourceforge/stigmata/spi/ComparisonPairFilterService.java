@@ -1,7 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-import java.util.Locale;
-
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 
 /**
@@ -9,14 +7,10 @@ import jp.sourceforge.stigmata.ComparisonPairFilter;
  * 
  * @author Haruaki TAMADA
  */
-public interface ComparisonPairFilterSpi extends ServiceProvider{
-    public String getDisplayFilterName(Locale locale);
-
-    public String getDisplayFilterName();
-
+public interface ComparisonPairFilterService{
     public String getFilterName();
 
-    public String getFilterClassName();
+    public String getDescription();
 
     public ComparisonPairFilter getFilter();
 }

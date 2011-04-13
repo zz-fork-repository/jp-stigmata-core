@@ -1,6 +1,7 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
 import jp.sourceforge.stigmata.BirthmarkComparator;
+import jp.sourceforge.stigmata.spi.BirthmarkComparatorService;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
@@ -9,7 +10,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkService;
  *
  * @author Haruaki TAMADA
  */
-public class CosineSimilarityBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
+public class CosineSimilarityBirthmarkComparatorService implements BirthmarkComparatorService{
     /**
      * returns a type of the birthmark this service provides.
      */
@@ -18,17 +19,17 @@ public class CosineSimilarityBirthmarkComparatorService extends AbstractBirthmar
         return "cosine";
     }
 
-    @Override
-    public String getComparatorClassName(){
-        return CosineSimilarityBirthmarkComparator.class.getName();
-    }
-
     /**
      * returns a extractor for the birthmark of this service.
      */
     @Override
     public BirthmarkComparator getComparator(BirthmarkService service){
         return new CosineSimilarityBirthmarkComparator(service);
+    }
+
+    @Override
+    public String getDescription(){
+        return "Cosine Similarity";
     }
 }
 

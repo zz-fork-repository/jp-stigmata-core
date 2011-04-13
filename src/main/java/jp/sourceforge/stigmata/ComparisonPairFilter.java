@@ -1,7 +1,7 @@
 package jp.sourceforge.stigmata;
 
 import jp.sourceforge.stigmata.filter.Criterion;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * Filtering results by some criteria.
@@ -24,5 +24,5 @@ public interface ComparisonPairFilter{
 
     public Criterion getCriterion();
 
-    public ComparisonPairFilterSpi getService();
+    public ComparisonPairFilterService getService();
 }

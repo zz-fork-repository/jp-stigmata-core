@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.BirthmarkExtractionFailedException;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.ExtractionUnit;
@@ -41,6 +42,10 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     @Override
     public BirthmarkService getProvider(){
         return spi;
+    }
+
+    public final Birthmark extract(InputStream in) throws BirthmarkExtractionFailedException{
+        return extract(createBirthmark(), in, new BirthmarkContext(BirthmarkEnvironment.getDefaultEnvironment()));
     }
 
     /**

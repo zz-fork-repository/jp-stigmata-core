@@ -7,7 +7,7 @@ import java.util.ServiceLoader;
 
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.printer.csv.CsvResultPrinterService;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 
 /**
  *
@@ -15,12 +15,12 @@ import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
  */
 public class PrinterManager{
     private static final PrinterManager manager = new PrinterManager();
-    private ServiceLoader<ResultPrinterSpi> serviceLoader;
+    private ServiceLoader<ResultPrinterService> serviceLoader;
 
-    private Map<String, ResultPrinterSpi> formats = new HashMap<String, ResultPrinterSpi>();
+    private Map<String, ResultPrinterService> formats = new HashMap<String, ResultPrinterService>();
 
     private PrinterManager(){
-        serviceLoader = ServiceLoader.load(ResultPrinterSpi.class);
+        serviceLoader = ServiceLoader.load(ResultPrinterService.class);
         load();
     }
 
@@ -32,12 +32,12 @@ public class PrinterManager{
     public static void refresh(BirthmarkEnvironment env){
         PrinterManager instance = getInstance();
         instance.formats.clear();
-        for(Iterator<ResultPrinterSpi> i = env.lookupProviders(ResultPrinterSpi.class); i.hasNext(); ){
+        for(Iterator<ResultPrinterService> i = env.lookupProviders(ResultPrinterService.class); i.hasNext(); ){
             instance.addService(i.next());
         }
     }
 
-    public static ResultPrinterSpi getDefaultFormatService(){
+    public static ResultPrinterService getDefaultFormatService(){
         return new CsvResultPrinterService();
     }
 
@@ -45,19 +45,19 @@ public class PrinterManager{
         return manager;
     }
 
-    public ResultPrinterSpi getService(String format){
+    public ResultPrinterService getService(String format){
         return formats.get(format);
     }
 
     private void load(){
         formats.clear();
-        for(Iterator<ResultPrinterSpi> i = serviceLoader.iterator(); i.hasNext(); ){
-            ResultPrinterSpi spi = i.next();
+        for(Iterator<ResultPrinterService> i = serviceLoader.iterator(); i.hasNext(); ){
+            ResultPrinterService spi = i.next();
             addService(spi);
         }
     }
 
-    private void addService(ResultPrinterSpi service){
+    private void addService(ResultPrinterService service){
         formats.put(service.getFormat(), service);
     }
 }

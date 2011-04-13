@@ -10,7 +10,7 @@ import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkHistory;
  * 
  * @author Haruaki Tamada
  */
-public interface ExtractedBirthmarkSpi{
+public interface ExtractedBirthmarkService{
     /**
      * finds and returns history from given parameter.
      * @param parameter search base.
@@ -23,4 +23,8 @@ public interface ExtractedBirthmarkSpi{
     public ExtractionResultSet createResultSet(BirthmarkContext context);
 
     public BirthmarkStoreTarget getTarget();
+
+    public String getType();
+
+    public String getDescription();
 }

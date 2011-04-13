@@ -13,7 +13,7 @@ import jp.sourceforge.stigmata.event.BirthmarkEngineAdapter;
 import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
 import jp.sourceforge.stigmata.event.WarningMessages;
 import jp.sourceforge.stigmata.printer.ComparisonResultSetPrinter;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 
 /**
  * 
@@ -51,7 +51,7 @@ public class CompareCommand extends AbstractStigmataCommand{
                 resultset = engine.filter(resultset);
             }
 
-            ResultPrinterSpi spi = stigmata.getPrinterManager().getService(context.getFormat());
+            ResultPrinterService spi = stigmata.getPrinterManager().getService(context.getFormat());
             ComparisonResultSetPrinter formatter = spi.getComparisonResultSetPrinter();
             formatter.printResult(new PrintWriter(System.out), resultset);
         }catch(Exception e){

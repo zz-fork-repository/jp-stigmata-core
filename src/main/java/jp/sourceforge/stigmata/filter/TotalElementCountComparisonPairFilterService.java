@@ -1,12 +1,13 @@
 package jp.sourceforge.stigmata.filter;
 
 import jp.sourceforge.stigmata.ComparisonPairFilter;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
  * @author Haruaki TAMADA
  */
-public class TotalElementCountComparisonPairFilterService extends AbstractComparisonPairFilterService{
+public class TotalElementCountComparisonPairFilterService implements ComparisonPairFilterService{
 
     @Override
     public ComparisonPairFilter getFilter(){
@@ -14,12 +15,12 @@ public class TotalElementCountComparisonPairFilterService extends AbstractCompar
     }
 
     @Override
-    public String getFilterClassName(){
-        return TotalElementCountComparisonPairFilter.class.getName();
+    public String getFilterName(){
+        return "totalelementcount";
     }
 
     @Override
-    public String getFilterName(){
-        return "totalelementcount";
+    public String getDescription(){
+        return "Filtering Element Count";
     }
 }

@@ -1,7 +1,7 @@
-package jp.sourceforge.stigmata.birthmarks.extractors;
+package jp.sourceforge.stigmata.birthmarks.fmc;
 
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor;
+import jp.sourceforge.stigmata.spi.BirthmarkExtractorService;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
@@ -9,19 +9,14 @@ import jp.sourceforge.stigmata.spi.BirthmarkService;
  *
  * @author Haruaki TAMADA
  */
-public class SequentialMethodCallBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
+public class FrequencyMethodCallBirthmarkExtractorService implements BirthmarkExtractorService{
 
     /**
      * returns a type of the birthmark this service provides.
      */
     @Override
     public String getType(){
-        return "smc";
-    }
-
-    @Override
-    public String getExtractorClassName(){
-        return SequentialMethodCallBirthmarkExtractor.class.getName();
+        return "fmc";
     }
 
     /**
@@ -29,6 +24,11 @@ public class SequentialMethodCallBirthmarkExtractorService extends AbstractBirth
      */
     @Override
     public BirthmarkExtractor getExtractor(BirthmarkService service){
-        return new SequentialMethodCallBirthmarkExtractor(service);
+        return new FrequencyMethodCallBirthmarkExtractor(service);
+    }
+
+    @Override
+    public String getDescription(){
+        return "Frequency of Method Calls birthmark";
     }
 }

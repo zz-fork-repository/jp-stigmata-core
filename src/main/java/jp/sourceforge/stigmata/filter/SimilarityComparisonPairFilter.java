@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.ComparisonPair;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter
 
     private double threshold;
 
-    public SimilarityComparisonPairFilter(ComparisonPairFilterSpi service){
+    public SimilarityComparisonPairFilter(ComparisonPairFilterService service){
         super(service);
         setThreshold(0.8d);
     }

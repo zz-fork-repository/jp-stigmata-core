@@ -1,4 +1,4 @@
-package jp.sourceforge.stigmata.birthmarks.cvfv;
+package jp.sourceforge.stigmata.birthmarks.uc;
 
 import java.io.FileInputStream;
 
@@ -19,34 +19,32 @@ import org.junit.Test;
  *
  * @author Haruaki TAMADA
  */
-public class CVFVBirthmarkExtractorTest{
+public class UsedClassesBirthmarkExtractorTest{
     private BirthmarkExtractor extractor; 
 
     @Before
     public void setup(){
-        extractor = new ConstantValueOfFieldVariableBirthmarkService().getExtractor();
+        extractor = new UsedClassesBirthmarkService().getExtractor();
         BirthmarkEnvironment env = BirthmarkEnvironment.getDefaultEnvironment();
         WellknownClassManager manager = env.getWellknownClassManager();
         manager.add(new WellknownClassJudgeRule("java.", MatchType.PREFIX, MatchPartType.FULLY_NAME));
         manager.add(new WellknownClassJudgeRule("javax.", MatchType.PREFIX, MatchPartType.FULLY_NAME));
     }
 
-
     @Test
     public void checkBirthmark() throws Exception{
         Birthmark birthmark = extractor.extract(new FileInputStream("target/test-classes/resources/HelloWorldFrame.class"));
-        Assert.assertEquals("cvfv", birthmark.getType());
+
+        Assert.assertEquals("uc", birthmark.getType());
+        Assert.assertEquals(7, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals(2, elements.length);
-
-        Assert.assertTrue(elements[0] instanceof TypeAndValueBirthmarkElement);
-        Assert.assertTrue(elements[1] instanceof TypeAndValueBirthmarkElement);
-
-        Assert.assertEquals("Ljava/lang/String;", ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
-        Assert.assertEquals("Ljava/lang/String;", ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
-
-        Assert.assertEquals("Hello World", elements[0].getValue());
-        Assert.assertEquals("Lucida Regular", elements[1].getValue());
+        Assert.assertEquals("java.awt.Component", elements[0].getValue());
+        Assert.assertEquals("java.awt.Container", elements[1].getValue());
+        Assert.assertEquals("java.awt.Font", elements[2].getValue());
+        Assert.assertEquals("java.lang.Object", elements[3].getValue());
+        Assert.assertEquals("java.lang.String", elements[4].getValue());
+        Assert.assertEquals("javax.swing.JFrame", elements[5].getValue());
+        Assert.assertEquals("javax.swing.JLabel", elements[6].getValue());
     }
 }

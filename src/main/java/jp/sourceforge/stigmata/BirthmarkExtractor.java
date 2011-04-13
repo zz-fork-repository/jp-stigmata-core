@@ -36,6 +36,11 @@ public interface BirthmarkExtractor{
     public BirthmarkElement buildElement(String value);
 
     /**
+     * extract birthmark from given stream with default environment.
+     */
+    public Birthmark extract(InputStream in) throws BirthmarkExtractionFailedException;
+
+    /**
      * extract birthmark from given stream with given environment.
      */
     public Birthmark extract(InputStream in, BirthmarkContext context) throws BirthmarkExtractionFailedException;

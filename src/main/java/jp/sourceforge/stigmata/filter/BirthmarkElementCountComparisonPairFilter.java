@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.ComparisonPair;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class BirthmarkElementCountComparisonPairFilter extends AbstractCompariso
         CRITERIA.add(Criterion.NOT_EQUALS_AS);
     }
 
-    public BirthmarkElementCountComparisonPairFilter(ComparisonPairFilterSpi service){
+    public BirthmarkElementCountComparisonPairFilter(ComparisonPairFilterService service){
         super(service);
     }
 

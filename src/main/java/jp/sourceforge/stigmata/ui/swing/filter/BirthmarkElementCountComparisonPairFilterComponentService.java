@@ -14,7 +14,7 @@ import jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilterService;
 import jp.sourceforge.stigmata.filter.FilterTarget;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListCellRenderer;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
@@ -27,7 +27,7 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
     private Pane pane;
 
     @Override
-    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterService service){
         pane = new Pane(frame, service);
         return pane;
     }
@@ -48,20 +48,20 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
     }
 
     @Override
-    public ComparisonPairFilterSpi getComparisonPairFilterService(){
+    public ComparisonPairFilterService getComparisonPairFilterService(){
         return new BirthmarkElementCountComparisonPairFilterService();
     }
 
     private static class Pane extends ComparisonPairFilterPane implements BirthmarkServiceListener{
         private static final long serialVersionUID = -6398073942592186671L;
 
-        private ComparisonPairFilterSpi service;
+        private ComparisonPairFilterService service;
         private JComboBox criterionType;
         private JTextField threshold;
         private JComboBox targetType;
         private JComboBox birthmarks;
 
-        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterService service){
             super(frame);
             this.service = service;
             initLayouts();

@@ -22,7 +22,6 @@ public class ServiceListTest{
         assertNotNull(env.getService("fmc"));
         assertNotNull(env.getService("fuc"));
         assertNotNull(env.getService("is"));
-        assertNotNull(env.getService("kgram"));
         assertNotNull(env.getService("smc"));
         assertNotNull(env.getService("uc"));
         assertNotNull(env.getService("cvfv_dp"));

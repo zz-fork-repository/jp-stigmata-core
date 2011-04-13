@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
-import jp.sourceforge.stigmata.spi.StigmataHookSpi;
+import jp.sourceforge.stigmata.spi.StigmataHookService;
 
 /**
  * 
@@ -36,8 +36,8 @@ public class StigmataHookManager{
     private MultipleStigmataHook buildHook(Phase phase, BirthmarkEnvironment env){
         MultipleStigmataHook hooks = new MultipleStigmataHook();
 
-        for(Iterator<StigmataHookSpi> i = env.lookupProviders(StigmataHookSpi.class); i.hasNext(); ){
-            StigmataHookSpi service = i.next();
+        for(Iterator<StigmataHookService> i = env.lookupProviders(StigmataHookService.class); i.hasNext(); ){
+            StigmataHookService service = i.next();
 
             switch(phase){
             case SETUP:

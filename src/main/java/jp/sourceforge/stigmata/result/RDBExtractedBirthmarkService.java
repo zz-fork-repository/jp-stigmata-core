@@ -7,13 +7,13 @@ import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ExtractionResultSet;
 import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkHistory;
 import jp.sourceforge.stigmata.result.history.RDBExtractedBirthmarkHistory;
-import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
+import jp.sourceforge.stigmata.spi.ExtractedBirthmarkService;
 
 /**
  * 
  * @author Haruaki Tamada
  */
-public class RDBExtractedBirthmarkService implements ExtractedBirthmarkSpi{
+public class RDBExtractedBirthmarkService implements ExtractedBirthmarkService{
     private DataSource source;
 
     public RDBExtractedBirthmarkService(){
@@ -37,5 +37,15 @@ public class RDBExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     @Override
     public BirthmarkStoreTarget getTarget(){
         return BirthmarkStoreTarget.RDB;
+    }
+
+    @Override
+    public String getType(){
+        return "rdb";
+    }
+
+    @Override
+    public String getDescription(){
+        return "Store birthmarks to Relational Database.";
     }
 }

@@ -23,7 +23,7 @@ public class BirthmarkCompareTest{
     @Before
     public void readBirthmarks() throws Exception{
         context = Stigmata.getInstance().createContext();
-        context.setBirthmarkTypes(new String[] { "cvfv", "smc", "uc", "is", "kgram", });
+        context.setBirthmarkTypes(new String[] { "cvfv", "smc", "uc", "is", });
         engine = new BirthmarkEngine(context.getEnvironment());
 
         ExtractionResultSet ers = engine.extract(

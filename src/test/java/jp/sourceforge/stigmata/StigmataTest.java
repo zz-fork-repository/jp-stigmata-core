@@ -27,7 +27,6 @@ public class StigmataTest{
         Assert.assertNotNull(environment.getService("cvfv"));
         Assert.assertNotNull(environment.getService("is"));
         Assert.assertNotNull(environment.getService("uc"));
-        Assert.assertNotNull(environment.getService("kgram"));
     }
 
     @Test
@@ -90,22 +89,6 @@ public class StigmataTest{
         );
         Assert.assertEquals(
             "jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor",
-            service.getExtractor().getClass().getName()
-        );
-    }
-
-    @Test
-    public void checkKgramBirthmarkService() throws Exception{
-        BirthmarkService service = environment.getService("kgram");
-
-        Assert.assertNotNull(service.getComparator());
-        Assert.assertNotNull(service.getExtractor());
-        Assert.assertEquals(
-            "jp.sourceforge.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparator",
-            service.getComparator().getClass().getName()
-        );
-        Assert.assertEquals(
-            "jp.sourceforge.stigmata.birthmarks.kgram.KGramBasedBirthmarkExtractor",
             service.getExtractor().getClass().getName()
         );
     }

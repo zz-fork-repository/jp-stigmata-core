@@ -28,8 +28,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
-import jp.sourceforge.stigmata.spi.BirthmarkComparatorSpi;
-import jp.sourceforge.stigmata.spi.BirthmarkExtractorSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkComparatorService;
+import jp.sourceforge.stigmata.spi.BirthmarkExtractorService;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.spi.ReflectedBirthmarkService;
 import jp.sourceforge.talisman.i18n.Messages;
@@ -304,14 +304,16 @@ public class BirthmarkDefinitionPane extends JPanel{
 
         public void initData(){
             comparator.addItem("");
-            for(Iterator<BirthmarkComparatorSpi> i = stigmata.getEnvironment().lookupProviders(BirthmarkComparatorSpi.class); i.hasNext();){
-                BirthmarkComparatorSpi service = i.next();
-                comparator.addItem(service.getComparatorClassName());
+            for(Iterator<BirthmarkComparatorService> i = stigmata.getEnvironment().lookupProviders(BirthmarkComparatorService.class); i.hasNext();){
+                BirthmarkComparatorService service = i.next();
+                comparator.addItem(service.getType());
+                // TODO: 比較器の名前を引っ張る方法を考える．
             }
             extractor.addItem("");
-            for(Iterator<BirthmarkExtractorSpi> i = stigmata.getEnvironment().lookupProviders(BirthmarkExtractorSpi.class); i.hasNext();){
-                BirthmarkExtractorSpi service = i.next();
-                extractor.addItem(service.getExtractorClassName());
+            for(Iterator<BirthmarkExtractorService> i = stigmata.getEnvironment().lookupProviders(BirthmarkExtractorService.class); i.hasNext();){
+                BirthmarkExtractorService service = i.next();
+                extractor.addItem(service.getType());
+                // TODO: 考える．
             }
         }
 

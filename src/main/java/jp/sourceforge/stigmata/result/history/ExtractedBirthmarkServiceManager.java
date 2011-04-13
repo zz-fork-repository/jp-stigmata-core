@@ -14,7 +14,7 @@ import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ExtractionResultSet;
-import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
+import jp.sourceforge.stigmata.spi.ExtractedBirthmarkService;
 
 /**
  * 
@@ -22,7 +22,7 @@ import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
  */
 public class ExtractedBirthmarkServiceManager{
     private ExtractedBirthmarkServiceManager parent;
-    private Map<BirthmarkStoreTarget, ExtractedBirthmarkSpi> targets = new HashMap<BirthmarkStoreTarget, ExtractedBirthmarkSpi>();
+    private Map<BirthmarkStoreTarget, ExtractedBirthmarkService> targets = new HashMap<BirthmarkStoreTarget, ExtractedBirthmarkService>();
     private BirthmarkEnvironment env;
 
     public ExtractedBirthmarkServiceManager(BirthmarkEnvironment env){
@@ -48,7 +48,7 @@ public class ExtractedBirthmarkServiceManager{
             bst = BirthmarkStoreTarget.XMLFILE;
         }
 
-        ExtractedBirthmarkSpi service = findService(bst);
+        ExtractedBirthmarkService service = findService(bst);
 
         return service.createResultSet(context);
     }
@@ -64,7 +64,7 @@ public class ExtractedBirthmarkServiceManager{
             BirthmarkStoreTarget bst = BirthmarkStoreTarget.valueOf(type);
             String path = id.substring(index + 1);
 
-            ExtractedBirthmarkSpi service = findService(bst);
+            ExtractedBirthmarkService service = findService(bst);
             if(service != null){
                 history = service.getHistory(path);
             }
@@ -90,8 +90,8 @@ public class ExtractedBirthmarkServiceManager{
         return values.toArray(new String[values.size()]);
     }
 
-    private synchronized ExtractedBirthmarkSpi findService(BirthmarkStoreTarget bst){
-        ExtractedBirthmarkSpi spi = targets.get(bst);
+    private synchronized ExtractedBirthmarkService findService(BirthmarkStoreTarget bst){
+        ExtractedBirthmarkService spi = targets.get(bst);
         if(spi == null){
             refreshService();
         }
@@ -101,8 +101,8 @@ public class ExtractedBirthmarkServiceManager{
     }
 
     private synchronized void refreshService(){
-        for(Iterator<ExtractedBirthmarkSpi> i = env.lookupProviders(ExtractedBirthmarkSpi.class); i.hasNext(); ){
-            ExtractedBirthmarkSpi service = i.next();
+        for(Iterator<ExtractedBirthmarkService> i = env.lookupProviders(ExtractedBirthmarkService.class); i.hasNext(); ){
+            ExtractedBirthmarkService service = i.next();
             targets.put(service.getTarget(), service);
         }
     }

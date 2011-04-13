@@ -1,7 +1,7 @@
-package jp.sourceforge.stigmata.birthmarks.extractors;
+package jp.sourceforge.stigmata.birthmarks.cvfv;
 
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor;
+import jp.sourceforge.stigmata.spi.BirthmarkExtractorService;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
@@ -9,7 +9,7 @@ import jp.sourceforge.stigmata.spi.BirthmarkService;
  *
  * @author Haruaki TAMADA
  */
-public class ConstantValueOfFieldVariableBirthmarkExtractorService extends AbstractBirthmarkExtractorService{
+public class ConstantValueOfFieldVariableBirthmarkExtractorService implements BirthmarkExtractorService{
 
     /**
      * returns a type of the birthmark this service provides.
@@ -19,16 +19,16 @@ public class ConstantValueOfFieldVariableBirthmarkExtractorService extends Abstr
         return "cvfv";
     }
 
-    @Override
-    public String getExtractorClassName(){
-        return ConstantValueOfFieldVariableBirthmarkExtractor.class.getName();
-    }
-
     /**
      * returns a extractor for the birthmark of this service.
      */
     @Override
     public BirthmarkExtractor getExtractor(BirthmarkService service){
         return new ConstantValueOfFieldVariableBirthmarkExtractor(service);
+    }
+
+    @Override
+    public String getDescription(){
+        return "Constant Value and Field Variable birthmark";
     }
 }

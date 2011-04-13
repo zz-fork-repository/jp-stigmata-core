@@ -11,11 +11,13 @@ import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
  *
  * @author Haruaki TAMADA
  */
-public interface ResultPrinterSpi extends ServiceProvider{
+public interface ResultPrinterService{
     /**
      * return a format.
      */
     public String getFormat();
+
+    public String getDescription();
 
     public BirthmarkServicePrinter getBirthmarkServicePrinter();
 

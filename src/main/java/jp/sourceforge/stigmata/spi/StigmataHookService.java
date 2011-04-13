@@ -7,7 +7,11 @@ import jp.sourceforge.stigmata.hook.StigmataRuntimeHook;
  * 
  * @author Haruaki Tamada
  */
-public interface StigmataHookSpi{
+public interface StigmataHookService{
+    public String getType();
+
+    public String getDescription();
+
     public StigmataHook onSetup();
 
     public StigmataHook onTearDown();

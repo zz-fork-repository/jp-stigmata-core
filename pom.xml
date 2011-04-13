@@ -42,7 +42,7 @@
   <dependencies>
     <dependency>
       <groupId>asm</groupId>
-      <artifactId>asm</artifactId>
+      <artifactId>asm-all</artifactId>
       <version>3.3</version>
       <scope>compile</scope>
     </dependency>

@@ -1,7 +1,5 @@
 package jp.sourceforge.stigmata.spi;
 
-import java.util.Locale;
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
 
 /**
@@ -9,25 +7,16 @@ import jp.sourceforge.stigmata.BirthmarkComparator;
  *
  * @author Haruaki TAMADA
  */
-public interface BirthmarkComparatorSpi extends ServiceProvider{
+public interface BirthmarkComparatorService{
     /**
      * returns a type of the birthmark this service provides.
      */
     public String getType();
 
     /**
-     * returns a localized description of the birthmark this service provides.
-     */
-    @Override
-    public String getDescription(Locale locale);
-
-    /**
      * returns a localized description of the birthmark in default locale.
      */
-    @Override
     public String getDescription();
-
-    public String getComparatorClassName();
 
     /**
      * returns a extractor for the birthmark of this service.

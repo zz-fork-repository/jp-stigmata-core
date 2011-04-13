@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.ComparisonPair;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
     private int threshold = 0;
     private FilterTarget target;
 
-    public TotalElementCountComparisonPairFilter(ComparisonPairFilterSpi service){
+    public TotalElementCountComparisonPairFilter(ComparisonPairFilterService service){
         super(service);
     }
 

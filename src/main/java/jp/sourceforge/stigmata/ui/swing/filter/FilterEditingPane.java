@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.sourceforge.stigmata.ui.swing.GUIUtility;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
@@ -71,8 +71,8 @@ public class FilterEditingPane extends JPanel{
         resetOldComponent();
         this.filter = filter;
         if(filter != null && filter.getService() != null){
-            ComparisonPairFilterSpi service = filter.getService();
-            String name = service.getDisplayFilterName();
+            ComparisonPairFilterService service = filter.getService();
+            String name = service.getFilterName();
 
             combo.setSelectedItem(name);
             card.show(cardComponent, name);
@@ -83,7 +83,7 @@ public class FilterEditingPane extends JPanel{
 
     private void resetOldComponent(){
         if(filter != null){
-            paneMap.get(filter.getService().getDisplayFilterName()).resetComponents();
+            paneMap.get(filter.getService().getFilterName()).resetComponents();
         }
     }
 
@@ -143,7 +143,7 @@ public class FilterEditingPane extends JPanel{
                 card.show(cardComponent, item);
                 if(paneMap.get(item) != null){
                     if(filter != null){
-                        String oldType = filter.getService().getDisplayFilterName();
+                        String oldType = filter.getService().getFilterName();
                         if(item.equals(oldType)){
                             paneMap.get(item).setFilter(filter);
                         }
