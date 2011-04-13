@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,13 +10,12 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class BirthmarkSelectablePane extends JPanel implements BirthmarkServiceListener{
 	private static final long serialVersionUID = 7057130952947891635L;
@@ -57,7 +52,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
         return selectedServices.toArray(new String[selectedServices.size()]);
     }
 
-    public BirthmarkSpi getService(String type){
+    public BirthmarkService getService(String type){
         BirthmarkSelection elem = services.get(type);
         if(elem != null){
             return elem.getService();
@@ -70,7 +65,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
         String[] serviceArray = new String[services.size()];
         int index = 0;
         for(String key: services.keySet()){
-            BirthmarkSpi service = services.get(key).getService();
+            BirthmarkService service = services.get(key).getService();
             serviceArray[index] = service.getType();
             index++;
         }
@@ -91,7 +86,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
         fireEvent();
     }
 
-    public void select(BirthmarkSpi service, boolean flag){
+    public void select(BirthmarkService service, boolean flag){
         select(service.getType(), flag);
     }
 
@@ -108,7 +103,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     }
 
     @Override
-    public void serviceAdded(BirthmarkSpi service){
+    public void serviceAdded(BirthmarkService service){
         if(services.get(service.getType()) == null){
             BirthmarkSelection elem = new BirthmarkSelection(service);
             selectedServices.add(service.getType());
@@ -119,7 +114,7 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     }
 
     @Override
-    public void serviceRemoved(BirthmarkSpi service){
+    public void serviceRemoved(BirthmarkService service){
         BirthmarkSelection elem = services.get(service);
         if(elem != null){
             selectedServices.remove(service);
@@ -147,10 +142,10 @@ public abstract class BirthmarkSelectablePane extends JPanel implements Birthmar
     }
 
     private void initServices(){
-        BirthmarkSpi[] serviceArray = stigmata.getEnvironment().getServices();
+        BirthmarkService[] serviceArray = stigmata.getEnvironment().getServices();
 
         services = new LinkedHashMap<String, BirthmarkSelection>();
-        for(BirthmarkSpi service: serviceArray){
+        for(BirthmarkService service: serviceArray){
             BirthmarkSelection elem = new BirthmarkSelection(service);
             services.put(service.getType(), elem);
         }

@@ -1,13 +1,8 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UnsupportedFormatException extends Exception{
     private static final long serialVersionUID = 8165384564671102575L;

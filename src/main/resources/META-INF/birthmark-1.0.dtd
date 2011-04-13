@@ -1,7 +1,3 @@
-<!--
-  $Id$
--->
-
 <!ATTLIST birthmark
   type  NAME  #REQUIRED
   count CDATA #REQUIRED

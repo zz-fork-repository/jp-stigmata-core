@@ -1,27 +1,22 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.ComparisonPairFilter;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractComparisonPairFilter implements ComparisonPairFilter{
-    private ComparisonPairFilterSpi service;
+    private ComparisonPairFilterService service;
     private Criterion criterion = Criterion.EQUALS_AS;
 
-    public AbstractComparisonPairFilter(ComparisonPairFilterSpi service){
+    public AbstractComparisonPairFilter(ComparisonPairFilterService service){
         this.service = service;
     }
 
     @Override
-    public ComparisonPairFilterSpi getService(){
+    public ComparisonPairFilterService getService(){
         return service;
     }
 

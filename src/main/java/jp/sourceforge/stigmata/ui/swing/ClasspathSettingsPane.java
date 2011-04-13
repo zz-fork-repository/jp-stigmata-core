@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -33,7 +29,6 @@ import jp.sourceforge.talisman.i18n.Messages;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ClasspathSettingsPane extends JPanel{
     private static final long serialVersionUID = 320973463423634L;

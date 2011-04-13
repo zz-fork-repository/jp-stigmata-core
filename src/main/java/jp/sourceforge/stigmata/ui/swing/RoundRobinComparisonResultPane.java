@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -44,7 +40,7 @@ import jp.sourceforge.stigmata.filter.FilteredComparisonResultSet;
 import jp.sourceforge.stigmata.printer.PrinterManager;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.result.RoundRobinComparisonResultSet;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 import jp.sourceforge.stigmata.ui.swing.actions.SaveAction;
 import jp.sourceforge.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
 import jp.sourceforge.stigmata.utils.AsciiDataWritable;
@@ -53,7 +49,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class RoundRobinComparisonResultPane extends JPanel{
     private static final long serialVersionUID = 2134574576543623L;
@@ -251,7 +246,7 @@ public class RoundRobinComparisonResultPane extends JPanel{
             messages, "savecomparison", new SaveAction(stigmata, new AsciiDataWritable(){
                 @Override
                 public void writeAsciiData(PrintWriter out, String format){
-                    ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
+                    ResultPrinterService service = PrinterManager.getInstance().getService(format);
                     if(service == null){
                         service = PrinterManager.getDefaultFormatService();
                     }

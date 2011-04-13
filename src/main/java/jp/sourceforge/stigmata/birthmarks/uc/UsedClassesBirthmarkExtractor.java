@@ -1,25 +1,21 @@
 package jp.sourceforge.stigmata.birthmarks.uc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 import org.objectweb.asm.ClassWriter;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
-    public UsedClassesBirthmarkExtractor(BirthmarkSpi spi){
+    public UsedClassesBirthmarkExtractor(BirthmarkService spi){
         super(spi);
     }
 
@@ -42,5 +38,10 @@ public class UsedClassesBirthmarkExtractor extends ASMBirthmarkExtractor{
     @Override
     public Birthmark createBirthmark(){
         return new UsedClassesBirthmark(getProvider().getType());
+    }
+
+    @Override
+    public BirthmarkElement buildElement(String value){
+        return new BirthmarkElement(value);
     }
 }

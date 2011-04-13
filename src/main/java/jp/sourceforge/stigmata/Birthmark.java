@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 
 /**
@@ -11,7 +7,6 @@ import java.util.Iterator;
  * The birthmark is native characteristics of a program.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface Birthmark extends Iterable<BirthmarkElement>{
     /**

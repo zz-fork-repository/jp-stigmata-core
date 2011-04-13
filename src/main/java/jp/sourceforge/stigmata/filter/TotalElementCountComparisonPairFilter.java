@@ -1,19 +1,14 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.ComparisonPair;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class TotalElementCountComparisonPairFilter extends AbstractComparisonPairFilter{
     private static final List<Criterion> CRITERIA = new ArrayList<Criterion>();
@@ -31,7 +26,7 @@ public class TotalElementCountComparisonPairFilter extends AbstractComparisonPai
     private int threshold = 0;
     private FilterTarget target;
 
-    public TotalElementCountComparisonPairFilter(ComparisonPairFilterSpi service){
+    public TotalElementCountComparisonPairFilter(ComparisonPairFilterService service){
         super(service);
     }
 

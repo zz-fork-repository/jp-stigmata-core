@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -21,7 +17,6 @@ import javax.swing.plaf.metal.MetalComboBoxIcon;
  * Popup button.
  * 
  * @author tamada
- * @version $Revision$ 
  */
 public class PopupButton extends JPanel{
     private static final long serialVersionUID = -4428839967597028837L;

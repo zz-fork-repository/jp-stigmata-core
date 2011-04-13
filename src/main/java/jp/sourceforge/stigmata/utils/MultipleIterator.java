@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,7 +9,6 @@ import java.util.NoSuchElementException;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class MultipleIterator<T> implements Iterator<T>{
     private List<Iterator<T>> iterators = new ArrayList<Iterator<T>>();

@@ -1,10 +1,6 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +9,6 @@ import org.junit.Test;
 /**
  * test case.
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class StigmataTest{
     private BirthmarkContext context;
@@ -32,12 +27,11 @@ public class StigmataTest{
         Assert.assertNotNull(environment.getService("cvfv"));
         Assert.assertNotNull(environment.getService("is"));
         Assert.assertNotNull(environment.getService("uc"));
-        Assert.assertNotNull(environment.getService("kgram"));
     }
 
     @Test
     public void checkSmcBirthmarkService() throws Exception{
-        BirthmarkSpi service = environment.getService("smc");
+        BirthmarkService service = environment.getService("smc");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -53,7 +47,7 @@ public class StigmataTest{
 
     @Test
     public void checkCvfvBirthmarkService() throws Exception{
-        BirthmarkSpi service = environment.getService("cvfv");
+        BirthmarkService service = environment.getService("cvfv");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -69,7 +63,7 @@ public class StigmataTest{
 
     @Test
     public void checkIsBirthmarkService() throws Exception{
-        BirthmarkSpi service = environment.getService("is");
+        BirthmarkService service = environment.getService("is");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -85,7 +79,7 @@ public class StigmataTest{
 
     @Test
     public void checkUcBirthmarkService() throws Exception{
-        BirthmarkSpi service = environment.getService("uc");
+        BirthmarkService service = environment.getService("uc");
 
         Assert.assertNotNull(service.getComparator());
         Assert.assertNotNull(service.getExtractor());
@@ -95,22 +89,6 @@ public class StigmataTest{
         );
         Assert.assertEquals(
             "jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor",
-            service.getExtractor().getClass().getName()
-        );
-    }
-
-    @Test
-    public void checkKgramBirthmarkService() throws Exception{
-        BirthmarkSpi service = environment.getService("kgram");
-
-        Assert.assertNotNull(service.getComparator());
-        Assert.assertNotNull(service.getExtractor());
-        Assert.assertEquals(
-            "jp.sourceforge.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparator",
-            service.getComparator().getClass().getName()
-        );
-        Assert.assertEquals(
-            "jp.sourceforge.stigmata.birthmarks.kgram.KGramBasedBirthmarkExtractor",
             service.getExtractor().getClass().getName()
         );
     }

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.smc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
@@ -17,7 +13,6 @@ import org.objectweb.asm.MethodVisitor;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public SequentialMethodCallBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){

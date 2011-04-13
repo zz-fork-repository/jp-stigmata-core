@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
@@ -11,7 +7,6 @@ import org.junit.Test;
 
 /**
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class ServiceListTest{
     private BirthmarkEnvironment env;
@@ -27,7 +22,6 @@ public class ServiceListTest{
         assertNotNull(env.getService("fmc"));
         assertNotNull(env.getService("fuc"));
         assertNotNull(env.getService("is"));
-        assertNotNull(env.getService("kgram"));
         assertNotNull(env.getService("smc"));
         assertNotNull(env.getService("uc"));
         assertNotNull(env.getService("cvfv_dp"));

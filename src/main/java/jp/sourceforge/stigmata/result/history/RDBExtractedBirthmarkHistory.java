@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result.history;
 
-/*
- * $Id$
- */
-
 import java.sql.SQLException;
 import java.util.Iterator;
 
@@ -19,7 +15,6 @@ import org.apache.commons.dbutils.QueryRunner;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class RDBExtractedBirthmarkHistory implements ExtractedBirthmarkHistory{
     private DataSource source;

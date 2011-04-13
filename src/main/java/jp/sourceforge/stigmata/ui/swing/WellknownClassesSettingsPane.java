@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -43,7 +39,6 @@ import jp.sourceforge.talisman.i18n.Messages;
  * Well-known classes judge rules management pane.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class WellknownClassesSettingsPane extends JPanel{
     private static final long serialVersionUID = 329734546345634532L;

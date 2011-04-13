@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -12,7 +8,6 @@ import java.util.ResourceBundle;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class LocalizedDescriptionManager{
     public static enum ServiceCategory{

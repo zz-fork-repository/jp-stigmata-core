@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -40,7 +36,6 @@ import jp.sourceforge.talisman.i18n.Messages;
  * Utility routines for building GUI.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class GUIUtility{
     private GUIUtility(){

@@ -1,29 +1,25 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.BirthmarkExtractionFailedException;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
 import jp.sourceforge.stigmata.ExtractionUnit;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * Abstract class for extracting birthmark.
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     /**
      * provider.
      */
-    private BirthmarkSpi spi;
+    private BirthmarkService spi;
 
     /**
      * default constructor.
@@ -36,7 +32,7 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
      * constructor.
      * @param spi service provider.
      */
-    public AbstractBirthmarkExtractor(BirthmarkSpi spi){
+    public AbstractBirthmarkExtractor(BirthmarkService spi){
         this.spi = spi;
     }
 
@@ -44,8 +40,12 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
      * returns the provider of this extractor.
      */
     @Override
-    public BirthmarkSpi getProvider(){
+    public BirthmarkService getProvider(){
         return spi;
+    }
+
+    public final Birthmark extract(InputStream in) throws BirthmarkExtractionFailedException{
+        return extract(createBirthmark(), in, new BirthmarkContext(BirthmarkEnvironment.getDefaultEnvironment()));
     }
 
     /**

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,7 +7,6 @@ import java.util.Map;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class WarningMessages{
     private OperationType type;

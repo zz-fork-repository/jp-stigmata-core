@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 
 import jp.sourceforge.stigmata.ComparisonResultSet;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.ComparisonResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface ComparisonResultSetPrinter{
     public void printResult(PrintWriter out, ComparisonResultSet resultset);

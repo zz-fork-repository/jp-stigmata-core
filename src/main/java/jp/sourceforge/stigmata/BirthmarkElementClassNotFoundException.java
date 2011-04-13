@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +7,6 @@ import java.util.List;
  * Thrown if extracting birthmark is failed to find a class definition.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkElementClassNotFoundException extends
                BirthmarkExtractionFailedException {

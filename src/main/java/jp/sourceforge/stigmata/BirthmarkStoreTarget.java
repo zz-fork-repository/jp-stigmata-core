@@ -4,16 +4,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * $Id$
- */
-
 /**
  * This class represents how to store extracted birthmarks.
  * memory?, databases?, or files?
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkStoreTarget implements Serializable, Comparable<BirthmarkStoreTarget>{
     private static final long serialVersionUID = -4225861589804166362L;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
@@ -15,7 +11,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class AboutAction extends ShowTextAction{
     private static final long serialVersionUID = -7060581883871662749L;

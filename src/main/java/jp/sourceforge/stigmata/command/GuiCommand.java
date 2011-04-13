@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.Stigmata;
@@ -14,7 +10,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class GuiCommand extends AbstractStigmataCommand{
     @Override

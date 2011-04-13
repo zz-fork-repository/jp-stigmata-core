@@ -1,20 +1,16 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkComparatorService;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * SPI of {@link BirthmarkComparator <code>BirthmarkComparator</code>}.
  * Comparing birthmarks by logical AND algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
-public class LogicalAndBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
+public class LogicalAndBirthmarkComparatorService implements BirthmarkComparatorService{
     /**
      * returns a type of the birthmark this service provides.
      */
@@ -23,17 +19,17 @@ public class LogicalAndBirthmarkComparatorService extends AbstractBirthmarkCompa
         return "and";
     }
 
-    @Override
-    public String getComparatorClassName(){
-        return LogicalAndBirthmarkComparator.class.getName();
-    }
-
     /**
      * returns a extractor for the birthmark of this service.
      */
     @Override
-    public BirthmarkComparator getComparator(BirthmarkSpi service){
+    public BirthmarkComparator getComparator(BirthmarkService service){
         return new LogicalAndBirthmarkComparator(service);
+    }
+
+    @Override
+    public String getDescription(){
+        return "Logical And Comparator";
     }
 }
 

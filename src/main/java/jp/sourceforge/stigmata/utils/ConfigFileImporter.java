@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -19,7 +15,8 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.ComparisonPairFilterSet;
 import jp.sourceforge.stigmata.Stigmata;
-import jp.sourceforge.stigmata.birthmarks.BirthmarkService;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
+import jp.sourceforge.stigmata.spi.ReflectedBirthmarkService;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -29,7 +26,6 @@ import org.xml.sax.helpers.DefaultHandler;
  * configuration file parser.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConfigFileImporter{
     private BirthmarkEnvironment environment;
@@ -65,7 +61,7 @@ public class ConfigFileImporter{
     private static class Handler extends DefaultHandler{
         private BirthmarkEnvironment environment;
         private WellknownClassManager manager;
-        private BirthmarkService service;
+        private Map<String, String> serviceMap;
         private ComparisonPairFilterSet filter;
         private Part part;
         private boolean exclude;
@@ -104,8 +100,6 @@ public class ConfigFileImporter{
             }
             else if(qname.equals("birthmark-service")){
                 part = Part.SERVICES;
-                service = new BirthmarkService();
-                service.setUserDefined(false);
             }
             else if(qname.equals("filterset-list")){
                 part = Part.FILTER_SET;
@@ -168,23 +162,16 @@ public class ConfigFileImporter{
                 }
                 else if(part == Part.CLASSPATH && qname.equals("classpath")){
                     try{
-                        environment.getClasspathContext().addClasspath(
-                                new URL(value));
+                        environment.getClasspathContext().addClasspath(new URL(value));
                     }catch(MalformedURLException e){
                         throw new SAXException(e);
                     }
                 }
                 else if(part == Part.SERVICES){
-                    if(qname.equals("type"))
-                        service.setType(value);
-                    else if(qname.equals("display-name"))
-                        service.setDisplayType(value);
-                    else if(qname.equals("description"))
-                        service.setDescription(value);
-                    else if(qname.equals("extractor"))
-                        service.setExtractorClassName(value);
-                    else if(qname.equals("comparator"))
-                        service.setComparatorClassName(value);
+                    if(serviceMap == null){
+                        serviceMap = new HashMap<String, String>();
+                    }
+                    serviceMap.put(qname, value);
                 }
                 else if(part == Part.FILTER_SET){
                     if(qname.equals("name")){
@@ -219,8 +206,13 @@ public class ConfigFileImporter{
         @Override
         public void endElement(String uri, String localname, String qname){
             if(part == Part.SERVICES && qname.equals("birthmark-service")){
+                BirthmarkService service = new ReflectedBirthmarkService(
+                    serviceMap.get("type"),
+                    serviceMap.get("description"),
+                    serviceMap.get("extractor"),
+                    serviceMap.get("comparator")
+                );
                 environment.addService(service);
-                service = null;
             }
             else if(part == Part.FILTER_DEFINITION && qname.equals("filter")){
                 ComparisonPairFilter f = environment.getFilterManager().buildFilter(

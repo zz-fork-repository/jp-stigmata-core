@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.util.Iterator;
 
@@ -17,12 +13,11 @@ import jp.sourceforge.stigmata.event.BirthmarkEngineAdapter;
 import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
 import jp.sourceforge.stigmata.event.WarningMessages;
 import jp.sourceforge.stigmata.printer.ComparisonResultSetPrinter;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class CompareCommand extends AbstractStigmataCommand{
     @Override
@@ -56,7 +51,7 @@ public class CompareCommand extends AbstractStigmataCommand{
                 resultset = engine.filter(resultset);
             }
 
-            ResultPrinterSpi spi = stigmata.getPrinterManager().getService(context.getFormat());
+            ResultPrinterService spi = stigmata.getPrinterManager().getService(context.getFormat());
             ComparisonResultSetPrinter formatter = spi.getComparisonResultSetPrinter();
             formatter.printResult(new PrintWriter(System.out), resultset);
         }catch(Exception e){

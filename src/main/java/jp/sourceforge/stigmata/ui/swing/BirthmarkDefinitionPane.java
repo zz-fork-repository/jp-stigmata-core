@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -32,16 +28,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
-import jp.sourceforge.stigmata.birthmarks.BirthmarkService;
-import jp.sourceforge.stigmata.spi.BirthmarkComparatorSpi;
-import jp.sourceforge.stigmata.spi.BirthmarkExtractorSpi;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkComparatorService;
+import jp.sourceforge.stigmata.spi.BirthmarkExtractorService;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
+import jp.sourceforge.stigmata.spi.ReflectedBirthmarkService;
 import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkDefinitionPane extends JPanel{
     private static final long serialVersionUID = 3932637653297802978L;
@@ -52,7 +47,7 @@ public class BirthmarkDefinitionPane extends JPanel{
     private JList serviceList;
     private JButton newService;
     private JButton removeService;
-    private List<BirthmarkSpi> addedService = new ArrayList<BirthmarkSpi>();
+    private List<BirthmarkService> addedService = new ArrayList<BirthmarkService>();
     private List<BirthmarkServiceListener> listeners = new ArrayList<BirthmarkServiceListener>();
 
     public BirthmarkDefinitionPane(StigmataFrame stigmata){
@@ -73,17 +68,14 @@ public class BirthmarkDefinitionPane extends JPanel{
     }
 
     public void reset(){
-        for(BirthmarkSpi service: addedService){
+        for(BirthmarkService service: addedService){
             model.removeElement(service);
         }
     }
 
     public void updateEnvironment(BirthmarkEnvironment environment){
-        for(BirthmarkSpi service: addedService){
+        for(BirthmarkService service: addedService){
             if(environment.getService(service.getType()) == null){
-                if(service instanceof BirthmarkService){
-                    ((BirthmarkService)service).setBirthmarkEnvironment(environment);
-                }
                 environment.addService(service);
             }
         }
@@ -93,7 +85,7 @@ public class BirthmarkDefinitionPane extends JPanel{
         information.initData();
         model.addElement(stigmata.getMessages().get("newservice.definition.label"));
 
-        for(BirthmarkSpi service: stigmata.getEnvironment().findServices()){
+        for(BirthmarkService service: stigmata.getEnvironment().findServices()){
             model.addElement(service);
         }
     }
@@ -151,7 +143,7 @@ public class BirthmarkDefinitionPane extends JPanel{
     private void removeService(){
         int index = serviceList.getSelectedIndex();
         if(index > 0){
-            BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(index);
+            BirthmarkService service = (BirthmarkService)model.getElementAt(index);
             if(service != null && service.isUserDefined()){
                 model.remove(index);
                 for(BirthmarkServiceListener listener: listeners){
@@ -178,7 +170,7 @@ public class BirthmarkDefinitionPane extends JPanel{
     private void listValueChanged(ListSelectionEvent e){
         int index = serviceList.getSelectedIndex();
         if(index > 0){
-            BirthmarkSpi service = (BirthmarkSpi)model.getElementAt(index);
+            BirthmarkService service = (BirthmarkService)model.getElementAt(index);
             if(service != null){
                 information.setService(service);
             }
@@ -197,9 +189,9 @@ public class BirthmarkDefinitionPane extends JPanel{
     private void updateView(){
         int index = serviceList.getSelectedIndex();
         ListModel model = serviceList.getModel();
-        BirthmarkSpi service = null;
+        BirthmarkService service = null;
         if(index > 0){
-            service = (BirthmarkSpi)model.getElementAt(index); 
+            service = (BirthmarkService)model.getElementAt(index); 
         }
         newService.setEnabled(
             (index <= 0 || service.isUserDefined()) && 
@@ -211,7 +203,7 @@ public class BirthmarkDefinitionPane extends JPanel{
     }
 
     private boolean isAvailableServiceName(String name){
-        for(BirthmarkSpi service: addedService){
+        for(BirthmarkService service: addedService){
             if(service.getType().equals(name)){
                 return false;
             }
@@ -225,7 +217,6 @@ public class BirthmarkDefinitionPane extends JPanel{
         private StigmataFrame stigmata;
         private BirthmarkDefinitionPane thisPane;
         private JTextField type;
-        private JTextField displayType;
         private JTextArea description;
         private JComboBox extractor;
         private JComboBox comparator;
@@ -247,27 +238,23 @@ public class BirthmarkDefinitionPane extends JPanel{
             super.setEnabled(flag);
 
             type.setEnabled(flag);
-            displayType.setEnabled(flag);
             description.setEnabled(flag);
             extractor.setEnabled(flag);
             comparator.setEnabled(flag);
         }
 
         public BirthmarkService createService(){
-            BirthmarkService service = new BirthmarkService();
-            service.setType(type.getText());
-            service.setDisplayType(displayType.getText());
-            service.setDescription(description.getText());
-            service.setExtractorClassName(extractor.getSelectedItem().toString());
-            service.setComparatorClassName(comparator.getSelectedItem().toString());
-            service.setUserDefined(true);
+            BirthmarkService service = new ReflectedBirthmarkService(
+                type.getText(), description.getText(),
+                extractor.getSelectedItem().toString(),
+                comparator.getSelectedItem().toString()
+            );
 
             return service;
         }
 
         public void clear(){
             type.setText("");
-            displayType.setText("");
             description.setText("");
             extractor.getModel().setSelectedItem(null);
             comparator.getModel().setSelectedItem(null);
@@ -290,7 +277,6 @@ public class BirthmarkDefinitionPane extends JPanel{
             BirthmarkEnvironment environment = stigmata.getEnvironment();
 
             boolean flag = newType.length() > 0
-                    && displayType.getText().length() > 0
                     && extractorClass.length() > 0
                     && comparatorClass.length() > 0;
 
@@ -305,12 +291,11 @@ public class BirthmarkDefinitionPane extends JPanel{
             return flag;
         }
 
-        public void setService(BirthmarkSpi service){
+        public void setService(BirthmarkService service){
             type.setText(service.getType());
-            displayType.setText(service.getDisplayType());
-            description.setText(service.getDefaultDescription());
-            selectComboBoxItem(extractor, service.getExtractorClassName());
-            selectComboBoxItem(comparator, service.getComparatorClassName());
+            description.setText(service.getDescription());
+            selectComboBoxItem(extractor, service.getExtractor().getClass().getName());
+            selectComboBoxItem(comparator, service.getComparator().getClass().getName());
             userDefined.setSelected(service.isUserDefined());
             experimental.setSelected(service.isExperimental());
 
@@ -319,14 +304,16 @@ public class BirthmarkDefinitionPane extends JPanel{
 
         public void initData(){
             comparator.addItem("");
-            for(Iterator<BirthmarkComparatorSpi> i = stigmata.getEnvironment().lookupProviders(BirthmarkComparatorSpi.class); i.hasNext();){
-                BirthmarkComparatorSpi service = i.next();
-                comparator.addItem(service.getComparatorClassName());
+            for(Iterator<BirthmarkComparatorService> i = stigmata.getEnvironment().lookupProviders(BirthmarkComparatorService.class); i.hasNext();){
+                BirthmarkComparatorService service = i.next();
+                comparator.addItem(service.getType());
+                // TODO: 比較器の名前を引っ張る方法を考える．
             }
             extractor.addItem("");
-            for(Iterator<BirthmarkExtractorSpi> i = stigmata.getEnvironment().lookupProviders(BirthmarkExtractorSpi.class); i.hasNext();){
-                BirthmarkExtractorSpi service = i.next();
-                extractor.addItem(service.getExtractorClassName());
+            for(Iterator<BirthmarkExtractorService> i = stigmata.getEnvironment().lookupProviders(BirthmarkExtractorService.class); i.hasNext();){
+                BirthmarkExtractorService service = i.next();
+                extractor.addItem(service.getType());
+                // TODO: 考える．
             }
         }
 
@@ -337,7 +324,6 @@ public class BirthmarkDefinitionPane extends JPanel{
         private void initLayouts(){
             Messages messages = stigmata.getMessages();
             type = new JTextField();
-            displayType = new JTextField();
             extractor = new JComboBox();
             comparator = new JComboBox();
             experimental = new JCheckBox(messages.get("define.experimental.label"));
@@ -345,14 +331,12 @@ public class BirthmarkDefinitionPane extends JPanel{
             description = new JTextArea();
             JScrollPane scroll = new JScrollPane(description);
             type.setColumns(10);
-            displayType.setColumns(20);
             description.setColumns(40);
             description.setRows(10);
 
             JPanel typePane = new JPanel(new BorderLayout());
             JPanel displayTypePane = new JPanel(new BorderLayout());
             typePane.add(type, BorderLayout.CENTER);
-            displayTypePane.add(displayType, BorderLayout.CENTER);
 
             JPanel box1 = new JPanel(new BorderLayout());
             box1.add(typePane, BorderLayout.WEST);
@@ -414,7 +398,6 @@ public class BirthmarkDefinitionPane extends JPanel{
             };
 
             type.getDocument().addDocumentListener(listener);
-            displayType.getDocument().addDocumentListener(listener);
             description.getDocument().addDocumentListener(listener);
             ItemListener itemListener = new ItemListener(){
                 @Override

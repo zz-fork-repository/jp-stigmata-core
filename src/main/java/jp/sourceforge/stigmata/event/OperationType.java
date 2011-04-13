@@ -1,13 +1,8 @@
 package jp.sourceforge.stigmata.event;
 
-/*
- * $Id$
- */
-
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public enum OperationType{
     CONFIGURATION,

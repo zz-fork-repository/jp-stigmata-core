@@ -1,8 +1,5 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -12,8 +9,8 @@ import java.util.Map;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.ComparisonPairFilterSet;
-import jp.sourceforge.stigmata.birthmarks.BirthmarkService;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
+import jp.sourceforge.stigmata.spi.ReflectedBirthmarkService;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -21,7 +18,6 @@ import org.apache.commons.beanutils.BeanUtils;
  * Export birthmark environment to xml file.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConfigFileExporter{
     private BirthmarkEnvironment environment;
@@ -35,17 +31,21 @@ public class ConfigFileExporter{
     }
 
     public void export(PrintWriter out) throws IOException{
-        out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        out.println("<stigmata>");
+        try{
+            out.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            out.println("<stigmata>");
 
-        exportServices(out);
-        exportFilters(out);
-        exportWellknownClasses(out);
-        exportClasspath(out);
-        exportProperties(out);
+            exportServices(out);
+            exportFilters(out);
+            exportWellknownClasses(out);
+            exportClasspath(out);
+            exportProperties(out);
 
-        out.println("</stigmata>");
-        out.flush();
+            out.println("</stigmata>");
+            out.flush();
+        } finally{
+            out.close();
+        }
     }
 
     private void exportProperties(PrintWriter out) throws IOException{
@@ -160,14 +160,16 @@ public class ConfigFileExporter{
 
     private void exportServices(PrintWriter out) throws IOException{
         out.println("  <birthmark-services>");
-        for(BirthmarkSpi service: environment.getServices()){
+        for(BirthmarkService service: environment.getServices()){
             if(service.isExperimental() && service instanceof BirthmarkService){
                 out.println("    <birthmark-service>");
                 out.printf("      <type>%s</type>%n", service.getType());
-                out.printf("      <display-name>%s</display-name>%n", service.getDisplayType());
-                out.printf("      <description>%s</description>%n", service.getDescription());
-                out.printf("      <extractor>%s</extractor>%n", service.getExtractorClassName());
-                out.printf("      <comparator>%s</comparator>%n", service.getComparatorClassName());
+                if(service instanceof ReflectedBirthmarkService){
+                    ReflectedBirthmarkService rbs = (ReflectedBirthmarkService)service;
+                    out.printf("      <description>%s</description>%n", rbs.getDescription());
+                    out.printf("      <extractor>%s</extractor>%n", rbs.getExtractorClassName());
+                    out.printf("      <comparator>%s</comparator>%n", rbs.getComparatorClassName());
+                }
                 out.println("    </birthmark-service>");
             }
         }

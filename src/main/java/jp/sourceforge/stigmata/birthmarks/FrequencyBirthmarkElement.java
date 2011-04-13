@@ -1,15 +1,10 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkElement;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class FrequencyBirthmarkElement extends BirthmarkElement implements ValueCountable{
     private static final long serialVersionUID = 4454345943098520436L;

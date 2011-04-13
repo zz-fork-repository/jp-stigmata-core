@@ -1,19 +1,14 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.sourceforge.stigmata.ComparisonPair;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter{
     private static final double EQUALS_THRESHOLD = 5E-5;
@@ -30,7 +25,7 @@ public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter
 
     private double threshold;
 
-    public SimilarityComparisonPairFilter(ComparisonPairFilterSpi service){
+    public SimilarityComparisonPairFilter(ComparisonPairFilterService service){
         super(service);
         setThreshold(0.8d);
     }

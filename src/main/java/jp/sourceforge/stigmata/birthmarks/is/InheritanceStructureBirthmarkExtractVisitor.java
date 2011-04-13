@@ -1,24 +1,23 @@
 package jp.sourceforge.stigmata.birthmarks.is;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
 import jp.sourceforge.stigmata.birthmarks.NullBirthmarkElement;
+import jp.sourceforge.stigmata.digger.ClassFileEntry;
+import jp.sourceforge.stigmata.digger.ClasspathContext;
 import jp.sourceforge.stigmata.utils.WellknownClassManager;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+
 
 /**
  * 
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public InheritanceStructureBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark, BirthmarkContext context){
@@ -28,14 +27,42 @@ public class InheritanceStructureBirthmarkExtractVisitor extends BirthmarkExtrac
     @Override
     public void visit(int version, int access, String name, String signature,
                       String superName, String[] interfaces){
-        try {
-            Class<?> c = getEnvironment().getClasspathContext().findClass(name.replace('/', '.'));
-            if(c != null && !c.isInterface()){
-                addISBirthmark(c);
+        if((access & Opcodes.ACC_INTERFACE) != Opcodes.ACC_INTERFACE){
+            ClasspathContext context = getEnvironment().getClasspathContext();
+            name = name.replace('/', '.');
+            ClassFileEntry entry = context.findEntry(name);
+            if(entry == null){
+                superName = superName.replace('/', '.');
+                ClassFileEntry parent = context.findEntry(superName);
+                if(parent != null){
+                    addIsBirthmark(name);
+                    addIsBirthmark(superName);
+                }
+                else{
+                    addFailur(new ClassNotFoundException(superName));
+                }
             }
-        } catch (ClassNotFoundException ex){
-            addFailur(ex);
+            else{
+                try{
+                    Class<?> clazz = context.findClass(name);
+                    addISBirthmark(clazz);
+                } catch(ClassNotFoundException e){
+                    addFailur(e);
+                }
+            }
         }
+    }
+
+    private void addIsBirthmark(String className){
+        WellknownClassManager wcm = getEnvironment().getWellknownClassManager();
+        BirthmarkElement element;
+        if(wcm.isWellKnownClass(className)){
+            element = new BirthmarkElement(className);
+        }
+        else{
+            element = NullBirthmarkElement.getInstance();
+        }
+        addElement(element);
     }
 
     private void addISBirthmark(Class<?> c){

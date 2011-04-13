@@ -1,16 +1,11 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 /**
  * This enum represents birthmark comparison method. let <it>X</it> be a set of
  * target <it>{ x1, x2, ..., xn, }</it> and <it>Y</it> be a set of target
  * <it>{ y1, y2, ..., ym, }</it>.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public enum ComparisonMethod{
     /**

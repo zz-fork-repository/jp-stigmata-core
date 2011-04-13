@@ -4,7 +4,6 @@
   <birthmark-services>
     <birthmark-service>
       <type>uc_seq</type>
-      <display-name>Used Classes (compare as sequence)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor
@@ -16,7 +15,6 @@
 
     <birthmark-service>
       <type>uc_dp</type>
-      <display-name>Used Classes (DP matching)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor
@@ -28,7 +26,6 @@
 
     <birthmark-service>
       <type>uc_ed</type>
-      <display-name>Used Classes (Edit distance)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractor
@@ -40,7 +37,6 @@
 
     <birthmark-service>
       <type>is_ed</type>
-      <display-name>Inheritance Structure (Edit distance)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.is.InheritanceStructureBirthmarkExtractor
@@ -52,7 +48,6 @@
 
     <birthmark-service>
       <type>is_dp</type>
-      <display-name>Inheritance Structure (DP matching)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.is.InheritanceStructureBirthmarkExtractor
@@ -64,7 +59,6 @@
 
     <birthmark-service>
       <type>smc_dp</type>
-      <display-name>Sequence of Method Calls (DP matching)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor
@@ -76,7 +70,6 @@
 
     <birthmark-service>
       <type>smc_ed</type>
-      <display-name>Sequence of Method Calls (Edit distance)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractor
@@ -88,7 +81,6 @@
 
     <birthmark-service>
       <type>cvfv_ed</type>
-      <display-name>Constant Value of Field Variable (Edit distance)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor
@@ -100,7 +92,6 @@
 
     <birthmark-service>
       <type>cvfv_dp</type>
-      <display-name>Constant Value of Field Variable (DP matching)</display-name>
       <description></description>
       <extractor>
         jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractor

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +14,6 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ChangeColorAction extends AbstractAction{
     private static final long serialVersionUID = -7617597154707466764L;

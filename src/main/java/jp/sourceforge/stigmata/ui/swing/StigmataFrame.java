@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -75,7 +71,6 @@ import org.apache.commons.cli.ParseException;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class StigmataFrame extends JFrame{
     private static final long serialVersionUID = 92345543665342134L;

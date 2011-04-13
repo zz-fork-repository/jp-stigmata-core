@@ -1,18 +1,13 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public interface BirthmarkServiceListener{
-    public void serviceAdded(BirthmarkSpi service);
+    public void serviceAdded(BirthmarkService service);
 
-    public void serviceRemoved(BirthmarkSpi service);
+    public void serviceRemoved(BirthmarkService service);
 }

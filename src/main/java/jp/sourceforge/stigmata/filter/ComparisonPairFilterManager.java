@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,24 +10,23 @@ import java.util.Map;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.ComparisonPairFilterSet;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ComparisonPairFilterManager{
-    private Map<String, ComparisonPairFilterSpi> services = new HashMap<String, ComparisonPairFilterSpi>();
+    private Map<String, ComparisonPairFilterService> services = new HashMap<String, ComparisonPairFilterService>();
     private Map<String, ComparisonPairFilterSet> filters = new HashMap<String, ComparisonPairFilterSet>();
     private ComparisonPairFilterManager parent;
 
     public ComparisonPairFilterManager(BirthmarkEnvironment env, ComparisonPairFilterManager parent){
         this.parent = parent;
-        for(Iterator<ComparisonPairFilterSpi> i = env.lookupProviders(ComparisonPairFilterSpi.class); i.hasNext(); ){
-            ComparisonPairFilterSpi service = i.next();
+        for(Iterator<ComparisonPairFilterService> i = env.lookupProviders(ComparisonPairFilterService.class); i.hasNext(); ){
+            ComparisonPairFilterService service = i.next();
             if(getService(service.getFilterName()) != null){
                 services.put(service.getFilterName(), service);
             }
@@ -39,8 +34,8 @@ public class ComparisonPairFilterManager{
     }
 
     public ComparisonPairFilterManager(BirthmarkEnvironment env){
-        for(Iterator<ComparisonPairFilterSpi> i = env.lookupProviders(ComparisonPairFilterSpi.class); i.hasNext(); ){
-            ComparisonPairFilterSpi service = i.next();
+        for(Iterator<ComparisonPairFilterService> i = env.lookupProviders(ComparisonPairFilterService.class); i.hasNext(); ){
+            ComparisonPairFilterService service = i.next();
             services.put(service.getFilterName(), service);
         }
     }
@@ -127,14 +122,14 @@ public class ComparisonPairFilterManager{
         return null;
     }
 
-    public ComparisonPairFilterSpi removeService(String name){
+    public ComparisonPairFilterService removeService(String name){
         if(parent != null && parent.hasService(name)){
             parent.removeService(name);
         }
         return services.remove(name);
     }
 
-    public void addService(ComparisonPairFilterSpi service){
+    public void addService(ComparisonPairFilterService service){
         if(parent == null || parent.getService(service.getFilterName()) == null){
             services.put(service.getFilterName(), service);
         }
@@ -144,8 +139,8 @@ public class ComparisonPairFilterManager{
         return (parent != null && parent.hasService(name)) || services.get(name) != null;
     }
 
-    public ComparisonPairFilterSpi getService(String name){
-        ComparisonPairFilterSpi service = null;
+    public ComparisonPairFilterService getService(String name){
+        ComparisonPairFilterService service = null;
         if(parent != null){
             service = parent.getService(name);
         }

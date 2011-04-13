@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.Component;
 import java.io.File;
 import java.text.MessageFormat;
@@ -17,7 +13,6 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class FileIOManager{
     private Component parent;

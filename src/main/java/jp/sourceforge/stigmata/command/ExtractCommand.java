@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.util.Iterator;
 
@@ -16,12 +12,11 @@ import jp.sourceforge.stigmata.event.BirthmarkEngineAdapter;
 import jp.sourceforge.stigmata.event.BirthmarkEngineEvent;
 import jp.sourceforge.stigmata.event.WarningMessages;
 import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class ExtractCommand extends AbstractStigmataCommand{
     @Override
@@ -51,7 +46,7 @@ public class ExtractCommand extends AbstractStigmataCommand{
             });
             ExtractionResultSet ers = engine.extract(args, context);
 
-            ResultPrinterSpi spi = stigmata.getPrinterManager().getService(context.getFormat());
+            ResultPrinterService spi = stigmata.getPrinterManager().getService(context.getFormat());
             ExtractionResultSetPrinter formatter = spi.getExtractionResultSetPrinter();
             formatter.printResult(new PrintWriter(System.out), ers);
         }catch(Exception ex){

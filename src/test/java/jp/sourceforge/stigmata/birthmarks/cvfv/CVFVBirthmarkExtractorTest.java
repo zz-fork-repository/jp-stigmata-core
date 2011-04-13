@@ -1,15 +1,15 @@
 package jp.sourceforge.stigmata.birthmarks.cvfv;
 
-/*
- * $Id$
- */
+import java.io.FileInputStream;
 
 import jp.sourceforge.stigmata.Birthmark;
-import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.BirthmarkSet;
-import jp.sourceforge.stigmata.ExtractionResultSet;
-import jp.sourceforge.stigmata.Stigmata;
+import jp.sourceforge.stigmata.BirthmarkEnvironment;
+import jp.sourceforge.stigmata.BirthmarkExtractor;
+import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule;
+import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule.MatchPartType;
+import jp.sourceforge.stigmata.utils.WellknownClassJudgeRule.MatchType;
+import jp.sourceforge.stigmata.utils.WellknownClassManager;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,92 +18,35 @@ import org.junit.Test;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class CVFVBirthmarkExtractorTest{
-    private Stigmata stigmata;
-    private BirthmarkContext context;
+    private BirthmarkExtractor extractor; 
 
     @Before
     public void setup(){
-        stigmata = Stigmata.getInstance();
-        context = stigmata.createContext();
-        context.addBirthmarkType("cvfv");
+        extractor = new ConstantValueOfFieldVariableBirthmarkService().getExtractor();
+        BirthmarkEnvironment env = BirthmarkEnvironment.getDefaultEnvironment();
+        WellknownClassManager manager = env.getWellknownClassManager();
+        manager.add(new WellknownClassJudgeRule("java.", MatchType.PREFIX, MatchPartType.FULLY_NAME));
+        manager.add(new WellknownClassJudgeRule("javax.", MatchType.PREFIX, MatchPartType.FULLY_NAME));
     }
 
+
     @Test
-    public void checkCVFVBirthmark() throws Exception{
-        ExtractionResultSet ers = stigmata.createEngine().extract(
-            new String[] { "target/classes/jp/sourceforge/stigmata/Stigmata.class", },
-            context
-        );
-        BirthmarkSet[] array = ers.getBirthmarkSets();
-
-        Assert.assertEquals(1, array.length);
-        Assert.assertNotNull(array[0].getBirthmark("cvfv"));
-
-        Birthmark birthmark = array[0].getBirthmark("cvfv");
+    public void checkBirthmark() throws Exception{
+        Birthmark birthmark = extractor.extract(new FileInputStream("target/test-classes/resources/HelloWorldFrame.class"));
         Assert.assertEquals("cvfv", birthmark.getType());
-        Assert.assertEquals(4, birthmark.getElementCount());
 
         BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[0].getClass().getName());
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[1].getClass().getName());
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[2].getClass().getName());
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[3].getClass().getName());
+        Assert.assertEquals(2, elements.length);
 
-        Assert.assertEquals("Ljp/sourceforge/stigmata/Stigmata;",
-            ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
-        Assert.assertNull(((TypeAndValueBirthmarkElement)elements[0]).getValue());
+        Assert.assertTrue(elements[0] instanceof TypeAndValueBirthmarkElement);
+        Assert.assertTrue(elements[1] instanceof TypeAndValueBirthmarkElement);
 
-        Assert.assertEquals("Ljp/sourceforge/stigmata/printer/PrinterManager;",
-            ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
-        Assert.assertNull(((TypeAndValueBirthmarkElement)elements[1]).getValue());
+        Assert.assertEquals("Ljava/lang/String;", ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
+        Assert.assertEquals("Ljava/lang/String;", ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
 
-        Assert.assertEquals("Ljp/sourceforge/stigmata/BirthmarkEnvironment;",
-                            ((TypeAndValueBirthmarkElement)elements[2]).getSignature());
-        Assert.assertNull(((TypeAndValueBirthmarkElement)elements[2]).getValue());
-
-        Assert.assertEquals("Ljava/util/List;",
-                            ((TypeAndValueBirthmarkElement)elements[3]).getSignature());
-        Assert.assertNull(((TypeAndValueBirthmarkElement)elements[3]).getValue());
-    }
-
-    @Test
-    public void checkCVFVBirthmark2() throws Exception{
-        ExtractionResultSet ers = stigmata.createEngine().extract(
-            new String[] { "target/classes/jp/sourceforge/stigmata/result/RoundRobinComparisonResultSet.class", },
-            context
-        );
-
-        BirthmarkSet[] array = ers.getBirthmarkSets();
-
-        Assert.assertEquals(array.length, 1);
-        Assert.assertNotNull(array[0].getBirthmark("cvfv"));
-
-        Birthmark birthmark = array[0].getBirthmark("cvfv");
-        Assert.assertEquals(birthmark.getType(), "cvfv");
-        Assert.assertEquals(3, birthmark.getElementCount());
-
-        BirthmarkElement[] elements = birthmark.getElements();
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[0].getClass().getName());
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[1].getClass().getName());
-        Assert.assertEquals("jp.sourceforge.stigmata.birthmarks.cvfv.TypeAndValueBirthmarkElement",
-                            elements[2].getClass().getName());
-
-        Assert.assertEquals("I",   ((TypeAndValueBirthmarkElement)elements[0]).getSignature());
-        Assert.assertEquals(-1,    ((TypeAndValueBirthmarkElement)elements[0]).getValue());
-
-        Assert.assertEquals("Z",   ((TypeAndValueBirthmarkElement)elements[1]).getSignature());
-        Assert.assertEquals(null,  ((TypeAndValueBirthmarkElement)elements[1]).getValue());
-
-        Assert.assertEquals("Z",   ((TypeAndValueBirthmarkElement)elements[2]).getSignature());
-        Assert.assertEquals(0,     ((TypeAndValueBirthmarkElement)elements[2]).getValue());
+        Assert.assertEquals("Hello World", elements[0].getValue());
+        Assert.assertEquals("Lucida Regular", elements[1].getValue());
     }
 }

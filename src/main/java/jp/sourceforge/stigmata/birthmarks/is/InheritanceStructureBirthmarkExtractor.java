@@ -1,20 +1,17 @@
 package jp.sourceforge.stigmata.birthmarks.is;
 
-/*
- * $Id$
- */
-
 import java.io.IOException;
 import java.io.InputStream;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.BirthmarkElementClassNotFoundException;
 import jp.sourceforge.stigmata.BirthmarkExtractionFailedException;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.AbstractBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -23,10 +20,9 @@ import org.objectweb.asm.ClassWriter;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExtractor{
-    public InheritanceStructureBirthmarkExtractor(BirthmarkSpi spi){
+    public InheritanceStructureBirthmarkExtractor(BirthmarkService spi){
         super(spi);
     }
 
@@ -69,5 +65,10 @@ public class InheritanceStructureBirthmarkExtractor extends AbstractBirthmarkExt
     @Override
     public ExtractionUnit[] getAcceptableUnits(){
         return new ExtractionUnit[] { ExtractionUnit.CLASS, };
+    }
+
+    @Override
+    public BirthmarkElement buildElement(String value){
+        return new BirthmarkElement(value);
     }
 }

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.event.ActionEvent;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -24,7 +20,6 @@ import jp.sourceforge.stigmata.utils.BinaryDataWritable;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class SaveAction extends AbstractAction{
     private static final long serialVersionUID = 1427912047636729211L;

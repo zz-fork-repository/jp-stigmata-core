@@ -1,7 +1,4 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
-/*
- * $Id$
- */
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +10,6 @@ import jp.sourceforge.talisman.mds.ui.swing.GeometoryType;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 class LabelMap{
     private List<String> labels = new ArrayList<String>();

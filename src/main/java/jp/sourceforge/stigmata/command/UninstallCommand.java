@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,14 +12,12 @@ import java.util.regex.Pattern;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.Stigmata;
-import jp.sourceforge.stigmata.birthmarks.BirthmarkService;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 @Deprecated
 public class UninstallCommand extends AbstractStigmataCommand{
@@ -45,7 +39,7 @@ public class UninstallCommand extends AbstractStigmataCommand{
         boolean removeServiceInConfigFile = false;
 
         for(int i = 0; i < args.length; i++){
-            BirthmarkSpi service = env.getService(args[i]);
+            BirthmarkService service = env.getService(args[i]);
             if(service instanceof BirthmarkService){
                 env.removeService(args[i]);
                 removeServiceInConfigFile = true;
@@ -72,7 +66,7 @@ public class UninstallCommand extends AbstractStigmataCommand{
         }
     }
 
-    private String getPluginFileNameOfService(BirthmarkContext context, BirthmarkSpi service){
+    private String getPluginFileNameOfService(BirthmarkContext context, BirthmarkService service){
         Class<?> serviceClass = service.getClass();
         URL location = serviceClass.getResource("/" + serviceClass.getName().replace('.', '/') + ".class");
 

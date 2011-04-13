@@ -1,22 +1,17 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ExtractionResultSet;
 import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkHistory;
 import jp.sourceforge.stigmata.result.history.MemoryExtractedBirthmarkHistory;
-import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
+import jp.sourceforge.stigmata.spi.ExtractedBirthmarkService;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
-public class MemoryExtractedBirthmarkService implements ExtractedBirthmarkSpi{
+public class MemoryExtractedBirthmarkService implements ExtractedBirthmarkService{
     private MemoryExtractedBirthmarkHistory history = new MemoryExtractedBirthmarkHistory();
 
     @Override
@@ -39,6 +34,16 @@ public class MemoryExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     @Override
     public BirthmarkStoreTarget getTarget(){
         return BirthmarkStoreTarget.MEMORY;
+    }
+
+    @Override
+    public String getType(){
+        return "memory";
+    }
+
+    @Override
+    public String getDescription(){
+        return "Store birthmarks in memory";
     }
 
 }

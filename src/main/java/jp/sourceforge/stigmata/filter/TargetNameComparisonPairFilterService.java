@@ -1,17 +1,13 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.ComparisonPairFilter;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
-public class TargetNameComparisonPairFilterService extends AbstractComparisonPairFilterService{
+public class TargetNameComparisonPairFilterService implements ComparisonPairFilterService{
 
     @Override
     public ComparisonPairFilter getFilter(){
@@ -19,12 +15,12 @@ public class TargetNameComparisonPairFilterService extends AbstractComparisonPai
     }
 
     @Override
-    public String getFilterClassName(){
-        return TargetNameComparisonPairFilter.class.getName();
+    public String getFilterName(){
+        return "name";
     }
 
     @Override
-    public String getFilterName(){
-        return "name";
+    public String getDescription(){
+        return "Filtering by Target Name";
     }
 }

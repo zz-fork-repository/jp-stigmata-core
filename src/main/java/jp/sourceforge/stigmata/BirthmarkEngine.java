@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,7 +14,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import jp.sourceforge.stigmata.birthmarks.extractors.BirthmarkExtractorFactory;
 import jp.sourceforge.stigmata.digger.ClassFileArchive;
 import jp.sourceforge.stigmata.digger.ClassFileEntry;
 import jp.sourceforge.stigmata.digger.ClasspathContext;
@@ -36,7 +31,7 @@ import jp.sourceforge.stigmata.hook.Phase;
 import jp.sourceforge.stigmata.hook.StigmataHookManager;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
 import jp.sourceforge.stigmata.result.RoundRobinComparisonResultSet;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * core engine for extracting/comparing/filtering birthmarks.
@@ -44,7 +39,6 @@ import jp.sourceforge.stigmata.spi.BirthmarkSpi;
  * This class is not thread safe.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkEngine{
     private BirthmarkEnvironment environment;
@@ -53,14 +47,12 @@ public class BirthmarkEngine{
     private WarningMessages warnings;
     private OperationType latestOperationType;
     private OperationType targetType;
-    private BirthmarkExtractorFactory factory;
 
     /**
      * constructor.
      */
     public BirthmarkEngine(BirthmarkEnvironment env){
         this.environment = env;
-        factory = new BirthmarkExtractorFactory(env);
     }
 
     /**
@@ -281,7 +273,7 @@ public class BirthmarkEngine{
         String[] target = set.toArray(new String[set.size()]);
         ClassFileArchive[] archives = createArchives(target, environment);
         for(String type: context.getBirthmarkTypes()){
-            BirthmarkSpi service = context.getEnvironment().getService(type);
+            BirthmarkService service = context.getEnvironment().getService(type);
             if(service != null && service.getPreprocessor() != null){
                 BirthmarkPreprocessor preprocessor = service.getPreprocessor();
                 preprocessor.preprocess(archives, context);
@@ -357,18 +349,15 @@ public class BirthmarkEngine{
 
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
                     for(String birthmarkType: context.getBirthmarkTypes()){
-                        try{
-                            BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
-                            if(extractor.isAcceptable(ExtractionUnit.PACKAGE)){
-                                Birthmark b = bs.getBirthmark(extractor.getProvider().getType());
-                                if(b == null){
-                                    b = extractor.createBirthmark();
-                                    bs.addBirthmark(b);
-                                }
-                                extractor.extract(b, new ByteArrayInputStream(data), er.getContext());
+                        BirthmarkService service = getEnvironment().getService(birthmarkType);
+                        BirthmarkExtractor extractor = service.getExtractor();
+                        if(extractor.isAcceptable(ExtractionUnit.PACKAGE)){
+                            Birthmark b = bs.getBirthmark(extractor.getProvider().getType());
+                            if(b == null){
+                                b = extractor.createBirthmark();
+                                bs.addBirthmark(b);
                             }
-                        } catch(ExtractorNotFoundException e){
-                            warnings.addMessage(e, birthmarkType);
+                            extractor.extract(b, new ByteArrayInputStream(data), er.getContext());
                         }
                     }
                 } catch(IOException e){
@@ -405,14 +394,11 @@ public class BirthmarkEngine{
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
 
                     for(String birthmarkType: context.getBirthmarkTypes()){
-                        try{
-                            BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
-                            if(extractor.isAcceptable(ExtractionUnit.CLASS)){
-                                Birthmark b = extractor.extract(new ByteArrayInputStream(data), er.getContext());
-                                birthmarkset.addBirthmark(b);
-                            }
-                        } catch(ExtractorNotFoundException e){
-                            warnings.addMessage(e, birthmarkType);
+                        BirthmarkService service = getEnvironment().getService(birthmarkType);
+                        BirthmarkExtractor extractor = service.getExtractor();
+                        if(extractor.isAcceptable(ExtractionUnit.CLASS)){
+                            Birthmark b = extractor.extract(new ByteArrayInputStream(data), er.getContext());
+                            birthmarkset.addBirthmark(b);
                         }
                     }
                     er.addBirthmarkSet(et, birthmarkset);
@@ -433,19 +419,16 @@ public class BirthmarkEngine{
                 try{
                     byte[] data = inputStreamToByteArray(entry.getLocation().openStream());
                     for(String birthmarkType: context.getBirthmarkTypes()){
-                        try{
-                            BirthmarkExtractor extractor = factory.getExtractor(birthmarkType);
-                            if(extractor.isAcceptable(ExtractionUnit.ARCHIVE)){
-                                Birthmark b = birthmarkset.getBirthmark(birthmarkType);
-                                if(b == null){
-                                    b = extractor.createBirthmark();
-                                    birthmarkset.addBirthmark(b);
-                                }
-                                extractor.extract(b, new ByteArrayInputStream(data), er.getContext());
+                        BirthmarkService service = getEnvironment().getService(birthmarkType);
+                        BirthmarkExtractor extractor = service.getExtractor();
+                        if(extractor.isAcceptable(ExtractionUnit.ARCHIVE)){
+                            Birthmark b = birthmarkset.getBirthmark(birthmarkType);
+                            if(b == null){
+                                b = extractor.createBirthmark();
+                                birthmarkset.addBirthmark(b);
                             }
-                        } catch(ExtractorNotFoundException e){
-                            warnings.addMessage(e, birthmarkType);
-                        } 
+                            extractor.extract(b, new ByteArrayInputStream(data), er.getContext());
+                        }
                     }
                 } catch(IOException e){
                     warnings.addMessage(e, entry.getClassName());

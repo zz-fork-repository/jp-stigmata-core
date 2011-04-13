@@ -1,17 +1,13 @@
 package jp.sourceforge.stigmata.filter;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.ComparisonPairFilter;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
-public class BirthmarkElementCountComparisonPairFilterService extends AbstractComparisonPairFilterService{
+public class BirthmarkElementCountComparisonPairFilterService implements ComparisonPairFilterService{
 
     @Override
     public ComparisonPairFilter getFilter(){
@@ -19,12 +15,12 @@ public class BirthmarkElementCountComparisonPairFilterService extends AbstractCo
     }
 
     @Override
-    public String getFilterClassName(){
-        return BirthmarkElementCountComparisonPairFilter.class.getName();
+    public String getFilterName(){
+        return "elementcount";
     }
 
     @Override
-    public String getFilterName(){
-        return "elementcount";
+    public String getDescription(){
+        return "Element count Filter";
     }
 }

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks.uc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
@@ -21,7 +17,6 @@ import org.objectweb.asm.signature.SignatureWriter;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     public UsedClassesBirthmarkExtractVisitor(ClassVisitor visitor, Birthmark birthmark,
@@ -34,13 +29,9 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             String superName, String[] interfaces){
         addSignatureClass(signature);
 
-        if(getEnvironment().getWellknownClassManager().isWellKnownClass(superName)){
-            add(superName);
-        }
+        addUCElement(superName);
         for(String i: interfaces){
-            if(getEnvironment().getWellknownClassManager().isWellKnownClass(i)){
-                add(i);
-            }
+            addUCElement(i);
         }
     }
 
@@ -60,9 +51,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
                                      String signature, String[] exceptions){
         if(exceptions != null){
             for(String exception: exceptions){
-                if(getEnvironment().getWellknownClassManager().isWellKnownClass(exception)){
-                    add(exception);
-                }
+                addUCElement(exception);
             }
         }
         addMethodDescriptor(desc);
@@ -75,7 +64,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitTypeInsn(int opcode, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
-                    add(desc);
+                    addUCElement(desc);
                 }
                 super.visitTypeInsn(opcode, desc);
             }
@@ -84,7 +73,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitTryCatchBlock(Label start, Label end, Label handle, String desc){
                 Type type = Type.getType("L" + desc + ";");
                 if(checkType(type)){
-                    add(getType(type));
+                    addUCElement(getType(type));
                 }
                 super.visitTryCatchBlock(start, end, handle, desc);
             }
@@ -93,7 +82,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitMultiANewArrayInsn(String desc, int dims){
                 Type type = Type.getType(desc);
                 if(checkType(type)){
-                    add(getType(type));
+                    addUCElement(getType(type));
                 }
                 super.visitMultiANewArrayInsn(desc, dims);
             }
@@ -102,7 +91,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             public void visitLocalVariable(String name, String desc, String signature,
                                            Label start, Label end, int index){
                 if(checkType(Type.getType(desc))){
-                    add(desc);
+                    addUCElement(desc);
                 }
                 addSignatureClass(signature);
 
@@ -111,18 +100,14 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
 
             @Override
             public void visitFieldInsn(int opcode, String owner, String name, String desc){
-                if(getEnvironment().getWellknownClassManager().isWellKnownClass(owner)){
-                    add(owner);
-                }
+                addUCElement(owner);
                 addDescriptor(desc);
                 super.visitFieldInsn(opcode, owner, name, desc);
             }
             @Override
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = normalize(owner);
-                if(getEnvironment().getWellknownClassManager().isWellKnownClass(className)){
-                    add(className);
-                }
+                addUCElement(className);
                 addMethodDescriptor(desc);
                 super.visitMethodInsn(opcode, owner, name, desc);
             }
@@ -135,9 +120,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
             SignatureWriter writer = new SignatureWriter(){
                 @Override
                 public void visitClassType(String classType){
-                    if(getEnvironment().getWellknownClassManager().isWellKnownClass(classType)){
-                        add(classType);
-                    }
+                    addUCElement(classType);
                 }
             };
             in.accept(writer);
@@ -148,11 +131,11 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         Type returnType = Type.getReturnType(desc);
         Type[] args = Type.getArgumentTypes(desc);
         if(checkType(returnType)){
-            add(getType(returnType));
+            addUCElement(getType(returnType));
         }
         for(Type arg: args){
             if(checkType(arg)){
-                add(getType(arg));
+                addUCElement(getType(arg));
             }
         }
     }
@@ -160,7 +143,7 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
     private void addDescriptor(String desc){
         Type type = Type.getType(desc);
         if(checkType(type)){
-            add(desc);
+            addUCElement(desc);
         }
     }
 
@@ -203,7 +186,9 @@ public class UsedClassesBirthmarkExtractVisitor extends BirthmarkExtractVisitor{
         return name;
     }
 
-    private void add(String name){
-        addElement(new BirthmarkElement(normalize(name)));
+    private void addUCElement(String name){
+        if(getEnvironment().getWellknownClassManager().isWellKnownClass(name)){
+            addElement(new BirthmarkElement(normalize(name)));
+        }
     }
 }

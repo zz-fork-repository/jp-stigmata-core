@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -20,7 +16,6 @@ import jp.sourceforge.stigmata.ExtractionUnit;
  * Abstract class for ExtractionResultSet.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public abstract class AbstractExtractionResultSet implements ExtractionResultSet{
     private BirthmarkContext context;

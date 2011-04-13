@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -17,8 +13,8 @@ import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.BirthmarkElementCountComparisonPairFilterService;
 import jp.sourceforge.stigmata.filter.FilterTarget;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListCellRenderer;
 import jp.sourceforge.stigmata.ui.swing.BirthmarkServiceListener;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
@@ -26,13 +22,12 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkElementCountComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService implements BirthmarkServiceListener{
     private Pane pane;
 
     @Override
-    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterService service){
         pane = new Pane(frame, service);
         return pane;
     }
@@ -43,42 +38,42 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
     }
 
     @Override
-    public void serviceAdded(BirthmarkSpi service){
+    public void serviceAdded(BirthmarkService service){
         pane.serviceAdded(service);
     }
 
     @Override
-    public void serviceRemoved(BirthmarkSpi service){
+    public void serviceRemoved(BirthmarkService service){
         pane.serviceRemoved(service);
     }
 
     @Override
-    public ComparisonPairFilterSpi getComparisonPairFilterService(){
+    public ComparisonPairFilterService getComparisonPairFilterService(){
         return new BirthmarkElementCountComparisonPairFilterService();
     }
 
     private static class Pane extends ComparisonPairFilterPane implements BirthmarkServiceListener{
         private static final long serialVersionUID = -6398073942592186671L;
 
-        private ComparisonPairFilterSpi service;
+        private ComparisonPairFilterService service;
         private JComboBox criterionType;
         private JTextField threshold;
         private JComboBox targetType;
         private JComboBox birthmarks;
 
-        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterService service){
             super(frame);
             this.service = service;
             initLayouts();
         }
 
         @Override
-        public void serviceAdded(BirthmarkSpi service){
+        public void serviceAdded(BirthmarkService service){
             birthmarks.addItem(service);
         }
 
         @Override
-        public void serviceRemoved(BirthmarkSpi service){
+        public void serviceRemoved(BirthmarkService service){
             birthmarks.removeItem(service);
         }
 
@@ -149,7 +144,7 @@ public class BirthmarkElementCountComparisonPairFilterComponentService extends A
         }
 
         private String getBirthmarkType(){
-            BirthmarkSpi service = (BirthmarkSpi)birthmarks.getSelectedItem();
+            BirthmarkService service = (BirthmarkService)birthmarks.getSelectedItem();
             if(service != null){
                 return service.getType();
             }

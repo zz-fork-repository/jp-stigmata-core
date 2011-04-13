@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Stigmata;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.StigmataCommand;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.hook.StigmataHookManager;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public abstract class AbstractStigmataCommand implements StigmataCommand{
     /**

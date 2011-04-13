@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.utils.ArrayIterator;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class FrequencyBirthmark extends AbstractBirthmark{
     private static final long serialVersionUID = 1905526895627693908L;

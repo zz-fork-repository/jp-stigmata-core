@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.filter;
 
-/*
- * $Id$
- */
-
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +13,17 @@ import javax.swing.event.DocumentListener;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.SimilarityComparisonPairFilter;
 import jp.sourceforge.stigmata.filter.SimilarityComparisonPairFilterService;
-import jp.sourceforge.stigmata.spi.ComparisonPairFilterSpi;
+import jp.sourceforge.stigmata.spi.ComparisonPairFilterService;
 import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class SimilarityComparisonPairFilterComponentService extends AbstractComparisonPairFilterComponentService{
 
     @Override
-    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterSpi service){
+    public ComparisonPairFilterPane createComponent(StigmataFrame frame, ComparisonPairFilterService service){
         return new Pane(frame, service);
     }
 
@@ -38,17 +33,17 @@ public class SimilarityComparisonPairFilterComponentService extends AbstractComp
     }
 
     @Override
-    public ComparisonPairFilterSpi getComparisonPairFilterService(){
+    public ComparisonPairFilterService getComparisonPairFilterService(){
         return new SimilarityComparisonPairFilterService();
     }
 
     private static class Pane extends ComparisonPairFilterPane{
         private static final long serialVersionUID = 8912037614500713027L;
-        private ComparisonPairFilterSpi service;
+        private ComparisonPairFilterService service;
         private JComboBox criterionType;
         private JTextField threshold;
 
-        public Pane(StigmataFrame frame, ComparisonPairFilterSpi service){
+        public Pane(StigmataFrame frame, ComparisonPairFilterService service){
             super(frame);
             this.service = service;
             initLayouts();

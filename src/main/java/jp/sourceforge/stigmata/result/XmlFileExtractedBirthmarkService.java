@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -12,14 +8,13 @@ import jp.sourceforge.stigmata.BirthmarkStoreTarget;
 import jp.sourceforge.stigmata.ExtractionResultSet;
 import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkHistory;
 import jp.sourceforge.stigmata.result.history.XmlFileExtractedBirthmarkHistory;
-import jp.sourceforge.stigmata.spi.ExtractedBirthmarkSpi;
+import jp.sourceforge.stigmata.spi.ExtractedBirthmarkService;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
-public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
+public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkService{
     private File defaultBaseDirectory;
 
     public XmlFileExtractedBirthmarkService(){
@@ -60,5 +55,15 @@ public class XmlFileExtractedBirthmarkService implements ExtractedBirthmarkSpi{
     @Override
     public BirthmarkStoreTarget getTarget(){
         return BirthmarkStoreTarget.XMLFILE;
+    }
+
+    @Override
+    public String getType(){
+        return "xmlfile";
+    }
+
+    @Override
+    public String getDescription(){
+        return "Store birthmarks into Xml File";
     }
 }

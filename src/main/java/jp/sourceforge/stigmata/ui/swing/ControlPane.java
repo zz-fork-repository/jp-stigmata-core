@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +37,6 @@ import jp.sourceforge.stigmata.utils.WellknownClassManager;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ControlPane extends JPanel{
     private static final long serialVersionUID = 983547612346543645L;

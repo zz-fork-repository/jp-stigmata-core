@@ -1,23 +1,18 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkElement;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * calculate similarities between two birthmarks by edit distance
  * algorithm (levenshtein distance).
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class EditDistanceBirthmarkComparator extends AbstractBirthmarkComparator{
-    public EditDistanceBirthmarkComparator(BirthmarkSpi spi){
+    public EditDistanceBirthmarkComparator(BirthmarkService spi){
         super(spi);
     }
 

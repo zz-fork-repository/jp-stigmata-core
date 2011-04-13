@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.birthmarks;
 
-/*
- * $Id$
- */
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,7 +12,6 @@ import jp.sourceforge.stigmata.BirthmarkElement;
  * Abstract class for concrete {@link Birthmark <code>Birthmark</code>}
  *
  * @author  Haruaki TAMADA
- * @version  $Revision$ 
  */
 public abstract class AbstractBirthmark implements Birthmark, Serializable{
 	private static final long serialVersionUID = -1300436185045832554L;

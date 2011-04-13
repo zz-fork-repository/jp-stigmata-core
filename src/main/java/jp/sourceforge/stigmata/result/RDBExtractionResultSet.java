@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -37,7 +33,6 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class RDBExtractionResultSet extends AbstractExtractionResultSet{
     private String id;
@@ -222,11 +217,11 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
 
                     Birthmark birthmark = bs.getBirthmark(type);
                     if(birthmark == null){
-                        birthmark = env.getService(type).buildBirthmark();
+                        birthmark = env.getService(type).getExtractor().createBirthmark();
                         bs.addBirthmark(birthmark);
                     }
                     String element = rs.getString("ELEMENT");
-                    birthmark.addElement(env.getService(type).buildBirthmarkElement(element));
+                    birthmark.addElement(env.getService(type).getExtractor().buildElement(element));
 
                 } catch(MalformedURLException e){
                 }

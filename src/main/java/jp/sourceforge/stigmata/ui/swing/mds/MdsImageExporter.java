@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.mds;
 
-/*
- * $Id$
- */
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -21,7 +17,6 @@ import jp.sourceforge.talisman.mds.ui.swing.MdsPane;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$
  */
 public class MdsImageExporter implements BinaryDataWritable{
     private MdsPane viewer;

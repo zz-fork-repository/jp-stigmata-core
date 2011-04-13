@@ -1,7 +1,0 @@
-jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkService
-jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkService
-jp.sourceforge.stigmata.birthmarks.is.InheritanceStructureBirthmarkService
-jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkService
-jp.sourceforge.stigmata.birthmarks.kgram.KGramBasedBirthmarkService
-jp.sourceforge.stigmata.birthmarks.fmc.FrequencyMethodCallBirthmarkService
-jp.sourceforge.stigmata.birthmarks.fuc.FrequencyUsedClassesBirthmarkService

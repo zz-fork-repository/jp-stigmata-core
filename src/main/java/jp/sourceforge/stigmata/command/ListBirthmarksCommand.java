@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.command;
 
-/*
- * $Id$
- */
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,13 +7,12 @@ import java.io.PrintWriter;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.Stigmata;
 import jp.sourceforge.stigmata.printer.BirthmarkServicePrinter;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class ListBirthmarksCommand extends AbstractStigmataCommand{
     @Override
@@ -27,8 +22,8 @@ public class ListBirthmarksCommand extends AbstractStigmataCommand{
 
     @Override
     public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
-        BirthmarkSpi[] spis = context.getEnvironment().findServices();
-        ResultPrinterSpi spi = stigmata.getPrinterManager().getService(context.getFormat());
+        BirthmarkService[] spis = context.getEnvironment().findServices();
+        ResultPrinterService spi = stigmata.getPrinterManager().getService(context.getFormat());
         BirthmarkServicePrinter formatter = spi.getBirthmarkServicePrinter();
 
         try{

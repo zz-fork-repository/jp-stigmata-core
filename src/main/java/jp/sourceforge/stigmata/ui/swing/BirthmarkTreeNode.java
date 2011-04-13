@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import jp.sourceforge.stigmata.Birthmark;
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.BirthmarkSet;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkTreeNode extends DefaultMutableTreeNode{
     private static final long serialVersionUID = -12323457653245L;

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,12 +14,11 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkServiceListCellRenderer extends JPanel implements ListCellRenderer{
     private static final long serialVersionUID = 3254763527508235L;
@@ -47,9 +42,9 @@ public class BirthmarkServiceListCellRenderer extends JPanel implements ListCell
 
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean hasFocus){
-        if(value instanceof BirthmarkSpi){
-            BirthmarkSpi service = (BirthmarkSpi)value;
-            leftLabel.setText(service.getDisplayType());
+        if(value instanceof BirthmarkService){
+            BirthmarkService service = (BirthmarkService)value;
+            leftLabel.setText(service.getType());
             rightLabel.setText("(" + service.getType() + ")");
         }
         else{

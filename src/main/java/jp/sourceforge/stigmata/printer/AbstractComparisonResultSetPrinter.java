@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -14,7 +10,6 @@ import jp.sourceforge.stigmata.ComparisonResultSet;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public abstract class AbstractComparisonResultSetPrinter implements ComparisonResultSetPrinter, Printer{
     @Override

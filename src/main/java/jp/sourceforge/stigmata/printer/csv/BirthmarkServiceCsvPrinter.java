@@ -1,29 +1,24 @@
 package jp.sourceforge.stigmata.printer.csv;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 
 import jp.sourceforge.stigmata.printer.AbstractBirthmarkServicePrinter;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkServiceCsvPrinter extends AbstractBirthmarkServicePrinter{
     @Override
-    public void printResult(PrintWriter out, BirthmarkSpi[] spilist){
+    public void printResult(PrintWriter out, BirthmarkService[] spilist){
         printHeader(out);
-        for(BirthmarkSpi spi: spilist){
+        for(BirthmarkService spi: spilist){
             out.print(spi.getType());
             out.print(",");
-            out.print(spi.getDisplayType());
+            out.print(spi.getType());
             out.print(",");
             out.print(spi.getClass().getName());
             out.print(",");

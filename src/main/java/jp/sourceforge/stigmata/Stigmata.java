@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +16,7 @@ import java.util.List;
 
 import jp.sourceforge.stigmata.event.BirthmarkEngineListener;
 import jp.sourceforge.stigmata.printer.PrinterManager;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.stigmata.ui.swing.ExtensionFilter;
 import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.stigmata.utils.ConfigFileImporter;
@@ -28,7 +24,6 @@ import jp.sourceforge.stigmata.utils.ConfigFileImporter;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class Stigmata{
     /**
@@ -158,8 +153,8 @@ public class Stigmata{
         } catch(IOException e){
             throw new ApplicationInitializationError(e);
         }
-        for(Iterator<BirthmarkSpi> i = defaultEnvironment.lookupProviders(BirthmarkSpi.class); i.hasNext(); ){
-            BirthmarkSpi service = i.next();
+        for(Iterator<BirthmarkService> i = defaultEnvironment.lookupProviders(BirthmarkService.class); i.hasNext(); ){
+            BirthmarkService service = i.next();
             defaultEnvironment.addService(service);
         }
         PrinterManager.refresh(defaultEnvironment);

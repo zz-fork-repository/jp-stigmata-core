@@ -1,18 +1,13 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
-import jp.sourceforge.stigmata.spi.StigmataHookSpi;
+import jp.sourceforge.stigmata.spi.StigmataHookService;
 
 /**
  * 
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
-public abstract class AbstractStigmataHookService implements StigmataHookSpi{
+public abstract class AbstractStigmataHookService implements StigmataHookService{
     @Override
     public StigmataRuntimeHook afterComparison(){
         return null;

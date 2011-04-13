@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.result;
 
-/*
- * $Id$
- */
-
 import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,7 +20,6 @@ import jp.sourceforge.stigmata.result.history.ExtractedBirthmarkServiceManager;
  * user.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class CertainPairComparisonResultSet extends AbstractComparisonResultSet{
     private int compareCount = -1;

@@ -1,23 +1,18 @@
 package jp.sourceforge.stigmata.birthmarks.is;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.AbstractBirthmarkService;
+import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 import jp.sourceforge.stigmata.birthmarks.comparators.PlainBirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
-public class InheritanceStructureBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
+public class InheritanceStructureBirthmarkService implements BirthmarkService{
     private BirthmarkComparator comparator = new PlainBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new InheritanceStructureBirthmarkExtractor(this);
 
@@ -27,7 +22,7 @@ public class InheritanceStructureBirthmarkService extends AbstractBirthmarkServi
     }
 
     @Override
-    public String getDefaultDescription(){
+    public String getDescription(){
         return "Inheritance sequence to root class and user classes is replaced to <null>.";
     }
 
@@ -49,5 +44,10 @@ public class InheritanceStructureBirthmarkService extends AbstractBirthmarkServi
     @Override
     public boolean isUserDefined(){
         return false;
+    }
+
+    @Override
+    public BirthmarkPreprocessor getPreprocessor(){
+        return null;
     }
 }

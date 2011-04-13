@@ -1,32 +1,27 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkContext;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * abstract birthmark comparator.
  *
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public abstract class AbstractBirthmarkComparator implements BirthmarkComparator{
-    private BirthmarkSpi spi;
+    private BirthmarkService spi;
 
     @Deprecated
     public AbstractBirthmarkComparator(){
     }
 
-    public AbstractBirthmarkComparator(BirthmarkSpi spi){
+    public AbstractBirthmarkComparator(BirthmarkService spi){
         this.spi = spi;
     }
 
-    public BirthmarkSpi getProvider(){
+    public BirthmarkService getProvider(){
         return spi;
     }
 

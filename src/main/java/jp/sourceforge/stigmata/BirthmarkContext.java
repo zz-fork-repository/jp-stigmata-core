@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,7 +11,6 @@ import java.util.Map;
  * Birthmark runtime context.
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class BirthmarkContext{
     private BirthmarkEnvironment environment;

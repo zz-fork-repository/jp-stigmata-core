@@ -3,6 +3,10 @@ package jp.sourceforge.stigmata.resolvers;
 import java.io.File;
 import java.util.ServiceLoader;
 
+/**
+ * 
+ * @author Haruaki Tamada
+ */
 public class StigmataHomeManager implements StigmataHomeResolver{
     private String home;
 

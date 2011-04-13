@@ -1,25 +1,21 @@
 package jp.sourceforge.stigmata.birthmarks.cvfv;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
+import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.birthmarks.ASMBirthmarkExtractor;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 import org.objectweb.asm.ClassWriter;
 
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmarkExtractor{
-    public ConstantValueOfFieldVariableBirthmarkExtractor(BirthmarkSpi spi){
+    public ConstantValueOfFieldVariableBirthmarkExtractor(BirthmarkService spi){
         super(spi);
     }
 
@@ -37,5 +33,33 @@ public class ConstantValueOfFieldVariableBirthmarkExtractor extends ASMBirthmark
         return new ExtractionUnit[] {
             ExtractionUnit.CLASS, ExtractionUnit.PACKAGE, ExtractionUnit.ARCHIVE, 
         };
+    }
+
+    @Override
+    public BirthmarkElement buildElement(String value) {
+    	String signature = value.substring(0, value.indexOf('='));
+    	String subValue = value.substring(value.indexOf('=') + 1);
+    	Object elementValue = subValue;
+    
+        if(subValue.equals("null")){
+            elementValue = null;
+        }
+        else{
+            switch(signature.charAt(0)){
+            case 'Z':{
+                if(value.equals("true")) elementValue = Boolean.TRUE;
+                else                     elementValue = Boolean.FALSE;
+                break;
+            }
+            case 'C': elementValue = new Character(subValue.charAt(0)); break;
+            case 'D': elementValue = new Double(subValue);  break;
+            case 'F': elementValue = new Float(subValue);   break;
+            case 'S': elementValue = new Short(subValue);   break;
+            case 'B': elementValue = new Byte(subValue);    break;
+            case 'I': elementValue = new Integer(subValue); break;
+            default:  elementValue = value; break;
+            }
+    	}
+    	return new TypeAndValueBirthmarkElement(signature, elementValue);
     }
 }

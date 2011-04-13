@@ -1,28 +1,23 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/**
- *  $Id$
- */
-
 import java.io.Serializable;
 
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 class BirthmarkSelection implements Serializable{
     private static final long serialVersionUID = -3244323970546344L;
 
-    private BirthmarkSpi service;
+    private BirthmarkService service;
     private boolean selected = true;
 
-    public BirthmarkSelection(BirthmarkSpi service){
+    public BirthmarkSelection(BirthmarkService service){
         this.service = service;
     }
 
-    public BirthmarkSpi getService(){
+    public BirthmarkService getService(){
         return service;
     }
 

@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.tab;
 
-/*
- * $Id$
- */
-
 import java.awt.FocusTraversalPolicy;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
@@ -25,7 +21,6 @@ import javax.swing.JTextField;
  * 
  * @author Haruaki Tamada
  * @author Terai Atsuhiro
- * @version $Revision$ 
  */
 public class EditableTabbedPane extends JTabbedPane{
     private static final long serialVersionUID = -66174062280771547L;

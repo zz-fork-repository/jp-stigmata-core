@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.printer;
 
-/*
- * $Id$
- */
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -12,7 +8,6 @@ import jp.sourceforge.stigmata.ComparisonPair;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public abstract class AbstractComparisonPairPrinter implements ComparisonPairPrinter, Printer{
 

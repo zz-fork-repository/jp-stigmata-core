@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.io.PrintWriter;
@@ -21,7 +17,7 @@ import jp.sourceforge.stigmata.ExtractionResultSet;
 import jp.sourceforge.stigmata.ExtractionTarget;
 import jp.sourceforge.stigmata.printer.ExtractionResultSetPrinter;
 import jp.sourceforge.stigmata.printer.PrinterManager;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 import jp.sourceforge.stigmata.ui.swing.actions.PopupShowAction;
 import jp.sourceforge.stigmata.ui.swing.actions.SaveAction;
 import jp.sourceforge.stigmata.utils.AsciiDataWritable;
@@ -29,7 +25,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class BirthmarkExtractionResultPane extends JPanel{
     private static final long serialVersionUID = 239084365756236543L;
@@ -49,7 +44,7 @@ public class BirthmarkExtractionResultPane extends JPanel{
         Action saveAction = new SaveAction(frame, new AsciiDataWritable(){
             @Override
             public void writeAsciiData(PrintWriter out, String format){
-                ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
+                ResultPrinterService service = PrinterManager.getInstance().getService(format);
                 if(service == null){
                     service = PrinterManager.getDefaultFormatService();
                 }

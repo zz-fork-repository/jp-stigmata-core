@@ -1,23 +1,18 @@
 package jp.sourceforge.stigmata.birthmarks.uc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
 import jp.sourceforge.stigmata.BirthmarkExtractor;
-import jp.sourceforge.stigmata.birthmarks.AbstractBirthmarkService;
+import jp.sourceforge.stigmata.BirthmarkPreprocessor;
 import jp.sourceforge.stigmata.birthmarks.comparators.LogicalAndBirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * 
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
-public class UsedClassesBirthmarkService extends AbstractBirthmarkService implements BirthmarkSpi{
+public class UsedClassesBirthmarkService implements BirthmarkService{
     private BirthmarkComparator comparator = new LogicalAndBirthmarkComparator(this);
     private BirthmarkExtractor extractor = new UsedClassesBirthmarkExtractor(this);
 
@@ -27,8 +22,8 @@ public class UsedClassesBirthmarkService extends AbstractBirthmarkService implem
     }
 
     @Override
-    public String getDefaultDescription(){
-        return "Set of used classes in target class.";
+    public String getDescription(){
+        return "Used classes birthmark";
     }
 
     @Override
@@ -49,5 +44,10 @@ public class UsedClassesBirthmarkService extends AbstractBirthmarkService implem
     @Override
     public boolean isUserDefined(){
         return false;
+    }
+
+    @Override
+    public BirthmarkPreprocessor getPreprocessor(){
+        return null;
     }
 }

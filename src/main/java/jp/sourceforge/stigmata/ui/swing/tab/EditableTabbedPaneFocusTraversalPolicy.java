@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.tab;
 
-/*
- * $Id$
- */
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
@@ -16,7 +12,6 @@ import javax.swing.JTextField;
  * 
  * @author Haruaki Tamada
  * @author Terai Atsuhiro
- * @version $Revision$ 
  */
 class EditableTabbedPaneFocusTraversalPolicy extends FocusTraversalPolicy{
     private JTextField editor;

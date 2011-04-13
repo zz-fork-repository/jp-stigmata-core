@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.Desktop;
 import java.net.URL;
 
@@ -13,7 +9,6 @@ import javax.swing.event.HyperlinkListener;
 /**
  *
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 class LinkFollower implements HyperlinkListener{
     @Override

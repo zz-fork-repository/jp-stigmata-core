@@ -1,16 +1,11 @@
 package jp.sourceforge.stigmata.birthmarks.uc;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkElement;
 import jp.sourceforge.stigmata.birthmarks.PlainBirthmark;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 class UsedClassesBirthmark extends PlainBirthmark{
     private static final long serialVersionUID = -1043130948373105655L;

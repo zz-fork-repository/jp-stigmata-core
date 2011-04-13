@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing;
 
-/*
- * $Id$
- */
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -34,7 +30,7 @@ import jp.sourceforge.stigmata.ComparisonPair;
 import jp.sourceforge.stigmata.ComparisonResultSet;
 import jp.sourceforge.stigmata.printer.PrinterManager;
 import jp.sourceforge.stigmata.result.CertainPairComparisonResultSet;
-import jp.sourceforge.stigmata.spi.ResultPrinterSpi;
+import jp.sourceforge.stigmata.spi.ResultPrinterService;
 import jp.sourceforge.stigmata.ui.swing.actions.SaveAction;
 import jp.sourceforge.stigmata.ui.swing.actions.UpdateBirthmarkCellColorAction;
 import jp.sourceforge.stigmata.utils.AsciiDataWritable;
@@ -43,7 +39,6 @@ import jp.sourceforge.stigmata.utils.AsciiDataWritable;
  * 
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public class PairComparisonResultSetPane extends JPanel{
     private static final long serialVersionUID = 3298346465652354302L;
@@ -129,7 +124,7 @@ public class PairComparisonResultSetPane extends JPanel{
             frame.getMessages(), "savecomparison", new SaveAction(frame, new AsciiDataWritable(){
                 @Override
                 public void writeAsciiData(PrintWriter out, String format) throws IOException{
-                    ResultPrinterSpi service = PrinterManager.getInstance().getService(format);
+                    ResultPrinterService service = PrinterManager.getInstance().getService(format);
                     if(service == null){
                         service = PrinterManager.getDefaultFormatService();
                     }

@@ -1,15 +1,10 @@
 package jp.sourceforge.stigmata.utils;
 
-/*
- * $Id$
- */
-
 import java.util.Iterator;
 
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revission$ 
  */
 public class ArrayIterator<T> implements Iterator<T>{
     private T[] values;

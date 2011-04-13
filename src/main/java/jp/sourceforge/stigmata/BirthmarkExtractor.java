@@ -1,24 +1,19 @@
 package jp.sourceforge.stigmata;
 
-/*
- * $Id$
- */
-
 import java.io.InputStream;
 
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * extract birthmarks from given Java bytecode stream.
  * 
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
 public interface BirthmarkExtractor{
     /**
      * returns service provider interface of this extractor.
      */
-    public BirthmarkSpi getProvider();
+    public BirthmarkService getProvider();
 
     /**
      * create new birthmark.
@@ -34,6 +29,16 @@ public interface BirthmarkExtractor{
      * returns accepted extraction unit list.
      */
     public ExtractionUnit[] getAcceptableUnits();
+
+    /**
+     * build birthmark element from given string.
+     */
+    public BirthmarkElement buildElement(String value);
+
+    /**
+     * extract birthmark from given stream with default environment.
+     */
+    public Birthmark extract(InputStream in) throws BirthmarkExtractionFailedException;
 
     /**
      * extract birthmark from given stream with given environment.

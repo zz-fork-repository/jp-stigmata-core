@@ -1,20 +1,16 @@
 package jp.sourceforge.stigmata.birthmarks.comparators;
 
-/*
- * $Id$
- */
-
 import jp.sourceforge.stigmata.BirthmarkComparator;
-import jp.sourceforge.stigmata.spi.BirthmarkSpi;
+import jp.sourceforge.stigmata.spi.BirthmarkComparatorService;
+import jp.sourceforge.stigmata.spi.BirthmarkService;
 
 /**
  * SPI of {@link BirthmarkComparator <code>BirthmarkComparator</code>}.
  * Comparing birthmarks by DP matching algorithm.
  *
  * @author Haruaki TAMADA
- * @version $Revision$ 
  */
-public class DPMatchingBirthmarkComparatorService extends AbstractBirthmarkComparatorService{
+public class DPMatchingBirthmarkComparatorService implements BirthmarkComparatorService{
     /**
      * returns a type of the birthmark this service provides.
      */
@@ -23,17 +19,17 @@ public class DPMatchingBirthmarkComparatorService extends AbstractBirthmarkCompa
         return "dpmatching";
     }
 
-    @Override
-    public String getComparatorClassName(){
-        return DPMatchingBirthmarkComparator.class.getName();
-    }
-
     /**
      * returns a extractor for the birthmark of this service.
      */
     @Override
-    public BirthmarkComparator getComparator(BirthmarkSpi service){
+    public BirthmarkComparator getComparator(BirthmarkService service){
         return new DPMatchingBirthmarkComparator(service);
+    }
+
+    @Override
+    public String getDescription(){
+        return "DP Matching";
     }
 }
 

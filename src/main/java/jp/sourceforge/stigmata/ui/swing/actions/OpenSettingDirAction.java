@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.ui.swing.actions;
 
-/*
- * $Id$
- */
-
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -19,7 +15,6 @@ import jp.sourceforge.talisman.i18n.Messages;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$
  */
 public class OpenSettingDirAction extends AbstractAction{
     private static final long serialVersionUID = -8347328823893358927L;

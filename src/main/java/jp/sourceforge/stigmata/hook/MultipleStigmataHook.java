@@ -1,9 +1,5 @@
 package jp.sourceforge.stigmata.hook;
 
-/*
- * $Id$
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +9,6 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 /**
  * 
  * @author Haruaki Tamada
- * @version $Revision$ 
  */
 public class MultipleStigmataHook implements StigmataHook, StigmataRuntimeHook{
     private List<StigmataHook> hooks = new ArrayList<StigmataHook>();
