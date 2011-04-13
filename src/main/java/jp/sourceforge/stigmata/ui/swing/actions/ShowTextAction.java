@@ -78,7 +78,7 @@ abstract class ShowTextAction extends AbstractAction{
     protected String loadStringFromFile(URL url){
         try{
             String line;
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
             StringWriter writer = new StringWriter();
             PrintWriter out = new PrintWriter(writer);
             while((line = in.readLine()) != null){

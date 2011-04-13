@@ -59,7 +59,7 @@ public class Utility{
         if(flag){
             try{
                 JarFile jarfile = new JarFile(pluginFile);
-                JarEntry entry = jarfile.getJarEntry("META-INF/services/jp.sourceforge.stigmata.spi.BirthmarkSpi");
+                JarEntry entry = jarfile.getJarEntry("META-INF/services/jp.sourceforge.stigmata.spi.BirthmarkService");
                 if(entry == null){
                     messages.add("install.error.servicedescriptor.missing");
                     flag = false;

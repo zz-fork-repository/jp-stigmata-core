@@ -1,21 +1,21 @@
 <html>
 <body>
 <p>
-Stigmata �o�[�W����: ${implementation.version}
+Stigmata バージョン: ${implementation.version}
 </p><p>
 Copyright (C) by Haruaki Tamada, Ph.D.,
-${implementation.vendor} 2004-2008,
+${implementation.vendor} 2004-2011,
 All right reserved.
 </p><p>
-Stigmata �̍ŐV�o�[�W������
+Stigmata の最新バージョンは
 <a href="http://stigmata.sourceforge.jp/">http://stigmata.sourceforge.jp/</a>
-����擾�\�ł��D�܂��CStigmata �� Java SE 6 �ŊJ������Ă��܂��D
+から取得可能です．また，Stigmata は Java SE 6 で開発されています．
 </p>
-<h2>�ˑ����C�u����</h2>
-Stigmata�� Java �o�C�g�R�[�h���������߁CASM 3.1�𗘗p���Ă��܂��D<br>
+<h2>依存ライブラリ</h2>
+Stigmataは Java バイトコードを扱うため，ASM 3.3を利用しています．<br>
 <a href="http://asm.objectweb.org/">http://asm.objectweb.org/</a>
 </p><p>
-Stigmata��Apache Software Foundation���J�������ȉ��̃��C�u�����𗘗p���Ă��܂��D<br>
+StigmataはApache Software Foundationが開発した以下のライブラリを利用しています．<br>
 <a href="http://www.apache.org/">http://www.apache.org/</a>
 </p>
 <ul>
@@ -26,22 +26,22 @@ Stigmata��Apache Software Foundation���J�������ȉ��̃��C�u�����𗘗p���Ă��܂��D
 </ul>
 <p>
 <p>
-Stigmata��MDS(Multi-Dimensional Scaling)�̌v�Z�̂��߂�Jama (Java matrix package)�𗘗p���Ă��܂��D<br>
+StigmataはMDS(Multi-Dimensional Scaling)の計算のためにJama (Java matrix package)を利用しています．<br>
 <a href="http://math.nist.gov/javanumerics/jama/">http://math.nist.gov/javanumerics/jama/</a>
 </p><p>
-Stigmata��FAMFAMFAM���񋟂��Ă���A�C�R���𗘗p���Ă��܂��D<br>
+StigmataはFAMFAMFAMが提供しているアイコンを利用しています．<br>
 <a href="http://www.famfamfam.com/">http://www.famfamfam.com/</a>
 </p>
 
-<h2>���C�Z���X&amp;���쌠</h2>
+<h2>ライセンス&amp;著作権</h2>
 <p>
-Copyright 2004-2008 �ʓc �t�� (Haruaki Tamada)
+Copyright 2004-2011 玉田 春昭 (Haruaki Tamada)
 </p><p>
-Apache License Version 2.0�i�u�{���C�Z���X�v�j�Ɋ�Â��ă��C�Z���X����܂��B���Ȃ������̃t�@�C�����g�p���邽�߂ɂ́A�{���C�Z���X�ɏ]��Ȃ���΂Ȃ�܂���B�{���C�Z���X�̃R�s�[�͉��L�̏ꏊ�������ł��܂��B
+Apache License Version 2.0（「本ライセンス」）に基づいてライセンスされます。あなたがこのファイルを使用するためには、本ライセンスに従わなければなりません。本ライセンスのコピーは下記の場所から入手できます。
 </p><p>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
 </p><p>
-�K�p�����@���܂��͏��ʂł̓��ӂɂ���Ė������Ȃ�����A�{���C�Z���X�Ɋ�Â��ĔЕz�����\�t�g�E�F�A�́A�����َ����킸�A�����Ȃ�ۏ؂��������Ȃ��Ɂu����̂܂܁v�Еz����܂��B�{���C�Z���X�ł̌����Ɛ������K�肵�������ɂ��ẮA�{���C�Z���X���Q�Ƃ��Ă��������B
+適用される法律または書面での同意によって命じられない限り、本ライセンスに基づいて頒布されるソフトウェアは、明示黙示を問わず、いかなる保証も条件もなしに「現状のまま」頒布されます。本ライセンスでの権利と制限を規定した文言については、本ライセンスを参照してください。
 </p>
 
 </body>
