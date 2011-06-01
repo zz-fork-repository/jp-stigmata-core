@@ -20,6 +20,9 @@ public interface BirthmarkService{
      */
     public String getDescription();
 
+    /**
+     * returns a preprocessor for the birthmark of this service.
+     */
     public BirthmarkPreprocessor getPreprocessor();
 
     /**
