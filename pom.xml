@@ -13,7 +13,7 @@
   <repositories>
     <repository>
       <id>tamadalab-intra-repo</id>
-      <url>dav:http://diamond.cse.kyoto-su.ac.jp/maven2</url>
+      <url>http://diamond.cse.kyoto-su.ac.jp/maven2</url>
     </repository>
     <repository>
       <id>stigmata.sourceforge.jp</id>
@@ -83,7 +83,7 @@
     <dependency>
       <groupId>jp.sourceforge.stigmata</groupId>
       <artifactId>digger</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>3.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
