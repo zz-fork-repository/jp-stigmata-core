@@ -12,6 +12,10 @@
 
   <repositories>
     <repository>
+      <id>tamadalab-intra-repo</id>
+      <url>dav:http://diamond.cse.kyoto-su.ac.jp/maven2</url>
+    </repository>
+    <repository>
       <id>stigmata.sourceforge.jp</id>
       <name>Stigmata Maven2 Repository in sourceforge.jp</name>
       <url>http://stigmata.sourceforge.jp/maven2</url>
@@ -258,6 +262,19 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0-beta-6</version>
+      </extension>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>1.0-beta-7</version>
+      </extension>
+    </extensions>
   </build>
 
   <reporting>
@@ -325,4 +342,22 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <profiles>
+    <profile>
+      <id>intra-lab</id>
+      <activation>
+        <property>
+          <name>target</name>
+          <value>intra</value>
+        </property>
+      </activation>
+      <distributionManagement>
+        <repository>
+          <id>tamadalab-intra-repo</id>
+          <url>dav:http://diamond.cse.kyoto-su.ac.jp/maven2</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>
