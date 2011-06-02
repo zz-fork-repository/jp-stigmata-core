@@ -6,6 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.BirthmarkEnvironment;
@@ -28,15 +33,19 @@ public class InstallCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         File pluginsDir = new File(BirthmarkEnvironment.getStigmataHome(), "plugins");
         BirthmarkEnvironment env = context.getEnvironment();
+        List<String> messages = new ArrayList<String>();
 
         for(int i = 0; i < args.length; i++){
             File pluginSource = new File(args[i]);
             File pluginDest = new File(pluginsDir, pluginSource.getName());
 
-            if(!Utility.isStigmataPluginJarFile(pluginSource)){
+            if(!Utility.isStigmataPluginJarFile(pluginSource, messages)){
+                for(String msg: messages){
+                    putMessage(msg);
+                }
                 throw new IllegalArgumentException(pluginSource + ": not stigmata plugin file.");
             }
             if(pluginDest.exists()){
@@ -51,21 +60,64 @@ public class InstallCommand extends AbstractStigmataCommand{
                     pluginDest.renameTo(backupFile);
                 }
             }
-
-            byte[] data = new byte[256];
-            int read;
-
-            try{
-                InputStream in = new FileInputStream(pluginSource);
-                OutputStream out = new FileOutputStream(pluginDest);
-
-                while((read = in.read(data)) != -1){
-                    out.write(data, 0, read);
+            copyFile(pluginSource, pluginDest);
+            File parent = pluginSource.getParentFile();
+            File destParent = pluginDest.getParentFile();
+            String[] myDependencies = null;
+            for(String dependency: Utility.getDependencies(pluginSource)){
+                if(myDependencies == null){
+                    myDependencies = findStigmataDependencies();
                 }
-                in.close();
-                out.close();
-            } catch(IOException e){
+                boolean include = false;
+                for(String systemDependency: myDependencies){
+                    if(dependency.equals(systemDependency)){
+                        include = true;
+                        break;
+                    }
+                }
+                if(!include){
+                    File dependencyFile = new File(parent, dependency);
+                    if(dependencyFile.exists()){
+                        copyFile(dependencyFile, new File(destParent, dependency));
+                    }
+                    else{
+                        putMessage(dependency + ": not found. Install this jar file into plugin directory");
+                    }
+                }
             }
+        }
+        return getMessageSize() == 0;
+    }
+
+    private String[] findStigmataDependencies(){
+        URL url = getClass().getResource("/jp/sourceforge/stigmata/command/InstallCommand.class");
+        String jarfilePath = url.toString();
+        String[] deps = new String[0];
+        if(jarfilePath.startsWith("jar:")){
+            jarfilePath = jarfilePath.substring("jar:".length(), jarfilePath.lastIndexOf("!"));
+            try{
+                deps = Utility.getDependencies(new File(new URI(jarfilePath)));
+            } catch(URISyntaxException e){
+                e.printStackTrace();
+            }
+        }
+        return deps;
+    }
+
+    private void copyFile(File source, File dest){
+        byte[] data = new byte[256];
+        int read;
+        
+        try{
+            InputStream in = new FileInputStream(source);
+            OutputStream out = new FileOutputStream(dest);
+
+            while((read = in.read(data)) != -1){
+                out.write(data, 0, read);
+            }
+            in.close();
+            out.close();
+        } catch(IOException e){
         }
     }
 }

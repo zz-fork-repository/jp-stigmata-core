@@ -450,16 +450,15 @@ public class StigmataFrame extends JFrame{
             new String[] { "jar", },
             messages.get("installplugin.fileopen.description")
         );
-        List<String> messages = new ArrayList<String>();
         if(pluginFile == null){
             return;
         }
 
-        if(Utility.isStigmataPluginJarFile(pluginFile, messages)){
-            StigmataCommand command = StigmataCommandFactory.getInstance().getCommand("install");
-            String path = pluginFile.getPath();
-            command.perform(getStigmata(), new String[] { path });
+        StigmataCommand command = StigmataCommandFactory.getInstance().getCommand("install");
+        String path = pluginFile.getPath();
+        boolean installFlag = command.perform(getStigmata(), new String[] { path });
 
+        if(installFlag){
             int flag = JOptionPane.showConfirmDialog(
                 this, getMessages().get("reload.after.installplugin"),
                 getMessages().get("reload.after.installplugin.title"),
@@ -481,8 +480,8 @@ public class StigmataFrame extends JFrame{
             StringBuilder sb = new StringBuilder("<html><body>");
             sb.append("<p>").append(getMessages().format("install.error", pluginFile.getPath())).append("</p>");
             sb.append("<ul>");
-            for(String message: messages){
-                sb.append("<li>").append(getMessages().get(message)).append("</li>");
+            for(String message: command.getMessages()){
+                sb.append("<li>").append(message).append("</li>");
             }
             sb.append("</ul></body></html>");
 

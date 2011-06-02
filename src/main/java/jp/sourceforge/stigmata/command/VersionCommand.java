@@ -16,9 +16,10 @@ public class VersionCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
         Package p = getClass().getPackage();
         System.out.printf("%s %s%n", helpResource.getString("cli.version.header"), p.getImplementationVersion());
+        return true;
     }
 }

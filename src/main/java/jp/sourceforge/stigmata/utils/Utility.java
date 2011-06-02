@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 public class Utility{
     /**
@@ -37,8 +38,25 @@ public class Utility{
         return new String(builder);
     }
 
-    public static boolean isStigmataPluginJarFile(File pluginFile){
-        return isStigmataPluginJarFile(pluginFile, new ArrayList<String>());
+    public static String[] getDependencies(File source){
+        JarFile jarfile = null;
+        try{
+            jarfile = new JarFile(source);
+            Manifest manifest = jarfile.getManifest();
+            String classPath = manifest.getMainAttributes().getValue("Class-Path");
+            if(classPath != null && !classPath.equals("")){
+                return classPath.split("[ \t]");
+            }
+        } catch(IOException e){
+        } finally{
+            if(jarfile != null){
+                try{
+                    jarfile.close();
+                } catch(IOException e){
+                }
+            }
+        }
+        return new String[0];
     }
 
     public static boolean isStigmataPluginJarFile(File pluginFile, List<String> messages){

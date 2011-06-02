@@ -164,6 +164,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.2</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -256,9 +257,11 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
+        <version>2.1</version>
         <configuration>
-          <tagBase>svn+ssh://tama3@svn.sourceforge.jp/svnroot/stigmata/tags</tagBase>
+          <tagBase>git:ssh://git@diamond.cse.kyoto-su.ac.jp:/stigmata/stigmata.git</tagBase>
         </configuration>
       </plugin>
     </plugins>

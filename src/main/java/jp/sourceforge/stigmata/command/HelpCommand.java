@@ -30,7 +30,7 @@ public class HelpCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         BirthmarkEnvironment env = context.getEnvironment();
         Package p = getClass().getPackage();
 
@@ -64,5 +64,7 @@ public class HelpCommand extends AbstractStigmataCommand{
         System.out.println();
         System.out.println(helpResource.getString("cli.interface.copyright"));
         System.out.println(helpResource.getString("cli.interface.mailto"));
+
+        return true;
     }
 }

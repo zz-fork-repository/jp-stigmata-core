@@ -21,7 +21,7 @@ public class ListBirthmarksCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         BirthmarkService[] spis = context.getEnvironment().findServices();
         ResultPrinterService spi = stigmata.getPrinterManager().getService(context.getFormat());
         BirthmarkServicePrinter formatter = spi.getBirthmarkServicePrinter();
@@ -39,6 +39,7 @@ public class ListBirthmarksCommand extends AbstractStigmataCommand{
         }catch(IOException e){
             e.printStackTrace();
         }
+        return true;
     }
 
     private String validateTarget(String fileName, String format){

@@ -30,7 +30,7 @@ public class ExtractCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         try{
             context.setComparisonMethod(ComparisonMethod.ROUND_ROBIN_SAME_PAIR);
             BirthmarkEngine engine = new BirthmarkEngine(context.getEnvironment());
@@ -52,5 +52,6 @@ public class ExtractCommand extends AbstractStigmataCommand{
         }catch(Exception ex){
             ex.printStackTrace();
         }
+        return true;
     }
 }

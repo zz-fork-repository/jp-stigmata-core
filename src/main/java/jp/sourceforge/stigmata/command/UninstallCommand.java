@@ -33,7 +33,7 @@ public class UninstallCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         File pluginsDir = new File(BirthmarkEnvironment.getStigmataHome(), "plugins");
         BirthmarkEnvironment env = context.getEnvironment();
         boolean removeServiceInConfigFile = false;
@@ -55,6 +55,7 @@ public class UninstallCommand extends AbstractStigmataCommand{
         if(removeServiceInConfigFile){
             updateConfigFile(env);
         }
+        return true;
     }
 
     private void updateConfigFile(BirthmarkEnvironment env){

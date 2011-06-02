@@ -13,9 +13,10 @@ import jp.sourceforge.stigmata.ui.swing.StigmataFrame;
  */
 public class GuiCommand extends AbstractStigmataCommand{
     @Override
-    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         StigmataFrame frame = new StigmataFrame(stigmata, context.getEnvironment());
         frame.setVisible(true);
+        return true;
     }
 
     @Override
