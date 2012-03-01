@@ -58,7 +58,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
     @Override
     public String[] getBirthmarkTypes(){
         if(initFlag){
-            String[] types = (String[])select(
+            String[] types = select(
                 "SELECT TYPE FROM EXTRACTED_BIRTHMARK_TYPES WHERE EXTRACTED_ID = ?",
                 new StringHandler(), id
             );
@@ -73,7 +73,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
     @Override
     public ExtractionUnit getExtractionUnit(){
         if(initFlag){
-            String[] units = (String[])select(
+            String[] units = select(
                 "SELECT UNIT FROM EXTRACTED_BIRTHMARKS WHERE EXTRACTED_ID = ?",
                 new StringHandler(), id
             );
@@ -92,7 +92,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
 
     @Override
     public BirthmarkSet[] getBirthmarkSets(ExtractionTarget target){
-        return (BirthmarkSet[])select(
+        return select(
             "SELECT * FROM EXTRACTED_BIRTHMARK WHERE EXTRACTED_ID = ? AND STORE_TARGET = ? ORDER TO TYPE, INDEX",
             new BirthmarkSetListHandler(getEnvironment()), id, target.name()
         );
@@ -141,10 +141,10 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
         return BirthmarkStoreTarget.RDB;
     }
 
-    private Object select(String sql, ResultSetHandler handler, Object... parameters){
+    private <T> T select(String sql, ResultSetHandler<T> handler, Object... parameters){
         QueryRunner qr = new QueryRunner(source);
         try{
-            return qr.query(sql, parameters, handler);
+            return qr.<T>query(sql, handler, parameters);
         } catch(SQLException e){
         }
         return null;
@@ -170,7 +170,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
-    public static class StringHandler implements ResultSetHandler{
+    public static class StringHandler implements ResultSetHandler<String[]>{
         private int index;
 
         public StringHandler(){
@@ -182,7 +182,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
         }
 
         @Override
-        public Object handle(ResultSet rs) throws SQLException{
+        public String[] handle(ResultSet rs) throws SQLException{
             List<String> list = new ArrayList<String>();
             while(rs.next()){
                 list.add(rs.getString(index));
@@ -191,7 +191,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
         }
     }
 
-    private static class BirthmarkSetListHandler implements ResultSetHandler{
+    private static class BirthmarkSetListHandler implements ResultSetHandler<BirthmarkSet[]>{
         private BirthmarkEnvironment env;
 
         public BirthmarkSetListHandler(BirthmarkEnvironment env){
@@ -199,7 +199,7 @@ public class RDBExtractionResultSet extends AbstractExtractionResultSet{
         }
 
         @Override
-        public Object handle(ResultSet rs) throws SQLException{
+        public BirthmarkSet[] handle(ResultSet rs) throws SQLException{
             Map<URL, BirthmarkSet> map = new HashMap<URL, BirthmarkSet>();
 
             while(rs.next()){

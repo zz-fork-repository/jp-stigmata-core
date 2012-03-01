@@ -1,4 +1,4 @@
-package jp.sourceforge.stigmata.ui.swing;
+package jp.sourceforge.stigmata.utils;
 
 /**
  * 

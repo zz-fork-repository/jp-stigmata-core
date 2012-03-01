@@ -1,4 +1,4 @@
-package jp.sourceforge.stigmata.ui.swing;
+package jp.sourceforge.stigmata.utils;
 
 import java.io.File;
 import java.util.ArrayList;

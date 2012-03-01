@@ -20,9 +20,9 @@ public class ExportConfigCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
-        PrintWriter out = null;
+    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         try{
+            PrintWriter out;
             if(args == null || args.length == 0){
                 out = new PrintWriter(System.out);
             }
@@ -34,13 +34,8 @@ public class ExportConfigCommand extends AbstractStigmataCommand{
             }
 
             new ConfigFileExporter(context.getEnvironment()).export(out);
-            return true;
+            out.close();
         }catch(IOException e){
-            return false;
-        } finally{
-            if(out != null){
-                out.close();
-            }
         }
     }
 }

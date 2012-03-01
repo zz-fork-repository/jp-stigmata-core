@@ -22,10 +22,12 @@ public class WellknownClassManager implements Iterable<WellknownClassJudgeRule>{
     /**
      * private field/method flag defined in JVM specification.
      */
+    @SuppressWarnings("unused")
     private static final int OPCODE_ACC_PRIVATE = 2;
     /**
      * protected field/method flag defined in JVM specification.
      */
+    @SuppressWarnings("unused")
     private static final int OPCODE_ACC_PROTECTED = 4;
     /**
      * static field/method flag defined in JVM specification.

@@ -19,27 +19,18 @@ public class LicenseCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
-        BufferedReader reader = null;
+    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         try{
             InputStream in = getClass().getResourceAsStream("/META-INF/license.txt");
-            reader = new BufferedReader(new InputStreamReader(in));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
 
             while((line = reader.readLine()) != null){
                 System.out.println(line);
             }
             reader.close();
-            return true;
         }catch(IOException ex){
-            return false;
-        } finally{
-            if(reader != null){
-                try{
-                    reader.close();
-                } catch(IOException e){
-                }
-            }
+            ex.printStackTrace();
         }
     }
 }

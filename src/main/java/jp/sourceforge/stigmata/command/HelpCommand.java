@@ -7,6 +7,7 @@ import jp.sourceforge.stigmata.BirthmarkEnvironment;
 import jp.sourceforge.stigmata.ComparisonPairFilter;
 import jp.sourceforge.stigmata.ComparisonPairFilterSet;
 import jp.sourceforge.stigmata.Stigmata;
+import jp.sourceforge.stigmata.StigmataCommand;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 import jp.sourceforge.talisman.xmlcli.ResourceHelpFormatter;
 
@@ -30,16 +31,21 @@ public class HelpCommand extends AbstractStigmataCommand{
     }
 
     @Override
-    public boolean perform(Stigmata stigmata, BirthmarkContext context, String[] args){
+    public void perform(Stigmata stigmata, BirthmarkContext context, String[] args){
         BirthmarkEnvironment env = context.getEnvironment();
         Package p = getClass().getPackage();
+        StigmataCommandFactory factory = StigmataCommandFactory.getInstance(); 
 
         ResourceBundle helpResource = ResourceBundle.getBundle("resources.options");
         HelpFormatter formatter = new ResourceHelpFormatter(helpResource);
+        String defaultCommand = getDefaultCommandName(factory);
+        String commandList = getCommandList(factory);
+
         formatter.printHelp(
             String.format(
                 helpResource.getString("cli.interface"),
-                p.getImplementationVersion()
+                p.getImplementationVersion(),
+                commandList, defaultCommand
             ),
             options
         );
@@ -64,7 +70,22 @@ public class HelpCommand extends AbstractStigmataCommand{
         System.out.println();
         System.out.println(helpResource.getString("cli.interface.copyright"));
         System.out.println(helpResource.getString("cli.interface.mailto"));
+    }
 
-        return true;
+    public String getCommandList(StigmataCommandFactory factory){
+        StringBuilder sb = new StringBuilder();
+
+        for(StigmataCommand command: factory){
+            if(sb.length() != 0){
+                sb.append(", ");
+            }
+            sb.append("`").append(command.getCommandString()).append("'");
+        }
+
+        return new String(sb);
+    }
+
+    private String getDefaultCommandName(StigmataCommandFactory factory){
+        return "`" + factory.getDefaultCommand().getCommandString() + "'";
     }
 }

@@ -3,10 +3,9 @@ package jp.sourceforge.stigmata.birthmarks.smc;
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
 import jp.sourceforge.stigmata.birthmarks.BirthmarkExtractVisitor;
-
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * 
@@ -25,7 +24,7 @@ public class SequentialMethodCallBirthmarkExtractVisitor extends BirthmarkExtrac
 
         MethodVisitor visitor = super.visitMethod(access, name, desc, signature, exceptions);
 
-        return new MethodAdapter(visitor){
+        return new MethodVisitor(Opcodes.ASM4, visitor){
             @Override
             public void visitMethodInsn(int opcode, String owner, String name, String desc){
                 String className = owner.replace('/', '.');

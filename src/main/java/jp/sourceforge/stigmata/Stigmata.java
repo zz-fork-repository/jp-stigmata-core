@@ -17,7 +17,7 @@ import java.util.List;
 import jp.sourceforge.stigmata.event.BirthmarkEngineListener;
 import jp.sourceforge.stigmata.printer.PrinterManager;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
-import jp.sourceforge.stigmata.ui.swing.ExtensionFilter;
+import jp.sourceforge.stigmata.utils.ExtensionFilter;
 import jp.sourceforge.stigmata.utils.ConfigFileExporter;
 import jp.sourceforge.stigmata.utils.ConfigFileImporter;
 

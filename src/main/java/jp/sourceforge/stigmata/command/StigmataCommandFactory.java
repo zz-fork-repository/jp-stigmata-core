@@ -1,7 +1,9 @@
 package jp.sourceforge.stigmata.command;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.ServiceLoader;
 
 import jp.sourceforge.stigmata.StigmataCommand;
 
@@ -9,34 +11,39 @@ import jp.sourceforge.stigmata.StigmataCommand;
  * 
  * @author Haruaki Tamada
  */
-public class StigmataCommandFactory{
+public class StigmataCommandFactory implements Iterable<StigmataCommand>{
     private static final StigmataCommandFactory factory = new StigmataCommandFactory();
     private Map<String, StigmataCommand> commands = new HashMap<String, StigmataCommand>();
 
     private StigmataCommandFactory(){
-        commands.put("compare", new CompareCommand());
-        commands.put("export-config", new ExportConfigCommand());
-        commands.put("extract", new ExtractCommand());
-        commands.put("gui", new GuiCommand());
-        commands.put("install", new InstallCommand());
-        commands.put("license", new LicenseCommand());
-        commands.put("list-birthmarks", new ListBirthmarksCommand());
-        /* this command is not supported in Windows OS.
-         * Deletion/Renaming is failed because plugin file is locked by system.
-         * commands.put("uninstall", new UninstallCommand());
-         */
-        commands.put("version", new VersionCommand());
-    }
-
-    public void registerCommand(String commandString, StigmataCommand command){
-        commands.put(commandString, command);
+        for(StigmataCommand command: ServiceLoader.load(StigmataCommand.class)){
+            registerCommand(command);
+        }
     }
 
     public static StigmataCommandFactory getInstance(){
         return factory;
     }
 
-    public StigmataCommand getCommand(String command){
-        return commands.get(command);
+    public void registerCommand(StigmataCommand command){
+        commands.put(command.getCommandString(), command);
+    }
+
+    public StigmataCommand getDefaultCommand(){
+        StigmataCommand gui = getCommand("gui");
+        return gui;
+    }
+
+    @Override
+    public Iterator<StigmataCommand> iterator(){
+        return commands.values().iterator();
+    }
+
+    public StigmataCommand getCommand(String commandString){
+        StigmataCommand command = commands.get(commandString);
+        if(command == null){
+            command = commands.get("help");
+        }
+        return command;
     }
 }

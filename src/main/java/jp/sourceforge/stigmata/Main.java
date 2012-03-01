@@ -55,7 +55,7 @@ public final class Main{
         updateContext(context, commandLine);
 
         StigmataCommandFactory factory = StigmataCommandFactory.getInstance();
-        factory.registerCommand("help", new HelpCommand(options));
+        factory.registerCommand(new HelpCommand(options));
 
         StigmataCommand command = factory.getCommand(commandString);
         if(!command.isAvailableArguments(arguments)){

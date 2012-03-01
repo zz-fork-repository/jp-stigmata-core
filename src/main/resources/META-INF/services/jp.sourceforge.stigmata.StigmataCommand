@@ -1,0 +1,9 @@
+jp.sourceforge.stigmata.command.CompareCommand
+jp.sourceforge.stigmata.command.ExportConfigCommand
+jp.sourceforge.stigmata.command.ExtractCommand
+jp.sourceforge.stigmata.command.InstallCommand
+jp.sourceforge.stigmata.command.LicenseCommand
+jp.sourceforge.stigmata.command.ListBirthmarksCommand
+jp.sourceforge.stigmata.command.UninstallCommand
+jp.sourceforge.stigmata.command.VersionCommand
+jp.sourceforge.stigmata.command.OpenSettingFolderCommand

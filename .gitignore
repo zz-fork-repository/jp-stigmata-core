@@ -1,6 +1,7 @@
+.settings
+*~
+target
 .classpath
 .djunitplugin
 .project
-.settings
-target
 jcoverage.ser

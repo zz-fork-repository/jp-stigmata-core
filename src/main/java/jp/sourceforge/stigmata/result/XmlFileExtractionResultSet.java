@@ -36,7 +36,7 @@ import jp.sourceforge.stigmata.ExtractionUnit;
 import jp.sourceforge.stigmata.Stigmata;
 import jp.sourceforge.stigmata.printer.xml.ExtractionResultSetXmlPrinter;
 import jp.sourceforge.stigmata.spi.BirthmarkService;
-import jp.sourceforge.stigmata.ui.swing.ExtensionFilter;
+import jp.sourceforge.stigmata.utils.ExtensionFilter;
 import jp.sourceforge.stigmata.utils.MultipleIterator;
 
 /**
