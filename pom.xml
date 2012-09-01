@@ -8,18 +8,26 @@
   <parent>
     <groupId>jp.sourceforge</groupId>
     <artifactId>stigmata</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <version>4.0</version>
   </parent>
 
   <groupId>jp.sourceforge.stigmata</groupId>
   <artifactId>stigmata-core</artifactId>
-  <version>4.0-SNAPSHOT</version>
+  <version>4.0</version>
   <packaging>jar</packaging>
 
   <name>Stigmata: Java Birthmark Toolkit Core Library</name>
   <description></description>
   <url>http://stigmata.sourceforge.jp/</url>
   <inceptionYear>2008</inceptionYear>
+
+  <repositories>
+    <repository>
+      <id>stigmata.sourceforge.jp</id>
+      <name>Stigmata Maven2 Repository in sourceforge.jp</name>
+      <url>http://stigmata.sourceforge.jp/maven2</url>
+    </repository>
+  </repositories>
 
   <scm>
     <connection>scm:git:git://git.sourceforge.jp/gitroot/stigmata/stigmata-core.git</connection>

@@ -1,6 +1,0 @@
-jp.sourceforge.stigmata.birthmarks.cvfv.ConstantValueOfFieldVariableBirthmarkExtractorService
-jp.sourceforge.stigmata.birthmarks.is.InheritanceStructureBirthmarkExtractorService
-jp.sourceforge.stigmata.birthmarks.smc.SequentialMethodCallBirthmarkExtractorService
-jp.sourceforge.stigmata.birthmarks.uc.UsedClassesBirthmarkExtractorService
-jp.sourceforge.stigmata.birthmarks.fmc.FrequencyMethodCallBirthmarkExtractorService
-jp.sourceforge.stigmata.birthmarks.fuc.FrequencyUsedClassesBirthmarkExtractorService

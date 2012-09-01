@@ -91,6 +91,22 @@ Related Publications
 
 *Dynamic Birthmark
 
+ * Patrick P.F. Chan, Lucas C.K. Hui, and S.M. Yiu, ``Dynamic software
+   birthmark for Java based on heap memory analysis,'' In Proc. 12th
+   IFIP TC 6/TC 11 International conference on Communications and
+   multimedia security, ser. CMS'11, pp.94--106, Springer-Verlag, 2011
+   (Berlin, Heidelberg).
+
+ * Patrick P.F. Chan, Lucas C.K. Hui, and S.M. Yiu, ``Jsbirth: Dynamic
+   javascript birthmark based on the run-time heap,'' In
+   Proc. Computer Software and Applications Conference (COMPSAC), 2011
+   IEEE 35th Annual, pp.407--412, July 2011.
+
+ * X. Wang, Y.C. Jhi, S. Zhu, and P. Liu, ``Behavior based software
+   theft detection,'' In Proc. the 16th ACM conference on Computer and
+   communications security, ser. CCS '09. pp.280--290, 2009. (New
+   York, NY, USA).
+
  * David Schuler, Valentin Dallmeier, and Christian Lindig, ``A
    Dynamic Birthmark for Java,'' In Proc. the 22nd IEEE/ACM
    International Conference on Automated Software Engineering,
@@ -132,6 +148,7 @@ Related Publications
  * Ginger Myles and Christian Collberg, ``Detecting Software Theft via
    Whole Program Path Birthmarks,'' In Proc. Information Security
    Conference, September 27-29, 2004.
+
 
 *Other Birthmark
 
