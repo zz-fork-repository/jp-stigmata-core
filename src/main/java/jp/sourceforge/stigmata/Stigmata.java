@@ -176,15 +176,17 @@ public class Stigmata{
         }
     }
 
-    private void exportConfigFile(String parent, String fileName){
+    private boolean exportConfigFile(String parent, String fileName){
         try{
             File file = new File(parent, fileName);
             if(!file.exists()){
                 ConfigFileExporter exporter = new ConfigFileExporter(defaultEnvironment);
                 exporter.export(new PrintWriter(new FileWriter(file)));
             }
+            return true;
         } catch(IOException e){
-            e.printStackTrace();
+            // e.printStackTrace();
+            return false;
         }
     }
 
