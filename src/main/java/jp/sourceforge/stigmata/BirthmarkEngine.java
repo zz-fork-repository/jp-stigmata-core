@@ -202,6 +202,7 @@ public class BirthmarkEngine{
             break;
         case ROUND_ROBIN_XY:
             crs = new RoundRobinComparisonResultSet(er, true);
+            break;
         case GUESSED_PAIR:
             crs = new CertainPairComparisonResultSet(er);
             break;
