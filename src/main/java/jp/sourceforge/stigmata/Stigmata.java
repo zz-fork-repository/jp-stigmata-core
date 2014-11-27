@@ -55,7 +55,8 @@ public class Stigmata{
      * creates a new birthmark context.
      */
     public BirthmarkContext createContext(){
-        return new BirthmarkContext(createEnvironment());
+        BirthmarkContext context = new BirthmarkContext(createEnvironment());
+        return context;
     }
 
     /**

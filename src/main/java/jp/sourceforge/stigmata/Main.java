@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import jp.sourceforge.stigmata.command.HelpCommand;
@@ -53,6 +54,7 @@ public final class Main{
 
         BirthmarkContext context = stigmata.createContext();
         updateContext(context, commandLine);
+        BirthmarkEnvironment env = context.getEnvironment();
 
         StigmataCommandFactory factory = StigmataCommandFactory.getInstance();
         factory.registerCommand(new HelpCommand(options));

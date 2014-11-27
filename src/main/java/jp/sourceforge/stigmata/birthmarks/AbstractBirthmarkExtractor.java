@@ -2,6 +2,8 @@ package jp.sourceforge.stigmata.birthmarks;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import jp.sourceforge.stigmata.Birthmark;
 import jp.sourceforge.stigmata.BirthmarkContext;
@@ -42,6 +44,11 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
     @Override
     public BirthmarkService getProvider(){
         return spi;
+    }
+
+    @Override
+    public String getType(){
+        return getProvider().getType();
     }
 
     public final Birthmark extract(InputStream in) throws BirthmarkExtractionFailedException{
@@ -100,5 +107,20 @@ public abstract class AbstractBirthmarkExtractor implements BirthmarkExtractor{
             }
         }
         return false;
+    }
+
+
+    @Override
+    public Iterator<String> getPropertyKeys(){
+        return new ArrayList<String>().iterator();
+    }
+
+    @Override
+    public void setProperty(String key, Object value){
+    }
+
+    @Override
+    public Object getProperty(String key){
+        return null;
     }
 }

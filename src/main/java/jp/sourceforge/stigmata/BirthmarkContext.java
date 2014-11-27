@@ -175,6 +175,10 @@ public class BirthmarkContext{
         return filterTypes.size();
     }
 
+    Iterator<String> propertyKeys(){
+        return properties.keySet().iterator();
+    }
+
     public Object getProperty(String key){
         return getProperty(key, null);
     }

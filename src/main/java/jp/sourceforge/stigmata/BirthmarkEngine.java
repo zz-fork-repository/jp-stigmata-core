@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -397,6 +398,7 @@ public class BirthmarkEngine{
                     for(String birthmarkType: context.getBirthmarkTypes()){
                         BirthmarkService service = getEnvironment().getService(birthmarkType);
                         BirthmarkExtractor extractor = service.getExtractor();
+                        applyProperties(extractor, context, "extractor");
                         if(extractor.isAcceptable(ExtractionUnit.CLASS)){
                             Birthmark b = extractor.extract(new ByteArrayInputStream(data), er.getContext());
                             birthmarkset.addBirthmark(b);
@@ -407,6 +409,15 @@ public class BirthmarkEngine{
                     warnings.addMessage(e, entry.getClassName());
                 }
             }
+        }
+    }
+
+    private void applyProperties(PropertyAccessor accessor, BirthmarkContext context, String typeKey){
+        for(Iterator<String> i = accessor.getPropertyKeys(); i.hasNext(); ){
+            String key = i.next();
+            String fullyKey = typeKey + "." + accessor.getType() + "." + key; 
+            Object value = context.getEnvironment().getProperty(fullyKey);
+            accessor.setProperty(key, value);
         }
     }
 

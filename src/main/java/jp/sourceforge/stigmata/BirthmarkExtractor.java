@@ -1,6 +1,7 @@
 package jp.sourceforge.stigmata;
 
 import java.io.InputStream;
+import java.util.Iterator;
 
 import jp.sourceforge.stigmata.spi.BirthmarkService;
 
@@ -9,11 +10,17 @@ import jp.sourceforge.stigmata.spi.BirthmarkService;
  * 
  * @author Haruaki TAMADA
  */
-public interface BirthmarkExtractor{
+public interface BirthmarkExtractor extends PropertyAccessor{
     /**
      * returns service provider interface of this extractor.
      */
     public BirthmarkService getProvider();
+
+    public Iterator<String> getPropertyKeys();
+
+    public void setProperty(String key, Object value);
+
+    public Object getProperty(String key);
 
     /**
      * create new birthmark.

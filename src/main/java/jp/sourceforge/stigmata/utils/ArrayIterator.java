@@ -21,6 +21,9 @@ public class ArrayIterator<T> implements Iterator<T>{
         }
     }
 
+    public ArrayIterator(){
+    }
+
     @Override
     public boolean hasNext(){
         return currentIndex < length;
@@ -28,9 +31,12 @@ public class ArrayIterator<T> implements Iterator<T>{
 
     @Override
     public T next(){
-        T value = values[currentIndex];
-        currentIndex++;
-        return value;
+        if(values != null){
+            T value = values[currentIndex];
+            currentIndex++;
+            return value;
+        }
+        throw new IndexOutOfBoundsException();
     }
 
     @Override
