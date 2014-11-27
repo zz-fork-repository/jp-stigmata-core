@@ -110,13 +110,21 @@ public class ExtractedBirthmarkServiceManager{
     private void addValuesFromSystemFile(Set<String> values){
         File file = new File(BirthmarkEnvironment.getStigmataHome(), "storelocations.txt");
         if(file.exists()){
+            BufferedReader in = null;
             try{
-                BufferedReader in = new BufferedReader(new FileReader(file));
+                in = new BufferedReader(new FileReader(file));
                 String line;
                 while((line = in.readLine()) != null){
                     values.add(line);
                 }
             } catch(IOException e){
+            } finally{
+                if(in != null){
+                    try{
+                        in.close();
+                    } catch(IOException e){
+                    }
+                }
             }
         }
     }

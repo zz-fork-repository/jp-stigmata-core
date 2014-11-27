@@ -91,6 +91,15 @@ public class SimilarityComparisonPairFilter extends AbstractComparisonPairFilter
         case LESS_THAN:      sb.append(" <  "); break;
         case EQUALS_AS:      sb.append(" == "); break;
         case NOT_EQUALS_AS:  sb.append(" != "); break;
+        // The followings are not used.
+        case ENDS_WITH:
+        case MATCH:
+        case NOT_ENDS_WITH:
+        case NOT_MATCH:
+        case NOT_STARTS_WITH:
+        case STARTS_WITH:
+        default:
+            break;
         }
         sb.append(getThreshold());
         return new String(sb);

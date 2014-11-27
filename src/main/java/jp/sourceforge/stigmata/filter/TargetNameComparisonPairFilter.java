@@ -153,12 +153,20 @@ public class TargetNameComparisonPairFilter extends AbstractComparisonPairFilter
         case ONE_OF_TARGETS: sb.append("(target1|target2).name"); break; 
         }
         switch(getCriterion()){
-        case STARTS_WITH:     sb.append(" starts with ");     break;
-        case NOT_STARTS_WITH: sb.append(" not starts with "); break;
-        case ENDS_WITH:       sb.append(" ends with ");       break;
-        case NOT_ENDS_WITH:   sb.append(" not ends with ");   break;
-        case EQUALS_AS:       sb.append(" equals as ");       break;
-        case NOT_EQUALS_AS:   sb.append(" not equals as ");   break;
+        case STARTS_WITH:     sb.append(" starts with ");        break;
+        case NOT_STARTS_WITH: sb.append(" not starts with ");    break;
+        case ENDS_WITH:       sb.append(" ends with ");          break;
+        case NOT_ENDS_WITH:   sb.append(" not ends with ");      break;
+        case EQUALS_AS:       sb.append(" equals as ");          break;
+        case NOT_EQUALS_AS:   sb.append(" not equals as ");      break;
+        case GREATER_EQUALS:  sb.append(" greater equals than"); break;
+        case GREATER_THAN:    sb.append(" greater than ");       break;
+        case LESS_EQUALS:     sb.append(" less equals than ");   break;
+        case LESS_THAN:       sb.append(" less than ");          break;
+        case MATCH:           sb.append(" match ");              break;
+        case NOT_MATCH:       sb.append(" not match ");          break;
+        default:
+            break;
         }
         sb.append(getValue());
 
